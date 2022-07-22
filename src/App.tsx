@@ -4,18 +4,14 @@ import "./App.css";
 import phaserGame from "./PhaserGame";
 import HelloWorldScene from "./scenes/Game";
 
-const handleClick = () => {
-    const scene = phaserGame.scene.keys.helloworld as HelloWorldScene;
-    scene.createEmitter();
-};
-
 function App() {
     return (
-        <div className="App">
+        <body>
             <header className="App-header">
+                <div id="game"></div>
                 <p>Niemo</p>
             </header>
-        </div>
+        </body>
     );
 }
 

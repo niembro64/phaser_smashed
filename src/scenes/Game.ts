@@ -18,6 +18,7 @@ export default class Game extends Phaser.Scene {
 
     create() {
         this.createEmitter();
+        this.char0.add.sprite(0, 0, "x");
     }
 
     update() {}
