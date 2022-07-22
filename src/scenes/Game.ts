@@ -1,43 +1,22 @@
-import Phaser from "phaser";
-import { ParenthesizedTypeNode } from "typescript";
-import { isBoxedPrimitive } from "util/types";
+import { SignPrivateKeyInput } from "crypto";
+import "phaser";
 
 export default class Game extends Phaser.Scene {
     char0: any;
-
     constructor() {
-        super("helloworld");
+        super("game");
     }
 
     preload() {
-        this.load.setBaseURL("https://labs.phaser.io");
-        this.load.image("logo", "assets/sprites/phaser3-logo.png");
-        this.load.image("red", "assets/particles/red.png");
-        this.load.image("x", "assets/images/character_0");
+        this.load.image("char0", "../images/star.png");
     }
 
     create() {
-        this.createEmitter();
-        this.char0.add.sprite(0, 0, "x");
+        this.char0 = this.physics.add.sprite(100, 100, "char0");
     }
-
-    update() {}
-
-    createEmitter() {
-        const particles = this.add.particles("red");
-
-        const emitter = particles.createEmitter({
-            speed: 100,
-            scale: { start: 1, end: 0 },
-            blendMode: "ADD",
-        });
-
-        const logo = this.physics.add.image(400, 100, "logo");
-
-        logo.setVelocity(100, 200);
-        logo.setBounce(1, 1);
-        logo.setCollideWorldBounds(true);
-
-        emitter.startFollow(logo);
+    update() {
+        if (this.char0.y > 300) {
+            this.char0.y = 100;
+        }
     }
 }
