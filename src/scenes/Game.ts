@@ -1,4 +1,3 @@
-import { SignPrivateKeyInput } from "crypto";
 import "phaser";
 
 export interface player {
@@ -6,7 +5,7 @@ export interface player {
 }
 
 export interface char {
-    sprite: null | Phaser.GameObjects.Sprite;
+    sprite: any | Phaser.GameObjects.Sprite;
     position: { x: number; y: number };
     velocity: { x: number; y: number };
     acceleration: { x: number; y: number };
@@ -20,7 +19,7 @@ export default class Game extends Phaser.Scene {
     players: player[] = [
         {
             char: {
-                sprite: null,
+                sprite: 0,
                 position: { x: 0, y: 0 },
                 velocity: { x: 0, y: 0 },
                 acceleration: { x: 0, y: 0.2 },
@@ -29,7 +28,7 @@ export default class Game extends Phaser.Scene {
         },
         {
             char: {
-                sprite: null,
+                sprite: 0,
                 position: { x: 0, y: 0 },
                 velocity: { x: 0, y: 0 },
                 acceleration: { x: 0, y: 0.4 },
@@ -38,7 +37,7 @@ export default class Game extends Phaser.Scene {
         },
         {
             char: {
-                sprite: null,
+                sprite: 0,
                 position: { x: 0, y: 0 },
                 velocity: { x: 0, y: 0 },
                 acceleration: { x: 0, y: 0.5 },
@@ -47,7 +46,7 @@ export default class Game extends Phaser.Scene {
         },
         {
             char: {
-                sprite: null,
+                sprite: 0,
                 position: { x: 0, y: 0 },
                 velocity: { x: 0, y: 0 },
                 acceleration: { x: 0, y: 0.9 },
@@ -58,26 +57,31 @@ export default class Game extends Phaser.Scene {
     constructor() {
         super("game");
     }
-
+    platform: any | Phaser.GameObjects.Sprite;
     preload() {
-        this.players.forEach((p, i) => {
+        this.load.image("platform", "platform.png");
+        for (let i = 0; i < 4; i++) {
             this.load.image("c" + i.toString(), "character_" + i + ".png");
-        });
+        }
     }
 
     create() {
+        this.platform = this.physics.add.staticGroup();
+        this.platform.create(300, 300, "platform").setScale(1, 1);
         this.players.forEach((p, i) => {
             p.char.sprite = this.physics.add.sprite(
                 200 * i + 100,
                 this.defaults.position.playerY,
                 "c" + i.toString()
             );
+            p.char.sprite.setScale(1, 1);
             console.log(p.char.sprite);
         });
     }
     update() {
         updateposition(this);
         updateAllMovingParts(this);
+        printStatus(this);
     }
 }
 
@@ -100,4 +104,11 @@ export function updateAllMovingParts(g: Game): void {
             p.char.sprite.y = 0;
         }
     });
+}
+
+export function printStatus(g: Game): void {
+    if (!g.players[0].char.sprite) {
+        return;
+    }
+    console.log("0", Math.round(g.players[0].char.sprite.y));
 }
