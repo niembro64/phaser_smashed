@@ -1,4 +1,5 @@
 import "phaser";
+import { isPrefixUnaryExpression } from "typescript";
 
 export interface player {
     char: char;
@@ -19,6 +20,7 @@ export interface char {
     pos: { x: number; y: number };
     vel: { x: number; y: number };
     acc: { x: number; y: number };
+    mult: number;
     damage: number;
 }
 
@@ -33,6 +35,7 @@ export default class Game extends Phaser.Scene {
                 pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
                 acc: { x: 0, y: 0.2 },
+                mult: 1.4,
                 damage: 0,
             },
             KEYBOARD: {
@@ -51,6 +54,7 @@ export default class Game extends Phaser.Scene {
                 pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
                 acc: { x: 0, y: 0.4 },
+                mult: 1.1,
                 damage: 0,
             },
             KEYBOARD: {
@@ -69,6 +73,7 @@ export default class Game extends Phaser.Scene {
                 pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
                 acc: { x: 0, y: 0.5 },
+                mult: 2,
                 damage: 0,
             },
             KEYBOARD: {
@@ -87,6 +92,7 @@ export default class Game extends Phaser.Scene {
                 pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
                 acc: { x: 0, y: 0.9 },
+                mult: 1.5,
                 damage: 0,
             },
             KEYBOARD: {
@@ -131,17 +137,34 @@ export default class Game extends Phaser.Scene {
     update() {
         updateKeyboard(this);
         updateMovingData(this);
+        // updateFacingDirection(this);
         updateMovingSprite(this);
         printStatus(this);
     }
 }
+
+export function updateFacingDirection(g: Game): void {
+    g.players.forEach((p, i) => {
+        if (p.char.vel.x > 0) {
+            p.char.sprite.setScale(-1);
+        } else if (p.char.vel.x < 0) {
+            p.char.sprite.setScale(1);
+        }
+    });
+}
 export function updateKeyboard(g: Game): void {
     g.players.forEach((p, i) => {
         if (p.keyboard.right.isDown) {
-            p.char.vel.x = -30;
+            p.char.vel.x = 300;
         }
-        if (p.keyboard.left.isDaown) {
-            p.char.vel.x = 30;
+        if (p.keyboard.left.isDown) {
+            p.char.vel.x = -300;
+        }
+        if (p.keyboard.jump.isDown) {
+            p.char.vel.y = -300;
+        }
+        if (p.keyboard.up.isDown) {
+            p.char.vel.y = -300;
         }
     });
 }
@@ -154,18 +177,16 @@ export function updateMovingSprite(g: Game): void {
 export function updateMovingData(g: Game): void {
     g.players.forEach((p, i) => {
         if (
-            p.char.sprite.body.touching.down ||
+            p.char.sprite.body.wasTouching.down ||
             p.char.sprite.body.touching.up
         ) {
-            p.char.vel.y = 0;
-            p.char.acc.y = 0;
+            p.char.vel.y = -p.char.vel.y;
         }
         if (
             p.char.sprite.body.touching.left ||
             p.char.sprite.body.touching.right
         ) {
-            p.char.vel.x = 0;
-            p.char.acc.x = 0;
+            p.char.vel.x = -p.char.vel.x;
         }
         p.char.vel.x += p.char.acc.x;
         p.char.vel.y += g.gravity + p.char.acc.y;
@@ -173,5 +194,7 @@ export function updateMovingData(g: Game): void {
 }
 
 export function printStatus(g: Game): void {
-    console.log("0", Math.round(g.players[0].char.sprite.y));
+    // console.log("0", Math.round(g.players[0].char.sprite.y));
+    // console.log(g.players[0].char.sprite);
+    console.log(g.players[0].keyboard);
 }
