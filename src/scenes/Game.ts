@@ -1,5 +1,4 @@
 import "phaser";
-import { isPrefixUnaryExpression } from "typescript";
 
 export interface player {
     char: char;
@@ -128,7 +127,7 @@ export default class Game extends Phaser.Scene {
             );
 
             p.char.sprite.setScale(1);
-            p.char.sprite.setCollideWorldBounds(true);
+            p.char.sprite.setCollideWorldBounds(false);
             this.physics.add.collider(p.char.sprite, this.platforms);
             p.keyboard = this.input.keyboard.addKeys(p.KEYBOARD);
         });
