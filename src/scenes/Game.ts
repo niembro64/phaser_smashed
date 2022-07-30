@@ -38,7 +38,7 @@ export default class Game extends Phaser.Scene {
             MULTIPLIERS: {
                 SPEED: 0.7,
                 FRICTION_GROUND: 0.94,
-                FRICTION_AIR: 0.9,
+                FRICTION_AIR: 1,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -156,11 +156,11 @@ export default class Game extends Phaser.Scene {
     }
     update() {
         updateKeyboard(this);
-        updateTouching(this);
         updateMovements(this);
         updateFrictionGround(this);
         updateFrictionAir(this);
         updateKeepOnScreen(this);
+        updateTouching(this);
         printStatus(this);
     }
 }
@@ -174,6 +174,7 @@ export function updateFrictionGround(g: Game) {
     g.players.forEach((p, i) => {
         if (p.char.sprite.body.touching.down) {
             p.char.vel.x = p.char.vel.x * p.MULTIPLIERS.FRICTION_GROUND;
+            p.char.canJump = true;
         }
     });
 }
@@ -210,14 +211,51 @@ export function updateTouching(g: Game): void {
 
 export function updateKeyboard(g: Game): void {
     g.players.forEach((p, i) => {
-        if (p.keyboard.left.isDown && p.keyboard.right.isDown) {
-            p.char.acc.x = 0;
-        } else if (p.keyboard.left.isDown) {
-            p.char.acc.x = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
-        } else if (p.keyboard.right.isDown) {
-            p.char.acc.x = p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+        // KEYBOARD LEFT RIGHT
+        if (p.char.sprite.body.touching.down) {
+            // GROUND
+            if (p.keyboard.left.isDown && p.keyboard.right.isDown) {
+                p.char.acc.x = 0;
+            } else if (p.keyboard.left.isDown) {
+                p.char.acc.x = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED * 2;
+            } else if (p.keyboard.right.isDown) {
+                p.char.acc.x = p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED * 2;
+            } else {
+                p.char.acc.x = 0;
+            }
         } else {
-            p.char.acc.x = 0;
+            // AIR
+            if (p.keyboard.left.isDown && p.keyboard.right.isDown) {
+                p.char.acc.x = 0;
+            } else if (p.keyboard.left.isDown) {
+                p.char.acc.x = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+            } else if (p.keyboard.right.isDown) {
+                p.char.acc.x = p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+            } else {
+                p.char.acc.x = 0;
+            }
+        }
+
+        // KEYBOARD LEFT RIGHT
+        if (p.keyboard.up.isDown && p.keyboard.down.isDown) {
+            p.char.acc.y = 0;
+        } else if (p.keyboard.up.isDown) {
+            p.char.acc.y = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+        } else if (p.keyboard.right.isDown) {
+            p.char.acc.y = p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+        } else {
+            p.char.acc.y = 0;
+        }
+
+        // KEYBOARD FAST
+        if (p.keyboard.fast.isDown) {
+            p.char.acc.x = p.char.acc.x * 3;
+        }
+
+        // KEYBOARD JUMP
+        if (p.keyboard.jump.isDown && p.char.canJump) {
+            p.char.vel.y = -900;
+            p.char.canJump = false;
         }
     });
 }
