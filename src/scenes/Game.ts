@@ -1,8 +1,13 @@
 import 'phaser';
 
 export interface player {
-    char: char;
+    MULTIPLIERS: {
+        SPEED: number;
+        FRICTION_GROUND: number;
+        FRICTION_AIR: number;
+    };
     KEYBOARD: KEYBOARD;
+    char: char;
     keyboard: typeof Phaser.Input.Keyboard | any;
 }
 export interface KEYBOARD {
@@ -19,23 +24,21 @@ export interface char {
     vel: { x: number; y: number };
     acc: { x: number; y: number };
     canJump: boolean;
-    mult: number;
     damage: number;
 }
 
 export default class Game extends Phaser.Scene {
-    screen = { height: 800, width: 400 };
-    defaults = { pos: { playerY: 100 } };
-    gravity: number = 20;
+    RATIO_SPEED_OVER_ACC: number = 0.5;
+    DEFAULT_SPEED: number = 30;
+    INITIAL = { POSITION: { PLAYER_Y: 100 } };
+    SCREEN = { HEIGHT: 400, WIDTH: 800 };
+    GRAVITY: number = 40;
     players: player[] = [
         {
-            char: {
-                sprite: 0,
-                vel: { x: 0, y: 0 },
-                acc: { x: 0, y: 1 },
-                canJump: false,
-                mult: 1.4,
-                damage: 0,
+            MULTIPLIERS: {
+                SPEED: 0.7,
+                FRICTION_GROUND: 0.94,
+                FRICTION_AIR: 0.9,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -45,16 +48,20 @@ export default class Game extends Phaser.Scene {
                 fast: Phaser.Input.Keyboard.KeyCodes.Z,
                 jump: Phaser.Input.Keyboard.KeyCodes.X,
             },
-            keyboard: 0,
-        },
-        {
             char: {
                 sprite: 0,
                 vel: { x: 0, y: 0 },
-                acc: { x: 0, y: 0.4 },
+                acc: { x: 0, y: 1 },
                 canJump: false,
-                mult: 1.1,
                 damage: 0,
+            },
+            keyboard: 0,
+        },
+        {
+            MULTIPLIERS: {
+                SPEED: 0.7,
+                FRICTION_GROUND: 0.94,
+                FRICTION_AIR: 0.98,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -64,16 +71,20 @@ export default class Game extends Phaser.Scene {
                 fast: Phaser.Input.Keyboard.KeyCodes.V,
                 jump: Phaser.Input.Keyboard.KeyCodes.B,
             },
-            keyboard: 0,
-        },
-        {
             char: {
                 sprite: 0,
                 vel: { x: 0, y: 0 },
-                acc: { x: 0, y: 0.5 },
+                acc: { x: 0, y: 0 },
                 canJump: false,
-                mult: 2,
                 damage: 0,
+            },
+            keyboard: 0,
+        },
+        {
+            MULTIPLIERS: {
+                SPEED: 1,
+                FRICTION_GROUND: 0.96,
+                FRICTION_AIR: 0.98,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -83,16 +94,20 @@ export default class Game extends Phaser.Scene {
                 fast: Phaser.Input.Keyboard.KeyCodes.O,
                 jump: Phaser.Input.Keyboard.KeyCodes.P,
             },
-            keyboard: 0,
-        },
-        {
             char: {
                 sprite: 0,
                 vel: { x: 0, y: 0 },
-                acc: { x: 0, y: 0.9 },
+                acc: { x: 0, y: 0 },
                 canJump: false,
-                mult: 1.5,
                 damage: 0,
+            },
+            keyboard: 0,
+        },
+        {
+            MULTIPLIERS: {
+                SPEED: 0.8,
+                FRICTION_GROUND: 0.95,
+                FRICTION_AIR: 0.97,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -101,6 +116,13 @@ export default class Game extends Phaser.Scene {
                 right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
                 fast: Phaser.Input.Keyboard.KeyCodes.END,
                 jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
+            },
+            char: {
+                sprite: 0,
+                vel: { x: 0, y: 0 },
+                acc: { x: 0, y: 0 },
+                canJump: false,
+                damage: 0,
             },
             keyboard: 0,
         },
@@ -122,7 +144,7 @@ export default class Game extends Phaser.Scene {
         this.players.forEach((p, i) => {
             p.char.sprite = this.physics.add.sprite(
                 200 * i + 100,
-                this.defaults.pos.playerY,
+                this.INITIAL.POSITION.PLAYER_Y,
                 'c' + i.toString()
             );
 
@@ -134,76 +156,84 @@ export default class Game extends Phaser.Scene {
     }
     update() {
         updateKeyboard(this);
-        updateMovingData(this);
         updateTouching(this);
-        updateMovingSprite(this);
-        printStatus(this);
+        updateMovements(this);
+        updateFrictionGround(this);
+        updateFrictionAir(this);
         updateKeepOnScreen(this);
+        printStatus(this);
     }
 }
-
-export function updateKeepOnScreen(g: Game): void{
-    
+export function updateFrictionAir(g: Game) {
     g.players.forEach((p, i) => {
-
-        // here
-    })
+        p.char.vel.x = p.char.vel.x * p.MULTIPLIERS.FRICTION_AIR;
+        p.char.vel.y = p.char.vel.y * p.MULTIPLIERS.FRICTION_AIR;
+    });
 }
-export function updateTouching(g: Game): void{
+export function updateFrictionGround(g: Game) {
     g.players.forEach((p, i) => {
-        if (p.char.sprite.body.touching.down && !p.char.canJump) {
+        if (p.char.sprite.body.touching.down) {
+            p.char.vel.x = p.char.vel.x * p.MULTIPLIERS.FRICTION_GROUND;
+        }
+    });
+}
+export function updateKeepOnScreen(g: Game): void {
+    g.players.forEach((p, i) => {
+        if (p.char.sprite.y < 0) {
+            p.char.sprite.y = g.SCREEN.HEIGHT;
+        }
+        if (p.char.sprite.y > g.SCREEN.HEIGHT) {
+            p.char.sprite.y = 0;
+        }
+        if (p.char.sprite.x < 0) {
+            p.char.sprite.x = g.SCREEN.WIDTH;
+        }
+        if (p.char.sprite.x > g.SCREEN.WIDTH) {
+            p.char.sprite.x = 0;
+        }
+    });
+}
+export function updateTouching(g: Game): void {
+    g.players.forEach((p, i) => {
+        if (p.char.sprite.body.touching.down) {
+            p.char.vel.y = 0;
             p.char.canJump = true;
         }
-        // if (p.char.sprite.body.collideWorldBounds && !p.char.canJump) {
-        //     p.char.canJump = true;
-        // }
+        if (
+            p.char.sprite.body.touching.left ||
+            p.char.sprite.body.touching.right
+        ) {
+            p.char.vel.x = 0;
+        }
     });
 }
 
-export function updateFacingDirection(g: Game): void {
-    g.players.forEach((p, i) => {
-        if (p.char.vel.x > 0) {
-            p.char.sprite.setScale(-1);
-        } else if (p.char.vel.x < 0) {
-            p.char.sprite.setScale(1);
-        }
-    });
-}
 export function updateKeyboard(g: Game): void {
     g.players.forEach((p, i) => {
-        if (p.keyboard.right.isDown) {
-            p.char.vel.x = 300;
-        }
-        if (p.keyboard.left.isDown) {
-            p.char.vel.x = -300;
-        }
-        if (p.keyboard.jump.isDown && p.char.canJump) {
-            console.log('JUMP');
-            p.char.canJump = false;
-            p.char.vel.y = -300;
+        if (p.keyboard.left.isDown && p.keyboard.right.isDown) {
+            p.char.acc.x = 0;
+        } else if (p.keyboard.left.isDown) {
+            p.char.acc.x = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+        } else if (p.keyboard.right.isDown) {
+            p.char.acc.x = p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+        } else {
+            p.char.acc.x = 0;
         }
     });
 }
-export function updateMovingSprite(g: Game): void {
+
+export function updateMovements(g: Game): void {
     g.players.forEach((p, i) => {
-        p.char.sprite.setVelocityX(
-            p.keyboard.fast.isDown ? p.char.vel.x * p.char.mult : p.char.vel.x
-        );
+        p.char.vel.x = p.char.vel.x + p.char.acc.x;
+        p.char.vel.y = p.char.vel.y + p.char.acc.y + g.GRAVITY;
+
+        p.char.sprite.setVelocityX(p.char.vel.x);
         p.char.sprite.setVelocityY(p.char.vel.y);
-    });
-}
-export function updateMovingData(g: Game): void {
-    g.players.forEach((p, i) => {
-        p.char.vel.x += p.char.acc.x;
-        p.char.vel.y += g.gravity * p.char.acc.y;
     });
 }
 
 export function printStatus(g: Game): void {
     // console.log("0", Math.round(g.players[0].char.sprite.y));
-    console.log(
-        g.players[0].char.sprite.body.touching,
-        g.players[0].char.canJump
-    );
+    console.log(g.players[0].char.sprite.body.gameObject.body);
     // console.log(g.players[0].keyboard);
 }
