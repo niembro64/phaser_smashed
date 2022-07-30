@@ -1,4 +1,4 @@
-import "phaser";
+import 'phaser';
 
 export interface player {
     char: char;
@@ -106,24 +106,24 @@ export default class Game extends Phaser.Scene {
         },
     ];
     constructor() {
-        super("game");
+        super('game');
     }
     platforms: any | Phaser.GameObjects.Sprite;
     preload() {
-        this.load.image("platform", "platform.png");
+        this.load.image('platform', 'platform.png');
         for (let i = 0; i < 4; i++) {
-            this.load.image("c" + i.toString(), "character_" + i + ".png");
+            this.load.image('c' + i.toString(), 'character_' + i + '.png');
         }
     }
 
     create() {
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(300, 300, "platform").setScale(1, 1);
+        this.platforms.create(300, 300, 'platform').setScale(1, 1);
         this.players.forEach((p, i) => {
             p.char.sprite = this.physics.add.sprite(
                 200 * i + 100,
                 this.defaults.pos.playerY,
-                "c" + i.toString()
+                'c' + i.toString()
             );
 
             p.char.sprite.setScale(1);
@@ -138,9 +138,18 @@ export default class Game extends Phaser.Scene {
         updateTouching(this);
         updateMovingSprite(this);
         printStatus(this);
+        updateKeepOnScreen(this);
     }
 }
-export function updateTouching(g: Game) {
+
+export function updateKeepOnScreen(g: Game): void{
+    
+    g.players.forEach((p, i) => {
+
+        // here
+    })
+}
+export function updateTouching(g: Game): void{
     g.players.forEach((p, i) => {
         if (p.char.sprite.body.touching.down && !p.char.canJump) {
             p.char.canJump = true;
@@ -169,7 +178,7 @@ export function updateKeyboard(g: Game): void {
             p.char.vel.x = -300;
         }
         if (p.keyboard.jump.isDown && p.char.canJump) {
-            console.log("JUMP")
+            console.log('JUMP');
             p.char.canJump = false;
             p.char.vel.y = -300;
         }
