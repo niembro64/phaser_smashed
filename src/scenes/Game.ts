@@ -17,9 +17,9 @@ export interface KEYBOARD {
 
 export interface char {
     sprite: any | Phaser.GameObjects.Sprite;
-    pos: { x: number; y: number };
     vel: { x: number; y: number };
     acc: { x: number; y: number };
+    canJump: boolean;
     mult: number;
     damage: number;
 }
@@ -27,14 +27,14 @@ export interface char {
 export default class Game extends Phaser.Scene {
     screen = { height: 800, width: 400 };
     defaults = { pos: { playerY: 100 } };
-    gravity: number = 1;
+    gravity: number = 20;
     players: player[] = [
         {
             char: {
                 sprite: 0,
-                pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
-                acc: { x: 0, y: 0.2 },
+                acc: { x: 0, y: 1 },
+                canJump: false,
                 mult: 1.4,
                 damage: 0,
             },
@@ -51,9 +51,9 @@ export default class Game extends Phaser.Scene {
         {
             char: {
                 sprite: 0,
-                pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
                 acc: { x: 0, y: 0.4 },
+                canJump: false,
                 mult: 1.1,
                 damage: 0,
             },
@@ -70,9 +70,9 @@ export default class Game extends Phaser.Scene {
         {
             char: {
                 sprite: 0,
-                pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
                 acc: { x: 0, y: 0.5 },
+                canJump: false,
                 mult: 2,
                 damage: 0,
             },
@@ -89,9 +89,9 @@ export default class Game extends Phaser.Scene {
         {
             char: {
                 sprite: 0,
-                pos: { x: 0, y: 0 },
                 vel: { x: 0, y: 0 },
                 acc: { x: 0, y: 0.9 },
+                canJump: false,
                 mult: 1.5,
                 damage: 0,
             },
@@ -127,7 +127,6 @@ export default class Game extends Phaser.Scene {
                 "c" + i.toString()
             );
 
-            p.char.pos.x = 200 * i + 100;
             p.char.sprite.setScale(1);
             p.char.sprite.setCollideWorldBounds(true);
             this.physics.add.collider(p.char.sprite, this.platforms);
@@ -137,10 +136,20 @@ export default class Game extends Phaser.Scene {
     update() {
         updateKeyboard(this);
         updateMovingData(this);
-        // updateFacingDirection(this);
+        updateTouching(this);
         updateMovingSprite(this);
         printStatus(this);
     }
+}
+export function updateTouching(g: Game) {
+    g.players.forEach((p, i) => {
+        if (p.char.sprite.body.touching.down && !p.char.canJump) {
+            p.char.canJump = true;
+        }
+        // if (p.char.sprite.body.collideWorldBounds && !p.char.canJump) {
+        //     p.char.canJump = true;
+        // }
+    });
 }
 
 export function updateFacingDirection(g: Game): void {
@@ -160,41 +169,33 @@ export function updateKeyboard(g: Game): void {
         if (p.keyboard.left.isDown) {
             p.char.vel.x = -300;
         }
-        if (p.keyboard.jump.isDown) {
-            p.char.vel.y = -300;
-        }
-        if (p.keyboard.up.isDown) {
+        if (p.keyboard.jump.isDown && p.char.canJump) {
+            console.log("JUMP")
+            p.char.canJump = false;
             p.char.vel.y = -300;
         }
     });
 }
 export function updateMovingSprite(g: Game): void {
     g.players.forEach((p, i) => {
-        p.char.sprite.setVelocityX(p.char.vel.x);
+        p.char.sprite.setVelocityX(
+            p.keyboard.fast.isDown ? p.char.vel.x * p.char.mult : p.char.vel.x
+        );
         p.char.sprite.setVelocityY(p.char.vel.y);
     });
 }
 export function updateMovingData(g: Game): void {
     g.players.forEach((p, i) => {
-        if (
-            p.char.sprite.body.wasTouching.down ||
-            p.char.sprite.body.touching.up
-        ) {
-            p.char.vel.y = -p.char.vel.y;
-        }
-        if (
-            p.char.sprite.body.touching.left ||
-            p.char.sprite.body.touching.right
-        ) {
-            p.char.vel.x = -p.char.vel.x;
-        }
         p.char.vel.x += p.char.acc.x;
-        p.char.vel.y += g.gravity + p.char.acc.y;
+        p.char.vel.y += g.gravity * p.char.acc.y;
     });
 }
 
 export function printStatus(g: Game): void {
     // console.log("0", Math.round(g.players[0].char.sprite.y));
-    // console.log(g.players[0].char.sprite);
-    console.log(g.players[0].keyboard);
+    console.log(
+        g.players[0].char.sprite.body.touching,
+        g.players[0].char.canJump
+    );
+    // console.log(g.players[0].keyboard);
 }
