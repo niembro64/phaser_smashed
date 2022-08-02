@@ -1,4 +1,4 @@
-import 'phaser';
+import "phaser";
 
 export interface player {
     MULTIPLIERS: {
@@ -29,16 +29,16 @@ export interface char {
 
 export default class Game extends Phaser.Scene {
     RATIO_SPEED_OVER_ACC: number = 0.5;
-    DEFAULT_SPEED: number = 30;
+    DEFAULT_SPEED: number = 40;
     INITIAL = { POSITION: { PLAYER_Y: 100 } };
     SCREEN = { HEIGHT: 400, WIDTH: 800 };
-    GRAVITY: number = 40;
+    GRAVITY: number = -40;
     players: player[] = [
         {
             MULTIPLIERS: {
                 SPEED: 0.7,
                 FRICTION_GROUND: 0.94,
-                FRICTION_AIR: 1,
+                FRICTION_AIR: 0.98,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -51,7 +51,7 @@ export default class Game extends Phaser.Scene {
             char: {
                 sprite: 0,
                 vel: { x: 0, y: 0 },
-                acc: { x: 0, y: 1 },
+                acc: { x: 0, y: 0 },
                 canJump: false,
                 damage: 0,
             },
@@ -61,7 +61,7 @@ export default class Game extends Phaser.Scene {
             MULTIPLIERS: {
                 SPEED: 0.7,
                 FRICTION_GROUND: 0.94,
-                FRICTION_AIR: 0.98,
+                FRICTION_AIR: 0.97,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -107,7 +107,7 @@ export default class Game extends Phaser.Scene {
             MULTIPLIERS: {
                 SPEED: 0.8,
                 FRICTION_GROUND: 0.95,
-                FRICTION_AIR: 0.97,
+                FRICTION_AIR: 0.96,
             },
             KEYBOARD: {
                 up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -128,24 +128,24 @@ export default class Game extends Phaser.Scene {
         },
     ];
     constructor() {
-        super('game');
+        super("game");
     }
     platforms: any | Phaser.GameObjects.Sprite;
     preload() {
-        this.load.image('platform', 'platform.png');
+        this.load.image("platform", "platform.png");
         for (let i = 0; i < 4; i++) {
-            this.load.image('c' + i.toString(), 'character_' + i + '.png');
+            this.load.image("c" + i.toString(), "character_" + i + ".png");
         }
     }
 
     create() {
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(300, 300, 'platform').setScale(1, 1);
+        this.platforms.create(300, 300, "platform").setScale(1, 1);
         this.players.forEach((p, i) => {
             p.char.sprite = this.physics.add.sprite(
                 200 * i + 100,
                 this.INITIAL.POSITION.PLAYER_Y,
-                'c' + i.toString()
+                "c" + i.toString()
             );
 
             p.char.sprite.setScale(1);
@@ -213,9 +213,9 @@ export function updateKeyboard(g: Game): void {
     g.players.forEach((p, i) => {
         // KEYBOARD LEFT RIGHT
         if (p.char.sprite.body.touching.down) {
-            // GROUND
+            // GROUND LEFT RIGHT
             if (p.keyboard.left.isDown && p.keyboard.right.isDown) {
-                p.char.acc.x = 0;
+                // p.char.acc.x = p.MULTIPLIERS.FRICTION_GROUND * p.char.acc.x;
             } else if (p.keyboard.left.isDown) {
                 p.char.acc.x = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED * 2;
             } else if (p.keyboard.right.isDown) {
@@ -224,9 +224,9 @@ export function updateKeyboard(g: Game): void {
                 p.char.acc.x = 0;
             }
         } else {
-            // AIR
+            // AIR LEFT RIGHT
             if (p.keyboard.left.isDown && p.keyboard.right.isDown) {
-                p.char.acc.x = 0;
+                // p.char.acc.x = 0;
             } else if (p.keyboard.left.isDown) {
                 p.char.acc.x = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
             } else if (p.keyboard.right.isDown) {
@@ -238,11 +238,11 @@ export function updateKeyboard(g: Game): void {
 
         // KEYBOARD LEFT RIGHT
         if (p.keyboard.up.isDown && p.keyboard.down.isDown) {
-            p.char.acc.y = 0;
+            // p.char.acc.y = 0;
         } else if (p.keyboard.up.isDown) {
-            p.char.acc.y = -1 * p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
-        } else if (p.keyboard.right.isDown) {
             p.char.acc.y = p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
+        } else if (p.keyboard.down.isDown) {
+            p.char.acc.y = -p.MULTIPLIERS.SPEED * g.DEFAULT_SPEED;
         } else {
             p.char.acc.y = 0;
         }
@@ -253,8 +253,13 @@ export function updateKeyboard(g: Game): void {
         }
 
         // KEYBOARD JUMP
-        if (p.keyboard.jump.isDown && p.char.canJump) {
-            p.char.vel.y = -900;
+        if (
+            p.char.sprite.body.touching.down &&
+            p.keyboard.jump.isDown &&
+            p.char.canJump
+        ) {
+            p.char.vel.y = 900;
+            // p.char.acc.y = 99;
             p.char.canJump = false;
         }
     });
@@ -266,12 +271,17 @@ export function updateMovements(g: Game): void {
         p.char.vel.y = p.char.vel.y + p.char.acc.y + g.GRAVITY;
 
         p.char.sprite.setVelocityX(p.char.vel.x);
-        p.char.sprite.setVelocityY(p.char.vel.y);
+        p.char.sprite.setVelocityY(-p.char.vel.y);
     });
 }
 
 export function printStatus(g: Game): void {
-    // console.log("0", Math.round(g.players[0].char.sprite.y));
-    console.log(g.players[0].char.sprite.body.gameObject.body);
+    console.log(
+        "0",
+        Math.round(g.players[0].char.sprite.y),
+        Math.round(g.players[0].char.acc.y),
+        Math.round(g.GRAVITY)
+    );
+    // console.log(g.players[0].char.sprite.body.gameObject.body);
     // console.log(g.players[0].keyboard);
 }
