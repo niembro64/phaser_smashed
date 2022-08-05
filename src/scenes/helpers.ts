@@ -6,7 +6,7 @@ export function updateMovements(g: Game): void {
     g.players.forEach((p) => {
         updateKeyboard(p, g);
         updatePosition(p);
-        addGravity(p, g);
+        // addGravity(p, g);
         updateKeepOnScreen(p, g);
     });
     console.log(g.players[0].char.vel);
