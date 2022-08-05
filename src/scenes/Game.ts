@@ -29,12 +29,13 @@ export interface Char {
 }
 
 export default class Game extends Phaser.Scene {
+    RATIO_ANGLED_MOVEMENT = Math.sin(Math.PI / 4);
     RATIO_SPEED_OVER_ACC: number = 0.01;
     DEFAULT_SPEED: number = 7;
     DEFAULT_JUMP: number = 7;
     INITIAL = { POSITION: { PLAYER_Y: 100 } };
     SCREEN = { HEIGHT: 400, WIDTH: 800 };
-    GRAVITY: number = 40;
+    GRAVITY: number = 0.1;
     players: Player[] = [
         {
             multipliers_static: {
