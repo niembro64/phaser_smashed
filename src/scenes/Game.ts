@@ -2,6 +2,7 @@ import "phaser";
 import { updateMovements } from "./helpers";
 
 export interface Player {
+    state: string;
     multipliers_static: {
         speed: number;
         friction_ground: number;
@@ -29,6 +30,7 @@ export interface Char {
 }
 
 export default class Game extends Phaser.Scene {
+    DEAD_TIME: number = 1000;
     RATIO_ANGLED_MOVEMENT = Math.sin(Math.PI / 4);
     RATIO_SPEED_OVER_ACC: number = 0.01;
     DEFAULT_SPEED: number = 7;
@@ -38,6 +40,7 @@ export default class Game extends Phaser.Scene {
     GRAVITY: number = 0.1;
     players: Player[] = [
         {
+            state: "dead",
             multipliers_static: {
                 speed: 0.7,
                 friction_ground: 0.94,
@@ -62,6 +65,7 @@ export default class Game extends Phaser.Scene {
             keyboard: 0,
         },
         {
+            state: "dead",
             multipliers_static: {
                 speed: 0.7,
                 friction_ground: 0.94,
@@ -86,6 +90,7 @@ export default class Game extends Phaser.Scene {
             keyboard: 0,
         },
         {
+            state: "dead",
             multipliers_static: {
                 speed: 1,
                 friction_ground: 0.96,
@@ -109,6 +114,7 @@ export default class Game extends Phaser.Scene {
             keyboard: 0,
         },
         {
+            state: "dead",
             multipliers_static: {
                 speed: 0.8,
                 friction_ground: 0.95,

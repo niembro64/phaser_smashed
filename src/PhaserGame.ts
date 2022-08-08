@@ -9,11 +9,11 @@ const config: Phaser.Types.Core.GameConfig = {
     pixelArt: false,
     type: Phaser.AUTO,
     parent: "game",
-    backgroundColor: "#0072bc",
+    backgroundColor: "#005577",
     physics: {
         default: "arcade",
         arcade: {
-            //   gravity: { y: 300 },
+            gravity: { y: 600 },
             debug: false,
         },
     },
