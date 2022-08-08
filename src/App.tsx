@@ -6,7 +6,7 @@ function App() {
         <body>
             <header className="App-header">
                 <div id="game"></div>
-                <p>Niemo</p>
+                <p>Niemo Smashed Bros</p>
             </header>
         </body>
     );

@@ -1,5 +1,5 @@
 import "phaser";
-import { updateMovements } from "./helpers";
+import { updateMovements, setState } from "./helpers";
 
 export interface Player {
     state: string;
@@ -40,7 +40,7 @@ export default class Game extends Phaser.Scene {
     GRAVITY: number = 0.1;
     players: Player[] = [
         {
-            state: "dead",
+            state: "start",
             multipliers_static: {
                 speed: 0.7,
                 friction_ground: 0.94,
@@ -64,79 +64,79 @@ export default class Game extends Phaser.Scene {
             },
             keyboard: 0,
         },
-        {
-            state: "dead",
-            multipliers_static: {
-                speed: 0.7,
-                friction_ground: 0.94,
-                friction_air: 0.97,
-            },
-            keyboard_static: {
-                up: Phaser.Input.Keyboard.KeyCodes.T,
-                down: Phaser.Input.Keyboard.KeyCodes.G,
-                left: Phaser.Input.Keyboard.KeyCodes.F,
-                right: Phaser.Input.Keyboard.KeyCodes.H,
-                fast: Phaser.Input.Keyboard.KeyCodes.V,
-                jump: Phaser.Input.Keyboard.KeyCodes.B,
-            },
-            char: {
-                sprite: 0,
-                vel: { x: 0, y: 0 },
-                pos: { x: 0, y: 0 },
-                // acc: { x: 0, y: 0 },
-                canJump: false,
-                damage: 0,
-            },
-            keyboard: 0,
-        },
-        {
-            state: "dead",
-            multipliers_static: {
-                speed: 1,
-                friction_ground: 0.96,
-                friction_air: 0.98,
-            },
-            keyboard_static: {
-                up: Phaser.Input.Keyboard.KeyCodes.I,
-                down: Phaser.Input.Keyboard.KeyCodes.K,
-                left: Phaser.Input.Keyboard.KeyCodes.J,
-                right: Phaser.Input.Keyboard.KeyCodes.L,
-                fast: Phaser.Input.Keyboard.KeyCodes.O,
-                jump: Phaser.Input.Keyboard.KeyCodes.P,
-            },
-            char: {
-                sprite: 0,
-                vel: { x: 0, y: 0 },
-                pos: { x: 0, y: 0 },
-                canJump: false,
-                damage: 0,
-            },
-            keyboard: 0,
-        },
-        {
-            state: "dead",
-            multipliers_static: {
-                speed: 0.8,
-                friction_ground: 0.95,
-                friction_air: 0.96,
-            },
-            keyboard_static: {
-                up: Phaser.Input.Keyboard.KeyCodes.UP,
-                down: Phaser.Input.Keyboard.KeyCodes.DOWN,
-                left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-                right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-                fast: Phaser.Input.Keyboard.KeyCodes.END,
-                jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
-            },
-            char: {
-                sprite: 0,
-                vel: { x: 0, y: 0 },
-                pos: { x: 0, y: 0 },
-                canJump: false,
-                damage: 0,
-            },
-            keyboard: 0,
-        },
+        // {
+        //     state: "start",
+        //     multipliers_static: {
+        //         speed: 0.7,
+        //         friction_ground: 0.94,
+        //         friction_air: 0.97,
+        //     },
+        //     keyboard_static: {
+        //         up: Phaser.Input.Keyboard.KeyCodes.T,
+        //         down: Phaser.Input.Keyboard.KeyCodes.G,
+        //         left: Phaser.Input.Keyboard.KeyCodes.F,
+        //         right: Phaser.Input.Keyboard.KeyCodes.H,
+        //         fast: Phaser.Input.Keyboard.KeyCodes.V,
+        //         jump: Phaser.Input.Keyboard.KeyCodes.B,
+        //     },
+        //     char: {
+        //         sprite: 0,
+        //         vel: { x: 0, y: 0 },
+        //         pos: { x: 0, y: 0 },
+        //         // acc: { x: 0, y: 0 },
+        //         canJump: false,
+        //         damage: 0,
+        //     },
+        //     keyboard: 0,
+        // },
+        // {
+        //     state: "start",
+        //     multipliers_static: {
+        //         speed: 1,
+        //         friction_ground: 0.96,
+        //         friction_air: 0.98,
+        //     },
+        //     keyboard_static: {
+        //         up: Phaser.Input.Keyboard.KeyCodes.I,
+        //         down: Phaser.Input.Keyboard.KeyCodes.K,
+        //         left: Phaser.Input.Keyboard.KeyCodes.J,
+        //         right: Phaser.Input.Keyboard.KeyCodes.L,
+        //         fast: Phaser.Input.Keyboard.KeyCodes.O,
+        //         jump: Phaser.Input.Keyboard.KeyCodes.P,
+        //     },
+        //     char: {
+        //         sprite: 0,
+        //         vel: { x: 0, y: 0 },
+        //         pos: { x: 0, y: 0 },
+        //         canJump: false,
+        //         damage: 0,
+        //     },
+        //     keyboard: 0,
+        // },
+        // {
+        //     state: "start",
+        //     multipliers_static: {
+        //         speed: 0.8,
+        //         friction_ground: 0.95,
+        //         friction_air: 0.96,
+        //     },
+        //     keyboard_static: {
+        //         up: Phaser.Input.Keyboard.KeyCodes.UP,
+        //         down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+        //         left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+        //         right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+        //         fast: Phaser.Input.Keyboard.KeyCodes.END,
+        //         jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
+        //     },
+        //     char: {
+        //         sprite: 0,
+        //         vel: { x: 0, y: 0 },
+        //         pos: { x: 0, y: 0 },
+        //         canJump: false,
+        //         damage: 0,
+        //     },
+        //     keyboard: 0,
+        // },
     ];
     constructor() {
         super("game");
@@ -163,10 +163,115 @@ export default class Game extends Phaser.Scene {
             p.char.sprite.setCollideWorldBounds(false);
             this.physics.add.collider(p.char.sprite, this.platforms);
             p.keyboard = this.input.keyboard.addKeys(p.keyboard_static);
+            p.char.sprite.body.setBounce(0);
+            // p.char.sprite.body.setAllowGravity(false);
+            p.char.sprite.body.setAllowGravity(true);
         });
         console.log("SPRITE", this.players[0].char.sprite);
     }
     update() {
-        updateMovements(this);
+        console.log(
+            "0",
+            this.players[0].state,
+            this.players[0].char.sprite.body.touching.down
+        );
+
+        this.players.forEach((p, i) => {
+            switch (p.state) {
+                case "start":
+                    ///////////////////////////////////////////////////////////////
+                    ///////// WHILE IN LOOP
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// timeout => dead
+                    ///////////////////////////////////////////////////////////////
+                    setTimeout(() => {
+                        if (p.state === "x") {
+                            p.char.sprite.body.setAllowGravity(true);
+                            setState(p, "air");
+                        } else {
+                            setState(p, "x");
+                        }
+                    }, this.DEAD_TIME);
+
+                    break;
+                case "dead":
+                    ///////////////////////////////////////////////////////////////
+                    ///////// WHILE IN LOOP
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// timeout => air
+                    ///////////////////////////////////////////////////////////////
+                    setTimeout(() => {
+                        p.char.sprite.body.setAllowGravity(true);
+      
+                    }, this.DEAD_TIME);
+
+                    break;
+                case "air":
+                    ///////////////////////////////////////////////////////////////
+                    ///////// WHILE IN LOOP
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// die => dead
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// touch down => ground
+                    ///////////////////////////////////////////////////////////////
+                    if (p.char.sprite.body.touching.down) {
+                        setState(p, "ground");
+                    }
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// touch side => wall
+                    ///////////////////////////////////////////////////////////////
+
+                    break;
+                case "ground":
+                    ///////////////////////////////////////////////////////////////
+                    ///////// WHILE IN LOOP
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////// jump => air
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// fall => air
+                    ///////////////////////////////////////////////////////////////
+                    break;
+                case "wall":
+                    ///////////////////////////////////////////////////////////////
+                    ///////// WHILE IN LOOP
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// jump => air
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// fall => air
+                    ///////////////////////////////////////////////////////////////
+                    break;
+                case "":
+                    ///////////////////////////////////////////////////////////////
+                    ///////// WHILE IN LOOP
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// jump => air
+                    ///////////////////////////////////////////////////////////////
+
+                    ///////////////////////////////////////////////////////////////
+                    ///////// fall => air
+                    ///////////////////////////////////////////////////////////////
+                    break;
+                default:
+                    console.log("????");
+            }
+        });
     }
 }
