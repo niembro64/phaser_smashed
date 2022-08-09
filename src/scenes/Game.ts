@@ -1,5 +1,6 @@
 import "phaser";
-import { updateMovements, setState } from "./helpers";
+import { Key } from "react";
+import { updateMovements, setState, updateKeyboard } from "./helpers";
 
 export interface Player {
     state: string;
@@ -8,18 +9,27 @@ export interface Player {
         friction_ground: number;
         friction_air: number;
     };
-    keyboard_static: Keyboard_Static;
+    keyboard_static: Keyboard;
     char: Char;
-    keyboard: typeof Phaser.Input.Keyboard | any;
+    keyboard: Keyboard | any;
+    // keyboard: typeof Phaser.Input.Keyboard | any;
 }
-export interface Keyboard_Static {
-    up: typeof Phaser.Input.Keyboard.Key | any;
-    down: typeof Phaser.Input.Keyboard.Key | any;
-    left: typeof Phaser.Input.Keyboard.Key | any;
-    right: typeof Phaser.Input.Keyboard.Key | any;
-    fast: typeof Phaser.Input.Keyboard.Key | any;
-    jump: typeof Phaser.Input.Keyboard.Key | any;
+export interface Keyboard {
+    up: Key;
+    down: Key;
+    left: Key;
+    right: Key;
+    fast: Key;
+    jump: Key;
 }
+// export interface Keyboard_Static {
+//     up: typeof Phaser.Input.Keyboard.Key | any;
+//     down: typeof Phaser.Input.Keyboard.Key | any;
+//     left: typeof Phaser.Input.Keyboard.Key | any;
+//     right: typeof Phaser.Input.Keyboard.Key | any;
+//     fast: typeof Phaser.Input.Keyboard.Key | any;
+//     jump: typeof Phaser.Input.Keyboard.Key | any;
+// }
 
 export interface Char {
     sprite: any | Phaser.GameObjects.Sprite;
@@ -31,12 +41,11 @@ export interface Char {
 
 export default class Game extends Phaser.Scene {
     DEAD_TIME: number = 1000;
-    RATIO_ANGLED_MOVEMENT = Math.sin(Math.PI / 4);
-    RATIO_SPEED_OVER_ACC: number = 0.01;
+    RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
     DEFAULT_SPEED: number = 7;
     DEFAULT_JUMP: number = 7;
     INITIAL = { POSITION: { PLAYER_Y: 100 } };
-    SCREEN = { HEIGHT: 400, WIDTH: 800 };
+    SCREEN_DIMENSIONS = { HEIGHT: 400, WIDTH: 800 };
     GRAVITY: number = 0.1;
     players: Player[] = [
         {
@@ -173,7 +182,8 @@ export default class Game extends Phaser.Scene {
         console.log(
             "0",
             this.players[0].state,
-            this.players[0].char.sprite.body.touching.down
+            this.players[0].char.sprite.body.touching.down,
+            this.players[0].keyboard
         );
 
         this.players.forEach((player, index) => {
@@ -207,6 +217,7 @@ export default class Game extends Phaser.Scene {
                     ///////////////////////////////////////////////////////////////
                     ///////// WHILE IN LOOP
                     ///////////////////////////////////////////////////////////////
+                    updateKeyboard(player, this);
 
                     ///////////////////////////////////////////////////////////////
                     ///////// die => dead
@@ -228,6 +239,7 @@ export default class Game extends Phaser.Scene {
                     ///////////////////////////////////////////////////////////////
                     ///////// WHILE IN LOOP
                     ///////////////////////////////////////////////////////////////
+                    updateKeyboard(player, this);
 
                     ///////// jump => air
                     ///////////////////////////////////////////////////////////////

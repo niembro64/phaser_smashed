@@ -1,5 +1,5 @@
 import { Gravity } from "matter";
-import { Char, Player, Keyboard_Static } from "./Game";
+import { Char, Player, Keyboard } from "./Game";
 import Game from "./Game";
 
 export function updateMovements(game: Game): void {}
@@ -55,7 +55,7 @@ export function updateKeyboard(player: Player, game: Game): void {
         return;
     }
 
-    // CHECK COUNTERS
+    // CHECK OPPOSING COUNTERS
     if (player.keyboard.left.isDown && player.keyboard.right.isDown) {
         player.char.vel.x = 0;
         player.char.vel.y = 0;
@@ -104,15 +104,15 @@ export function updateKeyboard(player: Player, game: Game): void {
 
 export function updateKeepOnScreen(player: Player, game: Game): void {
     if (player.char.pos.y < 0) {
-        player.char.pos.y = game.SCREEN.HEIGHT;
+        player.char.pos.y = game.SCREEN_DIMENSIONS.HEIGHT;
     }
-    if (player.char.pos.y > game.SCREEN.HEIGHT) {
+    if (player.char.pos.y > game.SCREEN_DIMENSIONS.HEIGHT) {
         player.char.pos.y = 0;
     }
     if (player.char.pos.x < 0) {
-        player.char.pos.x = game.SCREEN.WIDTH;
+        player.char.pos.x = game.SCREEN_DIMENSIONS.WIDTH;
     }
-    if (player.char.pos.x > game.SCREEN.WIDTH) {
+    if (player.char.pos.x > game.SCREEN_DIMENSIONS.WIDTH) {
         player.char.pos.x = 0;
     }
 }
