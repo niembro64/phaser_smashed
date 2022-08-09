@@ -2,117 +2,117 @@ import { Gravity } from "matter";
 import { Char, Player, Keyboard_Static } from "./Game";
 import Game from "./Game";
 
-export function updateMovements(g: Game): void {}
+export function updateMovements(game: Game): void {}
 
 export function setState(
-    p: Player,
-    s: "start" | "dead" | "air" | "ground" | "wall" | "x"
+    player: Player,
+    state: "start" | "dead" | "air" | "ground" | "wall" | "x"
 ): void {
-    p.state = s;
+    player.state = state;
 }
 
-export function updatePositionData(p: Player): void {
+export function updatePositionData(player: Player): void {
     // if (p.char.sprite.body.touching.down) {
     //     console.log("TOUCHING");
     //     p.char.pos.x = p.char.pos.x + p.char.vel.x;
     //     p.char.vel.y = 0;
     //     return;
     // }
-    if (p.char.pos.y > 300) {
+    if (player.char.pos.y > 300) {
         console.log("TOUCHING");
-        p.char.pos.x = p.char.pos.x + p.char.vel.x;
-        p.char.vel.y = 0;
+        player.char.pos.x = player.char.pos.x + player.char.vel.x;
+        player.char.vel.y = 0;
         return;
     }
-    p.char.pos.y = p.char.pos.y + p.char.vel.y;
+    player.char.pos.y = player.char.pos.y + player.char.vel.y;
 }
-export function updatePositionSprite(p: Player): void {
-    p.char.sprite.x = p.char.pos.x;
-    p.char.sprite.y = p.char.pos.y;
+export function updatePositionSprite(player: Player): void {
+    player.char.sprite.x = player.char.pos.x;
+    player.char.sprite.y = player.char.pos.y;
 }
 
-export function updateKeyboard(p: Player, g: Game): void {
+export function updateKeyboard(player: Player, game: Game): void {
     // CHECK ANGLED
-    if (p.keyboard.left.isDown && p.keyboard.up.isDown) {
+    if (player.keyboard.left.isDown && player.keyboard.up.isDown) {
         console.log("LEFT UP");
-        p.char.vel.x = -g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
-        p.char.vel.y = -g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.x = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
         return;
     }
-    if (p.keyboard.right.isDown && p.keyboard.up.isDown) {
-        p.char.vel.x = g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
-        p.char.vel.y = -g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
+    if (player.keyboard.right.isDown && player.keyboard.up.isDown) {
+        player.char.vel.x = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
         return;
     }
-    if (p.keyboard.left.isDown && p.keyboard.down.isDown) {
-        p.char.vel.x = -g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
-        p.char.vel.y = g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
+    if (player.keyboard.left.isDown && player.keyboard.down.isDown) {
+        player.char.vel.x = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
         return;
     }
-    if (p.keyboard.right.isDown && p.keyboard.down.isDown) {
-        p.char.vel.x = g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
-        p.char.vel.y = g.DEFAULT_SPEED * g.RATIO_ANGLED_MOVEMENT;
+    if (player.keyboard.right.isDown && player.keyboard.down.isDown) {
+        player.char.vel.x = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
         return;
     }
 
     // CHECK COUNTERS
-    if (p.keyboard.left.isDown && p.keyboard.right.isDown) {
-        p.char.vel.x = 0;
-        p.char.vel.y = 0;
+    if (player.keyboard.left.isDown && player.keyboard.right.isDown) {
+        player.char.vel.x = 0;
+        player.char.vel.y = 0;
         return;
     }
-    if (p.keyboard.up.isDown && p.keyboard.down.isDown) {
-        p.char.vel.x = 0;
-        p.char.vel.y = 0;
+    if (player.keyboard.up.isDown && player.keyboard.down.isDown) {
+        player.char.vel.x = 0;
+        player.char.vel.y = 0;
         return;
     }
     // CHECK INDIVIDUALS
-    if (p.keyboard.up.isDown) {
-        p.char.vel.x = 0;
-        p.char.vel.y = -g.DEFAULT_SPEED;
+    if (player.keyboard.up.isDown) {
+        player.char.vel.x = 0;
+        player.char.vel.y = -game.DEFAULT_SPEED;
         return;
     }
-    if (p.keyboard.down.isDown) {
-        p.char.vel.x = 0;
-        p.char.vel.y = g.DEFAULT_SPEED;
+    if (player.keyboard.down.isDown) {
+        player.char.vel.x = 0;
+        player.char.vel.y = game.DEFAULT_SPEED;
         return;
     }
-    if (p.keyboard.left.isDown) {
-        p.char.vel.y += g.GRAVITY;
-        p.char.vel.x = -g.DEFAULT_SPEED;
+    if (player.keyboard.left.isDown) {
+        player.char.vel.y += game.GRAVITY;
+        player.char.vel.x = -game.DEFAULT_SPEED;
         return;
     }
-    if (p.keyboard.right.isDown) {
-        p.char.vel.y += g.GRAVITY;
-        p.char.vel.x = g.DEFAULT_SPEED;
+    if (player.keyboard.right.isDown) {
+        player.char.vel.y += game.GRAVITY;
+        player.char.vel.x = game.DEFAULT_SPEED;
         return;
     }
 
     // CHECK NONE
-    if (!p.keyboard.left.isDown && !p.keyboard.right.isDown) {
+    if (!player.keyboard.left.isDown && !player.keyboard.right.isDown) {
         // p.char.vel.x = 0;
         // p.char.vel.y = 0;
     }
-    if (!p.keyboard.up.isDown && !p.keyboard.down.isDown) {
+    if (!player.keyboard.up.isDown && !player.keyboard.down.isDown) {
         // p.char.vel.x = 0;
         // p.char.vel.y = 0;
-        p.char.vel.y += g.GRAVITY;
+        player.char.vel.y += game.GRAVITY;
     }
 
     return;
 }
 
-export function updateKeepOnScreen(p: Player, g: Game): void {
-    if (p.char.pos.y < 0) {
-        p.char.pos.y = g.SCREEN.HEIGHT;
+export function updateKeepOnScreen(player: Player, game: Game): void {
+    if (player.char.pos.y < 0) {
+        player.char.pos.y = game.SCREEN.HEIGHT;
     }
-    if (p.char.pos.y > g.SCREEN.HEIGHT) {
-        p.char.pos.y = 0;
+    if (player.char.pos.y > game.SCREEN.HEIGHT) {
+        player.char.pos.y = 0;
     }
-    if (p.char.pos.x < 0) {
-        p.char.pos.x = g.SCREEN.WIDTH;
+    if (player.char.pos.x < 0) {
+        player.char.pos.x = game.SCREEN.WIDTH;
     }
-    if (p.char.pos.x > g.SCREEN.WIDTH) {
-        p.char.pos.x = 0;
+    if (player.char.pos.x > game.SCREEN.WIDTH) {
+        player.char.pos.x = 0;
     }
 }

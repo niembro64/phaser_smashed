@@ -164,8 +164,8 @@ export default class Game extends Phaser.Scene {
             this.physics.add.collider(p.char.sprite, this.platforms);
             p.keyboard = this.input.keyboard.addKeys(p.keyboard_static);
             p.char.sprite.body.setBounce(0);
-            // p.char.sprite.body.setAllowGravity(false);
-            p.char.sprite.body.setAllowGravity(true);
+            p.char.sprite.body.setAllowGravity(false);
+            // p.char.sprite.body.setAllowGravity(true);
         });
         console.log("SPRITE", this.players[0].char.sprite);
     }
@@ -176,8 +176,8 @@ export default class Game extends Phaser.Scene {
             this.players[0].char.sprite.body.touching.down
         );
 
-        this.players.forEach((p, i) => {
-            switch (p.state) {
+        this.players.forEach((player, index) => {
+            switch (player.state) {
                 case "start":
                     ///////////////////////////////////////////////////////////////
                     ///////// WHILE IN LOOP
@@ -186,14 +186,8 @@ export default class Game extends Phaser.Scene {
                     ///////////////////////////////////////////////////////////////
                     ///////// timeout => dead
                     ///////////////////////////////////////////////////////////////
-                    setTimeout(() => {
-                        if (p.state === "x") {
-                            p.char.sprite.body.setAllowGravity(true);
-                            setState(p, "air");
-                        } else {
-                            setState(p, "x");
-                        }
-                    }, this.DEAD_TIME);
+                    player.char.sprite.body.setAllowGravity(false);
+                    setState(player, "dead");
 
                     break;
                 case "dead":
@@ -204,11 +198,10 @@ export default class Game extends Phaser.Scene {
                     ///////////////////////////////////////////////////////////////
                     ///////// timeout => air
                     ///////////////////////////////////////////////////////////////
-                    setTimeout(() => {
-                        p.char.sprite.body.setAllowGravity(true);
-      
-                    }, this.DEAD_TIME);
-
+                    // @ts-ignore
+                    player.char.sprite.body.setAllowGravity(true);
+                    setState(player, "air");
+                    //a
                     break;
                 case "air":
                     ///////////////////////////////////////////////////////////////
@@ -222,9 +215,9 @@ export default class Game extends Phaser.Scene {
                     ///////////////////////////////////////////////////////////////
                     ///////// touch down => ground
                     ///////////////////////////////////////////////////////////////
-                    if (p.char.sprite.body.touching.down) {
-                        setState(p, "ground");
-                    }
+                    if (player.char.sprite.body.touching.down) {
+                        setState(player, "ground");
+                    } // shit
 
                     ///////////////////////////////////////////////////////////////
                     ///////// touch side => wall
@@ -256,7 +249,7 @@ export default class Game extends Phaser.Scene {
                     ///////// fall => air
                     ///////////////////////////////////////////////////////////////
                     break;
-                case "":
+                case "x":
                     ///////////////////////////////////////////////////////////////
                     ///////// WHILE IN LOOP
                     ///////////////////////////////////////////////////////////////
