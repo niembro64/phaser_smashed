@@ -1,6 +1,12 @@
 import "phaser";
 import { Key } from "react";
-import { updateMovements, setState, updateKeyboard } from "./helpers";
+import {
+    updateMovements,
+    setState,
+    addKeyboard,
+    updateSpriteVelocity,
+    addGravity,
+} from "./helpers";
 
 export interface Player {
     state: string;
@@ -42,8 +48,8 @@ export interface Char {
 export default class Game extends Phaser.Scene {
     DEAD_TIME: number = 1000;
     RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
-    DEFAULT_SPEED: number = 7;
-    DEFAULT_JUMP: number = 7;
+    DEFAULT_SPEED: number = 70;
+    DEFAULT_JUMP: number = 70;
     INITIAL = { POSITION: { PLAYER_Y: 100 } };
     SCREEN_DIMENSIONS = { HEIGHT: 400, WIDTH: 800 };
     GRAVITY: number = 0.1;
@@ -183,7 +189,7 @@ export default class Game extends Phaser.Scene {
             "0",
             this.players[0].state,
             this.players[0].char.sprite.body.touching.down,
-            this.players[0].keyboard
+            this.players[0].char.sprite.y
         );
 
         this.players.forEach((player, index) => {
@@ -208,16 +214,18 @@ export default class Game extends Phaser.Scene {
                     ///////////////////////////////////////////////////////////////
                     ///////// timeout => air
                     ///////////////////////////////////////////////////////////////
-                    // @ts-ignore
+
                     player.char.sprite.body.setAllowGravity(true);
                     setState(player, "air");
-                    //a
+
                     break;
                 case "air":
                     ///////////////////////////////////////////////////////////////
                     ///////// WHILE IN LOOP
                     ///////////////////////////////////////////////////////////////
-                    updateKeyboard(player, this);
+                    addKeyboard(player, this);
+                    addGravity(player, this);
+                    updateSpriteVelocity(player, this);
 
                     ///////////////////////////////////////////////////////////////
                     ///////// die => dead
@@ -227,6 +235,7 @@ export default class Game extends Phaser.Scene {
                     ///////// touch down => ground
                     ///////////////////////////////////////////////////////////////
                     if (player.char.sprite.body.touching.down) {
+                        player.char.sprite.body.setAllowGravity(false);
                         setState(player, "ground");
                     } // shit
 
@@ -239,7 +248,9 @@ export default class Game extends Phaser.Scene {
                     ///////////////////////////////////////////////////////////////
                     ///////// WHILE IN LOOP
                     ///////////////////////////////////////////////////////////////
-                    updateKeyboard(player, this);
+                    addKeyboard(player, this);
+                    addGravity(player, this);
+                    updateSpriteVelocity(player, this);
 
                     ///////// jump => air
                     ///////////////////////////////////////////////////////////////
@@ -261,7 +272,7 @@ export default class Game extends Phaser.Scene {
                     ///////// fall => air
                     ///////////////////////////////////////////////////////////////
                     break;
-                case "x":
+                case "spin":
                     ///////////////////////////////////////////////////////////////
                     ///////// WHILE IN LOOP
                     ///////////////////////////////////////////////////////////////
