@@ -1,5 +1,6 @@
 import "phaser";
 import { Key } from "react";
+import { create } from "./create";
 import {
     updateMovements,
     setState,
@@ -166,24 +167,7 @@ export default class Game extends Phaser.Scene {
     }
 
     create() {
-        this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(300, 300, "platform").setScale(1, 1);
-        this.players.forEach((p, i) => {
-            p.char.sprite = this.physics.add.sprite(
-                200 * i + 100,
-                this.INITIAL.POSITION.PLAYER_Y,
-                "c" + i.toString()
-            );
-
-            p.char.sprite.setScale(1);
-            p.char.sprite.setCollideWorldBounds(false);
-            this.physics.add.collider(p.char.sprite, this.platforms);
-            p.keyboard = this.input.keyboard.addKeys(p.keyboard_static);
-            p.char.sprite.body.setBounce(0);
-            p.char.sprite.body.setAllowGravity(false);
-            // p.char.sprite.body.setAllowGravity(true);
-        });
-        console.log("SPRITE", this.players[0].char.sprite);
+        create(this);
     }
     update() {
         update(this);
