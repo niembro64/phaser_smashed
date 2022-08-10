@@ -1,4 +1,4 @@
-import { Key } from "react";
+import { Key } from 'react';
 
 export interface Player {
     state: string;
@@ -10,7 +10,7 @@ export interface Player {
     keyboard_static: Keyboard;
     char: Char;
     keyboard: Keyboard | any;
-    pad: Gamepad | any; 
+    pad: Gamepad | any;
 }
 
 export interface Keyboard {
@@ -28,14 +28,14 @@ export interface Char {
     sprite: any | Phaser.GameObjects.Sprite;
     vel: { x: number; y: number };
     pos: { x: number; y: number };
-    canJump: boolean;
+    jumps: number[];
     damage: number;
 }
-    // export interface Keyboard_Static {
-    //     up: typeof Phaser.Input.Keyboard.Key | any;
-    //     down: typeof Phaser.Input.Keyboard.Key | any;
-    //     left: typeof Phaser.Input.Keyboard.Key | any;
-    //     right: typeof Phaser.Input.Keyboard.Key | any;
-    //     fast: typeof Phaser.Input.Keyboard.Key | any;
-    //     jump: typeof Phaser.Input.Keyboard.Key | any;
-    // }
+// export interface Keyboard_Static {
+//     up: typeof Phaser.Input.Keyboard.Key | any;
+//     down: typeof Phaser.Input.Keyboard.Key | any;
+//     left: typeof Phaser.Input.Keyboard.Key | any;
+//     right: typeof Phaser.Input.Keyboard.Key | any;
+//     fast: typeof Phaser.Input.Keyboard.Key | any;
+//     jump: typeof Phaser.Input.Keyboard.Key | any;
+// }

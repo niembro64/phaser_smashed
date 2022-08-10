@@ -1,8 +1,8 @@
-import "phaser";
-import { Key } from "react";
-import { create } from "./create";
-import { update } from "./update";
-import { Player, Char, Keyboard } from "./interfaces";
+import 'phaser';
+import { Key } from 'react';
+import { create } from './create';
+import { update } from './update';
+import { Player, Char, Keyboard } from './interfaces';
 
 export default class Game extends Phaser.Scene {
     DEAD_TIME: number = 1000;
@@ -15,7 +15,7 @@ export default class Game extends Phaser.Scene {
     platforms: any | Phaser.GameObjects.Sprite;
     players: Player[] = [
         {
-            state: "start",
+            state: 'start',
             multipliers_static: {
                 speed: 0.7,
                 friction_ground: 0.94,
@@ -30,20 +30,20 @@ export default class Game extends Phaser.Scene {
                 jump: Phaser.Input.Keyboard.KeyCodes.X,
             },
             char: {
-                name: "Mario",
-                src: "images/character_0.png",
+                name: 'Mario',
+                src: 'images/character_0.png',
                 sprite: 0,
                 vel: { x: 0, y: 0 },
                 pos: { x: 0, y: 0 },
                 // acc: { x: 0, y: 0 },
-                canJump: false,
+                jumps: [1, 1],
                 damage: 0,
             },
             keyboard: 0,
             pad: 0,
         },
         {
-            state: "start",
+            state: 'start',
             multipliers_static: {
                 speed: 0.7,
                 friction_ground: 0.94,
@@ -58,20 +58,20 @@ export default class Game extends Phaser.Scene {
                 jump: Phaser.Input.Keyboard.KeyCodes.B,
             },
             char: {
-                name: "Link",
-                src: "images/character_1.png",
+                name: 'Link',
+                src: 'images/character_1.png',
                 sprite: 0,
                 vel: { x: 0, y: 0 },
                 pos: { x: 0, y: 0 },
                 // acc: { x: 0, y: 0 },
-                canJump: false,
+                jumps: [1, 1.3],
                 damage: 0,
             },
             keyboard: 0,
             pad: 0,
         },
         {
-            state: "start",
+            state: 'start',
             multipliers_static: {
                 speed: 1,
                 friction_ground: 0.96,
@@ -86,19 +86,19 @@ export default class Game extends Phaser.Scene {
                 jump: Phaser.Input.Keyboard.KeyCodes.P,
             },
             char: {
-                name: "Pikachu",
-                src: "images/character_2.png",
+                name: 'Pikachu',
+                src: 'images/character_2.png',
                 sprite: 0,
                 vel: { x: 0, y: 0 },
                 pos: { x: 0, y: 0 },
-                canJump: false,
+                jumps: [1, 1],
                 damage: 0,
             },
             keyboard: 0,
             pad: 0,
         },
         {
-            state: "start",
+            state: 'start',
             multipliers_static: {
                 speed: 0.8,
                 friction_ground: 0.95,
@@ -113,12 +113,12 @@ export default class Game extends Phaser.Scene {
                 jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
             },
             char: {
-                name: "Kirby",
-                src: "images/character_3.png",
+                name: 'Kirby',
+                src: 'images/character_3.png',
                 sprite: 0,
                 vel: { x: 0, y: 0 },
                 pos: { x: 0, y: 0 },
-                canJump: false,
+                jumps: [1, 0.8, 0.6, 0.4, 0.2],
                 damage: 0,
             },
             keyboard: 0,
@@ -126,10 +126,10 @@ export default class Game extends Phaser.Scene {
         },
     ];
     constructor() {
-        super("game");
+        super('game');
     }
     preload() {
-        this.load.image("platform", "images/platform.png");
+        this.load.image('platform', 'images/platform.png');
 
         this.players.forEach((player, playerIndex) => {
             this.load.image(player.char.name, player.char.src);
