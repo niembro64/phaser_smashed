@@ -1,15 +1,8 @@
 import { Gravity } from "matter";
-import { Char, Player, Keyboard } from "./Game";
-import Game from "./Game";
+import Game from "./game";
+import { Player } from "./interfaces";
 
 export function updateMovements(game: Game): void {}
-
-export function setState(
-    player: Player,
-    state: "start" | "dead" | "air" | "ground" | "wall" | "spin"
-): void {
-    player.state = state;
-}
 
 export function updatePositionData(player: Player): void {
     // if (player.char.sprite.body.touching.down) {

@@ -1,5 +1,5 @@
 import { Physics } from "phaser";
-import Game from "./scenes/Game";
+import Game from "./scenes/game";
 
 const config: Phaser.Types.Core.GameConfig = {
     scale: {

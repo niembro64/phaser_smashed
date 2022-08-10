@@ -1,10 +1,10 @@
-import Game from "./Game";
+import Game from "./game";
 import {
     addGravity,
     addKeyboard,
-    setState,
     updateSpriteVelocity,
-} from "./helpers";
+} from "./movement";
+import { setState } from "./state";
 
 export function update(game: Game): void {
     console.log(
@@ -24,7 +24,7 @@ export function update(game: Game): void {
                 ///////////////////////////////////////////////////////////////
                 ///////// timeout => dead
                 ///////////////////////////////////////////////////////////////
-                player.char.sprite.body.setAllowGravity(false);
+                // player.char.sprite.body.setAllowGravity(false);
                 setState(player, "dead");
 
                 break;
@@ -37,7 +37,7 @@ export function update(game: Game): void {
                 ///////// timeout => air
                 ///////////////////////////////////////////////////////////////
 
-                player.char.sprite.body.setAllowGravity(true);
+                // player.char.sprite.body.setAllowGravity(true);
                 setState(player, "air");
 
                 break;
