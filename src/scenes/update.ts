@@ -7,6 +7,7 @@ import {
 import {
     addGravity,
     addKeyboard,
+    addPad,
     updateKeepOnScreen,
     updateSpriteVelocity,
 } from "./movement";
@@ -24,7 +25,7 @@ export function update(game: Game): void {
     assignConnectedGamePads(game);
 
     printAllPadsActive(game);
-    addKeyboard(game.players[0], game);
+    addPad(game.players[0], game);
     updateSpriteVelocity(game.players[0], game);
 
     // game.players.forEach((player, index) => {

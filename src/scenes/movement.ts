@@ -98,6 +98,76 @@ export function addKeyboard(player: Player, game: Game): void {
 
     return;
 }
+export function addPad(player: Player, game: Game): void {
+    // CHECK ANGLED
+    if (player.pad.left && player.pad.up) {
+        console.log("LEFT UP");
+        player.char.vel.x = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        return;
+    }
+    if (player.pad.right && player.pad.up) {
+        player.char.vel.x = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        return;
+    }
+    if (player.pad.left && player.pad.down) {
+        player.char.vel.x = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        return;
+    }
+    if (player.pad.right && player.pad.down) {
+        player.char.vel.x = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        player.char.vel.y = game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
+        return;
+    }
+
+    // CHECK OPPOSING COUNTERS
+    if (player.pad.left && player.pad.right) {
+        player.char.vel.x = 0;
+        player.char.vel.y = 0;
+        return;
+    }
+    if (player.pad.up && player.pad.down) {
+        player.char.vel.x = 0;
+        player.char.vel.y = 0;
+        return;
+    }
+    // CHECK INDIVIDUALS
+    if (player.pad.up) {
+        player.char.vel.x = 0;
+        player.char.vel.y = -game.DEFAULT_SPEED;
+        return;
+    }
+    if (player.pad.down) {
+        player.char.vel.x = 0;
+        player.char.vel.y = game.DEFAULT_SPEED;
+        return;
+    }
+    if (player.pad.left) {
+        player.char.vel.y += 0;
+        player.char.vel.x = -game.DEFAULT_SPEED;
+        return;
+    }
+    if (player.pad.right) {
+        player.char.vel.y += 0;
+        player.char.vel.x = game.DEFAULT_SPEED;
+        return;
+    }
+
+    // CHECK NONE
+    if (!player.pad.left && !player.pad.right) {
+        player.char.vel.x = 0;
+        // player.char.vel.y = 0;
+    }
+    if (!player.pad.up && !player.pad.down) {
+        player.char.vel.x = 0;
+        // player.char.vel.y = 0;
+        player.char.vel.y += game.GRAVITY;
+    }
+
+    return;
+}
 
 export function updateKeepOnScreen(player: Player, game: Game): void {
     if (player.char.pos.y < 0) {
