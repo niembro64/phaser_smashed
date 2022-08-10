@@ -142,13 +142,19 @@ export default class Game extends Phaser.Scene {
             pad = this.input.gamepad.getPad(0);
         }
         if (pad.B) {
-            console.log("B");
+            console.log("B", pad);
         }
         if (pad.A) {
             console.log("A");
         }
-
-        console.log("pad", pad);
-        // update(this);
+        if (pad.X) {
+            console.log("X");
+        }
+        if (pad.Y) {
+            console.log("Y");
+        }
+        if (pad.down) {
+            console.log("down");
+        }
     }
 }
