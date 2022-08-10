@@ -1,8 +1,7 @@
 import 'phaser';
-import { Key } from 'react';
 import { create } from './create';
 import { update } from './update';
-import { Player, Char, Keyboard } from './interfaces';
+import { Player } from './interfaces';
 
 export default class Game extends Phaser.Scene {
     DEAD_TIME: number = 1000;
