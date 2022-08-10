@@ -1,19 +1,22 @@
 import Game from "./Game";
 import {
-    addGravity,
-    addKeyboard,
-    updateSpriteVelocity,
-} from "./movement";
+    assignGamePadsConnected,
+    printAllPadsActive,
+    simpleMotion,
+} from "./gamePad";
+import { addGravity, addKeyboard, updateSpriteVelocity } from "./movement";
 import { setState } from "./state";
 
 export function update(game: Game): void {
-    console.log(
-        "0",
-        game.players[0].state,
-        game.players[0].char.sprite.body.touching.down,
-        game.players[0].char.sprite.y
-    );
-
+    // console.log(
+    //     "0",
+    //     game.players[0].state,
+    //     game.players[0].char.sprite.body.touching.down,
+    //     game.players[0].char.sprite.y
+    // );
+    // simpleMotion(game);
+    assignGamePadsConnected(game);
+    printAllPadsActive(game);
     game.players.forEach((player, index) => {
         switch (player.state) {
             case "start":

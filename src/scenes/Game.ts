@@ -40,6 +40,7 @@ export default class Game extends Phaser.Scene {
                 damage: 0,
             },
             keyboard: 0,
+            pad: 0,
         },
         {
             state: "start",
@@ -67,6 +68,7 @@ export default class Game extends Phaser.Scene {
                 damage: 0,
             },
             keyboard: 0,
+            pad: 0,
         },
         {
             state: "start",
@@ -93,6 +95,7 @@ export default class Game extends Phaser.Scene {
                 damage: 0,
             },
             keyboard: 0,
+            pad: 0,
         },
         {
             state: "start",
@@ -119,6 +122,7 @@ export default class Game extends Phaser.Scene {
                 damage: 0,
             },
             keyboard: 0,
+            pad: 0,
         },
     ];
     constructor() {
@@ -129,6 +133,7 @@ export default class Game extends Phaser.Scene {
 
         this.players.forEach((player, playerIndex) => {
             this.load.image(player.char.name, player.char.src);
+            player.pad = Phaser.Input.Gamepad.Gamepad;
         });
     }
 
@@ -136,25 +141,6 @@ export default class Game extends Phaser.Scene {
         create(this);
     }
     update() {
-        let pad: any = Phaser.Input.Gamepad.Gamepad;
-
-        if (this.input.gamepad.total) {
-            pad = this.input.gamepad.getPad(0);
-        }
-        if (pad.B) {
-            console.log("B", pad);
-        }
-        if (pad.A) {
-            console.log("A");
-        }
-        if (pad.X) {
-            console.log("X");
-        }
-        if (pad.Y) {
-            console.log("Y");
-        }
-        if (pad.down) {
-            console.log("down");
-        }
+        update(this);
     }
 }

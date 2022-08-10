@@ -10,6 +10,7 @@ export interface Player {
     keyboard_static: Keyboard;
     char: Char;
     keyboard: Keyboard | any;
+    pad: Gamepad | any; 
 }
 
 export interface Keyboard {
