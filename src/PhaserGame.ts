@@ -1,4 +1,3 @@
-import { Physics } from "phaser";
 import Game from "./scenes/Game";
 
 const config: Phaser.Types.Core.GameConfig = {
