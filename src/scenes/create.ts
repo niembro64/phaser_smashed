@@ -1,6 +1,9 @@
-import Game from "./game";
+import Game from "./Game";
+import { charsCollide } from "./movement";
 
 export function create(game: Game) {
+
+
     game.platforms = game.physics.add.staticGroup();
     game.platforms.create(300, 300, "platform").setScale(1, 1);
     game.players.forEach((player, playerIndex) => {
@@ -14,9 +17,10 @@ export function create(game: Game) {
         player.char.sprite.setCollideWorldBounds(false);
         game.physics.add.collider(player.char.sprite, game.platforms);
         player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
-        player.char.sprite.body.setBounce(0);
-        // player.char.sprite.body.setAllowGravity(false);
-        // p.char.sprite.body.setAllowGravity(true);
+        // player.char.sprite.body.setBounce(1);
+        // player.char.sprite.body.setAllowGravity(true);
     });
+
+    charsCollide(game);
     console.log("SPRITE", game.players[0].char.sprite);
 }

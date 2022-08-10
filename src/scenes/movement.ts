@@ -1,5 +1,5 @@
 import { Gravity } from "matter";
-import Game from "./game";
+import Game from "./Game";
 import { Player } from "./interfaces";
 
 export function updateMovements(game: Game): void {}
@@ -112,4 +112,14 @@ export function updateKeepOnScreen(player: Player, game: Game): void {
     if (player.char.pos.x > game.SCREEN_DIMENSIONS.WIDTH) {
         player.char.pos.x = 0;
     }
+}
+
+export function charsCollide(game: Game): void {
+    game.players.forEach((player, playerIndex) => {
+        game.players.forEach((p, pj) => {
+            if (pj !== playerIndex) {
+                game.physics.add.collider(player.char.sprite, p.char.sprite);
+            }
+        });
+    });
 }

@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
     INITIAL = { POSITION: { PLAYER_Y: 100 } };
     SCREEN_DIMENSIONS = { HEIGHT: 400, WIDTH: 800 };
     GRAVITY: number = 0.1;
+    platforms: any | Phaser.GameObjects.Sprite;
     players: Player[] = [
         {
             state: "start",
@@ -123,7 +124,6 @@ export default class Game extends Phaser.Scene {
     constructor() {
         super("game");
     }
-    platforms: any | Phaser.GameObjects.Sprite;
     preload() {
         this.load.image("platform", "images/platform.png");
 
@@ -136,6 +136,19 @@ export default class Game extends Phaser.Scene {
         create(this);
     }
     update() {
-        update(this);
+        let pad: any = Phaser.Input.Gamepad.Gamepad;
+
+        if (this.input.gamepad.total) {
+            pad = this.input.gamepad.getPad(0);
+        }
+        if (pad.B) {
+            console.log("B");
+        }
+        if (pad.A) {
+            console.log("A");
+        }
+
+        console.log("pad", pad);
+        // update(this);
     }
 }

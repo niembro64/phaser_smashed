@@ -1,5 +1,5 @@
 import { Physics } from "phaser";
-import Game from "./scenes/game";
+import Game from "./scenes/Game";
 
 const config: Phaser.Types.Core.GameConfig = {
     scale: {
@@ -10,6 +10,9 @@ const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     parent: "game",
     backgroundColor: "#005577",
+    input: {
+        gamepad: true,
+    },
     physics: {
         default: "arcade",
         arcade: {
