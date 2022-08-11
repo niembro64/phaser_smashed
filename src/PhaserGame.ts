@@ -1,25 +1,26 @@
 import Game from "./scenes/Game";
 
 const config: Phaser.Types.Core.GameConfig = {
-    scale: {
-        width: 800,
-        height: 400,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    width: 1600,
+    height: 600,
+  },
+  pixelArt: false,
+  type: Phaser.AUTO,
+  parent: "phaser-container",
+  backgroundColor: "#005577",
+  input: {
+    gamepad: true,
+  },
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 600 },
+      debug: false,
     },
-    pixelArt: false,
-    type: Phaser.AUTO,
-    parent: "game",
-    backgroundColor: "#005577",
-    input: {
-        gamepad: true,
-    },
-    physics: {
-        default: "arcade",
-        arcade: {
-            gravity: { y: 600 },
-            debug: false,
-        },
-    },
-    scene: Game,
+  },
+  scene: Game,
 };
 
 export default new Phaser.Game(config);

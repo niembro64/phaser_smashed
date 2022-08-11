@@ -100,17 +100,17 @@ export function addKeyboard(player: Player, game: Game): void {
 }
 
 export function updateKeepOnScreen(player: Player, game: Game): void {
-  if (player.char.pos.y < 0) {
-    player.char.pos.y = game.SCREEN_DIMENSIONS.HEIGHT;
+  if (player.char.sprite.y < 0) {
+    player.char.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
   }
-  if (player.char.pos.y > game.SCREEN_DIMENSIONS.HEIGHT) {
-    player.char.pos.y = 0;
+  if (player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
+    player.char.sprite.y = 0;
   }
-  if (player.char.pos.x < 0) {
-    player.char.pos.x = game.SCREEN_DIMENSIONS.WIDTH;
+  if (player.char.sprite.x < 0) {
+    player.char.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
   }
-  if (player.char.pos.x > game.SCREEN_DIMENSIONS.WIDTH) {
-    player.char.pos.x = 0;
+  if (player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
+    player.char.sprite.x = 0;
   }
 }
 
@@ -122,4 +122,13 @@ export function charsCollide(game: Game): void {
       }
     });
   });
+}
+
+export function updateTouchingDown(player: Player, game: Game): void {
+  if (player.char.sprite.body.touching.down) {
+    player.char.sprite.body.setVelocityX(
+      player.char.sprite.body.velocity.x *
+        Math.pow(player.char.friction_ground, 4)
+    );
+  }
 }

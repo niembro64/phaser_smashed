@@ -1,15 +1,11 @@
 import "./App.css";
 
-
 function App() {
-    return (
-        <body>
-            <header className="App-header">
-                <div id="game"></div>
-                <p>Niemo Smashed Bros</p>
-            </header>
-        </body>
-    );
+  return (
+    <>
+      <h1>SMASHED 69</h1>
+    </>
+  );
 }
 
 export default App;

@@ -1,35 +1,37 @@
-import { Key } from 'react';
+import { Key } from "react";
 
 export interface Player {
-    state: string;
-    multipliers_static: {
-        speed: number;
-        friction_ground: number;
-        friction_air: number;
-    };
-    keyboard_static: Keyboard;
-    char: Char;
-    keyboard: Keyboard | any;
-    pad: Gamepad | any;
+  index: number;
+  state: string;
+  keyboard_static: Keyboard;
+  char: Char;
+  keyboard: Keyboard | any;
+  pad: Gamepad | any;
 }
 
 export interface Keyboard {
-    up: Key;
-    down: Key;
-    left: Key;
-    right: Key;
-    fast: Key;
-    jump: Key;
+  up: Key;
+  down: Key;
+  left: Key;
+  right: Key;
+  fast: Key;
+  jump: Key;
 }
 
 export interface Char {
-    name: string;
-    src: string;
-    sprite: any | Phaser.GameObjects.Sprite;
-    vel: { x: number; y: number };
-    pos: { x: number; y: number };
-    jumps: number[];
-    damage: number;
+  name: string;
+  src: string;
+  sprite: any | Phaser.GameObjects.Sprite;
+  vel: { x: number; y: number };
+  pos: { x: number; y: number };
+  jumps: number[];
+  jumpPower: number;
+  jumpIndex: number;
+  damage: number;
+  speed: number;
+  fast: number;
+  friction_ground: number;
+  friction_air: number;
 }
 // export interface Keyboard_Static {
 //     up: typeof Phaser.Input.Keyboard.Key | any;

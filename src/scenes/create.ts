@@ -22,5 +22,4 @@ export function create(game: Game) {
     });
 
     charsCollide(game);
-    console.log("SPRITE", game.players[0].char.sprite);
 }
