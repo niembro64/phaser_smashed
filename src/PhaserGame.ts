@@ -9,7 +9,7 @@ const config: Phaser.Types.Core.GameConfig = {
   pixelArt: false,
   type: Phaser.AUTO,
   parent: "phaser-container",
-  backgroundColor: "#005577",
+  backgroundColor: "#0077dd",
   input: {
     gamepad: true,
   },

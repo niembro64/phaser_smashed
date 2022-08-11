@@ -132,6 +132,7 @@ export function controllerMovement(player: Player, game: Game): void {
     // return;
   }
   if (player.pad.right) {
+
     player.char.sprite.body.setVelocityX(
       player.char.sprite.body.velocity.x *
         Math.pow(player.char.friction_air, 4) +

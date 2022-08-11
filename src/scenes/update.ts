@@ -17,6 +17,7 @@ import {
   updateLastDirectionTouched,
   hasPlayerTouchedWallRecently,
 } from "./movement";
+import { updateSprites } from "./sprites";
 
 import { setState } from "./state";
 
@@ -34,6 +35,7 @@ export function update(game: Game): void {
   );
   assignConnectedGamePads(game);
   updateWallTouchArray(game);
+  updateSprites(game);
   game.players.forEach((player, index) => {
     updateLastDirectionTouched(player);
     // printAllPadsActive(player, game);
