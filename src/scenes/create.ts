@@ -11,7 +11,7 @@ export function create(game: Game) {
     }
 
     player.char.sprite = game.physics.add.sprite(
-      200 * playerIndex + 100,
+      150 * playerIndex + 450,
       game.INITIAL.POSITION.PLAYER_Y,
       player.char.name
     );

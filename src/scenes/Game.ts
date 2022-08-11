@@ -10,7 +10,7 @@ export default class Game extends Phaser.Scene {
   DEFAULT_SPEED_X: number = 70;
   DEFAULT_SPEED_Y: number = 15;
   DEFAULT_JUMP: number = 3500;
-  INITIAL = { POSITION: { PLAYER_Y: 100 } };
+  INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
   GRAVITY: number = 0.1;
   platforms: any | Phaser.GameObjects.Sprite;
