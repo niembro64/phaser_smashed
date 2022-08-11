@@ -6,9 +6,9 @@ import { Player } from "./interfaces";
 export default class Game extends Phaser.Scene {
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
-  DEFAULT_SPEED_X: number = 50;
-  DEFAULT_SPEED_Y: number = 5;
-  DEFAULT_JUMP: number = 2500;
+  DEFAULT_SPEED_X: number = 70;
+  DEFAULT_SPEED_Y: number = 15;
+  DEFAULT_JUMP: number = 3500;
   INITIAL = { POSITION: { PLAYER_Y: 100 } };
   SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
   GRAVITY: number = 0.1;
@@ -33,7 +33,7 @@ export default class Game extends Phaser.Scene {
         pos: { x: 0, y: 0 },
         // acc: { x: 0, y: 0 },
         jumps: [1, 1, 0],
-        jumpPower: 0.9,
+        jumpPower: 0.8,
         jumpIndex: 0,
         damage: 0,
         speed: 0.7,
@@ -112,7 +112,7 @@ export default class Game extends Phaser.Scene {
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
         jumps: [1, 1, 0],
-        jumpPower: 0.8,
+        jumpPower: 0.7,
         jumpIndex: 0,
         damage: 0,
         speed: 1,
@@ -151,7 +151,7 @@ export default class Game extends Phaser.Scene {
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
         jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
-        jumpPower: 0.7,
+        jumpPower: 0.5,
         jumpIndex: 0,
         damage: 0,
         speed: 0.8,
@@ -177,7 +177,8 @@ export default class Game extends Phaser.Scene {
     super("game");
   }
   preload() {
-    this.load.image("platform", "images/platform.png");
+    this.load.image("platformHorizontal", "images/platformHorizontal.png");
+    this.load.image("platformVertical", "images/platformVertical.png");
 
     this.players.forEach((player, playerIndex) => {
       this.load.image(player.char.name, player.char.src);

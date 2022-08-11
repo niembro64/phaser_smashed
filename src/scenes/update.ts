@@ -12,6 +12,7 @@ import {
   frictionGroundX,
   frictionAirX,
   frictionAirY,
+  frictionWallY,
 } from "./movement";
 
 import { setState } from "./state";
@@ -33,6 +34,7 @@ export function update(game: Game): void {
     controllerSetFast(player, game);
     frictionGroundX(player, game);
     frictionAirX(player, game);
+    frictionWallY(player, game);
     frictionAirY(player, game);
     jump(player, game);
     controllerMovement(player, game);

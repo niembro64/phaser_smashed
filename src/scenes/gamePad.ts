@@ -125,14 +125,16 @@ export function controllerMovement(player: Player, game: Game): void {
   }
   if (player.pad.left) {
     player.char.sprite.body.setVelocityX(
-      player.char.sprite.body.velocity.x * 0.9 +
+      player.char.sprite.body.velocity.x *
+        Math.pow(player.char.friction_air, 3) +
         -game.DEFAULT_SPEED_X * player.char.speed * player.char.fast
     );
     // return;
   }
   if (player.pad.right) {
     player.char.sprite.body.setVelocityX(
-      player.char.sprite.body.velocity.x * 0.9 +
+      player.char.sprite.body.velocity.x *
+        Math.pow(player.char.friction_air, 4) +
         game.DEFAULT_SPEED_X * player.char.speed * player.char.fast
     );
     // return;

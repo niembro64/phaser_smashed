@@ -2,7 +2,9 @@ import Game from "./Game";
 
 export function create(game: Game) {
   game.platforms = game.physics.add.staticGroup();
-  game.platforms.create(300, 300, "platform").setScale(1, 1);
+  game.platforms.create(300, 300, "platformHorizontal");
+  game.platforms.create(600, 500, "platformHorizontal");
+  game.platforms.create(900, 300, "platformVertical");
   game.players.forEach((player, playerIndex) => {
     player.char.sprite = game.physics.add.sprite(
       200 * playerIndex + 100,

@@ -17,6 +17,9 @@ export function updateKeepOnScreen(player: Player, game: Game): void {
 }
 
 export function jump(player: Player, game: Game): void {
+  if (player.char.sprite.body.touching.down) {
+    player.char.jumpIndex = 0;
+  }
   if (player.pad.A && !player.padPrev.A) {
     console.log(
       "JUMP",
@@ -27,19 +30,24 @@ export function jump(player: Player, game: Game): void {
       "jumps[i]",
       player.char.jumps[player.char.jumpIndex]
     );
-    if (player.char.sprite.body.touching.down) {
-      player.char.jumpIndex = 0;
-    }
     if (!player.char.sprite.body.touching.down && player.char.jumpIndex < 1) {
       player.char.jumpIndex = 1;
     }
     if (player.pad.left) {
-      if (player.char.sprite.body.velocity.x > 0) {
+      if (player.char.sprite.body.touching.left) {
+        player.char.sprite.body.setVelocityX(
+          game.DEFAULT_SPEED_X * player.char.speed * 50
+        );
+      } else if (player.char.sprite.body.velocity.x > 0) {
         player.char.sprite.body.setVelocityX(-game.DEFAULT_SPEED_X * 10);
       }
     }
     if (player.pad.right) {
-      if (player.char.sprite.body.velocity.x < 0) {
+      if (player.char.sprite.body.touching.right) {
+        player.char.sprite.body.setVelocityX(
+          -game.DEFAULT_SPEED_X * player.char.speed * 50
+        );
+      } else if (player.char.sprite.body.velocity.x < 0) {
         player.char.sprite.body.setVelocityX(game.DEFAULT_SPEED_X * 10);
       }
     }
@@ -53,6 +61,15 @@ export function jump(player: Player, game: Game): void {
     );
     player.char.jumpIndex +=
       player.char.jumpIndex == player.char.jumps.length - 1 ? 0 : 1;
+  }
+}
+
+export function frictionWallY(player: Player, game: Game): void {
+  if (
+    player.char.sprite.body.touching.left ||
+    player.char.sprite.body.touching.right
+  ) {
+    player.char.sprite.body.setVelocityY(0);
   }
 }
 
