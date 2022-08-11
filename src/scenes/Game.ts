@@ -6,7 +6,7 @@ import { Player } from './interfaces';
 export default class Game extends Phaser.Scene {
     DEAD_TIME: number = 1000;
     RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
-    DEFAULT_SPEED: number = 70;
+    DEFAULT_SPEED: number = 200;
     DEFAULT_JUMP: number = 70;
     INITIAL = { POSITION: { PLAYER_Y: 100 } };
     SCREEN_DIMENSIONS = { HEIGHT: 400, WIDTH: 800 };
