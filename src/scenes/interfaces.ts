@@ -7,6 +7,18 @@ export interface Player {
   char: Char;
   keyboard: Keyboard | any;
   pad: Gamepad | any;
+  padPrev: PadPrevious;
+}
+
+export interface PadPrevious {
+  up: boolean;
+  down: boolean;
+  left: boolean;
+  right: boolean;
+  A: boolean;
+  B: boolean;
+  X: boolean;
+  Y: boolean;
 }
 
 export interface Keyboard {

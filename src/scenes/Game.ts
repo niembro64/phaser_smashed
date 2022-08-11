@@ -6,8 +6,9 @@ import { Player } from "./interfaces";
 export default class Game extends Phaser.Scene {
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
-  DEFAULT_SPEED: number = 400;
-  DEFAULT_JUMP: number = 70;
+  DEFAULT_SPEED_X: number = 50;
+  DEFAULT_SPEED_Y: number = 5;
+  DEFAULT_JUMP: number = 2500;
   INITIAL = { POSITION: { PLAYER_Y: 100 } };
   SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
   GRAVITY: number = 0.1;
@@ -31,7 +32,7 @@ export default class Game extends Phaser.Scene {
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
         // acc: { x: 0, y: 0 },
-        jumps: [1, 1],
+        jumps: [1, 1, 0],
         jumpPower: 0.9,
         jumpIndex: 0,
         damage: 0,
@@ -42,6 +43,16 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       pad: null,
+      padPrev: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+      },
     },
     {
       index: 1,
@@ -61,7 +72,7 @@ export default class Game extends Phaser.Scene {
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
         // acc: { x: 0, y: 0 },
-        jumps: [1, 1.3],
+        jumps: [1, 1, 0],
         jumpPower: 0.5,
         jumpIndex: 0,
         damage: 0,
@@ -72,6 +83,16 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       pad: null,
+      padPrev: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+      },
     },
     {
       index: 2,
@@ -90,7 +111,7 @@ export default class Game extends Phaser.Scene {
         sprite: null,
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
-        jumps: [1, 1],
+        jumps: [1, 1, 0],
         jumpPower: 0.8,
         jumpIndex: 0,
         damage: 0,
@@ -101,6 +122,16 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       pad: null,
+      padPrev: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+      },
     },
     {
       index: 3,
@@ -119,7 +150,7 @@ export default class Game extends Phaser.Scene {
         sprite: null,
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
-        jumps: [1, 0.8, 0.6, 0.4, 0.2],
+        jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
         jumpPower: 0.7,
         jumpIndex: 0,
         damage: 0,
@@ -130,6 +161,16 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       pad: null,
+      padPrev: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+      },
     },
   ];
   constructor() {

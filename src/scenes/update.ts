@@ -4,28 +4,40 @@ import {
   assignGamePadsConnected as assignConnectedGamePads,
   printAllPadsActive,
   controllerSetFast,
+  updatePadPrevious,
 } from "./gamePad";
-import { updateKeepOnScreen, updateTouchingDown } from "./movement";
+import {
+  jump,
+  updateKeepOnScreen,
+  frictionGroundX,
+  frictionAirX,
+  frictionAirY,
+} from "./movement";
 
 import { setState } from "./state";
 
 export function update(game: Game): void {
-  console.log(
-    "1",
+  console
+    .log
+    // "1",
     // game.players[1].state,
-    game.players[1].char.sprite.body.touching.down,
+    // game.players[1].char.sprite.body.touching.down,
     // game.players[1].char.sprite.y,
     // game.players[1].char.sprite.body.velocity,
-    game.players[1].pad.X
-  );
+    // game.players[1].pad
+    ();
 
   assignConnectedGamePads(game);
   game.players.forEach((player, index) => {
-    printAllPadsActive(player, game);
+    // printAllPadsActive(player, game);
     controllerSetFast(player, game);
-    updateTouchingDown(player, game);
+    frictionGroundX(player, game);
+    frictionAirX(player, game);
+    frictionAirY(player, game);
+    jump(player, game);
     controllerMovement(player, game);
     updateKeepOnScreen(player, game);
+    updatePadPrevious(player, game);
     // console.log(player.char.sprite.velocity);
   });
 }
