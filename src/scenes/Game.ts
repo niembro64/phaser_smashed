@@ -4,6 +4,7 @@ import { update } from "./update";
 import { Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
+  allPlayersWallTouchIterator: number = 0;
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   DEFAULT_SPEED_X: number = 70;
@@ -40,6 +41,8 @@ export default class Game extends Phaser.Scene {
         fast: 1,
         friction_ground: 0.94,
         friction_air: 0.98,
+        wallTouchArray: [],
+        lastDirectionTouched: "none",
       },
       keyboard: null,
       pad: null,
@@ -80,6 +83,8 @@ export default class Game extends Phaser.Scene {
         fast: 1,
         friction_ground: 0.94,
         friction_air: 0.97,
+        wallTouchArray: [],
+        lastDirectionTouched: "none",
       },
       keyboard: null,
       pad: null,
@@ -119,6 +124,8 @@ export default class Game extends Phaser.Scene {
         fast: 1,
         friction_ground: 0.96,
         friction_air: 0.98,
+        wallTouchArray: [],
+        lastDirectionTouched: "none",
       },
       keyboard: null,
       pad: null,
@@ -158,6 +165,8 @@ export default class Game extends Phaser.Scene {
         fast: 1,
         friction_ground: 0.95,
         friction_air: 0.96,
+        wallTouchArray: [],
+        lastDirectionTouched: "none",
       },
       keyboard: null,
       pad: null,

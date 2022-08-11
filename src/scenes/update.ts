@@ -13,23 +13,29 @@ import {
   frictionAirX,
   frictionAirY,
   frictionWallY,
+  updateWallTouchArray,
+  updateLastDirectionTouched,
+  hasPlayerTouchedWallRecently,
 } from "./movement";
 
 import { setState } from "./state";
 
 export function update(game: Game): void {
-  console
-    .log
+  console.log(
     // "1",
     // game.players[1].state,
     // game.players[1].char.sprite.body.touching.down,
     // game.players[1].char.sprite.y,
     // game.players[1].char.sprite.body.velocity,
-    // game.players[1].pad
-    ();
-
+    // game.players[3].char.wallTouchArray,
+    // hasPlayerTouchedWallRecently(game.players[3]),
+    // game.players[3].char.lastDirectionTouched
+    game.players[3].char.wallTouchArray
+  );
   assignConnectedGamePads(game);
+  updateWallTouchArray(game);
   game.players.forEach((player, index) => {
+    updateLastDirectionTouched(player);
     // printAllPadsActive(player, game);
     controllerSetFast(player, game);
     frictionGroundX(player, game);

@@ -6,6 +6,10 @@ export function create(game: Game) {
   game.platforms.create(600, 500, "platformHorizontal");
   game.platforms.create(900, 300, "platformVertical");
   game.players.forEach((player, playerIndex) => {
+    for (let i = 0; i < 15; i++) {
+      player.char.wallTouchArray.push(false);
+    }
+
     player.char.sprite = game.physics.add.sprite(
       200 * playerIndex + 100,
       game.INITIAL.POSITION.PLAYER_Y,
