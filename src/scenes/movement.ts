@@ -172,6 +172,9 @@ export function setCameraCenter(game: Game): void {
 
     game.center.x = x / game.centerLocations.length;
     game.center.y = y / game.centerLocations.length;
+    // game.cameras.main.width = game.players[0].char.sprite.x;
+    // game.cameras.main.height = (game.cameras.main.width * 6) / 16;
+    
 }
 
 export function getCenterIterator(game: Game): number {

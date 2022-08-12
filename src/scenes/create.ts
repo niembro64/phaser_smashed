@@ -29,7 +29,7 @@ export function create(game: Game) {
     game.cameras.main.startFollow(game.center);
 
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 40; i++) {
         game.centerLocations.push({ x: 800, y: 300 });
     }
 }
