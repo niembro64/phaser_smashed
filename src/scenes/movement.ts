@@ -174,7 +174,28 @@ export function setCameraCenter(game: Game): void {
     game.center.y = y / game.centerLocations.length;
     // game.cameras.main.width = game.players[0].char.sprite.x;
     // game.cameras.main.height = (game.cameras.main.width * 6) / 16;
-    game.cameras.main.zoom = 1;
+    game.cameras.main.zoom = getZoomX(game);
+}
+
+export function getZoomX(game: Game): number {
+    let curr_x = 0;
+    let curr_y = 0;
+
+    game.players.forEach((player, playerIndex) => {
+        if (Math.abs(player.char.sprite.x - game.center.x) > curr_x) {
+            curr_x = Math.abs(player.char.sprite.x - game.center.x);
+        }
+    });
+    game.players.forEach((player, playerIndex) => {
+        if (Math.abs(player.char.sprite.y - game.center.y) > curr_y) {
+            curr_y = Math.abs(player.char.sprite.y - game.center.y);
+        }
+    });
+
+    let return_x = 0.8 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
+    let return_y = 0.8 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
+
+    return return_x < return_y ? return_x : return_y;
 }
 
 export function getCenterIterator(game: Game): number {
