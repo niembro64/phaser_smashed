@@ -1,5 +1,5 @@
 import Game from './Game';
-import { Player } from './interfaces';
+import { Location, Player } from './interfaces';
 
 export function updateKeepOnScreen(player: Player, game: Game): void {
     if (player.char.sprite.y < 0) {
@@ -158,7 +158,32 @@ export function frictionGroundX(player: Player, game: Game): void {
     }
 }
 
-export function placeCamera(game: Game): void {
+export function setCameraCenter(game: Game): void {
+    let i: number = getCenterIterator(game);
+    let x: number = 0;
+    let y: number = 0;
+
+    game.centerLocations[i] = getCurrentCenter(game);
+
+    for (let j = 0; j < game.centerLocations.length; j++) {
+        x += game.centerLocations[j].x;
+        y += game.centerLocations[j].y;
+    }
+
+    game.center.x = x / game.centerLocations.length;
+    game.center.y = y / game.centerLocations.length;
+}
+
+export function getCenterIterator(game: Game): number {
+    if (game.centerLocationsIterator + 1 === game.centerLocations.length) {
+        game.centerLocationsIterator = 0;
+    } else {
+        game.centerLocationsIterator++;
+    }
+    return game.centerLocationsIterator;
+}
+
+export function getCurrentCenter(game: Game): Location {
     var x: number = 0;
     var y: number = 0;
 
@@ -167,8 +192,10 @@ export function placeCamera(game: Game): void {
         y += player.char.sprite.y;
     });
 
-    game.center.x = x / game.players.length;
-    game.center.y = y / game.players.length;
+    // game.center.x = x / game.players.length;
+    // game.center.y = y / game.players.length;
+
+    return { x: x / game.players.length, y: y / game.players.length };
 }
 
 // export function addKeyboard(player: Player, game: Game): void {

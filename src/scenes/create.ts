@@ -27,6 +27,11 @@ export function create(game: Game) {
     game.center.setImmovable(true);
     game.center.body.allowGravity = false;
     game.cameras.main.startFollow(game.center);
+
+
+    for (let i = 0; i < 30; i++) {
+        game.centerLocations.push({ x: 800, y: 300 });
+    }
 }
 
 export function charsCollide(game: Game): void {

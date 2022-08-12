@@ -186,6 +186,8 @@ export default class Game extends Phaser.Scene {
         super('game');
     }
     center: any;
+    centerLocations: Location[] | any = [];
+    centerLocationsIterator: number = 0;
     bg: any;
     preload() {
         this.load.image('center', 'images/small.png');

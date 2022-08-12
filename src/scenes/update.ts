@@ -15,7 +15,7 @@ import {
     frictionWallY,
     updateWallTouchArray,
     updateLastDirectionTouched,
-    placeCamera,
+    setCameraCenter,
 } from './movement';
 import { updateSprites } from './sprites';
 
@@ -34,7 +34,7 @@ export function update(game: Game): void {
     assignConnectedGamePads(game);
     updateWallTouchArray(game);
     updateSprites(game);
-    placeCamera(game);
+    setCameraCenter(game);
     game.players.forEach((player, index) => {
         updateLastDirectionTouched(player);
         // printAllPadsActive(player, game);
