@@ -162,22 +162,25 @@ export function setCameraCenter(game: Game): void {
     let i: number = getCenterIterator(game);
     let x: number = 0;
     let y: number = 0;
+    let zoom: number = 0;
 
     game.centerLocations[i] = getCurrentCenter(game);
 
     for (let j = 0; j < game.centerLocations.length; j++) {
         x += game.centerLocations[j].x;
         y += game.centerLocations[j].y;
+        zoom += game.centerLocations[j].zoom;
     }
 
     game.center.x = x / game.centerLocations.length;
     game.center.y = y / game.centerLocations.length;
+    game.center.zoom = zoom / game.centerLocations.length;
     // game.cameras.main.width = game.players[0].char.sprite.x;
     // game.cameras.main.height = (game.cameras.main.width * 6) / 16;
-    game.cameras.main.zoom = getZoomX(game);
+    // game.cameras.main.zoom = getCurrentZoom(game);
 }
 
-export function getZoomX(game: Game): number {
+export function getCurrentZoom(game: Game): number {
     let curr_x = 0;
     let curr_y = 0;
 
@@ -210,6 +213,7 @@ export function getCenterIterator(game: Game): number {
 export function getCurrentCenter(game: Game): Location {
     var x: number = 0;
     var y: number = 0;
+    var zoom: number = getCurrentZoom(game);
 
     game.players.forEach((player, playerIndex) => {
         x += player.char.sprite.x;
@@ -219,7 +223,11 @@ export function getCurrentCenter(game: Game): Location {
     // game.center.x = x / game.players.length;
     // game.center.y = y / game.players.length;
 
-    return { x: x / game.players.length, y: y / game.players.length };
+    return {
+        x: x / game.players.length,
+        y: y / game.players.length,
+        zoom,
+    };
 }
 
 // export function addKeyboard(player: Player, game: Game): void {

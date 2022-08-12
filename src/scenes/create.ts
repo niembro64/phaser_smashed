@@ -28,9 +28,8 @@ export function create(game: Game) {
     game.center.body.allowGravity = false;
     game.cameras.main.startFollow(game.center);
 
-
     for (let i = 0; i < 40; i++) {
-        game.centerLocations.push({ x: 800, y: 300 });
+        game.centerLocations.push({ x: 800, y: 300, zoom: 1 });
     }
 }
 

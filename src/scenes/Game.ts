@@ -14,6 +14,9 @@ export default class Game extends Phaser.Scene {
     SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
     GRAVITY: number = 0.1;
     platforms: any | Phaser.GameObjects.Sprite;
+    center: any;
+    centerLocations: Location[] | any = [];
+    centerLocationsIterator: number = 0;
     players: Player[] = [
         {
             index: 3,
@@ -185,10 +188,7 @@ export default class Game extends Phaser.Scene {
     constructor() {
         super('game');
     }
-    center: any;
-    centerLocations: Location[] | any = [];
-    centerLocationsIterator: number = 0;
-    bg: any;
+
     preload() {
         this.load.image('center', 'images/small.png');
         this.load.image('platformHorizontal', 'images/platformHorizontal.png');

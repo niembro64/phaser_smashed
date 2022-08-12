@@ -3,6 +3,7 @@ import { Key } from 'react';
 export interface Location {
     x: number;
     y: number;
+    zoom: number;
 }
 
 export interface Player {
