@@ -164,17 +164,17 @@ export function setCameraCenter(game: Game): void {
     let y: number = 0;
     let zoom: number = 0;
 
-    game.centerLocations[i] = getCurrentCenter(game);
+    game.center.locations[i] = getCurrentCenter(game);
 
-    for (let j = 0; j < game.centerLocations.length; j++) {
-        x += game.centerLocations[j].x;
-        y += game.centerLocations[j].y;
-        zoom += game.centerLocations[j].zoom;
+    for (let j = 0; j < game.center.locations.length; j++) {
+        x += game.center.locations[j].x;
+        y += game.center.locations[j].y;
+        zoom += game.center.locations[j].zoom;
     }
 
-    game.center.x = x / game.centerLocations.length;
-    game.center.y = y / game.centerLocations.length;
-    game.center.zoom = zoom / game.centerLocations.length;
+    game.center.helper.x = x / game.center.locations.length;
+    game.center.helper.y = y / game.center.locations.length;
+    game.center.helper.zoom = zoom / game.center.locations.length;
     // game.cameras.main.width = game.players[0].char.sprite.x;
     // game.cameras.main.height = (game.cameras.main.width * 6) / 16;
     // game.cameras.main.zoom = getCurrentZoom(game);
@@ -185,13 +185,13 @@ export function getCurrentZoom(game: Game): number {
     let curr_y = 0;
 
     game.players.forEach((player, playerIndex) => {
-        if (Math.abs(player.char.sprite.x - game.center.x) > curr_x) {
-            curr_x = Math.abs(player.char.sprite.x - game.center.x);
+        if (Math.abs(player.char.sprite.x - game.center.helper.x) > curr_x) {
+            curr_x = Math.abs(player.char.sprite.x - game.center.helper.x);
         }
     });
     game.players.forEach((player, playerIndex) => {
-        if (Math.abs(player.char.sprite.y - game.center.y) > curr_y) {
-            curr_y = Math.abs(player.char.sprite.y - game.center.y);
+        if (Math.abs(player.char.sprite.y - game.center.helper.y) > curr_y) {
+            curr_y = Math.abs(player.char.sprite.y - game.center.helper.y);
         }
     });
 
@@ -202,12 +202,12 @@ export function getCurrentZoom(game: Game): number {
 }
 
 export function getCenterIterator(game: Game): number {
-    if (game.centerLocationsIterator + 1 === game.centerLocations.length) {
-        game.centerLocationsIterator = 0;
+    if (game.center.locationsIterator + 1 === game.center.locations.length) {
+        game.center.locationsIterator = 0;
     } else {
-        game.centerLocationsIterator++;
+        game.center.locationsIterator++;
     }
-    return game.centerLocationsIterator;
+    return game.center.locationsIterator;
 }
 
 export function getCurrentCenter(game: Game): Location {
@@ -220,8 +220,8 @@ export function getCurrentCenter(game: Game): Location {
         y += player.char.sprite.y;
     });
 
-    // game.center.x = x / game.players.length;
-    // game.center.y = y / game.players.length;
+    // game.center.helper.x = x / game.players.length;
+    // game.center.helper.y = y / game.players.length;
 
     return {
         x: x / game.players.length,

@@ -23,13 +23,14 @@ export function create(game: Game) {
     });
 
     charsCollide(game);
-    game.center = game.physics.add.sprite(200, 200, 'center');
-    game.center.setImmovable(true);
-    game.center.body.allowGravity = false;
-    game.cameras.main.startFollow(game.center);
+
+    game.center.helper = game.physics.add.sprite(200, 200, 'center');
+    game.center.helper.setImmovable(true);
+    game.center.helper.body.allowGravity = false;
+    game.cameras.main.startFollow(game.center.helper);
 
     for (let i = 0; i < 40; i++) {
-        game.centerLocations.push({ x: 800, y: 300, zoom: 1 });
+        game.center.locations.push({ x: 800, y: 300, zoom: 1 });
     }
 }
 
