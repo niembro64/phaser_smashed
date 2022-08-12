@@ -1,7 +1,7 @@
-import "phaser";
-import { create } from "./create";
-import { update } from "./update";
-import { Player } from "./interfaces";
+import 'phaser';
+import { create } from './create';
+import { update } from './update';
+import { Player } from './interfaces';
 
 export default class Game extends Phaser.Scene {
     allPlayersWallTouchIterator: number = 0;
@@ -185,9 +185,12 @@ export default class Game extends Phaser.Scene {
     constructor() {
         super('game');
     }
+    camera: any;
+    bg: any;
     preload() {
         this.load.image('platformHorizontal', 'images/platformHorizontal.png');
         this.load.image('platformVertical', 'images/platformVertical.png');
+        this.load.image('suburb', 'images/suburb.png');
 
         this.players.forEach((player, playerIndex) => {
             this.load.image(player.char.name, player.char.src);
