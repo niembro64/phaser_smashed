@@ -1,4 +1,3 @@
-import { Cameras } from 'phaser';
 import Game from './Game';
 
 export function create(game: Game) {
@@ -24,11 +23,10 @@ export function create(game: Game) {
     });
 
     charsCollide(game);
-    // game.cameras.main.setBounds(0, 0, 800, 300);
-    // game.cameras.main.startFollow(game.players[0].char.sprite);
-    // game.camera = game.cameras.main;
     game.cameras.main.startFollow(game.players[0].char.sprite);
-    // game.camera.setFollowOffset(-20, 30);
+    game.center = game.physics.add.sprite(200, 200, 'center');
+    game.center.setImmovable(true);
+    game.center.body.allowGravity = false;
 }
 
 export function charsCollide(game: Game): void {
