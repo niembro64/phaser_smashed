@@ -24,7 +24,6 @@ export function controllerSetFast(player: Player, game: Game): void {
     return;
   }
   player.char.fast = 1;
-  // console.log("FAST", player.char.fast);
 }
 
 export function controllerMovement(player: Player, game: Game): void {

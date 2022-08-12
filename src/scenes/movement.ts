@@ -158,6 +158,19 @@ export function frictionGroundX(player: Player, game: Game): void {
     }
 }
 
+export function placeCamera(game: Game): void {
+    var x: number = 0;
+    var y: number = 0;
+
+    game.players.forEach((player, playerIndex) => {
+        x += player.char.sprite.x;
+        y += player.char.sprite.y;
+    });
+
+    game.center.x = x / game.players.length;
+    game.center.y = y / game.players.length;
+}
+
 // export function addKeyboard(player: Player, game: Game): void {
 //   // CHECK ANGLED
 //   if (player.keyboard.left.isDown && player.keyboard.up.isDown) {

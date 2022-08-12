@@ -23,10 +23,10 @@ export function create(game: Game) {
     });
 
     charsCollide(game);
-    game.cameras.main.startFollow(game.players[0].char.sprite);
     game.center = game.physics.add.sprite(200, 200, 'center');
     game.center.setImmovable(true);
     game.center.body.allowGravity = false;
+    game.cameras.main.startFollow(game.center);
 }
 
 export function charsCollide(game: Game): void {
