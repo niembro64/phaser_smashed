@@ -174,6 +174,8 @@ export function setCamera(game: Game): void {
   game.center.helper.x = x / game.center.locations.length;
   game.center.helper.y = y / game.center.locations.length;
   game.cameras.main.zoom = zoom / game.center.locations.length;
+
+  game.cameras.main.setRotation(0);
   // game.cameras.main.zoom =
   //   game.center.helper.zoom > game.center.locations[i].zoom
   //     ? game.center.helper.zoom
