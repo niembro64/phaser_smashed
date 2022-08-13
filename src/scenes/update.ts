@@ -45,7 +45,7 @@ export function update(game: Game): void {
     frictionAirY(player, game);
     jump(player, game);
     controllerMovement(player, game);
-    updateKeepOnScreen(player, game);
+    // updateKeepOnScreen(player, game);
     updatePadPrevious(player, game);
     // console.log(player.char.sprite.velocity);
   });

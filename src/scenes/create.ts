@@ -29,7 +29,7 @@ export function create(game: Game) {
         .setScale(0.05);
     game.center_10.helper.setImmovable(true);
     game.center_10.helper.body.allowGravity = false;
-    game.cameras.main.startFollow(game.center_10.helper);
+    // game.cameras.main.startFollow(game.center_10.helper);
 
     game.center_80.helper = game.physics.add
         .sprite(200, 200, 'center')
@@ -38,19 +38,18 @@ export function create(game: Game) {
     game.center_80.helper.body.allowGravity = false;
     // game.cameras.main.startFollow(game.center_80.helper);
 
-    for (let i = 0; i < 30; i++) {
-        game.center_10.locations.push({ x: 800, y: 300, zoom: 1 });
+    for (let i = 0; i < 7; i++) {
+        game.center_10.locations.push({ x: 800, y: 300, zoom: 0.3 });
     }
-    for (let i = 0; i < 100; i++) {
-        game.center_80.locations.push({ x: 800, y: 300, zoom: 1 });
+    for (let i = 0; i < 577; i++) {
+        game.center_80.locations.push({ x: 800, y: 300, zoom: 0.3 });
     }
-    game.cameras.main.setBounds(
-        0,
-        0,
-        game.SCREEN_DIMENSIONS.WIDTH,
-        game.SCREEN_DIMENSIONS.HEIGHT
-    );
-    
+    // game.cameras.main.setBounds(
+    //     0,
+    //     0,
+    //     game.SCREEN_DIMENSIONS.WIDTH,
+    //     game.SCREEN_DIMENSIONS.HEIGHT
+    // );
 }
 
 export function charsCollide(game: Game): void {

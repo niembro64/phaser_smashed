@@ -159,27 +159,28 @@ export function frictionGroundX(player: Player, game: Game): void {
 }
 
 export function setCamera(game: Game): void {
-    let i_10: number = getCenterIterator10(game);
-    let x_10: number = 0;
-    let y_10: number = 0;
-    let zoom_10: number = 1;
-    let i_80: number = getCenterIterator80(game);
-    let x_80: number = 0;
-    let y_80: number = 0;
-    let zoom_80: number = 1;
+    var i_10: number = getCenterIterator10(game);
+    var x_10: number = 0;
+    var y_10: number = 0;
+    var zoom_10: number = 1;
 
-    game.center_10.locations[i_10] = getCurrentCamera(game);
-    game.center_80.locations[i_80] = getCurrentCamera(game);
+    var i_80: number = getCenterIterator80(game);
+    var x_80: number = 0;
+    var y_80: number = 0;
+    var zoom_80: number = 1;
 
-    for (let j = 0; j < game.center_10.locations.length; j++) {
+    game.center_10.locations[i_10] = getCurrentCamera10(game);
+    game.center_80.locations[i_80] = getCurrentCamera80(game);
+
+    for (var j = 0; j < game.center_10.locations.length; j++) {
         x_10 += game.center_10.locations[j].x;
         y_10 += game.center_10.locations[j].y;
         zoom_10 += game.center_10.locations[j].zoom;
     }
-    for (let j = 0; j < game.center_80.locations.length; j++) {
-        x_80 += game.center_80.locations[j].x;
-        y_80 += game.center_80.locations[j].y;
-        zoom_80 += game.center_80.locations[j].zoom;
+    for (var k = 0; k < game.center_80.locations.length; k++) {
+        x_80 += game.center_80.locations[k].x;
+        y_80 += game.center_80.locations[k].y;
+        zoom_80 += game.center_80.locations[k].zoom;
     }
 
     game.center_10.helper.x = x_10 / game.center_10.locations.length;
@@ -188,11 +189,13 @@ export function setCamera(game: Game): void {
     game.center_80.helper.x = x_80 / game.center_80.locations.length;
     game.center_80.helper.y = y_80 / game.center_80.locations.length;
 
-    if (zoom_10 > zoom_80) {
-        game.cameras.main.zoom = zoom_80 / game.center_10.locations.length;
-    } else {
-        game.cameras.main.zoom = zoom_10 / game.center_10.locations.length;
-    }
+    var z_10 = zoom_10 / game.center_10.locations.length;
+    var z_80 = zoom_80 / game.center_80.locations.length;
+    var z = Math.min(z_10, z_80, 2);
+    game.zoom = z * 0.1 + game.zoom * 0.9;
+
+    game.cameras.main.startFollow(game.center_10.helper);
+    game.cameras.main.zoom = game.zoom;
 
     // game.cameras.main.setRotation(0);
     // game.cameras.main.setBackgroundColor("#ffffff");
@@ -227,9 +230,11 @@ export function getCameraZoomCurrent10(game: Game): number {
     let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
     let r = Math.min(return_x * 0.5, return_y * 0.3);
+    // let r = Math.min(return_x * 2, return_y * 2);
+    // let r = Math.min(return_x * 0.5, return_y * 0.3);
 
-    r = Math.max(r, 1);
-    r = Math.min(r, 2);
+    // r = Math.max(r, 1);
+    // r = Math.min(r, 2);
 
     // return 1;
     // return r < 1 ? 1 : r;
@@ -254,9 +259,11 @@ export function getCameraZoomCurrent80(game: Game): number {
     let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
     let r = Math.min(return_x * 0.5, return_y * 0.3);
+    // let r = Math.min(return_x * 1, return_y * 1);
+    // let r = Math.min(return_x * 0.5, return_y * 0.3);
 
-    r = Math.max(r, 1);
-    r = Math.min(r, 2);
+    // r = Math.max(r, 1);
+    // r = Math.min(r, 2);
 
     // return 1;
     // return r < 1 ? 1 : r;
@@ -286,7 +293,7 @@ export function getCenterIterator80(game: Game): number {
     return game.center_80.locationsIterator;
 }
 
-export function getCurrentCamera(game: Game): Location {
+export function getCurrentCamera10(game: Game): Location {
     var x_low: number = Infinity;
     var x_high: number = 0;
     var y_low: number = Infinity;
@@ -303,6 +310,31 @@ export function getCurrentCamera(game: Game): Location {
     // game.center.helper.y = y / game.players.length;
 
     var z_10 = getCameraZoomCurrent10(game);
+
+    return {
+        // x: x_low / game.players.length,
+        // y: y_low / game.players.length,
+        x: (x_low + x_high) / 2,
+        y: (y_low + y_high) / 2,
+        zoom: z_10,
+    };
+}
+export function getCurrentCamera80(game: Game): Location {
+    var x_low: number = Infinity;
+    var x_high: number = 0;
+    var y_low: number = Infinity;
+    var y_high: number = 0;
+
+    game.players.forEach((player, playerIndex) => {
+        x_low = player.char.sprite.x > x_low ? x_low : player.char.sprite.x;
+        x_high = player.char.sprite.x < x_high ? x_high : player.char.sprite.x;
+        y_low = player.char.sprite.y > y_low ? y_low : player.char.sprite.y;
+        y_high = player.char.sprite.y < y_high ? y_high : player.char.sprite.y;
+    });
+
+    // game.center.helper.x = x / game.players.length;
+    // game.center.helper.y = y / game.players.length;
+
     var z_80 = getCameraZoomCurrent80(game);
 
     return {
@@ -310,7 +342,7 @@ export function getCurrentCamera(game: Game): Location {
         // y: y_low / game.players.length,
         x: (x_low + x_high) / 2,
         y: (y_low + y_high) / 2,
-        zoom: z_10 > z_80 ? z_80 : z_10,
+        zoom: z_80,
     };
 }
 

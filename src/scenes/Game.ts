@@ -4,6 +4,7 @@ import { update } from './update';
 import { CameraHelper, Player } from './interfaces';
 
 export default class Game extends Phaser.Scene {
+    zoom: number = 0;
     allPlayersWallTouchIterator: number = 0;
     DEAD_TIME: number = 1000;
     RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
