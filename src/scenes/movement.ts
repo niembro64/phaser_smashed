@@ -191,8 +191,8 @@ export function setCamera(game: Game): void {
 
     var z_10 = zoom_10 / game.center_10.locations.length;
     var z_80 = zoom_80 / game.center_80.locations.length;
-    var z = Math.min(z_10, z_80, 2);
-    game.zoom = z * 0.1 + game.zoom * 0.9;
+    var z = Math.min(z_10, z_80, 0.8);
+    game.zoom = z * 0.2 + game.zoom * 0.8;
 
     game.cameras.main.startFollow(game.center_10.helper);
     game.cameras.main.zoom = game.zoom;
@@ -229,16 +229,16 @@ export function getCameraZoomCurrent10(game: Game): number {
     let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
     let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-    let r = Math.min(return_x * 0.5, return_y * 0.3);
+    let r = Math.min(return_x * 0.5, return_y * 0.3, 0.8);
     // let r = Math.min(return_x * 2, return_y * 2);
     // let r = Math.min(return_x * 0.5, return_y * 0.3);
 
     // r = Math.max(r, 1);
     // r = Math.min(r, 2);
 
-    // return 1;
+    return 1;
     // return r < 1 ? 1 : r;
-    return r;
+    // return Math.min(r, 1);
 }
 export function getCameraZoomCurrent80(game: Game): number {
     let curr_x = 0;
@@ -258,7 +258,7 @@ export function getCameraZoomCurrent80(game: Game): number {
     let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
     let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-    let r = Math.min(return_x * 0.5, return_y * 0.3);
+    let r = Math.min(return_x * 0.5, return_y * 0.3, 0.8);
     // let r = Math.min(return_x * 1, return_y * 1);
     // let r = Math.min(return_x * 0.5, return_y * 0.3);
 
@@ -268,6 +268,7 @@ export function getCameraZoomCurrent80(game: Game): number {
     // return 1;
     // return r < 1 ? 1 : r;
     return r;
+    // return Math.min(r, 1);
 }
 
 export function getCenterIterator10(game: Game): number {

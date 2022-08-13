@@ -38,10 +38,10 @@ export function create(game: Game) {
     game.center_80.helper.body.allowGravity = false;
     // game.cameras.main.startFollow(game.center_80.helper);
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 11; i++) {
         game.center_10.locations.push({ x: 800, y: 300, zoom: 0.3 });
     }
-    for (let i = 0; i < 577; i++) {
+    for (let i = 0; i < 79; i++) {
         game.center_80.locations.push({ x: 800, y: 300, zoom: 0.3 });
     }
     // game.cameras.main.setBounds(
