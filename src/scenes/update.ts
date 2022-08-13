@@ -1,10 +1,10 @@
 import Game from './Game';
 import {
     controllerMovement,
-    assignGamePadsConnected as assignConnectedGamePads,
     printAllPadsActive,
     controllerSetFast,
     updatePadPrevious,
+    assignGamePadsConnected,
 } from './gamePad';
 import {
     jump,
@@ -15,7 +15,7 @@ import {
     frictionWallY,
     updateWallTouchArray,
     updateLastDirectionTouched,
-    setCameraCenter,
+    setCamera,
 } from './movement';
 import { updateSprites } from './sprites';
 
@@ -31,10 +31,10 @@ export function update(game: Game): void {
         // game.players[3].char.lastDirectionTouched
         game.players[3].char.wallTouchArray
     );
-    assignConnectedGamePads(game);
+    assignGamePadsConnected(game);
     updateWallTouchArray(game);
     updateSprites(game);
-    setCameraCenter(game);
+    setCamera(game);
     game.players.forEach((player, index) => {
         updateLastDirectionTouched(player);
         // printAllPadsActive(player, game);
