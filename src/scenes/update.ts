@@ -17,7 +17,7 @@ import {
     updateLastDirectionTouched,
     setCamera,
 } from './movement';
-import { updateSprites } from './sprites';
+import { updateSpritesLR } from './sprites';
 
 export function update(game: Game): void {
     console.log(
@@ -33,8 +33,8 @@ export function update(game: Game): void {
     );
     assignGamePadsConnected(game);
     updateWallTouchArray(game);
-    updateSprites(game);
     setCamera(game);
+    updateSpritesLR(game);
     game.players.forEach((player, index) => {
         updateLastDirectionTouched(player);
         // printAllPadsActive(player, game);
