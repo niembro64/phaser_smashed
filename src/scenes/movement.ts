@@ -173,10 +173,7 @@ export function setCamera(game: Game): void {
 
   game.center.helper.x = x / game.center.locations.length;
   game.center.helper.y = y / game.center.locations.length;
-  game.center.helper.zoom = zoom / game.center.locations.length;
-
-  game.cameras.main.zoom =
-    game.center.helper.zoom < 1 ? 1 : game.center.helper.zoom;
+  game.cameras.main.zoom = zoom / game.center.locations.length;
   // game.cameras.main.zoom =
   //   game.center.helper.zoom > game.center.locations[i].zoom
   //     ? game.center.helper.zoom
@@ -201,9 +198,14 @@ export function getCameraZoomCurrent(game: Game): number {
   let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
   let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-  let r = Math.min(return_x * 0.4, return_y * 0.3);
+  let r = Math.min(return_x, return_y) * 0.5;
 
-  return r < 1 ? 1 : r;
+  r = Math.max(r, 1);
+  r = Math.min(r, 2);
+
+  // return 1;
+  // return r < 1 ? 1 : r;
+  return r;
 }
 
 export function getCenterIterator(game: Game): number {
