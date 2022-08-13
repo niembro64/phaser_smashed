@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
   DEFAULT_JUMP: number = 2500;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
+  // SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
   GRAVITY: number = 0.1;
   platforms: any | Phaser.GameObjects.Sprite;
   // center: any;
@@ -51,7 +52,7 @@ export default class Game extends Phaser.Scene {
         friction_ground: 0.95,
         friction_air: 0.96,
         wallTouchArray: [],
-        lastDirectionTouched: "none",
+        lastDirectionTouched: null,
       },
       keyboard: null,
       pad: null,
@@ -93,7 +94,7 @@ export default class Game extends Phaser.Scene {
         friction_ground: 0.94,
         friction_air: 0.98,
         wallTouchArray: [],
-        lastDirectionTouched: "none",
+        lastDirectionTouched: null,
       },
       keyboard: null,
       pad: null,
@@ -135,7 +136,7 @@ export default class Game extends Phaser.Scene {
         friction_ground: 0.94,
         friction_air: 0.97,
         wallTouchArray: [],
-        lastDirectionTouched: "none",
+        lastDirectionTouched: null,
       },
       keyboard: null,
       pad: null,
@@ -176,7 +177,7 @@ export default class Game extends Phaser.Scene {
         friction_ground: 0.96,
         friction_air: 0.98,
         wallTouchArray: [],
-        lastDirectionTouched: "none",
+        lastDirectionTouched: null,
       },
       keyboard: null,
       pad: null,

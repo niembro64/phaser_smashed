@@ -4,8 +4,10 @@ const config: Phaser.Types.Core.GameConfig = {
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1600,
-        height: 600,
+        // width: 3200,
+        // height: 1200,
+        width: 800,
+        height: 300,
     },
     pixelArt: false,
     type: Phaser.AUTO,

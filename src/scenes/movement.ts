@@ -161,7 +161,7 @@ export function setCamera(game: Game): void {
   let i: number = getCenterIterator(game);
   let x: number = 0;
   let y: number = 0;
-  let zoom: number = 0;
+  let zoom: number = 1;
 
   game.center.locations[i] = getCurrentCamera(game);
 
@@ -174,12 +174,16 @@ export function setCamera(game: Game): void {
   game.center.helper.x = x / game.center.locations.length;
   game.center.helper.y = y / game.center.locations.length;
   game.center.helper.zoom = zoom / game.center.locations.length;
-  // game.cameras.main.width = game.players[0].char.sprite.x;
-  // game.cameras.main.height = (game.cameras.main.width * 6) / 16;
-  game.cameras.main.zoom = game.center.helper.zoom;
+
+  game.cameras.main.zoom =
+    game.center.helper.zoom < 1 ? 1 : game.center.helper.zoom;
+  // game.cameras.main.zoom =
+  //   game.center.helper.zoom > game.center.locations[i].zoom
+  //     ? game.center.helper.zoom
+  //     : game.center.locations[i].zoom;
 }
 
-export function getCameraZoom(game: Game): number {
+export function getCameraZoomCurrent(game: Game): number {
   let curr_x = 0;
   let curr_y = 0;
 
@@ -197,9 +201,9 @@ export function getCameraZoom(game: Game): number {
   let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
   let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-  let r = Math.min(return_x, return_y);
+  let r = Math.min(return_x * 0.4, return_y * 0.3);
 
-  return r;
+  return r < 1 ? 1 : r;
 }
 
 export function getCenterIterator(game: Game): number {
@@ -212,17 +216,16 @@ export function getCenterIterator(game: Game): number {
 }
 
 export function getCurrentCamera(game: Game): Location {
-  var x_low: number = 0;
-  var x_high: number = Infinity;
-  var y_low: number = 0;
-  var y_high: number = Infinity;
-  var zoom: number = getCameraZoom(game);
+  var x_low: number = Infinity;
+  var x_high: number = 0;
+  var y_low: number = Infinity;
+  var y_high: number = 0;
 
   game.players.forEach((player, playerIndex) => {
-    x_low = player.char.sprite.x < x_low ? x_low : player.char.sprite.x;
-    x_high = player.char.sprite.x > x_high ? x_high : player.char.sprite.x;
-    y_low = player.char.sprite.y < y_low ? y_low : player.char.sprite.y;
-    y_high = player.char.sprite.y > y_high ? y_high : player.char.sprite.y;
+    x_low = player.char.sprite.x > x_low ? x_low : player.char.sprite.x;
+    x_high = player.char.sprite.x < x_high ? x_high : player.char.sprite.x;
+    y_low = player.char.sprite.y > y_low ? y_low : player.char.sprite.y;
+    y_high = player.char.sprite.y < y_high ? y_high : player.char.sprite.y;
   });
 
   // game.center.helper.x = x / game.players.length;
@@ -233,7 +236,7 @@ export function getCurrentCamera(game: Game): Location {
     // y: y_low / game.players.length,
     x: (x_low + x_high) / 2,
     y: (y_low + y_high) / 2,
-    zoom: getCameraZoom(game),
+    zoom: getCameraZoomCurrent(game),
   };
 }
 

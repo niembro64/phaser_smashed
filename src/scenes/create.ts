@@ -26,12 +26,12 @@ export function create(game: Game) {
 
   game.center.helper = game.physics.add
     .sprite(200, 200, "center")
-    .setScale(0.1);
+    .setScale(0.05);
   game.center.helper.setImmovable(true);
   game.center.helper.body.allowGravity = false;
   game.cameras.main.startFollow(game.center.helper);
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 30; i++) {
     game.center.locations.push({ x: 800, y: 300, zoom: 1 });
   }
 }

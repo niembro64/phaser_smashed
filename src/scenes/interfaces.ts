@@ -57,7 +57,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: "up" | "down" | "left" | "right" | "none";
+  lastDirectionTouched: "up" | "down" | "left" | "right" | null;
 }
 // export interface Keyboard_Static {
 //     up: typeof Phaser.Input.Keyboard.Key | any;
