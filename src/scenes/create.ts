@@ -38,7 +38,7 @@ export function create(game: Game) {
     game.center_80.helper.body.allowGravity = false;
     // game.cameras.main.startFollow(game.center_80.helper);
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 30; i++) {
         game.center_10.locations.push({ x: 800, y: 300, zoom: 1 });
     }
     for (let i = 0; i < 100; i++) {

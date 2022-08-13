@@ -226,7 +226,7 @@ export function getCameraZoomCurrent10(game: Game): number {
     let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
     let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-    let r = Math.min(return_x, return_y) * 0.5;
+    let r = Math.min(return_x * 0.5, return_y * 0.3);
 
     r = Math.max(r, 1);
     r = Math.min(r, 2);
@@ -253,7 +253,7 @@ export function getCameraZoomCurrent80(game: Game): number {
     let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
     let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-    let r = Math.min(return_x, return_y) * 0.5;
+    let r = Math.min(return_x * 0.5, return_y * 0.3);
 
     r = Math.max(r, 1);
     r = Math.min(r, 2);
