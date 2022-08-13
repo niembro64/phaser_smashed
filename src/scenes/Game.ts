@@ -197,7 +197,7 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("center", "images/small.png");
+    this.load.image("center", "images/x.png");
     this.load.image("platformHorizontal", "images/platformHorizontal.png");
     this.load.image("platformVertical", "images/platformVertical.png");
     this.load.image("suburb", "images/suburb.png");
