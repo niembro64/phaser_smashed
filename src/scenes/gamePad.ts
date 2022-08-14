@@ -3,7 +3,7 @@ import { Player } from "./interfaces";
 
 export function assignGamePadsConnected(game: Game): void {
   for (let i = 0; i < game.input.gamepad.total; i++) {
-    game.players[i].pad = game.input.gamepad.getPad(i);
+    game.players[game.playersOrder[i]].pad = game.input.gamepad.getPad(i);
   }
 }
 
@@ -131,7 +131,6 @@ export function controllerMovement(player: Player, game: Game): void {
     // return;
   }
   if (player.pad.right) {
-
     player.char.sprite.body.setVelocityX(
       player.char.sprite.body.velocity.x *
         Math.pow(player.char.friction_air, 4) +
