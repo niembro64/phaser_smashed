@@ -29,26 +29,26 @@ export function create(game: Game) {
 
   charsCollide(game);
 
-  game.center_10.helper = game.physics.add
+  game.cameraFast.char.sprite = game.physics.add
     .sprite(200, 200, "center")
-    .setScale(0.05);
-  game.center_10.helper.setImmovable(true);
-  game.center_10.helper.body.allowGravity = false;
-  // game.cameras.main.startFollow(game.center_10.helper);
+    .setScale(0.1);
+  game.cameraFast.char.sprite.setImmovable(true);
+  game.cameraFast.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraFast.char.sprite);
 
-  game.center_80.helper = game.physics.add
+  game.cameraSlow.char.sprite = game.physics.add
     .sprite(200, 200, "center")
-    .setScale(0.05);
-  game.center_80.helper.setImmovable(true);
-  game.center_80.helper.body.allowGravity = false;
-  // game.cameras.main.startFollow(game.center_80.helper);
+    .setScale(0.1);
+  game.cameraSlow.char.sprite.setImmovable(true);
+  game.cameraSlow.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.center_80.char.sprite);
 
-  for (let i = 0; i < 11; i++) {
-    game.center_10.locations.push({ x: 800, y: 300, zoom: 0.3 });
-  }
-  for (let i = 0; i < 79; i++) {
-    game.center_80.locations.push({ x: 800, y: 300, zoom: 0.3 });
-  }
+  // for (let i = 0; i < 11; i++) {
+  //   game.center_10.helperState.push({ x: 800, y: 300, zoom: 0.3 });
+  // }
+  // for (let i = 0; i < 79; i++) {
+  //   game.center_80.helperState.push({ x: 800, y: 300, zoom: 0.3 });
+  // }
   // game.cameras.main.setBounds(
   //     0,
   //     0,

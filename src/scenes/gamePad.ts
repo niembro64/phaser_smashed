@@ -16,6 +16,8 @@ export function updatePadPrevious(player: Player, game: Game): void {
   player.padPrev.B = player.pad.B;
   player.padPrev.X = player.pad.X;
   player.padPrev.Y = player.pad.Y;
+
+  player.char.sprite.zoom = 1; 
 }
 
 export function controllerSetFast(player: Player, game: Game): void {
