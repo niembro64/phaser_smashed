@@ -173,8 +173,11 @@ export function setCamera(game: Game): void {
   // var c80 = getCurrentCamera80(game);
 
   game.cameraBoy.char.sprite.x = c10.x;
-  game.cameraBoy.char.sprite.y = c10.y;
+  game.cameraBoy.char.sprite.y = c10.y - 50;
   game.cameraBoy.char.zoom = c10.zoom;
+
+  var zoomRatioSlow = 0.995;
+  var zoomRatioFast = 0.9;
 
   // game.cameraSlow.char.sprite.x =
   //   game.cameraSlow.char.sprite.x * 0.99 + c10.x * 0.01;
@@ -187,12 +190,13 @@ export function setCamera(game: Game): void {
   // game.cameras.main.startFollow(game.cameraFast.char.sprite);
 
   if (game.cameras.main.zoom < game.cameraBoy.char.zoom) {
-    console.log("LESS");
     game.cameras.main.zoom =
-      game.cameras.main.zoom * 0.99 + game.cameraBoy.char.zoom * 0.01;
+      game.cameras.main.zoom * zoomRatioSlow +
+      game.cameraBoy.char.zoom * (1 - zoomRatioSlow);
   } else {
-    console.log("GREATER");
-    game.cameras.main.zoom = game.cameraBoy.char.zoom;
+    game.cameras.main.zoom =
+      game.cameras.main.zoom * zoomRatioFast +
+      game.cameraBoy.char.zoom * (1 - zoomRatioFast);
   }
 
   // game.cameras.main.zoom = zFast * 0.8;
