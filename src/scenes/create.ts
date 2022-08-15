@@ -1,10 +1,16 @@
 import Game from "./Game";
 
 export function create(game: Game) {
+  game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
+  game.background.setScale(1);
+  game.background.setImmovable(true);
+  game.background.body.allowGravity = false;
+
   game.platforms = game.physics.add.staticGroup();
-  game.platforms.create(500, 300, "platformHorizontal");
-  game.platforms.create(800, 500, "platformHorizontal");
-  game.platforms.create(1100, 300, "platformVertical");
+  game.platforms.create(1200, 850, "platformShorter");
+  game.platforms.create(600, 1000, "platformShort");
+  game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
+  game.platforms.create(1200, 700, "platformVertical");
 
   for (let i = 0; i < 4; i++) {
     game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(
@@ -50,10 +56,10 @@ export function create(game: Game) {
   //   game.center_80.helperState.push({ x: 800, y: 300, zoom: 0.3 });
   // }
   // game.cameras.main.setBounds(
-  //     0,
-  //     0,
-  //     game.SCREEN_DIMENSIONS.WIDTH,
-  //     game.SCREEN_DIMENSIONS.HEIGHT
+  //   0,
+  //   0,
+  //   game.SCREEN_DIMENSIONS.WIDTH,
+  //   game.SCREEN_DIMENSIONS.HEIGHT
   // );
 }
 

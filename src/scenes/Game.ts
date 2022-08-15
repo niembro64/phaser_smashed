@@ -4,7 +4,6 @@ import { update } from "./update";
 import { CameraHelper, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  // zoom: number = 0;
   allPlayersWallTouchIterator: number = 0;
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
@@ -13,12 +12,9 @@ export default class Game extends Phaser.Scene {
   DEFAULT_JUMP: number = 1800;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
-  // SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
   GRAVITY: number = 0.1;
   platforms: any | Phaser.GameObjects.Sprite;
-  // center: any;
-  // centerLocations: Location[] | any = [];
-  // centerLocationsIterator: number = 0;
+  background: any | Phaser.GameObjects.Sprite;
 
   cameraBoy: Player = {
     index: 0,
@@ -287,8 +283,11 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
+    this.load.image("background", "images/smaller_triforce_background.png");
     this.load.image("center", "images/x.png");
     this.load.image("platformHorizontal", "images/platformHorizontal.png");
+    this.load.image("platformShort", "images/platformShort.bmp");
+    this.load.image("platformShorter", "images/platformShorter.bmp");
     this.load.image("platformVertical", "images/platformVertical.png");
     this.load.image("suburb", "images/suburb.png");
 
