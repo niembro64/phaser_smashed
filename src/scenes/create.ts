@@ -10,6 +10,7 @@ export function create(game: Game) {
   game.platforms.create(1200, 850, "platformShorter");
   game.platforms.create(600, 1000, "platformShort");
   game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
+  game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1200, 700, "platformVertical");
 
   for (let i = 0; i < 4; i++) {
@@ -35,12 +36,41 @@ export function create(game: Game) {
 
   charsCollide(game);
 
-  game.cameraBoy.char.sprite = game.physics.add
+  game.cameraPlayers.char.sprite = game.physics.add
     .sprite(200, 200, "center")
     .setScale(0.1);
-  game.cameraBoy.char.sprite.setImmovable(true);
-  game.cameraBoy.char.sprite.body.allowGravity = false;
-  game.cameras.main.startFollow(game.cameraBoy.char.sprite);
+  game.cameraPlayers.char.sprite.setImmovable(true);
+  game.cameraPlayers.char.sprite.body.allowGravity = false;
+  game.cameras.main.startFollow(game.cameraPlayers.char.sprite);
+
+  game.cameraPlayersHalfway.char.sprite = game.physics.add
+    .sprite(200, 200, "center")
+    .setScale(0.1);
+  game.cameraPlayersHalfway.char.sprite.setImmovable(true);
+  game.cameraPlayersHalfway.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraBorderBoy.char.sprite);
+
+  game.cameraCenter.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      "center"
+    )
+    .setScale(0.1);
+  game.cameraCenter.char.sprite.setImmovable(true);
+  game.cameraCenter.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
+
+  game.cameraBox.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      "center"
+    )
+    .setScale(0.1);
+  game.cameraBox.char.sprite.setImmovable(true);
+  game.cameraBox.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
 
   // game.cameraSlow.char.sprite = game.physics.add
   //   .sprite(200, 200, "center")

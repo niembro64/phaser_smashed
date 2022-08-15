@@ -159,50 +159,97 @@ export function frictionGroundX(player: Player, game: Game): void {
 }
 
 export function setCamera(game: Game): void {
-  var c10 = getCurrentCameraBoy(game);
+  var cPlayer = getCameraPlayerStatus(game);
+  var cBorder = getCameraBorderStatus(game);
+  var cBox = getCameraBoxStatus(game);
+
   var zoomRatioSlow = 0.995;
   var zoomRatioFast = 0.9;
 
-  game.cameraBoy.char.sprite.x = c10.x;
-  game.cameraBoy.char.sprite.y = c10.y - 100;
-  game.cameraBoy.char.zoom = game.cameraBoy.char.zoom = c10.zoom;
+  game.cameraPlayers.char.sprite.x = cPlayer.x;
+  game.cameraPlayers.char.sprite.y = cPlayer.y + game.CAMERA_OFFSET_Y;
+  game.cameraPlayers.char.zoom = game.cameraPlayers.char.zoom = cPlayer.zoom;
 
-  if (game.cameras.main.zoom < game.cameraBoy.char.zoom) {
+  game.cameraPlayersHalfway.char.sprite.x = cBorder.x;
+  game.cameraPlayersHalfway.char.sprite.y = cBorder.y + game.CAMERA_OFFSET_Y;
+  game.cameraPlayersHalfway.char.zoom = game.cameraPlayersHalfway.char.zoom =
+    cBorder.zoom;
+
+  game.cameraBox.char.sprite.x = cBox.x;
+  game.cameraBox.char.sprite.y = cBox.y + game.CAMERA_OFFSET_Y;
+  game.cameraBox.char.zoom = game.cameraBox.char.zoom =
+    cBox.zoom;
+
+  if (game.cameras.main.zoom < game.cameraPlayers.char.zoom) {
     game.cameras.main.zoom =
       game.cameras.main.zoom * zoomRatioSlow +
-      game.cameraBoy.char.zoom * (1 - zoomRatioSlow);
+      game.cameraPlayers.char.zoom * (1 - zoomRatioSlow);
   } else {
     game.cameras.main.zoom =
       game.cameras.main.zoom * zoomRatioFast +
-      game.cameraBoy.char.zoom * (1 - zoomRatioFast);
+      game.cameraPlayers.char.zoom * (1 - zoomRatioFast);
   }
 }
 
-export function getCurrentCameraBoyZoom(game: Game): number {
+export function getBorderZoom(game: Game): number {
+  var curr_x: number = 0;
+  var curr_y: number = 0;
+
+  if (game.cameraPlayers.char.sprite.x < game.SCREEN_DIMENSIONS.WIDTH / 2) {
+    curr_x = game.BORDER_PADDING_X + game.cameraPlayers.char.sprite.x;
+  } else {
+    curr_x =
+      game.BORDER_PADDING_X +
+      game.SCREEN_DIMENSIONS.WIDTH -
+      game.cameraPlayers.char.sprite.x;
+  }
+
+  if (game.cameraPlayers.char.sprite.y < game.SCREEN_DIMENSIONS.HEIGHT / 2) {
+    curr_y = game.BORDER_PADDING_Y + game.cameraPlayers.char.sprite.y;
+  } else {
+    curr_y =
+      game.BORDER_PADDING_Y +
+      game.SCREEN_DIMENSIONS.HEIGHT -
+      game.cameraPlayers.char.sprite.y;
+  }
+
+  let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
+  let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
+
+  return Math.max(return_x, return_y);
+}
+
+export function getPlayerZoom(game: Game): number {
   let curr_x = 0;
   let curr_y = 0;
-  let padding_x: number = 100;
-  let padding_y: number = 150;
 
   game.players.forEach((player, playerIndex) => {
     if (
       Math.abs(
-        padding_x + player.char.sprite.x - game.cameraBoy.char.sprite.x
+        game.BORDER_PADDING_X +
+          player.char.sprite.x -
+          game.cameraPlayers.char.sprite.x
       ) > curr_x
     ) {
       curr_x = Math.abs(
-        padding_x + player.char.sprite.x - game.cameraBoy.char.sprite.x
+        game.BORDER_PADDING_X +
+          player.char.sprite.x -
+          game.cameraPlayers.char.sprite.x
       );
     }
   });
   game.players.forEach((player, playerIndex) => {
     if (
       Math.abs(
-        padding_y + player.char.sprite.y - game.cameraBoy.char.sprite.y
+        game.BORDER_PADDING_Y +
+          player.char.sprite.y -
+          game.cameraPlayers.char.sprite.y
       ) > curr_y
     ) {
       curr_y = Math.abs(
-        padding_y + player.char.sprite.y - game.cameraBoy.char.sprite.y
+        game.BORDER_PADDING_Y +
+          player.char.sprite.y -
+          game.cameraPlayers.char.sprite.y
       );
     }
   });
@@ -210,12 +257,30 @@ export function getCurrentCameraBoyZoom(game: Game): number {
   let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
   let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-  let r = Math.min(return_x, return_y);
-
-  return r;
+  return Math.min(return_x, return_y);
 }
 
-export function getCurrentCameraBoy(game: Game): Location {
+export function getCameraBorderStatus(game: Game): Location {
+  var x_low: number = Infinity;
+  var x_high: number = 0;
+  var y_low: number = Infinity;
+  var y_high: number = 0;
+
+  game.players.forEach((player, playerIndex) => {
+    x_low = player.char.sprite.x > x_low ? x_low : player.char.sprite.x;
+    x_high = player.char.sprite.x < x_high ? x_high : player.char.sprite.x;
+    y_low = player.char.sprite.y > y_low ? y_low : player.char.sprite.y;
+    y_high = player.char.sprite.y < y_high ? y_high : player.char.sprite.y;
+  });
+
+  return {
+    x: ((x_low + x_high) / 2 + game.SCREEN_DIMENSIONS.WIDTH / 2) / 2,
+    y: ((y_low + y_high) / 2 + game.SCREEN_DIMENSIONS.HEIGHT / 2) / 2,
+    zoom: getBorderZoom(game),
+  };
+}
+
+export function getCameraPlayerStatus(game: Game): Location {
   var x_low: number = Infinity;
   var x_high: number = 0;
   var y_low: number = Infinity;
@@ -231,7 +296,33 @@ export function getCurrentCameraBoy(game: Game): Location {
   return {
     x: (x_low + x_high) / 2,
     y: (y_low + y_high) / 2,
-    zoom: getCurrentCameraBoyZoom(game),
+    zoom: getPlayerZoom(game),
+  };
+}
+
+export function getCameraBoxStatus(game: Game): Location {
+  var x_low: number = Infinity;
+  var x_high: number = 0;
+  var y_low: number = Infinity;
+  var y_high: number = 0;
+
+  game.players.forEach((player, playerIndex) => {
+    x_low = player.char.sprite.x > x_low ? x_low : player.char.sprite.x;
+    x_high = player.char.sprite.x < x_high ? x_high : player.char.sprite.x;
+    y_low = player.char.sprite.y > y_low ? y_low : player.char.sprite.y;
+    y_high = player.char.sprite.y < y_high ? y_high : player.char.sprite.y;
+  });
+
+  var x = Math.max(game.SCREEN_DIMENSIONS.WIDTH / 4, (x_low + x_high) / 2);
+  var y = Math.max(game.SCREEN_DIMENSIONS.HEIGHT / 4, (y_low + y_high) / 2);
+
+  x = Math.min((game.SCREEN_DIMENSIONS.WIDTH / 4) * 3, x);
+  y = Math.min((game.SCREEN_DIMENSIONS.HEIGHT / 4) * 3, y);
+
+  return {
+    x: x,
+    y: y,
+    zoom: 1,
   };
 }
 

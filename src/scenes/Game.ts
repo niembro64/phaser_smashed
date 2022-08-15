@@ -15,8 +15,14 @@ export default class Game extends Phaser.Scene {
   GRAVITY: number = 0.1;
   platforms: any | Phaser.GameObjects.Sprite;
   background: any | Phaser.GameObjects.Sprite;
+  BORDER_PADDING_X: number = 0;
+  BORDER_PADDING_Y: number = 0;
+  // BORDER_PADDING_X: number= 100;
+  // BORDER_PADDING_Y: number= 150;
+  CAMERA_OFFSET_Y: number = 0;
+  // CAMERA_OFFSET_Y: number = -100;
 
-  cameraBoy: Player = {
+  cameraPlayers: Player = {
     index: 0,
     state: "camera",
     keyboard_static: {
@@ -59,7 +65,93 @@ export default class Game extends Phaser.Scene {
       Y: false,
     },
   };
-  cameraSlow: Player = {
+  cameraPlayersHalfway: Player = {
+    index: 0,
+    state: "camera",
+    keyboard_static: {
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      down: Phaser.Input.Keyboard.KeyCodes.S,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D,
+      fast: Phaser.Input.Keyboard.KeyCodes.Z,
+      jump: Phaser.Input.Keyboard.KeyCodes.X,
+    },
+    char: {
+      name: "center_80",
+      src: "images/x.png",
+      sprite: null,
+      zoom: 1,
+      vel: { x: 0, y: 0 },
+      pos: { x: 0, y: 0 },
+      // acc: { x: 0, y: 0 },
+      jumps: [0],
+      jumpPower: 0,
+      jumpIndex: 0,
+      damage: 0,
+      speed: 0,
+      fast: 0,
+      friction_ground: 0,
+      friction_air: 0,
+      wallTouchArray: [],
+      lastDirectionTouched: null,
+    },
+    keyboard: undefined,
+    pad: undefined,
+    padPrev: {
+      up: false,
+      down: false,
+      left: false,
+      right: false,
+      A: false,
+      B: false,
+      X: false,
+      Y: false,
+    },
+  };
+  cameraCenter: Player = {
+    index: 0,
+    state: "camera",
+    keyboard_static: {
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      down: Phaser.Input.Keyboard.KeyCodes.S,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D,
+      fast: Phaser.Input.Keyboard.KeyCodes.Z,
+      jump: Phaser.Input.Keyboard.KeyCodes.X,
+    },
+    char: {
+      name: "center_80",
+      src: "images/x.png",
+      sprite: null,
+      zoom: 1,
+      vel: { x: 0, y: 0 },
+      pos: { x: 0, y: 0 },
+      // acc: { x: 0, y: 0 },
+      jumps: [0],
+      jumpPower: 0,
+      jumpIndex: 0,
+      damage: 0,
+      speed: 0,
+      fast: 0,
+      friction_ground: 0,
+      friction_air: 0,
+      wallTouchArray: [],
+      lastDirectionTouched: null,
+    },
+    keyboard: undefined,
+    pad: undefined,
+    padPrev: {
+      up: false,
+      down: false,
+      left: false,
+      right: false,
+      A: false,
+      B: false,
+      X: false,
+      Y: false,
+    },
+  };
+  cameraBox: Player = {
     index: 0,
     state: "camera",
     keyboard_static: {
