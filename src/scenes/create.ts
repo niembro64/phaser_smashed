@@ -1,4 +1,5 @@
 import Game from "./Game";
+import { hasPlayerTouchedWallRecently } from "./movement";
 
 export function create(game: Game) {
   game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
@@ -20,7 +21,7 @@ export function create(game: Game) {
 
   for (let i = 0; i < 4; i++) {
     game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2 + 100 + (i - 2) * 200,
+      game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[i],
       game.INITIAL.POSITION.PLAYER_Y,
       game.players[game.playersOrder[i]].char.name
     );

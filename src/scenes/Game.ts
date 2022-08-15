@@ -17,6 +17,7 @@ export default class Game extends Phaser.Scene {
   background: any | Phaser.GameObjects.Sprite;
   table: any | Phaser.GameObjects.Sprite;
   playerZoomKeeper: number = 1;
+  playerLocations: number[] = [-200, -110, 110, 200];
   zoomRatioSlow = 0.995;
   zoomRatioFast = 0.9;
   // BORDER_PADDING_X: number = 0;
