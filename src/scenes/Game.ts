@@ -4,7 +4,7 @@ import { update } from "./update";
 import { CameraHelper, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  zoom: number = 0;
+  // zoom: number = 0;
   allPlayersWallTouchIterator: number = 0;
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
@@ -12,7 +12,7 @@ export default class Game extends Phaser.Scene {
   DEFAULT_SPEED_Y: number = 15;
   DEFAULT_JUMP: number = 1800;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
-  SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
+  SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
   // SCREEN_DIMENSIONS = { HEIGHT: 600, WIDTH: 1600 };
   GRAVITY: number = 0.1;
   platforms: any | Phaser.GameObjects.Sprite;
@@ -35,7 +35,7 @@ export default class Game extends Phaser.Scene {
       name: "center_10",
       src: "images/x.png",
       sprite: null,
-      zoom: 1,
+      zoom: 0,
       vel: { x: 0, y: 0 },
       pos: { x: 0, y: 0 },
       // acc: { x: 0, y: 0 },
