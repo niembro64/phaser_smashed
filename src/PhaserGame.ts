@@ -1,31 +1,33 @@
-import Game from './scenes/Game';
+import Game from "./scenes/Game";
 
 const config: Phaser.Types.Core.GameConfig = {
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        // width: 3200,
-        // height: 1200,
-        // width: 800,
-        // height: 300,
-        width: 1920,
-        height: 1080,
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+    // width: 3200,
+    // height: 1200,
+    // width: 800,
+    // height: 300,
+    width: 1920,
+    height: 1080,
+  },
+  pixelArt: false,
+  type: Phaser.AUTO,
+  parent: "phaser-container",
+  backgroundColor: "#000000",
+  // backgroundColor: '#0077dd',
+  input: {
+    gamepad: true,
+  },
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { y: 4300 },
+      debug: false,
+      // debug: true,
     },
-    pixelArt: false,
-    type: Phaser.AUTO,
-    parent: 'phaser-container',
-    backgroundColor: '#0077dd',
-    input: {
-        gamepad: true,
-    },
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 4300 },
-            debug: true,
-        },
-    },
-    scene: Game,
+  },
+  scene: Game,
 };
 
 export default new Phaser.Game(config);

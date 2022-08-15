@@ -1,14 +1,12 @@
 import Game from "./Game";
 import {
   controllerMovement,
-  printAllPadsActive,
   controllerSetFast,
   updatePadPrevious,
   assignGamePadsConnected,
 } from "./gamePad";
 import {
   jump,
-  updateKeepOnScreen,
   frictionGroundX,
   frictionAirX,
   frictionAirY,
@@ -16,21 +14,17 @@ import {
   updateWallTouchArray,
   updateLastDirectionTouched,
   setCamera,
+  updateKeepOnScreen,
 } from "./movement";
 import { updateSpritesLR } from "./sprites";
 
 export function update(game: Game): void {
-  console.log(
-    // "1",
-    // game.players[1].state,
-    // game.players[1].char.sprite.body.touching.down,
-    // game.players[1].char.sprite.y,
-    // game.players[1].char.sprite.body.velocity,
-    // game.players[3].char.wallTouchArray,
-    // hasPlayerTouchedWallRecently(game.players[3]),
-    // game.players[3].char.lastDirectionTouched
-    // game.players[3].char.wallTouchArray
-  );
+  // console.log(
+  //   "CAMERA MOVER",
+  //   game.cameraMover.char.sprite.x,
+  //   game.cameraMover.char.sprite.x,
+  //   game.cameraMover.char.zoom
+  // );
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   setCamera(game);
@@ -45,7 +39,7 @@ export function update(game: Game): void {
     frictionAirY(player, game);
     jump(player, game);
     controllerMovement(player, game);
-    // updateKeepOnScreen(player, game);
+    updateKeepOnScreen(player, game);
     updatePadPrevious(player, game);
     // console.log(player.char.sprite.velocity);
   });

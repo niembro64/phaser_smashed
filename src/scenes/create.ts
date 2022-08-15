@@ -5,17 +5,22 @@ export function create(game: Game) {
   game.background.setScale(1);
   game.background.setImmovable(true);
   game.background.body.allowGravity = false;
+  game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
+  game.table.setScale(1);
+  game.table.setImmovable(true);
+  game.table.body.allowGravity = false;
 
   game.platforms = game.physics.add.staticGroup();
   game.platforms.create(1200, 850, "platformShorter");
-  game.platforms.create(600, 1000, "platformShort");
+  game.platforms.create(600, 900, "platformShort");
   game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
   game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
+  game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1200, 700, "platformVertical");
 
   for (let i = 0; i < 4; i++) {
     game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(
-      150 * i + 450,
+      game.SCREEN_DIMENSIONS.WIDTH / 2 + 100 + (i - 2) * 200,
       game.INITIAL.POSITION.PLAYER_Y,
       game.players[game.playersOrder[i]].char.name
     );
@@ -37,26 +42,46 @@ export function create(game: Game) {
   charsCollide(game);
 
   game.cameraPlayers.char.sprite = game.physics.add
-    .sprite(200, 200, "center")
-    .setScale(0.1);
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
+      "centerWhite"
+    )
+    .setScale(0.05);
   game.cameraPlayers.char.sprite.setImmovable(true);
   game.cameraPlayers.char.sprite.body.allowGravity = false;
-  game.cameras.main.startFollow(game.cameraPlayers.char.sprite);
+  // game.cameras.main.startFollow(game.cameraPlayers.char.sprite);
+
+  game.cameraMover.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
+      "centerRed"
+    )
+    .setScale(0.08)
+    .setRotation(Math.PI / 4);
+  game.cameraMover.char.sprite.setImmovable(true);
+  game.cameraMover.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraMover.char.sprite);
 
   game.cameraPlayersHalfway.char.sprite = game.physics.add
-    .sprite(200, 200, "center")
-    .setScale(0.1);
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
+      "centerWhite"
+    )
+    .setScale(0.05);
   game.cameraPlayersHalfway.char.sprite.setImmovable(true);
   game.cameraPlayersHalfway.char.sprite.body.allowGravity = false;
-  // game.cameras.main.startFollow(game.cameraBorderBoy.char.sprite);
+  // game.cameras.main.startFollow(game.cameraPlayersHalfway.char.sprite);
 
   game.cameraCenter.char.sprite = game.physics.add
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "center"
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
+      "centerWhite"
     )
-    .setScale(0.1);
+    .setScale(0.05);
   game.cameraCenter.char.sprite.setImmovable(true);
   game.cameraCenter.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
@@ -64,18 +89,18 @@ export function create(game: Game) {
   game.cameraBox.char.sprite = game.physics.add
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "center"
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
+      "centerWhite"
     )
-    .setScale(0.1)
+    .setScale(0.08)
     .setRotation(Math.PI / 4);
   game.cameraBox.char.sprite.setImmovable(true);
   game.cameraBox.char.sprite.body.allowGravity = false;
-  // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
+  // game.cameras.main.startFollow(game.cameraBox.char.sprite);
 
   // game.cameraSlow.char.sprite = game.physics.add
   //   .sprite(200, 200, "center")
-  //   .setScale(0.1);
+  //   .setScale(0.05);
   // game.cameraSlow.char.sprite.setImmovable(true);
   // game.cameraSlow.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.center_80.char.sprite);
