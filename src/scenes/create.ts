@@ -67,7 +67,8 @@ export function create(game: Game) {
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
       "center"
     )
-    .setScale(0.1);
+    .setScale(0.1)
+    .setRotation(Math.PI / 4);
   game.cameraBox.char.sprite.setImmovable(true);
   game.cameraBox.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
