@@ -29,18 +29,18 @@ export function create(game: Game) {
 
   charsCollide(game);
 
-  game.cameraFast.char.sprite = game.physics.add
+  game.cameraBoy.char.sprite = game.physics.add
     .sprite(200, 200, "center")
     .setScale(0.1);
-  game.cameraFast.char.sprite.setImmovable(true);
-  game.cameraFast.char.sprite.body.allowGravity = false;
-  // game.cameras.main.startFollow(game.cameraFast.char.sprite);
+  game.cameraBoy.char.sprite.setImmovable(true);
+  game.cameraBoy.char.sprite.body.allowGravity = false;
+  game.cameras.main.startFollow(game.cameraBoy.char.sprite);
 
-  game.cameraSlow.char.sprite = game.physics.add
-    .sprite(200, 200, "center")
-    .setScale(0.1);
-  game.cameraSlow.char.sprite.setImmovable(true);
-  game.cameraSlow.char.sprite.body.allowGravity = false;
+  // game.cameraSlow.char.sprite = game.physics.add
+  //   .sprite(200, 200, "center")
+  //   .setScale(0.1);
+  // game.cameraSlow.char.sprite.setImmovable(true);
+  // game.cameraSlow.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.center_80.char.sprite);
 
   // for (let i = 0; i < 11; i++) {

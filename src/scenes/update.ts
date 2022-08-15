@@ -29,7 +29,7 @@ export function update(game: Game): void {
     // game.players[3].char.wallTouchArray,
     // hasPlayerTouchedWallRecently(game.players[3]),
     // game.players[3].char.lastDirectionTouched
-    game.players[3].char.wallTouchArray
+    // game.players[3].char.wallTouchArray
   );
   assignGamePadsConnected(game);
   updateWallTouchArray(game);

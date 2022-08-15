@@ -20,7 +20,7 @@ export default class Game extends Phaser.Scene {
   // centerLocations: Location[] | any = [];
   // centerLocationsIterator: number = 0;
 
-  cameraFast: Player = {
+  cameraBoy: Player = {
     index: 0,
     state: "camera",
     keyboard_static: {
@@ -106,9 +106,9 @@ export default class Game extends Phaser.Scene {
       Y: false,
     },
   };
-  playersOrder: number[] = [0, 1, 2, 3];
+  // playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  // playersOrder: number[] = [2, 3, 0, 1];
+  playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   players: Player[] = [
     {

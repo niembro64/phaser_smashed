@@ -1,3 +1,4 @@
+import { Cameras } from "phaser";
 import Game from "./Game";
 import { Location, Player } from "./interfaces";
 
@@ -59,15 +60,15 @@ export function jump(player: Player, game: Game): void {
     player.char.jumpIndex = 0;
   }
   if (player.pad.A && !player.padPrev.A) {
-    console.log(
-      "JUMP",
-      "player.index:",
-      player.index,
-      "jumpIndex",
-      player.char.jumpIndex,
-      "jumps[i]",
-      player.char.jumps[player.char.jumpIndex]
-    );
+    // console.log(
+    //   "JUMP",
+    //   "player.index:",
+    //   player.index,
+    //   "jumpIndex",
+    //   player.char.jumpIndex,
+    //   "jumps[i]",
+    //   player.char.jumps[player.char.jumpIndex]
+    // );
     if (
       !(
         player.char.sprite.body.touching.down ||
@@ -169,24 +170,36 @@ export function setCamera(game: Game): void {
   //   var zoom_80: number = 1;
 
   var c10 = getCurrentCamera10(game);
-  //   var c80 = getCurrentCamera80(game);
+  // var c80 = getCurrentCamera80(game);
 
-  game.cameraFast.char.sprite.x =
-    game.cameraFast.char.sprite.x * 0.9 + c10.x * 0.1;
-  game.cameraFast.char.sprite.y =
-    game.cameraFast.char.sprite.y * 0.9 + c10.y * 0.1;
-  game.cameraFast.char.zoom =
-    game.cameraFast.char.zoom * 0.9 + c10.zoom * 0.1;
+  game.cameraBoy.char.sprite.x = c10.x;
+  game.cameraBoy.char.sprite.y = c10.y;
+  game.cameraBoy.char.zoom = c10.zoom;
 
-  //   game.cameraSlow.char.sprite.x =
-  //     game.cameraSlow.char.sprite.x * 0.9 + c80.x * 0.1;
-  //   game.cameraSlow.char.sprite.y =
-  //     game.cameraSlow.char.sprite.y * 0.9 + c80.y * 0.1;
-  //   game.cameraSlow.char.sprite.zoom =
-  //     game.cameraSlow.char.sprite.zoom * 0.9 + c80.zoom * 0.1;
+  // game.cameraSlow.char.sprite.x =
+  //   game.cameraSlow.char.sprite.x * 0.99 + c10.x * 0.01;
+  // game.cameraSlow.char.sprite.y =
+  //   game.cameraSlow.char.sprite.y * 0.99 + c10.y * 0.01;
+  // game.cameraSlow.char.zoom =
+  //   game.cameraSlow.char.zoom * 0.99 + c10.zoom * 0.01;
 
-  game.cameras.main.startFollow(game.cameraFast.char.sprite);
-  game.cameras.main.zoom = game.cameraFast.char.zoom;
+  // game.cameras.main.startFollow(game.cameraSlow.char.sprite);
+  // game.cameras.main.startFollow(game.cameraFast.char.sprite);
+
+  if (game.cameras.main.zoom < game.cameraBoy.char.zoom) {
+    console.log("LESS");
+    game.cameras.main.zoom =
+      game.cameras.main.zoom * 0.99 + game.cameraBoy.char.zoom * 0.01;
+  } else {
+    console.log("GREATER");
+    game.cameras.main.zoom = game.cameraBoy.char.zoom;
+  }
+
+  // game.cameras.main.zoom = zFast * 0.8;
+
+  // game.cameras.main.zoom =
+  // 0.9 * game.cameras.main.zoom + 0.1 * (zSlow < zFast ? zSlow : zFast);
+  // game.cameras.main.zoom = zSlow;
 
   // game.cameras.main.setRotation(0);
   // game.cameras.main.setBackgroundColor("#ffffff");
@@ -205,28 +218,36 @@ export function setCamera(game: Game): void {
 export function getCameraZoomCurrent10(game: Game): number {
   let curr_x = 0;
   let curr_y = 0;
+  let padding: number = 100;
 
   game.players.forEach((player, playerIndex) => {
     if (
-      Math.abs(player.char.sprite.x - game.cameraFast.char.sprite.x) > curr_x
+      Math.abs(padding + player.char.sprite.x - game.cameraBoy.char.sprite.x) >
+      curr_x
     ) {
-      curr_x = Math.abs(player.char.sprite.x - game.cameraFast.char.sprite.x);
+      curr_x = Math.abs(
+        padding + player.char.sprite.x - game.cameraBoy.char.sprite.x
+      );
     }
   });
   game.players.forEach((player, playerIndex) => {
     if (
-      Math.abs(player.char.sprite.y - game.cameraFast.char.sprite.y) > curr_y
+      Math.abs(padding + player.char.sprite.y - game.cameraBoy.char.sprite.y) >
+      curr_y
     ) {
-      curr_y = Math.abs(player.char.sprite.y - game.cameraFast.char.sprite.y);
+      curr_y = Math.abs(
+        padding + player.char.sprite.y - game.cameraBoy.char.sprite.y
+      );
     }
   });
 
   let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
   let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-  let r = Math.min(return_x * 0.5, return_y * 0.3, 0.8);
+  // let r = Math.min(return_x * 0.5, return_y * 0.3, 0.8);
   // let r = Math.min(return_x * 2, return_y * 2);
   // let r = Math.min(return_x * 0.5, return_y * 0.3);
+  let r = Math.min(return_x, return_y);
 
   // r = Math.max(r, 1);
   // r = Math.min(r, 2);
@@ -235,6 +256,7 @@ export function getCameraZoomCurrent10(game: Game): number {
   // return r < 1 ? 1 : r;
   // return Math.min(r, 1);
 }
+
 export function getCameraZoomCurrent80(game: Game): number {
   let curr_x = 0;
   let curr_y = 0;
@@ -257,16 +279,16 @@ export function getCameraZoomCurrent80(game: Game): number {
   let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
   let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-  let r = Math.min(return_x * 0.5, return_y * 0.3, 0.8);
-  // let r = Math.min(return_x * 1, return_y * 1);
+  // let r = Math.min(return_x * 0.5, return_y * 0.3, 0.8);
+  // let r = Math.min(return_x * 2, return_y * 2);
   // let r = Math.min(return_x * 0.5, return_y * 0.3);
+  let r = Math.min(return_x, return_y);
 
   // r = Math.max(r, 1);
   // r = Math.min(r, 2);
 
-  // return 1;
-  // return r < 1 ? 1 : r;
   return r;
+  // return r < 1 ? 1 : r;
   // return Math.min(r, 1);
 }
 
@@ -338,11 +360,14 @@ export function getCurrentCamera80(game: Game): Location {
   // game.center.char.sprite.x = x / game.players.length;
   // game.center.char.sprite.y = y / game.players.length;
 
-  //   var z_80 = getCameraZoomCurrent80(game);
+  //   var z_10 = getCameraZoomCurrent10(game);
 
   return {
     // x: x_low / game.players.length,
     // y: y_low / game.players.length,
+    // x: 300,
+    // y: 300,
+    // zoom: 1,
     x: (x_low + x_high) / 2,
     y: (y_low + y_high) / 2,
     zoom: getCameraZoomCurrent80(game),
