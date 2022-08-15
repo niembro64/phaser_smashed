@@ -191,7 +191,6 @@ export function setCamera(game: Game): void {
   game.cameraMover.char.sprite.y =
     game.cameraMover.char.sprite.y * game.zoomRatioFast +
     (cMover.y + game.CAMERA_OFFSET_Y) * (1 - game.zoomRatioFast);
-  // game.cameraMover.char.sprite.y = cMover.y + game.CAMERA_OFFSET_Y;
   game.cameraMover.char.zoom = game.cameraMover.char.zoom = cMover.zoom;
 
   game.cameraPlayersHalfway.char.sprite.x = cBorder.x;

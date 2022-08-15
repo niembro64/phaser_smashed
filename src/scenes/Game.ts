@@ -260,7 +260,7 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Mario",
-        src: "images/character_0.png",
+        src: "images/character_0_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -303,7 +303,7 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Link",
-        src: "images/character_1.png",
+        src: "images/character_1_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -346,7 +346,7 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Pikachu",
-        src: "images/character_2.png",
+        src: "images/character_2_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -388,7 +388,7 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Kirby",
-        src: "images/character_3.png",
+        src: "images/character_3_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
