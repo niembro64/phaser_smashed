@@ -1,4 +1,5 @@
 import Game from "./scenes/Game";
+// import DynamicTextPlugin from "phaser3-rex-plugins/plugins/dynamictext-plugin.js";
 
 const config: Phaser.Types.Core.GameConfig = {
   scale: {
@@ -20,10 +21,19 @@ const config: Phaser.Types.Core.GameConfig = {
     arcade: {
       gravity: { y: 4300 },
       // debug: false,
-      debug: true,
+      debug: false,
     },
   },
   scene: Game,
+  // plugins: {
+  //   global: [
+  //     {
+  //       key: "rexDynamicTextPlugin",
+  //       plugin: DynamicTextPlugin,
+  //       start: true,
+  //     },
+  //   ],
+  // },
 };
 
 export default new Phaser.Game(config);

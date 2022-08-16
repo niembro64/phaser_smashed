@@ -21,14 +21,16 @@ import {
 import { updateSpritesLR } from "./sprites";
 
 export function update(game: Game): void {
+  // game.text = game.timer.actualFps;
+  // console.log(game.timer);
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   setCamera(game);
   updateSpritesLR(game);
   game.players.forEach((player, index) => {
+    // printAllPadsActive(player, game);
     attack(player, game);
     updateLastDirectionTouched(player);
-    printAllPadsActive(player, game);
     controllerSetFast(player, game);
     frictionGroundX(player, game);
     frictionAirX(player, game);

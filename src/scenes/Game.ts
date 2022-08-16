@@ -2,8 +2,12 @@ import "phaser";
 import { create } from "./create";
 import { update } from "./update";
 import { Camera, Player } from "./interfaces";
+import DynamicText from 'phaser3-rex-plugins/plugins/dynamictext.js';
 
 export default class Game extends Phaser.Scene {
+  timer: any;
+  title: any;
+  subTitle: any;
   allPlayersWallTouchIterator: number = 0;
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
@@ -267,13 +271,20 @@ export default class Game extends Phaser.Scene {
       },
     },
   ];
+
   constructor() {
     super("game");
     // this.laserGroup;
   }
   preload() {
+    this.load.plugin(
+      "rexdynamictextplugin",
+      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdynamictextplugin.min.js",
+      true
+    );
+
     this.load.image("laser", "images/laser.png");
-    
+
     this.load.image("table", "images/table.png");
     this.load.image("background", "images/darkxp.jpg");
     this.load.image("centerWhite", "images/wx.png");

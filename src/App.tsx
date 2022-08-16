@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <h1>SMASHED 69 {{ debug } ? "(DEBUG MODE)" : ""}</h1>
+      {/* <h1>SMASHED 69 {{ debug } ? "(DEBUG MODE)" : ""}</h1> */}
       <div id="phaser-container"></div>
     </>
   );

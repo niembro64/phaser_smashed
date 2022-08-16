@@ -58,7 +58,7 @@ export function jump(player: Player, game: Game): void {
   ) {
     player.char.jumpIndex = 0;
   }
-  if (player.pad.A && !player.padPrev.A) {
+  if (player.pad.Y && !player.padPrev.Y) {
     if (
       !(
         player.char.sprite.body.touching.down ||

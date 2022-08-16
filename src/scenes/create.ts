@@ -1,7 +1,11 @@
+import { Scale } from "phaser";
+import PhaserGame from "../PhaserGame";
 import Game from "./Game";
 import { hasPlayerTouchedWallRecently } from "./movement";
 
 export function create(game: Game) {
+  game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
+
   game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
   game.background.setScale(1);
   game.background.setImmovable(true);
@@ -18,6 +22,38 @@ export function create(game: Game) {
   game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1200, 700, "platformVertical");
+
+  // game.text = game.add.rexDynamicText(x, y, width, height);
+
+  game.title = game.add
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 200, "SMASHED", {
+      // font: "300px Impact",
+      fontFamily: "Impact",
+      // fontFamily: "'Press Start 2P'",
+      // font: "64px Press Start 2P",
+      // font: '"Press Start 2P"',
+      fontSize: "500px",
+    })
+    .setOrigin(0.5)
+    .setColor("black")
+    .setAlpha(0.3);
+  game.subTitle = game.add
+    .text(
+      game.SCREEN_DIMENSIONS.WIDTH / 13,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 - 90,
+      "NIEMBRO64",
+      {
+        // font: "300px Impact",
+        fontFamily: "Impact",
+        // fontFamily: "'Press Start 2P'",
+        // font: "64px Press Start 2P",
+        // font: '"Press Start 2P"',
+        fontSize: "50px",
+      }
+    )
+    .setOrigin(0.5)
+    .setColor("black")
+    .setAlpha(0.3);
 
   for (let i = 0; i < 4; i++) {
     game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(
