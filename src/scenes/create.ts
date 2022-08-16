@@ -10,23 +10,11 @@ export function create(game: Game) {
   game.background.setScale(1);
   game.background.setImmovable(true);
   game.background.body.allowGravity = false;
-  game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
-  game.table.setScale(1);
-  game.table.setImmovable(true);
-  game.table.body.allowGravity = false;
-
-  game.platforms = game.physics.add.staticGroup();
-  game.platforms.create(1200, 850, "platformShorter");
-  game.platforms.create(600, 900, "platformShort");
-  game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
-  game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
-  game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
-  game.platforms.create(1200, 700, "platformVertical");
 
   // game.text = game.add.rexDynamicText(x, y, width, height);
 
   game.title = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 200, "SMASHED", {
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, "SMASHED", {
       // font: "300px Impact",
       fontFamily: "Impact",
       // fontFamily: "'Press Start 2P'",
@@ -40,7 +28,7 @@ export function create(game: Game) {
   game.subTitle = game.add
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 13,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 - 90,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
       "NIEMBRO64",
       {
         // font: "300px Impact",
@@ -54,6 +42,31 @@ export function create(game: Game) {
     .setOrigin(0.5)
     .setColor("black")
     .setAlpha(0.3);
+  game.superTitle = game.add
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, "YOUNG-CHEZ", {
+      // font: "300px Impact",
+      fontFamily: "Impact",
+      // fontFamily: "'Press Start 2P'",
+      // font: "64px Press Start 2P",
+      // font: '"Press Start 2P"',
+      fontSize: "80px",
+    })
+    .setOrigin(0.5)
+    .setColor("black")
+    .setAlpha(0.3);
+
+  game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
+  game.table.setScale(1);
+  game.table.setImmovable(true);
+  game.table.body.allowGravity = false;
+
+  game.platforms = game.physics.add.staticGroup();
+  game.platforms.create(1200, 850, "platformShorter");
+  game.platforms.create(600, 900, "platformShort");
+  game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
+  game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
+  game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
+  game.platforms.create(1200, 700, "platformVertical");
 
   for (let i = 0; i < 4; i++) {
     game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(

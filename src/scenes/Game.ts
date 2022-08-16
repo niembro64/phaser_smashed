@@ -8,6 +8,7 @@ export default class Game extends Phaser.Scene {
   timer: any;
   title: any;
   subTitle: any;
+  superTitle: any;
   allPlayersWallTouchIterator: number = 0;
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);

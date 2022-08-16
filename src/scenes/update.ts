@@ -5,7 +5,7 @@ import {
   updatePadPrevious,
   assignGamePadsConnected,
   printAllPadsActive,
-  attack,
+  attackEnergy,
 } from "./gamePad";
 import {
   jump,
@@ -29,7 +29,7 @@ export function update(game: Game): void {
   updateSpritesLR(game);
   game.players.forEach((player, index) => {
     // printAllPadsActive(player, game);
-    attack(player, game);
+    attackEnergy(player, game);
     updateLastDirectionTouched(player);
     controllerSetFast(player, game);
     frictionGroundX(player, game);

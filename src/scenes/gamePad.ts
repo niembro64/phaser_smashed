@@ -7,7 +7,7 @@ export function assignGamePadsConnected(game: Game): void {
   }
 }
 
-export function attack(player: Player, game: Game): void {
+export function attackEnergy(player: Player, game: Game): void {
   var vX = 3 * player.char.sprite.body.velocity.x * 2;
   var vY = player.char.sprite.body.velocity.y * 0.4;
   var laserSpeed = 600;
