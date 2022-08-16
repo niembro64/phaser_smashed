@@ -77,6 +77,7 @@ export function create(game: Game) {
     player.char.attack.sprite = game.physics.add
       .sprite(-300, -300, "laser")
       .setMass(1.8);
+    player.char.attack.sprite.body.allowGravity = true;
 
     player.char.attack.sprite.body.allowGravity = false;
   });

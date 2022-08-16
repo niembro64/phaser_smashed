@@ -8,21 +8,26 @@ export function assignGamePadsConnected(game: Game): void {
 }
 
 export function attack(player: Player, game: Game): void {
+  var vX = player.char.sprite.body.velocity.x * 2;
+  var vY = player.char.sprite.body.velocity.y * 0.3;
+  var laserSpeed = 800;
   if (
     player.pad?.X &&
-    !player.padPrev.X &&
-    isSpriteOffscreen(player.char.attack.sprite, game)
+    !player.padPrev.X
+    // isSpriteOffscreen(player.char.attack.sprite, game)
   ) {
     if (player.char.sprite.flipX) {
       player.char.attack.sprite.x =
         player.char.sprite.x - player.char.sprite.width;
       player.char.attack.sprite.y = player.char.sprite.y;
-      player.char.attack.sprite.body.setVelocityX(-800);
+      player.char.attack.sprite.body.setVelocityX(-1 * laserSpeed + vX * 2);
+      player.char.attack.sprite.body.setVelocityY(vY);
     } else {
       player.char.attack.sprite.x =
         player.char.sprite.x + player.char.sprite.width;
       player.char.attack.sprite.y = player.char.sprite.y;
-      player.char.attack.sprite.body.setVelocityX(800);
+      player.char.attack.sprite.body.setVelocityX(laserSpeed + vX * 2);
+      player.char.attack.sprite.body.setVelocityY(vY);
     }
   }
 }
