@@ -19,6 +19,8 @@ export function create(game: Game) {
   game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1200, 700, "platformVertical");
 
+  
+
   for (let i = 0; i < 4; i++) {
     game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[i],

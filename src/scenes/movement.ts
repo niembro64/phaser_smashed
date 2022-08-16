@@ -59,15 +59,6 @@ export function jump(player: Player, game: Game): void {
     player.char.jumpIndex = 0;
   }
   if (player.pad.A && !player.padPrev.A) {
-    // console.log(
-    //   "JUMP",
-    //   "player.index:",
-    //   player.index,
-    //   "jumpIndex",
-    //   player.char.jumpIndex,
-    //   "jumps[i]",
-    //   player.char.jumps[player.char.jumpIndex]
-    // );
     if (
       !(
         player.char.sprite.body.touching.down ||
@@ -345,20 +336,11 @@ export function getCameraMoverStatus(game: Game): Location {
   var spriteMover = game.cameraMover.char.sprite;
   var spriteCenter = game.cameraCenter.char.sprite;
 
-  // game.playerZoomKeeper =
-  //   game.playerZoomKeeper * game.zoomRatioFast +
-  //   Math.max(getPlayerZoom(game), 1) * (1 - game.zoomRatioFast);
-
   game.playerZoomKeeper =
     game.playerZoomKeeper * game.zoomRatioSlow +
     Math.max(getPlayerZoom(game), 1) * (1 - game.zoomRatioSlow);
 
   var percentCloseToCenter = Math.pow(1 / game.playerZoomKeeper, 3);
-  // console.log(game.cameraMover.char.zoom);
-  // console.log(spritePlayer.zoom);
-  // console.log(percentCloseToCenter);
-  // console.log(spritePlayer.x);
-  // console.log(spriteCenter.x);
 
   let x =
     spritePlayer.x * (1 - percentCloseToCenter) +
@@ -368,8 +350,6 @@ export function getCameraMoverStatus(game: Game): Location {
     spriteCenter.y * percentCloseToCenter;
 
   y -= game.CAMERA_OFFSET_Y;
-
-  console.log(x, y);
 
   return {
     x: x,
@@ -407,7 +387,6 @@ export function getCameraBoxStatus(game: Game): Location {
 // export function addKeyboard(player: Player, game: Game): void {
 //   // CHECK ANGLED
 //   if (player.keyboard.left.isDown && player.keyboard.up.isDown) {
-//     console.log("LEFT UP");
 //     player.char.vel.x = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
 //     player.char.vel.y = -game.DEFAULT_SPEED * game.RATIO_ANGLED_MOVEMENT;
 //     return;

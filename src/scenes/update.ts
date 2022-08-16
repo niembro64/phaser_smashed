@@ -19,12 +19,6 @@ import {
 import { updateSpritesLR } from "./sprites";
 
 export function update(game: Game): void {
-  // console.log(
-  //   "CAMERA MOVER",
-  //   game.cameraMover.char.sprite.x,
-  //   game.cameraMover.char.sprite.x,
-  //   game.cameraMover.char.zoom
-  // );
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   setCamera(game);
@@ -41,7 +35,6 @@ export function update(game: Game): void {
     controllerMovement(player, game);
     updateKeepOnScreen(player, game);
     updatePadPrevious(player, game);
-    // console.log(player.char.sprite.velocity);
   });
 }
 
@@ -128,5 +121,4 @@ export function update(game: Game): void {
 //       ////////////////////////////////
 //       break;
 //     default:
-//       console.log("????");
 //   }

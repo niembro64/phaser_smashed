@@ -20,6 +20,16 @@ export interface Player {
   pad: Gamepad | any;
   padPrev: padStatePrevious;
 }
+export interface Camera {
+  char: CameraChar;
+}
+
+export interface CameraChar {
+  name: string;
+  src: string;
+  sprite: any | Phaser.GameObjects.Sprite;
+  zoom: number;
+}
 
 export interface padStatePrevious {
   up: boolean;
@@ -58,6 +68,20 @@ export interface Char {
   friction_air: number;
   wallTouchArray: boolean[];
   lastDirectionTouched: "up" | "down" | "left" | "right" | "camera" | null;
+  attack: Punch | Laser;
+}
+
+export interface Punch {
+  sprite: any | Phaser.GameObjects.Sprite;
+  damage: number;
+  width: number;
+  height: number;
+}
+export interface Laser {
+  sprite: any | Phaser.GameObjects.Sprite;
+  damage: number;
+  width: number;
+  height: number;
 }
 // export interface Keyboard_Static {
 //     up: typeof Phaser.Input.Keyboard.Key | any;

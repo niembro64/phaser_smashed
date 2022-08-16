@@ -1,7 +1,7 @@
 import "phaser";
 import { create } from "./create";
 import { update } from "./update";
-import { Player } from "./interfaces";
+import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   allPlayersWallTouchIterator: number = 0;
@@ -27,219 +27,44 @@ export default class Game extends Phaser.Scene {
   BORDER_PADDING_Y: number = 100;
   CAMERA_OFFSET_Y: number = -100;
 
-  cameraPlayers: Player = {
-    index: 0,
-    state: "camera",
-    keyboard_static: {
-      up: Phaser.Input.Keyboard.KeyCodes.W,
-      down: Phaser.Input.Keyboard.KeyCodes.S,
-      left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D,
-      fast: Phaser.Input.Keyboard.KeyCodes.Z,
-      jump: Phaser.Input.Keyboard.KeyCodes.X,
-    },
+  cameraPlayers: Camera = {
     char: {
       name: "center_10",
       src: "images/x.png",
       sprite: null,
       zoom: 0,
-      vel: { x: 0, y: 0 },
-      pos: { x: 0, y: 0 },
-      // acc: { x: 0, y: 0 },
-      jumps: [0],
-      jumpPower: 0,
-      jumpIndex: 0,
-      damage: 0,
-      speed: 0,
-      fast: 0,
-      friction_ground: 0,
-      friction_air: 0,
-      wallTouchArray: [],
-      lastDirectionTouched: null,
-    },
-    keyboard: undefined,
-    pad: undefined,
-    padPrev: {
-      up: false,
-      down: false,
-      left: false,
-      right: false,
-      A: false,
-      B: false,
-      X: false,
-      Y: false,
     },
   };
-  cameraMover: Player = {
-    index: 0,
-    state: "camera",
-    keyboard_static: {
-      up: Phaser.Input.Keyboard.KeyCodes.W,
-      down: Phaser.Input.Keyboard.KeyCodes.S,
-      left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D,
-      fast: Phaser.Input.Keyboard.KeyCodes.Z,
-      jump: Phaser.Input.Keyboard.KeyCodes.X,
-    },
+  cameraMover: Camera = {
     char: {
       name: "center_10",
       src: "images/x.png",
       sprite: null,
       zoom: 0,
-      vel: { x: 0, y: 0 },
-      pos: { x: 0, y: 0 },
-      // acc: { x: 0, y: 0 },
-      jumps: [0],
-      jumpPower: 0,
-      jumpIndex: 0,
-      damage: 0,
-      speed: 0,
-      fast: 0,
-      friction_ground: 0,
-      friction_air: 0,
-      wallTouchArray: [],
-      lastDirectionTouched: null,
-    },
-    keyboard: undefined,
-    pad: undefined,
-    padPrev: {
-      up: false,
-      down: false,
-      left: false,
-      right: false,
-      A: false,
-      B: false,
-      X: false,
-      Y: false,
     },
   };
-  cameraPlayersHalfway: Player = {
-    index: 0,
-    state: "camera",
-    keyboard_static: {
-      up: Phaser.Input.Keyboard.KeyCodes.W,
-      down: Phaser.Input.Keyboard.KeyCodes.S,
-      left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D,
-      fast: Phaser.Input.Keyboard.KeyCodes.Z,
-      jump: Phaser.Input.Keyboard.KeyCodes.X,
-    },
+  cameraPlayersHalfway: Camera = {
     char: {
       name: "center_80",
       src: "images/x.png",
       sprite: null,
       zoom: 1,
-      vel: { x: 0, y: 0 },
-      pos: { x: 0, y: 0 },
-      // acc: { x: 0, y: 0 },
-      jumps: [0],
-      jumpPower: 0,
-      jumpIndex: 0,
-      damage: 0,
-      speed: 0,
-      fast: 0,
-      friction_ground: 0,
-      friction_air: 0,
-      wallTouchArray: [],
-      lastDirectionTouched: null,
-    },
-    keyboard: undefined,
-    pad: undefined,
-    padPrev: {
-      up: false,
-      down: false,
-      left: false,
-      right: false,
-      A: false,
-      B: false,
-      X: false,
-      Y: false,
     },
   };
-  cameraCenter: Player = {
-    index: 0,
-    state: "camera",
-    keyboard_static: {
-      up: Phaser.Input.Keyboard.KeyCodes.W,
-      down: Phaser.Input.Keyboard.KeyCodes.S,
-      left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D,
-      fast: Phaser.Input.Keyboard.KeyCodes.Z,
-      jump: Phaser.Input.Keyboard.KeyCodes.X,
-    },
+  cameraCenter: Camera = {
     char: {
       name: "center_80",
       src: "images/x.png",
       sprite: null,
       zoom: 1,
-      vel: { x: 0, y: 0 },
-      pos: { x: 0, y: 0 },
-      // acc: { x: 0, y: 0 },
-      jumps: [0],
-      jumpPower: 0,
-      jumpIndex: 0,
-      damage: 0,
-      speed: 0,
-      fast: 0,
-      friction_ground: 0,
-      friction_air: 0,
-      wallTouchArray: [],
-      lastDirectionTouched: null,
-    },
-    keyboard: undefined,
-    pad: undefined,
-    padPrev: {
-      up: false,
-      down: false,
-      left: false,
-      right: false,
-      A: false,
-      B: false,
-      X: false,
-      Y: false,
     },
   };
-  cameraBox: Player = {
-    index: 0,
-    state: "camera",
-    keyboard_static: {
-      up: Phaser.Input.Keyboard.KeyCodes.W,
-      down: Phaser.Input.Keyboard.KeyCodes.S,
-      left: Phaser.Input.Keyboard.KeyCodes.A,
-      right: Phaser.Input.Keyboard.KeyCodes.D,
-      fast: Phaser.Input.Keyboard.KeyCodes.Z,
-      jump: Phaser.Input.Keyboard.KeyCodes.X,
-    },
+  cameraBox: Camera = {
     char: {
       name: "center_80",
       src: "images/x.png",
       sprite: null,
       zoom: 1,
-      vel: { x: 0, y: 0 },
-      pos: { x: 0, y: 0 },
-      // acc: { x: 0, y: 0 },
-      jumps: [0],
-      jumpPower: 0,
-      jumpIndex: 0,
-      damage: 0,
-      speed: 0,
-      fast: 0,
-      friction_ground: 0,
-      friction_air: 0,
-      wallTouchArray: [],
-      lastDirectionTouched: null,
-    },
-    keyboard: undefined,
-    pad: undefined,
-    padPrev: {
-      up: false,
-      down: false,
-      left: false,
-      right: false,
-      A: false,
-      B: false,
-      X: false,
-      Y: false,
     },
   };
   // playersOrder: number[] = [0, 1, 2, 3];
@@ -276,6 +101,12 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attack: {
+          sprite: null,
+          damage: 10,
+          width: 30,
+          height: 30,
+        },
       },
       keyboard: null,
       pad: null,
@@ -319,6 +150,12 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.97,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attack: {
+          sprite: null,
+          damage: 10,
+          width: 30,
+          height: 30,
+        },
       },
       keyboard: null,
       pad: null,
@@ -361,6 +198,12 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attack: {
+          sprite: null,
+          damage: 10,
+          width: 30,
+          height: 30,
+        },
       },
       keyboard: null,
       pad: null,
@@ -403,6 +246,12 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.96,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attack: {
+          sprite: null,
+          damage: 10,
+          width: 30,
+          height: 30,
+        },
       },
       keyboard: null,
       pad: null,
@@ -420,9 +269,10 @@ export default class Game extends Phaser.Scene {
   ];
   constructor() {
     super("game");
+    // this.laserGroup;
   }
-
   preload() {
+    this.load.image("laser", "images/laser.png");
     this.load.image("table", "images/table.png");
     this.load.image("background", "images/darkxp.jpg");
     this.load.image("centerWhite", "images/wx.png");
@@ -440,7 +290,6 @@ export default class Game extends Phaser.Scene {
       player.pad = Phaser.Input.Gamepad.Gamepad;
     });
   }
-
   create() {
     create(this);
   }
