@@ -19,8 +19,6 @@ export function create(game: Game) {
   game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1200, 700, "platformVertical");
 
-  
-
   for (let i = 0; i < 4; i++) {
     game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[i],
@@ -30,7 +28,6 @@ export function create(game: Game) {
   }
 
   game.players.forEach((player, playerIndex) => {
-    // for (let playerIndex = 0; playerIndex < 4; playerIndex++) {
     for (let i = 0; i < 15; i++) {
       player.char.wallTouchArray.push(false);
     }
@@ -39,11 +36,27 @@ export function create(game: Game) {
     player.char.sprite.setCollideWorldBounds(false);
     game.physics.add.collider(player.char.sprite, game.platforms);
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
-    // }
+
+    // attacks
+    player.char.attack.sprite = game.physics.add.sprite(-300, -300, "laser");
+    player.char.attack.sprite.body.allowGravity = false;
   });
 
+  createCameras(game);
   charsCollide(game);
+}
 
+export function charsCollide(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    game.players.forEach((p, pj) => {
+      if (pj !== playerIndex) {
+        game.physics.add.collider(player.char.sprite, p.char.sprite);
+      }
+    });
+  });
+}
+
+export function createCameras(game: Game): void {
   game.cameraPlayers.char.sprite = game.physics.add
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
@@ -120,14 +133,4 @@ export function create(game: Game) {
   //   game.SCREEN_DIMENSIONS.WIDTH,
   //   game.SCREEN_DIMENSIONS.HEIGHT
   // );
-}
-
-export function charsCollide(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
-    game.players.forEach((p, pj) => {
-      if (pj !== playerIndex) {
-        game.physics.add.collider(player.char.sprite, p.char.sprite);
-      }
-    });
-  });
 }

@@ -273,6 +273,7 @@ export default class Game extends Phaser.Scene {
   }
   preload() {
     this.load.image("laser", "images/laser.png");
+    
     this.load.image("table", "images/table.png");
     this.load.image("background", "images/darkxp.jpg");
     this.load.image("centerWhite", "images/wx.png");

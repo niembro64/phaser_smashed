@@ -4,6 +4,8 @@ import {
   controllerSetFast,
   updatePadPrevious,
   assignGamePadsConnected,
+  printAllPadsActive,
+  attack,
 } from "./gamePad";
 import {
   jump,
@@ -24,8 +26,9 @@ export function update(game: Game): void {
   setCamera(game);
   updateSpritesLR(game);
   game.players.forEach((player, index) => {
+    attack(player, game);
     updateLastDirectionTouched(player);
-    // printAllPadsActive(player, game);
+    printAllPadsActive(player, game);
     controllerSetFast(player, game);
     frictionGroundX(player, game);
     frictionAirX(player, game);
