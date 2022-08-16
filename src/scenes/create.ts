@@ -88,12 +88,14 @@ export function create(game: Game) {
 }
 
 export function lasersCollide(game: Game): void {
-  game.players.forEach((player) => {
+  game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 4; i++) {
-      game.physics.add.collider(
-        player.char.attack.sprite,
-        game.players[i].char.sprite
-      );
+      if (playerIndex !== i) {
+        game.physics.add.collider(
+          player.char.attack.sprite,
+          game.players[i].char.sprite
+        );
+      }
     }
   });
 }
