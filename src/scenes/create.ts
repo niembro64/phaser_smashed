@@ -74,12 +74,27 @@ export function create(game: Game) {
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
 
     // attacks
-    player.char.attack.sprite = game.physics.add.sprite(-300, -300, "laser");
+    player.char.attack.sprite = game.physics.add
+      .sprite(-300, -300, "laser")
+      .setMass(1.8);
+
     player.char.attack.sprite.body.allowGravity = false;
   });
 
   createCameras(game);
+  lasersCollide(game);
   charsCollide(game);
+}
+
+export function lasersCollide(game: Game): void {
+  game.players.forEach((player) => {
+    for (let i = 0; i < 4; i++) {
+      game.physics.add.collider(
+        player.char.attack.sprite,
+        game.players[i].char.sprite
+      );
+    }
+  });
 }
 
 export function charsCollide(game: Game): void {
