@@ -4,7 +4,7 @@ export function updateText(game: Game): void {
   const baseY = 0;
 
   game.scoreBoard.setText(
-    "ZOOM " + Math.round(100 * game.cameras.main.zoom).toString() + "%"
+    "z" + Math.round(100 * game.cameras.main.zoom).toString() + "%"
   );
   // game.scoreBoard.setText(Math.round(game.players[2].char.sprite.y).toString());
   game.scoreBoard.setScale(
@@ -26,7 +26,15 @@ export function updateText(game: Game): void {
   game.scoreBoard.y = newY;
 
   game.players.forEach((player, playerIndex) => {
-    player.text.setScale(1 / zoom, 1 / zoom);
+    player.text
+      .setScale(1 / zoom, 1 / zoom)
+      .setText(
+        "P" +
+          playerIndex.toString() +
+          "_" +
+          Math.round(player.char.sprite.x).toString() +
+          "x"
+      );
     player.text.x =
       game.cameraMover.char.sprite.x +
       game.textLocations[playerIndex] * (1 / zoom);

@@ -120,7 +120,7 @@ export function create(game: Game) {
         "P" + playerIndex.toString(),
         {
           // font: "Arial 100px",
-          fontSize: "50px",
+          fontSize: "30px",
           fontFamily: "'Press Start 2P'",
         }
       )
