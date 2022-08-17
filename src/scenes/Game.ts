@@ -2,7 +2,6 @@ import "phaser";
 import { create } from "./create";
 import { update } from "./update";
 import { Camera, Player } from "./interfaces";
-import DynamicText from 'phaser3-rex-plugins/plugins/dynamictext.js';
 
 export default class Game extends Phaser.Scene {
   timer: any;
