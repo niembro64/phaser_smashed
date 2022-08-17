@@ -7,30 +7,16 @@ import { DOMElement } from 'react';
 export function create(game: Game) {
     game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
 
-    game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, 'background');
-    game.background.setScale(1);
-    game.background.setImmovable(true);
-    game.background.body.allowGravity = false;
-
-    // game.text = game.add.rexDynamicText(x, y, width, height);
-
-    game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, 'table');
-    game.table.setScale(1);
-    game.table.setImmovable(true);
-    game.table.body.allowGravity = false;
-
-    game.platforms = game.physics.add.staticGroup();
-    game.platforms.create(1200, 850, 'platformShorter');
-    game.platforms.create(600, 900, 'platformShort');
-    game.platforms.create(1920 / 2, 1080 / 2, 'platformHorizontal');
-    game.platforms.create(300, 1080 / 1.5, 'platformHorizontal');
-    game.platforms.create(1700, 1080 / 1.5, 'platformHorizontal');
-    game.platforms.create(1200, 700, 'platformVertical');
-
+    createBackground(game);
     createTitles(game);
+    createTable(game);
+    createPlatforms(game);
     createCameras(game);
-    scoreboardInit(game);
+    createScoreboard(game);
+    createPlayers(game);
+}
 
+export function createPlayers(game: Game): void {
     for (let i = 0; i < 4; i++) {
         game.players[game.playersOrder[i]].char.sprite =
             game.physics.add.sprite(
@@ -62,7 +48,27 @@ export function create(game: Game) {
     lasersCollide(game);
     charsCollide(game);
 }
-
+export function createBackground(game: Game): void {
+    game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, 'background');
+    game.background.setScale(1);
+    game.background.setImmovable(true);
+    game.background.body.allowGravity = false;
+}
+export function createPlatforms(game: Game): void {
+    game.platforms = game.physics.add.staticGroup();
+    game.platforms.create(1200, 850, 'platformShorter');
+    game.platforms.create(600, 900, 'platformShort');
+    game.platforms.create(1920 / 2, 1080 / 2, 'platformHorizontal');
+    game.platforms.create(300, 1080 / 1.5, 'platformHorizontal');
+    game.platforms.create(1700, 1080 / 1.5, 'platformHorizontal');
+    game.platforms.create(1200, 700, 'platformVertical');
+}
+export function createTable(game: Game): void {
+    game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, 'table');
+    game.table.setScale(1);
+    game.table.setImmovable(true);
+    game.table.body.allowGravity = false;
+}
 export function createTitles(game: Game): void {
     game.title = game.add
         .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, 'SMASHED', {
@@ -107,7 +113,7 @@ export function createTitles(game: Game): void {
         .setAlpha(0.3);
 }
 
-export function scoreboardInit(game: Game): void {
+export function createScoreboard(game: Game): void {
     game.scoreBoard = game.add.text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
