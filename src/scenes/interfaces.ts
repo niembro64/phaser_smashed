@@ -13,6 +13,7 @@ export interface CameraHelper {
 
 export interface Player {
   index: number;
+  text: string | any;
   state: string;
   keyboard_static: Keyboard;
   char: Char;

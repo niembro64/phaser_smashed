@@ -106,11 +106,27 @@ export function create(game: Game) {
     "",
     {
       // font: "Arial 100px",
-      fontSize: "20px",
+      fontSize: "50px",
       fontFamily: "'Press Start 2P'",
     }
   );
   game.scoreBoard.setOrigin(0.5, 0.5).setAlpha(0.5);
+
+  game.players.forEach((player, playerIndex) => {
+    player.text = game.add
+      .text(
+        game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[playerIndex],
+        game.SCREEN_DIMENSIONS.HEIGHT / 2,
+        "P" + playerIndex.toString(),
+        {
+          // font: "Arial 100px",
+          fontSize: "50px",
+          fontFamily: "'Press Start 2P'",
+        }
+      )
+      .setOrigin(0.5, 0.5)
+      .setAlpha(0.5);
+  });
 }
 
 export function lasersCollide(game: Game): void {

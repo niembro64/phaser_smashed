@@ -18,15 +18,16 @@ export function updateText(game: Game): void {
     ((-1 * 1) / Math.pow(game.cameras.main.zoom, 1.2) + 1);
 
   game.scoreBoard.y = newY;
-  // const newY =
-  //   game.cameraMover.char.sprite.y *
-  //   ((-1 * 1) / Math.pow(game.cameras.main.zoom, 1.2) + 1);
 
-  // game.scoreBoard.y =
-  //   game.scoreBoard.y * game.zoomRatioFast + newY * (1 - game.zoomRatioFast);
+  game.players.forEach((player, playerIndex) => {
+    player.text.setScale(
+      1 / game.cameras.main.zoom,
+      1 / game.cameras.main.zoom
+    );
+    player.text.x =
+      game.cameraMover.char.sprite.x +
+      game.playerLocations[playerIndex] * (1 / game.cameras.main.zoom);
+
+    player.text.y = newY;
+  });
 }
-
-//   game.scoreBoard.y * game.zoomRatioFast +
-//   (1 - game.zoomRatioFast) *
-//     (game.cameraMover.char.sprite.y - game.CAMERA_OFFSET_Y) *
-//     (1 - 1 / game.cameras.main.zoom);

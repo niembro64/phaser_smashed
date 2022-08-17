@@ -75,11 +75,12 @@ export default class Game extends Phaser.Scene {
   // playersOrder: number[] = [1, 2, 3, 0];
   // playersOrder: number[] = [2, 3, 0, 1];
   playersOrder: number[] = [3, 0, 1, 2];
-  playerLocations: number[] = [-800, -300, 300, 800];
+  playerLocations: number[] = [-800, -400, 400, 800];
   // playerLocations: number[] = [-200, -110, 110, 200];
   players: Player[] = [
     {
       index: 0,
+      text: "",
       state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -129,6 +130,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       index: 1,
+      text: "",
       state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -178,6 +180,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       index: 2,
+      text: "",
       state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -226,6 +229,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       index: 3,
+      text: "",
       state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
