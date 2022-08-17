@@ -26,7 +26,7 @@ export function updateText(game: Game): void {
     );
     player.text.x =
       game.cameraMover.char.sprite.x +
-      game.playerLocations[playerIndex] * (1 / game.cameras.main.zoom);
+      game.textLocations[playerIndex] * (1 / game.cameras.main.zoom);
 
     player.text.y = newY;
   });
