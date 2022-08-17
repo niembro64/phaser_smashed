@@ -13,20 +13,23 @@ export function updateText(game: Game): void {
   );
   game.scoreBoard.x = game.cameraMover.char.sprite.x;
 
+  const zoom = game.cameras.main.zoom;
+
+  const redOffsetY =
+    game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
+
   const newY =
-    game.cameraMover.char.sprite.y *
-    ((-1 * 1) / Math.pow(game.cameras.main.zoom, 1.2) + 1);
+    baseY +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1.2) + 1);
 
   game.scoreBoard.y = newY;
 
   game.players.forEach((player, playerIndex) => {
-    player.text.setScale(
-      1 / game.cameras.main.zoom,
-      1 / game.cameras.main.zoom
-    );
+    player.text.setScale(1 / zoom, 1 / zoom);
     player.text.x =
       game.cameraMover.char.sprite.x +
-      game.textLocations[playerIndex] * (1 / game.cameras.main.zoom);
+      game.textLocations[playerIndex] * (1 / zoom);
 
     player.text.y = newY;
   });

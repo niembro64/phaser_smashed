@@ -75,7 +75,7 @@ export default class Game extends Phaser.Scene {
   // playersOrder: number[] = [1, 2, 3, 0];
   // playersOrder: number[] = [2, 3, 0, 1];
   playersOrder: number[] = [3, 0, 1, 2];
-  textLocations: number[] = [-800, -400, 400, 800];
+  textLocations: number[] = [-760, -460, 460, 760];
   // playerLocations: number[] = [-800, -400, 400, 800];
   playerLocations: number[] = [-200, -110, 110, 200];
   players: Player[] = [
