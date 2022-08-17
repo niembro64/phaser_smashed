@@ -131,6 +131,8 @@ export function create(game: Game) {
 
 export function lasersCollide(game: Game): void {
   game.players.forEach((player, playerIndex) => {
+    game.physics.add.collider(player.char.attack.sprite, game.platforms);
+
     for (let i = 0; i < 4; i++) {
       if (playerIndex !== i) {
         game.physics.add.collider(

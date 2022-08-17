@@ -12,7 +12,7 @@ export default class Game extends Phaser.Scene {
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   DEFAULT_SPEED_X: number = 50;
-  DEFAULT_SPEED_Y: number = 15;
+  DEFAULT_SPEED_Y: number = 25;
   DEFAULT_JUMP: number = 1800;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
