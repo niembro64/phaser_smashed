@@ -174,10 +174,10 @@ export function createCameras(game: Game): void {
         .sprite(
             game.SCREEN_DIMENSIONS.WIDTH / 2,
             game.SCREEN_DIMENSIONS.HEIGHT / 2,
-            'centerBlack'
+            'centerWhite'
         )
         .setScale(0.05)
-        .setRotation(Math.PI / 4);
+        .setAlpha(0.5);
     game.cameraBox.char.sprite.setImmovable(true);
     game.cameraBox.char.sprite.body.allowGravity = false;
     // game.cameras.main.startFollow(game.cameraBox.char.sprite);
@@ -188,7 +188,9 @@ export function createCameras(game: Game): void {
             game.SCREEN_DIMENSIONS.HEIGHT / 2,
             'centerWhite'
         )
-        .setScale(0.05);
+        .setScale(0.05)
+        .setRotation(Math.PI / 4)
+        .setAlpha(0.5);
     game.cameraPlayers.char.sprite.setImmovable(true);
     game.cameraPlayers.char.sprite.body.allowGravity = false;
     // game.cameras.main.startFollow(game.cameraPlayers.char.sprite);
@@ -199,7 +201,9 @@ export function createCameras(game: Game): void {
             game.SCREEN_DIMENSIONS.HEIGHT / 2,
             'centerWhite'
         )
-        .setScale(0.05);
+        .setRotation(Math.PI / 4)
+        .setScale(0.05)
+        .setAlpha(0.5);
     game.cameraPlayersHalfway.char.sprite.setImmovable(true);
     game.cameraPlayersHalfway.char.sprite.body.allowGravity = false;
     // game.cameras.main.startFollow(game.cameraPlayersHalfway.char.sprite);
@@ -210,7 +214,9 @@ export function createCameras(game: Game): void {
             game.SCREEN_DIMENSIONS.HEIGHT / 2,
             'centerWhite'
         )
-        .setScale(0.05);
+        .setScale(0.05)
+        .setRotation(Math.PI / 4)
+        .setAlpha(0.5);
     game.cameraCenter.char.sprite.setImmovable(true);
     game.cameraCenter.char.sprite.body.allowGravity = false;
     // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
