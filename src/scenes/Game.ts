@@ -21,15 +21,15 @@ export default class Game extends Phaser.Scene {
   background: any | Phaser.GameObjects.Sprite;
   table: any | Phaser.GameObjects.Sprite;
   playerZoomKeeper: number = 1;
-  playerLocations: number[] = [-200, -110, 110, 200];
+
   zoomRatioSlow = 0.995;
   zoomRatioFast = 0.9;
   // BORDER_PADDING_X: number = 0;
   // BORDER_PADDING_Y: number = 0;
-  // CAMERA_OFFSET_Y: number = 0;
   BORDER_PADDING_X: number = 200;
   BORDER_PADDING_Y: number = 100;
   CAMERA_OFFSET_Y: number = -100;
+  // CAMERA_OFFSET_Y: number = 0;
 
   cameraPlayers: Camera = {
     char: {
@@ -73,8 +73,10 @@ export default class Game extends Phaser.Scene {
   };
   // playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  playersOrder: number[] = [2, 3, 0, 1];
-  // playersOrder: number[] = [3, 0, 1, 2];
+  // playersOrder: number[] = [2, 3, 0, 1];
+  playersOrder: number[] = [3, 0, 1, 2];
+  playerLocations: number[] = [-800, -300, 300, 800];
+  // playerLocations: number[] = [-200, -110, 110, 200];
   players: Player[] = [
     {
       index: 0,
@@ -276,12 +278,33 @@ export default class Game extends Phaser.Scene {
     super("game");
     // this.laserGroup;
   }
+  // style = {
+  //   "background-color": "lime",
+  //   position: "absolute",
+  //   top: "0%",
+  //   left: "50%",
+  //   width: "200px",
+  //   height: "100px",
+  //   font: "48px Arial",
+  //   "font-weight": "bold",
+  //   display: "flex",
+  // };
+
+  // element: any;
+  scoreBoard: any;
+
   preload() {
-    this.load.plugin(
-      "rexdynamictextplugin",
-      "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdynamictextplugin.min.js",
-      true
-    );
+    // this.load.bitmapFont(
+    //   "ice",
+    //   "assets/fonts/bitmap/iceicebaby.png",
+    //   "assets/fonts/bitmap/iceicebaby.xml"
+    // );
+
+    // this.load.plugin(
+    //   "rexdynamictextplugin",
+    //   "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdynamictextplugin.min.js",
+    //   true
+    // );
 
     this.load.image("laser", "images/laser.png");
 

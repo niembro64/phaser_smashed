@@ -1,10 +1,12 @@
 * {
   padding: 0px;
   margin: 0px;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0);
   color: white;
   /* font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif; */
-  font-family: "Press Start 2P", cursive;
+  font-family: Impact, Arial;
+  font-weight: 300;
+  /* font-family: "Press Start 2P", cursive; */
 
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -32,15 +34,34 @@ html {
 }
 
 #root {
-  width: 100%;
-  height: auto;
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+}
+
+#top-bar {
+  width: 100%;
+  height: auto;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 50px 50px rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 
 h1 {
-  margin: 1%;
+  margin: 0.5%;
+  padding: 0%;
+  font-size: 20px;
 }

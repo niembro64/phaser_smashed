@@ -2,6 +2,7 @@ import { Scale } from "phaser";
 import PhaserGame from "../PhaserGame";
 import Game from "./Game";
 import { hasPlayerTouchedWallRecently } from "./movement";
+import { DOMElement } from "react";
 
 export function create(game: Game) {
   game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
@@ -98,6 +99,18 @@ export function create(game: Game) {
   createCameras(game);
   lasersCollide(game);
   charsCollide(game);
+
+  game.scoreBoard = game.add.text(
+    game.SCREEN_DIMENSIONS.WIDTH,
+    game.SCREEN_DIMENSIONS.HEIGHT,
+    "",
+    {
+      // font: "Arial 100px",
+      fontSize: "20px",
+      fontFamily: "'Press Start 2P'",
+    }
+  );
+  game.scoreBoard.setOrigin(0.5, 0.5).setAlpha(0.5);
 }
 
 export function lasersCollide(game: Game): void {
@@ -124,80 +137,80 @@ export function charsCollide(game: Game): void {
 }
 
 export function createCameras(game: Game): void {
-    game.cameraPlayers.char.sprite = game.physics.add
-        .sprite(
-            game.SCREEN_DIMENSIONS.WIDTH / 2,
-            game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
-            'centerWhite'
-        )
-        .setScale(0.05);
-    game.cameraPlayers.char.sprite.setImmovable(true);
-    game.cameraPlayers.char.sprite.body.allowGravity = false;
-    // game.cameras.main.startFollow(game.cameraPlayers.char.sprite);
+  game.cameraBox.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      "centerBlack"
+    )
+    .setScale(0.05)
+    .setRotation(Math.PI / 4);
+  game.cameraBox.char.sprite.setImmovable(true);
+  game.cameraBox.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraBox.char.sprite);
 
-    game.cameraPlayersHalfway.char.sprite = game.physics.add
-        .sprite(
-            game.SCREEN_DIMENSIONS.WIDTH / 2,
-            game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
-            'centerWhite'
-        )
-        .setScale(0.05);
-    game.cameraPlayersHalfway.char.sprite.setImmovable(true);
-    game.cameraPlayersHalfway.char.sprite.body.allowGravity = false;
-    // game.cameras.main.startFollow(game.cameraPlayersHalfway.char.sprite);
+  game.cameraPlayers.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      "centerWhite"
+    )
+    .setScale(0.05);
+  game.cameraPlayers.char.sprite.setImmovable(true);
+  game.cameraPlayers.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraPlayers.char.sprite);
 
-    game.cameraCenter.char.sprite = game.physics.add
-        .sprite(
-            game.SCREEN_DIMENSIONS.WIDTH / 2,
-            game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
-            'centerWhite'
-        )
-        .setScale(0.05);
-    game.cameraCenter.char.sprite.setImmovable(true);
-    game.cameraCenter.char.sprite.body.allowGravity = false;
-    // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
+  game.cameraPlayersHalfway.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      "centerWhite"
+    )
+    .setScale(0.05);
+  game.cameraPlayersHalfway.char.sprite.setImmovable(true);
+  game.cameraPlayersHalfway.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraPlayersHalfway.char.sprite);
 
-    game.cameraBox.char.sprite = game.physics.add
-        .sprite(
-            game.SCREEN_DIMENSIONS.WIDTH / 2,
-            game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
-            'centerWhite'
-        )
-        .setScale(0.08)
-        .setRotation(Math.PI / 4);
-    game.cameraBox.char.sprite.setImmovable(true);
-    game.cameraBox.char.sprite.body.allowGravity = false;
-    // game.cameras.main.startFollow(game.cameraBox.char.sprite);
+  game.cameraCenter.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      "centerWhite"
+    )
+    .setScale(0.05);
+  game.cameraCenter.char.sprite.setImmovable(true);
+  game.cameraCenter.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
 
-    game.cameraMover.char.sprite = game.physics.add
-        .sprite(
-            game.SCREEN_DIMENSIONS.WIDTH / 2,
-            game.SCREEN_DIMENSIONS.HEIGHT / 2 + game.CAMERA_OFFSET_Y,
-            'centerRed'
-        )
-        .setScale(0.08)
-        .setRotation(Math.PI / 4);
-    game.cameraMover.char.sprite.setImmovable(true);
-    game.cameraMover.char.sprite.body.allowGravity = false;
-    // game.cameras.main.startFollow(game.cameraMover.char.sprite);
+  game.cameraMover.char.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      "centerRed"
+    )
+    .setScale(0.08)
+    .setRotation(Math.PI / 4);
+  game.cameraMover.char.sprite.setImmovable(true);
+  game.cameraMover.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.cameraMover.char.sprite);
 
-    // game.cameraSlow.char.sprite = game.physics.add
-    //   .sprite(200, 200, "center")
-    //   .setScale(0.05);
-    // game.cameraSlow.char.sprite.setImmovable(true);
-    // game.cameraSlow.char.sprite.body.allowGravity = false;
-    // game.cameras.main.startFollow(game.center_80.char.sprite);
+  // game.cameraSlow.char.sprite = game.physics.add
+  //   .sprite(200, 200, "center")
+  //   .setScale(0.05);
+  // game.cameraSlow.char.sprite.setImmovable(true);
+  // game.cameraSlow.char.sprite.body.allowGravity = false;
+  // game.cameras.main.startFollow(game.center_80.char.sprite);
 
-    // for (let i = 0; i < 11; i++) {
-    //   game.center_10.helperState.push({ x: 800, y: 300, zoom: 0.3 });
-    // }
-    // for (let i = 0; i < 79; i++) {
-    //   game.center_80.helperState.push({ x: 800, y: 300, zoom: 0.3 });
-    // }
-    // game.cameras.main.setBounds(
-    //   0,
-    //   0,
-    //   game.SCREEN_DIMENSIONS.WIDTH,
-    //   game.SCREEN_DIMENSIONS.HEIGHT
-    // );
+  // for (let i = 0; i < 11; i++) {
+  //   game.center_10.helperState.push({ x: 800, y: 300, zoom: 0.3 });
+  // }
+  // for (let i = 0; i < 79; i++) {
+  //   game.center_80.helperState.push({ x: 800, y: 300, zoom: 0.3 });
+  // }
+  // game.cameras.main.setBounds(
+  //   0,
+  //   0,
+  //   game.SCREEN_DIMENSIONS.WIDTH,
+  //   game.SCREEN_DIMENSIONS.HEIGHT
+  // );
 }

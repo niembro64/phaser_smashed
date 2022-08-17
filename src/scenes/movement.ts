@@ -1,3 +1,4 @@
+import { GameObjects } from "phaser";
 import Game from "./Game";
 import { Location, Player } from "./interfaces";
 
@@ -173,7 +174,7 @@ export function setCamera(game: Game): void {
   var cBox = getCameraBoxStatus(game);
 
   game.cameraPlayers.char.sprite.x = cPlayer.x;
-  game.cameraPlayers.char.sprite.y = cPlayer.y + game.CAMERA_OFFSET_Y;
+  game.cameraPlayers.char.sprite.y = cPlayer.y;
   game.cameraPlayers.char.zoom = game.cameraPlayers.char.zoom = cPlayer.zoom;
 
   game.cameraMover.char.sprite.x =
@@ -185,12 +186,12 @@ export function setCamera(game: Game): void {
   game.cameraMover.char.zoom = game.cameraMover.char.zoom = cMover.zoom;
 
   game.cameraPlayersHalfway.char.sprite.x = cBorder.x;
-  game.cameraPlayersHalfway.char.sprite.y = cBorder.y + game.CAMERA_OFFSET_Y;
+  game.cameraPlayersHalfway.char.sprite.y = cBorder.y;
   game.cameraPlayersHalfway.char.zoom = game.cameraPlayersHalfway.char.zoom =
     cBorder.zoom;
 
   game.cameraBox.char.sprite.x = cBox.x;
-  game.cameraBox.char.sprite.y = cBox.y + game.CAMERA_OFFSET_Y;
+  game.cameraBox.char.sprite.y = cBox.y;
   game.cameraBox.char.zoom = game.cameraBox.char.zoom = cBox.zoom;
 
   var newZoom = Math.max(game.cameraPlayers.char.zoom, 1);
@@ -348,8 +349,6 @@ export function getCameraMoverStatus(game: Game): Location {
   let y =
     spritePlayer.y * (1 - percentCloseToCenter) +
     spriteCenter.y * percentCloseToCenter;
-
-  y -= game.CAMERA_OFFSET_Y;
 
   return {
     x: x,
