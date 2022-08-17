@@ -99,10 +99,13 @@ export function create(game: Game) {
   createCameras(game);
   lasersCollide(game);
   charsCollide(game);
+  scoreboardInit(game);
+}
 
+export function scoreboardInit(game: Game): void {
   game.scoreBoard = game.add.text(
-    game.SCREEN_DIMENSIONS.WIDTH,
-    game.SCREEN_DIMENSIONS.HEIGHT,
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
     "",
     {
       // font: "Arial 100px",
@@ -110,7 +113,7 @@ export function create(game: Game) {
       fontFamily: "'Press Start 2P'",
     }
   );
-  game.scoreBoard.setOrigin(0.5, 0.5).setAlpha(0.5);
+  game.scoreBoard.setOrigin(0.5, 0).setAlpha(0.5);
 
   game.players.forEach((player, playerIndex) => {
     player.text = game.add
@@ -124,7 +127,7 @@ export function create(game: Game) {
           fontFamily: "'Press Start 2P'",
         }
       )
-      .setOrigin(0.5, 0.5)
+      .setOrigin(0.5, 0)
       .setAlpha(0.5);
   });
 }

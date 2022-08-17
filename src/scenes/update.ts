@@ -22,13 +22,13 @@ import { updateSpritesLR } from "./sprites";
 import { updateText } from "./text";
 
 export function update(game: Game): void {
-  updateText(game);
   // game.text = game.timer.actualFps;
   // console.log(game.timer);
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   setCamera(game);
   updateSpritesLR(game);
+  updateText(game);
   game.players.forEach((player, index) => {
     // printAllPadsActive(player, game);
     attackEnergy(player, game);
