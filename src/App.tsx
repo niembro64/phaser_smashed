@@ -7,12 +7,12 @@ function App() {
 
   return (
     <>
-      <div id="top-bar">
+      {/* <div id="top-bar">
         <h1 id="title">SMASHED</h1>
         <h1 id="title">{{ debug } ? "DEBUGGING" : ""}</h1>
         <h1 id="title"># Controllers: {numControllers}</h1>
         <h1 id="boy"># Controllers: {numControllers}</h1>
-      </div>
+      </div> */}
       <div id="phaser-container"></div>
     </>
   );
