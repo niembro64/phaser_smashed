@@ -1,88 +1,96 @@
-import { Key } from 'react';
+import { Key } from "react";
 
 export interface Location {
-    x: number;
-    y: number;
-    zoom: number;
+  x: number;
+  y: number;
+  zoom: number;
 }
 
 export interface CameraHelper {
-    helper: any;
-    helperState: Location | any;
+  helper: any;
+  helperState: Location | any;
 }
 
 export interface Player {
-    playerNumber: number;
-    text: string | any;
-    state: string;
-    keyboard_static: Keyboard;
-    char: Char;
-    keyboard: Keyboard | any;
-    pad: Gamepad | any;
-    padPrev: padStatePrevious;
+  playerNumber: number;
+  text: string | any;
+  state: string;
+  keyboard_static: Keyboard;
+  char: Char;
+  keyboard: Keyboard | any;
+  pad: Gamepad | any;
+  padPrev: padStatePrevious;
+}
+
+export interface Color {
+  primary: string;
+  secondary: string;
+  dark: string;
+  light: string;
 }
 export interface Camera {
-    char: CameraChar;
+  char: CameraChar;
 }
 
 export interface CameraChar {
-    name: string;
-    src: string;
-    sprite: any | Phaser.GameObjects.Sprite;
-    zoom: number;
+  name: string;
+  src: string;
+  sprite: any | Phaser.GameObjects.Sprite;
+  zoom: number;
 }
 
 export interface padStatePrevious {
-    up: boolean;
-    down: boolean;
-    left: boolean;
-    right: boolean;
-    A: boolean;
-    B: boolean;
-    X: boolean;
-    Y: boolean;
+  up: boolean;
+  down: boolean;
+  left: boolean;
+  right: boolean;
+  A: boolean;
+  B: boolean;
+  X: boolean;
+  Y: boolean;
 }
 
 export interface Keyboard {
-    up: Key;
-    down: Key;
-    left: Key;
-    right: Key;
-    fast: Key;
-    jump: Key;
+  up: Key;
+  down: Key;
+  left: Key;
+  right: Key;
+  fast: Key;
+  jump: Key;
 }
 
 export interface Char {
-    name: string;
-    src: string;
-    sprite: any | Phaser.GameObjects.Sprite;
-    zoom: number;
-    vel: { x: number; y: number };
-    pos: { x: number; y: number };
-    jumps: number[];
-    jumpPower: number;
-    jumpIndex: number;
-    damage: number;
-    speed: number;
-    fast: number;
-    friction_ground: number;
-    friction_air: number;
-    wallTouchArray: boolean[];
-    lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | 'camera' | null;
-    attack: Punch | Laser;
+  name: string;
+  color: Color;
+  src: string;
+  sprite: any | Phaser.GameObjects.Sprite;
+  zoom: number;
+  vel: { x: number; y: number };
+  pos: { x: number; y: number };
+  jumps: number[];
+  jumpPower: number;
+  jumpIndex: number;
+  damage: number;
+  speed: number;
+  fast: number;
+  friction_ground: number;
+  friction_air: number;
+  wallTouchArray: boolean[];
+  lastDirectionTouched: "up" | "down" | "left" | "right" | "camera" | null;
+  attack: Punch | Laser;
 }
 
 export interface Punch {
-    sprite: any | Phaser.GameObjects.Sprite;
-    damage: number;
-    width: number;
-    height: number;
+  sprite: any | Phaser.GameObjects.Sprite;
+  damage: number;
+  width: number;
+  height: number;
 }
 export interface Laser {
-    sprite: any | Phaser.GameObjects.Sprite;
-    damage: number;
-    width: number;
-    height: number;
+  sprite: any | Phaser.GameObjects.Sprite;
+  damage: number;
+  width: number;
+  height: number;
 }
 // export interface Keyboard_Static {
 //     up: typeof Phaser.Input.Keyboard.Key | any;
