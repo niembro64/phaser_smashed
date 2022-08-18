@@ -10,11 +10,16 @@ export function assignGamePadsConnected(game: Game): void {
 export function attackEnergy(player: Player, game: Game): void {
   var vX =
     player.char.sprite.body.velocity.x * 2 * player.char.attackEnergy.vel.x;
-  var vY = 10 * player.char.attackEnergy.vel.y;
-  vY +=
-    player.char.attackEnergy.vel.y === 0
-      ? 0
-      : player.char.sprite.body.velocity.y;
+
+  var vY = 0;
+  if (player.char.attackEnergy.allowVelocityY) {
+    vY = 300 * player.char.attackEnergy.vel.y;
+    vY +=
+      player.char.attackEnergy.vel.y === 0
+        ? 0
+        : player.char.sprite.body.velocity.y;
+  }
+
   var laserSpeed = 600;
   if (
     player.pad?.X &&
@@ -28,6 +33,14 @@ export function attackEnergy(player: Player, game: Game): void {
         player.char.sprite.y - player.char.attackEnergy.sprite.height;
       player.char.attackEnergy.sprite.body.setVelocityX(-1 * laserSpeed + vX);
       player.char.attackEnergy.sprite.body.setVelocityY(vY);
+
+      //   player.char.attackEnergy.sprite.flipX = false;
+      player.char.attackEnergy.sprite.setRotation(
+        player.char.attackEnergy.rotation.initial * Math.PI * 3
+      );
+      player.char.attackEnergy.sprite.setAngularVelocity(
+        player.char.attackEnergy.rotation.speed * Math.PI
+      );
     } else {
       player.char.attackEnergy.sprite.x =
         player.char.sprite.x + player.char.sprite.width;
@@ -35,6 +48,14 @@ export function attackEnergy(player: Player, game: Game): void {
         player.char.sprite.y - player.char.attackEnergy.sprite.height;
       player.char.attackEnergy.sprite.body.setVelocityX(laserSpeed + vX);
       player.char.attackEnergy.sprite.body.setVelocityY(vY);
+
+      //   player.char.attackEnergy.sprite.flipX = true;
+      player.char.attackEnergy.sprite.setRotation(
+        player.char.attackEnergy.rotation.initial * Math.PI * 1
+      );
+      player.char.attackEnergy.sprite.setAngularVelocity(
+        player.char.attackEnergy.rotation.speed * Math.PI
+      );
     }
   }
 }

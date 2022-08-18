@@ -14,6 +14,13 @@ export function create(game: Game) {
   createCameras(game);
   createScoreboard(game);
   createPlayers(game);
+
+  // game.matter.world.setBounds(
+  //   0,
+  //   0,
+  //   game.SCREEN_DIMENSIONS.WIDTH,
+  //   game.SCREEN_DIMENSIONS.HEIGHT
+  // );
 }
 
 export function createPlayers(game: Game): void {
@@ -45,7 +52,8 @@ export function createPowerAttackes(game: Game): void {
       .sprite(-300, -300, player.char.attackEnergy.srcImage)
       .setMass(player.char.attackEnergy.mass)
       .setScale(player.char.attackEnergy.scale)
-      .setRotation(player.char.attackEnergy.rotation.initial * Math.PI);
+      .setRotation(player.char.attackEnergy.rotation.initial * Math.PI)
+      .setAngularVelocity(player.char.attackEnergy.rotation.speed * Math.PI);
 
     player.char.attackEnergy.sprite.body.allowGravity =
       player.char.attackEnergy.gravity;
@@ -53,8 +61,12 @@ export function createPowerAttackes(game: Game): void {
       player.char.attackEnergy.bounce
     );
     // player.char.attackEnergy.sprite.body.gravity.set(0, 0);
-
-    game.physics.add.collider(player.char.attackEnergy.sprite, game.platforms);
+    if (player.char.attackEnergy.walls) {
+      game.physics.add.collider(
+        player.char.attackEnergy.sprite,
+        game.platforms
+      );
+    }
 
     for (let i = 0; i < 4; i++) {
       if (playerIndex !== i) {
@@ -75,7 +87,7 @@ export function createBackground(game: Game): void {
 export function createPlatforms(game: Game): void {
   game.platforms = game.physics.add.staticGroup();
   game.platforms.create(1200, 700, "platformVertical");
-  game.platforms.create(1200, 850, "platformShorter");
+  game.platforms.create(1200, 850, "platformShort");
   game.platforms.create(600, 900, "platformShort");
   game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
   game.platforms.create(300, 1080 / 1.5, "platformHorizontal");

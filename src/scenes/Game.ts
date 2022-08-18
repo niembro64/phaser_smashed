@@ -71,9 +71,9 @@ export default class Game extends Phaser.Scene {
       zoom: 1,
     },
   };
-  playersOrder: number[] = [0, 1, 2, 3];
+  // playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  // playersOrder: number[] = [2, 3, 0, 1];
+  playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
@@ -118,7 +118,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          vel: { x: 1, y: -0.5 },
+          vel: { x: 1, y: -5 },
           srcImage: "fireball",
           bounce: 0.9,
           gravity: true,
@@ -126,9 +126,10 @@ export default class Game extends Phaser.Scene {
           damage: 10,
           scale: 2,
           mass: 0.9,
+          allowVelocityY: true,
           rotation: {
             initial: 0.25,
-            speed: 1,
+            speed: 1000,
           },
         },
       },
@@ -191,6 +192,7 @@ export default class Game extends Phaser.Scene {
           damage: 10,
           scale: 3,
           mass: 0.5,
+          allowVelocityY: false,
           rotation: {
             initial: 0.5,
             speed: 0,
@@ -253,8 +255,9 @@ export default class Game extends Phaser.Scene {
           gravity: true,
           walls: true,
           damage: 10,
-          scale: 1.3,
+          scale: 1.4,
           mass: 2,
+          allowVelocityY: true,
           rotation: {
             initial: 0,
             speed: 0,
@@ -311,17 +314,18 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          vel: { x: 1, y: -0.5 },
+          vel: { x: 1, y: -3 },
           srcImage: "hammer",
           bounce: 0.7,
           gravity: true,
-          walls: true,
+          walls: false,
           damage: 10,
           scale: 2,
           mass: 10,
+          allowVelocityY: true,
           rotation: {
             initial: 0,
-            speed: 5,
+            speed: 500,
           },
         },
       },
@@ -387,9 +391,10 @@ export default class Game extends Phaser.Scene {
     this.load.image("centerMagenta", "images/mx.png");
     this.load.image("centerRed", "images/rx.png");
     this.load.image("platformHorizontal", "images/brickhoriz.bmp");
-    this.load.image("platformShort", "images/brickhorizshort.bmp");
-    this.load.image("platformShorter", "images/brickhorizshorter.bmp");
+    this.load.image("platformShort", "images/brickhorizshorter.bmp");
+    // this.load.image("platformShorter", "images/brickhorizshorter.bmp");
     this.load.image("platformVertical", "images/brickvert.bmp");
+    this.load.image("brick", "images/brickcracked.bmp");
     this.load.image("suburb", "images/suburb.png");
 
     this.players.forEach((player, playerIndex) => {

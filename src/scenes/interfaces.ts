@@ -104,6 +104,7 @@ export interface AttackEnergy {
   damage: number;
   scale: number;
   mass: number;
+  allowVelocityY: boolean;
   rotation: AttackEnergyRotation;
 }
 // export interface Keyboard_Static {
