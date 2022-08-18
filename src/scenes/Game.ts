@@ -96,8 +96,8 @@ export default class Game extends Phaser.Scene {
         name: "Mario",
         initializeCharPosition: {
           lookingRight: true,
-          x: 0,
-          y: 0,
+          x: -200,
+          y: 100,
         },
         color: {
           primary: "#e24800",
@@ -168,8 +168,8 @@ export default class Game extends Phaser.Scene {
         name: "Link",
         initializeCharPosition: {
           lookingRight: false,
-          x: 0,
-          y: 0,
+          x: -110,
+          y: 100,
         },
         color: {
           primary: "#43a528",
@@ -240,8 +240,8 @@ export default class Game extends Phaser.Scene {
         name: "Pikachu",
         initializeCharPosition: {
           lookingRight: true,
-          x: 0,
-          y: 0,
+          x: 110,
+          y: 100,
         },
         color: {
           primary: "#ffc90e",
@@ -311,8 +311,8 @@ export default class Game extends Phaser.Scene {
         name: "Kirby",
         initializeCharPosition: {
           lookingRight: false,
-          x: 0,
-          y: 0,
+          x: 200,
+          y: 100,
         },
         color: {
           primary: "#ff88ae",
@@ -418,7 +418,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("platformShort", "images/brickhorizshorter.bmp");
     // this.load.image("platformShorter", "images/brickhorizshorter.bmp");
     this.load.image("platformVertical", "images/brickvert.bmp");
-    this.load.image("brick", "images/brickcracked.bmp");
+    this.load.image("brick", "images/blockcracked.png");
     this.load.image("suburb", "images/suburb.png");
 
     this.players.forEach((player, playerIndex) => {

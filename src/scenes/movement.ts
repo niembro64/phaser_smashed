@@ -1,8 +1,19 @@
 import { GameObjects } from "phaser";
 import Game from "./Game";
-import { Location, Player } from "./interfaces";
+import { AttackEnergy, Location, Player } from "./interfaces";
 
-export function updateKeepOnScreen(player: Player, game: Game): void {
+export function updateKeepOnScreenLREnergyAttack(
+  energyAttack: AttackEnergy,
+  game: Game
+): void {
+  if (energyAttack.sprite.x < 0) {
+    energyAttack.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
+  }
+  if (energyAttack.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
+    energyAttack.sprite.x = 0;
+  }
+}
+export function updateKeepOnScreenPlayer(player: Player, game: Game): void {
   if (player.char.sprite.y < 0) {
     player.char.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
   }
@@ -14,6 +25,21 @@ export function updateKeepOnScreen(player: Player, game: Game): void {
   }
   if (player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
     player.char.sprite.x = 0;
+  }
+}
+export function updateKeepOnScreenPlayerDead(player: Player, game: Game): void {
+  if (
+    player.char.sprite.y < 0 ||
+    player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT ||
+    player.char.sprite.x < 0 ||
+    player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH
+  ) {
+    player.char.sprite.x =
+      game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x;
+    player.char.sprite.y = player.char.initializeCharPosition.y;
+
+    player.char.sprite.setVelocityX(0);
+    player.char.sprite.setVelocityY(0);
   }
 }
 export function updateLastDirectionTouched(player: Player): void {

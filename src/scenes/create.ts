@@ -44,10 +44,10 @@ export function createPlayers(game: Game): void {
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
   // attacks
-  createPowerAttackes(game);
+  createEnergyAttacks(game);
   charsCollide(game);
 }
-export function createPowerAttackes(game: Game): void {
+export function createEnergyAttacks(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.attackEnergy.sprite = game.physics.add
       .sprite(-300, -300, player.char.attackEnergy.srcImage)
@@ -94,7 +94,12 @@ export function createPlatforms(game: Game): void {
   game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
   game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
+
+  game.platforms.create(200, 200, "platformShort");
+  game.platforms.create(120, 200 - 33, "brick");
+  game.platforms.create(280, 200 - 33, "brick");
 }
+
 export function createTable(game: Game): void {
   game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
   game.table.setScale(1);

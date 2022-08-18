@@ -16,7 +16,9 @@ import {
   updateWallTouchArray,
   updateLastDirectionTouched,
   setCamera,
-  updateKeepOnScreen,
+  updateKeepOnScreenPlayer,
+  updateKeepOnScreenPlayerDead,
+  updateKeepOnScreenLREnergyAttack,
 } from "./movement";
 import { updateSpritesLR } from "./sprites";
 import { updateText } from "./text";
@@ -40,7 +42,9 @@ export function update(game: Game): void {
     frictionAirY(player, game);
     jump(player, game);
     controllerMovement(player, game);
-    updateKeepOnScreen(player, game);
+    updateKeepOnScreenPlayer(player, game);
+    updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
+    updateKeepOnScreenPlayerDead(player, game);
     updatePadPrevious(player, game);
   });
 }
