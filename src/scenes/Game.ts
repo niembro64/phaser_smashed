@@ -71,9 +71,9 @@ export default class Game extends Phaser.Scene {
       zoom: 1,
     },
   };
-  // playersOrder: number[] = [0, 1, 2, 3];
+  playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  playersOrder: number[] = [2, 3, 0, 1];
+  // playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
