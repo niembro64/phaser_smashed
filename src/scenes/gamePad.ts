@@ -8,8 +8,13 @@ export function assignGamePadsConnected(game: Game): void {
 }
 
 export function attackEnergy(player: Player, game: Game): void {
-  var vX = player.char.sprite.body.velocity.x * 2;
-  var vY = player.char.sprite.body.velocity.y * 0.6;
+  var vX =
+    player.char.sprite.body.velocity.x * 2 * player.char.attackEnergy.vel.x;
+  var vY = 10 * player.char.attackEnergy.vel.y;
+  vY +=
+    player.char.attackEnergy.vel.y === 0
+      ? 0
+      : player.char.sprite.body.velocity.y;
   var laserSpeed = 600;
   if (
     player.pad?.X &&
@@ -17,17 +22,19 @@ export function attackEnergy(player: Player, game: Game): void {
     // isSpriteOffscreen(player.char.attack.sprite, game)
   ) {
     if (player.char.sprite.flipX) {
-      player.char.attack.sprite.x =
+      player.char.attackEnergy.sprite.x =
         player.char.sprite.x - player.char.sprite.width;
-      player.char.attack.sprite.y = player.char.sprite.y;
-      player.char.attack.sprite.body.setVelocityX(-1 * laserSpeed + vX);
-      player.char.attack.sprite.body.setVelocityY(vY);
+      player.char.attackEnergy.sprite.y =
+        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+      player.char.attackEnergy.sprite.body.setVelocityX(-1 * laserSpeed + vX);
+      player.char.attackEnergy.sprite.body.setVelocityY(vY);
     } else {
-      player.char.attack.sprite.x =
+      player.char.attackEnergy.sprite.x =
         player.char.sprite.x + player.char.sprite.width;
-      player.char.attack.sprite.y = player.char.sprite.y;
-      player.char.attack.sprite.body.setVelocityX(laserSpeed + vX);
-      player.char.attack.sprite.body.setVelocityY(vY);
+      player.char.attackEnergy.sprite.y =
+        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+      player.char.attackEnergy.sprite.body.setVelocityX(laserSpeed + vX);
+      player.char.attackEnergy.sprite.body.setVelocityY(vY);
     }
   }
 }

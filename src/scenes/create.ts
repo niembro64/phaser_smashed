@@ -37,15 +37,33 @@ export function createPlayers(game: Game): void {
   });
   // attacks
   createPowerAttackes(game);
-  lasersCollide(game);
   charsCollide(game);
 }
 export function createPowerAttackes(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    player.char.attack.sprite = game.physics.add
-      .sprite(-300, -300, "laser")
-      .setMass(1.8);
-    player.char.attack.sprite.body.allowGravity = true;
+    player.char.attackEnergy.sprite = game.physics.add
+      .sprite(-300, -300, player.char.attackEnergy.srcImage)
+      .setMass(player.char.attackEnergy.mass)
+      .setScale(player.char.attackEnergy.scale)
+      .setRotation(player.char.attackEnergy.rotation.initial * Math.PI);
+
+    player.char.attackEnergy.sprite.body.allowGravity =
+      player.char.attackEnergy.gravity;
+    player.char.attackEnergy.sprite.body.bounce.set(
+      player.char.attackEnergy.bounce
+    );
+    // player.char.attackEnergy.sprite.body.gravity.set(0, 0);
+
+    game.physics.add.collider(player.char.attackEnergy.sprite, game.platforms);
+
+    for (let i = 0; i < 4; i++) {
+      if (playerIndex !== i) {
+        game.physics.add.collider(
+          player.char.attackEnergy.sprite,
+          game.players[i].char.sprite
+        );
+      }
+    }
   });
 }
 export function createBackground(game: Game): void {
@@ -56,12 +74,12 @@ export function createBackground(game: Game): void {
 }
 export function createPlatforms(game: Game): void {
   game.platforms = game.physics.add.staticGroup();
+  game.platforms.create(1200, 700, "platformVertical");
   game.platforms.create(1200, 850, "platformShorter");
   game.platforms.create(600, 900, "platformShort");
   game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
   game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
-  game.platforms.create(1200, 700, "platformVertical");
 }
 export function createTable(game: Game): void {
   game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
@@ -163,24 +181,6 @@ export function createScoreboard(game: Game): void {
       )
       .setOrigin(0.5, 0)
       .setAlpha(1);
-  });
-}
-
-export function lasersCollide(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
-    game.physics.add.collider(player.char.attack.sprite, game.platforms);
-
-    for (let i = 0; i < 4; i++) {
-      if (playerIndex !== i) {
-        game.physics.add.collider(
-          player.char.attack.sprite,
-          game.players[i].char.sprite
-        );
-      }
-    }
-
-    player.char.attack.sprite.body.bounce.set(0.8);
-    player.char.attack.sprite.body.gravity.set(0, 0);
   });
 }
 

@@ -77,7 +77,7 @@ export interface Char {
   friction_air: number;
   wallTouchArray: boolean[];
   lastDirectionTouched: "up" | "down" | "left" | "right" | "camera" | null;
-  attack: AttackPhysical | AttackPower;
+  attackEnergy: AttackEnergy;
 }
 
 export interface AttackPhysical {
@@ -85,11 +85,16 @@ export interface AttackPhysical {
   damage: number;
 }
 
+export interface AttackEnergyRotation {
+  initial: number;
+  speed: number;
+}
+
 export interface Velocity {
   x: number;
   y: number;
 }
-export interface AttackPower {
+export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
   vel: Velocity;
   srcImage: string;
@@ -97,6 +102,9 @@ export interface AttackPower {
   gravity: boolean;
   walls: boolean;
   damage: number;
+  scale: number;
+  mass: number;
+  rotation: AttackEnergyRotation;
 }
 // export interface Keyboard_Static {
 //     up: typeof Phaser.Input.Keyboard.Key | any;

@@ -71,10 +71,10 @@ export default class Game extends Phaser.Scene {
       zoom: 1,
     },
   };
-  // playersOrder: number[] = [0, 1, 2, 3];
+  playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
   // playersOrder: number[] = [2, 3, 0, 1];
-  playersOrder: number[] = [3, 0, 1, 2];
+  // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
   // playerLocations: number[] = [-800, -400, 400, 800];
@@ -116,13 +116,20 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
-        attack: {
+        attackEnergy: {
           sprite: null,
-          vel: { x: 30, y: -30 },
-          srcImage: "laser",
+          vel: { x: 1, y: -0.5 },
+          srcImage: "fireball",
           bounce: 0.9,
+          gravity: true,
           walls: true,
           damage: 10,
+          scale: 2,
+          mass: 0.9,
+          rotation: {
+            initial: 0.25,
+            speed: 1,
+          },
         },
       },
       keyboard: null,
@@ -174,14 +181,20 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.97,
         wallTouchArray: [],
         lastDirectionTouched: null,
-        attack: {
+        attackEnergy: {
           sprite: null,
-          vel: { x: 30, y: -30 },
-          srcImage: "laser",
+          vel: { x: 1, y: -0.5 },
+          srcImage: "sword",
           bounce: 0,
           gravity: false,
           walls: false,
           damage: 10,
+          scale: 3,
+          mass: 0.5,
+          rotation: {
+            initial: 0.5,
+            speed: 0,
+          },
         },
       },
       keyboard: null,
@@ -232,14 +245,20 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
-        attack: {
+        attackEnergy: {
           sprite: null,
-          vel: { x: 30, y: -30 },
-          srcImage: "laser",
-          bounce: 0.5,
-          gravity: false,
+          vel: { x: 1, y: -1 },
+          srcImage: "greenshell",
+          bounce: 0.1,
+          gravity: true,
           walls: true,
           damage: 10,
+          scale: 1.3,
+          mass: 2,
+          rotation: {
+            initial: 0,
+            speed: 0,
+          },
         },
       },
       keyboard: null,
@@ -290,14 +309,20 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.96,
         wallTouchArray: [],
         lastDirectionTouched: null,
-        attack: {
+        attackEnergy: {
           sprite: null,
-          vel: { x: 30, y: -30 },
-          srcImage: "laser",
+          vel: { x: 1, y: -0.5 },
+          srcImage: "hammer",
           bounce: 0.7,
           gravity: true,
           walls: true,
           damage: 10,
+          scale: 2,
+          mass: 10,
+          rotation: {
+            initial: 0,
+            speed: 5,
+          },
         },
       },
       keyboard: null,
@@ -353,6 +378,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("flagpole", "images/flagpole.png");
     this.load.image("greenshell", "images/greenshell.png");
     this.load.image("hammer", "images/hammer.png");
+    this.load.image("sword", "images/sword.png");
 
     this.load.image("table", "images/table.png");
     this.load.image("background", "images/darkxp.jpg");
