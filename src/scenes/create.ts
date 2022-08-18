@@ -121,6 +121,16 @@ export function createScoreboard(game: Game): void {
       // font: "Arial 100px",
       fontSize: "50px",
       fontFamily: "'Press Start 2P'",
+      stroke: "black",
+      strokeThickness: 1,
+      shadow: {
+        offsetX: 0,
+        offsetY: 3,
+        color: "#000",
+        blur: 10,
+        stroke: true,
+        fill: true,
+      },
     }
   );
   game.scoreBoard.setOrigin(0.5, 0).setAlpha(1);
@@ -130,12 +140,24 @@ export function createScoreboard(game: Game): void {
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "P" + playerIndex.toString(),
+        "PLAYER",
         {
           // font: "Arial 100px",
           fontSize: "30px",
           fontFamily: "'Press Start 2P'",
+          // color: "white",
           color: player.char.color.primary,
+          // stroke: player.char.color.primary,
+          stroke: "black",
+          strokeThickness: 1,
+          shadow: {
+            offsetX: 0,
+            offsetY: 3,
+            color: "#000",
+            blur: 10,
+            stroke: true,
+            fill: true,
+          },
         }
       )
       .setOrigin(0.5, 0)
