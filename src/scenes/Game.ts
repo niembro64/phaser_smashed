@@ -12,7 +12,7 @@ export default class Game extends Phaser.Scene {
   DEAD_TIME: number = 1000;
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   DEFAULT_SPEED_X: number = 50;
-  DEFAULT_SPEED_Y: number = 25;
+  DEFAULT_SPEED_Y: number = 30;
   DEFAULT_JUMP: number = 1800;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
@@ -118,9 +118,11 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attack: {
           sprite: null,
+          vel: { x: 30, y: -30 },
+          srcImage: "laser",
+          bounce: 0.9,
+          walls: true,
           damage: 10,
-          width: 30,
-          height: 30,
         },
       },
       keyboard: null,
@@ -174,9 +176,12 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attack: {
           sprite: null,
+          vel: { x: 30, y: -30 },
+          srcImage: "laser",
+          bounce: 0,
+          gravity: false,
+          walls: false,
           damage: 10,
-          width: 30,
-          height: 30,
         },
       },
       keyboard: null,
@@ -229,9 +234,12 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attack: {
           sprite: null,
+          vel: { x: 30, y: -30 },
+          srcImage: "laser",
+          bounce: 0.5,
+          gravity: false,
+          walls: true,
           damage: 10,
-          width: 30,
-          height: 30,
         },
       },
       keyboard: null,
@@ -284,9 +292,12 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attack: {
           sprite: null,
+          vel: { x: 30, y: -30 },
+          srcImage: "laser",
+          bounce: 0.7,
+          gravity: true,
+          walls: true,
           damage: 10,
-          width: 30,
-          height: 30,
         },
       },
       keyboard: null,
@@ -337,6 +348,11 @@ export default class Game extends Phaser.Scene {
     // );
 
     this.load.image("laser", "images/laser.png");
+    this.load.image("blockcracked", "images/blockcracked.png");
+    this.load.image("fireball", "images/fireball.png");
+    this.load.image("flagpole", "images/flagpole.png");
+    this.load.image("greenshell", "images/greenshell.png");
+    this.load.image("hammer", "images/hammer.png");
 
     this.load.image("table", "images/table.png");
     this.load.image("background", "images/darkxp.jpg");
@@ -344,10 +360,10 @@ export default class Game extends Phaser.Scene {
     this.load.image("centerBlack", "images/bx.png");
     this.load.image("centerMagenta", "images/mx.png");
     this.load.image("centerRed", "images/rx.png");
-    this.load.image("platformHorizontal", "images/platformHorizontal.png");
-    this.load.image("platformShort", "images/platformShort.bmp");
-    this.load.image("platformShorter", "images/platformShorter.bmp");
-    this.load.image("platformVertical", "images/platformVertical.png");
+    this.load.image("platformHorizontal", "images/brickhoriz.bmp");
+    this.load.image("platformShort", "images/brickhorizshort.bmp");
+    this.load.image("platformShorter", "images/brickhorizshorter.bmp");
+    this.load.image("platformVertical", "images/brickvert.bmp");
     this.load.image("suburb", "images/suburb.png");
 
     this.players.forEach((player, playerIndex) => {

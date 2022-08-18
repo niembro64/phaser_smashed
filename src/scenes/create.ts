@@ -34,18 +34,19 @@ export function createPlayers(game: Game): void {
     player.char.sprite.setCollideWorldBounds(false);
     game.physics.add.collider(player.char.sprite, game.platforms);
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
-
-    // attacks
+  });
+  // attacks
+  createPowerAttackes(game);
+  lasersCollide(game);
+  charsCollide(game);
+}
+export function createPowerAttackes(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
     player.char.attack.sprite = game.physics.add
       .sprite(-300, -300, "laser")
       .setMass(1.8);
     player.char.attack.sprite.body.allowGravity = true;
-
-    player.char.attack.sprite.body.allowGravity = false;
   });
-
-  lasersCollide(game);
-  charsCollide(game);
 }
 export function createBackground(game: Game): void {
   game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
@@ -177,6 +178,9 @@ export function lasersCollide(game: Game): void {
         );
       }
     }
+
+    player.char.attack.sprite.body.bounce.set(0.8);
+    player.char.attack.sprite.body.gravity.set(0, 0);
   });
 }
 
