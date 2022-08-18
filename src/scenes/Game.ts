@@ -71,9 +71,9 @@ export default class Game extends Phaser.Scene {
       zoom: 1,
     },
   };
-  playersOrder: number[] = [0, 1, 2, 3];
+  // playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  // playersOrder: number[] = [2, 3, 0, 1];
+  playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
@@ -94,6 +94,11 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Mario",
+        initializeCharPosition: {
+          lookingRight: true,
+          x: 0,
+          y: 0,
+        },
         color: {
           primary: "#e24800",
           secondary: "#e24800",
@@ -160,6 +165,11 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Link",
+        initializeCharPosition: {
+          lookingRight: false,
+          x: 0,
+          y: 0,
+        },
         color: {
           primary: "#43a528",
           secondary: "#e24800",
@@ -226,6 +236,11 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Pikachu",
+        initializeCharPosition: {
+          lookingRight: true,
+          x: 0,
+          y: 0,
+        },
         color: {
           primary: "#ffc90e",
           secondary: "#e24800",
@@ -291,6 +306,11 @@ export default class Game extends Phaser.Scene {
       },
       char: {
         name: "Kirby",
+        initializeCharPosition: {
+          lookingRight: false,
+          x: 0,
+          y: 0,
+        },
         color: {
           primary: "#ff88ae",
           secondary: "#e24800",

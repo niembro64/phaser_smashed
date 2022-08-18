@@ -78,6 +78,13 @@ export interface Char {
   wallTouchArray: boolean[];
   lastDirectionTouched: "up" | "down" | "left" | "right" | "camera" | null;
   attackEnergy: AttackEnergy;
+  initializeCharPosition: InitializeCharPosition;
+}
+
+export interface InitializeCharPosition {
+  lookingRight: boolean;
+  x: number;
+  y: number;
 }
 
 export interface AttackPhysical {

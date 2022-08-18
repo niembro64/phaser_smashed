@@ -38,6 +38,7 @@ export function createPlayers(game: Game): void {
     }
 
     player.char.sprite.setScale(1);
+    player.char.sprite.flipX = !player.char.initializeCharPosition.lookingRight;
     player.char.sprite.setCollideWorldBounds(false);
     game.physics.add.collider(player.char.sprite, game.platforms);
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);

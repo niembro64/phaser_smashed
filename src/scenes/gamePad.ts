@@ -17,11 +17,46 @@ export function attackEnergy(player: Player, game: Game): void {
   }
 
   var laserSpeed = 600;
+
+  if (player.pad?.X && player.padPrev.X) {
+    player.char.attackEnergy.sprite.body.allowGravity = false;
+    if (player.char.sprite.flipX) {
+      player.char.attackEnergy.sprite.x =
+        player.char.sprite.x - player.char.sprite.width;
+      player.char.attackEnergy.sprite.y =
+        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+
+      //   player.char.attackEnergy.sprite.flipX = false;
+      player.char.attackEnergy.sprite.setRotation(
+        player.char.attackEnergy.rotation.initial * Math.PI * 3
+      );
+      player.char.attackEnergy.sprite.setAngularVelocity(
+        player.char.attackEnergy.rotation.speed * Math.PI
+      );
+    } else {
+      player.char.attackEnergy.sprite.x =
+        player.char.sprite.x + player.char.sprite.width;
+      player.char.attackEnergy.sprite.y =
+        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+
+      //   player.char.attackEnergy.sprite.flipX = true;
+      player.char.attackEnergy.sprite.setRotation(
+        player.char.attackEnergy.rotation.initial * Math.PI * 1
+      );
+      player.char.attackEnergy.sprite.setAngularVelocity(
+        player.char.attackEnergy.rotation.speed * Math.PI
+      );
+    }
+  }
+
   if (
-    player.pad?.X &&
-    !player.padPrev.X
+    !player.pad?.X &&
+    player.padPrev.X
     // isSpriteOffscreen(player.char.attack.sprite, game)
   ) {
+    if (player.char.attackEnergy.allowVelocityY) {
+      player.char.attackEnergy.sprite.body.allowGravity = true;
+    }
     if (player.char.sprite.flipX) {
       player.char.attackEnergy.sprite.x =
         player.char.sprite.x - player.char.sprite.width;
@@ -35,7 +70,7 @@ export function attackEnergy(player: Player, game: Game): void {
         player.char.attackEnergy.rotation.initial * Math.PI * 3
       );
       player.char.attackEnergy.sprite.setAngularVelocity(
-        player.char.attackEnergy.rotation.speed * Math.PI
+        player.char.attackEnergy.rotation.speed * Math.PI * -1
       );
     } else {
       player.char.attackEnergy.sprite.x =
