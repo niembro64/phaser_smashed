@@ -59,7 +59,8 @@ export function createPowerAttackes(game: Game): void {
     player.char.attackEnergy.sprite.body.allowGravity =
       player.char.attackEnergy.gravity;
     player.char.attackEnergy.sprite.body.bounce.set(
-      player.char.attackEnergy.bounce
+      player.char.attackEnergy.bounceX,
+      player.char.attackEnergy.bounceY
     );
     // player.char.attackEnergy.sprite.body.gravity.set(0, 0);
     if (player.char.attackEnergy.walls) {

@@ -71,9 +71,9 @@ export default class Game extends Phaser.Scene {
       zoom: 1,
     },
   };
-  // playersOrder: number[] = [0, 1, 2, 3];
+  playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  playersOrder: number[] = [2, 3, 0, 1];
+  // playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
@@ -125,12 +125,13 @@ export default class Game extends Phaser.Scene {
           sprite: null,
           vel: { x: 1, y: -5 },
           srcImage: "fireball",
-          bounce: 0.9,
+          bounceY: 0.95,
+          bounceX: 1,
           gravity: true,
           walls: true,
           damage: 10,
           scale: 2,
-          mass: 0.9,
+          mass: 0.01,
           allowVelocityY: true,
           rotation: {
             initial: 0.25,
@@ -196,7 +197,8 @@ export default class Game extends Phaser.Scene {
           sprite: null,
           vel: { x: 1, y: -0.5 },
           srcImage: "sword",
-          bounce: 0,
+          bounceY: 0,
+          bounceX: 0,
           gravity: false,
           walls: false,
           damage: 10,
@@ -266,12 +268,13 @@ export default class Game extends Phaser.Scene {
           sprite: null,
           vel: { x: 1, y: -1 },
           srcImage: "greenshell",
-          bounce: 0.1,
+          bounceY: 0.1,
+          bounceX: 1,
           gravity: true,
           walls: true,
           damage: 10,
-          scale: 1.4,
-          mass: 2,
+          scale: 1.3,
+          mass: 50,
           allowVelocityY: true,
           rotation: {
             initial: 0,
@@ -336,7 +339,8 @@ export default class Game extends Phaser.Scene {
           sprite: null,
           vel: { x: 1, y: -3 },
           srcImage: "hammer",
-          bounce: 0.7,
+          bounceY: 0.3,
+          bounceX: 0.3,
           gravity: true,
           walls: false,
           damage: 10,

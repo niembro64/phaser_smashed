@@ -105,7 +105,8 @@ export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
   vel: Velocity;
   srcImage: string;
-  bounce: number;
+  bounceY: number;
+  bounceX: number;
   gravity: boolean;
   walls: boolean;
   damage: number;
