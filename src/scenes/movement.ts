@@ -108,6 +108,15 @@ export function jump(player: Player, game: Game): void {
       return;
     }
   }
+
+  // holding jump
+  if (player.pad.Y) {
+    player.char.sprite.body.setVelocityY(
+      player.char.sprite.body.velocity.y +
+        -game.DEFAULT_SPEED_Y * player.char.speed * player.char.fast
+    );
+    // return;
+  }
 }
 
 export function frictionWallY(player: Player, game: Game): void {
