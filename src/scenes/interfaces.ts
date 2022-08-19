@@ -105,10 +105,16 @@ export interface PosFromCenter {
   x: number;
   y: number;
 }
+export interface AttackEnergyFriction {
+  air: number;
+  ground: number;
+  stickWall: boolean;
+}
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
-  vel: Velocity;
   posFromCenter: PosFromCenter;
+  friction: AttackEnergyFriction;
+  vel: Velocity;
   srcImage: string;
   bounceY: number;
   bounceX: number;

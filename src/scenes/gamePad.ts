@@ -16,6 +16,7 @@ export function attackEnergy(player: Player, game: Game): void {
     vY += player.char.sprite.body.velocity.y;
   }
 
+  // HOLD
   if (player.pad?.X && player.padPrev.X) {
     player.char.attackEnergy.sprite.body.allowGravity = false;
 
@@ -25,29 +26,26 @@ export function attackEnergy(player: Player, game: Game): void {
       player.char.attackEnergy.sprite.y =
         player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
 
-      //   player.char.attackEnergy.sprite.flipX = false;
+      player.char.attackEnergy.sprite.flipX = true;
       player.char.attackEnergy.sprite.setRotation(
-        player.char.attackEnergy.rotation.initial + Math.PI
+        player.char.attackEnergy.rotation.initial
       );
-      player.char.attackEnergy.sprite.setAngularVelocity(
-        player.char.attackEnergy.rotation.speed * Math.PI
-      );
+      player.char.attackEnergy.sprite.setAngularVelocity(0);
     } else {
       player.char.attackEnergy.sprite.x =
         player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
       player.char.attackEnergy.sprite.y =
         player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
 
-      //   player.char.attackEnergy.sprite.flipX = true;
+      player.char.attackEnergy.sprite.flipX = false;
       player.char.attackEnergy.sprite.setRotation(
         player.char.attackEnergy.rotation.initial
       );
-      player.char.attackEnergy.sprite.setAngularVelocity(
-        player.char.attackEnergy.rotation.speed * Math.PI
-      );
+      player.char.attackEnergy.sprite.setAngularVelocity(0);
     }
   }
 
+  // SHOOT
   if (
     !player.pad?.X &&
     player.padPrev.X
@@ -67,10 +65,10 @@ export function attackEnergy(player: Player, game: Game): void {
       );
       player.char.attackEnergy.sprite.body.setVelocityY(vY);
 
-      //   player.char.attackEnergy.sprite.flipX = false;
-      player.char.attackEnergy.sprite.setRotation(
-        player.char.attackEnergy.rotation.initial + Math.PI
-      );
+      player.char.attackEnergy.sprite.flipX = true;
+      // player.char.attackEnergy.sprite.setRotation(
+      //   player.char.attackEnergy.rotation.initial + Math.PI
+      // );
       player.char.attackEnergy.sprite.setAngularVelocity(
         player.char.attackEnergy.rotation.speed * Math.PI * -1
       );
@@ -85,10 +83,10 @@ export function attackEnergy(player: Player, game: Game): void {
       );
       player.char.attackEnergy.sprite.body.setVelocityY(vY);
 
-      //   player.char.attackEnergy.sprite.flipX = true;
-      player.char.attackEnergy.sprite.setRotation(
-        player.char.attackEnergy.rotation.initial
-      );
+      player.char.attackEnergy.sprite.flipX = false;
+      // player.char.attackEnergy.sprite.setRotation(
+      //   player.char.attackEnergy.rotation.initial
+      // );
       player.char.attackEnergy.sprite.setAngularVelocity(
         player.char.attackEnergy.rotation.speed * Math.PI
       );

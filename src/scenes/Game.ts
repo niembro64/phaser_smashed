@@ -4,9 +4,9 @@ import { update } from "./update";
 import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  playersOrder: number[] = [0, 1, 2, 3];
+  // playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  // playersOrder: number[] = [2, 3, 0, 1];
+  playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
@@ -128,8 +128,9 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          posFromCenter: { x: 1, y: -0.5 },
-          vel: { x: 1, y: -5 },
+          posFromCenter: { x: 20, y: -30 },
+          friction: { ground: 0.2, stickWall: false, air: 0 },
+          vel: { x: 1, y: 1 },
           srcImage: "fireball",
           bounceY: 0.95,
           bounceX: 1,
@@ -202,6 +203,7 @@ export default class Game extends Phaser.Scene {
         attackEnergy: {
           sprite: null,
           posFromCenter: { x: 50, y: 3 },
+          friction: { ground: 0, stickWall: false, air: 0 },
           vel: { x: 1, y: -0.5 },
           srcImage: "sword",
           bounceY: 0,
@@ -273,7 +275,8 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          posFromCenter: { x: 1, y: -0.5 },
+          posFromCenter: { x: 0, y: -20 },
+          friction: { ground: 0, stickWall: false, air: 0 },
           vel: { x: 1, y: -1 },
           srcImage: "greenshell",
           bounceY: 0.1,
@@ -345,16 +348,17 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          posFromCenter: { x: 10, y: -0.5 },
+          posFromCenter: { x: 10, y: -25 },
+          friction: { ground: 0.9, stickWall: true, air: 0.2 },
           vel: { x: 1, y: -3 },
           srcImage: "hammer",
           bounceY: 0.3,
           bounceX: 0.3,
           gravity: true,
-          walls: false,
+          walls: true,
           damage: 0.1,
           scale: 2,
-          mass: 10,
+          mass: 2,
           allowVelocityY: true,
           rotation: {
             initial: 0,
