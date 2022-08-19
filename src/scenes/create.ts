@@ -5,22 +5,22 @@ import { hasPlayerTouchedWallRecently } from "./movement";
 import { DOMElement } from "react";
 
 export function create(game: Game) {
-  game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
+  // game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
 
   createBackground(game);
   createBackgroundTitles(game);
   createTable(game);
   createPlatforms(game);
   createCameras(game);
-  createScoreboard(game);
-
+  
   // attacks
   createEnergyAttacks(game);
   createPlayers(game);
-
+  
   charsCollide(game);
+  
   setAttackEnergyCollides(game);
-
+  createScoreboard(game);
   // game.matter.world.setBounds(
   //   0,
   //   0,

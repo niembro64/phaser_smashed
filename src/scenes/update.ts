@@ -6,6 +6,7 @@ import {
   assignGamePadsConnected,
   printAllPadsActive,
   attackEnergy,
+  updateAttackEnergyFriction,
 } from "./gamePad";
 import {
   jump,
@@ -31,6 +32,14 @@ export function update(game: Game): void {
   setCamera(game);
   updateSpritesLR(game);
   updateText(game);
+  // updateAttackEnergyFriction(game);
+  updateKeepOnScreenPlayer(game);
+  // updatePadPrevious(game);
+  updatePlayers(game);
+  updatePadPrevious(game);
+}
+
+export function updatePlayers(game: Game): void {
   game.players.forEach((player, index) => {
     // printAllPadsActive(player, game);
     attackEnergy(player, game);
@@ -41,11 +50,9 @@ export function update(game: Game): void {
     frictionWallY(player, game);
     frictionAirY(player, game);
     jump(player, game);
-    controllerMovement(player, game);
-    updateKeepOnScreenPlayer(player, game);
     updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
-    updateKeepOnScreenPlayerDead(player, game);
-    updatePadPrevious(player, game);
+    controllerMovement(player, game);
+    // updateKeepOnScreenPlayerDead(player, game);
   });
 }
 

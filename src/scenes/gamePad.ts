@@ -7,6 +7,17 @@ export function assignGamePadsConnected(game: Game): void {
   }
 }
 
+export function updateAttackEnergyFriction(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    // console.log(player.char.attackEnergy.sprite.body.touching.down);
+    if (player.char.attackEnergy.sprite.body.touching.down) {
+      player.char.attackEnergy.sprite.setAngularVelocity(
+        // player.char.attackEnergy.sprite.body.angular
+      );
+    }
+  });
+}
+
 export function attackEnergy(player: Player, game: Game): void {
   var vX = player.char.sprite.body.velocity.x * player.char.attackEnergy.vel.x;
 
@@ -66,9 +77,9 @@ export function attackEnergy(player: Player, game: Game): void {
       player.char.attackEnergy.sprite.body.setVelocityY(vY);
 
       player.char.attackEnergy.sprite.flipX = true;
-      // player.char.attackEnergy.sprite.setRotation(
-      //   player.char.attackEnergy.rotation.initial + Math.PI
-      // );
+      player.char.attackEnergy.sprite.setRotation(
+        player.char.attackEnergy.rotation.initial + Math.PI
+      );
       player.char.attackEnergy.sprite.setAngularVelocity(
         player.char.attackEnergy.rotation.speed * Math.PI * -1
       );
@@ -84,9 +95,9 @@ export function attackEnergy(player: Player, game: Game): void {
       player.char.attackEnergy.sprite.body.setVelocityY(vY);
 
       player.char.attackEnergy.sprite.flipX = false;
-      // player.char.attackEnergy.sprite.setRotation(
-      //   player.char.attackEnergy.rotation.initial
-      // );
+      player.char.attackEnergy.sprite.setRotation(
+        player.char.attackEnergy.rotation.initial
+      );
       player.char.attackEnergy.sprite.setAngularVelocity(
         player.char.attackEnergy.rotation.speed * Math.PI
       );
@@ -108,17 +119,19 @@ export function isSpriteOffscreen(
   return false;
 }
 
-export function updatePadPrevious(player: Player, game: Game): void {
-  player.padPrev.up = player.pad.up;
-  player.padPrev.down = player.pad.down;
-  player.padPrev.left = player.pad.left;
-  player.padPrev.right = player.pad.right;
-  player.padPrev.A = player.pad.A;
-  player.padPrev.B = player.pad.B;
-  player.padPrev.X = player.pad.X;
-  player.padPrev.Y = player.pad.Y;
+export function updatePadPrevious(game: Game): void {
+  game.players.forEach((player) => {
+    player.padPrev.up = player.pad.up;
+    player.padPrev.down = player.pad.down;
+    player.padPrev.left = player.pad.left;
+    player.padPrev.right = player.pad.right;
+    player.padPrev.A = player.pad.A;
+    player.padPrev.B = player.pad.B;
+    player.padPrev.X = player.pad.X;
+    player.padPrev.Y = player.pad.Y;
 
-  player.char.sprite.zoom = 1;
+    player.char.sprite.zoom = 1;
+  });
 }
 
 export function controllerSetFast(player: Player, game: Game): void {

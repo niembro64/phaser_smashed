@@ -13,19 +13,21 @@ export function updateKeepOnScreenLREnergyAttack(
     energyAttack.sprite.x = 0;
   }
 }
-export function updateKeepOnScreenPlayer(player: Player, game: Game): void {
-  if (player.char.sprite.y < 0) {
-    player.char.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
-  }
-  if (player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
-    player.char.sprite.y = 0;
-  }
-  if (player.char.sprite.x < 0) {
-    player.char.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
-  }
-  if (player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
-    player.char.sprite.x = 0;
-  }
+export function updateKeepOnScreenPlayer(game: Game): void {
+  game.players.forEach((player) => {
+    if (player.char.sprite.y < 0) {
+      player.char.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
+    }
+    if (player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
+      player.char.sprite.y = 0;
+    }
+    if (player.char.sprite.x < 0) {
+      player.char.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
+    }
+    if (player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
+      player.char.sprite.x = 0;
+    }
+  });
 }
 export function updateKeepOnScreenPlayerDead(player: Player, game: Game): void {
   if (
