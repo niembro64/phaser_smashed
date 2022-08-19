@@ -101,15 +101,15 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        attackEnergy(player, game);
+        // attackEnergy(player, game);
         updateLastDirectionTouched(player);
-        controllerSetFast(player, game);
+        // controllerSetFast(player, game);
         // frictionGroundX(player, game);
         // frictionAirX(player, game);
         // frictionWallY(player, game);
         // frictionAirY(player, game);
         // jump(player, game);
-        updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
+        // updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
         // controllerMovement(player, game);
 
         ////////////////////////////////

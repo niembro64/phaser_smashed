@@ -5,7 +5,7 @@ import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   startDelay: number = 100;
-  hurtDelay: number = 200;
+  hurtDelay: number = 400;
   // playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
   playersOrder: number[] = [2, 3, 0, 1];
@@ -33,7 +33,7 @@ export default class Game extends Phaser.Scene {
   table: any | Phaser.GameObjects.Sprite;
   cameraMoverZoomStatusKeeper: number = 1;
 
-  HITBACK_X: number = 1000;
+  HITBACK_X: number = 0;
   HITBACK_Y: number = -1000;
 
   ATTACK_ENERGY_SPEED_X: number = 600;
@@ -451,7 +451,7 @@ export default class Game extends Phaser.Scene {
       player.pad = Phaser.Input.Gamepad.Gamepad;
     });
 
-    
+
   }
   create() {
     create(this);

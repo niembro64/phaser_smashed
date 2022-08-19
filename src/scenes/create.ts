@@ -1,8 +1,4 @@
-import { Scale } from "phaser";
-import PhaserGame from "../PhaserGame";
 import Game from "./Game";
-import { hasPlayerTouchedWallRecently } from "./movement";
-import { DOMElement } from "react";
 
 export function create(game: Game) {
   // game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
@@ -196,7 +192,7 @@ export function createScoreboard(game: Game): void {
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "PLAYER",
+        "XXX",
         {
           // font: "Arial 100px",
           fontSize: "30px",

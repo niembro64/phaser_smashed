@@ -25,6 +25,10 @@ export function updateText(game: Game): void {
 
   game.scoreBoard.y = newY;
 
+  setPlayerText(game, zoom, newY);
+}
+
+export function setPlayerText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
     player.text
       .setScale(1 / zoom, 1 / zoom)
