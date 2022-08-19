@@ -19,7 +19,6 @@ import {
   updateWallTouchArray,
   updateLastDirectionTouched,
   setCamera,
-  updateKeepOnScreenPlayer,
   updateKeepOnScreenPlayerDead,
   updateKeepOnScreenLREnergyAttack,
   updatePlaceOffscreenEnergyAttacks,
@@ -40,7 +39,7 @@ export function update(game: Game): void {
   updateAttackEnergyFrictionGroundMovement(game);
   updatePlaceOffscreenEnergyAttacks(game);
   updateAttackEnergyFrictionWall(game);
-  updateKeepOnScreenPlayer(game);
+
   updatePlayers(game);
   hitboxOverlapReset(game);
   updatePadPrevious(game);
@@ -91,7 +90,7 @@ export function updatePlayers(game: Game): void {
         updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
         controllerMovement(player, game);
         checkHitboxes(player, playerIndex, game);
-        // updateKeepOnScreenPlayerDead(player, game);
+        updateKeepOnScreenPlayerDead(player, game);
 
         ////////////////////////////////
         ///////// timeout => air
