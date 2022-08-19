@@ -5,6 +5,7 @@ import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   startDelay: number = 1000;
+  hurtDelay: number = 3000;
   playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
   // playersOrder: number[] = [2, 3, 0, 1];
@@ -23,20 +24,20 @@ export default class Game extends Phaser.Scene {
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   DEFAULT_SPEED_X: number = 50;
   DEFAULT_SPEED_Y: number = 30;
-  DEFAULT_JUMP: number = 1500;
+  DEFAULT_JUMP: number = -1500;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
   GRAVITY: number = 0.1;
   platforms: any | Phaser.GameObjects.Sprite;
   background: any | Phaser.GameObjects.Sprite;
   table: any | Phaser.GameObjects.Sprite;
-  playerZoomKeeper: number = 1;
+  cameraMoverZoomStatusKeeper: number = 1;
 
   ATTACK_ENERGY_SPEED_X: number = 600;
   ATTACK_ENERGY_SPEED_Y: number = 600;
 
-  zoomRatioSlow = 0.995;
-  zoomRatioFast = 0.9;
+  ZOOM_RATIO_SLOW = 0.995;
+  ZOOM_RATIO_FAST = 0.9;
   // BORDER_PADDING_X: number = 0;
   // BORDER_PADDING_Y: number = 0;
   BORDER_PADDING_X: number = 200;
@@ -84,6 +85,13 @@ export default class Game extends Phaser.Scene {
       zoom: 1,
     },
   };
+
+  hitboxOverlap: boolean[][] = [
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+  ];
 
   players: Player[] = [
     {

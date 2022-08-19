@@ -12,14 +12,10 @@ export function create(game: Game) {
   createTable(game);
   createPlatforms(game);
   createCameras(game);
-  
-  // attacks
   createEnergyAttacks(game);
   createPlayers(game);
-  
-  charsCollide(game);
-  
-  setAttackEnergyCollides(game);
+  // setPlayersCollide(game);
+  // setAttackEnergyCollideWithPlayers(game);
   createScoreboard(game);
   // game.matter.world.setBounds(
   //   0,
@@ -28,7 +24,19 @@ export function create(game: Game) {
   //   game.SCREEN_DIMENSIONS.HEIGHT
   // );
 
-  
+  game.players.forEach((player, playerIndex) => {
+    game.players.forEach((p, i) => {
+      if (player !== p) {
+        game.physics.add.overlap(
+          player.char.sprite,
+          p.char.attackEnergy.sprite,
+          function () {
+            game.hitboxOverlap[playerIndex][i] = true;
+          }
+        );
+      }
+    });
+  });
 }
 
 export function createPlayers(game: Game): void {
@@ -77,7 +85,7 @@ export function createEnergyAttacks(game: Game): void {
   });
 }
 
-export function setAttackEnergyCollides(game: Game): void {
+export function setAttackEnergyCollideWithPlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 4; i++) {
       if (playerIndex !== i) {
@@ -105,9 +113,9 @@ export function createPlatforms(game: Game): void {
   game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
   game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
 
-  game.platforms.create(200, 200, "platformShort");
-  game.platforms.create(120, 200 - 33, "brick");
-  game.platforms.create(280, 200 - 33, "brick");
+  game.platforms.create(400, 500, "platformShort");
+  game.platforms.create(320, 500 - 33, "brick");
+  game.platforms.create(480, 500 - 33, "brick");
 }
 
 export function createTable(game: Game): void {
@@ -213,7 +221,7 @@ export function createScoreboard(game: Game): void {
   });
 }
 
-export function charsCollide(game: Game): void {
+export function setPlayersCollide(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((p, pj) => {
       if (pj !== playerIndex) {

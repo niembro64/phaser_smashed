@@ -25,7 +25,7 @@ import {
   updatePlaceOffscreenEnergyAttacks,
 } from "./movement";
 import { updateSpritesLR } from "./sprites";
-import { goToState } from "./state";
+import { checkHitboxes, goToState, hitboxOverlapReset } from "./state";
 import { updateText } from "./text";
 
 export function update(game: Game): void {
@@ -38,20 +38,28 @@ export function update(game: Game): void {
   updateText(game);
   updateAttackEnergyFrictionGroundRotation(game);
   updateAttackEnergyFrictionGroundMovement(game);
-  // updatePlaceOffscreenEnergyAttacks(game);
+  updatePlaceOffscreenEnergyAttacks(game);
   updateAttackEnergyFrictionWall(game);
   updateKeepOnScreenPlayer(game);
-  // updatePadPrevious(game);
   updatePlayers(game);
+  checkHitboxes(game);
+  hitboxOverlapReset(game);
   updatePadPrevious(game);
 }
 
 export function updatePlayers(game: Game): void {
+  // for (let i = 0; i < 4; i++) {
+  //   for (let j = 0; j < 4; j++) {
+  //     if (game.hitboxOverlap[i][j] === true) {
+  //       console.log(game.hitboxOverlap);
+  //     }
+  //   }
+  // }
   // printAllPadsActive(player, game);
   game.players.forEach((player, index) => {
-    if (player.playerNumber === 0) {
-      // console.log("0", player.state);
-    }
+    // if (player.playerNumber === 0) {
+    //   console.log("0", player.state);
+    // }
     switch (player.state) {
       case "start":
         ////////////////////////////////
@@ -92,6 +100,16 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        attackEnergy(player, game);
+        updateLastDirectionTouched(player);
+        controllerSetFast(player, game);
+        frictionGroundX(player, game);
+        frictionAirX(player, game);
+        frictionWallY(player, game);
+        frictionAirY(player, game);
+        jump(player, game);
+        updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
+        controllerMovement(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive
@@ -100,6 +118,9 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// offscreen => dead
         ////////////////////////////////
+        setTimeout(() => {
+          goToState(player, "alive");
+        }, game.hurtDelay);
 
         break;
       case "dead":

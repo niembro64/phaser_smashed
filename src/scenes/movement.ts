@@ -116,7 +116,7 @@ export function jump(player: Player, game: Game): void {
 
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y *
-        (1 - player.char.jumps[player.char.jumpIndex]) -
+        (1 - player.char.jumps[player.char.jumpIndex]) +
         game.DEFAULT_JUMP *
           player.char.jumpPower *
           player.char.jumps[player.char.jumpIndex]
@@ -231,11 +231,11 @@ export function setCamera(game: Game): void {
   game.cameraPlayers.char.zoom = game.cameraPlayers.char.zoom = cPlayer.zoom;
 
   game.cameraMover.char.sprite.x =
-    game.cameraMover.char.sprite.x * game.zoomRatioFast +
-    cMover.x * (1 - game.zoomRatioFast);
+    game.cameraMover.char.sprite.x * game.ZOOM_RATIO_FAST +
+    cMover.x * (1 - game.ZOOM_RATIO_FAST);
   game.cameraMover.char.sprite.y =
-    game.cameraMover.char.sprite.y * game.zoomRatioFast +
-    (cMover.y + game.CAMERA_OFFSET_Y) * (1 - game.zoomRatioFast);
+    game.cameraMover.char.sprite.y * game.ZOOM_RATIO_FAST +
+    (cMover.y + game.CAMERA_OFFSET_Y) * (1 - game.ZOOM_RATIO_FAST);
   game.cameraMover.char.zoom = game.cameraMover.char.zoom = cMover.zoom;
 
   game.cameraPlayersHalfway.char.sprite.x = cBorder.x;
@@ -253,12 +253,12 @@ export function setCamera(game: Game): void {
 
   if (game.cameras.main.zoom < newZoom) {
     game.cameras.main.zoom =
-      game.cameras.main.zoom * game.zoomRatioSlow +
-      newZoom * (1 - game.zoomRatioSlow);
+      game.cameras.main.zoom * game.ZOOM_RATIO_SLOW +
+      newZoom * (1 - game.ZOOM_RATIO_SLOW);
   } else {
     game.cameras.main.zoom =
-      game.cameras.main.zoom * game.zoomRatioFast +
-      newZoom * (1 - game.zoomRatioFast);
+      game.cameras.main.zoom * game.ZOOM_RATIO_FAST +
+      newZoom * (1 - game.ZOOM_RATIO_FAST);
   }
   // var newZoom = game.cameraPlayers.char.zoom;
 
@@ -380,6 +380,15 @@ export function getCameraPlayerStatus(game: Game): Location {
   };
 }
 
+export function hitThenFly(player: Player): void {
+  player.char.sprite.body.setVelocityY(-2000);
+  if (player.char.sprite.flipX) {
+    player.char.sprite.body.setVelocityX(2000);
+  } else {
+    player.char.sprite.body.setVelocityX(-2000);
+  }
+}
+
 export function getCameraMoverStatus(game: Game): Location {
   var x_low: number = Infinity;
   var x_high: number = 0;
@@ -390,11 +399,11 @@ export function getCameraMoverStatus(game: Game): Location {
   var spriteMover = game.cameraMover.char.sprite;
   var spriteCenter = game.cameraCenter.char.sprite;
 
-  game.playerZoomKeeper =
-    game.playerZoomKeeper * game.zoomRatioSlow +
-    Math.max(getPlayerZoom(game), 1) * (1 - game.zoomRatioSlow);
+  game.cameraMoverZoomStatusKeeper =
+    game.cameraMoverZoomStatusKeeper * game.ZOOM_RATIO_SLOW +
+    Math.max(getPlayerZoom(game), 1) * (1 - game.ZOOM_RATIO_SLOW);
 
-  var percentCloseToCenter = Math.pow(1 / game.playerZoomKeeper, 3);
+  var percentCloseToCenter = Math.pow(1 / game.cameraMoverZoomStatusKeeper, 3);
 
   let x =
     spritePlayer.x * (1 - percentCloseToCenter) +

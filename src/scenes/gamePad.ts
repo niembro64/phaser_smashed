@@ -318,7 +318,7 @@ export function printAllPadsActive(player: Player, game: Game): void {
     }
     if (player.pad.Y) {
       console.log(player.playerNumber, "Y");
-      player.char.fast = 2;
+      // player.char.fast = 2;
     }
 
     //  D Pad
