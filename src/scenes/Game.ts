@@ -450,6 +450,8 @@ export default class Game extends Phaser.Scene {
       this.load.image(player.char.name, player.char.src);
       player.pad = Phaser.Input.Gamepad.Gamepad;
     });
+
+    
   }
   create() {
     create(this);

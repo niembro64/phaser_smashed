@@ -13,10 +13,10 @@ export function create(game: Game) {
   createPlatforms(game);
   createCameras(game);
   createEnergyAttacks(game);
+  createScoreboard(game);
   createPlayers(game);
   // setPlayersCollide(game);
   // setAttackEnergyCollideWithPlayers(game);
-  createScoreboard(game);
   // game.matter.world.setBounds(
   //   0,
   //   0,
