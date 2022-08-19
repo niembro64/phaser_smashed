@@ -6,7 +6,9 @@ import {
   assignGamePadsConnected,
   printAllPadsActive,
   attackEnergy,
-  updateAttackEnergyFriction,
+  updateAttackEnergyFrictionGroundRotation,
+  updateAttackEnergyFrictionWall,
+  updateAttackEnergyFrictionGroundMovement,
 } from "./gamePad";
 import {
   jump,
@@ -32,7 +34,9 @@ export function update(game: Game): void {
   setCamera(game);
   updateSpritesLR(game);
   updateText(game);
-  // updateAttackEnergyFriction(game);
+  updateAttackEnergyFrictionGroundRotation(game);
+  updateAttackEnergyFrictionGroundMovement(game);
+  updateAttackEnergyFrictionWall(game);
   updateKeepOnScreenPlayer(game);
   // updatePadPrevious(game);
   updatePlayers(game);

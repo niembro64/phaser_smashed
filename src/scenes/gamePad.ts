@@ -7,18 +7,79 @@ export function assignGamePadsConnected(game: Game): void {
   }
 }
 
-export function updateAttackEnergyFriction(game: Game): void {
+export function updateAttackEnergyFrictionGroundRotation(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    // console.log(player.char.attackEnergy.sprite.body.touching.down);
     if (player.char.attackEnergy.sprite.body.touching.down) {
       player.char.attackEnergy.sprite.setAngularVelocity(
-        // player.char.attackEnergy.sprite.body.angular
+        player.char.attackEnergy.sprite.body.angularVelocity -
+          player.char.attackEnergy.sprite.body.angularVelocity *
+            player.char.attackEnergy.friction.ground
+      );
+    }
+  });
+}
+export function updateAttackEnergyFrictionGroundMovement(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.attackEnergy.sprite.body.touching.down) {
+      player.char.attackEnergy.sprite.setVelocityX(
+        player.char.attackEnergy.sprite.body.velocity.x -
+          player.char.attackEnergy.sprite.body.velocity.x *
+            player.char.attackEnergy.friction.ground
       );
     }
   });
 }
 
-export function attackEnergy(player: Player, game: Game): void {
+export function updateAttackEnergyFrictionWall(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (
+      player.char.attackEnergy.friction.stickWall &&
+      (player.char.attackEnergy.sprite.body.touching.left ||
+        player.char.attackEnergy.sprite.body.touching.right)
+    ) {
+      player.char.attackEnergy.sprite.setAngularVelocity(
+        -player.char.attackEnergy.sprite.body.angularVelocity * 0.5
+      );
+      // player.char.attackEnergy.sprite.setVelocityX(0);
+      // player.char.attackEnergy.sprite.setVelocityY(0);
+      // player.char.attackEnergy.sprite.body.allowGravity = false;
+    }
+  });
+  //   if (
+  //     player.char.attackEnergy.friction.stickWall &&
+  //     !player.char.attackEnergy.sprite.body.touching.left &&
+  //     !player.char.attackEnergy.sprite.body.touching.right
+  //   ) {
+  //     player.char.attackEnergy.sprite.body.allowGravity = true;
+  //   }
+}
+
+export function playerHoldAttackEnergy(player: Player): void {
+  if (player.char.sprite.flipX) {
+    player.char.attackEnergy.sprite.x =
+      player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
+    player.char.attackEnergy.sprite.y =
+      player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
+
+    player.char.attackEnergy.sprite.flipX = true;
+    player.char.attackEnergy.sprite.setRotation(
+      player.char.attackEnergy.rotation.initial
+    );
+    player.char.attackEnergy.sprite.setAngularVelocity(0);
+  } else {
+    player.char.attackEnergy.sprite.x =
+      player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
+    player.char.attackEnergy.sprite.y =
+      player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
+
+    player.char.attackEnergy.sprite.flipX = false;
+    player.char.attackEnergy.sprite.setRotation(
+      player.char.attackEnergy.rotation.initial
+    );
+    player.char.attackEnergy.sprite.setAngularVelocity(0);
+  }
+}
+export function playerShootAttackEnergy(player: Player, game: Game): void {
   var vX = player.char.sprite.body.velocity.x * player.char.attackEnergy.vel.x;
 
   var vY = 0;
@@ -27,33 +88,53 @@ export function attackEnergy(player: Player, game: Game): void {
     vY += player.char.sprite.body.velocity.y;
   }
 
+  if (player.char.attackEnergy.allowVelocityY) {
+    player.char.attackEnergy.sprite.body.allowGravity = true;
+  }
+  if (player.char.sprite.flipX) {
+    player.char.attackEnergy.sprite.x =
+      player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
+    player.char.attackEnergy.sprite.y =
+      player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
+
+    player.char.attackEnergy.sprite.body.setVelocityX(
+      -1 * game.ATTACK_ENERGY_SPEED_X + vX
+    );
+    player.char.attackEnergy.sprite.body.setVelocityY(vY);
+
+    player.char.attackEnergy.sprite.flipX = true;
+    player.char.attackEnergy.sprite.setRotation(
+      player.char.attackEnergy.rotation.initial + Math.PI
+    );
+    player.char.attackEnergy.sprite.setAngularVelocity(
+      player.char.attackEnergy.rotation.speed * Math.PI * -1
+    );
+  } else {
+    player.char.attackEnergy.sprite.x =
+      player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
+    player.char.attackEnergy.sprite.y =
+      player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
+
+    player.char.attackEnergy.sprite.body.setVelocityX(
+      game.ATTACK_ENERGY_SPEED_X + vX
+    );
+    player.char.attackEnergy.sprite.body.setVelocityY(vY);
+
+    player.char.attackEnergy.sprite.flipX = false;
+    player.char.attackEnergy.sprite.setRotation(
+      player.char.attackEnergy.rotation.initial
+    );
+    player.char.attackEnergy.sprite.setAngularVelocity(
+      player.char.attackEnergy.rotation.speed * Math.PI
+    );
+  }
+}
+export function attackEnergy(player: Player, game: Game): void {
   // HOLD
   if (player.pad?.X && player.padPrev.X) {
     player.char.attackEnergy.sprite.body.allowGravity = false;
 
-    if (player.char.sprite.flipX) {
-      player.char.attackEnergy.sprite.x =
-        player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
-      player.char.attackEnergy.sprite.y =
-        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
-
-      player.char.attackEnergy.sprite.flipX = true;
-      player.char.attackEnergy.sprite.setRotation(
-        player.char.attackEnergy.rotation.initial
-      );
-      player.char.attackEnergy.sprite.setAngularVelocity(0);
-    } else {
-      player.char.attackEnergy.sprite.x =
-        player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
-      player.char.attackEnergy.sprite.y =
-        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
-
-      player.char.attackEnergy.sprite.flipX = false;
-      player.char.attackEnergy.sprite.setRotation(
-        player.char.attackEnergy.rotation.initial
-      );
-      player.char.attackEnergy.sprite.setAngularVelocity(0);
-    }
+    playerHoldAttackEnergy(player);
   }
 
   // SHOOT
@@ -62,46 +143,7 @@ export function attackEnergy(player: Player, game: Game): void {
     player.padPrev.X
     // isSpriteOffscreen(player.char.attack.sprite, game)
   ) {
-    if (player.char.attackEnergy.allowVelocityY) {
-      player.char.attackEnergy.sprite.body.allowGravity = true;
-    }
-    if (player.char.sprite.flipX) {
-      player.char.attackEnergy.sprite.x =
-        player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
-      player.char.attackEnergy.sprite.y =
-        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
-
-      player.char.attackEnergy.sprite.body.setVelocityX(
-        -1 * game.ATTACK_ENERGY_SPEED_X + vX
-      );
-      player.char.attackEnergy.sprite.body.setVelocityY(vY);
-
-      player.char.attackEnergy.sprite.flipX = true;
-      player.char.attackEnergy.sprite.setRotation(
-        player.char.attackEnergy.rotation.initial + Math.PI
-      );
-      player.char.attackEnergy.sprite.setAngularVelocity(
-        player.char.attackEnergy.rotation.speed * Math.PI * -1
-      );
-    } else {
-      player.char.attackEnergy.sprite.x =
-        player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
-      player.char.attackEnergy.sprite.y =
-        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
-
-      player.char.attackEnergy.sprite.body.setVelocityX(
-        game.ATTACK_ENERGY_SPEED_X + vX
-      );
-      player.char.attackEnergy.sprite.body.setVelocityY(vY);
-
-      player.char.attackEnergy.sprite.flipX = false;
-      player.char.attackEnergy.sprite.setRotation(
-        player.char.attackEnergy.rotation.initial
-      );
-      player.char.attackEnergy.sprite.setAngularVelocity(
-        player.char.attackEnergy.rotation.speed * Math.PI
-      );
-    }
+    playerShootAttackEnergy(player, game);
   }
 }
 export function isSpriteOffscreen(

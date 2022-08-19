@@ -129,7 +129,7 @@ export default class Game extends Phaser.Scene {
         attackEnergy: {
           sprite: null,
           posFromCenter: { x: 20, y: -30 },
-          friction: { ground: 0.2, stickWall: false, air: 0 },
+          friction: { ground: 0, stickWall: false, air: 0 },
           vel: { x: 1, y: 1 },
           srcImage: "fireball",
           bounceY: 0.95,
@@ -349,11 +349,11 @@ export default class Game extends Phaser.Scene {
         attackEnergy: {
           sprite: null,
           posFromCenter: { x: 10, y: -25 },
-          friction: { ground: 0.9, stickWall: true, air: 0.2 },
+          friction: { ground: 0.3, stickWall: true, air: 0.2 },
           vel: { x: 1, y: -3 },
           srcImage: "hammer",
           bounceY: 0.3,
-          bounceX: 0.3,
+          bounceX: 0.5,
           gravity: true,
           walls: true,
           damage: 0.1,
