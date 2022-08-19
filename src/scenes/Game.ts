@@ -4,6 +4,15 @@ import { update } from "./update";
 import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
+  playersOrder: number[] = [0, 1, 2, 3];
+  // playersOrder: number[] = [1, 2, 3, 0];
+  // playersOrder: number[] = [2, 3, 0, 1];
+  // playersOrder: number[] = [3, 0, 1, 2];
+  textLocationLROffset: number = 230;
+  textLocations: number[] = [-760, -460, 460, 760];
+  // playerLocations: number[] = [-800, -400, 400, 800];
+  playerLocations: number[] = [-200, -110, 110, 200];
+
   timer: any;
   title: any;
   subTitle: any;
@@ -71,14 +80,7 @@ export default class Game extends Phaser.Scene {
       zoom: 1,
     },
   };
-  playersOrder: number[] = [0, 1, 2, 3];
-  // playersOrder: number[] = [1, 2, 3, 0];
-  // playersOrder: number[] = [2, 3, 0, 1];
-  // playersOrder: number[] = [3, 0, 1, 2];
-  textLocationLROffset: number = 230;
-  textLocations: number[] = [-760, -460, 460, 760];
-  // playerLocations: number[] = [-800, -400, 400, 800];
-  playerLocations: number[] = [-200, -110, 110, 200];
+
   players: Player[] = [
     {
       playerNumber: 0,
@@ -129,9 +131,9 @@ export default class Game extends Phaser.Scene {
           bounceX: 1,
           gravity: true,
           walls: true,
-          damage: 10,
+          damage: 0.1,
           scale: 2,
-          mass: 0.01,
+          mass: 0.5,
           allowVelocityY: true,
           rotation: {
             initial: 0.25,
@@ -201,12 +203,12 @@ export default class Game extends Phaser.Scene {
           bounceX: 0,
           gravity: false,
           walls: false,
-          damage: 10,
+          damage: 0.1,
           scale: 3,
           mass: 0.5,
           allowVelocityY: false,
           rotation: {
-            initial: 0.5,
+            initial: 0,
             speed: 0,
           },
         },
@@ -272,7 +274,7 @@ export default class Game extends Phaser.Scene {
           bounceX: 1,
           gravity: true,
           walls: true,
-          damage: 10,
+          damage: 0.1,
           scale: 1.3,
           mass: 50,
           allowVelocityY: true,
@@ -343,7 +345,7 @@ export default class Game extends Phaser.Scene {
           bounceX: 0.3,
           gravity: true,
           walls: false,
-          damage: 10,
+          damage: 0.1,
           scale: 2,
           mass: 10,
           allowVelocityY: true,
@@ -406,7 +408,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("flagpole", "images/flagpole.png");
     this.load.image("greenshell", "images/greenshell.png");
     this.load.image("hammer", "images/hammer.png");
-    this.load.image("sword", "images/sword.png");
+    this.load.image("sword", "images/sword_right.png");
 
     this.load.image("table", "images/table.png");
     this.load.image("background", "images/darkxp.jpg");
