@@ -6,9 +6,9 @@ import { Camera, Player } from "./interfaces";
 export default class Game extends Phaser.Scene {
   startDelay: number = 100;
   hurtDelay: number = 200;
-  playersOrder: number[] = [0, 1, 2, 3];
+  // playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  // playersOrder: number[] = [2, 3, 0, 1];
+  playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
@@ -366,7 +366,7 @@ export default class Game extends Phaser.Scene {
           gravity: true,
           walls: true,
           damage: 0.1,
-          scale: 2,
+          scale: 1,
           mass: 2,
           allowVelocityY: true,
           rotation: {
@@ -427,7 +427,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("fireball", "images/fireball.png");
     this.load.image("flagpole", "images/flagpole.png");
     this.load.image("greenshell", "images/greenshell.png");
-    this.load.image("hammer", "images/hammer.png");
+    this.load.image("hammer", "images/ham.png");
     this.load.image("sword", "images/sword_right.png");
 
     this.load.image("table", "images/table.png");
