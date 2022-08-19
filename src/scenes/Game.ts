@@ -31,6 +31,9 @@ export default class Game extends Phaser.Scene {
   table: any | Phaser.GameObjects.Sprite;
   playerZoomKeeper: number = 1;
 
+  ATTACK_ENERGY_SPEED_X: number = 600; 
+  ATTACK_ENERGY_SPEED_Y: number = 600; 
+
   zoomRatioSlow = 0.995;
   zoomRatioFast = 0.9;
   // BORDER_PADDING_X: number = 0;
@@ -204,7 +207,7 @@ export default class Game extends Phaser.Scene {
           gravity: false,
           walls: false,
           damage: 0.1,
-          scale: 3,
+          scale: 1,
           mass: 0.5,
           allowVelocityY: false,
           rotation: {
