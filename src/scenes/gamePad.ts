@@ -21,9 +21,9 @@ export function attackEnergy(player: Player, game: Game): void {
 
     if (player.char.sprite.flipX) {
       player.char.attackEnergy.sprite.x =
-        player.char.sprite.x - player.char.sprite.width;
+        player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
       player.char.attackEnergy.sprite.y =
-        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
 
       //   player.char.attackEnergy.sprite.flipX = false;
       player.char.attackEnergy.sprite.setRotation(
@@ -34,9 +34,9 @@ export function attackEnergy(player: Player, game: Game): void {
       );
     } else {
       player.char.attackEnergy.sprite.x =
-        player.char.sprite.x + player.char.sprite.width;
+        player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
       player.char.attackEnergy.sprite.y =
-        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
 
       //   player.char.attackEnergy.sprite.flipX = true;
       player.char.attackEnergy.sprite.setRotation(
@@ -58,9 +58,10 @@ export function attackEnergy(player: Player, game: Game): void {
     }
     if (player.char.sprite.flipX) {
       player.char.attackEnergy.sprite.x =
-        player.char.sprite.x - player.char.sprite.width;
+        player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
       player.char.attackEnergy.sprite.y =
-        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
+
       player.char.attackEnergy.sprite.body.setVelocityX(
         -1 * game.ATTACK_ENERGY_SPEED_X + vX
       );
@@ -75,9 +76,10 @@ export function attackEnergy(player: Player, game: Game): void {
       );
     } else {
       player.char.attackEnergy.sprite.x =
-        player.char.sprite.x + player.char.sprite.width;
+        player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
       player.char.attackEnergy.sprite.y =
-        player.char.sprite.y - player.char.attackEnergy.sprite.height;
+        player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
+
       player.char.attackEnergy.sprite.body.setVelocityX(
         game.ATTACK_ENERGY_SPEED_X + vX
       );

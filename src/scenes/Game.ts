@@ -31,8 +31,8 @@ export default class Game extends Phaser.Scene {
   table: any | Phaser.GameObjects.Sprite;
   playerZoomKeeper: number = 1;
 
-  ATTACK_ENERGY_SPEED_X: number = 600; 
-  ATTACK_ENERGY_SPEED_Y: number = 600; 
+  ATTACK_ENERGY_SPEED_X: number = 600;
+  ATTACK_ENERGY_SPEED_Y: number = 600;
 
   zoomRatioSlow = 0.995;
   zoomRatioFast = 0.9;
@@ -128,6 +128,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          posFromCenter: { x: 1, y: -0.5 },
           vel: { x: 1, y: -5 },
           srcImage: "fireball",
           bounceY: 0.95,
@@ -200,6 +201,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          posFromCenter: { x: 50, y: 3 },
           vel: { x: 1, y: -0.5 },
           srcImage: "sword",
           bounceY: 0,
@@ -271,6 +273,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          posFromCenter: { x: 1, y: -0.5 },
           vel: { x: 1, y: -1 },
           srcImage: "greenshell",
           bounceY: 0.1,
@@ -342,6 +345,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          posFromCenter: { x: 10, y: -0.5 },
           vel: { x: 1, y: -3 },
           srcImage: "hammer",
           bounceY: 0.3,

@@ -13,7 +13,13 @@ export function create(game: Game) {
   createPlatforms(game);
   createCameras(game);
   createScoreboard(game);
+
+  // attacks
+  createEnergyAttacks(game);
   createPlayers(game);
+
+  charsCollide(game);
+  setAttackEnergyCollides(game);
 
   // game.matter.world.setBounds(
   //   0,
@@ -43,9 +49,6 @@ export function createPlayers(game: Game): void {
     game.physics.add.collider(player.char.sprite, game.platforms);
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
-  // attacks
-  createEnergyAttacks(game);
-  charsCollide(game);
 }
 export function createEnergyAttacks(game: Game): void {
   game.players.forEach((player, playerIndex) => {
@@ -69,7 +72,11 @@ export function createEnergyAttacks(game: Game): void {
         game.platforms
       );
     }
+  });
+}
 
+export function setAttackEnergyCollides(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 4; i++) {
       if (playerIndex !== i) {
         game.physics.add.collider(
@@ -80,6 +87,7 @@ export function createEnergyAttacks(game: Game): void {
     }
   });
 }
+
 export function createBackground(game: Game): void {
   game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
   game.background.setScale(1);

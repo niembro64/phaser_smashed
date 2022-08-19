@@ -101,9 +101,14 @@ export interface Velocity {
   x: number;
   y: number;
 }
+export interface PosFromCenter {
+  x: number;
+  y: number;
+}
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
   vel: Velocity;
+  posFromCenter: PosFromCenter;
   srcImage: string;
   bounceY: number;
   bounceX: number;
