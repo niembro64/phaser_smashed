@@ -11,9 +11,8 @@ export function updateAttackEnergyFrictionGroundRotation(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.body.touching.down) {
       player.char.attackEnergy.sprite.setAngularVelocity(
-        player.char.attackEnergy.sprite.body.angularVelocity -
-          player.char.attackEnergy.sprite.body.angularVelocity *
-            player.char.attackEnergy.friction.ground
+        player.char.attackEnergy.sprite.body.angularVelocity *
+          player.char.attackEnergy.friction.ground
       );
     }
   });
@@ -22,9 +21,8 @@ export function updateAttackEnergyFrictionGroundMovement(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.body.touching.down) {
       player.char.attackEnergy.sprite.setVelocityX(
-        player.char.attackEnergy.sprite.body.velocity.x -
-          player.char.attackEnergy.sprite.body.velocity.x *
-            player.char.attackEnergy.friction.ground
+        player.char.attackEnergy.sprite.body.velocity.x *
+          player.char.attackEnergy.friction.ground
       );
     }
   });
