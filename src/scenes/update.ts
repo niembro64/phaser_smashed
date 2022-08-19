@@ -64,7 +64,7 @@ export function updatePlayers(game: Game): void {
         setTimeout(() => {
           player.char.sprite.body.allowGravity = true;
           goToState(player, "alive");
-        }, 3000);
+        }, game.startDelay);
 
         break;
       case "alive":

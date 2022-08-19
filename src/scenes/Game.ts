@@ -4,6 +4,7 @@ import { update } from "./update";
 import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
+  startDelay: number = 1000;
   playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
   // playersOrder: number[] = [2, 3, 0, 1];
@@ -22,7 +23,7 @@ export default class Game extends Phaser.Scene {
   RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   DEFAULT_SPEED_X: number = 50;
   DEFAULT_SPEED_Y: number = 30;
-  DEFAULT_JUMP: number = 1800;
+  DEFAULT_JUMP: number = 1500;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
   GRAVITY: number = 0.1;
@@ -191,7 +192,7 @@ export default class Game extends Phaser.Scene {
         pos: { x: 0, y: 0 },
         // acc: { x: 0, y: 0 },
         jumps: [1, 0.8, 0],
-        jumpPower: 0.8,
+        jumpPower: 0.9,
         jumpIndex: 0,
         damage: 0,
         speed: 0.7,
@@ -337,7 +338,7 @@ export default class Game extends Phaser.Scene {
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
         jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
-        jumpPower: 0.9,
+        jumpPower: 1,
         jumpIndex: 0,
         damage: 0,
         speed: 0.9,

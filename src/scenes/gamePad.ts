@@ -45,6 +45,9 @@ export function updateAttackEnergyFrictionWall(game: Game): void {
 export function playerHoldAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.allowGravity = false;
 
+  // player.char.attackEnergy.sprite.body.setVelocityX(0);
+  // player.char.attackEnergy.sprite.body.setVelocityY(0);
+
   if (player.char.sprite.flipX) {
     player.char.attackEnergy.sprite.x =
       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
@@ -119,7 +122,17 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
     );
   }
 }
+
+export function playerGrabAttackEnergy(player: Player): void {
+  player.char.attackEnergy.sprite.body.setVelocityX(0);
+  player.char.attackEnergy.sprite.body.setVelocityY(0);
+}
 export function attackEnergy(player: Player, game: Game): void {
+  // GRAB
+  if (player.pad?.X && !player.padPrev.X) {
+    playerGrabAttackEnergy(player);
+  }
+
   // HOLD
   if (player.pad?.X && player.padPrev.X) {
     playerHoldAttackEnergy(player);
