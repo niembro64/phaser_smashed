@@ -4,8 +4,8 @@ import { update } from "./update";
 import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  startDelay: number = 1000;
-  hurtDelay: number = 3000;
+  startDelay: number = 100;
+  hurtDelay: number = 200;
   playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
   // playersOrder: number[] = [2, 3, 0, 1];

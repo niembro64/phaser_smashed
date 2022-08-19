@@ -17,13 +17,12 @@ export function hitboxOverlapReset(game: Game): void {
   });
 }
 
-export function checkHitboxes(game: Game): void {
-  game.players.forEach((pi, i) => {
-    game.players.forEach((pj, j) => {
-      if (game.hitboxOverlap[i][j]) {
-        goToState(pi, "hurt");
-        hitThenFly(pi);
-      }
-    });
+export function checkHitboxes(pi: Player, i: number, game: Game): void {
+  game.players.forEach((pj, j) => {
+    if (game.hitboxOverlap[i][j]) {
+      pi.char.sprite.body.allowGravity = false;
+      hitThenFly(pi);
+      goToState(pi, "hurt");
+    }
   });
 }

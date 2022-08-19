@@ -42,7 +42,6 @@ export function update(game: Game): void {
   updateAttackEnergyFrictionWall(game);
   updateKeepOnScreenPlayer(game);
   updatePlayers(game);
-  checkHitboxes(game);
   hitboxOverlapReset(game);
   updatePadPrevious(game);
 }
@@ -56,7 +55,7 @@ export function updatePlayers(game: Game): void {
   //   }
   // }
   // printAllPadsActive(player, game);
-  game.players.forEach((player, index) => {
+  game.players.forEach((player, playerIndex) => {
     // if (player.playerNumber === 0) {
     //   console.log("0", player.state);
     // }
@@ -79,6 +78,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        player.char.sprite.body.allowGravity = true;
+
         attackEnergy(player, game);
         updateLastDirectionTouched(player);
         controllerSetFast(player, game);
@@ -89,6 +90,7 @@ export function updatePlayers(game: Game): void {
         jump(player, game);
         updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
         controllerMovement(player, game);
+        checkHitboxes(player, playerIndex, game);
         // updateKeepOnScreenPlayerDead(player, game);
 
         ////////////////////////////////
@@ -103,13 +105,13 @@ export function updatePlayers(game: Game): void {
         attackEnergy(player, game);
         updateLastDirectionTouched(player);
         controllerSetFast(player, game);
-        frictionGroundX(player, game);
-        frictionAirX(player, game);
-        frictionWallY(player, game);
-        frictionAirY(player, game);
-        jump(player, game);
+        // frictionGroundX(player, game);
+        // frictionAirX(player, game);
+        // frictionWallY(player, game);
+        // frictionAirY(player, game);
+        // jump(player, game);
         updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
-        controllerMovement(player, game);
+        // controllerMovement(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive
