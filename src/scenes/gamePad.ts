@@ -40,21 +40,13 @@ export function updateAttackEnergyFrictionWall(game: Game): void {
       player.char.attackEnergy.sprite.setAngularVelocity(
         -player.char.attackEnergy.sprite.body.angularVelocity * 0.5
       );
-      // player.char.attackEnergy.sprite.setVelocityX(0);
-      // player.char.attackEnergy.sprite.setVelocityY(0);
-      // player.char.attackEnergy.sprite.body.allowGravity = false;
     }
   });
-  //   if (
-  //     player.char.attackEnergy.friction.stickWall &&
-  //     !player.char.attackEnergy.sprite.body.touching.left &&
-  //     !player.char.attackEnergy.sprite.body.touching.right
-  //   ) {
-  //     player.char.attackEnergy.sprite.body.allowGravity = true;
-  //   }
 }
 
 export function playerHoldAttackEnergy(player: Player): void {
+  player.char.attackEnergy.sprite.body.allowGravity = false;
+
   if (player.char.sprite.flipX) {
     player.char.attackEnergy.sprite.x =
       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
@@ -104,7 +96,7 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
 
     player.char.attackEnergy.sprite.flipX = true;
     player.char.attackEnergy.sprite.setRotation(
-      player.char.attackEnergy.rotation.initial + Math.PI
+      player.char.attackEnergy.rotation.initial
     );
     player.char.attackEnergy.sprite.setAngularVelocity(
       player.char.attackEnergy.rotation.speed * Math.PI * -1
@@ -132,8 +124,6 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
 export function attackEnergy(player: Player, game: Game): void {
   // HOLD
   if (player.pad?.X && player.padPrev.X) {
-    player.char.attackEnergy.sprite.body.allowGravity = false;
-
     playerHoldAttackEnergy(player);
   }
 

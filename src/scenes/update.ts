@@ -22,6 +22,7 @@ import {
   updateKeepOnScreenPlayer,
   updateKeepOnScreenPlayerDead,
   updateKeepOnScreenLREnergyAttack,
+  updatePlaceOffscreenEnergyAttacks,
 } from "./movement";
 import { updateSpritesLR } from "./sprites";
 import { updateText } from "./text";
@@ -36,6 +37,7 @@ export function update(game: Game): void {
   updateText(game);
   updateAttackEnergyFrictionGroundRotation(game);
   updateAttackEnergyFrictionGroundMovement(game);
+  // updatePlaceOffscreenEnergyAttacks(game);
   updateAttackEnergyFrictionWall(game);
   updateKeepOnScreenPlayer(game);
   // updatePadPrevious(game);

@@ -40,10 +40,24 @@ export function updateKeepOnScreenPlayerDead(player: Player, game: Game): void {
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x;
     player.char.sprite.y = player.char.initializeCharPosition.y;
 
-    player.char.sprite.setVelocityX(0);
-    player.char.sprite.setVelocityY(0);
+    player.char.sprite.body.setVelocityX(0);
+    player.char.sprite.body.setVelocityY(0);
   }
 }
+
+export function updatePlaceOffscreenEnergyAttacks(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
+      // console.log("ASDF")
+      // player.char.attackEnergy.sprite.body.setVelocityX(0);
+      // player.char.attackEnergy.sprite.body.setVelocityY(0);
+      player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
+      player.char.attackEnergy.sprite.Y = game.SCREEN_DIMENSIONS.HEIGHT / 2;
+      player.char.attackEnergy.sprite.body.allowGravity = false;
+    }
+  });
+}
+
 export function updateLastDirectionTouched(player: Player): void {
   if (player.char.sprite.body.touching.up) {
     player.char.lastDirectionTouched = "up";
@@ -87,6 +101,7 @@ export function jump(player: Player, game: Game): void {
   ) {
     player.char.jumpIndex = 0;
   }
+
   if (player.pad.Y && !player.padPrev.Y) {
     if (
       !(
@@ -98,6 +113,7 @@ export function jump(player: Player, game: Game): void {
     ) {
       player.char.jumpIndex = 1;
     }
+
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y *
         (1 - player.char.jumps[player.char.jumpIndex]) -

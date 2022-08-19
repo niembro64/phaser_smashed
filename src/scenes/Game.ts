@@ -4,9 +4,9 @@ import { update } from "./update";
 import { Camera, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  // playersOrder: number[] = [0, 1, 2, 3];
+  playersOrder: number[] = [0, 1, 2, 3];
   // playersOrder: number[] = [1, 2, 3, 0];
-  playersOrder: number[] = [2, 3, 0, 1];
+  // playersOrder: number[] = [2, 3, 0, 1];
   // playersOrder: number[] = [3, 0, 1, 2];
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
@@ -132,7 +132,7 @@ export default class Game extends Phaser.Scene {
           friction: { ground: 0, stickWall: false, air: 0 },
           vel: { x: 1, y: 1 },
           srcImage: "fireball",
-          bounceY: 0.95,
+          bounceY: 1,
           bounceX: 1,
           gravity: true,
           walls: true,
