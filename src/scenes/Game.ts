@@ -33,6 +33,9 @@ export default class Game extends Phaser.Scene {
   table: any | Phaser.GameObjects.Sprite;
   cameraMoverZoomStatusKeeper: number = 1;
 
+  HITBACK_X: number = 1000;
+  HITBACK_Y: number = -1000;
+
   ATTACK_ENERGY_SPEED_X: number = 600;
   ATTACK_ENERGY_SPEED_Y: number = 600;
 

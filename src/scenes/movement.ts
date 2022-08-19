@@ -380,12 +380,12 @@ export function getCameraPlayerStatus(game: Game): Location {
   };
 }
 
-export function hitThenFly(player: Player): void {
-  player.char.sprite.body.setVelocityY(-1000);
+export function hitThenFly(player: Player, game: Game): void {
+  player.char.sprite.body.setVelocityY(game.HITBACK_Y);
   if (player.char.sprite.flipX) {
-    player.char.sprite.body.setVelocityX(1000);
+    player.char.sprite.body.setVelocityX(game.HITBACK_X);
   } else {
-    player.char.sprite.body.setVelocityX(-1000);
+    player.char.sprite.body.setVelocityX(-game.HITBACK_X);
   }
 }
 
