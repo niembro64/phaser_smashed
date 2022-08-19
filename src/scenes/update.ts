@@ -101,6 +101,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        player.char.sprite.body.allowGravity = false;
         // attackEnergy(player, game);
         updateLastDirectionTouched(player);
         // controllerSetFast(player, game);
@@ -128,7 +129,6 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        player.char.sprite.body.allowGravity = false;
 
         ////////////////////////////////
         ///////// timeout => alive
