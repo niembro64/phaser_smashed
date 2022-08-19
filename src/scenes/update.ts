@@ -25,6 +25,7 @@ import {
   updatePlaceOffscreenEnergyAttacks,
 } from "./movement";
 import { updateSpritesLR } from "./sprites";
+import { goToState } from "./state";
 import { updateText } from "./text";
 
 export function update(game: Game): void {
@@ -46,103 +47,76 @@ export function update(game: Game): void {
 }
 
 export function updatePlayers(game: Game): void {
+  // printAllPadsActive(player, game);
   game.players.forEach((player, index) => {
-    // printAllPadsActive(player, game);
-    attackEnergy(player, game);
-    updateLastDirectionTouched(player);
-    controllerSetFast(player, game);
-    frictionGroundX(player, game);
-    frictionAirX(player, game);
-    frictionWallY(player, game);
-    frictionAirY(player, game);
-    jump(player, game);
-    updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
-    controllerMovement(player, game);
-    // updateKeepOnScreenPlayerDead(player, game);
+    if (player.playerNumber === 0) {
+      // console.log("0", player.state);
+    }
+    switch (player.state) {
+      case "start":
+        ////////////////////////////////
+        ///////// WHILE IN LOOP
+        ////////////////////////////////
+
+        ////////////////////////////////
+        ///////// timeout => dead
+        ////////////////////////////////
+        setTimeout(() => {
+          player.char.sprite.body.allowGravity = true;
+          goToState(player, "alive");
+        }, 3000);
+
+        break;
+      case "alive":
+        ////////////////////////////////
+        ///////// WHILE IN LOOP
+        ////////////////////////////////
+        attackEnergy(player, game);
+        updateLastDirectionTouched(player);
+        controllerSetFast(player, game);
+        frictionGroundX(player, game);
+        frictionAirX(player, game);
+        frictionWallY(player, game);
+        frictionAirY(player, game);
+        jump(player, game);
+        updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
+        controllerMovement(player, game);
+        // updateKeepOnScreenPlayerDead(player, game);
+
+        ////////////////////////////////
+        ///////// timeout => air
+        ////////////////////////////////
+
+        break;
+      case "hurt":
+        ////////////////////////////////
+        ///////// WHILE IN LOOP
+        ////////////////////////////////
+
+        ////////////////////////////////
+        ///////// timeout => alive
+        ////////////////////////////////
+
+        ////////////////////////////////
+        ///////// offscreen => dead
+        ////////////////////////////////
+
+        break;
+      case "dead":
+        ////////////////////////////////
+        ///////// WHILE IN LOOP
+        ////////////////////////////////
+        player.char.sprite.body.allowGravity = false;
+
+        ////////////////////////////////
+        ///////// timeout => alive
+        ////////////////////////////////
+        setTimeout(() => {
+          player.char.sprite.body.allowGravity = true;
+          goToState(player, "alive");
+        }, 3000);
+
+        break;
+    }
   });
 }
-
-//   switch (player.state) {
-//     case "start":
-//       ////////////////////////////////
-//       ///////// WHILE IN LOOP
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// timeout => dead
-//       ////////////////////////////////
-//       // player.char.sprite.body.setAllowGravity(false);
-//       setState(player, "dead");
-
-//       break;
-//     case "dead":
-//       ////////////////////////////////
-//       ///////// WHILE IN LOOP
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// timeout => air
-//       ////////////////////////////////
-
-//       // player.char.sprite.body.setAllowGravity(true);
-//       setState(player, "air");
-
-//       break;
-//     case "air":
-//       ////////////////////////////////
-//       ///////// WHILE IN LOOP
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// die => dead
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// touch down => ground
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// touch side => wall
-//       ////////////////////////////////
-
-//       break;
-//     case "ground":
-//       ////////////////////////////////
-//       ///////// WHILE IN LOOP
-//       ////////////////////////////////
-
-//       ///////// jump => air
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// fall => air
-//       ////////////////////////////////
-//       break;
-//     case "wall":
-//       ////////////////////////////////
-//       ///////// WHILE IN LOOP
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// jump => air
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// fall => air
-//       ////////////////////////////////
-//       break;
-//     case "spin":
-//       ////////////////////////////////
-//       ///////// WHILE IN LOOP
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// jump => air
-//       ////////////////////////////////
-
-//       ////////////////////////////////
-//       ///////// fall => air
-//       ////////////////////////////////
-//       break;
-//     default:
-//   }

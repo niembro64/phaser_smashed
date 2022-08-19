@@ -27,6 +27,8 @@ export function create(game: Game) {
   //   game.SCREEN_DIMENSIONS.WIDTH,
   //   game.SCREEN_DIMENSIONS.HEIGHT
   // );
+
+  
 }
 
 export function createPlayers(game: Game): void {
