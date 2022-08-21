@@ -133,11 +133,16 @@ export interface AttackEnergy {
   gravity: boolean;
   walls: boolean;
   damage: number;
-  hitback: number;
+  hitback: Hitback;
   scale: number;
   mass: number;
   allowVelocityY: boolean;
   rotation: AttackEnergyRotation;
+}
+
+export interface Hitback {
+  x: number;
+  y: number;
 }
 // export interface Keyboard_Static {
 //     up: typeof Phaser.Input.Keyboard.Key | any;
