@@ -19,12 +19,17 @@ export interface CameraHelper {
 export interface Player {
   playerNumber: number;
   text: string | any;
-  state: string;
+  state: State;
   keyboard_static: Keyboard;
   char: Char;
   keyboard: Keyboard | any;
   pad: Gamepad | any;
   padPrev: padStatePrevious;
+}
+
+export interface State {
+  name: string;
+  timestamp: number;
 }
 
 export interface Color {
@@ -67,6 +72,7 @@ export interface Keyboard {
 export interface Char {
   name: string;
   color: Color;
+  colorFilter: boolean;
   src: string;
   sprite: any | Phaser.GameObjects.Sprite;
   zoom: number;

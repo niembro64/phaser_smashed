@@ -43,7 +43,6 @@ export function isPlayerOffscreen(player: Player, game: Game): boolean {
 }
 
 export function setRespawn(player: Player, game: Game): void {
-  player.char.sprite.body.allowGravity = false;
   player.char.sprite.x =
     game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x;
   player.char.sprite.y = player.char.initializeCharPosition.y;
@@ -287,3 +286,11 @@ export function hitThenFly(player: Player, game: Game): void {
 
 //   return;
 // }
+
+export function setGravityTrue(player: Player): void {
+  player.char.sprite.body.allowGravity = true;
+}
+
+export function setGravityFalse(player: Player): void {
+  player.char.sprite.body.allowGravity = false;
+}

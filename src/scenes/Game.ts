@@ -12,7 +12,7 @@ export default class Game extends Phaser.Scene {
     setCollidePlayerEnergyAttacks: false,
   };
 
-  START_DELAY_DURATION: number = 100;
+  START_DELAY_DURATION: number = 4;
   HURT_DURATION: number = 400;
   // playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
@@ -25,10 +25,10 @@ export default class Game extends Phaser.Scene {
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
   time: any;
-  timeNanoseconds: number = 0;
-  timeMilliseconds: number = 0;
-  timeSeconds: number = 0;
-  timeClock: Clock = { minutes: 0, seconds: 0 };
+  NanosecondsTime: number = 0;
+  millisecondsTime: number = 0;
+  secondsTime: number = 0;
+  clockTime: Clock = { minutes: 0, seconds: 0 };
   timer: any;
   TITLE: any;
   SUBTITLE: any;
@@ -114,7 +114,7 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 0,
       text: "",
-      state: "start",
+      state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
         down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -136,6 +136,7 @@ export default class Game extends Phaser.Scene {
           dark: "#1c0900",
           light: "#ffffff",
         },
+        colorFilter: false,
         src: "images/character_0_cropped.png",
         sprite: null,
         zoom: 1,
@@ -188,7 +189,7 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 1,
       text: "",
-      state: "start",
+      state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
         down: Phaser.Input.Keyboard.KeyCodes.G,
@@ -210,6 +211,7 @@ export default class Game extends Phaser.Scene {
           dark: "#1c0900",
           light: "#ffffff",
         },
+        colorFilter: false,
         src: "images/character_1_cropped.png",
         sprite: null,
         zoom: 1,
@@ -262,7 +264,7 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 2,
       text: "",
-      state: "start",
+      state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
         down: Phaser.Input.Keyboard.KeyCodes.K,
@@ -284,6 +286,7 @@ export default class Game extends Phaser.Scene {
           dark: "#1c0900",
           light: "#ffffff",
         },
+        colorFilter: false,
         src: "images/character_2_cropped.png",
         sprite: null,
         zoom: 1,
@@ -335,7 +338,7 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 3,
       text: "",
-      state: "start",
+      state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,
@@ -357,6 +360,7 @@ export default class Game extends Phaser.Scene {
           dark: "#1c0900",
           light: "#ffffff",
         },
+        colorFilter: false,
         src: "images/character_3_cropped.png",
         sprite: null,
         zoom: 1,

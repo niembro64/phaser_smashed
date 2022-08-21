@@ -23,10 +23,10 @@ export function updateText(game: Game): void {
 
 export function updateCenterText(game: Game): void {
   game.scoreBoard.setText(
-    game.timeClock.minutes.toString() +
+    game.clockTime.minutes.toString() +
       ":" +
-      (game.timeClock.seconds < 10 ? "0" : "") +
-      game.timeClock.seconds.toString()
+      (game.clockTime.seconds < 10 ? "0" : "") +
+      game.clockTime.seconds.toString()
   );
   // game.scoreBoard.setText(
   //   "ZOOM:" + Math.round(100 * game.cameras.main.zoom).toString() + "%"

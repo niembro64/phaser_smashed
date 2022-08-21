@@ -22,8 +22,14 @@ import {
   setRespawn,
   hitThenFly,
   isPlayerOffscreen,
+  setGravityTrue,
+  setGravityFalse,
 } from "./helpers/movement";
-import { setSpriteOpaque, updateSpritesLR } from "./helpers/sprites";
+import {
+  setSpriteFilterFalse,
+  setSpriteFilterTrue,
+  updateSpritesLR,
+} from "./helpers/sprites";
 import {
   goToState,
   isPlayerHit,
@@ -32,7 +38,7 @@ import {
 } from "./helpers/state";
 import { updateText } from "./helpers/text";
 import { Player } from "./interfaces";
-import { setSpriteTransparent } from "./helpers/sprites";
+import { updateSpriteFilter } from "./helpers/sprites";
 
 export function update(game: Game): void {
   // game.text = game.timer.actualFps;
@@ -71,31 +77,30 @@ export function updatePlayers(game: Game): void {
 
   // printAllPadsActive(player, game);
   game.players.forEach((player, playerIndex) => {
-    // if (playerIndex === 0) {
-    //   console.log(player.playerNumber, player.char.name, player.state);
-    // }
-    switch (player.state) {
+    if (playerIndex === 0) {
+      console.log(player.playerNumber, player.char.name, player.state);
+    }
+    switch (player.state.name) {
       case "start":
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        setSpriteTransparent(player);
+        updateSpriteFilter(player, game);
 
         ////////////////////////////////
         ///////// timeout => dead
         ////////////////////////////////
-        setTimeout(() => {
-          player.char.sprite.body.allowGravity = true;
-          setSpriteOpaque(player);
-          goToState(player, "alive");
-        }, game.START_DELAY_DURATION);
+        if (game.secondsTime > game.START_DELAY_DURATION) {
+          setGravityTrue(player);
+          setSpriteFilterFalse(player);
+          goToState(player, "alive", game);
+        }
 
         break;
       case "alive":
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        setSpriteOpaque(player);
         player.char.sprite.body.allowGravity = true;
 
         attackEnergy(player, game);
@@ -106,20 +111,22 @@ export function updatePlayers(game: Game): void {
         frictionWallY(player, game);
         frictionAirY(player, game);
         jump(player, game);
-
+        updateSpriteFilter(player, game);
         controllerMovement(player, game);
+
         if (isPlayerHit(playerIndex, game)) {
           console.log("HIT", player.char.name);
-          player.char.sprite.body.allowGravity = false;
+          setGravityFalse(player);
           hitThenFly(player, game);
-          goToState(player, "hurt");
+          goToState(player, "hurt", game);
         }
         ////////////////////////////////
         ///////// timeout => air
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
-          setSpriteTransparent(player);
-          goToState(player, "dead");
+          setSpriteFilterTrue(player);
+          setGravityFalse(player);
+          goToState(player, "dead", game);
           setRespawn(player, game);
         }
 
@@ -128,6 +135,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        updateSpriteFilter(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive
@@ -138,13 +146,14 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         setTimeout(() => {
           if (isPlayerOffscreen(player, game)) {
-            setSpriteTransparent(player);
+            setGravityFalse(player);
+            setSpriteFilterTrue(player);
             setRespawn(player, game);
-            goToState(player, "dead");
+            goToState(player, "dead", game);
           } else {
-            setSpriteOpaque(player);
-            player.char.sprite.body.allowGravity = true;
-            goToState(player, "alive");
+            setGravityTrue(player);
+            setSpriteFilterFalse(player);
+            goToState(player, "alive", game);
           }
         }, game.HURT_DURATION);
 
@@ -153,13 +162,14 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        updateSpriteFilter(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive
         ////////////////////////////////
         setTimeout(() => {
-          player.char.sprite.body.allowGravity = true;
-          goToState(player, "alive");
+          setGravityTrue(player);
+          goToState(player, "alive", game);
         }, game.DEAD_DURATION);
 
         break;

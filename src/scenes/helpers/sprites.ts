@@ -17,20 +17,49 @@ export function updateSpritesLR(game: Game): void {
   });
 }
 
-export function setSpriteTransparent(player: Player): void {
-  // player.char.sprite.setAlpha(0.5);
-  // player.char.sprite.setTint(0x000000);
-  setTDark(player);
+export function updateSpriteFilter(player: Player, game: Game): void {
+  if (player.char.colorFilter) {
+    if (player.state.name === "hurt") {
+      // HURT
+      if (Math.floor(game.millisecondsTime / 100) % 2 === 0) {
+        setFilterDark(player);
+      } else {
+        setFilterLight(player);
+      }
+    } else {
+      // NOT HURT
+      if (Math.floor(game.millisecondsTime / 100) % 2 === 0) {
+        setFilterDark(player);
+      } else {
+        setFilterLight(player);
+      }
+    }
+    return;
+  }
+  filterOff(player);
 }
 
-export function setTDark(player: Player): void {
-  player.char.sprite.setTint(0x333333);
+export function setFilterRerd(player: Player): void {
+  player.char.sprite.setTint(0xaa3333);
+  player.char.sprite.setAlpha(0.8);
 }
-export function setTLight(player: Player): void {
+export function setFilterDark(player: Player): void {
+  player.char.sprite.setTint(0x555555);
+  player.char.sprite.setAlpha(0.8);
+}
+export function setFilterLight(player: Player): void {
   player.char.sprite.setTint(0x888888);
+  player.char.sprite.setAlpha(0.8);
 }
 
-export function setSpriteOpaque(player: Player): void {
-  // player.char.sprite.setAlpha(1);
+export function filterOff(player: Player): void {
+  player.char.sprite.setAlpha(1);
   player.char.sprite.setTint(0xffffff);
+}
+
+export function setSpriteFilterTrue(player: Player): void {
+  player.char.colorFilter = true;
+}
+export function setSpriteFilterFalse(player: Player): void {
+  player.char.colorFilter = false;
 }

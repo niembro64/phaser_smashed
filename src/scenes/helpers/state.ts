@@ -4,9 +4,11 @@ import { hitThenFly } from "./movement";
 
 export function goToState(
   player: Player,
-  state: "start" | "alive" | "dead" | "hurt"
+  state: "start" | "alive" | "dead" | "hurt",
+  game: Game
 ): void {
-  player.state = state;
+  player.state.name = state;
+  player.state.timestamp = game.millisecondsTime;
 }
 
 export function resetAllHitboxes(game: Game): void {
@@ -27,10 +29,10 @@ export function isPlayerHit(playerIndex: number, game: Game): boolean {
 }
 
 export function updateTime(game: Game): void {
-  game.timeNanoseconds = game.time.now;
-  game.timeMilliseconds = Math.floor(game.timeNanoseconds);
-  game.timeSeconds = Math.floor(game.timeNanoseconds / 1000);
+  game.NanosecondsTime = game.time.now;
+  game.millisecondsTime = Math.floor(game.NanosecondsTime);
+  game.secondsTime = Math.floor(game.NanosecondsTime / 1000);
 
-  game.timeClock.minutes = Math.floor(game.timeSeconds / 60);
-  game.timeClock.seconds = Math.floor(game.timeSeconds % 60);
+  game.clockTime.minutes = Math.floor(game.secondsTime / 60);
+  game.clockTime.seconds = Math.floor(game.secondsTime % 60);
 }

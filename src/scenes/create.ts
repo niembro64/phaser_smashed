@@ -1,4 +1,5 @@
 import Game from "./Game";
+import { setSpriteFilterTrue, updateSpriteFilter } from "./helpers/sprites";
 
 export function create(game: Game) {
   game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
@@ -50,14 +51,11 @@ export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
   game.players.forEach((player, playerIndex) => {
-    // for (let i = 0; i < 4; i++) {
-
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.INITIAL.POSITION.PLAYER_Y,
       player.char.name
     );
-    // }
   });
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
@@ -70,6 +68,10 @@ export function createPlayers(game: Game): void {
 
     game.physics.add.collider(player.char.sprite, game.PLATFORMS);
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
+  });
+
+  game.players.forEach((player, playerIndex) => {
+    setSpriteFilterTrue(player);
   });
 }
 export function createEnergyAttacks(game: Game): void {
