@@ -18,18 +18,16 @@ import {
   frictionWallY,
   updateWallTouchArray,
   updateLastDirectionTouched,
-  isPlayerOffscreen,
   updateKeepOnScreenLREnergyAttack,
-  updateEnergyAttacksScreenWrap,
   setRespawn,
+  hitThenFly,
+  isPlayerOffscreen,
 } from "./helpers/movement";
-import { updateSpritesLR } from "./helpers/sprites";
-import {
-  checkHitboxes,
-  goToState,
-  hitboxOverlapReset as resetAllHitboxOverlapMatrix,
-} from "./helpers/state";
+import { setSpriteOpaque, updateSpritesLR } from "./helpers/sprites";
+import { goToState, isPlayerHit, resetAllHitboxes } from "./helpers/state";
 import { updateText } from "./helpers/text";
+import { Player } from "./interfaces";
+import { setSpriteTransparent } from "./helpers/sprites";
 
 export function update(game: Game): void {
   // game.text = game.timer.actualFps;
@@ -53,7 +51,8 @@ export function update(game: Game): void {
 
   // AFTER PLAYERS
   updatePadPrevious(game);
-  resetAllHitboxOverlapMatrix(game);
+  console.log(game.hitboxOverlap[0]);
+  resetAllHitboxes(game);
 }
 
 export function updatePlayers(game: Game): void {
@@ -75,12 +74,14 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        setSpriteTransparent(player);
 
         ////////////////////////////////
         ///////// timeout => dead
         ////////////////////////////////
         setTimeout(() => {
           player.char.sprite.body.allowGravity = true;
+          setSpriteOpaque(player);
           goToState(player, "alive");
         }, game.START_DELAY_DURATION);
 
@@ -101,12 +102,17 @@ export function updatePlayers(game: Game): void {
         jump(player, game);
 
         controllerMovement(player, game);
-        checkHitboxes(player, playerIndex, game);
-
+        if (isPlayerHit(playerIndex, game)) {
+          console.log("HIT", player.char.name);
+          player.char.sprite.body.allowGravity = false;
+          hitThenFly(player, game);
+          goToState(player, "hurt");
+        }
         ////////////////////////////////
         ///////// timeout => air
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
+          setSpriteTransparent(player);
           goToState(player, "dead");
           setRespawn(player, game);
         }
@@ -116,18 +122,6 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        // checkPlayerOffscreen(player, game);
-        // player.char.sprite.body.allowGravity = false;
-        // attackEnergy(player, game);
-        // updateLastDirectionTouched(player);
-        // controllerSetFast(player, game);
-        // frictionGroundX(player, game);
-        // frictionAirX(player, game);
-        // frictionWallY(player, game);
-        // frictionAirY(player, game);
-        // jump(player, game);
-        // updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
-        // controllerMovement(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive
@@ -138,9 +132,11 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         setTimeout(() => {
           if (isPlayerOffscreen(player, game)) {
+            setSpriteTransparent(player);
             setRespawn(player, game);
             goToState(player, "dead");
           } else {
+            setSpriteOpaque(player);
             player.char.sprite.body.allowGravity = true;
             goToState(player, "alive");
           }

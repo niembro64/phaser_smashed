@@ -24,13 +24,13 @@ export function create(game: Game) {
 
 export function initializeHitboxOverlap(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    game.players.forEach((p, i) => {
-      if (player !== p) {
+    game.players.forEach((pj, j) => {
+      if (player !== pj) {
         game.physics.add.overlap(
           player.char.sprite,
-          p.char.attackEnergy.sprite,
+          pj.char.attackEnergy.sprite,
           function () {
-            game.hitboxOverlap[playerIndex][i] = true;
+            game.hitboxOverlap[playerIndex][j] = true;
           }
         );
       }
@@ -49,11 +49,7 @@ export function setPlayersInitialPositions(game: Game): void {
 export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
-  game.players.forEach((player, playerIndex) => {
-    
-
-  })
-
+  game.players.forEach((player, playerIndex) => {});
 
   for (let i = 0; i < 4; i++) {
     game.players[game.playerSpawnOrder[i]].char.sprite =

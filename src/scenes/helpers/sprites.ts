@@ -1,4 +1,5 @@
 import Game from "../Game";
+import { Player } from "../interfaces";
 import { hasPlayerTouchedWallRecently } from "./movement";
 
 export function updateSpritesLR(game: Game): void {
@@ -14,4 +15,11 @@ export function updateSpritesLR(game: Game): void {
       }
     }
   });
+}
+
+export function setSpriteTransparent(player: Player): void {
+  player.char.sprite.setAlpha(0.1);
+}
+export function setSpriteOpaque(player: Player): void {
+  player.char.sprite.setAlpha(1);
 }
