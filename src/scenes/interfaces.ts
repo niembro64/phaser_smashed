@@ -18,7 +18,7 @@ export interface CameraHelper {
 
 export interface Player {
   playerNumber: number;
-  text: string | any;
+  scoreBoardDamage: string | any;
   state: State;
   keyboard_static: Keyboard;
   char: Char;

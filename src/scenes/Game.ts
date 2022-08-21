@@ -6,8 +6,8 @@ import { Time } from "phaser";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
-    useCameras: false,
-    seeCameras: false,
+    useCameras: true,
+    seeCameras: true,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
   };
@@ -21,11 +21,12 @@ export default class Game extends Phaser.Scene {
   playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
-  textLocationLROffset: number = 230;
+  textLocationLROffset: number = 100;
   textLocations: number[] = [-760, -460, 460, 760];
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
+  scoreBoardTime: any;
   time: any;
   NanosecondsTime: number = 0;
   millisecondsTime: number = 0;
@@ -114,7 +115,7 @@ export default class Game extends Phaser.Scene {
   players: Player[] = [
     {
       playerNumber: 0,
-      text: "",
+      scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -194,7 +195,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 1,
-      text: "",
+      scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -274,7 +275,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 2,
-      text: "",
+      scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -353,7 +354,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 3,
-      text: "",
+      scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -431,8 +432,7 @@ export default class Game extends Phaser.Scene {
       },
     },
   ];
-  onClockEvent: any;
-  scoreBoard: any;
+
 
   constructor() {
     super("game");

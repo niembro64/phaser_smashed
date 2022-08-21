@@ -186,14 +186,15 @@ export function createBackgroundTitles(game: Game): void {
 }
 
 export function createScoreboard(game: Game): void {
-  game.scoreBoard = game.add.text(
+  game.scoreBoardTime = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
     "",
     {
       // font: "Arial 100px",
-      fontSize: "50px",
-      fontFamily: "'Press Start 2P'",
+      fontSize: "60px",
+      fontFamily: "'Courier New'",
+      // fontFamily: "'Press Start 2P'",
       stroke: "black",
       strokeThickness: 1,
       shadow: {
@@ -206,10 +207,12 @@ export function createScoreboard(game: Game): void {
       },
     }
   );
-  game.scoreBoard.setOrigin(1, 0).setAlpha(1);
+  game.scoreBoardTime
+    .setOrigin(1, 0)
+    .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
 
   game.players.forEach((player, playerIndex) => {
-    player.text = game.add
+    player.scoreBoardDamage = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
@@ -217,8 +220,9 @@ export function createScoreboard(game: Game): void {
         "XXX",
         {
           // font: "Arial 100px",
-          fontSize: "30px",
-          fontFamily: "'Press Start 2P'",
+          fontSize: "60px",
+          fontFamily: "'Courier New'",
+          // fontFamily: "'Press Start 2P'",
           // color: "white",
           color: player.char.color.primary,
           // stroke: player.char.color.primary,
@@ -234,7 +238,8 @@ export function createScoreboard(game: Game): void {
           },
         }
       )
-      .setOrigin(1, 0);
+      .setOrigin(1, 0)
+      .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
 }
 
