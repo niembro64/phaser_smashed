@@ -1,7 +1,7 @@
 import Game from "../Game";
 
 export function updateText(game: Game): void {
-  const baseY = 0;
+  const baseY = 2;
   const zoom = game.cameras.main.zoom;
   const redOffsetY =
     game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
@@ -10,11 +10,9 @@ export function updateText(game: Game): void {
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1.2) + 1);
 
-  game.scoreBoardTime.setScale(
-    1 / game.cameras.main.zoom,
-    1 / game.cameras.main.zoom
-  );
-  game.scoreBoardTime.x = game.cameraMover.char.sprite.x;
+  game.scoreBoardTime.setScale(1 / zoom, 1 / zoom);
+  game.scoreBoardTime.x =
+    game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
   game.scoreBoardTime.y = newY;
 
   updateClockText(game);
@@ -32,15 +30,12 @@ export function updateClockText(game: Game): void {
 
 export function updateDamageText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDamage
-      .setScale(1 / zoom, 1 / zoom)
-      .setText(
-        "p" +
-          playerIndex.toString() +
-          " " +
-          Math.round(player.char.damage).toString() +
-          "%"
-      );
+    player.scoreBoardDamage.setScale(1 / zoom, 1 / zoom).setText(
+      // "p" +
+      // playerIndex.toString() +
+      // " " +
+      Math.round(player.char.damage).toString() + "%"
+    );
     player.scoreBoardDamage.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +

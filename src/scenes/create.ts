@@ -193,7 +193,8 @@ export function createScoreboard(game: Game): void {
     {
       // font: "Arial 100px",
       fontSize: "60px",
-      fontFamily: "'Courier New'",
+      // fontFamily: "'Courier New'",
+      fontFamily: "Consolas",
       // fontFamily: "'Press Start 2P'",
       stroke: "black",
       strokeThickness: 1,
@@ -221,7 +222,8 @@ export function createScoreboard(game: Game): void {
         {
           // font: "Arial 100px",
           fontSize: "60px",
-          fontFamily: "'Courier New'",
+          fontFamily: "Consolas",
+          // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
           color: player.char.color.primary,
