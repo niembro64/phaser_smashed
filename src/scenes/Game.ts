@@ -444,8 +444,6 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
-    console.log(this.timeSeconds);
-    // console.log(this.time.now);
     update(this);
   }
 }
