@@ -1,9 +1,6 @@
-import { SignPrivateKeyInput } from "crypto";
-import { isMainThread } from "worker_threads";
 import Game from "../Game";
 import { AttackEnergy, NormalizedVector, Player } from "../interfaces";
 import { hitbackFly } from "./movement";
-import { attackEnergy, playerShootAttackEnergy } from "./pad";
 
 export function onHitHandler(
   player: Player,
@@ -51,6 +48,33 @@ export function updateDeadMatrix(playerIndex: number, game: Game): void {
   }
 
   // console.log(game.killedByMatrix[0]);
+}
+
+export function updateDeathsAndKills(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    updatePlayerNumberDeaths(player, playerIndex, game);
+    updatePlayerNumberKills(player, playerIndex, game);
+  });
+}
+
+export function updatePlayerNumberDeaths(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  player.deathCount = game.killedByMatrix[playerIndex].reduce(
+    (partialSum, a) => partialSum + a,
+    0
+  );
+}
+export function updatePlayerNumberKills(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  for (let i = 0; i < game.players.length; i++) {
+    player.killCount += game.killedByMatrix[i][playerIndex];
+  }
 }
 
 export function removeDamage(player: Player, damage: number): void {

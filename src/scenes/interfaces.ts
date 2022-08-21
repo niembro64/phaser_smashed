@@ -25,6 +25,8 @@ export interface Player {
   keyboard: Keyboard | any;
   pad: Gamepad | any;
   padPrev: PadStatePrevious;
+  killCount: number;
+  deathCount: number;
 }
 
 export interface State {

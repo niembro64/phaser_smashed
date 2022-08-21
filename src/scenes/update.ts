@@ -37,7 +37,7 @@ import {
   updateTime,
 } from "./helpers/state";
 import { updateText } from "./helpers/text";
-import { resetDamage, updateDeadMatrix } from "./helpers/damage";
+import { resetDamage, updateDeadMatrix, updateDeathsAndKills } from "./helpers/damage";
 
 export function update(game: Game): void {
   // BEFORE PLAYERS
@@ -52,6 +52,7 @@ export function update(game: Game): void {
   updateAttackEnergyFrictionGroundMovement(game);
   updateAttackEnergyFrictionWall(game);
   updateKeepOnScreenLREnergyAttack(game);
+  updateDeathsAndKills(game);
   // updateEnergyAttacksScreenWrap(game);
 
   // PLAYERS

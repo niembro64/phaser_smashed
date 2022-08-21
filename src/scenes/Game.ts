@@ -2,7 +2,6 @@ import "phaser";
 import { create } from "./create";
 import { update } from "./update";
 import { Camera, Clock, Debug, Player } from "./interfaces";
-import { Time } from "phaser";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
@@ -135,6 +134,8 @@ export default class Game extends Phaser.Scene {
   players: Player[] = [
     {
       playerNumber: 0,
+      killCount: 0,
+      deathCount: 0,
       scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
@@ -216,6 +217,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 1,
+      killCount: 0,
+      deathCount: 0,
       scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
@@ -297,6 +300,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 2,
+      killCount: 0,
+      deathCount: 0,
       scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
@@ -377,6 +382,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 3,
+      killCount: 0,
+      deathCount: 0,
       scoreBoardDamage: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
