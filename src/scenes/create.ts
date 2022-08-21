@@ -1,4 +1,4 @@
-import Game from './Game';
+import Game from "./Game";
 
 export function create(game: Game) {
   // game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
@@ -11,15 +11,18 @@ export function create(game: Game) {
   createEnergyAttacks(game);
   createScoreboard(game);
   createPlayers(game);
-  // setPlayersCollide(game);
-  // setAttackEnergyCollideWithPlayers(game);
+  setPlayersCollide(game);
+  setAttackEnergyCollideWithPlayers(game);
+  initializeHitboxOverlap(game);
   // game.matter.world.setBounds(
   //   0,
   //   0,
   //   game.SCREEN_DIMENSIONS.WIDTH,
   //   game.SCREEN_DIMENSIONS.HEIGHT
   // );
+}
 
+export function initializeHitboxOverlap(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((p, i) => {
       if (player !== p) {
@@ -92,6 +95,9 @@ export function createEnergyAttacks(game: Game): void {
 }
 
 export function setAttackEnergyCollideWithPlayers(game: Game): void {
+  if (!game.debug.collidePlayerEnergyAttacks) {
+    return;
+  }
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 4; i++) {
       if (playerIndex !== i) {
@@ -105,72 +111,72 @@ export function setAttackEnergyCollideWithPlayers(game: Game): void {
 }
 
 export function createBackground(game: Game): void {
-  game.BACKGROUND = game.physics.add.sprite(1920 / 2, 1080 / 2, 'background');
+  game.BACKGROUND = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
   game.BACKGROUND.setScale(1);
   game.BACKGROUND.setImmovable(true);
   game.BACKGROUND.body.allowGravity = false;
 }
 export function createPlatforms(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
-  game.PLATFORMS.create(1200, 700, 'platformVertical');
-  game.PLATFORMS.create(1200, 850, 'platformShort');
-  game.PLATFORMS.create(600, 900, 'platformShort');
-  game.PLATFORMS.create(1920 / 2, 1080 / 2, 'platformHorizontal');
-  game.PLATFORMS.create(300, 1080 / 1.5, 'platformHorizontal');
-  game.PLATFORMS.create(1700, 1080 / 1.5, 'platformHorizontal');
+  game.PLATFORMS.create(1200, 700, "platformVertical");
+  game.PLATFORMS.create(1200, 850, "platformShort");
+  game.PLATFORMS.create(600, 900, "platformShort");
+  game.PLATFORMS.create(1920 / 2, 1080 / 2, "platformHorizontal");
+  game.PLATFORMS.create(300, 1080 / 1.5, "platformHorizontal");
+  game.PLATFORMS.create(1700, 1080 / 1.5, "platformHorizontal");
 
-  game.PLATFORMS.create(400, 500, 'platformShort');
-  game.PLATFORMS.create(320, 500 - 33, 'brick');
-  game.PLATFORMS.create(480, 500 - 33, 'brick');
+  game.PLATFORMS.create(400, 500, "platformShort");
+  game.PLATFORMS.create(320, 500 - 33, "brick");
+  game.PLATFORMS.create(480, 500 - 33, "brick");
 }
 
 export function createTable(game: Game): void {
-  game.TABLE = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, 'table');
+  game.TABLE = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
   game.TABLE.setScale(1);
   game.TABLE.setImmovable(true);
   game.TABLE.body.allowGravity = false;
 }
 export function createBackgroundTitles(game: Game): void {
   game.TITLE = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, 'SMASHED', {
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, "SMASHED", {
       // font: "300px Impact",
-      fontFamily: 'Impact',
+      fontFamily: "Impact",
       // fontFamily: "'Press Start 2P'",
       // font: "64px Press Start 2P",
       // font: '"Press Start 2P"',
-      fontSize: '500px',
+      fontSize: "500px",
     })
     .setOrigin(0.5)
-    .setColor('black')
+    .setColor("black")
     .setAlpha(0.3);
   game.SUBTITLE = game.add
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 13,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
-      'NIEMBRO64',
+      "NIEMBRO64",
       {
         // font: "300px Impact",
-        fontFamily: 'Impact',
+        fontFamily: "Impact",
         // fontFamily: "'Press Start 2P'",
         // font: "64px Press Start 2P",
         // font: '"Press Start 2P"',
-        fontSize: '50px',
+        fontSize: "50px",
       }
     )
     .setOrigin(0.5)
-    .setColor('black')
+    .setColor("black")
     .setAlpha(0.3);
   game.SUPERTITLE = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, 'YOUNG-CHEZ', {
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, "YOUNG-CHEZ", {
       // font: "300px Impact",
-      fontFamily: 'Impact',
+      fontFamily: "Impact",
       // fontFamily: "'Press Start 2P'",
       // font: "64px Press Start 2P",
       // font: '"Press Start 2P"',
-      fontSize: '80px',
+      fontSize: "80px",
     })
     .setOrigin(0.5)
-    .setColor('black')
+    .setColor("black")
     .setAlpha(0.3);
 }
 
@@ -178,17 +184,17 @@ export function createScoreboard(game: Game): void {
   game.scoreBoard = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    '',
+    "",
     {
       // font: "Arial 100px",
-      fontSize: '50px',
+      fontSize: "50px",
       fontFamily: "'Press Start 2P'",
-      stroke: 'black',
+      stroke: "black",
       strokeThickness: 1,
       shadow: {
         offsetX: 0,
         offsetY: 3,
-        color: '#000',
+        color: "#000",
         blur: 10,
         stroke: true,
         fill: true,
@@ -203,20 +209,20 @@ export function createScoreboard(game: Game): void {
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        'XXX',
+        "XXX",
         {
           // font: "Arial 100px",
-          fontSize: '30px',
+          fontSize: "30px",
           fontFamily: "'Press Start 2P'",
           // color: "white",
           color: player.char.color.primary,
           // stroke: player.char.color.primary,
-          stroke: 'black',
+          stroke: "black",
           strokeThickness: 1,
           shadow: {
             offsetX: 0,
             offsetY: 3,
-            color: '#000',
+            color: "#000",
             blur: 10,
             stroke: true,
             fill: true,
@@ -228,6 +234,9 @@ export function createScoreboard(game: Game): void {
 }
 
 export function setPlayersCollide(game: Game): void {
+  if (!game.debug.collidePlayerPlayers) {
+    return;
+  }
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((p, pj) => {
       if (pj !== playerIndex) {
@@ -245,7 +254,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      'centerWhite'
+      "centerWhite"
     )
     .setScale(0.05)
     .setAlpha(0.5);
@@ -257,7 +266,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      'centerWhite'
+      "centerWhite"
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
@@ -270,7 +279,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      'centerWhite'
+      "centerWhite"
     )
     .setRotation(Math.PI / 4)
     .setScale(0.05)
@@ -283,7 +292,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      'centerWhite'
+      "centerWhite"
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
@@ -296,7 +305,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      'centerRed'
+      "centerRed"
     )
     .setScale(0.08)
     .setRotation(Math.PI / 4);

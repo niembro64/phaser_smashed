@@ -1,18 +1,21 @@
-import 'phaser';
-import { create } from './create';
-import { update } from './update';
-import { Camera, Debug, Player } from './interfaces';
+import "phaser";
+import { create } from "./create";
+import { update } from "./update";
+import { Camera, Debug, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-
-  debug: Debug = { cameras: true };
+  debug: Debug = {
+    cameras: true,
+    collidePlayerPlayers: false,
+    collidePlayerEnergyAttacks: false,
+  };
 
   START_DELAY_DURATION: number = 100;
   HURT_DURATION: number = 400;
   // playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
-  playerSpawnOrder: number[] = [2, 3, 0, 1];
-  // playerSpawnOrder: number[] = [3, 0, 1, 2];
+  // playerSpawnOrder: number[] = [2, 3, 0, 1];
+  playerSpawnOrder: number[] = [3, 0, 1, 2];
 
   textLocationLROffset: number = 230;
   textLocations: number[] = [-760, -460, 460, 760];
@@ -54,40 +57,40 @@ export default class Game extends Phaser.Scene {
 
   cameraPlayers: Camera = {
     char: {
-      name: 'center_10',
-      src: 'images/x.png',
+      name: "center_10",
+      src: "images/x.png",
       sprite: null,
       zoom: 0,
     },
   };
   cameraMover: Camera = {
     char: {
-      name: 'center_10',
-      src: 'images/x.png',
+      name: "center_10",
+      src: "images/x.png",
       sprite: null,
       zoom: 0,
     },
   };
   cameraPlayersHalfway: Camera = {
     char: {
-      name: 'center_80',
-      src: 'images/x.png',
+      name: "center_80",
+      src: "images/x.png",
       sprite: null,
       zoom: 1,
     },
   };
   cameraCenter: Camera = {
     char: {
-      name: 'center_80',
-      src: 'images/x.png',
+      name: "center_80",
+      src: "images/x.png",
       sprite: null,
       zoom: 1,
     },
   };
   cameraBox: Camera = {
     char: {
-      name: 'center_80',
-      src: 'images/x.png',
+      name: "center_80",
+      src: "images/x.png",
       sprite: null,
       zoom: 1,
     },
@@ -103,8 +106,8 @@ export default class Game extends Phaser.Scene {
   players: Player[] = [
     {
       playerNumber: 0,
-      text: '',
-      state: 'start',
+      text: "",
+      state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
         down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -114,19 +117,19 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.X,
       },
       char: {
-        name: 'Mario',
+        name: "Mario",
         initializeCharPosition: {
           lookingRight: true,
           x: -200,
           y: 100,
         },
         color: {
-          primary: '#e24800',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#e24800",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
-        src: 'images/character_0_cropped.png',
+        src: "images/character_0_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -147,7 +150,7 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 20, y: -30 },
           friction: { ground: 1, stickWall: false, air: 1 },
           vel: { x: 1, y: 1 },
-          srcImage: 'fireball',
+          srcImage: "fireball",
           bounceY: 1,
           bounceX: 1,
           gravity: true,
@@ -177,8 +180,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 1,
-      text: '',
-      state: 'start',
+      text: "",
+      state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
         down: Phaser.Input.Keyboard.KeyCodes.G,
@@ -188,19 +191,19 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.B,
       },
       char: {
-        name: 'Link',
+        name: "Link",
         initializeCharPosition: {
           lookingRight: false,
           x: -110,
           y: 100,
         },
         color: {
-          primary: '#43a528',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#43a528",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
-        src: 'images/character_1_cropped.png',
+        src: "images/character_1_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -221,7 +224,7 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 50, y: 3 },
           friction: { ground: 1, stickWall: false, air: 1 },
           vel: { x: 1, y: -0.5 },
-          srcImage: 'sword',
+          srcImage: "sword",
           bounceY: 0,
           bounceX: 0,
           gravity: false,
@@ -251,8 +254,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 2,
-      text: '',
-      state: 'start',
+      text: "",
+      state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
         down: Phaser.Input.Keyboard.KeyCodes.K,
@@ -262,19 +265,19 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.P,
       },
       char: {
-        name: 'Pikachu',
+        name: "Pikachu",
         initializeCharPosition: {
           lookingRight: true,
           x: 110,
           y: 100,
         },
         color: {
-          primary: '#ffc90e',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#ffc90e",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
-        src: 'images/character_2_cropped.png',
+        src: "images/character_2_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -294,7 +297,7 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 0, y: -20 },
           friction: { ground: 1, stickWall: false, air: 1 },
           vel: { x: 1, y: -1 },
-          srcImage: 'greenshell',
+          srcImage: "greenshell",
           bounceY: 0.1,
           bounceX: 1,
           gravity: true,
@@ -324,8 +327,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 3,
-      text: '',
-      state: 'start',
+      text: "",
+      state: "start",
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,
@@ -335,19 +338,19 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
       },
       char: {
-        name: 'Kirby',
+        name: "Kirby",
         initializeCharPosition: {
           lookingRight: false,
           x: 200,
           y: 100,
         },
         color: {
-          primary: '#ff88ae',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#ff88ae",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
-        src: 'images/character_3_cropped.png',
+        src: "images/character_3_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -367,7 +370,7 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 10, y: -25 },
           friction: { ground: 0.7, stickWall: true, air: 0.8 },
           vel: { x: 1, y: -3 },
-          srcImage: 'hammer',
+          srcImage: "hammer",
           bounceY: 0.3,
           bounceX: 0.5,
           gravity: true,
@@ -398,7 +401,7 @@ export default class Game extends Phaser.Scene {
   ];
 
   constructor() {
-    super('game');
+    super("game");
     // this.laserGroup;
   }
   // style = {
@@ -429,25 +432,25 @@ export default class Game extends Phaser.Scene {
     //   true
     // );
 
-    this.load.image('laser', 'images/laser.png');
-    this.load.image('blockcracked', 'images/blockcracked.png');
-    this.load.image('fireball', 'images/fireball.png');
-    this.load.image('flagpole', 'images/flagpole.png');
-    this.load.image('greenshell', 'images/greenshell.png');
-    this.load.image('hammer', 'images/ham.png');
-    this.load.image('sword', 'images/sword_right.png');
+    this.load.image("laser", "images/laser.png");
+    this.load.image("blockcracked", "images/blockcracked.png");
+    this.load.image("fireball", "images/fireball.png");
+    this.load.image("flagpole", "images/flagpole.png");
+    this.load.image("greenshell", "images/greenshell.png");
+    this.load.image("hammer", "images/ham.png");
+    this.load.image("sword", "images/sword_right.png");
 
-    this.load.image('table', 'images/table.png');
-    this.load.image('background', 'images/darkxp.jpg');
-    this.load.image('centerWhite', 'images/wx.png');
-    this.load.image('centerBlack', 'images/bx.png');
-    this.load.image('centerMagenta', 'images/mx.png');
-    this.load.image('centerRed', 'images/rx.png');
-    this.load.image('platformHorizontal', 'images/brickhoriz.bmp');
-    this.load.image('platformShort', 'images/brickhorizshorter.bmp');
-    this.load.image('platformVertical', 'images/brickvert.bmp');
-    this.load.image('brick', 'images/blockcracked.png');
-    this.load.image('suburb', 'images/suburb.png');
+    this.load.image("table", "images/table.png");
+    this.load.image("background", "images/darkxp.jpg");
+    this.load.image("centerWhite", "images/wx.png");
+    this.load.image("centerBlack", "images/bx.png");
+    this.load.image("centerMagenta", "images/mx.png");
+    this.load.image("centerRed", "images/rx.png");
+    this.load.image("platformHorizontal", "images/brickhoriz.bmp");
+    this.load.image("platformShort", "images/brickhorizshorter.bmp");
+    this.load.image("platformVertical", "images/brickvert.bmp");
+    this.load.image("brick", "images/blockcracked.png");
+    this.load.image("suburb", "images/suburb.png");
 
     this.players.forEach((player, playerIndex) => {
       this.load.image(player.char.name, player.char.src);

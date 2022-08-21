@@ -1,4 +1,4 @@
-import { Key } from 'react';
+import { Key } from "react";
 
 export interface Loc {
   x: number;
@@ -76,7 +76,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | 'camera' | null;
+  lastDirectionTouched: "up" | "down" | "left" | "right" | "camera" | null;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
 }
@@ -137,4 +137,6 @@ export interface AttackEnergy {
 
 export interface Debug {
   cameras: boolean;
+  collidePlayerPlayers: boolean;
+  collidePlayerEnergyAttacks: boolean;
 }

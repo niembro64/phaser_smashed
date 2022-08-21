@@ -1,5 +1,5 @@
-import Game from '../Game';
-import { Player } from '../interfaces';
+import Game from "../Game";
+import { Player } from "../interfaces";
 
 export function assignGamePadsConnected(game: Game): void {
   for (let i = 0; i < game.input.gamepad.total; i++) {
@@ -17,6 +17,7 @@ export function updateAttackEnergyFrictionGroundRotation(game: Game): void {
     }
   });
 }
+
 export function updateAttackEnergyFrictionGroundMovement(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.body.touching.down) {
@@ -72,6 +73,7 @@ export function playerHoldAttackEnergy(player: Player): void {
     player.char.attackEnergy.sprite.setAngularVelocity(0);
   }
 }
+
 export function playerShootAttackEnergy(player: Player, game: Game): void {
   var vX = player.char.sprite.body.velocity.x * player.char.attackEnergy.vel.x;
 
@@ -186,17 +188,16 @@ export function controllerSetFast(player: Player, game: Game): void {
 }
 
 export function controllerMovement(player: Player, game: Game): void {
-  // if nothing return
-  if (
-    !player.pad.left &&
-    !player.pad.right &&
-    !player.pad.up &&
-    !player.pad.down
-  ) {
-    return;
-  }
-
   if (player.pad) {
+    if (
+      !player.pad.left &&
+      !player.pad.right &&
+      !player.pad.up &&
+      !player.pad.down
+    ) {
+      return;
+    }
+
     // // CHECK ANGLED
     // if (player.pad.left && player.pad.up) {
     //   player.char.sprite.body.setVelocityX(
@@ -298,8 +299,6 @@ export function controllerMovement(player: Player, game: Game): void {
       );
       // return;
     }
-
-    return;
   }
 }
 
@@ -308,39 +307,39 @@ export function printAllPadsActive(player: Player, game: Game): void {
 
   if (player.pad) {
     if (player.pad.B) {
-      console.log(player.playerNumber, 'B');
+      console.log(player.playerNumber, "B");
     }
     if (player.pad.A) {
-      console.log(player.playerNumber, 'A');
+      console.log(player.playerNumber, "A");
     }
     if (player.pad.X) {
-      console.log(player.playerNumber, 'X');
+      console.log(player.playerNumber, "X");
     }
     if (player.pad.Y) {
-      console.log(player.playerNumber, 'Y');
+      console.log(player.playerNumber, "Y");
       // player.char.fast = 2;
     }
 
     //  D Pad
     if (player.pad.down) {
-      console.log(player.playerNumber, 'down');
+      console.log(player.playerNumber, "down");
     }
     if (player.pad.up) {
-      console.log(player.playerNumber, 'up');
+      console.log(player.playerNumber, "up");
     }
     if (player.pad.left) {
-      console.log(player.playerNumber, 'left');
+      console.log(player.playerNumber, "left");
     }
     if (player.pad.right) {
-      console.log(player.playerNumber, 'right');
+      console.log(player.playerNumber, "right");
     }
 
     // L R Buttons
     if (player.pad.L1) {
-      console.log(player.playerNumber, 'L1');
+      console.log(player.playerNumber, "L1");
     }
     if (player.pad.R1) {
-      console.log(player.playerNumber, 'R1');
+      console.log(player.playerNumber, "R1");
     }
   }
 }
