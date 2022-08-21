@@ -1,4 +1,5 @@
 import Game from "./Game";
+import { addDamage } from "./helpers/damage";
 import { setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
@@ -32,6 +33,8 @@ export function initializeHitboxOverlap(game: Game): void {
           pj.char.attackEnergy.sprite,
           function () {
             game.hitboxOverlap[playerIndex][j] = true;
+
+            addDamage(player, 5);
           }
         );
       }
