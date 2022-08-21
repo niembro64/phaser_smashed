@@ -26,13 +26,14 @@ import {
   setGravityFalse,
 } from "./helpers/movement";
 import {
-  setSpriteFilterFalse,
-  setSpriteFilterTrue,
+  setBlinkFalse,
+  setBlinkTrue,
   updateAllSpriteFilters,
   updateSpritesLR,
 } from "./helpers/sprites";
 import {
   goToState,
+  hasThisDurationPassed,
   isPlayerHit,
   resetAllHitboxes,
   updateTime,
@@ -77,9 +78,9 @@ export function updatePlayers(game: Game): void {
 
   // printAllPadsActive(player, game);
   game.players.forEach((player, playerIndex) => {
-    if (playerIndex === 0) {
-      console.log(player.playerNumber, player.char.name, player.state);
-    }
+    // if (playerIndex === 0) {
+    //   console.log(player.playerNumber, player.char.name, player.state);
+    // }
     switch (player.state.name) {
       case "start":
         ////////////////////////////////
@@ -89,9 +90,9 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// timeout => dead
         ////////////////////////////////
-        if (game.millisecondsTime > game.START_DELAY_DURATION) {
+        if (hasThisDurationPassed(player, game.START_DELAY_DURATION, game)) {
           setGravityTrue(player);
-          setSpriteFilterFalse(player);
+          setBlinkFalse(player);
           goToState(player, "alive", game);
         }
 
@@ -113,6 +114,7 @@ export function updatePlayers(game: Game): void {
 
         if (isPlayerHit(playerIndex, game)) {
           console.log("HIT", player.char.name);
+          setBlinkTrue(player);
           setGravityFalse(player);
           hitThenFly(player, game);
           goToState(player, "hurt", game);
@@ -121,7 +123,7 @@ export function updatePlayers(game: Game): void {
         ///////// timeout => air
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
-          setSpriteFilterTrue(player);
+          setBlinkTrue(player);
           setGravityFalse(player);
           goToState(player, "dead", game);
           setRespawn(player, game);
@@ -140,18 +142,18 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// offscreen => dead
         ////////////////////////////////
-        setTimeout(() => {
+        if (hasThisDurationPassed(player, game.HURT_DURATION, game)) {
           if (isPlayerOffscreen(player, game)) {
             setGravityFalse(player);
-            setSpriteFilterTrue(player);
+            setBlinkTrue(player);
             setRespawn(player, game);
             goToState(player, "dead", game);
           } else {
             setGravityTrue(player);
-            setSpriteFilterFalse(player);
+            setBlinkFalse(player);
             goToState(player, "alive", game);
           }
-        }, game.HURT_DURATION);
+        }
 
         break;
       case "dead":
@@ -162,11 +164,11 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// timeout => alive
         ////////////////////////////////
-        setTimeout(() => {
+        if (hasThisDurationPassed(player, game.DEAD_DURATION, game)) {
           setGravityTrue(player);
-          setSpriteFilterFalse(player);
+          setBlinkFalse(player);
           goToState(player, "alive", game);
-        }, game.DEAD_DURATION);
+        }
 
         break;
     }

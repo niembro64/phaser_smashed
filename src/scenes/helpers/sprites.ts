@@ -28,44 +28,44 @@ export function updateSpriteFilter(player: Player, game: Game): void {
     if (player.state.name === "hurt") {
       // HURT
       if (Math.floor(game.millisecondsTime / 100) % 2 === 0) {
-        setFilterDark(player);
+        filterRed(player);
       } else {
-        setFilterLight(player);
+        filterLight(player);
       }
     } else {
       // NOT HURT
       if (Math.floor(game.millisecondsTime / 100) % 2 === 0) {
-        setFilterDark(player);
+        filterDark(player);
       } else {
-        setFilterLight(player);
+        filterLight(player);
       }
     }
-    return;
+  } else {
+    filterNormal(player);
   }
-  filterOff(player);
 }
 
-export function setFilterRerd(player: Player): void {
+export function filterRed(player: Player): void {
   player.char.sprite.setTint(0xaa3333);
   player.char.sprite.setAlpha(0.8);
 }
-export function setFilterDark(player: Player): void {
+export function filterDark(player: Player): void {
   player.char.sprite.setTint(0x555555);
   player.char.sprite.setAlpha(0.8);
 }
-export function setFilterLight(player: Player): void {
+export function filterLight(player: Player): void {
   player.char.sprite.setTint(0x888888);
   player.char.sprite.setAlpha(0.8);
 }
 
-export function filterOff(player: Player): void {
+export function filterNormal(player: Player): void {
   player.char.sprite.setAlpha(1);
   player.char.sprite.setTint(0xffffff);
 }
 
-export function setSpriteFilterTrue(player: Player): void {
+export function setBlinkTrue(player: Player): void {
   player.char.colorFilter = true;
 }
-export function setSpriteFilterFalse(player: Player): void {
+export function setBlinkFalse(player: Player): void {
   player.char.colorFilter = false;
 }

@@ -37,10 +37,21 @@ export function updateTime(game: Game): void {
   game.clockTime.seconds = Math.floor(game.secondsTime % 60);
 }
 
-export function hasPassedTimeSinceStateChange(
+export function hasThisDurationPassed(
   player: Player,
-  duration: number
-): void {
-  if (player.state.timestamp) {
+  duration: number,
+  game: Game
+): boolean {
+  // console.log(
+  //   "p",
+  //   player.state.timestamp,
+  //   "d",
+  //   duration,
+  //   "g",
+  //   game.millisecondsTime
+  // );
+  if (game.millisecondsTime > player.state.timestamp + duration) {
+    return true;
   }
+  return false;
 }

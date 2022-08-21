@@ -13,7 +13,7 @@ export default class Game extends Phaser.Scene {
   };
 
   START_DELAY_DURATION: number = 4000;
-  HURT_DURATION: number = 2000;
+  HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
   // playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
