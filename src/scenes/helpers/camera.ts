@@ -19,7 +19,7 @@ export function isXinsideBox(game: Game): boolean {
   return true;
 }
 
-export function setCamera(game: Game): void {
+export function updateCamera(game: Game): void {
   var cPlayer = getCameraPlayerStatus(game);
   var cMover = getCameraMoverStatus(game);
   var cBorder = getCameraBorderStatus(game);

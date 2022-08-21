@@ -1,5 +1,5 @@
 import Game from "./Game";
-import { setCamera } from "./helpers/camera";
+import { updateCamera } from "./helpers/camera";
 import {
   controllerMovement,
   controllerSetFast,
@@ -20,14 +20,14 @@ import {
   updateLastDirectionTouched,
   checkPlayerOffscreen,
   updateKeepOnScreenLREnergyAttack,
-  checkEnergyAttacksOffscreen,
+  updateEnergyAttacksScreenWrap,
   setRespawn,
 } from "./helpers/movement";
 import { updateSpritesLR } from "./helpers/sprites";
 import {
   checkHitboxes,
   goToState,
-  hitboxOverlapReset as resetHitboxOverlap,
+  hitboxOverlapReset as resetAllHitboxOverlapMatrix,
 } from "./helpers/state";
 import { updateText } from "./helpers/text";
 
@@ -35,20 +35,25 @@ export function update(game: Game): void {
   // game.text = game.timer.actualFps;
   // console.log(game.timer);
   console.log(game.players[0].state);
+
+  // BEFORE PLAYERS
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
-  setCamera(game);
+  updateCamera(game);
   updateSpritesLR(game);
   updateText(game);
   updateAttackEnergyFrictionGroundRotation(game);
   updateAttackEnergyFrictionGroundMovement(game);
-  checkEnergyAttacksOffscreen(game);
   updateAttackEnergyFrictionWall(game);
+  updateKeepOnScreenLREnergyAttack(game);
+  // updateEnergyAttacksScreenWrap(game);
 
-  // PLAYER UPDATE
+  // PLAYERS
   updatePlayers(game);
+
+  // AFTER PLAYERS
   updatePadPrevious(game);
-  resetHitboxOverlap(game);
+  resetAllHitboxOverlapMatrix(game);
 }
 
 export function updatePlayers(game: Game): void {
@@ -94,7 +99,7 @@ export function updatePlayers(game: Game): void {
         frictionWallY(player, game);
         frictionAirY(player, game);
         jump(player, game);
-        updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
+
         controllerMovement(player, game);
         checkHitboxes(player, playerIndex, game);
         checkPlayerOffscreen(player, game);

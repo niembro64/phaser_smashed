@@ -1,16 +1,15 @@
 import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
 
-export function updateKeepOnScreenLREnergyAttack(
-  energyAttack: AttackEnergy,
-  game: Game
-): void {
-  if (energyAttack.sprite.x < 0) {
-    energyAttack.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
-  }
-  if (energyAttack.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
-    energyAttack.sprite.x = 0;
-  }
+export function updateKeepOnScreenLREnergyAttack(game: Game): void {
+  game.players.forEach((player) => {
+    if (player.char.attackEnergy.sprite.x < 0) {
+      player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
+    }
+    if (player.char.attackEnergy.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
+      player.char.attackEnergy.sprite.x = 0;
+    }
+  });
 }
 export function updateKeepOnScreenPlayer(game: Game): void {
   game.players.forEach((player) => {
@@ -52,10 +51,9 @@ export function setRespawn(player: Player, game: Game): void {
   player.char.sprite.body.setVelocityY(0);
 }
 
-export function checkEnergyAttacksOffscreen(game: Game): void {
+export function updateEnergyAttacksScreenWrap(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
-      // console.log("ASDF")
       // player.char.attackEnergy.sprite.body.setVelocityX(0);
       // player.char.attackEnergy.sprite.body.setVelocityY(0);
       player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
