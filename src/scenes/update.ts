@@ -1,4 +1,5 @@
 import Game from "./Game";
+import { setCamera } from "./helpers/camera";
 import {
   controllerMovement,
   controllerSetFast,
@@ -18,7 +19,6 @@ import {
   frictionWallY,
   updateWallTouchArray,
   updateLastDirectionTouched,
-  setCamera,
   updateKeepOnScreenPlayerDead,
   updateKeepOnScreenLREnergyAttack,
   updatePlaceOffscreenEnergyAttacks,

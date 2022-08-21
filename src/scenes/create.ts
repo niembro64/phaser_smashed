@@ -228,6 +228,9 @@ export function setPlayersCollide(game: Game): void {
 }
 
 export function createCameras(game: Game): void {
+  if (!game.debug.cameras) {
+    return;
+  }
   game.cameraBox.char.sprite = game.physics.add
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
