@@ -36,7 +36,6 @@ export function isPlayerOffscreen(player: Player, game: Game): boolean {
     player.char.sprite.x < 0 ||
     player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH
   ) {
-
     return true;
   }
   return false;
@@ -210,7 +209,9 @@ export function frictionGroundX(player: Player, game: Game): void {
 }
 
 export function hitThenFly(player: Player, game: Game): void {
-  player.char.sprite.body.setVelocityY(game.HITBACK_Y);
+  player.char.sprite.body.setVelocityY(
+    game.HITBACK_Y + (game.HITBACK_Y * player.char.damage) / 50
+  );
   if (player.char.sprite.flipX) {
     player.char.sprite.body.setVelocityX(game.HITBACK_X);
   } else {

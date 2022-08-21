@@ -6,3 +6,6 @@ export function addDamage(player: Player, damage: number): void {
     player.char.damage += damage;
   }
 }
+export function resetDamage(player: Player): void {
+  player.char.damage = 0;
+}
