@@ -1,7 +1,8 @@
 import "phaser";
 import { create } from "./create";
 import { update } from "./update";
-import { Camera, Debug, Player } from "./interfaces";
+import { Camera, Clock, Debug, Player } from "./interfaces";
+import { Time } from "phaser";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
@@ -22,6 +23,11 @@ export default class Game extends Phaser.Scene {
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
+  time: any;
+  timeNanoseconds: number = 0;
+  timeMilliseconds: number = 0;
+  timeSeconds: number = 0;
+  timeClock: Clock = { minutes: 0, seconds: 0 };
   timer: any;
   TITLE: any;
   SUBTITLE: any;
@@ -399,39 +405,15 @@ export default class Game extends Phaser.Scene {
       },
     },
   ];
+  onClockEvent: any;
+  scoreBoard: any;
 
   constructor() {
     super("game");
     // this.laserGroup;
   }
-  // style = {
-  //   "background-color": "lime",
-  //   position: "absolute",
-  //   top: "0%",
-  //   left: "50%",
-  //   width: "200px",
-  //   height: "100px",
-  //   font: "48px Arial",
-  //   "font-weight": "bold",
-  //   display: "flex",
-  // };
-
-  // element: any;
-  scoreBoard: any;
 
   preload() {
-    // this.load.bitmapFont(
-    //   "ice",
-    //   "assets/fonts/bitmap/iceicebaby.png",
-    //   "assets/fonts/bitmap/iceicebaby.xml"
-    // );
-
-    // this.load.plugin(
-    //   "rexdynamictextplugin",
-    //   "https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexdynamictextplugin.min.js",
-    //   true
-    // );
-
     this.load.image("laser", "images/laser.png");
     this.load.image("blockcracked", "images/blockcracked.png");
     this.load.image("fireball", "images/fireball.png");
@@ -462,6 +444,8 @@ export default class Game extends Phaser.Scene {
   }
 
   update() {
+    console.log(this.timeSeconds);
+    // console.log(this.time.now);
     update(this);
   }
 }

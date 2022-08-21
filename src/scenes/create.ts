@@ -1,7 +1,7 @@
 import Game from "./Game";
 
 export function create(game: Game) {
-  // game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
+  game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
 
   createBackground(game);
   createBackgroundTitles(game);

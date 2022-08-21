@@ -1,5 +1,10 @@
 import { Key } from "react";
 
+export interface Clock {
+  minutes: number;
+  seconds: number;
+}
+
 export interface Loc {
   x: number;
   y: number;

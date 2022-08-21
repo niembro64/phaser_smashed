@@ -25,3 +25,9 @@ export function isPlayerHit(playerIndex: number, game: Game): boolean {
   }
   return false;
 }
+
+export function updateTime(game: Game): void {
+  game.timeNanoseconds = game.time.now;
+  game.timeMilliseconds = Math.floor(game.timeNanoseconds);
+  game.timeSeconds = Math.floor(game.timeNanoseconds / 1000);
+}

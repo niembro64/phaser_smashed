@@ -24,7 +24,12 @@ import {
   isPlayerOffscreen,
 } from "./helpers/movement";
 import { setSpriteOpaque, updateSpritesLR } from "./helpers/sprites";
-import { goToState, isPlayerHit, resetAllHitboxes } from "./helpers/state";
+import {
+  goToState,
+  isPlayerHit,
+  resetAllHitboxes,
+  updateTime,
+} from "./helpers/state";
 import { updateText } from "./helpers/text";
 import { Player } from "./interfaces";
 import { setSpriteTransparent } from "./helpers/sprites";
@@ -35,6 +40,7 @@ export function update(game: Game): void {
   // console.log(game.players[0].state);
 
   // BEFORE PLAYERS
+  updateTime(game);
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   updateCamera(game);
@@ -51,7 +57,6 @@ export function update(game: Game): void {
 
   // AFTER PLAYERS
   updatePadPrevious(game);
-  console.log(game.hitboxOverlap[0]);
   resetAllHitboxes(game);
 }
 
