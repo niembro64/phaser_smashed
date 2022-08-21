@@ -1,5 +1,5 @@
-import Game from "./Game";
-import { Player } from "./interfaces";
+import Game from "../Game";
+import { Player } from "../interfaces";
 import { hitThenFly } from "./movement";
 
 export function goToState(

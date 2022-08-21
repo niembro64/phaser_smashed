@@ -1,5 +1,5 @@
-import Game from "./Game";
-import { Player } from "./interfaces";
+import Game from "../Game";
+import { Player } from "../interfaces";
 
 export function assignGamePadsConnected(game: Game): void {
   for (let i = 0; i < game.input.gamepad.total; i++) {

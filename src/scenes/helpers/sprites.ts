@@ -1,4 +1,4 @@
-import Game from "./Game";
+import Game from "../Game";
 import { hasPlayerTouchedWallRecently } from "./movement";
 
 export function updateSpritesLR(game: Game): void {

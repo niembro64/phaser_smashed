@@ -9,7 +9,7 @@ import {
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
   updateAttackEnergyFrictionGroundMovement,
-} from "./gamePad";
+} from "./helpers/gamePad";
 import {
   jump,
   frictionGroundX,
@@ -22,10 +22,10 @@ import {
   updateKeepOnScreenPlayerDead,
   updateKeepOnScreenLREnergyAttack,
   updatePlaceOffscreenEnergyAttacks,
-} from "./movement";
-import { updateSpritesLR } from "./sprites";
-import { checkHitboxes, goToState, hitboxOverlapReset } from "./state";
-import { updateText } from "./text";
+} from "./helpers/movement";
+import { updateSpritesLR } from './helpers/sprites';
+import { checkHitboxes, goToState, hitboxOverlapReset } from './helpers/state';
+import { updateText } from './helpers/text';
 
 export function update(game: Game): void {
   // game.text = game.timer.actualFps;

@@ -1,6 +1,5 @@
-import { GameObjects } from "phaser";
-import Game from "./Game";
-import { AttackEnergy, Location, Player } from "./interfaces";
+import Game from "../Game";
+import { AttackEnergy, Location, Player } from "../interfaces";
 
 export function updateKeepOnScreenLREnergyAttack(
   energyAttack: AttackEnergy,

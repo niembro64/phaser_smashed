@@ -1,4 +1,4 @@
-import Game from "./Game";
+import Game from "../Game";
 
 export function updateText(game: Game): void {
   const baseY = 0;
