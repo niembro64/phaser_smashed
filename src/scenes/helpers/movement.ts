@@ -217,17 +217,20 @@ export function hitbackFly(
   player.char.sprite.body.setVelocityY(
     hitbackx * (game.HITBACK_Y + (game.HITBACK_Y * player.char.damage) / 50)
   );
-  if (player.char.sprite.flipX) {
-    player.char.sprite.body.setVelocityX(
-      hitbackx * (game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50)
-    );
-  } else {
-    player.char.sprite.body.setVelocityX(
-      -1 *
-        hitbacky *
-        (game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50)
-    );
-  }
+  player.char.sprite.body.setVelocityX(
+    hitbackx * (game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50)
+  );
+  // if (player.char.sprite.flipX) {
+  //   player.char.sprite.body.setVelocityX(
+  //     hitbackx * (game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50)
+  //   );
+  // } else {
+  //   player.char.sprite.body.setVelocityX(
+  //     -1 *
+  //       hitbacky *
+  //       (game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50)
+  //   );
+  // }
 }
 
 // export function addKeyboard(player: Player, game: Game): void {

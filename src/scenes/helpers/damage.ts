@@ -1,6 +1,9 @@
+import { SignPrivateKeyInput } from "crypto";
+import { isMainThread } from "worker_threads";
 import Game from "../Game";
-import { Player } from "../interfaces";
+import { AttackEnergy, NormalizedVector, Player } from "../interfaces";
 import { hitbackFly } from "./movement";
+import { attackEnergy } from "./pad";
 
 export function onHitHandler(
   player: Player,
@@ -28,3 +31,14 @@ export function resetDamage(player: Player): void {
 
 // export function addHit(player: Player, game: Game): void {
 // }
+
+export function getNormalizedVector(
+  attack: AttackEnergy,
+  player: Player
+): NormalizedVector {
+  let newX = player.char.sprite.x - attack.sprite.x;
+  let newY = player.char.sprite.y - attack.sprite.y;
+  let newRatio = Math.sqrt(newX * newX + newY * newY);
+
+  return { x: newX / newRatio, y: newY / newRatio };
+}

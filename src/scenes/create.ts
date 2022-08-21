@@ -1,5 +1,5 @@
 import Game from "./Game";
-import { onHitHandler } from "./helpers/damage";
+import { getNormalizedVector, onHitHandler } from "./helpers/damage";
 import { setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
@@ -34,11 +34,13 @@ export function initializeHitboxOverlap(game: Game): void {
           function () {
             game.overlappingMatrix[playerIndex][j] = true;
 
+            let vector = getNormalizedVector(pj.char.attackEnergy, player);
+
             onHitHandler(
               player,
               pj.char.attackEnergy.damage,
-              pj.char.attackEnergy.hitback.x,
-              pj.char.attackEnergy.hitback.y,
+              pj.char.attackEnergy.hitback.x * vector.x,
+              pj.char.attackEnergy.hitback.y * vector.y,
               game
             );
 

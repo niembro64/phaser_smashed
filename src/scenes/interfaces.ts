@@ -159,3 +159,8 @@ export interface Debug {
   setCollidePlayerPlayers: boolean;
   setCollidePlayerEnergyAttacks: boolean;
 }
+
+export interface NormalizedVector {
+  x: number;
+  y: number;
+}
