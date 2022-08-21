@@ -32,13 +32,18 @@ export function updateAttackEnergyFrictionGroundMovement(game: Game): void {
 export function updateAttackEnergyFrictionWall(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (
-      player.char.attackEnergy.friction.stickWall &&
+      player.char.attackEnergy.friction.wallInvertRotation &&
       (player.char.attackEnergy.sprite.body.touching.left ||
         player.char.attackEnergy.sprite.body.touching.right)
     ) {
       player.char.attackEnergy.sprite.setAngularVelocity(
-        -player.char.attackEnergy.sprite.body.angularVelocity * 0.5
+        -player.char.attackEnergy.sprite.body.angularVelocity
       );
+
+      if (player.char.attackEnergy.friction.wallInvertSprite) {
+        player.char.attackEnergy.sprite.flipX =
+          !player.char.attackEnergy.sprite.flipX;
+      }
     }
   });
 }

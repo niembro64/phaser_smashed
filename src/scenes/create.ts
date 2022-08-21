@@ -1,5 +1,5 @@
 import Game from "./Game";
-import { setBlinkTrue, updateSpriteFilter } from "./helpers/sprites";
+import { setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
   game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
@@ -206,7 +206,7 @@ export function createScoreboard(game: Game): void {
       },
     }
   );
-  game.scoreBoard.setOrigin(0.5, 0).setAlpha(1);
+  game.scoreBoard.setOrigin(1, 0).setAlpha(1);
 
   game.players.forEach((player, playerIndex) => {
     player.text = game.add
@@ -234,7 +234,7 @@ export function createScoreboard(game: Game): void {
           },
         }
       )
-      .setOrigin(0.5, 0);
+      .setOrigin(1, 0);
   });
 }
 

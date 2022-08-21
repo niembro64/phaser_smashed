@@ -119,7 +119,8 @@ export interface PosFromCenter {
 export interface AttackEnergyFriction {
   air: number;
   ground: number;
-  stickWall: boolean;
+  wallInvertRotation: boolean;
+  wallInvertSprite: boolean;
 }
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
