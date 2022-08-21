@@ -3,7 +3,7 @@ import { isMainThread } from "worker_threads";
 import Game from "../Game";
 import { AttackEnergy, NormalizedVector, Player } from "../interfaces";
 import { hitbackFly } from "./movement";
-import { attackEnergy } from "./pad";
+import { attackEnergy, playerShootAttackEnergy } from "./pad";
 
 export function onHitHandler(
   player: Player,
@@ -37,9 +37,20 @@ export function onHitHandler(
 
     game.hitByMatrix[playerIndex][j] = game.hitByMatrix[playerIndex][j] + 1;
 
-    console.log(game.lastHitByMatrix[0]);
+    // console.log(game.lastHitByMatrix[0]);
     // console.log(game.hitByMatrix[0]);
   }
+}
+
+export function updateDeadMatrix(playerIndex: number, game: Game): void {
+  for (let j = 0; j < game.players.length; j++) {
+    if (game.lastHitByMatrix[playerIndex][j]) {
+      // console.log(playerIndex, j);
+      game.killedByMatrix[playerIndex][j]++;
+    }
+  }
+
+  // console.log(game.killedByMatrix[0]);
 }
 
 export function removeDamage(player: Player, damage: number): void {

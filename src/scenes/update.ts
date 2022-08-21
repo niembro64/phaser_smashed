@@ -37,7 +37,7 @@ import {
   updateTime,
 } from "./helpers/state";
 import { updateText } from "./helpers/text";
-import { resetDamage } from "./helpers/damage";
+import { resetDamage, updateDeadMatrix } from "./helpers/damage";
 
 export function update(game: Game): void {
   // BEFORE PLAYERS
@@ -113,6 +113,7 @@ export function updatePlayers(game: Game): void {
           setBlinkTrue(player);
           setGravityFalse(player);
           resetDamage(player);
+          updateDeadMatrix(playerIndex, game);
           goToState(player, "dead", game);
           setRespawn(player, game);
         }
@@ -150,6 +151,7 @@ export function updatePlayers(game: Game): void {
           setBlinkTrue(player);
           setRespawn(player, game);
           resetDamage(player);
+          updateDeadMatrix(playerIndex, game);
           goToState(player, "dead", game);
         }
 
