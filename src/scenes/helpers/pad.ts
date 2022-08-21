@@ -179,14 +179,6 @@ export function updatePadPrevious(game: Game): void {
   });
 }
 
-export function controllerSetFast(player: Player, game: Game): void {
-  // if (player.pad.B) {
-  //   player.char.fast = 2;
-  //   return;
-  // }
-  player.char.fast = 2;
-}
-
 export function controllerMovement(player: Player, game: Game): void {
   if (player.pad) {
     if (

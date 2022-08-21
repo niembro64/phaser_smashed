@@ -2,7 +2,6 @@ import Game from "./Game";
 import { updateCamera } from "./helpers/camera";
 import {
   controllerMovement,
-  controllerSetFast,
   updatePadPrevious,
   assignGamePadsConnected,
   attackEnergy,
@@ -90,7 +89,6 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         attackEnergy(player, game);
         updateLastDirectionTouched(player);
-        controllerSetFast(player, game);
         frictionGroundX(player, game);
         frictionAirX(player, game);
         frictionWallY(player, game);
@@ -109,7 +107,7 @@ export function updatePlayers(game: Game): void {
         }
 
         ////////////////////////////////
-        ///////// duration => dead
+        ///////// offscreen => dead
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           setBlinkTrue(player);
@@ -123,9 +121,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        attackEnergy(player, game);
         updateLastDirectionTouched(player);
-        controllerSetFast(player, game);
         frictionGroundX(player, game);
         frictionAirX(player, game);
         frictionWallY(player, game);
@@ -134,7 +130,7 @@ export function updatePlayers(game: Game): void {
         controllerMovement(player, game);
 
         ////////////////////////////////
-        ///////// duration => alive
+        ///////// !offscreen && duration => alive
         ////////////////////////////////
         if (
           !isPlayerOffscreen(player, game) &&
