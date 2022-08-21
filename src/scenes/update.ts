@@ -28,6 +28,7 @@ import {
 import {
   setSpriteFilterFalse,
   setSpriteFilterTrue,
+  updateAllSpriteFilters,
   updateSpritesLR,
 } from "./helpers/sprites";
 import {
@@ -37,8 +38,6 @@ import {
   updateTime,
 } from "./helpers/state";
 import { updateText } from "./helpers/text";
-import { Player } from "./interfaces";
-import { updateSpriteFilter } from "./helpers/sprites";
 
 export function update(game: Game): void {
   // game.text = game.timer.actualFps;
@@ -50,6 +49,7 @@ export function update(game: Game): void {
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   updateCamera(game);
+  updateAllSpriteFilters(game);
   updateSpritesLR(game);
   updateText(game);
   updateAttackEnergyFrictionGroundRotation(game);
@@ -85,12 +85,11 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        updateSpriteFilter(player, game);
 
         ////////////////////////////////
         ///////// timeout => dead
         ////////////////////////////////
-        if (game.secondsTime > game.START_DELAY_DURATION) {
+        if (game.millisecondsTime > game.START_DELAY_DURATION) {
           setGravityTrue(player);
           setSpriteFilterFalse(player);
           goToState(player, "alive", game);
@@ -101,8 +100,6 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        player.char.sprite.body.allowGravity = true;
-
         attackEnergy(player, game);
         updateLastDirectionTouched(player);
         controllerSetFast(player, game);
@@ -111,7 +108,7 @@ export function updatePlayers(game: Game): void {
         frictionWallY(player, game);
         frictionAirY(player, game);
         jump(player, game);
-        updateSpriteFilter(player, game);
+
         controllerMovement(player, game);
 
         if (isPlayerHit(playerIndex, game)) {
@@ -135,7 +132,6 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        updateSpriteFilter(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive
@@ -162,13 +158,13 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        updateSpriteFilter(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive
         ////////////////////////////////
         setTimeout(() => {
           setGravityTrue(player);
+          setSpriteFilterFalse(player);
           goToState(player, "alive", game);
         }, game.DEAD_DURATION);
 

@@ -36,3 +36,11 @@ export function updateTime(game: Game): void {
   game.clockTime.minutes = Math.floor(game.secondsTime / 60);
   game.clockTime.seconds = Math.floor(game.secondsTime % 60);
 }
+
+export function hasPassedTimeSinceStateChange(
+  player: Player,
+  duration: number
+): void {
+  if (player.state.timestamp) {
+  }
+}

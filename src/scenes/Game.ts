@@ -12,8 +12,9 @@ export default class Game extends Phaser.Scene {
     setCollidePlayerEnergyAttacks: false,
   };
 
-  START_DELAY_DURATION: number = 4;
-  HURT_DURATION: number = 400;
+  START_DELAY_DURATION: number = 4000;
+  HURT_DURATION: number = 2000;
+  DEAD_DURATION: number = 2000;
   // playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
   playerSpawnOrder: number[] = [2, 3, 0, 1];
@@ -34,7 +35,6 @@ export default class Game extends Phaser.Scene {
   SUBTITLE: any;
   SUPERTITLE: any;
   allPlayersWallTouchIterator: number = 0;
-  DEAD_DURATION: number = 4000;
   // RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   DEFAULT_SPEED_X: number = 50;
   DEFAULT_SPEED_Y: number = 30;

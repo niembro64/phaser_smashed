@@ -17,6 +17,12 @@ export function updateSpritesLR(game: Game): void {
   });
 }
 
+export function updateAllSpriteFilters(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    updateSpriteFilter(player, game);
+  });
+}
+
 export function updateSpriteFilter(player: Player, game: Game): void {
   if (player.char.colorFilter) {
     if (player.state.name === "hurt") {
