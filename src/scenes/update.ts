@@ -18,7 +18,7 @@ import {
   frictionWallY,
   updateWallTouchArray,
   updateLastDirectionTouched,
-  checkPlayerOffscreen,
+  isPlayerOffscreen,
   updateKeepOnScreenLREnergyAttack,
   updateEnergyAttacksScreenWrap,
   setRespawn,
@@ -34,7 +34,7 @@ import { updateText } from "./helpers/text";
 export function update(game: Game): void {
   // game.text = game.timer.actualFps;
   // console.log(game.timer);
-  console.log(game.players[0].state);
+  // console.log(game.players[0].state);
 
   // BEFORE PLAYERS
   assignGamePadsConnected(game);
@@ -67,8 +67,8 @@ export function updatePlayers(game: Game): void {
 
   // printAllPadsActive(player, game);
   game.players.forEach((player, playerIndex) => {
-    // if (player.playerNumber === 0) {
-    //   console.log("0", player.state);
+    // if (playerIndex === 0) {
+    //   console.log(player.playerNumber, player.char.name, player.state);
     // }
     switch (player.state) {
       case "start":
@@ -102,11 +102,14 @@ export function updatePlayers(game: Game): void {
 
         controllerMovement(player, game);
         checkHitboxes(player, playerIndex, game);
-        checkPlayerOffscreen(player, game);
 
         ////////////////////////////////
         ///////// timeout => air
         ////////////////////////////////
+        if (isPlayerOffscreen(player, game)) {
+          goToState(player, "dead");
+          setRespawn(player, game);
+        }
 
         break;
       case "hurt":
@@ -134,7 +137,7 @@ export function updatePlayers(game: Game): void {
         ///////// offscreen => dead
         ////////////////////////////////
         setTimeout(() => {
-          if (checkPlayerOffscreen(player, game)) {
+          if (isPlayerOffscreen(player, game)) {
             setRespawn(player, game);
             goToState(player, "dead");
           } else {

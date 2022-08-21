@@ -27,15 +27,14 @@ export function updateKeepOnScreenPlayer(game: Game): void {
     }
   });
 }
-export function checkPlayerOffscreen(player: Player, game: Game): boolean {
+export function isPlayerOffscreen(player: Player, game: Game): boolean {
   if (
     player.char.sprite.y < 0 ||
     player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT ||
     player.char.sprite.x < 0 ||
     player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH
   ) {
-    // goToState(player, 'dead');
-    // setRespawn(player, game);
+
     return true;
   }
   return false;
