@@ -1,6 +1,6 @@
-import { Key } from "react";
+import { Key } from 'react';
 
-export interface Location {
+export interface Loc {
   x: number;
   y: number;
   zoom: number;
@@ -8,7 +8,7 @@ export interface Location {
 
 export interface CameraHelper {
   helper: any;
-  helperState: Location | any;
+  helperState: Loc | any;
 }
 
 export interface Player {
@@ -76,7 +76,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: "up" | "down" | "left" | "right" | "camera" | null;
+  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | 'camera' | null;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
 }
@@ -134,3 +134,7 @@ export interface AttackEnergy {
 //     fast: typeof Phaser.Input.Keyboard.Key | any;
 //     jump: typeof Phaser.Input.Keyboard.Key | any;
 // }
+
+export interface Debug {
+  cameras: boolean;
+}

@@ -1,4 +1,4 @@
-import Game from "./Game";
+import Game from "../Game";
 
 export function updateText(game: Game): void {
   const baseY = 0;
@@ -40,7 +40,7 @@ export function updatePlayerText(game: Game, zoom: number, newY: number): void {
       );
     player.text.x =
       game.cameraMover.char.sprite.x +
-      game.textLocations[game.playersOrder[playerIndex]] * (1 / zoom);
+      game.textLocations[game.playerSpawnOrder[playerIndex]] * (1 / zoom);
 
     player.text.y = newY;
   });
