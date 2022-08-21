@@ -109,13 +109,12 @@ export function updatePlayers(game: Game): void {
         frictionWallY(player, game);
         frictionAirY(player, game);
         jump(player, game);
-
         controllerMovement(player, game);
 
         if (isPlayerHit(playerIndex, game)) {
           console.log("HIT", player.char.name);
           setBlinkTrue(player);
-          setGravityFalse(player);
+          setGravityTrue(player);
           hitThenFly(player, game);
           goToState(player, "hurt", game);
         }
@@ -134,6 +133,15 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        attackEnergy(player, game);
+        updateLastDirectionTouched(player);
+        controllerSetFast(player, game);
+        frictionGroundX(player, game);
+        frictionAirX(player, game);
+        frictionWallY(player, game);
+        frictionAirY(player, game);
+        jump(player, game);
+        controllerMovement(player, game);
 
         ////////////////////////////////
         ///////// timeout => alive

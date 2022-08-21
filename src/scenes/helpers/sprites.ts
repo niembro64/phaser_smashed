@@ -18,7 +18,7 @@ export function updateSpritesLR(game: Game): void {
 }
 
 export function updateAllSpriteFilters(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.players.forEach((player) => {
     updateSpriteFilter(player, game);
   });
 }
@@ -27,14 +27,28 @@ export function updateSpriteFilter(player: Player, game: Game): void {
   if (player.char.colorFilter) {
     if (player.state.name === "hurt") {
       // HURT
-      if (Math.floor(game.millisecondsTime / 100) % 2 === 0) {
+      if (
+        Math.floor(
+          (game.millisecondsTime - player.state.timestamp) /
+            game.HURT_FLICKER_SPEED
+        ) %
+          2 ===
+        0
+      ) {
         filterRed(player);
       } else {
         filterLight(player);
       }
     } else {
       // NOT HURT
-      if (Math.floor(game.millisecondsTime / 100) % 2 === 0) {
+      if (
+        Math.floor(
+          (game.millisecondsTime - player.state.timestamp) /
+            game.HURT_FLICKER_SPEED
+        ) %
+          2 ===
+        0
+      ) {
         filterDark(player);
       } else {
         filterLight(player);

@@ -12,6 +12,7 @@ export default class Game extends Phaser.Scene {
     setCollidePlayerEnergyAttacks: false,
   };
 
+  HURT_FLICKER_SPEED: number = 100;
   START_DELAY_DURATION: number = 4000;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
