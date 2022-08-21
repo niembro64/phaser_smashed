@@ -10,7 +10,7 @@ import {
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
   updateAttackEnergyFrictionGroundMovement,
-} from './helpers/gamePad';
+} from './helpers/pad';
 import {
   jump,
   frictionGroundX,
