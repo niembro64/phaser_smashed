@@ -212,8 +212,7 @@ export function createScoreboard(game: Game): void {
           },
         }
       )
-      .setOrigin(0.5, 0)
-      .setAlpha(1);
+      .setOrigin(0.5, 0);
   });
 }
 
