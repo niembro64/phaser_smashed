@@ -1,4 +1,4 @@
-import Game from "./Game";
+import Game from './Game';
 
 export function create(game: Game) {
   // game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
@@ -95,72 +95,72 @@ export function setAttackEnergyCollideWithPlayers(game: Game): void {
 }
 
 export function createBackground(game: Game): void {
-  game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
+  game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, 'background');
   game.background.setScale(1);
   game.background.setImmovable(true);
   game.background.body.allowGravity = false;
 }
 export function createPlatforms(game: Game): void {
   game.platforms = game.physics.add.staticGroup();
-  game.platforms.create(1200, 700, "platformVertical");
-  game.platforms.create(1200, 850, "platformShort");
-  game.platforms.create(600, 900, "platformShort");
-  game.platforms.create(1920 / 2, 1080 / 2, "platformHorizontal");
-  game.platforms.create(300, 1080 / 1.5, "platformHorizontal");
-  game.platforms.create(1700, 1080 / 1.5, "platformHorizontal");
+  game.platforms.create(1200, 700, 'platformVertical');
+  game.platforms.create(1200, 850, 'platformShort');
+  game.platforms.create(600, 900, 'platformShort');
+  game.platforms.create(1920 / 2, 1080 / 2, 'platformHorizontal');
+  game.platforms.create(300, 1080 / 1.5, 'platformHorizontal');
+  game.platforms.create(1700, 1080 / 1.5, 'platformHorizontal');
 
-  game.platforms.create(400, 500, "platformShort");
-  game.platforms.create(320, 500 - 33, "brick");
-  game.platforms.create(480, 500 - 33, "brick");
+  game.platforms.create(400, 500, 'platformShort');
+  game.platforms.create(320, 500 - 33, 'brick');
+  game.platforms.create(480, 500 - 33, 'brick');
 }
 
 export function createTable(game: Game): void {
-  game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
+  game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, 'table');
   game.table.setScale(1);
   game.table.setImmovable(true);
   game.table.body.allowGravity = false;
 }
 export function createBackgroundTitles(game: Game): void {
   game.title = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, "SMASHED", {
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, 'SMASHED', {
       // font: "300px Impact",
-      fontFamily: "Impact",
+      fontFamily: 'Impact',
       // fontFamily: "'Press Start 2P'",
       // font: "64px Press Start 2P",
       // font: '"Press Start 2P"',
-      fontSize: "500px",
+      fontSize: '500px',
     })
     .setOrigin(0.5)
-    .setColor("black")
+    .setColor('black')
     .setAlpha(0.3);
   game.subTitle = game.add
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 13,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
-      "NIEMBRO64",
+      'NIEMBRO64',
       {
         // font: "300px Impact",
-        fontFamily: "Impact",
+        fontFamily: 'Impact',
         // fontFamily: "'Press Start 2P'",
         // font: "64px Press Start 2P",
         // font: '"Press Start 2P"',
-        fontSize: "50px",
+        fontSize: '50px',
       }
     )
     .setOrigin(0.5)
-    .setColor("black")
+    .setColor('black')
     .setAlpha(0.3);
   game.superTitle = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, "YOUNG-CHEZ", {
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, 'YOUNG-CHEZ', {
       // font: "300px Impact",
-      fontFamily: "Impact",
+      fontFamily: 'Impact',
       // fontFamily: "'Press Start 2P'",
       // font: "64px Press Start 2P",
       // font: '"Press Start 2P"',
-      fontSize: "80px",
+      fontSize: '80px',
     })
     .setOrigin(0.5)
-    .setColor("black")
+    .setColor('black')
     .setAlpha(0.3);
 }
 
@@ -168,17 +168,17 @@ export function createScoreboard(game: Game): void {
   game.scoreBoard = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "",
+    '',
     {
       // font: "Arial 100px",
-      fontSize: "50px",
+      fontSize: '50px',
       fontFamily: "'Press Start 2P'",
-      stroke: "black",
+      stroke: 'black',
       strokeThickness: 1,
       shadow: {
         offsetX: 0,
         offsetY: 3,
-        color: "#000",
+        color: '#000',
         blur: 10,
         stroke: true,
         fill: true,
@@ -192,20 +192,20 @@ export function createScoreboard(game: Game): void {
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "XXX",
+        'XXX',
         {
           // font: "Arial 100px",
-          fontSize: "30px",
+          fontSize: '30px',
           fontFamily: "'Press Start 2P'",
           // color: "white",
           color: player.char.color.primary,
           // stroke: player.char.color.primary,
-          stroke: "black",
+          stroke: 'black',
           strokeThickness: 1,
           shadow: {
             offsetX: 0,
             offsetY: 3,
-            color: "#000",
+            color: '#000',
             blur: 10,
             stroke: true,
             fill: true,
@@ -232,7 +232,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setScale(0.05)
     .setAlpha(0.5);
@@ -244,7 +244,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
@@ -257,7 +257,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setRotation(Math.PI / 4)
     .setScale(0.05)
@@ -270,7 +270,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
@@ -283,7 +283,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerRed"
+      'centerRed'
     )
     .setScale(0.08)
     .setRotation(Math.PI / 4);
