@@ -52,7 +52,7 @@ export function update(game: Game): void {
   updateAttackEnergyFrictionGroundMovement(game);
   updateAttackEnergyFrictionWall(game);
   updateKeepOnScreenLREnergyAttack(game);
-  updateDeathsAndKills(game);
+
   // updateEnergyAttacksScreenWrap(game);
 
   // PLAYERS

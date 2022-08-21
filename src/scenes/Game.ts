@@ -5,7 +5,7 @@ import { Camera, Clock, Debug, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
-    useCameras: false,
+    useCameras: true,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -137,6 +137,7 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       scoreBoardDamage: "",
+      scoreBoardDeathsKills: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -220,6 +221,7 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       scoreBoardDamage: "",
+      scoreBoardDeathsKills: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -303,6 +305,7 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       scoreBoardDamage: "",
+      scoreBoardDeathsKills: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -385,6 +388,7 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       scoreBoardDamage: "",
+      scoreBoardDeathsKills: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,

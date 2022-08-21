@@ -37,6 +37,8 @@ export function onHitHandler(
     // console.log(game.lastHitByMatrix[0]);
     // console.log(game.hitByMatrix[0]);
   }
+
+  updateDeathsAndKills(game);
 }
 
 export function updateDeadMatrix(playerIndex: number, game: Game): void {

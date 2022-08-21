@@ -17,6 +17,7 @@ export function updateText(game: Game): void {
 
   updateClockText(game);
   updateDamageText(game, zoom, newY);
+  updateDeathsKillsText(game, zoom, newY);
 }
 
 export function updateClockText(game: Game): void {
@@ -36,6 +37,26 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
       // " " +
       Math.round(player.char.damage).toString() + "%"
     );
+    player.scoreBoardDamage.x =
+      game.cameraMover.char.sprite.x +
+      (game.textLocations[game.playerSpawnOrder[playerIndex]] +
+        game.textLocationLROffset) *
+        (1 / zoom);
+
+    player.scoreBoardDamage.y = newY;
+  });
+}
+export function updateDeathsKillsText(
+  game: Game,
+  zoom: number,
+  newY: number
+): void {
+  game.players.forEach((player, playerIndex) => {
+    player.scoreBoardDeathsKills
+      .setScale(1 / zoom, 1 / zoom)
+      .setText(
+        player.killCount.toString() + ":" + player.deathCount.toString()
+      );
     player.scoreBoardDamage.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +

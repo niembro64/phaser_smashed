@@ -252,6 +252,37 @@ export function createScoreboard(game: Game): void {
       .setOrigin(1, 0)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
+  game.players.forEach((player, playerIndex) => {
+    player.scoreBoardDeathsKills = game.add
+      .text(
+        game.SCREEN_DIMENSIONS.WIDTH / 2 +
+          game.playerSpawnLocations[playerIndex],
+        game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
+        "XXX",
+        {
+          // font: "Arial 100px",
+          fontSize: "40px",
+          fontFamily: "Consolas",
+          // fontFamily: "'Courier New'",
+          // fontFamily: "'Press Start 2P'",
+          // color: "white",
+          color: player.char.color.primary,
+          // stroke: player.char.color.primary,
+          stroke: "black",
+          strokeThickness: 1,
+          shadow: {
+            offsetX: 0,
+            offsetY: 3,
+            color: "#000",
+            blur: 10,
+            stroke: true,
+            fill: true,
+          },
+        }
+      )
+      .setOrigin(1, 0)
+      .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
+  });
 }
 
 export function setPlayersCollide(game: Game): void {
