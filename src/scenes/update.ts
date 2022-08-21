@@ -41,10 +41,6 @@ import {
 import { updateText } from "./helpers/text";
 
 export function update(game: Game): void {
-  // game.text = game.timer.actualFps;
-  // console.log(game.timer);
-  // console.log(game.players[0].state);
-
   // BEFORE PLAYERS
   updateTime(game);
   assignGamePadsConnected(game);
@@ -68,15 +64,6 @@ export function update(game: Game): void {
 }
 
 export function updatePlayers(game: Game): void {
-  // for (let i = 0; i < 4; i++) {
-  //   for (let j = 0; j < 4; j++) {
-  //     if (game.hitboxOverlap[i][j] === true) {
-  //       console.log(game.hitboxOverlap);
-  //     }
-  //   }
-  // }
-
-  // printAllPadsActive(player, game);
   game.players.forEach((player, playerIndex) => {
     // if (playerIndex === 0) {
     //   console.log(player.playerNumber, player.char.name, player.state);
@@ -88,7 +75,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
 
         ////////////////////////////////
-        ///////// timeout => dead
+        ///////// duration => alive
         ////////////////////////////////
         if (hasThisDurationPassed(player, game.START_DELAY_DURATION, game)) {
           setGravityTrue(player);
@@ -111,15 +98,18 @@ export function updatePlayers(game: Game): void {
         jump(player, game);
         controllerMovement(player, game);
 
+        ////////////////////////////////
+        ///////// hit => hurt
+        ////////////////////////////////
         if (isPlayerHit(playerIndex, game)) {
-          console.log("HIT", player.char.name);
           setBlinkTrue(player);
           setGravityTrue(player);
           hitThenFly(player, game);
           goToState(player, "hurt", game);
         }
+
         ////////////////////////////////
-        ///////// timeout => air
+        ///////// duration => dead
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           setBlinkTrue(player);
@@ -144,23 +134,25 @@ export function updatePlayers(game: Game): void {
         controllerMovement(player, game);
 
         ////////////////////////////////
-        ///////// timeout => alive
+        ///////// duration => alive
         ////////////////////////////////
+        if (
+          !isPlayerOffscreen(player, game) &&
+          hasThisDurationPassed(player, game.HURT_DURATION, game)
+        ) {
+          setGravityTrue(player);
+          setBlinkFalse(player);
+          goToState(player, "alive", game);
+        }
 
         ////////////////////////////////
         ///////// offscreen => dead
         ////////////////////////////////
-        if (hasThisDurationPassed(player, game.HURT_DURATION, game)) {
-          if (isPlayerOffscreen(player, game)) {
-            setGravityFalse(player);
-            setBlinkTrue(player);
-            setRespawn(player, game);
-            goToState(player, "dead", game);
-          } else {
-            setGravityTrue(player);
-            setBlinkFalse(player);
-            goToState(player, "alive", game);
-          }
+        if (isPlayerOffscreen(player, game)) {
+          setGravityFalse(player);
+          setBlinkTrue(player);
+          setRespawn(player, game);
+          goToState(player, "dead", game);
         }
 
         break;
@@ -170,7 +162,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
 
         ////////////////////////////////
-        ///////// timeout => alive
+        ///////// duration => alive
         ////////////////////////////////
         if (hasThisDurationPassed(player, game.DEAD_DURATION, game)) {
           setGravityTrue(player);

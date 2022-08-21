@@ -42,14 +42,6 @@ export function hasThisDurationPassed(
   duration: number,
   game: Game
 ): boolean {
-  // console.log(
-  //   "p",
-  //   player.state.timestamp,
-  //   "d",
-  //   duration,
-  //   "g",
-  //   game.millisecondsTime
-  // );
   if (game.millisecondsTime > player.state.timestamp + duration) {
     return true;
   }
