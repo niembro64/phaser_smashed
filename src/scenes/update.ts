@@ -90,6 +90,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        setSpriteOpaque(player);
         player.char.sprite.body.allowGravity = true;
 
         attackEnergy(player, game);

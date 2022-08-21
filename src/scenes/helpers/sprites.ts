@@ -18,8 +18,19 @@ export function updateSpritesLR(game: Game): void {
 }
 
 export function setSpriteTransparent(player: Player): void {
-  player.char.sprite.setAlpha(0.1);
+  // player.char.sprite.setAlpha(0.5);
+  // player.char.sprite.setTint(0x000000);
+  setTDark(player);
 }
+
+export function setTDark(player: Player): void {
+  player.char.sprite.setTint(0x333333);
+}
+export function setTLight(player: Player): void {
+  player.char.sprite.setTint(0x888888);
+}
+
 export function setSpriteOpaque(player: Player): void {
-  player.char.sprite.setAlpha(1);
+  // player.char.sprite.setAlpha(1);
+  player.char.sprite.setTint(0xffffff);
 }
