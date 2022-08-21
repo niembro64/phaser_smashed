@@ -1,6 +1,6 @@
 import Game from "../Game";
 import { Player } from "../interfaces";
-import { hitThenFly } from "./movement";
+import { hitbackFly } from "./movement";
 
 export function goToState(
   player: Player,

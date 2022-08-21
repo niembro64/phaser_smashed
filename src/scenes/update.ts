@@ -19,7 +19,7 @@ import {
   updateLastDirectionTouched,
   updateKeepOnScreenLREnergyAttack,
   setRespawn,
-  hitThenFly,
+  hitbackFly,
   isPlayerOffscreen,
   setGravityTrue,
   setGravityFalse,
@@ -103,7 +103,7 @@ export function updatePlayers(game: Game): void {
         if (isPlayerHit(playerIndex, game)) {
           setBlinkTrue(player);
           setGravityTrue(player);
-          hitThenFly(player, game);
+          hitbackFly(player, game);
           goToState(player, "hurt", game);
         }
 

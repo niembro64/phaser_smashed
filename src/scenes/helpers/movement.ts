@@ -208,14 +208,18 @@ export function frictionGroundX(player: Player, game: Game): void {
   }
 }
 
-export function hitThenFly(player: Player, game: Game): void {
+export function hitbackFly(player: Player, game: Game): void {
   player.char.sprite.body.setVelocityY(
     game.HITBACK_Y + (game.HITBACK_Y * player.char.damage) / 50
   );
   if (player.char.sprite.flipX) {
-    player.char.sprite.body.setVelocityX(game.HITBACK_X);
+    player.char.sprite.body.setVelocityX(
+      game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50
+    );
   } else {
-    player.char.sprite.body.setVelocityX(-game.HITBACK_X);
+    player.char.sprite.body.setVelocityX(
+      -1 * (game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50)
+    );
   }
 }
 
