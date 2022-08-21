@@ -38,7 +38,7 @@ export function initializeHitboxOverlap(game: Game): void {
   });
 }
 
-export function updatePlayersInitialPositions(game: Game): void {
+export function setPlayersInitialPositions(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.initializeCharPosition.x =
       game.playerSpawnLocations[game.playerSpawnOrder[playerIndex]];
@@ -47,7 +47,14 @@ export function updatePlayersInitialPositions(game: Game): void {
 }
 
 export function createPlayers(game: Game): void {
-  updatePlayersInitialPositions(game);
+  setPlayersInitialPositions(game);
+
+  game.players.forEach((player, playerIndex) => {
+    
+
+  })
+
+
   for (let i = 0; i < 4; i++) {
     game.players[game.playerSpawnOrder[i]].char.sprite =
       game.physics.add.sprite(

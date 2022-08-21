@@ -1,6 +1,5 @@
-import Game from '../Game';
-import { AttackEnergy, Loc, Player } from '../interfaces';
-import { goToState } from './state';
+import Game from "../Game";
+import { AttackEnergy, Player } from "../interfaces";
 
 export function updateKeepOnScreenLREnergyAttack(
   energyAttack: AttackEnergy,
@@ -38,7 +37,7 @@ export function checkPlayerOffscreen(player: Player, game: Game): boolean {
   ) {
     // goToState(player, 'dead');
     // setRespawn(player, game);
-    return true; 
+    return true;
   }
   return false;
 }
@@ -68,16 +67,16 @@ export function checkEnergyAttacksOffscreen(game: Game): void {
 
 export function updateLastDirectionTouched(player: Player): void {
   if (player.char.sprite.body.touching.up) {
-    player.char.lastDirectionTouched = 'up';
+    player.char.lastDirectionTouched = "up";
   }
   if (player.char.sprite.body.touching.down) {
-    player.char.lastDirectionTouched = 'down';
+    player.char.lastDirectionTouched = "down";
   }
   if (player.char.sprite.body.touching.left) {
-    player.char.lastDirectionTouched = 'left';
+    player.char.lastDirectionTouched = "left";
   }
   if (player.char.sprite.body.touching.right) {
-    player.char.lastDirectionTouched = 'right';
+    player.char.lastDirectionTouched = "right";
   }
 }
 
@@ -134,7 +133,7 @@ export function jump(player: Player, game: Game): void {
 
     // horizontal stuff
     if (
-      player.char.lastDirectionTouched === 'left' &&
+      player.char.lastDirectionTouched === "left" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
@@ -147,7 +146,7 @@ export function jump(player: Player, game: Game): void {
       return;
     }
     if (
-      player.char.lastDirectionTouched === 'right' &&
+      player.char.lastDirectionTouched === "right" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(

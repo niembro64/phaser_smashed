@@ -181,13 +181,13 @@ export function getCameraPlayerStatus(game: Game): Loc {
 
 
 export function getCameraMoverStatus(game: Game): Loc {
-  var x_low: number = Infinity;
-  var x_high: number = 0;
-  var y_low: number = Infinity;
-  var y_high: number = 0;
+  // var x_low: number = Infinity;
+  // var x_high: number = 0;
+  // var y_low: number = Infinity;
+  // var y_high: number = 0;
 
   var spritePlayer = game.cameraPlayers.char.sprite;
-  var spriteMover = game.cameraMover.char.sprite;
+  // var spriteMover = game.cameraMover.char.sprite;
   var spriteCenter = game.cameraCenter.char.sprite;
 
   game.cameraMoverZoomStatusKeeper =

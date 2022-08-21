@@ -1,16 +1,15 @@
-import Game from './Game';
-import { setCamera } from './helpers/camera';
+import Game from "./Game";
+import { setCamera } from "./helpers/camera";
 import {
   controllerMovement,
   controllerSetFast,
   updatePadPrevious,
   assignGamePadsConnected,
-  printAllPadsActive,
   attackEnergy,
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
   updateAttackEnergyFrictionGroundMovement,
-} from './helpers/pad';
+} from "./helpers/pad";
 import {
   jump,
   frictionGroundX,
@@ -23,14 +22,14 @@ import {
   updateKeepOnScreenLREnergyAttack,
   checkEnergyAttacksOffscreen,
   setRespawn,
-} from './helpers/movement';
-import { updateSpritesLR } from './helpers/sprites';
+} from "./helpers/movement";
+import { updateSpritesLR } from "./helpers/sprites";
 import {
   checkHitboxes,
   goToState,
   hitboxOverlapReset as resetHitboxOverlap,
-} from './helpers/state';
-import { updateText } from './helpers/text';
+} from "./helpers/state";
+import { updateText } from "./helpers/text";
 
 export function update(game: Game): void {
   // game.text = game.timer.actualFps;
@@ -67,7 +66,7 @@ export function updatePlayers(game: Game): void {
     //   console.log("0", player.state);
     // }
     switch (player.state) {
-      case 'start':
+      case "start":
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
@@ -77,11 +76,11 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         setTimeout(() => {
           player.char.sprite.body.allowGravity = true;
-          goToState(player, 'alive');
+          goToState(player, "alive");
         }, game.START_DELAY_DURATION);
 
         break;
-      case 'alive':
+      case "alive":
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
@@ -105,7 +104,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
 
         break;
-      case 'hurt':
+      case "hurt":
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
@@ -132,15 +131,15 @@ export function updatePlayers(game: Game): void {
         setTimeout(() => {
           if (checkPlayerOffscreen(player, game)) {
             setRespawn(player, game);
-            goToState(player, 'dead');
+            goToState(player, "dead");
           } else {
             player.char.sprite.body.allowGravity = true;
-            goToState(player, 'alive');
+            goToState(player, "alive");
           }
         }, game.HURT_DURATION);
 
         break;
-      case 'dead':
+      case "dead":
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
@@ -150,7 +149,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         setTimeout(() => {
           player.char.sprite.body.allowGravity = true;
-          goToState(player, 'alive');
+          goToState(player, "alive");
         }, game.DEAD_DURATION);
 
         break;
