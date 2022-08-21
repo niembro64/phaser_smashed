@@ -34,7 +34,12 @@ export function initializeHitboxOverlap(game: Game): void {
           function () {
             game.hitboxOverlap[playerIndex][j] = true;
 
-            addDamage(player, pj.char.attackEnergy.damage);
+            addDamage(
+              player,
+              pj.char.attackEnergy.damage,
+              pj.char.attackEnergy.hitback,
+              game
+            );
           }
         );
       }

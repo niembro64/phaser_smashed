@@ -24,7 +24,7 @@ export interface Player {
   char: Char;
   keyboard: Keyboard | any;
   pad: Gamepad | any;
-  padPrev: padStatePrevious;
+  padPrev: PadStatePrevious;
 }
 
 export interface State {
@@ -49,7 +49,7 @@ export interface CameraChar {
   zoom: number;
 }
 
-export interface padStatePrevious {
+export interface PadStatePrevious {
   up: boolean;
   down: boolean;
   left: boolean;
@@ -87,7 +87,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: "up" | "down" | "left" | "right" | "camera" | null;
+  lastDirectionTouched: "up" | "down" | "left" | "right" | null;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
 }
@@ -133,6 +133,7 @@ export interface AttackEnergy {
   gravity: boolean;
   walls: boolean;
   damage: number;
+  hitback: number;
   scale: number;
   mass: number;
   allowVelocityY: boolean;

@@ -171,6 +171,7 @@ export default class Game extends Phaser.Scene {
           gravity: true,
           walls: true,
           damage: 5,
+          hitback: 0.1,
           scale: 2,
           mass: 0.5,
           allowVelocityY: true,
@@ -251,6 +252,7 @@ export default class Game extends Phaser.Scene {
           gravity: false,
           walls: false,
           damage: 20,
+          hitback: 0.2,
           scale: 1,
           mass: 0.5,
           allowVelocityY: false,
@@ -330,6 +332,7 @@ export default class Game extends Phaser.Scene {
           gravity: true,
           walls: true,
           damage: 10,
+          hitback: 0.6,
           scale: 1.3,
           mass: 50,
           allowVelocityY: true,
@@ -409,6 +412,7 @@ export default class Game extends Phaser.Scene {
           gravity: true,
           walls: true,
           damage: 25,
+          hitback: 0.3,
           scale: 1,
           mass: 2,
           allowVelocityY: true,
@@ -432,7 +436,6 @@ export default class Game extends Phaser.Scene {
       },
     },
   ];
-
 
   constructor() {
     super("game");
