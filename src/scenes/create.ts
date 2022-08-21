@@ -35,13 +35,23 @@ export function create(game: Game) {
   });
 }
 
+export function updatePlayersInitialPositions(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    player.char.initializeCharPosition.x =
+      game.playerSpawnLocations[game.playerSpawnOrder[playerIndex]];
+    // player.char.initializeCharPosition.y = game.playerSpawnLocations.y;
+  });
+}
+
 export function createPlayers(game: Game): void {
+  updatePlayersInitialPositions(game);
   for (let i = 0; i < 4; i++) {
-    game.players[game.playersOrder[i]].char.sprite = game.physics.add.sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[i],
-      game.INITIAL.POSITION.PLAYER_Y,
-      game.players[game.playersOrder[i]].char.name
-    );
+    game.players[game.playerSpawnOrder[i]].char.sprite =
+      game.physics.add.sprite(
+        game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerSpawnLocations[i],
+        game.INITIAL.POSITION.PLAYER_Y,
+        game.players[game.playerSpawnOrder[i]].char.name
+      );
   }
 
   game.players.forEach((player, playerIndex) => {
@@ -52,7 +62,7 @@ export function createPlayers(game: Game): void {
     player.char.sprite.setScale(1);
     player.char.sprite.flipX = !player.char.initializeCharPosition.lookingRight;
     player.char.sprite.setCollideWorldBounds(false);
-    game.physics.add.collider(player.char.sprite, game.platforms);
+    game.physics.add.collider(player.char.sprite, game.PLATFORMS);
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
 }
@@ -75,7 +85,7 @@ export function createEnergyAttacks(game: Game): void {
     if (player.char.attackEnergy.walls) {
       game.physics.add.collider(
         player.char.attackEnergy.sprite,
-        game.platforms
+        game.PLATFORMS
       );
     }
   });
@@ -95,33 +105,33 @@ export function setAttackEnergyCollideWithPlayers(game: Game): void {
 }
 
 export function createBackground(game: Game): void {
-  game.background = game.physics.add.sprite(1920 / 2, 1080 / 2, 'background');
-  game.background.setScale(1);
-  game.background.setImmovable(true);
-  game.background.body.allowGravity = false;
+  game.BACKGROUND = game.physics.add.sprite(1920 / 2, 1080 / 2, 'background');
+  game.BACKGROUND.setScale(1);
+  game.BACKGROUND.setImmovable(true);
+  game.BACKGROUND.body.allowGravity = false;
 }
 export function createPlatforms(game: Game): void {
-  game.platforms = game.physics.add.staticGroup();
-  game.platforms.create(1200, 700, 'platformVertical');
-  game.platforms.create(1200, 850, 'platformShort');
-  game.platforms.create(600, 900, 'platformShort');
-  game.platforms.create(1920 / 2, 1080 / 2, 'platformHorizontal');
-  game.platforms.create(300, 1080 / 1.5, 'platformHorizontal');
-  game.platforms.create(1700, 1080 / 1.5, 'platformHorizontal');
+  game.PLATFORMS = game.physics.add.staticGroup();
+  game.PLATFORMS.create(1200, 700, 'platformVertical');
+  game.PLATFORMS.create(1200, 850, 'platformShort');
+  game.PLATFORMS.create(600, 900, 'platformShort');
+  game.PLATFORMS.create(1920 / 2, 1080 / 2, 'platformHorizontal');
+  game.PLATFORMS.create(300, 1080 / 1.5, 'platformHorizontal');
+  game.PLATFORMS.create(1700, 1080 / 1.5, 'platformHorizontal');
 
-  game.platforms.create(400, 500, 'platformShort');
-  game.platforms.create(320, 500 - 33, 'brick');
-  game.platforms.create(480, 500 - 33, 'brick');
+  game.PLATFORMS.create(400, 500, 'platformShort');
+  game.PLATFORMS.create(320, 500 - 33, 'brick');
+  game.PLATFORMS.create(480, 500 - 33, 'brick');
 }
 
 export function createTable(game: Game): void {
-  game.table = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, 'table');
-  game.table.setScale(1);
-  game.table.setImmovable(true);
-  game.table.body.allowGravity = false;
+  game.TABLE = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, 'table');
+  game.TABLE.setScale(1);
+  game.TABLE.setImmovable(true);
+  game.TABLE.body.allowGravity = false;
 }
 export function createBackgroundTitles(game: Game): void {
-  game.title = game.add
+  game.TITLE = game.add
     .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, 'SMASHED', {
       // font: "300px Impact",
       fontFamily: 'Impact',
@@ -133,7 +143,7 @@ export function createBackgroundTitles(game: Game): void {
     .setOrigin(0.5)
     .setColor('black')
     .setAlpha(0.3);
-  game.subTitle = game.add
+  game.SUBTITLE = game.add
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 13,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
@@ -150,7 +160,7 @@ export function createBackgroundTitles(game: Game): void {
     .setOrigin(0.5)
     .setColor('black')
     .setAlpha(0.3);
-  game.superTitle = game.add
+  game.SUPERTITLE = game.add
     .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, 'YOUNG-CHEZ', {
       // font: "300px Impact",
       fontFamily: 'Impact',
@@ -190,7 +200,8 @@ export function createScoreboard(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.text = game.add
       .text(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerLocations[playerIndex],
+        game.SCREEN_DIMENSIONS.WIDTH / 2 +
+          game.playerSpawnLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
         'XXX',
         {

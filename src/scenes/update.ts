@@ -1,5 +1,5 @@
-import Game from "./Game";
-import { setCamera } from "./helpers/camera";
+import Game from './Game';
+import { setCamera } from './helpers/camera';
 import {
   controllerMovement,
   controllerSetFast,
@@ -10,7 +10,7 @@ import {
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
   updateAttackEnergyFrictionGroundMovement,
-} from "./helpers/gamePad";
+} from './helpers/gamePad';
 import {
   jump,
   frictionGroundX,
@@ -19,17 +19,23 @@ import {
   frictionWallY,
   updateWallTouchArray,
   updateLastDirectionTouched,
-  updateKeepOnScreenPlayerDead,
+  checkPlayerOffscreen,
   updateKeepOnScreenLREnergyAttack,
-  updatePlaceOffscreenEnergyAttacks,
-} from "./helpers/movement";
+  checkEnergyAttacksOffscreen,
+  setRespawn,
+} from './helpers/movement';
 import { updateSpritesLR } from './helpers/sprites';
-import { checkHitboxes, goToState, hitboxOverlapReset } from './helpers/state';
+import {
+  checkHitboxes,
+  goToState,
+  hitboxOverlapReset as resetHitboxOverlap,
+} from './helpers/state';
 import { updateText } from './helpers/text';
 
 export function update(game: Game): void {
   // game.text = game.timer.actualFps;
   // console.log(game.timer);
+  console.log(game.players[0].state);
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   setCamera(game);
@@ -37,12 +43,13 @@ export function update(game: Game): void {
   updateText(game);
   updateAttackEnergyFrictionGroundRotation(game);
   updateAttackEnergyFrictionGroundMovement(game);
-  updatePlaceOffscreenEnergyAttacks(game);
+  checkEnergyAttacksOffscreen(game);
   updateAttackEnergyFrictionWall(game);
 
+  // PLAYER UPDATE
   updatePlayers(game);
-  hitboxOverlapReset(game);
   updatePadPrevious(game);
+  resetHitboxOverlap(game);
 }
 
 export function updatePlayers(game: Game): void {
@@ -53,13 +60,14 @@ export function updatePlayers(game: Game): void {
   //     }
   //   }
   // }
+
   // printAllPadsActive(player, game);
   game.players.forEach((player, playerIndex) => {
     // if (player.playerNumber === 0) {
     //   console.log("0", player.state);
     // }
     switch (player.state) {
-      case "start":
+      case 'start':
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
@@ -69,11 +77,11 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         setTimeout(() => {
           player.char.sprite.body.allowGravity = true;
-          goToState(player, "alive");
-        }, game.startDelay);
+          goToState(player, 'alive');
+        }, game.START_DELAY_DURATION);
 
         break;
-      case "alive":
+      case 'alive':
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
@@ -90,20 +98,21 @@ export function updatePlayers(game: Game): void {
         updateKeepOnScreenLREnergyAttack(player.char.attackEnergy, game);
         controllerMovement(player, game);
         checkHitboxes(player, playerIndex, game);
-        updateKeepOnScreenPlayerDead(player, game);
+        checkPlayerOffscreen(player, game);
 
         ////////////////////////////////
         ///////// timeout => air
         ////////////////////////////////
 
         break;
-      case "hurt":
+      case 'hurt':
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
-        player.char.sprite.body.allowGravity = false;
+        // checkPlayerOffscreen(player, game);
+        // player.char.sprite.body.allowGravity = false;
         // attackEnergy(player, game);
-        updateLastDirectionTouched(player);
+        // updateLastDirectionTouched(player);
         // controllerSetFast(player, game);
         // frictionGroundX(player, game);
         // frictionAirX(player, game);
@@ -121,11 +130,17 @@ export function updatePlayers(game: Game): void {
         ///////// offscreen => dead
         ////////////////////////////////
         setTimeout(() => {
-          goToState(player, "alive");
-        }, game.hurtDelay);
+          if (checkPlayerOffscreen(player, game)) {
+            setRespawn(player, game);
+            goToState(player, 'dead');
+          } else {
+            player.char.sprite.body.allowGravity = true;
+            goToState(player, 'alive');
+          }
+        }, game.HURT_DURATION);
 
         break;
-      case "dead":
+      case 'dead':
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
@@ -135,8 +150,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         setTimeout(() => {
           player.char.sprite.body.allowGravity = true;
-          goToState(player, "alive");
-        }, 3000);
+          goToState(player, 'alive');
+        }, game.DEAD_DURATION);
 
         break;
     }

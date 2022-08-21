@@ -1,5 +1,6 @@
 import Game from '../Game';
 import { AttackEnergy, Loc, Player } from '../interfaces';
+import { goToState } from './state';
 
 export function updateKeepOnScreenLREnergyAttack(
   energyAttack: AttackEnergy,
@@ -28,23 +29,31 @@ export function updateKeepOnScreenPlayer(game: Game): void {
     }
   });
 }
-export function updateKeepOnScreenPlayerDead(player: Player, game: Game): void {
+export function checkPlayerOffscreen(player: Player, game: Game): boolean {
   if (
     player.char.sprite.y < 0 ||
     player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT ||
     player.char.sprite.x < 0 ||
     player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH
   ) {
-    player.char.sprite.x =
-      game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x;
-    player.char.sprite.y = player.char.initializeCharPosition.y;
-
-    player.char.sprite.body.setVelocityX(0);
-    player.char.sprite.body.setVelocityY(0);
+    // goToState(player, 'dead');
+    // setRespawn(player, game);
+    return true; 
   }
+  return false;
 }
 
-export function updatePlaceOffscreenEnergyAttacks(game: Game): void {
+export function setRespawn(player: Player, game: Game): void {
+  player.char.sprite.body.allowGravity = false;
+  player.char.sprite.x =
+    game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x;
+  player.char.sprite.y = player.char.initializeCharPosition.y;
+
+  player.char.sprite.body.setVelocityX(0);
+  player.char.sprite.body.setVelocityY(0);
+}
+
+export function checkEnergyAttacksOffscreen(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
       // console.log("ASDF")
