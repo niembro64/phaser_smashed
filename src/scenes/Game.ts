@@ -13,7 +13,7 @@ export default class Game extends Phaser.Scene {
   };
 
   HURT_FLICKER_SPEED: number = 100;
-  START_DELAY_DURATION: number = 4000;
+  START_DELAY_DURATION: number = 2000;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
   playerSpawnOrder: number[] = [0, 1, 2, 3];
@@ -49,8 +49,8 @@ export default class Game extends Phaser.Scene {
   TABLE: any | Phaser.GameObjects.Sprite;
   cameraMoverZoomStatusKeeper: number = 1;
 
-  HITBACK_X: number = 10000;
-  HITBACK_Y: number = -10000;
+  HITBACK_X: number = 300;
+  HITBACK_Y: number = 300;
 
   ATTACK_ENERGY_SPEED_X: number = 600;
   ATTACK_ENERGY_SPEED_Y: number = 600;
@@ -124,6 +124,12 @@ export default class Game extends Phaser.Scene {
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
+  ];
+  lastHitByMatrix: boolean[][] = [
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
   ];
 
   players: Player[] = [
@@ -346,7 +352,7 @@ export default class Game extends Phaser.Scene {
           gravity: true,
           walls: true,
           damage: 10,
-          hitback: { x: 0.6, y: 0.2 },
+          hitback: { x: 0.1, y: 0.2 },
           scale: 1.3,
           mass: 50,
           allowVelocityY: true,

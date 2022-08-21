@@ -215,10 +215,12 @@ export function hitbackFly(
   hitbacky: number
 ): void {
   player.char.sprite.body.setVelocityY(
-    hitbackx * (game.HITBACK_Y + (game.HITBACK_Y * player.char.damage) / 50)
+    hitbacky * game.HITBACK_Y +
+      ((hitbacky > 0 ? 1 : -1) * (game.HITBACK_Y * player.char.damage)) / 5
   );
   player.char.sprite.body.setVelocityX(
-    hitbackx * (game.HITBACK_X + (game.HITBACK_X * player.char.damage) / 50)
+    hitbackx * game.HITBACK_X +
+      ((hitbackx > 0 ? 1 : -1) * (game.HITBACK_X * player.char.damage)) / 5
   );
   // if (player.char.sprite.flipX) {
   //   player.char.sprite.body.setVelocityX(

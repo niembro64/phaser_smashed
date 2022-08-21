@@ -7,15 +7,38 @@ import { attackEnergy } from "./pad";
 
 export function onHitHandler(
   player: Player,
+  playerIndex: number,
+  attackEnergy: AttackEnergy,
+  j: number,
   damage: number,
-  hitbackx: number,
-  hitbacky: number,
   game: Game
 ): void {
+  game.overlappingMatrix[playerIndex][j] = true;
+
+  for (var bj = 0; bj < game.players.length; bj++) {
+    if (bj === j) {
+      game.lastHitByMatrix[playerIndex][bj] = true;
+    } else {
+      game.lastHitByMatrix[playerIndex][bj] = false;
+    }
+  }
+
+  let vector = getNormalizedVector(attackEnergy, player);
+
   if (player.state.name === "alive") {
     player.char.damage += damage;
 
-    hitbackFly(player, game, hitbackx, hitbacky);
+    hitbackFly(
+      player,
+      game,
+      attackEnergy.hitback.x * vector.x,
+      attackEnergy.hitback.y * vector.y
+    );
+
+    game.hitByMatrix[playerIndex][j] = game.hitByMatrix[playerIndex][j] + 1;
+
+    console.log(game.lastHitByMatrix[0]);
+    // console.log(game.hitByMatrix[0]);
   }
 }
 
