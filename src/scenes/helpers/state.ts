@@ -14,14 +14,14 @@ export function goToState(
 export function resetAllHitboxes(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((p, i) => {
-      game.hitboxOverlap[playerIndex][i] = false;
+      game.overlappingMatrix[playerIndex][i] = false;
     });
   });
 }
 
 export function isPlayerHit(playerIndex: number, game: Game): boolean {
   for (let j = 0; j < game.players.length; j++) {
-    if (game.hitboxOverlap[playerIndex][j]) {
+    if (game.overlappingMatrix[playerIndex][j]) {
       return true;
     }
   }

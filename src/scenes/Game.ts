@@ -6,7 +6,7 @@ import { Time } from "phaser";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
-    useCameras: true,
+    useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -16,12 +16,12 @@ export default class Game extends Phaser.Scene {
   START_DELAY_DURATION: number = 4000;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
-  playerSpawnOrder: number[] = [0, 1, 2, 3];
+  // playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
-  // playerSpawnOrder: number[] = [2, 3, 0, 1];
+  playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
-  textLocationLROffset: number = 100;
+  textLocationLROffset: number = 60;
   textLocations: number[] = [-760, -460, 460, 760];
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
@@ -38,7 +38,7 @@ export default class Game extends Phaser.Scene {
   SUPERTITLE: any;
   allPlayersWallTouchIterator: number = 0;
   // RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
-  DEFAULT_SPEED_X: number = 50;
+  DEFAULT_SPEED_X: number = 80;
   DEFAULT_SPEED_Y: number = 30;
   DEFAULT_JUMP: number = -1500;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
@@ -105,11 +105,25 @@ export default class Game extends Phaser.Scene {
     },
   };
 
-  hitboxOverlap: boolean[][] = [
+  // i : player
+  // j : attacks from other players
+  overlappingMatrix: boolean[][] = [
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
+  ];
+  hitByMatrix: number[][] = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ];
+  killedByMatrix: number[][] = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
   ];
 
   players: Player[] = [

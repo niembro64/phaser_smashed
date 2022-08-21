@@ -32,7 +32,7 @@ export function initializeHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.attackEnergy.sprite,
           function () {
-            game.hitboxOverlap[playerIndex][j] = true;
+            game.overlappingMatrix[playerIndex][j] = true;
 
             addDamage(
               player,
@@ -40,6 +40,8 @@ export function initializeHitboxOverlap(game: Game): void {
               pj.char.attackEnergy.hitback,
               game
             );
+
+            game.hitByMatrix[playerIndex][j]++;
           }
         );
       }

@@ -24,3 +24,6 @@ export function removeDamage(player: Player, damage: number): void {
 export function resetDamage(player: Player): void {
   player.char.damage = 0;
 }
+
+// export function addHit(player: Player, game: Game): void {
+// }
