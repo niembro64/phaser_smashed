@@ -11,6 +11,7 @@ export function updateKeepOnScreenLREnergyAttack(game: Game): void {
     }
   });
 }
+
 export function updateKeepOnScreenPlayer(game: Game): void {
   game.players.forEach((player) => {
     if (player.char.sprite.y < 0) {
@@ -27,6 +28,7 @@ export function updateKeepOnScreenPlayer(game: Game): void {
     }
   });
 }
+
 export function isPlayerOffscreen(player: Player, game: Game): boolean {
   if (
     player.char.sprite.y < 0 ||
@@ -185,6 +187,7 @@ export function frictionAirY(player: Player, game: Game): void {
     );
   }
 }
+
 export function frictionAirX(player: Player, game: Game): void {
   if (!player.char.sprite.body.touching.down) {
     player.char.sprite.body.setVelocityX(
@@ -193,6 +196,7 @@ export function frictionAirX(player: Player, game: Game): void {
     );
   }
 }
+
 export function frictionGroundX(player: Player, game: Game): void {
   if (
     player.char.sprite.body.touching.down &&

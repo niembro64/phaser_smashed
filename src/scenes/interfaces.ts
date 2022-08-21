@@ -141,7 +141,8 @@ export interface AttackEnergy {
 // }
 
 export interface Debug {
-  cameras: boolean;
-  collidePlayerPlayers: boolean;
-  collidePlayerEnergyAttacks: boolean;
+  useCameras: boolean;
+  seeCameras: boolean;
+  setCollidePlayerPlayers: boolean;
+  setCollidePlayerEnergyAttacks: boolean;
 }

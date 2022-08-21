@@ -1,25 +1,10 @@
 import Game from "../Game";
 import { Loc } from "../interfaces";
 
-export function isXinsideBox(game: Game): boolean {
-  var sprite = game.cameraPlayers.char.sprite;
-  var left = game.SCREEN_DIMENSIONS.WIDTH / 4;
-  var right = (game.SCREEN_DIMENSIONS.WIDTH / 4) * 3;
-  var top = game.SCREEN_DIMENSIONS.HEIGHT / 4;
-  var bottom = (game.SCREEN_DIMENSIONS.HEIGHT / 4) * 3;
-
-  if (
-    sprite.x > right ||
-    sprite.x < left ||
-    sprite.y > bottom ||
-    sprite.y < top
-  ) {
-    return false;
-  }
-  return true;
-}
-
 export function updateCamera(game: Game): void {
+  if (!game.debug.useCameras) {
+    return;
+  }
   var cPlayer = getCameraPlayerStatus(game);
   var cMover = getCameraMoverStatus(game);
   var cBorder = getCameraBorderStatus(game);
@@ -178,7 +163,6 @@ export function getCameraPlayerStatus(game: Game): Loc {
     zoom: getPlayerZoom(game),
   };
 }
-
 
 export function getCameraMoverStatus(game: Game): Loc {
   // var x_low: number = Infinity;

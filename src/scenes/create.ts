@@ -7,10 +7,10 @@ export function create(game: Game) {
   createBackgroundTitles(game);
   createTable(game);
   createPlatforms(game);
-  createCameras(game);
   createEnergyAttacks(game);
   createScoreboard(game);
   createPlayers(game);
+  createCameras(game);
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
   initializeHitboxOverlap(game);
@@ -41,25 +41,24 @@ export function initializeHitboxOverlap(game: Game): void {
 export function setPlayersInitialPositions(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.initializeCharPosition.x =
+      // game.playerSpawnLocations[playerIndex];
       game.playerSpawnLocations[game.playerSpawnOrder[playerIndex]];
-    // player.char.initializeCharPosition.y = game.playerSpawnLocations.y;
   });
 }
 
 export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
-  game.players.forEach((player, playerIndex) => {});
+  game.players.forEach((player, playerIndex) => {
+    // for (let i = 0; i < 4; i++) {
 
-  for (let i = 0; i < 4; i++) {
-    game.players[game.playerSpawnOrder[i]].char.sprite =
-      game.physics.add.sprite(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 + game.playerSpawnLocations[i],
-        game.INITIAL.POSITION.PLAYER_Y,
-        game.players[game.playerSpawnOrder[i]].char.name
-      );
-  }
-
+    player.char.sprite = game.physics.add.sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
+      game.INITIAL.POSITION.PLAYER_Y,
+      player.char.name
+    );
+    // }
+  });
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
       player.char.wallTouchArray.push(false);
@@ -68,6 +67,7 @@ export function createPlayers(game: Game): void {
     player.char.sprite.setScale(1);
     player.char.sprite.flipX = !player.char.initializeCharPosition.lookingRight;
     player.char.sprite.setCollideWorldBounds(false);
+
     game.physics.add.collider(player.char.sprite, game.PLATFORMS);
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
@@ -98,7 +98,7 @@ export function createEnergyAttacks(game: Game): void {
 }
 
 export function setAttackEnergyCollideWithPlayers(game: Game): void {
-  if (!game.debug.collidePlayerEnergyAttacks) {
+  if (!game.debug.setCollidePlayerEnergyAttacks) {
     return;
   }
   game.players.forEach((player, playerIndex) => {
@@ -237,7 +237,7 @@ export function createScoreboard(game: Game): void {
 }
 
 export function setPlayersCollide(game: Game): void {
-  if (!game.debug.collidePlayerPlayers) {
+  if (!game.debug.setCollidePlayerPlayers) {
     return;
   }
   game.players.forEach((player, playerIndex) => {
@@ -250,8 +250,9 @@ export function setPlayersCollide(game: Game): void {
 }
 
 export function createCameras(game: Game): void {
-  if (!game.debug.cameras) {
-    return;
+  var debugAlpha = 1;
+  if (!game.debug.seeCameras) {
+    debugAlpha = 0;
   }
   game.cameraBox.char.sprite = game.physics.add
     .sprite(
@@ -260,7 +261,7 @@ export function createCameras(game: Game): void {
       "centerWhite"
     )
     .setScale(0.05)
-    .setAlpha(0.5);
+    .setAlpha(0);
   game.cameraBox.char.sprite.setImmovable(true);
   game.cameraBox.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.cameraBox.char.sprite);
@@ -273,7 +274,7 @@ export function createCameras(game: Game): void {
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
-    .setAlpha(0.5);
+    .setAlpha(debugAlpha);
   game.cameraPlayers.char.sprite.setImmovable(true);
   game.cameraPlayers.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.cameraPlayers.char.sprite);
@@ -286,7 +287,7 @@ export function createCameras(game: Game): void {
     )
     .setRotation(Math.PI / 4)
     .setScale(0.05)
-    .setAlpha(0.5);
+    .setAlpha(debugAlpha);
   game.cameraPlayersHalfway.char.sprite.setImmovable(true);
   game.cameraPlayersHalfway.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.cameraPlayersHalfway.char.sprite);
@@ -299,7 +300,7 @@ export function createCameras(game: Game): void {
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
-    .setAlpha(0.5);
+    .setAlpha(debugAlpha);
   game.cameraCenter.char.sprite.setImmovable(true);
   game.cameraCenter.char.sprite.body.allowGravity = false;
   // game.cameras.main.startFollow(game.cameraCenterBoy.char.sprite);
@@ -308,9 +309,10 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerRed"
+      "centerWhite"
     )
     .setScale(0.08)
+    .setAlpha(debugAlpha)
     .setRotation(Math.PI / 4);
   game.cameraMover.char.sprite.setImmovable(true);
   game.cameraMover.char.sprite.body.allowGravity = false;
