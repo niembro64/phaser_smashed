@@ -6,7 +6,7 @@ import { Camera, Clock, Debug, Player } from "./interfaces";
 export default class Game extends Phaser.Scene {
   debug: Debug = {
     level: 3,
-    useCameras: true,
+    useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -17,9 +17,9 @@ export default class Game extends Phaser.Scene {
   START_DELAY_DURATION: number = 2000;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
-  playerSpawnOrder: number[] = [0, 1, 2, 3];
+  // playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
-  // playerSpawnOrder: number[] = [2, 3, 0, 1];
+  playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
   textLocationLROffset: number = 60;

@@ -2,9 +2,9 @@ import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
 
 export function updateEnergyAttacksWrapScreen(game: Game): void {
-  // if (!game.debug.energyAttackWrapScreen) {
-  //   return;
-  // }
+  if (!game.debug.energyAttackWrapScreen) {
+    return;
+  }
   game.players.forEach((player) => {
     if (player.char.attackEnergy.sprite.x < 0) {
       player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
