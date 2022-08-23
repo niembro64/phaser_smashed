@@ -6,9 +6,16 @@ import { setBlinkTrue } from "./helpers/sprites";
 export function create(game: Game) {
   game.timer = new Phaser.Core.TimeStep(game.game, { min: 60, target: 60 });
 
+  game.SOUND_INTRO = game.sound.add("intro", { volume: 0.8 });
+  game.SOUND_GUN = game.sound.add("gun", { volume: 0.8 });
+  game.SOUND_HIT = game.sound.add("hit", { volume: 0.8 });
+  game.SOUND_JUMP = game.sound.add("jump", { volume: 0.8 });
+  game.SOUND_JUMP_POWER = game.sound.add("jumpPower", { volume: 0.8 });
+
   createBackground(game);
   createBackgroundTitles(game);
   createTable(game);
+  game.SOUND_INTRO.play();
   switch (game.debug.level) {
     case 0:
       createPlatforms0(game);

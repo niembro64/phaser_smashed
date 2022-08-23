@@ -27,6 +27,20 @@ export default class Game extends Phaser.Scene {
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
+  FILE_SOUNDS: any = {
+    INTRO: "cresent-hell-escalate-3-11647.mp3",
+    GUN: "gunner-sound-43794.mp3",
+    HIT: "kick-rubber-tube-82839.mp3",
+    JUMP: "quick-swhooshing-noise-80898.mp3",
+    JUMP_POWER: "mxl993_yarstick_swoosh_6-88322.mp3",
+  };
+
+  SOUND_INTRO: any;
+  SOUND_GUN: any;
+  SOUND_HIT: any;
+  SOUND_JUMP: any;
+  SOUND_JUMP_POWER: any;
+
   scoreBoardTime: any;
   time: any;
   NanosecondsTime: number = 0;
@@ -492,6 +506,13 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
+    let path = "sounds/";
+    this.load.audio("intro", path + this.FILE_SOUNDS.INTRO);
+    this.load.audio("gun", path + this.FILE_SOUNDS.GUN);
+    this.load.audio("hit", path + this.FILE_SOUNDS.HIT);
+    this.load.audio("jump", path + this.FILE_SOUNDS.JUMP);
+    this.load.audio("jumpPower", path + this.FILE_SOUNDS.JUMP_POWER);
+
     this.load.image("laser", "images/laser.png");
     this.load.image("blockcracked", "images/blockcracked.png");
     this.load.image("fireball", "images/fireball.png");
