@@ -5,7 +5,7 @@ import { Camera, Clock, Debug, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
-    level: 1,
+    level: 3,
     useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
@@ -42,7 +42,8 @@ export default class Game extends Phaser.Scene {
   RATIO_ACCELERATION_VELOCITY = 0.7;
   DEFAULT_SPEED_X: number = 700;
   DEFAULT_SPEED_Y: number = 30;
-  DEFAULT_JUMP: number = -1500;
+  DEFAULT_JUMP: number = -1100;
+  DEFAULT_UPB: number = -1100;
   DEFAULT_WALL_JUMP: number = -1 * this.DEFAULT_JUMP * 2;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
@@ -64,7 +65,8 @@ export default class Game extends Phaser.Scene {
   ATTACK_ENERGY_SPEED_X: number = 600;
   ATTACK_ENERGY_SPEED_Y: number = 600;
 
-  ZOOM_MULTIPLIER = 0.5;
+  ZOOM_MULTIPLIER_X = 0.95;
+  ZOOM_MULTIPLIER_Y = 0.7;
   ZOOM_RATIO_SLOW = 0.995;
   ZOOM_RATIO_FAST = 0.9;
   // BORDER_PADDING_X: number = 0;
@@ -181,6 +183,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.8, 0],
         jumpPower: 1,
         jumpIndex: 0,
+        upB: { canUse: false, x: 0.5, y: -1 },
         damage: 0,
         speed: 0.8,
         fast: 1,
@@ -266,6 +269,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.8, 0],
         jumpPower: 0.9,
         jumpIndex: 0,
+        upB: { canUse: false, x: 0.5, y: -1 },
         damage: 0,
         speed: 0.7,
         fast: 1,
@@ -349,6 +353,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 1, 0],
         jumpPower: 1,
         jumpIndex: 0,
+        upB: { canUse: false, x: 0.5, y: -1 },
         damage: 0,
         speed: 1,
         fast: 1,
@@ -432,6 +437,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
         jumpPower: 1,
         jumpIndex: 0,
+        upB: { canUse: false, x: 0.5, y: -1 },
         damage: 0,
         speed: 0.9,
         fast: 1,

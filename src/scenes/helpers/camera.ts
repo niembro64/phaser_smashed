@@ -32,6 +32,7 @@ export function updateCamera(game: Game): void {
   game.cameraBox.char.zoom = game.cameraBox.char.zoom = cBox.zoom;
 
   var newZoom = game.cameraPlayers.char.zoom;
+  // var newZoom = game.cameraPlayers.char.zoom * game.ZOOM_MULTIPLIER_X;
   // var newZoom = Math.max(game.cameraPlayers.char.zoom, 1);
 
   game.cameras.main.startFollow(game.cameraMover.char.sprite);
@@ -122,7 +123,10 @@ export function getPlayerZoom(game: Game): number {
   let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
   let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
 
-  return Math.min(return_x, return_y);
+  return Math.min(
+    return_x * game.ZOOM_MULTIPLIER_X,
+    return_y * game.ZOOM_MULTIPLIER_Y
+  );
 }
 
 export function getCameraBorderStatus(game: Game): Loc {

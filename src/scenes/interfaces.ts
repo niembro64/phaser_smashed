@@ -84,6 +84,7 @@ export interface Char {
   jumps: number[];
   jumpPower: number;
   jumpIndex: number;
+  upB: UpB;
   damage: number;
   speed: number;
   fast: number;
@@ -109,6 +110,12 @@ export interface AttackPhysical {
 export interface AttackEnergyRotation {
   initial: number;
   speed: number;
+}
+
+export interface UpB {
+  canUse: boolean;
+  y: number;
+  x: number;
 }
 
 export interface Velocity {

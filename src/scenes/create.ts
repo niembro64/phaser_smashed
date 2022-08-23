@@ -214,7 +214,7 @@ export function createPlatforms3(game: Game): void {
     "platformShort"
   );
   game.PLATFORMS.create(
-    600 * game.SCREEN_SCALE.WIDTH,
+    800 * game.SCREEN_SCALE.WIDTH,
     900 * game.SCREEN_SCALE.HEIGHT,
     "platformShort"
   );

@@ -43,6 +43,7 @@ import {
   onDeadUpdateMatrix,
   updateDeathsAndKillsMatrices,
 } from "./helpers/damage";
+import { upB } from "./helpers/attacks";
 
 export function update(game: Game): void {
   // BEFORE PLAYERS
@@ -64,7 +65,7 @@ export function update(game: Game): void {
 
   // PLAYERS
   updatePlayers(game);
-  
+
   // AFTER PLAYERS
   updatePadPrevious(game);
   resetAllHitboxes(game);
@@ -72,9 +73,9 @@ export function update(game: Game): void {
 
 export function updatePlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    if (playerIndex === 0) {
-      console.log(player.playerNumber, player.char.name, player.state.name);
-    }
+    // if (playerIndex === 0) {
+    //   console.log(player.playerNumber, player.char.name, player.state.name);
+    // }
     switch (player.state.name) {
       case "start":
         ////////////////////////////////
@@ -103,6 +104,7 @@ export function updatePlayers(game: Game): void {
         frictionAirY(player, game);
         jump(player, game);
         controllerMovement(player, game);
+        upB(player, game);
 
         ////////////////////////////////
         ///////// hit => hurt
@@ -138,6 +140,7 @@ export function updatePlayers(game: Game): void {
         frictionAirY(player, game);
         jump(player, game);
         controllerMovement(player, game);
+        upB(player, game);
 
         ////////////////////////////////
         ///////// !offscreen && duration => alive

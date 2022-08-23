@@ -141,10 +141,10 @@ export function jump(player: Player, game: Game): void {
       );
       return;
     }
-    if (player.pad.left && player.char.sprite.body.velocity.x > 0) {
-      player.char.sprite.body.setVelocityX(-game.DEFAULT_SPEED_X * 10);
-      return;
-    }
+    // if (player.pad.left && player.char.sprite.body.velocity.x > 0) {
+    //   player.char.sprite.body.setVelocityX(-game.DEFAULT_SPEED_X * 10);
+    //   return;
+    // }
     if (
       player.char.lastDirectionTouched === "right" &&
       hasPlayerTouchedWallRecently(player)
@@ -154,10 +154,10 @@ export function jump(player: Player, game: Game): void {
       );
       return;
     }
-    if (player.pad.right && player.char.sprite.body.velocity.x < 0) {
-      player.char.sprite.body.setVelocityX(game.DEFAULT_SPEED_X * 10);
-      return;
-    }
+    // if (player.pad.right && player.char.sprite.body.velocity.x < 0) {
+    //   player.char.sprite.body.setVelocityX(game.DEFAULT_SPEED_X * 10);
+    //   return;
+    // }
   }
 
   // holding jump
