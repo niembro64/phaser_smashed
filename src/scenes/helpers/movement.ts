@@ -83,8 +83,9 @@ export function updateLastDirectionTouched(player: Player): void {
 export function updateWallTouchArray(game: Game): void {
   game.players.forEach((player) => {
     if (
-      player.char.sprite.body.touching.left ||
-      player.char.sprite.body.touching.right
+      !player.char.sprite.body.touching.down &&
+      (player.char.sprite.body.touching.left ||
+        player.char.sprite.body.touching.right)
     ) {
       player.char.wallTouchArray[game.allPlayersWallTouchIterator] = true;
     } else {
@@ -120,6 +121,9 @@ export function jump(player: Player, game: Game): void {
     ) {
       player.char.jumpIndex = 1;
     }
+
+    game.SOUND_JUMP.volume = player.char.jumps[player.char.jumpIndex];
+    game.SOUND_JUMP.play();
 
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y *

@@ -8,6 +8,7 @@ export function upB(player: Player, game: Game): void {
     !player.padPrev.X &&
     player.char.upB.canUse
   ) {
+    game.SOUND_JUMP_POWER.play();
     player.char.sprite.body.setVelocityY(game.DEFAULT_UPB);
     player.char.upB.canUse = false;
   }

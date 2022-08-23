@@ -155,6 +155,7 @@ export function attackEnergy(player: Player, game: Game): void {
     player.padPrev.X
     // isSpriteOffscreen(player.char.attack.sprite, game)
   ) {
+    game.SOUND_GUN.play();
     playerShootAttackEnergy(player, game);
   }
 }

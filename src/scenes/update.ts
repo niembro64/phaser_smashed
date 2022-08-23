@@ -109,7 +109,7 @@ export function updatePlayers(game: Game): void {
         if (isPlayerHit(playerIndex, game)) {
           setBlinkTrue(player);
           setGravityTrue(player);
-          // hitThenFly(player, game);
+          game.SOUND_HIT.play();
           goToState(player, "hurt", game);
         }
 

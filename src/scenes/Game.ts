@@ -29,10 +29,10 @@ export default class Game extends Phaser.Scene {
 
   FILE_SOUNDS: any = {
     INTRO: "cresent-hell-escalate-3-11647.mp3",
-    GUN: "gunner-sound-43794.mp3",
+    GUN: "gun.mp3",
     HIT: "kick-rubber-tube-82839.mp3",
-    JUMP: "quick-swhooshing-noise-80898.mp3",
-    JUMP_POWER: "mxl993_yarstick_swoosh_6-88322.mp3",
+    JUMP: "mxl993_yarstick_swoosh_6-88322.mp3",
+    JUMP_POWER: "quick-swhooshing-noise-80898.mp3",
   };
 
   SOUND_INTRO: any;
@@ -56,8 +56,8 @@ export default class Game extends Phaser.Scene {
   RATIO_ACCELERATION_VELOCITY = 0.7;
   DEFAULT_SPEED_X: number = 700;
   DEFAULT_SPEED_Y: number = 30;
-  DEFAULT_JUMP: number = -1100;
-  DEFAULT_UPB: number = -2000;
+  DEFAULT_JUMP: number = -1000;
+  DEFAULT_UPB: number = -1000;
   DEFAULT_WALL_JUMP: number = -1 * this.DEFAULT_JUMP * 2;
   INITIAL = { POSITION: { PLAYER_Y: 250 } };
   SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
