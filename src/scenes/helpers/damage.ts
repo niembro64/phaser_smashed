@@ -10,13 +10,10 @@ export function onHitHandler(
   damage: number,
   game: Game
 ): void {
-  if (game.currentlyOverlappingSpritesMatrix[playerIndex][j]) {
-    game.currentlyOverlappingSpritesMatrix[playerIndex][j] = true;
-    return;
-  }
   if (player.state.name !== "alive") {
     return;
   }
+  game.currentlyOverlappingSpritesMatrix[playerIndex][j] = true;
 
   for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {

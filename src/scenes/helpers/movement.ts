@@ -318,7 +318,7 @@ export function setGravityFalse(player: Player): void {
 export function keepObjectsFromFallingLikeCrazy(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
-      player.char.attackEnergy.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
+      player.char.attackEnergy.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT + 200;
       player.char.attackEnergy.sprite.body.setVelocityY(0);
       player.char.attackEnergy.sprite.body.setVelocityX(0);
     }

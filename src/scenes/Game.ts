@@ -6,7 +6,7 @@ import { Camera, Clock, Debug, Player } from "./interfaces";
 export default class Game extends Phaser.Scene {
   debug: Debug = {
     level: 1,
-    useCameras: true,
+    useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -58,8 +58,8 @@ export default class Game extends Phaser.Scene {
   TABLE: any | Phaser.GameObjects.Sprite;
   cameraMoverZoomStatusKeeper: number = 1;
 
-  HITBACK_X: number = 300;
-  HITBACK_Y: number = 300;
+  HITBACK_X: number = 120;
+  HITBACK_Y: number = 90;
 
   ATTACK_ENERGY_SPEED_X: number = 600;
   ATTACK_ENERGY_SPEED_Y: number = 600;
