@@ -135,6 +135,10 @@ export function playerGrabAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.setVelocityY(0);
 }
 export function attackEnergy(player: Player, game: Game): void {
+  if (player.pad?.up) {
+    return;
+  }
+
   // GRAB
   if (player.pad?.X && !player.padPrev.X) {
     playerGrabAttackEnergy(player);
