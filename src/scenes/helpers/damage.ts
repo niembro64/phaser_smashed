@@ -10,49 +10,52 @@ export function onHitHandler(
   damage: number,
   game: Game
 ): void {
-  game.overlappingMatrix[playerIndex][j] = true;
+  if (game.currentlyOverlappingSpritesMatrix[playerIndex][j]) {
+    game.currentlyOverlappingSpritesMatrix[playerIndex][j] = true;
+    return;
+  }
+  if (player.state.name !== "alive") {
+    return;
+  }
 
   for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {
-      game.lastHitByMatrix[playerIndex][bj] = true;
+      game.wasLastHitByMatrix[playerIndex][bj] = true;
+      game.numberHitByMatrix[playerIndex][j]++;
     } else {
-      game.lastHitByMatrix[playerIndex][bj] = false;
+      game.wasLastHitByMatrix[playerIndex][bj] = false;
     }
   }
 
   let vector = getNormalizedVector(attackEnergy, player);
 
-  if (player.state.name === "alive") {
-    player.char.damage += damage;
+  player.char.damage += damage;
 
-    hitbackFly(
-      player,
-      game,
-      attackEnergy.hitback.x * vector.x,
-      attackEnergy.hitback.y * vector.y
-    );
+  hitbackFly(
+    player,
+    game,
+    attackEnergy.hitback.x * vector.x,
+    attackEnergy.hitback.y * vector.y
+  );
 
-    game.hitByMatrix[playerIndex][j] = game.hitByMatrix[playerIndex][j] + 1;
-
-    // console.log(game.lastHitByMatrix[0]);
-    // console.log(game.hitByMatrix[0]);
-  }
-
-  updateDeathsAndKills(game);
+  console.log(game.wasLastHitByMatrix[0]);
+  console.log(game.numberHitByMatrix[0]);
 }
 
-export function updateDeadMatrix(playerIndex: number, game: Game): void {
+export function onDeadUpdateMatrix(playerIndex: number, game: Game): void {
+  let killedSelf: boolean = true;
   for (let j = 0; j < game.players.length; j++) {
-    if (game.lastHitByMatrix[playerIndex][j]) {
-      // console.log(playerIndex, j);
-      game.killedByMatrix[playerIndex][j]++;
+    if (game.wasLastHitByMatrix[playerIndex][j]) {
+      killedSelf = false;
+      game.numberKilledByMatrix[playerIndex][j]++;
     }
   }
-
-  // console.log(game.killedByMatrix[0]);
+  if (killedSelf) {
+    game.numberKilledByMatrix[playerIndex][playerIndex]++;
+  }
 }
 
-export function updateDeathsAndKills(game: Game): void {
+export function updateDeathsAndKillsMatrices(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     updatePlayerNumberDeaths(player, playerIndex, game);
     updatePlayerNumberKills(player, playerIndex, game);
@@ -64,7 +67,7 @@ export function updatePlayerNumberDeaths(
   playerIndex: number,
   game: Game
 ): void {
-  player.deathCount = game.killedByMatrix[playerIndex].reduce(
+  player.deathCount = game.numberKilledByMatrix[playerIndex].reduce(
     (partialSum, a) => partialSum + a,
     0
   );
@@ -74,8 +77,11 @@ export function updatePlayerNumberKills(
   playerIndex: number,
   game: Game
 ): void {
+  player.killCount = 0;
   for (let i = 0; i < game.players.length; i++) {
-    player.killCount += game.killedByMatrix[i][playerIndex];
+    if (i !== playerIndex) {
+      player.killCount += game.numberKilledByMatrix[i][playerIndex];
+    }
   }
 }
 

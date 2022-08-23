@@ -55,7 +55,7 @@ export function updateDeathsKillsText(
     player.scoreBoardDeathsKills
       .setScale(1 / zoom, 1 / zoom)
       .setText(
-        player.killCount.toString() + ":" + player.deathCount.toString()
+        "+" + player.killCount.toString() + ":-" + player.deathCount.toString()
       );
     player.scoreBoardDamage.x =
       game.cameraMover.char.sprite.x +

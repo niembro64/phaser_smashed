@@ -15,9 +15,9 @@ export default class Game extends Phaser.Scene {
   START_DELAY_DURATION: number = 2000;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
-  // playerSpawnOrder: number[] = [0, 1, 2, 3];
+  playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
-  playerSpawnOrder: number[] = [2, 3, 0, 1];
+  // playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
   textLocationLROffset: number = 60;
@@ -106,25 +106,25 @@ export default class Game extends Phaser.Scene {
 
   // i : player
   // j : attacks from other players
-  overlappingMatrix: boolean[][] = [
+  currentlyOverlappingSpritesMatrix: boolean[][] = [
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
   ];
-  hitByMatrix: number[][] = [
+  numberHitByMatrix: number[][] = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
   ];
-  killedByMatrix: number[][] = [
+  numberKilledByMatrix: number[][] = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
   ];
-  lastHitByMatrix: boolean[][] = [
+  wasLastHitByMatrix: boolean[][] = [
     [false, false, false, false],
     [false, false, false, false],
     [false, false, false, false],
