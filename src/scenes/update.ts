@@ -31,7 +31,8 @@ import {
   updateSpritesFlipX,
 } from "./helpers/sprites";
 import {
-  goToState,
+  goToStateGame,
+  goToStatePlayer,
   hasThisDurationPassed,
   isPlayerHit,
   resetAllHitboxes,
@@ -46,6 +47,25 @@ import {
 import { upB } from "./helpers/attacks";
 
 export function update(game: Game): void {
+  console.log("GAME STATE", game.gameState.name);
+  switch (game.gameState.name) {
+    case "start":
+      goToStateGame("play", game);
+      break;
+    case "play":
+      setTimeout(() => {
+        goToStateGame("first-blood", game);
+      }, 3000);
+      break;
+    case "first-blood":
+      break;
+    case "screen-clear":
+      break;
+    case "pause":
+      break;
+    default:
+      break;
+  }
   // BEFORE PLAYERS
   updateTime(game);
   assignGamePadsConnected(game);
@@ -85,7 +105,7 @@ export function updatePlayers(game: Game): void {
         if (hasThisDurationPassed(player, game.START_DELAY_DURATION, game)) {
           setGravityTrue(player);
           setBlinkFalse(player);
-          goToState(player, "alive", game);
+          goToStatePlayer(player, "alive", game);
         }
 
         break;
@@ -110,7 +130,7 @@ export function updatePlayers(game: Game): void {
           setBlinkTrue(player);
           setGravityTrue(player);
           game.SOUND_HIT.play();
-          goToState(player, "hurt", game);
+          goToStatePlayer(player, "hurt", game);
         }
 
         ////////////////////////////////
@@ -121,7 +141,7 @@ export function updatePlayers(game: Game): void {
           setGravityFalse(player);
           resetDamage(player);
           onDeadUpdateMatrix(playerIndex, game);
-          goToState(player, "dead", game);
+          goToStatePlayer(player, "dead", game);
           setRespawn(player, game);
         }
 
@@ -148,7 +168,7 @@ export function updatePlayers(game: Game): void {
         ) {
           setGravityTrue(player);
           setBlinkFalse(player);
-          goToState(player, "alive", game);
+          goToStatePlayer(player, "alive", game);
         }
 
         ////////////////////////////////
@@ -160,7 +180,7 @@ export function updatePlayers(game: Game): void {
           setRespawn(player, game);
           resetDamage(player);
           onDeadUpdateMatrix(playerIndex, game);
-          goToState(player, "dead", game);
+          goToStatePlayer(player, "dead", game);
         }
 
         break;
@@ -176,7 +196,7 @@ export function updatePlayers(game: Game): void {
         if (hasThisDurationPassed(player, game.DEAD_DURATION, game)) {
           setGravityTrue(player);
           setBlinkFalse(player);
-          goToState(player, "alive", game);
+          goToStatePlayer(player, "alive", game);
         }
 
         break;

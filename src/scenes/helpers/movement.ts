@@ -1,5 +1,5 @@
 import Game from "../Game";
-import { AttackEnergy, Player } from "../interfaces";
+import { Player } from "../interfaces";
 
 export function updateEnergyAttacksWrapScreen(game: Game): void {
   if (!game.debug.energyAttackWrapScreen) {

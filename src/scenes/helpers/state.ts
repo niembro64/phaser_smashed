@@ -2,7 +2,14 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 import { hitbackFly } from "./movement";
 
-export function goToState(
+export function goToStateGame(
+  state: "start" | "play" | "first-blood" | "screen-clear",
+  game: Game
+): void {
+  game.gameState.name = state;
+  game.gameState.timestamp = game.millisecondsTime;
+}
+export function goToStatePlayer(
   player: Player,
   state: "start" | "alive" | "dead" | "hurt",
   game: Game

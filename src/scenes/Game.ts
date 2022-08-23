@@ -1,7 +1,7 @@
 import "phaser";
 import { create } from "./create";
 import { update } from "./update";
-import { Camera, Clock, Debug, Player } from "./interfaces";
+import { Camera, Clock, Debug, Player, State } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
@@ -157,7 +157,10 @@ export default class Game extends Phaser.Scene {
     [false, false, false, false],
     [false, false, false, false],
   ];
-
+  gameState: State = {
+    name: "start",
+    timestamp: 0,
+  };
   players: Player[] = [
     {
       playerNumber: 0,
