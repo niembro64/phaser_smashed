@@ -41,7 +41,8 @@ export default class Game extends Phaser.Scene {
   DEFAULT_SPEED_Y: number = 30;
   DEFAULT_JUMP: number = -1500;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
-  SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
+  SCREEN_DIMENSIONS = { HEIGHT: 3840, WIDTH: 2160 };
+  // SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
   GRAVITY: number = 0.1;
   PLATFORMS: any | Phaser.GameObjects.Sprite;
   BACKGROUND: any | Phaser.GameObjects.Sprite;
@@ -84,7 +85,7 @@ export default class Game extends Phaser.Scene {
       name: "center_80",
       src: "images/x.png",
       sprite: null,
-      zoom: 1,
+      zoom: 0,
     },
   };
   cameraCenter: Camera = {
@@ -92,7 +93,7 @@ export default class Game extends Phaser.Scene {
       name: "center_80",
       src: "images/x.png",
       sprite: null,
-      zoom: 1,
+      zoom: 0,
     },
   };
   cameraBox: Camera = {
@@ -100,7 +101,7 @@ export default class Game extends Phaser.Scene {
       name: "center_80",
       src: "images/x.png",
       sprite: null,
-      zoom: 1,
+      zoom: 0,
     },
   };
 

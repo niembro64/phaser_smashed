@@ -3,9 +3,16 @@ import Game from "./scenes/Game";
 const config: Phaser.Types.Core.GameConfig = {
   scale: {
     mode: Phaser.Scale.FIT,
+    // mode: Phaser.Scale.ENVELOP,
+    // mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
-    width: 1920,
-    height: 1080,
+    width: 3840,
+    // width: 1920,
+    // width: 1080,
+    height: 2160,
+    // height: 1920,
+    // height: 1080,
+    // autoRound: true,
   },
   pixelArt: false,
   type: Phaser.AUTO,
@@ -18,7 +25,7 @@ const config: Phaser.Types.Core.GameConfig = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 5000 },
+      gravity: { y: 3000 },
       debug: false,
       // debug: true,
     },

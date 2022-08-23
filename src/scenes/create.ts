@@ -17,11 +17,17 @@ export function create(game: Game) {
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
   initializeHitboxOverlap(game);
-  // game.matter.world.setBounds(
+  game.cameras.main.setBounds(
+    0,
+    0,
+    game.SCREEN_DIMENSIONS.WIDTH,
+    game.SCREEN_DIMENSIONS.HEIGHT
+  );
+  // game.cameras.main.setBounds(
   //   0,
   //   0,
   //   game.SCREEN_DIMENSIONS.WIDTH,
-  //   game.SCREEN_DIMENSIONS.HEIGHT
+  //   game.SCREEN_DIMENSIONS.WIDTH
   // );
 }
 
@@ -126,7 +132,7 @@ export function setAttackEnergyCollideWithPlayers(game: Game): void {
 
 export function createBackground(game: Game): void {
   game.BACKGROUND = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
-  game.BACKGROUND.setScale(1);
+  game.BACKGROUND.setScale(game.SCREEN_DIMENSIONS.WIDTH / 1080);
   game.BACKGROUND.setImmovable(true);
   game.BACKGROUND.body.allowGravity = false;
 }
