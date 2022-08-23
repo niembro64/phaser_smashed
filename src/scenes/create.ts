@@ -252,6 +252,7 @@ export function createScoreboard(game: Game): void {
       .setOrigin(1, 0)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
+
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardDeathsKills = game.add
       .text(
@@ -261,7 +262,7 @@ export function createScoreboard(game: Game): void {
         "XXX",
         {
           // font: "Arial 100px",
-          fontSize: "40px",
+          fontSize: "60px",
           fontFamily: "Consolas",
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
@@ -280,7 +281,7 @@ export function createScoreboard(game: Game): void {
           },
         }
       )
-      .setOrigin(1, 0)
+      .setOrigin(1, 1)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
 }

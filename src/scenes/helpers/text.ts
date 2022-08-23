@@ -1,23 +1,28 @@
 import Game from "../Game";
 
 export function updateText(game: Game): void {
-  const baseY = 2;
+  const baseDamageY = 0;
+  const baseDeadKillY = game.SCREEN_DIMENSIONS.HEIGHT;
   const zoom = game.cameras.main.zoom;
   const redOffsetY =
     game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
-  const newY =
-    baseY +
+  const newDamageY =
+    baseDamageY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
-    game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1.2) + 1);
+    game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
+  const newDeathKillY =
+    baseDeadKillY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
 
   game.scoreBoardTime.setScale(1 / zoom, 1 / zoom);
   game.scoreBoardTime.x =
     game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
-  game.scoreBoardTime.y = newY;
+  game.scoreBoardTime.y = newDamageY;
 
   updateClockText(game);
-  updateDamageText(game, zoom, newY);
-  updateDeathsKillsText(game, zoom, newY);
+  updateDamageText(game, zoom, newDamageY);
+  updateDeathsKillsText(game, zoom, newDeathKillY);
 }
 
 export function updateClockText(game: Game): void {
@@ -57,12 +62,12 @@ export function updateDeathsKillsText(
       .setText(
         "+" + player.killCount.toString() + ":-" + player.deathCount.toString()
       );
-    player.scoreBoardDamage.x =
+    player.scoreBoardDeathsKills.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
         game.textLocationLROffset) *
         (1 / zoom);
 
-    player.scoreBoardDamage.y = newY;
+    player.scoreBoardDeathsKills.y = newY;
   });
 }
