@@ -6,10 +6,11 @@ import { Camera, Clock, Debug, Player } from "./interfaces";
 export default class Game extends Phaser.Scene {
   debug: Debug = {
     level: 1,
-    useCameras: true,
+    useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
+    energyAttackWrapScreen: true,
   };
 
   HURT_FLICKER_SPEED: number = 100;
@@ -42,6 +43,7 @@ export default class Game extends Phaser.Scene {
   DEFAULT_SPEED_X: number = 700;
   DEFAULT_SPEED_Y: number = 30;
   DEFAULT_JUMP: number = -1500;
+  DEFAULT_WALL_JUMP: number = -1 * this.DEFAULT_JUMP * 2;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
   SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
   // SCREEN_DIMENSIONS = { WIDTH: 3840, HEIGHT: 2160 };
@@ -62,6 +64,7 @@ export default class Game extends Phaser.Scene {
   ATTACK_ENERGY_SPEED_X: number = 600;
   ATTACK_ENERGY_SPEED_Y: number = 600;
 
+  ZOOM_MULTIPLIER = 0.5;
   ZOOM_RATIO_SLOW = 0.995;
   ZOOM_RATIO_FAST = 0.9;
   // BORDER_PADDING_X: number = 0;

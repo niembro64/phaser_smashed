@@ -17,11 +17,12 @@ import {
   frictionWallY,
   updateWallTouchArray,
   updateLastDirectionTouched,
-  updateKeepOnScreenLREnergyAttack,
+  updateEnergyAttacksWrapScreen,
   setRespawn,
   isPlayerOffscreen,
   setGravityTrue,
   setGravityFalse,
+  keepObjectsFromFallingLikeCrazy,
 } from "./helpers/movement";
 import {
   setBlinkFalse,
@@ -55,8 +56,9 @@ export function update(game: Game): void {
   updateAttackEnergyFrictionGroundRotation(game);
   updateAttackEnergyFrictionGroundMovement(game);
   updateAttackEnergyFrictionWall(game);
-  updateKeepOnScreenLREnergyAttack(game);
+  updateEnergyAttacksWrapScreen(game);
   updateDeathsAndKillsMatrices(game);
+  keepObjectsFromFallingLikeCrazy(game);
 
   // updateEnergyAttacksScreenWrap(game);
 

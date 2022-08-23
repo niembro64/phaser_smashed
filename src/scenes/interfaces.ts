@@ -162,6 +162,7 @@ export interface Debug {
   seeCameras: boolean;
   setCollidePlayerPlayers: boolean;
   setCollidePlayerEnergyAttacks: boolean;
+  energyAttackWrapScreen: boolean;
 }
 
 export interface NormalizedVector {

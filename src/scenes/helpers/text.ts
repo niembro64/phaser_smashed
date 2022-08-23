@@ -9,7 +9,7 @@ export function updateText(game: Game): void {
   const newDamageY =
     baseDamageY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
-    game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
+    game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newDeathKillY =
     baseDeadKillY * (1 / zoom) +
     redOffsetY * (1 / zoom) +

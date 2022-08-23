@@ -31,7 +31,8 @@ export function updateCamera(game: Game): void {
   game.cameraBox.char.sprite.y = cBox.y;
   game.cameraBox.char.zoom = game.cameraBox.char.zoom = cBox.zoom;
 
-  var newZoom = Math.max(game.cameraPlayers.char.zoom, 1);
+  var newZoom = game.cameraPlayers.char.zoom;
+  // var newZoom = Math.max(game.cameraPlayers.char.zoom, 1);
 
   game.cameras.main.startFollow(game.cameraMover.char.sprite);
 

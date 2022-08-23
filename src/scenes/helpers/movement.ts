@@ -1,7 +1,10 @@
 import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
 
-export function updateKeepOnScreenLREnergyAttack(game: Game): void {
+export function updateEnergyAttacksWrapScreen(game: Game): void {
+  // if (!game.debug.energyAttackWrapScreen) {
+  //   return;
+  // }
   game.players.forEach((player) => {
     if (player.char.attackEnergy.sprite.x < 0) {
       player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
@@ -134,7 +137,7 @@ export function jump(player: Player, game: Game): void {
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        game.DEFAULT_SPEED_X * player.char.speed * 30
+        game.DEFAULT_WALL_JUMP * player.char.speed
       );
       return;
     }
@@ -147,7 +150,7 @@ export function jump(player: Player, game: Game): void {
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        -game.DEFAULT_SPEED_X * player.char.speed * 30
+        -game.DEFAULT_WALL_JUMP * player.char.speed
       );
       return;
     }
@@ -310,4 +313,14 @@ export function setGravityTrue(player: Player): void {
 
 export function setGravityFalse(player: Player): void {
   player.char.sprite.body.allowGravity = false;
+}
+
+export function keepObjectsFromFallingLikeCrazy(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
+      player.char.attackEnergy.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
+      player.char.attackEnergy.sprite.body.setVelocityY(0);
+      player.char.attackEnergy.sprite.body.setVelocityX(0);
+    }
+  });
 }
