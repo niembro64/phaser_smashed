@@ -16,6 +16,12 @@ export function create(game: Game) {
     case 1:
       createPlatforms1(game);
       break;
+    case 2:
+      createPlatforms2(game);
+      break;
+    case 3:
+      createPlatforms3(game);
+      break;
     default:
       createPlatforms0(game);
       break;
@@ -151,7 +157,51 @@ export function createBackground(game: Game): void {
   game.BACKGROUND.setImmovable(true);
   game.BACKGROUND.body.allowGravity = false;
 }
+
 export function createPlatforms0(game: Game): void {
+  game.PLATFORMS = game.physics.add.staticGroup();
+
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    "platformHorizontal"
+  );
+}
+export function createPlatforms1(game: Game): void {
+  game.PLATFORMS = game.physics.add.staticGroup();
+
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 3 + 320,
+    "platformVertical"
+  );
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    "platformHorizontal"
+  );
+}
+export function createPlatforms2(game: Game): void {
+  game.PLATFORMS = game.physics.add.staticGroup();
+
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    "platformHorizontal"
+  );
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2 - 34 * 10,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
+    "brick"
+  );
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2 + 34 * 10,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
+    "brick"
+  );
+}
+
+export function createPlatforms3(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
   game.PLATFORMS.create(
     1200 * game.SCREEN_SCALE.WIDTH,
@@ -198,15 +248,6 @@ export function createPlatforms0(game: Game): void {
     480 * game.SCREEN_SCALE.WIDTH,
     (500 - 33) * game.SCREEN_SCALE.HEIGHT,
     "brick"
-  );
-}
-export function createPlatforms1(game: Game): void {
-  game.PLATFORMS = game.physics.add.staticGroup();
-
-  game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "platformHorizontal"
   );
 }
 
