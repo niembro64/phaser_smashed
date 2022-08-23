@@ -269,30 +269,44 @@ export function controllerMovement(player: Player, game: Game): void {
     if (player.pad.up && !player.pad.Y) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
-          -game.DEFAULT_SPEED_Y * player.char.speed * player.char.fast
+          -game.DEFAULT_SPEED_Y *
+            player.char.speed *
+            player.char.fast *
+            (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
       // return;
     }
     if (player.pad.down) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
-          game.DEFAULT_SPEED_Y * player.char.speed * player.char.fast
+          game.DEFAULT_SPEED_Y *
+            player.char.speed *
+            player.char.fast *
+            (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
       // return;
     }
     if (player.pad.left) {
       player.char.sprite.body.setVelocityX(
         player.char.sprite.body.velocity.x *
+          game.RATIO_ACCELERATION_VELOCITY *
           Math.pow(player.char.friction_air, 3) +
-          -game.DEFAULT_SPEED_X * player.char.speed * player.char.fast
+          -game.DEFAULT_SPEED_X *
+            player.char.speed *
+            player.char.fast *
+            (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
       // return;
     }
     if (player.pad.right) {
       player.char.sprite.body.setVelocityX(
         player.char.sprite.body.velocity.x *
+          game.RATIO_ACCELERATION_VELOCITY *
           Math.pow(player.char.friction_air, 4) +
-          game.DEFAULT_SPEED_X * player.char.speed * player.char.fast
+          game.DEFAULT_SPEED_X *
+            player.char.speed *
+            player.char.fast *
+            (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
       // return;
     }

@@ -37,7 +37,11 @@ import {
   updateTime,
 } from "./helpers/state";
 import { updateText } from "./helpers/text";
-import { resetDamage, onDeadUpdateMatrix, updateDeathsAndKillsMatrices } from "./helpers/damage";
+import {
+  resetDamage,
+  onDeadUpdateMatrix,
+  updateDeathsAndKillsMatrices,
+} from "./helpers/damage";
 
 export function update(game: Game): void {
   // BEFORE PLAYERS
@@ -162,6 +166,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+        setRespawn(player, game);
 
         ////////////////////////////////
         ///////// duration => alive

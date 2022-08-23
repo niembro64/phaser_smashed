@@ -202,51 +202,11 @@ export function createPlatforms0(game: Game): void {
 }
 export function createPlatforms1(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
-  game.PLATFORMS.create(
-    1200 * game.SCREEN_SCALE.WIDTH,
-    700 * game.SCREEN_SCALE.HEIGHT,
-    "platformVertical"
-  );
-  game.PLATFORMS.create(
-    1200 * game.SCREEN_SCALE.WIDTH,
-    850 * game.SCREEN_SCALE.HEIGHT,
-    "platformShort"
-  );
-  game.PLATFORMS.create(
-    600 * game.SCREEN_SCALE.WIDTH,
-    900 * game.SCREEN_SCALE.HEIGHT,
-    "platformShort"
-  );
+
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
     "platformHorizontal"
-  );
-  game.PLATFORMS.create(
-    300 * game.SCREEN_SCALE.WIDTH,
-    (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
-    "platformHorizontal"
-  );
-  game.PLATFORMS.create(
-    1700 * game.SCREEN_SCALE.WIDTH,
-    (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
-    "platformHorizontal"
-  );
-
-  game.PLATFORMS.create(
-    400 * game.SCREEN_SCALE.WIDTH,
-    500 * game.SCREEN_SCALE.HEIGHT,
-    "platformShort"
-  );
-  game.PLATFORMS.create(
-    320 * game.SCREEN_SCALE.WIDTH,
-    (500 - 33) * game.SCREEN_SCALE.HEIGHT,
-    "brick"
-  );
-  game.PLATFORMS.create(
-    480 * game.SCREEN_SCALE.WIDTH,
-    (500 - 33) * game.SCREEN_SCALE.HEIGHT,
-    "brick"
   );
 }
 

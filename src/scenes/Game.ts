@@ -16,9 +16,9 @@ export default class Game extends Phaser.Scene {
   START_DELAY_DURATION: number = 2000;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
-  playerSpawnOrder: number[] = [0, 1, 2, 3];
+  // playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
-  // playerSpawnOrder: number[] = [2, 3, 0, 1];
+  playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
   textLocationLROffset: number = 60;
@@ -38,7 +38,8 @@ export default class Game extends Phaser.Scene {
   SUPERTITLE: any;
   allPlayersWallTouchIterator: number = 0;
   // RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
-  DEFAULT_SPEED_X: number = 80;
+  RATIO_ACCELERATION_VELOCITY = 0.7;
+  DEFAULT_SPEED_X: number = 700;
   DEFAULT_SPEED_Y: number = 30;
   DEFAULT_JUMP: number = -1500;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
@@ -180,7 +181,8 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.8,
         fast: 1,
-        friction_ground: 0.94,
+        friction_ground: 0.8,
+        // friction_ground: 0.94,
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
@@ -206,7 +208,7 @@ export default class Game extends Phaser.Scene {
           allowVelocityY: true,
           rotation: {
             initial: 0.25,
-            speed: 1000,
+            speed: 400,
           },
         },
       },
@@ -264,7 +266,7 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.7,
         fast: 1,
-        friction_ground: 0.94,
+        friction_ground: 0.8,
         friction_air: 0.97,
         wallTouchArray: [],
         lastDirectionTouched: null,
@@ -347,7 +349,7 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 1,
         fast: 1,
-        friction_ground: 0.96,
+        friction_ground: 0.8,
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
@@ -430,7 +432,7 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.9,
         fast: 1,
-        friction_ground: 0.95,
+        friction_ground: 0.8,
         friction_air: 0.96,
         wallTouchArray: [],
         lastDirectionTouched: null,
