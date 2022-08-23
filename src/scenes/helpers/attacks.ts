@@ -8,7 +8,6 @@ export function upB(player: Player, game: Game): void {
     !player.padPrev.X &&
     player.char.upB.canUse
   ) {
-    console.log("UPB!!!");
     player.char.sprite.body.setVelocityY(game.DEFAULT_UPB);
     player.char.upB.canUse = false;
   }

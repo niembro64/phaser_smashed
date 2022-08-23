@@ -34,9 +34,6 @@ export function onHitHandler(
     attackEnergy.hitback.x * vector.x,
     attackEnergy.hitback.y * vector.y
   );
-
-  console.log(game.wasLastHitByMatrix[0]);
-  console.log(game.numberHitByMatrix[0]);
 }
 
 export function onDeadUpdateMatrix(playerIndex: number, game: Game): void {

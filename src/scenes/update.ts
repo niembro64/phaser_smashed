@@ -73,9 +73,6 @@ export function update(game: Game): void {
 
 export function updatePlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    // if (playerIndex === 0) {
-    //   console.log(player.playerNumber, player.char.name, player.state.name);
-    // }
     switch (player.state.name) {
       case "start":
         ////////////////////////////////
