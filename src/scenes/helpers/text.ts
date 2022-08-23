@@ -1,7 +1,7 @@
 import Game from "../Game";
 
 export function updateText(game: Game): void {
-  const baseDamageY = 0;
+  const baseDamageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
   const baseDeadKillY = game.SCREEN_DIMENSIONS.HEIGHT;
   const zoom = game.cameras.main.zoom;
   const redOffsetY =

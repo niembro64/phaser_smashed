@@ -11,8 +11,8 @@ export function create(game: Game) {
   createTable(game);
   createPlatforms(game);
   createEnergyAttacks(game);
-  createScoreboard(game);
   createPlayers(game);
+  createScoreboard(game);
   createCameras(game);
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);

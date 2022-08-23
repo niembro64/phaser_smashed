@@ -60,7 +60,7 @@ export default class Game extends Phaser.Scene {
   // BORDER_PADDING_Y: number = 0;
   BORDER_PADDING_X: number = 200;
   BORDER_PADDING_Y: number = 100;
-  CAMERA_OFFSET_Y: number = -100;
+  CAMERA_OFFSET_Y: number = -50;
   // CAMERA_OFFSET_Y: number = 0;
 
   cameraPlayers: Camera = {
