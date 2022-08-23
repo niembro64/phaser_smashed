@@ -28,7 +28,7 @@ export default class Game extends Phaser.Scene {
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
   FILE_SOUNDS: any = {
-    INTRO: "cresent-hell-escalate-3-11647.mp3",
+    INTRO: "deep.mp3",
     GUN: "gun.mp3",
     HIT: "kick-rubber-tube-82839.mp3",
     JUMP: "mxl993_yarstick_swoosh_6-88322.mp3",

@@ -54,6 +54,7 @@ export function update(game: Game): void {
       break;
     case "play":
       setTimeout(() => {
+        game.SOUND_INTRO.play();
         goToStateGame("first-blood", game);
       }, 3000);
       break;
