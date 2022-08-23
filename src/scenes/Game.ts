@@ -6,11 +6,11 @@ import { Camera, Clock, Debug, Player } from "./interfaces";
 export default class Game extends Phaser.Scene {
   debug: Debug = {
     level: 1,
-    useCameras: false,
+    useCameras: true,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
-    energyAttackWrapScreen: true,
+    energyAttackWrapScreen: false,
   };
 
   HURT_FLICKER_SPEED: number = 100;

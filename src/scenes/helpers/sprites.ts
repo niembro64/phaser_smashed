@@ -2,7 +2,7 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 import { hasPlayerTouchedWallRecently } from "./movement";
 
-export function updateSpritesLR(game: Game): void {
+export function updateSpritesFlipX(game: Game): void {
   game.players.forEach((player) => {
     if (!hasPlayerTouchedWallRecently(player)) {
       if (player.char.sprite.body.velocity.x === 0) {

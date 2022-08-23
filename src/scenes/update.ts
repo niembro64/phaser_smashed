@@ -28,7 +28,7 @@ import {
   setBlinkFalse,
   setBlinkTrue,
   updateAllSpriteFilters,
-  updateSpritesLR,
+  updateSpritesFlipX,
 } from "./helpers/sprites";
 import {
   goToState,
@@ -51,7 +51,7 @@ export function update(game: Game): void {
   updateWallTouchArray(game);
   updateCamera(game);
   updateAllSpriteFilters(game);
-  updateSpritesLR(game);
+  updateSpritesFlipX(game);
   updateText(game);
   updateAttackEnergyFrictionGroundRotation(game);
   updateAttackEnergyFrictionGroundMovement(game);
@@ -64,7 +64,7 @@ export function update(game: Game): void {
 
   // PLAYERS
   updatePlayers(game);
-
+  
   // AFTER PLAYERS
   updatePadPrevious(game);
   resetAllHitboxes(game);
@@ -72,9 +72,9 @@ export function update(game: Game): void {
 
 export function updatePlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    // if (playerIndex === 0) {
-    //   console.log(player.playerNumber, player.char.name, player.state);
-    // }
+    if (playerIndex === 0) {
+      console.log(player.playerNumber, player.char.name, player.state.name);
+    }
     switch (player.state.name) {
       case "start":
         ////////////////////////////////

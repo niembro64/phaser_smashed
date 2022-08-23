@@ -4,7 +4,7 @@ import { attackEnergy } from "./helpers/pad";
 import { setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
-  game.timer = new Phaser.Core.TimeStep(game.game, { min: 50, target: 60 });
+  game.timer = new Phaser.Core.TimeStep(game.game, { min: 60, target: 60 });
 
   createBackground(game);
   createBackgroundTitles(game);
@@ -33,12 +33,12 @@ export function create(game: Game) {
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
   initializeHitboxOverlap(game);
-  game.cameras.main.setBounds(
-    0,
-    0,
-    game.SCREEN_DIMENSIONS.WIDTH,
-    game.SCREEN_DIMENSIONS.HEIGHT
-  );
+  // game.cameras.main.setBounds(
+  //   0,
+  //   0,
+  //   game.SCREEN_DIMENSIONS.WIDTH,
+  //   game.SCREEN_DIMENSIONS.HEIGHT
+  // );
   // game.cameras.main.setBounds(
   //   0,
   //   0,
