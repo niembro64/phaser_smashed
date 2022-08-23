@@ -18,33 +18,37 @@
 html {
   padding: 0px;
   margin: 0px;
-  width: 1920px;
-  height: 1080px;
+  /* width: 1920px;
+  height: 1080px; */
 }
 
 body {
   background-color: black;
   color: white;
-  width: 1920px;
+  /* width: 1920px;
   height: 1080px;
-  overflow: hidden;
+  overflow: hidden; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #phaser-container {
-  padding: 2px;
+  padding: 0px;
   margin: 0px;
-  /* width: 100%;
-  height: auto; */
+  width: 100%;
+  height: auto;
 
-  width: 1920px;
-  height: 1080px;
+  /* width: 1920px;
+  height: 1080px; */
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #root {

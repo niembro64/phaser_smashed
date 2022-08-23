@@ -9,7 +9,17 @@ export function create(game: Game) {
   createBackground(game);
   createBackgroundTitles(game);
   createTable(game);
-  createPlatforms(game);
+  switch (game.debug.level) {
+    case 0:
+      createPlatforms0(game);
+      break;
+    case 1:
+      createPlatforms1(game);
+      break;
+    default:
+      createPlatforms0(game);
+      break;
+  }
   createEnergyAttacks(game);
   createPlayers(game);
   createScoreboard(game);
@@ -131,41 +141,141 @@ export function setAttackEnergyCollideWithPlayers(game: Game): void {
 }
 
 export function createBackground(game: Game): void {
-  game.BACKGROUND = game.physics.add.sprite(1920 / 2, 1080 / 2, "background");
-  game.BACKGROUND.setScale(game.SCREEN_DIMENSIONS.WIDTH / 1080);
+  game.BACKGROUND = game.physics.add.sprite(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    "background"
+  );
+  game.BACKGROUND.setScale(game.SCREEN_SCALE.WIDTH, game.SCREEN_SCALE.HEIGHT);
+  // game.BACKGROUND.setOrigin(0.5, 0.5);
   game.BACKGROUND.setImmovable(true);
   game.BACKGROUND.body.allowGravity = false;
 }
-export function createPlatforms(game: Game): void {
+export function createPlatforms0(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
-  game.PLATFORMS.create(1200, 700, "platformVertical");
-  game.PLATFORMS.create(1200, 850, "platformShort");
-  game.PLATFORMS.create(600, 900, "platformShort");
-  game.PLATFORMS.create(1920 / 2, 1080 / 2, "platformHorizontal");
-  game.PLATFORMS.create(300, 1080 / 1.5, "platformHorizontal");
-  game.PLATFORMS.create(1700, 1080 / 1.5, "platformHorizontal");
+  game.PLATFORMS.create(
+    1200 * game.SCREEN_SCALE.WIDTH,
+    700 * game.SCREEN_SCALE.HEIGHT,
+    "platformVertical"
+  );
+  game.PLATFORMS.create(
+    1200 * game.SCREEN_SCALE.WIDTH,
+    850 * game.SCREEN_SCALE.HEIGHT,
+    "platformShort"
+  );
+  game.PLATFORMS.create(
+    600 * game.SCREEN_SCALE.WIDTH,
+    900 * game.SCREEN_SCALE.HEIGHT,
+    "platformShort"
+  );
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    "platformHorizontal"
+  );
+  game.PLATFORMS.create(
+    300 * game.SCREEN_SCALE.WIDTH,
+    (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
+    "platformHorizontal"
+  );
+  game.PLATFORMS.create(
+    1700 * game.SCREEN_SCALE.WIDTH,
+    (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
+    "platformHorizontal"
+  );
 
-  game.PLATFORMS.create(400, 500, "platformShort");
-  game.PLATFORMS.create(320, 500 - 33, "brick");
-  game.PLATFORMS.create(480, 500 - 33, "brick");
+  game.PLATFORMS.create(
+    400 * game.SCREEN_SCALE.WIDTH,
+    500 * game.SCREEN_SCALE.HEIGHT,
+    "platformShort"
+  );
+  game.PLATFORMS.create(
+    320 * game.SCREEN_SCALE.WIDTH,
+    (500 - 33) * game.SCREEN_SCALE.HEIGHT,
+    "brick"
+  );
+  game.PLATFORMS.create(
+    480 * game.SCREEN_SCALE.WIDTH,
+    (500 - 33) * game.SCREEN_SCALE.HEIGHT,
+    "brick"
+  );
+}
+export function createPlatforms1(game: Game): void {
+  game.PLATFORMS = game.physics.add.staticGroup();
+  game.PLATFORMS.create(
+    1200 * game.SCREEN_SCALE.WIDTH,
+    700 * game.SCREEN_SCALE.HEIGHT,
+    "platformVertical"
+  );
+  game.PLATFORMS.create(
+    1200 * game.SCREEN_SCALE.WIDTH,
+    850 * game.SCREEN_SCALE.HEIGHT,
+    "platformShort"
+  );
+  game.PLATFORMS.create(
+    600 * game.SCREEN_SCALE.WIDTH,
+    900 * game.SCREEN_SCALE.HEIGHT,
+    "platformShort"
+  );
+  game.PLATFORMS.create(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    "platformHorizontal"
+  );
+  game.PLATFORMS.create(
+    300 * game.SCREEN_SCALE.WIDTH,
+    (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
+    "platformHorizontal"
+  );
+  game.PLATFORMS.create(
+    1700 * game.SCREEN_SCALE.WIDTH,
+    (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
+    "platformHorizontal"
+  );
+
+  game.PLATFORMS.create(
+    400 * game.SCREEN_SCALE.WIDTH,
+    500 * game.SCREEN_SCALE.HEIGHT,
+    "platformShort"
+  );
+  game.PLATFORMS.create(
+    320 * game.SCREEN_SCALE.WIDTH,
+    (500 - 33) * game.SCREEN_SCALE.HEIGHT,
+    "brick"
+  );
+  game.PLATFORMS.create(
+    480 * game.SCREEN_SCALE.WIDTH,
+    (500 - 33) * game.SCREEN_SCALE.HEIGHT,
+    "brick"
+  );
 }
 
 export function createTable(game: Game): void {
-  game.TABLE = game.physics.add.sprite(1920 / 2, 1080 / 2 - 40, "table");
+  game.TABLE = game.physics.add.sprite(
+    (1920 / 2) * game.SCREEN_SCALE.WIDTH,
+    (1080 / 2 - 40) * game.SCREEN_SCALE.HEIGHT,
+    "table"
+  );
   game.TABLE.setScale(1);
   game.TABLE.setImmovable(true);
   game.TABLE.body.allowGravity = false;
 }
 export function createBackgroundTitles(game: Game): void {
   game.TITLE = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 300, "SMASHED", {
-      // font: "300px Impact",
-      fontFamily: "Impact",
-      // fontFamily: "'Press Start 2P'",
-      // font: "64px Press Start 2P",
-      // font: '"Press Start 2P"',
-      fontSize: "500px",
-    })
+    .text(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      300 * game.SCREEN_SCALE.HEIGHT,
+      "SMASHED",
+      {
+        // font: "300px Impact",
+        fontFamily: "Impact",
+        // fontFamily: "'Press Start 2P'",
+        // font: "64px Press Start 2P",
+        // font: '"Press Start 2P"',
+        fontSize: "500px",
+        // fontSize: "500px",
+      }
+    )
     .setOrigin(0.5)
     .setColor("black")
     .setAlpha(0.3);

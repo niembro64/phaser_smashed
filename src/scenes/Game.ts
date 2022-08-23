@@ -5,8 +5,9 @@ import { Camera, Clock, Debug, Player } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
-    useCameras: true,
-    seeCameras: false,
+    level: 1,
+    useCameras: false,
+    seeCameras: true,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
   };
@@ -41,7 +42,12 @@ export default class Game extends Phaser.Scene {
   DEFAULT_SPEED_Y: number = 30;
   DEFAULT_JUMP: number = -1500;
   INITIAL = { POSITION: { PLAYER_Y: 10 } };
-  SCREEN_DIMENSIONS = { HEIGHT: 3840, WIDTH: 2160 };
+  SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
+  // SCREEN_DIMENSIONS = { WIDTH: 3840, HEIGHT: 2160 };
+  SCREEN_SCALE = {
+    WIDTH: this.SCREEN_DIMENSIONS.WIDTH / 1920,
+    HEIGHT: this.SCREEN_DIMENSIONS.HEIGHT / 1080,
+  };
   // SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
   GRAVITY: number = 0.1;
   PLATFORMS: any | Phaser.GameObjects.Sprite;

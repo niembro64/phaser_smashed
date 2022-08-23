@@ -157,6 +157,7 @@ export interface Hitback {
 // }
 
 export interface Debug {
+  level: number;
   useCameras: boolean;
   seeCameras: boolean;
   setCollidePlayerPlayers: boolean;
