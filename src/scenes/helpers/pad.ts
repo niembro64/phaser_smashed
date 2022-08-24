@@ -7,6 +7,15 @@ export function assignGamePadsConnected(game: Game): void {
   }
 }
 
+export function isAllPlayersReady(game: Game): boolean {
+  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+    if (!game.players[i].pad.Y) {
+      return false;
+    }
+  }
+  return true;
+}
+
 export function updateAttackEnergyFrictionGroundRotation(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.body.touching.down) {

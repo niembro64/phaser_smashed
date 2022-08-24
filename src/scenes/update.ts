@@ -1,5 +1,9 @@
 import Game from "./Game";
-import { controllerMovement, attackEnergy } from "./helpers/pad";
+import {
+  controllerMovement,
+  attackEnergy,
+  isAllPlayersReady,
+} from "./helpers/pad";
 import {
   jump,
   frictionGroundX,
@@ -22,6 +26,8 @@ import {
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { upB } from "./helpers/attacks";
 import { gameStatePlay } from "./gameStates.ts/gameStatePlay";
+import { isFirstBlood } from "./helpers/drinking";
+import { pausePhysics, resumePhysics } from "./helpers/physics";
 
 export function update(game: Game): void {
   console.log("GAME STATE", game.gameState.name);
@@ -36,11 +42,18 @@ export function update(game: Game): void {
       break;
     case "play":
       gameStatePlay(game);
-      // setTimeout(() => {
-      //   goToStateGame("first-blood", game);
-      // }, 100);
+      if (isFirstBlood(game)) {
+        goToStateGame("first-blood", game);
+        pausePhysics(game);
+        console.log("FIRST BLOOD");
+      }
       break;
     case "first-blood":
+      if (isAllPlayersReady(game)) {
+        goToStateGame("play", game);
+        resumePhysics(game);
+        console.log("ALL READY");
+      }
       break;
     case "screen-clear":
       break;

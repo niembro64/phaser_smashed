@@ -99,7 +99,7 @@ export default class Game extends Phaser.Scene {
     { graphic: null, colorNumber: 0xe24800, colorString: "#e24800" },
     { graphic: null, colorNumber: 0x43a528, colorString: "#43a528" },
     { graphic: null, colorNumber: 0xffc90e, colorString: "#ffc90e" },
-    { graphic: null, colorNumber: 0xff88ae, colorString: "#ff88ae" },
+    { graphic: null, colorNumber: 0x8e98ff, colorString: "#8e98ff" },
   ];
 
   cameraPlayers: Camera = {
