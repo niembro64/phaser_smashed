@@ -193,7 +193,7 @@ export interface Debug {
   setCollidePlayerEnergyAttacks: boolean;
   energyAttackWrapScreen: boolean;
   seeCircles: boolean;
-  playStartupSound: boolean;
+  playBackgroundMusic: boolean;
   wallJumps: boolean;
 }
 

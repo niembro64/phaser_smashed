@@ -120,7 +120,8 @@ export function playerHoldAttackEnergy(player: Player): void {
 }
 
 export function playerShootAttackEnergy(player: Player, game: Game): void {
-  var vX = player.char.sprite.body.velocity.x * player.char.attackEnergy.vel.x;
+  var vX =
+    player.char.sprite.body.velocity.x * player.char.attackEnergy.vel.x * 0.5;
 
   var vY = 0;
   if (player.char.attackEnergy.allowVelocityY) {

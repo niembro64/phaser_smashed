@@ -27,23 +27,33 @@ import {
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
 import { gameStatePlay } from "./gameStates.ts/gameStatePlay";
-import { addToShotsMatrix, isFirstBlood } from "./helpers/drinking";
+import {
+  addToShotsMatrix,
+  isFirstBlood,
+  isScreenClear,
+} from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
 
 export function update(game: Game): void {
   console.log("GAME STATE", game.gameState.name);
   switch (game.gameState.name) {
     case "start":
-      setTimeout(() => {
-        if (game.debug.playStartupSound) {
-          game.SOUND_INTRO.play();
-        }
+      if (game.time.now > 0) {
         game.SOUND_MII.play();
         goToStateGame("play", game);
-      }, 100);
+      }
       break;
     case "play":
       gameStatePlay(game);
+      if (isScreenClear(game)) {
+        goToStateGame("screen-clear", game);
+        game.SOUND_MII.pause();
+        game.SOUND_INTRO.play();
+        // game.SOUND_FIRST_BLOOD.play();
+        game.SOUND_SQUISH.play();
+        pausePhysics(game);
+        console.log("SCREEN CLEAR");
+      }
       if (isFirstBlood(game)) {
         goToStateGame("first-blood", game);
         game.SOUND_MII.pause();
@@ -64,6 +74,13 @@ export function update(game: Game): void {
       }
       break;
     case "screen-clear":
+      if (isAllPlayersReady(game)) {
+        game.SOUND_MII.resume();
+        goToStateGame("play", game);
+        game.SOUND_START.play();
+        resumePhysics(game);
+        console.log("ALL READY");
+      }
       break;
     case "pause":
       break;
