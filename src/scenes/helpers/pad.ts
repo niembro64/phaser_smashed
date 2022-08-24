@@ -16,7 +16,18 @@ export function assignGamePadsConnected(game: Game): void {
 
 export function isAllPlayersReady(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    if (!game.players[i].pad.Y) {
+    if (
+      !game.players[i].pad.up &&
+      !game.players[i].pad.down &&
+      !game.players[i].pad.left &&
+      !game.players[i].pad.right &&
+      !game.players[i].pad.A &&
+      !game.players[i].pad.B &&
+      !game.players[i].pad.X &&
+      !game.players[i].pad.Y &&
+      !game.players[i].pad.R1 &&
+      !game.players[i].pad.L1
+    ) {
       return false;
     }
   }
