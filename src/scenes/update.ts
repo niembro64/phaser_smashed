@@ -44,6 +44,9 @@ export function update(game: Game): void {
       gameStatePlay(game);
       if (isFirstBlood(game)) {
         goToStateGame("first-blood", game);
+        game.SOUND_INTRO.play();
+        game.SOUND_FIRST_BLOOD.play();
+        game.SOUND_SQUISH.play();
         pausePhysics(game);
         console.log("FIRST BLOOD");
       }
@@ -51,6 +54,7 @@ export function update(game: Game): void {
     case "first-blood":
       if (isAllPlayersReady(game)) {
         goToStateGame("play", game);
+        game.SOUND_START.play();
         resumePhysics(game);
         console.log("ALL READY");
       }
@@ -111,6 +115,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
+          game.SOUND_DIE.play();
           setBlinkTrue(player);
           setGravityFalse(player);
           resetDamage(player);
@@ -149,6 +154,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
+          game.SOUND_DIE.play();
           setGravityFalse(player);
           setBlinkTrue(player);
           setRespawn(player, game);

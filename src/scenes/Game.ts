@@ -37,6 +37,10 @@ export default class Game extends Phaser.Scene {
     HIT: "kick-rubber-tube-82839.mp3",
     JUMP: "mxl993_yarstick_swoosh_6-88322.mp3",
     JUMP_POWER: "quick-swhooshing-noise-80898.mp3",
+    FIRST_BLOOD: "first_blood_echo-92250.mp3",
+    SQUISH: "goresplat-7088.mp3",
+    DIE: "sword-hits-the-body-48273.mp3",
+    START: "start.mp3",
   };
 
   SOUND_INTRO: any;
@@ -44,6 +48,10 @@ export default class Game extends Phaser.Scene {
   SOUND_HIT: any;
   SOUND_JUMP: any;
   SOUND_JUMP_POWER: any;
+  SOUND_FIRST_BLOOD: any;
+  SOUND_SQUISH: any;
+  SOUND_DIE: any;
+  SOUND_START: any;
 
   scoreBoardTime: any;
   time: any;
@@ -536,6 +544,10 @@ export default class Game extends Phaser.Scene {
     this.load.audio("hit", path + this.FILE_SOUNDS.HIT);
     this.load.audio("jump", path + this.FILE_SOUNDS.JUMP);
     this.load.audio("jumpPower", path + this.FILE_SOUNDS.JUMP_POWER);
+    this.load.audio("firstBlood", path + this.FILE_SOUNDS.FIRST_BLOOD);
+    this.load.audio("squish", path + this.FILE_SOUNDS.SQUISH);
+    this.load.audio("die", path + this.FILE_SOUNDS.DIE);
+    this.load.audio("start", path + this.FILE_SOUNDS.START);
 
     this.load.image("laser", "images/laser.png");
     this.load.image("blockcracked", "images/blockcracked.png");
