@@ -3,7 +3,7 @@ import { Player } from "../interfaces";
 import { hasPlayerTouchedWallRecently } from "./movement";
 
 export function updateSpritesFlipX(game: Game): void {
-  game.players.forEach((player) => {
+  game.playersCurrent.forEach((player) => {
     if (!hasPlayerTouchedWallRecently(player)) {
       if (player.char.sprite.body.velocity.x === 0) {
       } else if (player.char.sprite.body.velocity.x > 0) {
@@ -18,7 +18,7 @@ export function updateSpritesFlipX(game: Game): void {
 }
 
 export function updateAllSpriteFilters(game: Game): void {
-  game.players.forEach((player) => {
+  game.playersCurrent.forEach((player) => {
     updateSpriteFilter(player, game);
   });
 }

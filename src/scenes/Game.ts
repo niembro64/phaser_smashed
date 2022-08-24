@@ -1,25 +1,27 @@
 import "phaser";
 import { create } from "./create";
 import { update } from "./update";
-import { Camera, Clock, Debug, Player, State } from "./interfaces";
+import { Camera, Circle, Clock, Debug, Player, State } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   debug: Debug = {
     level: 3,
-    useCameras: false,
+    useCameras: true,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
     energyAttackWrapScreen: false,
+    seeCircles: true,
+    playStartupSound: false,
   };
 
   HURT_FLICKER_SPEED: number = 100;
   START_DELAY_DURATION: number = 2000;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 2000;
-  // playerSpawnOrder: number[] = [0, 1, 2, 3];
+  playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
-  playerSpawnOrder: number[] = [2, 3, 0, 1];
+  // playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
   textLocationLROffset: number = 60;
@@ -89,6 +91,14 @@ export default class Game extends Phaser.Scene {
   BORDER_PADDING_Y: number = 100;
   CAMERA_OFFSET_Y: number = -50;
   // CAMERA_OFFSET_Y: number = 0;
+
+  circleOffset: number = 50;
+  circles: Circle[] = [
+    { graphic: null, colorNumber: 0xe24800, colorString: "#e24800" },
+    { graphic: null, colorNumber: 0x43a528, colorString: "#43a528" },
+    { graphic: null, colorNumber: 0xffc90e, colorString: "#ffc90e" },
+    { graphic: null, colorNumber: 0xff88ae, colorString: "#ff88ae" },
+  ];
 
   cameraPlayers: Camera = {
     char: {
@@ -161,7 +171,11 @@ export default class Game extends Phaser.Scene {
     name: "start",
     timestamp: 0,
   };
-  players: Player[] = [
+
+  PLAYER_CHOICES: number[] = [0, 1, 1, 3];
+
+  playersCurrent: Player[] = [];
+  playerOptions: Player[] = [
     {
       playerNumber: 0,
       killCount: 0,
@@ -536,7 +550,15 @@ export default class Game extends Phaser.Scene {
     this.load.image("brick", "images/blockcracked.png");
     this.load.image("suburb", "images/suburb.png");
 
-    this.players.forEach((player, playerIndex) => {
+    for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
+      this.playersCurrent.push(
+        JSON.parse(JSON.stringify(this.playerOptions[this.PLAYER_CHOICES[i]]))
+      );
+    }
+
+    console.log("PLAYERS CURRENT", this.playersCurrent);
+
+    this.playersCurrent.forEach((player, playerIndex) => {
       this.load.image(player.char.name, player.char.src);
       player.pad = Phaser.Input.Gamepad.Gamepad;
     });

@@ -30,6 +30,12 @@ export interface Player {
   deathCount: number;
 }
 
+export interface Circle {
+  graphic: any;
+  colorNumber: number;
+  colorString: string;
+}
+
 export interface State {
   name: string;
   timestamp: number;
@@ -170,6 +176,8 @@ export interface Debug {
   setCollidePlayerPlayers: boolean;
   setCollidePlayerEnergyAttacks: boolean;
   energyAttackWrapScreen: boolean;
+  seeCircles: boolean;
+  playStartupSound: boolean;
 }
 
 export interface NormalizedVector {

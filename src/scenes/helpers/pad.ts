@@ -3,12 +3,12 @@ import { Player } from "../interfaces";
 
 export function assignGamePadsConnected(game: Game): void {
   for (let i = 0; i < game.input.gamepad.total; i++) {
-    game.players[game.playerSpawnOrder[i]].pad = game.input.gamepad.getPad(i);
+    game.playersCurrent[game.playerSpawnOrder[i]].pad = game.input.gamepad.getPad(i);
   }
 }
 
 export function updateAttackEnergyFrictionGroundRotation(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.body.touching.down) {
       player.char.attackEnergy.sprite.setAngularVelocity(
         player.char.attackEnergy.sprite.body.angularVelocity *
@@ -19,7 +19,7 @@ export function updateAttackEnergyFrictionGroundRotation(game: Game): void {
 }
 
 export function updateAttackEnergyFrictionGroundMovement(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.body.touching.down) {
       player.char.attackEnergy.sprite.setVelocityX(
         player.char.attackEnergy.sprite.body.velocity.x *
@@ -30,7 +30,7 @@ export function updateAttackEnergyFrictionGroundMovement(game: Game): void {
 }
 
 export function updateAttackEnergyFrictionWall(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     if (
       player.char.attackEnergy.friction.wallInvertRotation &&
       (player.char.attackEnergy.sprite.body.touching.left ||
@@ -175,7 +175,7 @@ export function isSpriteOffscreen(
 }
 
 export function updatePadPrevious(game: Game): void {
-  game.players.forEach((player) => {
+  game.playersCurrent.forEach((player) => {
     player.padPrev.up = player.pad.up;
     player.padPrev.down = player.pad.down;
     player.padPrev.left = player.pad.left;

@@ -1,6 +1,6 @@
 import Game from "./Game";
 import { getNormalizedVector, onHitHandler } from "./helpers/damage";
-import { attackEnergy } from "./helpers/pad";
+import { attackEnergy, playerShootAttackEnergy } from "./helpers/pad";
 import { setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
@@ -15,7 +15,6 @@ export function create(game: Game) {
   createBackground(game);
   createBackgroundTitles(game);
   createTable(game);
-  // game.SOUND_INTRO.play();
   switch (game.debug.level) {
     case 0:
       createPlatforms0(game);
@@ -33,6 +32,7 @@ export function create(game: Game) {
       createPlatforms0(game);
       break;
   }
+  createCircles(game);
   createEnergyAttacks(game);
   createPlayers(game);
   createScoreboard(game);
@@ -54,9 +54,19 @@ export function create(game: Game) {
   // );
 }
 
+export function createCircles(game: Game): void {
+  if (!game.debug.seeCircles) {
+    return;
+  }
+
+  game.circles.forEach((circle, circleIndex) => {
+    circle.graphic = game.add.circle(0, 0, 50, circle.colorNumber);
+  });
+}
+
 export function initializeHitboxOverlap(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
-    game.players.forEach((pj, j) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
+    game.playersCurrent.forEach((pj, j) => {
       if (player !== pj) {
         game.physics.add.overlap(
           player.char.sprite,
@@ -78,7 +88,7 @@ export function initializeHitboxOverlap(game: Game): void {
 }
 
 export function setPlayersInitialPositions(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     player.char.initializeCharPosition.x =
       // game.playerSpawnLocations[playerIndex];
       game.playerSpawnLocations[game.playerSpawnOrder[playerIndex]];
@@ -88,14 +98,14 @@ export function setPlayersInitialPositions(game: Game): void {
 export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.INITIAL.POSITION.PLAYER_Y,
       player.char.name
     );
   });
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
       player.char.wallTouchArray.push(false);
     }
@@ -108,12 +118,12 @@ export function createPlayers(game: Game): void {
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     setBlinkTrue(player);
   });
 }
 export function createEnergyAttacks(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     player.char.attackEnergy.sprite = game.physics.add
       .sprite(-300, -300, player.char.attackEnergy.srcImage)
       .setMass(player.char.attackEnergy.mass)
@@ -141,12 +151,12 @@ export function setAttackEnergyCollideWithPlayers(game: Game): void {
   if (!game.debug.setCollidePlayerEnergyAttacks) {
     return;
   }
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     for (let i = 0; i < 4; i++) {
       if (playerIndex !== i) {
         game.physics.add.collider(
           player.char.attackEnergy.sprite,
-          game.players[i].char.sprite
+          game.playersCurrent[i].char.sprite
         );
       }
     }
@@ -345,7 +355,7 @@ export function createScoreboard(game: Game): void {
     .setOrigin(1, 0)
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     player.scoreBoardDamage = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
@@ -359,7 +369,7 @@ export function createScoreboard(game: Game): void {
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
-          color: player.char.color.primary,
+          color: game.circles[playerIndex].colorString,
           // stroke: player.char.color.primary,
           stroke: "black",
           strokeThickness: 1,
@@ -377,7 +387,7 @@ export function createScoreboard(game: Game): void {
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     player.scoreBoardDeathsKills = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
@@ -391,7 +401,7 @@ export function createScoreboard(game: Game): void {
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
-          color: player.char.color.primary,
+          color: game.circles[playerIndex].colorString,
           // stroke: player.char.color.primary,
           stroke: "black",
           strokeThickness: 1,
@@ -414,8 +424,8 @@ export function setPlayersCollide(game: Game): void {
   if (!game.debug.setCollidePlayerPlayers) {
     return;
   }
-  game.players.forEach((player, playerIndex) => {
-    game.players.forEach((p, pj) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
+    game.playersCurrent.forEach((p, pj) => {
       if (pj !== playerIndex) {
         game.physics.add.collider(player.char.sprite, p.char.sprite);
       }

@@ -89,7 +89,7 @@ export function getPlayerZoom(game: Game): number {
   let curr_x = 0;
   let curr_y = 0;
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     if (
       Math.abs(
         game.BORDER_PADDING_X +
@@ -104,7 +104,7 @@ export function getPlayerZoom(game: Game): number {
       );
     }
   });
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     if (
       Math.abs(
         game.BORDER_PADDING_Y +
@@ -135,7 +135,7 @@ export function getCameraBorderStatus(game: Game): Loc {
   var y_low: number = Infinity;
   var y_high: number = 0;
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     x_low = player.char.sprite.x > x_low ? x_low : player.char.sprite.x;
     x_high = player.char.sprite.x < x_high ? x_high : player.char.sprite.x;
     y_low = player.char.sprite.y > y_low ? y_low : player.char.sprite.y;
@@ -155,7 +155,7 @@ export function getCameraPlayerStatus(game: Game): Loc {
   var y_low: number = Infinity;
   var y_high: number = 0;
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     x_low = player.char.sprite.x > x_low ? x_low : player.char.sprite.x;
     x_high = player.char.sprite.x < x_high ? x_high : player.char.sprite.x;
     y_low = player.char.sprite.y > y_low ? y_low : player.char.sprite.y;
@@ -205,7 +205,7 @@ export function getCameraBoxStatus(game: Game): Loc {
   var y_low: number = Infinity;
   var y_high: number = 0;
 
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     x_low = player.char.sprite.x > x_low ? x_low : player.char.sprite.x;
     x_high = player.char.sprite.x < x_high ? x_high : player.char.sprite.x;
     y_low = player.char.sprite.y > y_low ? y_low : player.char.sprite.y;

@@ -1,11 +1,29 @@
 import Game from "../Game";
 import { Player } from "../interfaces";
 
+export function updateCirclesLocations(game: Game): void {
+  if (!game.debug.seeCircles) {
+    return;
+  }
+
+  game.circles.forEach((circle, circleIndex) => {
+    circle.graphic.x = game.playersCurrent[circleIndex].char.sprite.x;
+    circle.graphic.y =
+      game.playersCurrent[circleIndex].char.sprite.y - game.circleOffset;
+
+    circle.graphic.setRadius((1 / game.cameras.main.zoom) * 10);
+    circle.graphic.setPosition(
+      game.playersCurrent[circleIndex].char.sprite.x,
+      game.playersCurrent[circleIndex].char.sprite.y - game.circleOffset
+    );
+  });
+}
+
 export function updateEnergyAttacksWrapScreen(game: Game): void {
   if (!game.debug.energyAttackWrapScreen) {
     return;
   }
-  game.players.forEach((player) => {
+  game.playersCurrent.forEach((player) => {
     if (player.char.attackEnergy.sprite.x < 0) {
       player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
     }
@@ -16,7 +34,7 @@ export function updateEnergyAttacksWrapScreen(game: Game): void {
 }
 
 export function updateKeepOnScreenPlayer(game: Game): void {
-  game.players.forEach((player) => {
+  game.playersCurrent.forEach((player) => {
     if (player.char.sprite.y < 0) {
       player.char.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
     }
@@ -54,7 +72,7 @@ export function setRespawn(player: Player, game: Game): void {
 }
 
 export function updateEnergyAttacksScreenWrap(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
       // player.char.attackEnergy.sprite.body.setVelocityX(0);
       // player.char.attackEnergy.sprite.body.setVelocityY(0);
@@ -81,7 +99,7 @@ export function updateLastDirectionTouched(player: Player): void {
 }
 
 export function updateWallTouchArray(game: Game): void {
-  game.players.forEach((player) => {
+  game.playersCurrent.forEach((player) => {
     if (
       !player.char.sprite.body.touching.down &&
       (player.char.sprite.body.touching.left ||
@@ -94,7 +112,7 @@ export function updateWallTouchArray(game: Game): void {
   });
   game.allPlayersWallTouchIterator =
     (game.allPlayersWallTouchIterator + 1) %
-    game.players[0].char.wallTouchArray.length;
+    game.playersCurrent[0].char.wallTouchArray.length;
 }
 
 export function hasPlayerTouchedWallRecently(player: Player): boolean {
@@ -320,7 +338,7 @@ export function setGravityFalse(player: Player): void {
 }
 
 export function keepObjectsFromFallingLikeCrazy(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
       player.char.attackEnergy.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT + 200;
       player.char.attackEnergy.sprite.body.setVelocityY(0);

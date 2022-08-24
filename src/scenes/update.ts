@@ -23,6 +23,7 @@ import {
   setGravityTrue,
   setGravityFalse,
   keepObjectsFromFallingLikeCrazy,
+  updateCirclesLocations,
 } from "./helpers/movement";
 import {
   setBlinkFalse,
@@ -50,13 +51,17 @@ export function update(game: Game): void {
   console.log("GAME STATE", game.gameState.name);
   switch (game.gameState.name) {
     case "start":
-      goToStateGame("play", game);
+      setTimeout(() => {
+        if (game.debug.playStartupSound) {
+          game.SOUND_INTRO.play();
+        }
+        goToStateGame("play", game);
+      }, 100);
       break;
     case "play":
       setTimeout(() => {
-        game.SOUND_INTRO.play();
         goToStateGame("first-blood", game);
-      }, 3000);
+      }, 100);
       break;
     case "first-blood":
       break;
@@ -81,6 +86,7 @@ export function update(game: Game): void {
   updateEnergyAttacksWrapScreen(game);
   updateDeathsAndKillsMatrices(game);
   keepObjectsFromFallingLikeCrazy(game);
+  updateCirclesLocations(game);
 
   // updateEnergyAttacksScreenWrap(game);
 
@@ -93,7 +99,7 @@ export function update(game: Game): void {
 }
 
 export function updatePlayers(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
+  game.playersCurrent.forEach((player, playerIndex) => {
     switch (player.state.name) {
       case "start":
         ////////////////////////////////
