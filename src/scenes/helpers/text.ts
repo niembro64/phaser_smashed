@@ -40,7 +40,10 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
       // "p" +
       // playerIndex.toString() +
       // " " +
-      Math.round(player.char.damage).toString() + "%"
+      Math.round(player.char.damage).toString() +
+        "% " +
+        player.shotCount.toString() +
+        "*"
     );
     player.scoreBoardDamage.x =
       game.cameraMover.char.sprite.x +
@@ -64,9 +67,7 @@ export function updateDeathsKillsText(
           player.killCount.toString() +
           "+ " +
           player.deathCount.toString() +
-          "- " +
-          player.shotCount.toString() +
-          "s"
+          "-"
       );
     player.scoreBoardDeathsKillsShots.x =
       game.cameraMover.char.sprite.x +
