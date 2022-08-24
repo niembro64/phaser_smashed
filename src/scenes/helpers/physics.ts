@@ -6,3 +6,5 @@ export function pausePhysics(game: Game): void {
 export function resumePhysics(game: Game): void {
   game.physics.resume();
 }
+
+

@@ -20,9 +20,12 @@ export function upB(player: Player, game: Game): void {
 
 export function turnOffPhysicsAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.enable = false;
+  player.char.attackEnergy.sprite.body.allowGravity = false;
 }
 export function turnOnPhysicsAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.enable = true;
+  player.char.attackEnergy.sprite.body.allowGravity =
+    player.char.attackEnergy.gravity;
 }
 
 export function isAttackEnergyOffscreen(
