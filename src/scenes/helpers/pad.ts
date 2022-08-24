@@ -132,6 +132,7 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
   if (player.char.attackEnergy.allowVelocityY) {
     player.char.attackEnergy.sprite.body.allowGravity = true;
   }
+  
   if (player.char.sprite.flipX) {
     player.char.attackEnergy.sprite.x =
       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;

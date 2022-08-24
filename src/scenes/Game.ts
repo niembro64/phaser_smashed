@@ -8,14 +8,14 @@ export default class Game extends Phaser.Scene {
   PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
-    useCameras: true,
+    useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
     energyAttackWrapScreen: false,
     seeCircles: true,
     playBackgroundMusic: true,
-    wallJumps: false,
+    wallJumps: true,
   };
 
   HURT_FLICKER_SPEED: number = 100;
