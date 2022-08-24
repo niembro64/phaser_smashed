@@ -1,5 +1,9 @@
 import Game from "../Game";
 import { Player } from "../interfaces";
+import {
+  turnOffPhysicsAttackEnergy,
+  turnOnPhysicsAttackEnergy,
+} from "./attacks";
 
 export function assignGamePadsConnected(game: Game): void {
   for (let i = 0; i < game.input.gamepad.total; i++) {
@@ -150,6 +154,7 @@ export function attackEnergy(player: Player, game: Game): void {
 
   // GRAB
   if (player.pad?.X && !player.padPrev.X) {
+    turnOffPhysicsAttackEnergy(player);
     playerGrabAttackEnergy(player);
   }
 
@@ -165,6 +170,7 @@ export function attackEnergy(player: Player, game: Game): void {
     // isSpriteOffscreen(player.char.attack.sprite, game)
   ) {
     game.SOUND_GUN.play();
+    turnOnPhysicsAttackEnergy(player);
     playerShootAttackEnergy(player, game);
   }
 }
