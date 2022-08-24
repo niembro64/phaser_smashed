@@ -60,6 +60,8 @@ export default class Game extends Phaser.Scene {
   NanosecondsTime: number = 0;
   millisecondsTime: number = 0;
   secondsTime: number = 0;
+  secondsTimePrev: number = 0;
+  secondsTimeClock: number = 0;
   clockTime: Clock = { minutes: 0, seconds: 0 };
   timer: any;
   TITLE: any;

@@ -1,3 +1,4 @@
+import { setAttackEnergyCollideWithPlayers } from "../create";
 import Game from "../Game";
 import { Player } from "../interfaces";
 import { hitbackFly } from "./movement";
@@ -39,10 +40,14 @@ export function isPlayerHit(playerIndex: number, game: Game): boolean {
 export function updateTime(game: Game): void {
   game.NanosecondsTime = game.time.now;
   game.millisecondsTime = Math.floor(game.NanosecondsTime);
+  game.secondsTimePrev = game.secondsTime;
   game.secondsTime = Math.floor(game.NanosecondsTime / 1000);
+  if (game.secondsTime !== game.secondsTimePrev) {
+    game.secondsTimeClock++;
+  }
 
-  game.clockTime.minutes = Math.floor(game.secondsTime / 60);
-  game.clockTime.seconds = Math.floor(game.secondsTime % 60);
+  game.clockTime.minutes = Math.floor(game.secondsTimeClock / 60);
+  game.clockTime.seconds = Math.floor(game.secondsTimeClock % 60);
 }
 
 export function hasThisDurationPassed(
