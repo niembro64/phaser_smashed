@@ -1,51 +1,27 @@
 import Game from "./Game";
-import { updateCamera } from "./helpers/camera";
-import {
-  controllerMovement,
-  updatePadPrevious,
-  assignGamePadsConnected,
-  attackEnergy,
-  updateAttackEnergyFrictionGroundRotation,
-  updateAttackEnergyFrictionWall,
-  updateAttackEnergyFrictionGroundMovement,
-} from "./helpers/pad";
+import { controllerMovement, attackEnergy } from "./helpers/pad";
 import {
   jump,
   frictionGroundX,
   frictionAirX,
   frictionAirY,
   frictionWallY,
-  updateWallTouchArray,
   updateLastDirectionTouched,
-  updateEnergyAttacksWrapScreen,
   setRespawn,
   isPlayerOffscreen,
   setGravityTrue,
   setGravityFalse,
-  keepObjectsFromFallingLikeCrazy,
-  updateCirclesLocations,
 } from "./helpers/movement";
-import {
-  setBlinkFalse,
-  setBlinkTrue,
-  updateAllSpriteFilters,
-  updateSpritesFlipX,
-} from "./helpers/sprites";
+import { setBlinkFalse, setBlinkTrue } from "./helpers/sprites";
 import {
   goToStateGame,
   goToStatePlayer,
   hasThisDurationPassed,
   isPlayerHit,
-  resetAllHitboxes,
-  updateTime,
 } from "./helpers/state";
-import { updateText } from "./helpers/text";
-import {
-  resetDamage,
-  onDeadUpdateMatrix,
-  updateDeathsAndKillsMatrices,
-} from "./helpers/damage";
+import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { upB } from "./helpers/attacks";
+import { gameStatePlay } from "./gameStates.ts/gameStatePlay";
 
 export function update(game: Game): void {
   console.log("GAME STATE", game.gameState.name);
@@ -59,9 +35,10 @@ export function update(game: Game): void {
       }, 100);
       break;
     case "play":
-      setTimeout(() => {
-        goToStateGame("first-blood", game);
-      }, 100);
+      gameStatePlay(game);
+      // setTimeout(() => {
+      //   goToStateGame("first-blood", game);
+      // }, 100);
       break;
     case "first-blood":
       break;
@@ -72,34 +49,10 @@ export function update(game: Game): void {
     default:
       break;
   }
-  // BEFORE PLAYERS
-  updateTime(game);
-  assignGamePadsConnected(game);
-  updateWallTouchArray(game);
-  updateCamera(game);
-  updateAllSpriteFilters(game);
-  updateSpritesFlipX(game);
-  updateText(game);
-  updateAttackEnergyFrictionGroundRotation(game);
-  updateAttackEnergyFrictionGroundMovement(game);
-  updateAttackEnergyFrictionWall(game);
-  updateEnergyAttacksWrapScreen(game);
-  updateDeathsAndKillsMatrices(game);
-  keepObjectsFromFallingLikeCrazy(game);
-  updateCirclesLocations(game);
-
-  // updateEnergyAttacksScreenWrap(game);
-
-  // PLAYERS
-  updatePlayers(game);
-
-  // AFTER PLAYERS
-  updatePadPrevious(game);
-  resetAllHitboxes(game);
 }
 
 export function updatePlayers(game: Game): void {
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     switch (player.state.name) {
       case "start":
         ////////////////////////////////
@@ -110,9 +63,9 @@ export function updatePlayers(game: Game): void {
         ///////// duration => alive
         ////////////////////////////////
         if (hasThisDurationPassed(player, game.START_DELAY_DURATION, game)) {
+          goToStatePlayer(player, "alive", game);
           setGravityTrue(player);
           setBlinkFalse(player);
-          goToStatePlayer(player, "alive", game);
         }
 
         break;
@@ -134,21 +87,21 @@ export function updatePlayers(game: Game): void {
         ///////// hit => hurt
         ////////////////////////////////
         if (isPlayerHit(playerIndex, game)) {
+          goToStatePlayer(player, "hurt", game);
           setBlinkTrue(player);
           setGravityTrue(player);
           game.SOUND_HIT.play();
-          goToStatePlayer(player, "hurt", game);
         }
 
         ////////////////////////////////
         ///////// offscreen => dead
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
+          goToStatePlayer(player, "dead", game);
           setBlinkTrue(player);
           setGravityFalse(player);
           resetDamage(player);
           onDeadUpdateMatrix(playerIndex, game);
-          goToStatePlayer(player, "dead", game);
           setRespawn(player, game);
         }
 
@@ -173,21 +126,21 @@ export function updatePlayers(game: Game): void {
           !isPlayerOffscreen(player, game) &&
           hasThisDurationPassed(player, game.HURT_DURATION, game)
         ) {
+          goToStatePlayer(player, "alive", game);
           setGravityTrue(player);
           setBlinkFalse(player);
-          goToStatePlayer(player, "alive", game);
         }
 
         ////////////////////////////////
         ///////// offscreen => dead
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
+          goToStatePlayer(player, "dead", game);
           setGravityFalse(player);
           setBlinkTrue(player);
           setRespawn(player, game);
           resetDamage(player);
           onDeadUpdateMatrix(playerIndex, game);
-          goToStatePlayer(player, "dead", game);
         }
 
         break;
@@ -201,9 +154,9 @@ export function updatePlayers(game: Game): void {
         ///////// duration => alive
         ////////////////////////////////
         if (hasThisDurationPassed(player, game.DEAD_DURATION, game)) {
+          goToStatePlayer(player, "alive", game);
           setGravityTrue(player);
           setBlinkFalse(player);
-          goToStatePlayer(player, "alive", game);
         }
 
         break;

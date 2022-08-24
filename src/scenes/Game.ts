@@ -4,6 +4,8 @@ import { update } from "./update";
 import { Camera, Circle, Clock, Debug, Player, State } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
+  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  PLAYER_CHOICES: number[] = [3, 3, 3, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -167,14 +169,19 @@ export default class Game extends Phaser.Scene {
     [false, false, false, false],
     [false, false, false, false],
   ];
+  numberShotsByMatrix: number[][] = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ];
+
   gameState: State = {
     name: "start",
     timestamp: 0,
   };
 
-  PLAYER_CHOICES: number[] = [0, 1, 1, 3];
-
-  playersCurrent: Player[] = [];
+  players: Player[] = [];
   playerOptions: Player[] = [
     {
       playerNumber: 0,
@@ -551,14 +558,14 @@ export default class Game extends Phaser.Scene {
     this.load.image("suburb", "images/suburb.png");
 
     for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
-      this.playersCurrent.push(
+      this.players.push(
         JSON.parse(JSON.stringify(this.playerOptions[this.PLAYER_CHOICES[i]]))
       );
     }
 
-    console.log("PLAYERS CURRENT", this.playersCurrent);
+    console.log("PLAYERS CURRENT", this.players);
 
-    this.playersCurrent.forEach((player, playerIndex) => {
+    this.players.forEach((player, playerIndex) => {
       this.load.image(player.char.name, player.char.src);
       player.pad = Phaser.Input.Gamepad.Gamepad;
     });

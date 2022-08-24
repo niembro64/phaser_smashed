@@ -35,7 +35,7 @@ export function updateClockText(game: Game): void {
 }
 
 export function updateDamageText(game: Game, zoom: number, newY: number): void {
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     player.scoreBoardDamage.setScale(1 / zoom, 1 / zoom).setText(
       // "p" +
       // playerIndex.toString() +
@@ -56,7 +56,7 @@ export function updateDeathsKillsText(
   zoom: number,
   newY: number
 ): void {
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     player.scoreBoardDeathsKills
       .setScale(1 / zoom, 1 / zoom)
       .setText(

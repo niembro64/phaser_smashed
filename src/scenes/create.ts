@@ -65,8 +65,8 @@ export function createCircles(game: Game): void {
 }
 
 export function initializeHitboxOverlap(game: Game): void {
-  game.playersCurrent.forEach((player, playerIndex) => {
-    game.playersCurrent.forEach((pj, j) => {
+  game.players.forEach((player, playerIndex) => {
+    game.players.forEach((pj, j) => {
       if (player !== pj) {
         game.physics.add.overlap(
           player.char.sprite,
@@ -88,7 +88,7 @@ export function initializeHitboxOverlap(game: Game): void {
 }
 
 export function setPlayersInitialPositions(game: Game): void {
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     player.char.initializeCharPosition.x =
       // game.playerSpawnLocations[playerIndex];
       game.playerSpawnLocations[game.playerSpawnOrder[playerIndex]];
@@ -98,14 +98,14 @@ export function setPlayersInitialPositions(game: Game): void {
 export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.INITIAL.POSITION.PLAYER_Y,
       player.char.name
     );
   });
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
       player.char.wallTouchArray.push(false);
     }
@@ -118,12 +118,12 @@ export function createPlayers(game: Game): void {
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
 
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     setBlinkTrue(player);
   });
 }
 export function createEnergyAttacks(game: Game): void {
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     player.char.attackEnergy.sprite = game.physics.add
       .sprite(-300, -300, player.char.attackEnergy.srcImage)
       .setMass(player.char.attackEnergy.mass)
@@ -151,12 +151,12 @@ export function setAttackEnergyCollideWithPlayers(game: Game): void {
   if (!game.debug.setCollidePlayerEnergyAttacks) {
     return;
   }
-  game.playersCurrent.forEach((player, playerIndex) => {
-    for (let i = 0; i < 4; i++) {
+  game.players.forEach((player, playerIndex) => {
+    for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
       if (playerIndex !== i) {
         game.physics.add.collider(
           player.char.attackEnergy.sprite,
-          game.playersCurrent[i].char.sprite
+          game.players[i].char.sprite
         );
       }
     }
@@ -355,7 +355,7 @@ export function createScoreboard(game: Game): void {
     .setOrigin(1, 0)
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
 
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     player.scoreBoardDamage = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
@@ -387,7 +387,7 @@ export function createScoreboard(game: Game): void {
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
 
-  game.playersCurrent.forEach((player, playerIndex) => {
+  game.players.forEach((player, playerIndex) => {
     player.scoreBoardDeathsKills = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
@@ -424,8 +424,8 @@ export function setPlayersCollide(game: Game): void {
   if (!game.debug.setCollidePlayerPlayers) {
     return;
   }
-  game.playersCurrent.forEach((player, playerIndex) => {
-    game.playersCurrent.forEach((p, pj) => {
+  game.players.forEach((player, playerIndex) => {
+    game.players.forEach((p, pj) => {
       if (pj !== playerIndex) {
         game.physics.add.collider(player.char.sprite, p.char.sprite);
       }

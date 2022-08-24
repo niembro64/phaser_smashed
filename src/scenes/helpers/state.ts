@@ -9,6 +9,7 @@ export function goToStateGame(
   game.gameState.name = state;
   game.gameState.timestamp = game.millisecondsTime;
 }
+
 export function goToStatePlayer(
   player: Player,
   state: "start" | "alive" | "dead" | "hurt",
@@ -19,15 +20,15 @@ export function goToStatePlayer(
 }
 
 export function resetAllHitboxes(game: Game): void {
-  game.playersCurrent.forEach((player, playerIndex) => {
-    game.playersCurrent.forEach((p, i) => {
+  game.players.forEach((player, playerIndex) => {
+    game.players.forEach((p, i) => {
       game.currentlyOverlappingSpritesMatrix[playerIndex][i] = false;
     });
   });
 }
 
 export function isPlayerHit(playerIndex: number, game: Game): boolean {
-  for (let j = 0; j < game.playersCurrent.length; j++) {
+  for (let j = 0; j < game.players.length; j++) {
     if (game.currentlyOverlappingSpritesMatrix[playerIndex][j]) {
       return true;
     }
