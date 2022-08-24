@@ -33,8 +33,22 @@ export function isAnyPlayerCurrentlyDead(game: Game): boolean {
   return false;
 }
 
-export function updateShotsMatrix(
+export function addToShotsMatrix(
   player: Player,
   playerIndex: number,
   game: Game
-): void {}
+): void {
+  if (player.state.name !== "dead") {
+    return;
+  }
+  let hit: boolean = false;
+  game.players.forEach((pj, j) => {
+    if (game.wasLastHitByMatrix[playerIndex][j]) {
+      game.numberShotsTakenByMatrix[playerIndex][j]++;
+      hit = true;
+    }
+  });
+  if (!hit) {
+    game.numberShotsTakenByMatrix[playerIndex][playerIndex]++;
+  }
+}

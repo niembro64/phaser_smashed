@@ -34,6 +34,19 @@ export function isAllPlayersReady(game: Game): boolean {
   return true;
 }
 
+export function resetMyHitByIfGroundAndNotHurt(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  if (!player.char.sprite.body.touching.down || player.state.name === "hurt") {
+    return;
+  }
+  for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+    game.wasLastHitByMatrix[playerIndex][j] = false;
+  }
+}
+
 export function updateAttackEnergyFrictionGroundRotation(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.sprite.body.touching.down) {

@@ -3,6 +3,7 @@ import {
   controllerMovement,
   attackEnergy,
   isAllPlayersReady,
+  resetMyHitByIfGroundAndNotHurt,
 } from "./helpers/pad";
 import {
   jump,
@@ -26,7 +27,7 @@ import {
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
 import { gameStatePlay } from "./gameStates.ts/gameStatePlay";
-import { isFirstBlood } from "./helpers/drinking";
+import { addToShotsMatrix, isFirstBlood } from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
 
 export function update(game: Game): void {
@@ -102,6 +103,7 @@ export function updatePlayers(game: Game): void {
         jump(player, game);
         controllerMovement(player, game);
         upB(player, game);
+        resetMyHitByIfGroundAndNotHurt(player, playerIndex, game);
 
         ////////////////////////////////
         ///////// hit => hurt
@@ -121,6 +123,11 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
+          onDeadUpdateMatrix(playerIndex, game);
+          if (isFirstBlood(game)) {
+            addToShotsMatrix(player, playerIndex, game);
+            console.log("HERE", game.numberShotsTakenByMatrix[0]);
+          }
           game.SOUND_DIE.play();
           player.char.attackEnergy.timestampThrow = game.time.now;
           player.char.attackEnergy.state = "released";
@@ -128,7 +135,6 @@ export function updatePlayers(game: Game): void {
           setBlinkTrue(player);
           setGravityFalse(player);
           resetDamage(player);
-          onDeadUpdateMatrix(playerIndex, game);
           setRespawn(player, game);
         }
 
@@ -163,15 +169,19 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
+          onDeadUpdateMatrix(playerIndex, game);
+          if (isFirstBlood(game)) {
+            addToShotsMatrix(player, playerIndex, game);
+            console.log("HERE", game.numberShotsTakenByMatrix[0]);
+          }
           game.SOUND_DIE.play();
           player.char.attackEnergy.timestampThrow = game.time.now;
           player.char.attackEnergy.state = "released";
           turnOnPhysicsAttackEnergy(player);
           setGravityFalse(player);
           setBlinkTrue(player);
-          setRespawn(player, game);
           resetDamage(player);
-          onDeadUpdateMatrix(playerIndex, game);
+          setRespawn(player, game);
         }
 
         break;
