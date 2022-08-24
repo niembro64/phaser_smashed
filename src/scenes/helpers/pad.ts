@@ -126,7 +126,7 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
   var vY = 0;
   if (player.char.attackEnergy.allowVelocityY) {
     vY = 300 * player.char.attackEnergy.vel.y;
-    vY += player.char.sprite.body.velocity.y;
+    vY += player.char.sprite.body.velocity.y * 0.5;
   }
 
   if (player.char.attackEnergy.allowVelocityY) {
