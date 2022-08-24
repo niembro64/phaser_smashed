@@ -1,6 +1,9 @@
 import Game from "../Game";
 import { Player } from "../interfaces";
 import {
+  isAttackEnergyMoving,
+  isAttackEnergyNearPlayer,
+  isAttackEnergyOffscreen,
   turnOffPhysicsAttackEnergy,
   turnOnPhysicsAttackEnergy,
 } from "./attacks";
@@ -152,26 +155,52 @@ export function attackEnergy(player: Player, game: Game): void {
     return;
   }
 
-  // GRAB
-  if (player.pad?.X && !player.padPrev.X) {
-    turnOffPhysicsAttackEnergy(player);
-    playerGrabAttackEnergy(player);
+  if (
+    !isAttackEnergyOffscreen(player.char.attackEnergy, game) &&
+    !isAttackEnergyNearPlayer(player)
+  ) {
+    return;
   }
 
-  // HOLD
-  if (player.pad?.X && player.padPrev.X) {
-    playerHoldAttackEnergy(player);
-  }
+  // GRAB
+  // if (
+  //   player.pad?.X &&
+  //   !player.padPrev.X &&
+  //   game.time.now >
+  //     player.char.attackEnergy.timestampThrow +
+  //       player.char.attackEnergy.durationBetweenThrows
+  // ) {
+  //   player.char.attackEnergy.state = "held";
+  //   turnOffPhysicsAttackEnergy(player);
+  //   playerGrabAttackEnergy(player);
+  // }
 
   // SHOOT
   if (
     !player.pad?.X &&
-    player.padPrev.X
-    // isSpriteOffscreen(player.char.attack.sprite, game)
+    player.padPrev.X &&
+    game.time.now >
+      player.char.attackEnergy.timestampThrow +
+        player.char.attackEnergy.durationBetweenThrows &&
+    player.char.attackEnergy.state === "held"
   ) {
     game.SOUND_GUN.play();
+    player.char.attackEnergy.timestampThrow = game.time.now;
+    player.char.attackEnergy.state = "released";
     turnOnPhysicsAttackEnergy(player);
     playerShootAttackEnergy(player, game);
+    return;
+  }
+  // HOLD
+  if (
+    (player.pad?.X || player.padPrev.X || player.padDebounced.X) &&
+    game.time.now >
+      player.char.attackEnergy.timestampThrow +
+        player.char.attackEnergy.durationBetweenThrows
+  ) {
+    player.char.attackEnergy.state = "held";
+    turnOffPhysicsAttackEnergy(player);
+    playerHoldAttackEnergy(player);
   }
 }
 export function isSpriteOffscreen(
@@ -189,7 +218,7 @@ export function isSpriteOffscreen(
   return false;
 }
 
-export function updatePadPrevious(game: Game): void {
+export function updatePadPreviousAndDebounced(game: Game): void {
   game.players.forEach((player) => {
     player.padPrev.up = player.pad.up;
     player.padPrev.down = player.pad.down;
@@ -201,6 +230,56 @@ export function updatePadPrevious(game: Game): void {
     player.padPrev.Y = player.pad.Y;
 
     player.char.sprite.zoom = 1;
+
+    if (player.pad.up) {
+      player.padDebounced.up +=
+        player.padDebounced.up >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.up += player.padDebounced.up <= 0 ? 0 : -1;
+    }
+    if (player.pad.down) {
+      player.padDebounced.down +=
+        player.padDebounced.down >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.down += player.padDebounced.down <= 0 ? 0 : -1;
+    }
+    if (player.pad.left) {
+      player.padDebounced.left +=
+        player.padDebounced.left >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.left += player.padDebounced.left <= 0 ? 0 : -1;
+    }
+    if (player.pad.right) {
+      player.padDebounced.right +=
+        player.padDebounced.right >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.right += player.padDebounced.right <= 0 ? 0 : -1;
+    }
+
+    if (player.pad.A) {
+      player.padDebounced.A +=
+        player.padDebounced.A >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.A += player.padDebounced.A <= 0 ? 0 : -1;
+    }
+    if (player.pad.B) {
+      player.padDebounced.B +=
+        player.padDebounced.B >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.B += player.padDebounced.B <= 0 ? 0 : -1;
+    }
+    if (player.pad.X) {
+      player.padDebounced.X +=
+        player.padDebounced.X >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.X += player.padDebounced.X <= 0 ? 0 : -1;
+    }
+    if (player.pad.Y) {
+      player.padDebounced.Y +=
+        player.padDebounced.Y >= game.DEBOUNCE_NUMBER ? 0 : 1;
+    } else {
+      player.padDebounced.Y += player.padDebounced.Y <= 0 ? 0 : -1;
+    }
   });
 }
 

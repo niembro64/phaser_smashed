@@ -24,7 +24,7 @@ import {
   isPlayerHit,
 } from "./helpers/state";
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
-import { upB } from "./helpers/attacks";
+import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
 import { gameStatePlay } from "./gameStates.ts/gameStatePlay";
 import { isFirstBlood } from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
@@ -37,6 +37,7 @@ export function update(game: Game): void {
         if (game.debug.playStartupSound) {
           game.SOUND_INTRO.play();
         }
+        game.SOUND_MII.play();
         goToStateGame("play", game);
       }, 100);
       break;
@@ -44,6 +45,7 @@ export function update(game: Game): void {
       gameStatePlay(game);
       if (isFirstBlood(game)) {
         goToStateGame("first-blood", game);
+        game.SOUND_MII.pause();
         game.SOUND_INTRO.play();
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
@@ -53,6 +55,7 @@ export function update(game: Game): void {
       break;
     case "first-blood":
       if (isAllPlayersReady(game)) {
+        game.SOUND_MII.resume();
         goToStateGame("play", game);
         game.SOUND_START.play();
         resumePhysics(game);
@@ -105,6 +108,9 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerHit(playerIndex, game)) {
           goToStatePlayer(player, "hurt", game);
+          player.char.attackEnergy.timestampThrow = game.time.now;
+          player.char.attackEnergy.state = "released";
+          turnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);
           setGravityTrue(player);
           game.SOUND_HIT.play();
@@ -116,6 +122,9 @@ export function updatePlayers(game: Game): void {
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
           game.SOUND_DIE.play();
+          player.char.attackEnergy.timestampThrow = game.time.now;
+          player.char.attackEnergy.state = "released";
+          turnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);
           setGravityFalse(player);
           resetDamage(player);
@@ -155,6 +164,9 @@ export function updatePlayers(game: Game): void {
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
           game.SOUND_DIE.play();
+          player.char.attackEnergy.timestampThrow = game.time.now;
+          player.char.attackEnergy.state = "released";
+          turnOnPhysicsAttackEnergy(player);
           setGravityFalse(player);
           setBlinkTrue(player);
           setRespawn(player, game);

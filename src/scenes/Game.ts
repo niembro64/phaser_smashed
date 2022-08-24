@@ -5,7 +5,7 @@ import { Camera, Circle, Clock, Debug, Player, State } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
-  PLAYER_CHOICES: number[] = [3, 3, 3, 3];
+  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -41,6 +41,7 @@ export default class Game extends Phaser.Scene {
     SQUISH: "goresplat-7088.mp3",
     DIE: "sword-hits-the-body-48273.mp3",
     START: "start.mp3",
+    MII: "mii.mp3",
   };
 
   SOUND_INTRO: any;
@@ -52,6 +53,7 @@ export default class Game extends Phaser.Scene {
   SOUND_SQUISH: any;
   SOUND_DIE: any;
   SOUND_START: any;
+  SOUND_MII: any;
 
   scoreBoardTime: any;
   time: any;
@@ -72,6 +74,7 @@ export default class Game extends Phaser.Scene {
   DEFAULT_UPB: number = -1000;
   DEFAULT_WALL_JUMP: number = -1 * this.DEFAULT_JUMP * 2;
   INITIAL = { POSITION: { PLAYER_Y: 250 } };
+  DEBOUNCE_NUMBER: number = 9;
   SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
   // SCREEN_DIMENSIONS = { WIDTH: 3840, HEIGHT: 2160 };
   SCREEN_SCALE = {
@@ -240,6 +243,9 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          state: "released",
+          timestampThrow: 0,
+          durationBetweenThrows: 1000,
           posFromCenter: { x: 20, y: -30 },
           friction: {
             ground: 1,
@@ -275,6 +281,16 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+      },
+      padDebounced: {
+        up: 0,
+        down: 0,
+        left: 0,
+        right: 0,
+        A: 0,
+        B: 0,
+        X: 0,
+        Y: 0,
       },
     },
     {
@@ -325,6 +341,9 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          state: "released",
+          timestampThrow: 0,
+          durationBetweenThrows: 1000,
           posFromCenter: { x: 50, y: 3 },
           friction: {
             ground: 1,
@@ -360,6 +379,16 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+      },
+      padDebounced: {
+        up: 0,
+        down: 0,
+        left: 0,
+        right: 0,
+        A: 0,
+        B: 0,
+        X: 0,
+        Y: 0,
       },
     },
     {
@@ -409,6 +438,9 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          state: "released",
+          timestampThrow: 0,
+          durationBetweenThrows: 1000,
           posFromCenter: { x: 0, y: -20 },
           friction: {
             ground: 1,
@@ -444,6 +476,16 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+      },
+      padDebounced: {
+        up: 0,
+        down: 0,
+        left: 0,
+        right: 0,
+        A: 0,
+        B: 0,
+        X: 0,
+        Y: 0,
       },
     },
     {
@@ -493,6 +535,9 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
+          state: "released",
+          timestampThrow: 0,
+          durationBetweenThrows: 1000,
           posFromCenter: { x: 10, y: -25 },
           friction: {
             ground: 0.7,
@@ -529,6 +574,16 @@ export default class Game extends Phaser.Scene {
         X: false,
         Y: false,
       },
+      padDebounced: {
+        up: 0,
+        down: 0,
+        left: 0,
+        right: 0,
+        A: 0,
+        B: 0,
+        X: 0,
+        Y: 0,
+      },
     },
   ];
 
@@ -548,6 +603,7 @@ export default class Game extends Phaser.Scene {
     this.load.audio("squish", path + this.FILE_SOUNDS.SQUISH);
     this.load.audio("die", path + this.FILE_SOUNDS.DIE);
     this.load.audio("start", path + this.FILE_SOUNDS.START);
+    this.load.audio("mii", path + this.FILE_SOUNDS.MII);
 
     this.load.image("laser", "images/laser.png");
     this.load.image("blockcracked", "images/blockcracked.png");

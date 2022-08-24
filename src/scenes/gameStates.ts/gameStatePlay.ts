@@ -2,7 +2,7 @@ import Game from "../Game";
 import { updateCamera } from "../helpers/camera";
 import { updateDeathsAndKillsMatrices } from "../helpers/damage";
 import { keepObjectsFromFallingLikeCrazy, updateCirclesLocations, updateEnergyAttacksWrapScreen, updateWallTouchArray } from "../helpers/movement";
-import { assignGamePadsConnected, updateAttackEnergyFrictionGroundMovement, updateAttackEnergyFrictionGroundRotation, updateAttackEnergyFrictionWall, updatePadPrevious } from "../helpers/pad";
+import { assignGamePadsConnected, updateAttackEnergyFrictionGroundMovement, updateAttackEnergyFrictionGroundRotation, updateAttackEnergyFrictionWall, updatePadPreviousAndDebounced } from "../helpers/pad";
 import { updateAllSpriteFilters, updateSpritesFlipX } from "../helpers/sprites";
 import { resetAllHitboxes, updateTime } from "../helpers/state";
 import { updateText } from "../helpers/text";
@@ -29,6 +29,6 @@ export function gameStatePlay(game: Game): void {
   updatePlayers(game);
 
   // AFTER PLAYERS
-  updatePadPrevious(game);
+  updatePadPreviousAndDebounced(game);
   resetAllHitboxes(game);
 }

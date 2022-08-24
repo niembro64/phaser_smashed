@@ -26,6 +26,7 @@ export interface Player {
   keyboard: Keyboard | any;
   pad: Gamepad | any;
   padPrev: PadStatePrevious;
+  padDebounced: PadStateDebounced;
   killCount: number;
   deathCount: number;
 }
@@ -67,6 +68,17 @@ export interface PadStatePrevious {
   B: boolean;
   X: boolean;
   Y: boolean;
+}
+
+export interface PadStateDebounced {
+  up: number;
+  down: number;
+  left: number;
+  right: number;
+  A: number;
+  B: number;
+  X: number;
+  Y: number;
 }
 
 export interface Keyboard {
@@ -140,6 +152,9 @@ export interface AttackEnergyFriction {
 }
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
+  state: "held" | "released";
+  timestampThrow: number;
+  durationBetweenThrows: number;
   posFromCenter: PosFromCenter;
   friction: AttackEnergyFriction;
   vel: Velocity;
