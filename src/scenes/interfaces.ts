@@ -194,6 +194,7 @@ export interface Debug {
   energyAttackWrapScreen: boolean;
   seeCircles: boolean;
   playStartupSound: boolean;
+  wallJumps: boolean;
 }
 
 export interface NormalizedVector {

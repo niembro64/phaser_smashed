@@ -155,11 +155,12 @@ export function jump(player: Player, game: Game): void {
 
     // horizontal stuff
     if (
+      game.debug.wallJumps &&
       player.char.lastDirectionTouched === "left" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        game.DEFAULT_WALL_JUMP * player.char.speed
+        game.DEFAULT_WALL_JUMP * player.char.speed * 0.5
       );
       return;
     }
@@ -168,11 +169,12 @@ export function jump(player: Player, game: Game): void {
     //   return;
     // }
     if (
+      game.debug.wallJumps &&
       player.char.lastDirectionTouched === "right" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        -game.DEFAULT_WALL_JUMP * player.char.speed
+        -game.DEFAULT_WALL_JUMP * player.char.speed * 0.5
       );
       return;
     }
@@ -193,6 +195,10 @@ export function jump(player: Player, game: Game): void {
 }
 
 export function frictionWallY(player: Player, game: Game): void {
+  if (!game.debug.wallJumps) {
+    return;
+  }
+
   if (
     (player.pad.left || player.pad.right) &&
     (player.char.sprite.body.touching.left ||

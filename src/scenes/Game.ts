@@ -15,6 +15,7 @@ export default class Game extends Phaser.Scene {
     energyAttackWrapScreen: false,
     seeCircles: true,
     playStartupSound: false,
+    wallJumps: false,
   };
 
   HURT_FLICKER_SPEED: number = 100;
