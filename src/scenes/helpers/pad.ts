@@ -151,9 +151,9 @@ export function playerGrabAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.setVelocityY(0);
 }
 export function attackEnergy(player: Player, game: Game): void {
-  if (player.pad?.up) {
-    return;
-  }
+  // if (player.pad?.up && !(player.pad.left || player.pad.right)) {
+  //   return;
+  // }
 
   if (
     !isAttackEnergyOffscreen(player.char.attackEnergy, game) &&
