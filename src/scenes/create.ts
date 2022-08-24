@@ -393,7 +393,7 @@ export function createScoreboard(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDeathsKills = game.add
+    player.scoreBoardDeathsKillsShots = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],

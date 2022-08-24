@@ -57,17 +57,23 @@ export function updateDeathsKillsText(
   newY: number
 ): void {
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDeathsKills
+    player.scoreBoardDeathsKillsShots
       .setScale(1 / zoom, 1 / zoom)
       .setText(
-        "+" + player.killCount.toString() + ":-" + player.deathCount.toString()
+        "" +
+          player.killCount.toString() +
+          "+ " +
+          player.deathCount.toString() +
+          "- " +
+          player.shotCount.toString() +
+          "s"
       );
-    player.scoreBoardDeathsKills.x =
+    player.scoreBoardDeathsKillsShots.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
         game.textLocationLROffset) *
         (1 / zoom);
 
-    player.scoreBoardDeathsKills.y = newY;
+    player.scoreBoardDeathsKillsShots.y = newY;
   });
 }

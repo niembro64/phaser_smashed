@@ -19,7 +19,7 @@ export interface CameraHelper {
 export interface Player {
   playerNumber: number;
   scoreBoardDamage: string | any;
-  scoreBoardDeathsKills: string | any;
+  scoreBoardDeathsKillsShots: string | any;
   state: State;
   keyboard_static: Keyboard;
   char: Char;
@@ -29,6 +29,7 @@ export interface Player {
   padDebounced: PadStateDebounced;
   killCount: number;
   deathCount: number;
+  shotCount: number;
 }
 
 export interface Circle {

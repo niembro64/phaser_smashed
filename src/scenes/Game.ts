@@ -26,8 +26,8 @@ export default class Game extends Phaser.Scene {
   // playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
-  textLocationLROffset: number = 60;
-  textLocations: number[] = [-760, -460, 460, 760];
+  textLocationLROffset: number = 120;
+  textLocations: number[] = [-760, -440, 440, 760];
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
@@ -198,8 +198,9 @@ export default class Game extends Phaser.Scene {
       playerNumber: 0,
       killCount: 0,
       deathCount: 0,
+      shotCount: 0,
       scoreBoardDamage: "",
-      scoreBoardDeathsKills: "",
+      scoreBoardDeathsKillsShots: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -297,8 +298,9 @@ export default class Game extends Phaser.Scene {
       playerNumber: 1,
       killCount: 0,
       deathCount: 0,
+      shotCount: 0,
       scoreBoardDamage: "",
-      scoreBoardDeathsKills: "",
+      scoreBoardDeathsKillsShots: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -395,8 +397,9 @@ export default class Game extends Phaser.Scene {
       playerNumber: 2,
       killCount: 0,
       deathCount: 0,
+      shotCount: 0,
       scoreBoardDamage: "",
-      scoreBoardDeathsKills: "",
+      scoreBoardDeathsKillsShots: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -492,8 +495,9 @@ export default class Game extends Phaser.Scene {
       playerNumber: 3,
       killCount: 0,
       deathCount: 0,
+      shotCount: 0,
       scoreBoardDamage: "",
-      scoreBoardDeathsKills: "",
+      scoreBoardDeathsKillsShots: "",
       state: { name: "start", timestamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
