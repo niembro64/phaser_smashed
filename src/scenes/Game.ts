@@ -123,6 +123,7 @@ export default class Game extends Phaser.Scene {
   PLATFORMS: any | Phaser.GameObjects.Sprite;
   BACKGROUND: any | Phaser.GameObjects.Sprite;
   TABLE: any | Phaser.GameObjects.Sprite;
+  FLAG: any | Phaser.GameObjects.Sprite;
   cameraMoverZoomStatusKeeper: number = 1;
 
   HITBACK_X: number = 120;
@@ -678,6 +679,8 @@ export default class Game extends Phaser.Scene {
     this.load.image("sword", "images/sword_right.png");
 
     this.load.image("table", "images/table.png");
+    this.load.image("flag", "images/flagpole_JK2.png");
+
     this.load.image("background", "images/darkxp.jpg");
     this.load.image("centerWhite", "images/wx.png");
     this.load.image("centerBlack", "images/bx.png");

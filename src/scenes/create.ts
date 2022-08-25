@@ -15,7 +15,7 @@ export function create(game: Game) {
   game.SOUND_SQUISH = game.sound.add("squish", { volume: 0.2 });
   game.SOUND_DIE = game.sound.add("die", { volume: 0.8 });
   game.SOUND_START = game.sound.add("start", { volume: 0.6 });
-  
+
   game.ENERJA_AH = game.sound.add("enerja_ah", { volume: 0.2 });
   game.ENERJA_DO_AGAIN = game.sound.add("enerja_again", { volume: 0.2 });
   game.ENERJA_FINISH = game.sound.add("enerja_finish", { volume: 0.2 });
@@ -28,7 +28,7 @@ export function create(game: Game) {
 
   game.SOUND_PAUSED = game.sound.add("mii", { volume: 0.2, loop: true });
   game.SOUND_BGM_MONKEY = game.sound.add("bgm", { volume: 0.2, loop: true });
-  
+
   createBackground(game);
   createBackgroundTitles(game);
   createTable(game);
@@ -294,6 +294,15 @@ export function createTable(game: Game): void {
   game.TABLE.setScale(1);
   game.TABLE.setImmovable(true);
   game.TABLE.body.allowGravity = false;
+
+  game.FLAG = game.physics.add.sprite(
+    (1920 / 2 - 493) * game.SCREEN_SCALE.WIDTH,
+    (1080 / 2 - 200 - 35) * game.SCREEN_SCALE.HEIGHT,
+    "flag"
+  );
+  game.FLAG.setScale(1);
+  game.FLAG.setImmovable(true);
+  game.FLAG.body.allowGravity = false;
 }
 export function createBackgroundTitles(game: Game): void {
   game.TITLE = game.add
