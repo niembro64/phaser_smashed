@@ -27,22 +27,25 @@ import {
 } from "./helpers/state";
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
-import { gameStatePlay } from "./gameStates.ts/gameStatePlay";
-import {
-  addToShotsMatrix,
-  isFirstBlood,
-  isScreenClear,
-} from "./helpers/drinking";
+import { gameStatePlay as gameStatePlayHandler } from "./gameStates.ts/gameStatePlay";
+import { addToShotsMatrix, isFirstBlood, isScreenClear } from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
 
 export function update(game: Game, time: number, delta: number): void {
-  // console.log("DELTA", delta);
   console.log(
-    "GAME STATE",
-    game.gameState.name,
-    " | NanosecondsTime",
-    game.NanosecondsTime
+    "PLAYERS DEAD",
+    game.players[0].state.name,
+    game.players[1].state.name,
+    game.players[2].state.name,
+    game.players[3].state.name
   );
+  // console.log("DELTA", delta);
+  // console.log(
+  //   "GAME STATE",
+  //   game.gameState.name,
+  //   " | NanosecondsTime",
+  //   game.NanosecondsTime
+  // );
   switch (game.gameState.name) {
     case "start":
       if (game.NanosecondsTime >= 0) {
@@ -53,15 +56,15 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "play":
-      gameStatePlay(game, time, delta);
-      // if (isScreenClear(game)) {
-      //   goToStateGame("screen-clear", game);
-      //   game.SOUND_MII.pause();
-      //   game.SOUND_INTRO.play();
-      //   game.SOUND_SQUISH.play();
-      //   pausePhysics(game);
-      //   console.log("SCREEN CLEAR");
-      // }
+      gameStatePlayHandler(game, time, delta);
+      if (isScreenClear(game)) {
+        goToStateGame("screen-clear", game);
+        game.SOUND_MII.pause();
+        game.SOUND_INTRO.play();
+        game.SOUND_SQUISH.play();
+        pausePhysics(game);
+        console.log("SCREEN CLEAR");
+      }
       if (
         isFirstBlood(game) &&
         longEnoughSinceLastState(game.DEAD_DURATION, game)

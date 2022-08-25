@@ -6,12 +6,12 @@ import { playerGrabAttackEnergy } from "./pad";
 
 export function isScreenClear(game: Game): boolean {
   // is there three people currently dead
-  let numPlayersDead = 0;
-  game.players.forEach((player, playerIndex) => {
-    if (player.state.name === "dead ") {
+  let numPlayersDead: number = 0;
+  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+    if (game.players[i].state.name === "dead") {
       numPlayersDead++;
     }
-  });
+  }
 
   if (numPlayersDead === game.PLAYER_CHOICES.length - 1) {
     return true;
