@@ -27,7 +27,11 @@ export function create(game: Game) {
   game.ENERJA_UGH = game.sound.add("enerja_ugh", { volume: 0.2 });
 
   game.SOUND_PAUSED = game.sound.add("mii", { volume: 0.2, loop: true });
-  game.SOUND_BGM_MONKEY = game.sound.add("bgm", { volume: 0.2, loop: true });
+  game.SOUND_BGM = game.sound.add("bgm", { volume: 0.2, loop: true });
+
+  if (!game.debug.useBGM) {
+    game.SOUND_BGM.volume = 0;
+  }
 
   createBackground(game);
   createBackgroundTitles(game);

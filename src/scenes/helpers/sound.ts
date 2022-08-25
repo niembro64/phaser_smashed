@@ -13,17 +13,17 @@ export function playWiiMusic(game: Game): void {
   }
 }
 export function pauseBGMusic(game: Game): void {
-  game.SOUND_BGM_MONKEY.pause();
+  game.SOUND_BGM.pause();
 }
 export function playBGMusic(game: Game): void {
   // if (game.SOUND_MII.isPlaying()) {
   //   return;
   // }
-  game.SOUND_BGM_MONKEY.play();
+  game.SOUND_BGM.play();
 }
 export function resumeBGMusic(game: Game): void {
   // if (game.SOUND_MII.isPlaying()) {
   //   return;
   // }
-  game.SOUND_BGM_MONKEY.resume();
+  game.SOUND_BGM.resume();
 }

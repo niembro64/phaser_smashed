@@ -10,7 +10,7 @@ export default class Game extends Phaser.Scene {
   PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
-    useCameras: false,
+    useCameras: true,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -82,10 +82,9 @@ export default class Game extends Phaser.Scene {
   ENERJA_TURTLE: any;
   ENERJA_TWO_SHOTS: any;
   ENERJA_UGH: any;
+
   SOUND_PAUSED: any;
-  SOUND_BGM_DREAM: any;
-  SOUND_BGM_MONKEY: any;
-  SOUND_BGM_ROYKSOP: any;
+  SOUND_BGM: any;
 
   scoreBoardTime: any;
   // time: any;
@@ -658,16 +657,15 @@ export default class Game extends Phaser.Scene {
     this.load.audio("enerja_ugh", path + this.FILE_SOUNDS.ENERJA_UGH);
 
     this.load.audio("mii", path + this.FILE_SOUNDS.MII);
-    if (this.debug.useBGM) {
-      if (this.debug.BGMNumber === 0) {
-        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_DREAM);
-      }
-      if (this.debug.BGMNumber === 1) {
-        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_MONKEY);
-      }
-      if (this.debug.BGMNumber === 2) {
-        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_ROYKSOP);
-      }
+
+    if (this.debug.BGMNumber === 0) {
+      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_DREAM);
+    }
+    if (this.debug.BGMNumber === 1) {
+      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_MONKEY);
+    }
+    if (this.debug.BGMNumber === 2) {
+      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
 
     this.load.image("laser", "images/laser.png");
