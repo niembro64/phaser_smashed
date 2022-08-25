@@ -15,13 +15,13 @@ import {
   updatePadPreviousAndDebounced,
 } from "../helpers/pad";
 import { updateAllSpriteFilters, updateSpritesFlipX } from "../helpers/sprites";
-import { resetAllHitboxes, updateTime } from "../helpers/state";
+import { resetAllHitboxes, updateGameTime } from "../helpers/state";
 import { updateText } from "../helpers/text";
 import { updatePlayers } from "../update";
 
 export function gameStatePlay(game: Game, time: number, delta: number): void {
   // BEFORE PLAYERS
-  updateTime(game, time, delta);
+  updateGameTime(game, time, delta);
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   updateCamera(game);

@@ -2,6 +2,7 @@ import "phaser";
 import { create } from "./create";
 import { update } from "./update";
 import { Camera, Circle, Clock, Debug, Player, State } from "./interfaces";
+import { timeStamp } from "console";
 
 export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
@@ -22,6 +23,7 @@ export default class Game extends Phaser.Scene {
   START_DELAY_DURATION: number = 1200;
   HURT_DURATION: number = 1000;
   DEAD_DURATION: number = 3000;
+  MIN_SHOT_DURATION: number = 20000;
   playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
   // playerSpawnOrder: number[] = [2, 3, 0, 1];
@@ -76,12 +78,12 @@ export default class Game extends Phaser.Scene {
 
   scoreBoardTime: any;
   // time: any;
-  NanosecondsTime: number = 0;
-  millisecondsTime: number = 0;
-  secondsTime: number = 0;
-  secondsTimePrev: number = 0;
-  secondsTimeClock: number = 0;
-  clockTime: Clock = { minutes: 0, seconds: 0 };
+  timeNanoseconds: number = 0;
+  gameNanoseconds: number = 0;
+  gameSeconds: number = 0;
+  gameSecondsPrev: number = 0;
+  gameSecondsClock: number = 0;
+  gameClock: Clock = { gameMinutes: 0, gameSeconds: 0 };
   timer: any;
   TITLE: any;
   SUBTITLE: any;
@@ -208,9 +210,10 @@ export default class Game extends Phaser.Scene {
     [0, 0, 0, 0],
   ];
 
-  gameState: State = {
+  state: State = {
     name: "start",
-    timestamp: 0,
+    gameStamp: 0,
+    timeStamp: 0,
   };
 
   players: Player[] = [];
@@ -222,7 +225,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamage: "",
       scoreBoardDeathsKillsShots: "",
-      state: { name: "start", timestamp: 0 },
+      gameState: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
         down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -322,7 +325,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamage: "",
       scoreBoardDeathsKillsShots: "",
-      state: { name: "start", timestamp: 0 },
+      gameState: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
         down: Phaser.Input.Keyboard.KeyCodes.G,
@@ -421,7 +424,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamage: "",
       scoreBoardDeathsKillsShots: "",
-      state: { name: "start", timestamp: 0 },
+      gameState: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
         down: Phaser.Input.Keyboard.KeyCodes.K,
@@ -519,7 +522,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamage: "",
       scoreBoardDeathsKillsShots: "",
-      state: { name: "start", timestamp: 0 },
+      gameState: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,

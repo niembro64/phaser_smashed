@@ -25,11 +25,11 @@ export function updateAllSpriteFilters(game: Game): void {
 
 export function updateSpriteFilter(player: Player, game: Game): void {
   if (player.char.colorFilter) {
-    if (player.state.name === "hurt") {
+    if (player.gameState.name === "hurt") {
       // HURT
       if (
         Math.floor(
-          (game.millisecondsTime - player.state.timestamp) /
+          (game.gameNanoseconds - player.gameState.gameStamp) /
             game.HURT_FLICKER_SPEED
         ) %
           2 ===
@@ -43,7 +43,7 @@ export function updateSpriteFilter(player: Player, game: Game): void {
       // NOT HURT
       if (
         Math.floor(
-          (game.millisecondsTime - player.state.timestamp) /
+          (game.gameNanoseconds - player.gameState.gameStamp) /
             game.HURT_FLICKER_SPEED
         ) %
           2 ===

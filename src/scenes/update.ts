@@ -23,7 +23,9 @@ import {
   goToStatePlayer,
   hasThisDurationPassed,
   isPlayerHit,
-  longEnoughSinceLastState,
+  longEnoughGame,
+  longEnoughTime,
+  updateTimeTime,
 } from "./helpers/state";
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
@@ -36,12 +38,13 @@ import {
 import { pausePhysics, resumePhysics } from "./helpers/physics";
 
 export function update(game: Game, time: number, delta: number): void {
+  updateTimeTime(game, time, delta);
   console.log(
     "PLAYERS DEAD",
-    game.players[0].state.name,
-    game.players[1].state.name,
-    game.players[2].state.name,
-    game.players[3].state.name
+    game.players[0].gameState.name,
+    game.players[1].gameState.name,
+    game.players[2].gameState.name,
+    game.players[3].gameState.name
   );
   // console.log("DELTA", delta);
   // console.log(
@@ -50,9 +53,9 @@ export function update(game: Game, time: number, delta: number): void {
   //   " | NanosecondsTime",
   //   game.NanosecondsTime
   // );
-  switch (game.gameState.name) {
+  switch (game.state.name) {
     case "start":
-      if (game.NanosecondsTime >= 0) {
+      if (game.gameNanoseconds >= 0) {
         if (game.debug.playBackgroundMusic) {
           game.SOUND_MII.play();
         }
@@ -61,19 +64,15 @@ export function update(game: Game, time: number, delta: number): void {
       break;
     case "play":
       gameStatePlayHandler(game, time, delta);
-      if (isScreenClear(game)) {
+      if (isScreenClear(game) && longEnoughGame(game.DEAD_DURATION, game)) {
         goToStateGame("screen-clear", game);
         game.SOUND_MII.pause();
-        game.SOUND_INTRO.play();
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);
         console.log("SCREEN CLEAR");
       }
-      if (
-        isFirstBlood(game) &&
-        longEnoughSinceLastState(game.DEAD_DURATION, game)
-      ) {
+      if (isFirstBlood(game) && longEnoughGame(game.DEAD_DURATION, game)) {
         goToStateGame("first-blood", game);
         game.SOUND_MII.pause();
         game.SOUND_INTRO.play();
@@ -84,7 +83,10 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "first-blood":
-      if (isAllPlayersReady(game)) {
+      if (
+        longEnoughTime(game.MIN_SHOT_DURATION, game) &&
+        isAllPlayersReady(game)
+      ) {
         game.SOUND_MII.resume();
         goToStateGame("play", game);
         game.SOUND_START.play();
@@ -93,7 +95,10 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "screen-clear":
-      if (isAllPlayersReady(game)) {
+      if (
+        longEnoughTime(game.MIN_SHOT_DURATION, game) &&
+        isAllPlayersReady(game)
+      ) {
         game.SOUND_MII.resume();
         goToStateGame("play", game);
         game.SOUND_START.play();
@@ -110,7 +115,7 @@ export function update(game: Game, time: number, delta: number): void {
 
 export function updatePlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    switch (player.state.name) {
+    switch (player.gameState.name) {
       case "start":
         ////////////////////////////////
         ///////// WHILE IN LOOP
@@ -146,7 +151,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerHit(playerIndex, game)) {
           goToStatePlayer(player, "hurt", game);
-          player.char.attackEnergy.timestampThrow = game.NanosecondsTime;
+          player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
           player.char.attackEnergy.state = "released";
           turnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);
@@ -165,7 +170,7 @@ export function updatePlayers(game: Game): void {
             console.log("HERE", game.numberShotsTakenByMatrix[0]);
           }
           game.SOUND_DIE.play();
-          player.char.attackEnergy.timestampThrow = game.NanosecondsTime;
+          player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
           player.char.attackEnergy.state = "released";
           turnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);

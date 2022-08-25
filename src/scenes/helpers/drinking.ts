@@ -8,7 +8,7 @@ export function isScreenClear(game: Game): boolean {
   // is there three people currently dead
   let numPlayersDead: number = 0;
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    if (game.players[i].state.name === "dead") {
+    if (game.players[i].gameState.name === "dead") {
       numPlayersDead++;
     }
   }
@@ -46,7 +46,7 @@ export function isFirstBlood(game: Game): boolean {
 
 export function isAnyPlayerCurrentlyDead(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    if (game.players[i].state.name === "dead") {
+    if (game.players[i].gameState.name === "dead") {
       return true;
     }
   }
@@ -58,7 +58,7 @@ export function addToShotsMatrix(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.state.name !== "dead") {
+  if (player.gameState.name !== "dead") {
     return;
   }
   let hit: boolean = false;

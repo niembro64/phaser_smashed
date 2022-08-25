@@ -8,8 +8,9 @@ export function goToStateGame(
   state: "start" | "play" | "first-blood" | "screen-clear",
   game: Game
 ): void {
-  game.gameState.name = state;
-  game.gameState.timestamp = game.millisecondsTime;
+  game.state.name = state;
+  game.state.gameStamp = game.gameNanoseconds;
+  game.state.timeStamp = game.timeNanoseconds;
 }
 
 export function goToStatePlayer(
@@ -17,8 +18,9 @@ export function goToStatePlayer(
   state: "start" | "alive" | "dead" | "hurt",
   game: Game
 ): void {
-  player.state.name = state;
-  player.state.timestamp = game.millisecondsTime;
+  player.gameState.name = state;
+  player.gameState.gameStamp = game.gameNanoseconds;
+  player.gameState.timeStamp = game.timeNanoseconds;
 }
 
 export function resetAllHitboxes(game: Game): void {
@@ -38,27 +40,35 @@ export function isPlayerHit(playerIndex: number, game: Game): boolean {
   return false;
 }
 
-export function longEnoughSinceLastState(
-  duration: number,
-  game: Game
-): boolean {
-  if (game.NanosecondsTime > game.gameState.timestamp + duration + 20) {
+export function longEnoughGame(duration: number, game: Game): boolean {
+  console.log(game.gameNanoseconds, game.state.gameStamp + duration + 20);
+  if (game.gameNanoseconds > game.state.gameStamp + duration + 20) {
+    return true;
+  }
+  return false;
+}
+export function longEnoughTime(duration: number, game: Game): boolean {
+  console.log(game.timeNanoseconds, game.state.timeStamp + duration + 20);
+  if (game.timeNanoseconds > game.state.timeStamp + duration + 20) {
     return true;
   }
   return false;
 }
 
-export function updateTime(game: Game, time: number, delta: number): void {
-  game.NanosecondsTime += delta;
-  game.millisecondsTime = Math.floor(game.NanosecondsTime);
-  game.secondsTimePrev = game.secondsTime;
-  game.secondsTime = Math.floor(game.NanosecondsTime / 1000);
-  if (game.secondsTime !== game.secondsTimePrev) {
-    game.secondsTimeClock++;
+export function updateGameTime(game: Game, time: number, delta: number): void {
+  game.gameNanoseconds += delta;
+  game.gameSecondsPrev = game.gameSeconds;
+  game.gameSeconds = Math.floor(game.gameNanoseconds / 1000);
+  if (game.gameSeconds !== game.gameSecondsPrev) {
+    game.gameSecondsClock++;
   }
 
-  game.clockTime.minutes = Math.floor(game.secondsTimeClock / 60);
-  game.clockTime.seconds = Math.floor(game.secondsTimeClock % 60);
+  game.gameClock.gameMinutes = Math.floor(game.gameSecondsClock / 60);
+  game.gameClock.gameSeconds = Math.floor(game.gameSecondsClock % 60);
+}
+
+export function updateTimeTime(game: Game, time: number, delta: number): void {
+  game.timeNanoseconds = time;
 }
 
 export function hasThisDurationPassed(
@@ -66,7 +76,7 @@ export function hasThisDurationPassed(
   duration: number,
   game: Game
 ): boolean {
-  if (game.millisecondsTime > player.state.timestamp + duration) {
+  if (game.gameNanoseconds > player.gameState.gameStamp + duration) {
     return true;
   }
   return false;

@@ -22,7 +22,7 @@ export function create(game: Game) {
   game.ENERJA_FINISH = game.sound.add("enerja_finish", { volume: 0.2 });
   game.ENERJA_GYA = game.sound.add("enerja_gya", { volume: 0.2 });
   game.ENERJA_HAPPEN = game.sound.add("enerja_shit", { volume: 0.2 });
-  game.ENERJA_SMASHED = game.sound.add("enerja_smashed", { volume: 0.2 });
+  game.ENERJA_SMASHED = game.sound.add("enerja_smashed", { volume: 0.7 });
   game.ENERJA_TURTLE = game.sound.add("enerja_turtle", { volume: 0.2 });
   game.ENERJA_TWO_SHOTS = game.sound.add("enerja_shots", { volume: 0.2 });
   game.ENERJA_UGH = game.sound.add("enerja_ugh", { volume: 0.2 });

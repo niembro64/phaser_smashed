@@ -1,8 +1,8 @@
 import { Key } from "react";
 
 export interface Clock {
-  minutes: number;
-  seconds: number;
+  gameMinutes: number;
+  gameSeconds: number;
 }
 
 export interface Loc {
@@ -20,7 +20,7 @@ export interface Player {
   playerNumber: number;
   scoreBoardDamage: string | any;
   scoreBoardDeathsKillsShots: string | any;
-  state: State;
+  gameState: State;
   keyboard_static: Keyboard;
   char: Char;
   keyboard: Keyboard | any;
@@ -40,7 +40,8 @@ export interface Circle {
 
 export interface State {
   name: string;
-  timestamp: number;
+  gameStamp: number;
+  timeStamp: number;
 }
 
 export interface Color {

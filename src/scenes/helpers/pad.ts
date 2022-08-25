@@ -39,7 +39,7 @@ export function resetMyHitByIfGroundAndNotHurt(
   playerIndex: number,
   game: Game
 ): void {
-  if (!player.char.sprite.body.touching.down || player.state.name === "hurt") {
+  if (!player.char.sprite.body.touching.down || player.gameState.name === "hurt") {
     return;
   }
   for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
@@ -205,13 +205,13 @@ export function attackEnergy(player: Player, game: Game): void {
   if (
     !player.pad?.X &&
     player.padPrev.X &&
-    game.NanosecondsTime >
+    game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationBetweenThrows &&
     player.char.attackEnergy.state === "held"
   ) {
     game.SOUND_GUN.play();
-    player.char.attackEnergy.timestampThrow = game.NanosecondsTime;
+    player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
     player.char.attackEnergy.state = "released";
     turnOnPhysicsAttackEnergy(player);
     playerShootAttackEnergy(player, game);
@@ -220,7 +220,7 @@ export function attackEnergy(player: Player, game: Game): void {
   // HOLD
   if (
     (player.pad?.X || player.padPrev.X || player.padDebounced.X) &&
-    game.NanosecondsTime >
+    game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationBetweenThrows
   ) {
