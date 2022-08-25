@@ -19,7 +19,7 @@ export default class Game extends Phaser.Scene {
     playShotsWiiBGM: true,
     wallJumps: true,
     useBGM: true,
-    BGMNumber: 0,
+    BGMNumber: 2,
   };
 
   DURATION_GAME_START: number = 1200;
@@ -59,6 +59,7 @@ export default class Game extends Phaser.Scene {
     ENERJA_TWO_SHOTS: "/enerja/two_shots.mp3",
     ENERJA_UGH: "/enerja/ugh.mp3",
     MII: "mii.mp3",
+    BGM_DREAM: "kirbyloop.wav",
     BGM_MONKEY: "/na/monkeys2022.wav",
     BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
   };
@@ -81,7 +82,8 @@ export default class Game extends Phaser.Scene {
   ENERJA_TURTLE: any;
   ENERJA_TWO_SHOTS: any;
   ENERJA_UGH: any;
-  SOUND_MII: any;
+  SOUND_PAUSED: any;
+  SOUND_BGM_DREAM: any;
   SOUND_BGM_MONKEY: any;
   SOUND_BGM_ROYKSOP: any;
 
@@ -657,9 +659,12 @@ export default class Game extends Phaser.Scene {
     this.load.audio("mii", path + this.FILE_SOUNDS.MII);
     if (this.debug.useBGM) {
       if (this.debug.BGMNumber === 0) {
-        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_MONKEY);
+        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_DREAM);
       }
       if (this.debug.BGMNumber === 1) {
+        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_MONKEY);
+      }
+      if (this.debug.BGMNumber === 2) {
         this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_ROYKSOP);
       }
     }
