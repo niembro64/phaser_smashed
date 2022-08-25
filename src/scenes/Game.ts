@@ -3,6 +3,7 @@ import { create } from "./create";
 import { update } from "./update";
 import { Camera, Circle, Clock, Debug, Player, State } from "./interfaces";
 import { timeStamp } from "console";
+import { useDebugValue } from "react";
 
 export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
@@ -17,10 +18,12 @@ export default class Game extends Phaser.Scene {
     seePlayerCircles: true,
     playShotsWiiBGM: true,
     wallJumps: true,
+    useBGM: true,
+    BGMNumber: 0,
   };
 
   DURATION_GAME_START: number = 1200;
-  DURATION_GAME_PAUSE_MUSIC: number = 10000;
+  DURATION_GAME_PAUSE_MUSIC: number = 60000;
   DURATION_GAME_SHOT: number = 4000;
   DURATION_PLAYER_HURT: number = 1000;
   DURATION_PLAYER_DEAD: number = 5000;
@@ -46,7 +49,6 @@ export default class Game extends Phaser.Scene {
     SQUISH: "goresplat-7088.mp3",
     DIE: "sword-hits-the-body-48273.mp3",
     START: "start.mp3",
-    MII: "mii.mp3",
     ENERJA_AH: "/enerja/ah.mp3",
     ENERJA_DO_AGAIN: "/enerja/do_it_again_yeah.mp3",
     ENERJA_FINISH: "/enerja/finishit.mp3",
@@ -56,6 +58,9 @@ export default class Game extends Phaser.Scene {
     ENERJA_TURTLE: "/enerja/turtle.mp3",
     ENERJA_TWO_SHOTS: "/enerja/two_shots.mp3",
     ENERJA_UGH: "/enerja/ugh.mp3",
+    MII: "mii.mp3",
+    BGM_MONKEY: "/na/monkeys2022.wav",
+    BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
   };
 
   SOUND_INTRO: any;
@@ -67,7 +72,6 @@ export default class Game extends Phaser.Scene {
   SOUND_SQUISH: any;
   SOUND_DIE: any;
   SOUND_START: any;
-  SOUND_MII: any;
   ENERJA_AH: any;
   ENERJA_DO_AGAIN: any;
   ENERJA_FINISH: any;
@@ -77,6 +81,9 @@ export default class Game extends Phaser.Scene {
   ENERJA_TURTLE: any;
   ENERJA_TWO_SHOTS: any;
   ENERJA_UGH: any;
+  SOUND_MII: any;
+  SOUND_BGM_MONKEY: any;
+  SOUND_BGM_ROYKSOP: any;
 
   scoreBoardTime: any;
   // time: any;
@@ -636,7 +643,6 @@ export default class Game extends Phaser.Scene {
     this.load.audio("squish", path + this.FILE_SOUNDS.SQUISH);
     this.load.audio("die", path + this.FILE_SOUNDS.DIE);
     this.load.audio("start", path + this.FILE_SOUNDS.START);
-    this.load.audio("mii", path + this.FILE_SOUNDS.MII);
 
     this.load.audio("enerja_ah", path + this.FILE_SOUNDS.ENERJA_AH);
     this.load.audio("enerja_again", path + this.FILE_SOUNDS.ENERJA_DO_AGAIN);
@@ -647,6 +653,16 @@ export default class Game extends Phaser.Scene {
     this.load.audio("enerja_turtle", path + this.FILE_SOUNDS.ENERJA_TURTLE);
     this.load.audio("enerja_shots", path + this.FILE_SOUNDS.ENERJA_TWO_SHOTS);
     this.load.audio("enerja_ugh", path + this.FILE_SOUNDS.ENERJA_UGH);
+
+    this.load.audio("mii", path + this.FILE_SOUNDS.MII);
+    if (this.debug.useBGM) {
+      if (this.debug.BGMNumber === 0) {
+        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_MONKEY);
+      }
+      if (this.debug.BGMNumber === 1) {
+        this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_ROYKSOP);
+      }
+    }
 
     this.load.image("laser", "images/laser.png");
     this.load.image("blockcracked", "images/blockcracked.png");

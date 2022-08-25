@@ -38,7 +38,13 @@ import {
   isScreenClear,
 } from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
-import { pauseWiiMusic, playWiiMusic } from "./helpers/sound";
+import {
+  pauseBGMusic,
+  pauseWiiMusic,
+  playBGMusic,
+  playWiiMusic,
+  resumeBGMusic,
+} from "./helpers/sound";
 
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
@@ -59,12 +65,9 @@ export function update(game: Game, time: number, delta: number): void {
   // );
   switch (game.state.name) {
     case "start":
-      if (game.gameNanoseconds >= 0) {
-        if (game.debug.playShotsWiiBGM) {
-          pauseWiiMusic(game);
-        }
-        goToStateGame("play", game);
-      }
+      playBGMusic(game);
+      pauseWiiMusic(game);
+      goToStateGame("play", game);
       break;
     case "play":
       gameStatePlayHandler(game, time, delta);
@@ -74,6 +77,8 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("screen-clear", game);
+        pauseBGMusic(game);
+        playWiiMusic(game);
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);
@@ -85,6 +90,8 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("first-blood", game);
+        pauseBGMusic(game);
+        playWiiMusic(game);
         game.SOUND_INTRO.play();
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
@@ -93,12 +100,12 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "first-blood":
-      playWiiMusic(game);
       if (
         longEnoughTime(game.DURATION_GAME_SHOT, game) &&
         isAllPlayersReady(game)
       ) {
         pauseWiiMusic(game);
+        resumeBGMusic(game);
         goToStateGame("play", game);
         game.SOUND_START.play();
         resumePhysics(game);
@@ -106,12 +113,12 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "screen-clear":
-      playWiiMusic(game);
       if (
         longEnoughTime(game.DURATION_GAME_SHOT, game) &&
         isAllPlayersReady(game)
       ) {
         pauseWiiMusic(game);
+        resumeBGMusic(game);
         goToStateGame("play", game);
         game.SOUND_START.play();
         resumePhysics(game);

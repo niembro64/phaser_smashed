@@ -196,6 +196,8 @@ export interface Debug {
   seePlayerCircles: boolean;
   playShotsWiiBGM: boolean;
   wallJumps: boolean;
+  useBGM: boolean;
+  BGMNumber: number;
 }
 
 export interface NormalizedVector {
