@@ -53,7 +53,7 @@ export function isAnyPlayerCurrentlyDead(game: Game): boolean {
   return false;
 }
 
-export function addToShotsMatrix(
+export function addShotToMatrixFirstBlood(
   player: Player,
   playerIndex: number,
   game: Game
@@ -71,5 +71,31 @@ export function addToShotsMatrix(
   });
   if (!hit) {
     game.numberShotsTakenByMeMatrix[playerIndex][playerIndex]++;
+  }
+}
+
+export function addToShotsMatrixScreenClear(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  // add shots for each that isn't alive
+  // if dead add shot by last touched
+
+  let hit = false;
+
+  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+    if (game.players[i].gameState.name === "dead") {
+      for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+        if (game.wasLastHitByMatrix[i][j]) {
+          hit = true;
+          game.numberShotsTakenByMeMatrix[i][j]++;
+        }
+      }
+      if (!hit) {
+        game.numberShotsTakenByMeMatrix[i][i]++;
+        hit = false;
+      }
+    }
   }
 }

@@ -20,6 +20,12 @@ export function goToStatePlayer(
   player.gameState.timeStamp = game.timeNanoseconds;
 }
 
+export function hasNumDeadIncrased(game: Game): boolean {
+  if (game.numDead > game.numDeadPrev) {
+    return true;
+  }
+  return false;
+}
 export function hasNumDeadChanged(game: Game): boolean {
   if (game.numDead === game.numDeadPrev) {
     return false;

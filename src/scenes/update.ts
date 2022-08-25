@@ -21,7 +21,7 @@ import { setBlinkFalse, setBlinkTrue } from "./helpers/sprites";
 import {
   goToStateGame,
   goToStatePlayer,
-  hasNumDeadChanged,
+  hasNumDeadIncrased,
   hasThisDurationPassed,
   isPlayerHit,
   longEnoughGame,
@@ -33,7 +33,8 @@ import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
 import { gameStatePlay as gameStatePlayHandler } from "./gameStates.ts/gameStatePlay";
 import {
-  addToShotsMatrix,
+  addShotToMatrixFirstBlood as addToShotsMatrixFirstBlood,
+  addToShotsMatrixScreenClear,
   isFirstBlood,
   isScreenClear,
 } from "./helpers/drinking";
@@ -73,7 +74,7 @@ export function update(game: Game, time: number, delta: number): void {
       gameStatePlayHandler(game, time, delta);
       if (
         isScreenClear(game) &&
-        hasNumDeadChanged(game)
+        hasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("screen-clear", game);
@@ -86,7 +87,7 @@ export function update(game: Game, time: number, delta: number): void {
       }
       if (
         isFirstBlood(game) &&
-        hasNumDeadChanged(game)
+        hasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("first-blood", game);
@@ -163,7 +164,7 @@ export function updatePlayers(game: Game): void {
         jump(player, game);
         controllerMovement(player, game);
         upB(player, game);
-        
+
         ////////////////////////////////
         ///////// hit => hurt
         ////////////////////////////////
@@ -184,13 +185,18 @@ export function updatePlayers(game: Game): void {
           goToStatePlayer(player, "dead", game);
           onDeadUpdateMatrix(playerIndex, game);
           if (isFirstBlood(game)) {
-            if (isFirstBlood(game)) {
-              console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-              console.log("SHOTS", game.numberShotsTakenByMeMatrix);
-              addToShotsMatrix(player, playerIndex, game);
-              console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-              console.log("SHOTS", game.numberShotsTakenByMeMatrix);
-            }
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
+            addToShotsMatrixFirstBlood(player, playerIndex, game);
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
+          }
+          if (isScreenClear(game)) {
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
+            addToShotsMatrixScreenClear(player, playerIndex, game);
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
           game.SOUND_DIE.play();
           player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
@@ -201,8 +207,8 @@ export function updatePlayers(game: Game): void {
           resetDamage(player);
           setRespawn(player, game);
         }
-        
-        resetMyHitByMatrix(player, playerIndex, game);
+
+        // resetMyHitByMatrix(player, playerIndex, game);
         break;
       case "hurt":
         ////////////////////////////////
@@ -238,7 +244,14 @@ export function updatePlayers(game: Game): void {
           if (isFirstBlood(game)) {
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
-            addToShotsMatrix(player, playerIndex, game);
+            addToShotsMatrixFirstBlood(player, playerIndex, game);
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
+          }
+          if (isScreenClear(game)) {
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
+            addToShotsMatrixScreenClear(player, playerIndex, game);
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
