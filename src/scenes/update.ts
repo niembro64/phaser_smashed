@@ -39,7 +39,9 @@ export function update(game: Game): void {
   switch (game.gameState.name) {
     case "start":
       if (game.time.now > 0) {
-        game.SOUND_MII.play();
+        if (game.debug.playBackgroundMusic) {
+          game.SOUND_MII.play();
+        }
         goToStateGame("play", game);
       }
       break;
@@ -49,7 +51,6 @@ export function update(game: Game): void {
         goToStateGame("screen-clear", game);
         game.SOUND_MII.pause();
         game.SOUND_INTRO.play();
-        // game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);
         console.log("SCREEN CLEAR");

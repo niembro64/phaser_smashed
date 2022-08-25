@@ -14,7 +14,7 @@ export default class Game extends Phaser.Scene {
     setCollidePlayerEnergyAttacks: false,
     energyAttackWrapScreen: false,
     seeCircles: true,
-    playBackgroundMusic: true,
+    playBackgroundMusic: false,
     wallJumps: true,
   };
 
