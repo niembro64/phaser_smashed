@@ -22,7 +22,7 @@ export default class Game extends Phaser.Scene {
     BGMNumber: 2,
   };
 
-  DURATION_GAME_LAST_MINUTES: number = 0.1;
+  DURATION_GAME_LAST_MINUTES: number = 1;
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
   DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
@@ -40,6 +40,8 @@ export default class Game extends Phaser.Scene {
   textLocations: number[] = [-760, -440, 440, 760];
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
+
+
 
   FILE_SOUNDS: any = {
     INTRO: "deep.mp3",

@@ -46,7 +46,17 @@ export function updateClockText(game: Game): void {
   );
 }
 
+export function updateShotsOnPlayers(game: Game) {
+  game.players.forEach((player, playerIndex) => {
+    player.shotCount = 0;
+    for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+      player.shotCount += game.numberShotsTakenByMeMatrix[playerIndex][j];
+    }
+  });
+}
+
 export function updateDamageText(game: Game, zoom: number, newY: number): void {
+  updateShotsOnPlayers(game);
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardDamage.setScale(1 / zoom, 1 / zoom).setText(
       // "p" +

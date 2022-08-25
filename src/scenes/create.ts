@@ -26,7 +26,7 @@ export function create(game: Game) {
   game.ENERJA_TWO_SHOTS = game.sound.add("enerja_shots", { volume: 0.2 });
   game.ENERJA_UGH = game.sound.add("enerja_ugh", { volume: 0.2 });
 
-  game.SOUND_PAUSED = game.sound.add("mii", { volume: 0.2, loop: true });
+  game.SOUND_PAUSED = game.sound.add("mii", { volume: 0.1, loop: true });
   game.SOUND_BGM = game.sound.add("bgm", { volume: 0.2, loop: true });
 
   if (!game.debug.useBGM) {
