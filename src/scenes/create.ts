@@ -359,7 +359,7 @@ export function createBackgroundTitles(game: Game): void {
 }
 
 export function createScoreboard(game: Game): void {
-  game.scoreBoardTime = game.add.text(
+  game.scoreBoardTimeGame = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
     "",
@@ -381,9 +381,35 @@ export function createScoreboard(game: Game): void {
       },
     }
   );
-  game.scoreBoardTime
+  game.scoreBoardTimeGame
     .setOrigin(1, 0)
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
+  game.scoreBoardTimeTime = game.add.text(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
+    "",
+    {
+      // font: "Arial 100px",
+      fontSize: "60px",
+      // fontFamily: "'Courier New'",
+      fontFamily: "Consolas",
+      // fontFamily: "'Press Start 2P'",
+      stroke: "black",
+      strokeThickness: 1,
+      shadow: {
+        offsetX: 0,
+        offsetY: 3,
+        color: "#000",
+        blur: 10,
+        stroke: true,
+        fill: true,
+      },
+    }
+  );
+  game.scoreBoardTimeTime
+    .setOrigin(1, 1)
+    .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom)
+    .setAlpha(0.5);
 
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardDamage = game.add

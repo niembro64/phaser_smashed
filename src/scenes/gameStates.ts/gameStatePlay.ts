@@ -27,7 +27,7 @@ export function gameStatePlay(game: Game, time: number, delta: number): void {
   updateCamera(game);
   updateAllSpriteFilters(game);
   updateSpritesFlipX(game);
-  updateText(game);
+
   updateAttackEnergyFrictionGroundRotation(game);
   updateAttackEnergyFrictionGroundMovement(game);
   updateAttackEnergyFrictionWall(game);

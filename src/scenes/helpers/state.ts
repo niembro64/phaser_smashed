@@ -75,7 +75,7 @@ export function updateGameTime(game: Game, time: number, delta: number): void {
   game.gameSecondsPrev = game.gameSeconds;
   game.gameSeconds = Math.floor(game.gameNanoseconds / 1000);
   if (game.gameSeconds !== game.gameSecondsPrev) {
-    game.gameSecondsClock++;
+    game.gameSecondsClock--;
   }
 
   game.gameClock.minutes = Math.floor(game.gameSecondsClock / 60);

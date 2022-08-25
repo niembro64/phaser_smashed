@@ -46,9 +46,11 @@ import {
   playWiiMusic,
   resumeBGMusic,
 } from "./helpers/sound";
+import { updateText } from "./helpers/text";
 
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
+  updateText(game);
   updateNumCurrentlyDead(game);
   // console.log(
   //   "PLAYERS DEAD",
