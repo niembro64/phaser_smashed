@@ -22,9 +22,10 @@ export default class Game extends Phaser.Scene {
     BGMNumber: 2,
   };
 
-  DURATION_GAME_LAST_MINUTES: number = 7;
+  DURATION_GAME_LAST_MINUTES: number = 0.1;
   DURATION_GAME_START: number = 1200;
-  DURATION_GAME_PAUSE_MUSIC: number = 10000;
+  DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
+  DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
   DURATION_GAME_SHOT: number = 4000;
   DURATION_PLAYER_HURT: number = 1000;
   DURATION_PLAYER_DEAD: number = 5000;

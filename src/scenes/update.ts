@@ -40,11 +40,12 @@ import {
 } from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
 import {
-  pauseBGMusic,
+  pauseMusic,
   pauseWiiMusic,
   playBGMusic,
   playWiiMusic,
-  resumeBGMusic,
+  playWiiMusicWait,
+  resumeMusic,
 } from "./helpers/sound";
 import { updateText } from "./helpers/text";
 
@@ -80,8 +81,8 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("screen-clear", game);
-        pauseBGMusic(game);
-        playWiiMusic(game);
+        pauseMusic(game);
+
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);
@@ -93,40 +94,52 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("first-blood", game);
-        pauseBGMusic(game);
-        playWiiMusic(game);
+        pauseMusic(game);
+  
         game.SOUND_INTRO.play();
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);
         console.log("FIRST BLOOD");
       }
+      if (game.gameSecondsClock < 1) {
+        goToStateGame("end", game);
+        pauseMusic(game);
+        game.ENERJA_FINISH.play();
+        // game.SOUND_PAUSED.play()
+      }
       break;
     case "first-blood":
+      playWiiMusicWait(game);
       if (
         longEnoughTime(game.DURATION_GAME_SHOT, game) &&
         isAllPlayersReady(game)
       ) {
         pauseWiiMusic(game);
-        resumeBGMusic(game);
+        resumeMusic(game);
+        goToStateGame("play", game);
+        game.SOUND_START.play();
+        resumePhysics(game);
+        console.log("ALL READY");
+      }
+
+      break;
+    case "screen-clear":
+      playWiiMusicWait(game);
+      if (
+        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
+        isAllPlayersReady(game)
+      ) {
+        pauseWiiMusic(game);
+        resumeMusic(game);
         goToStateGame("play", game);
         game.SOUND_START.play();
         resumePhysics(game);
         console.log("ALL READY");
       }
       break;
-    case "screen-clear":
-      if (
-        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
-        isAllPlayersReady(game)
-      ) {
-        pauseWiiMusic(game);
-        resumeBGMusic(game);
-        goToStateGame("play", game);
-        game.SOUND_START.play();
-        resumePhysics(game);
-        console.log("ALL READY");
-      }
+    case "end":
+      playWiiMusic(game);
       break;
     case "pause":
       break;

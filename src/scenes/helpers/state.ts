@@ -2,7 +2,7 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 
 export function goToStateGame(
-  state: "start" | "play" | "first-blood" | "screen-clear",
+  state: "start" | "play" | "pause" | "first-blood" | "screen-clear" | "end",
   game: Game
 ): void {
   game.state.name = state;
@@ -64,6 +64,11 @@ export function longEnoughGame(duration: number, game: Game): boolean {
   return false;
 }
 export function longEnoughTime(duration: number, game: Game): boolean {
+  // console.log(
+  //   "HERE",
+  //   game.timeNanoseconds,
+  //   game.state.timeStamp + duration + 20
+  // );
   if (game.timeNanoseconds > game.state.timeStamp + duration + 20) {
     return true;
   }
@@ -93,8 +98,6 @@ export function updateTimeTime(game: Game, time: number, delta: number): void {
   game.timeClock.minutes = Math.floor(game.timeSecondsClock / 60);
   game.timeClock.seconds = Math.floor(game.timeSecondsClock % 60);
 }
-
-
 
 export function hasThisDurationPassed(
   player: Player,
