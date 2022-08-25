@@ -23,6 +23,7 @@ import {
   goToStatePlayer,
   hasThisDurationPassed,
   isPlayerHit,
+  longEnoughSinceLastState,
 } from "./helpers/state";
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
@@ -34,11 +35,17 @@ import {
 } from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
 
-export function update(game: Game): void {
-  console.log("GAME STATE", game.gameState.name);
+export function update(game: Game, time: number, delta: number): void {
+  // console.log("DELTA", delta);
+  console.log(
+    "GAME STATE",
+    game.gameState.name,
+    " | NanosecondsTime",
+    game.NanosecondsTime
+  );
   switch (game.gameState.name) {
     case "start":
-      if (game.time.now > 0) {
+      if (game.NanosecondsTime >= 0) {
         if (game.debug.playBackgroundMusic) {
           game.SOUND_MII.play();
         }
@@ -46,16 +53,19 @@ export function update(game: Game): void {
       }
       break;
     case "play":
-      gameStatePlay(game);
-      if (isScreenClear(game)) {
-        goToStateGame("screen-clear", game);
-        game.SOUND_MII.pause();
-        game.SOUND_INTRO.play();
-        game.SOUND_SQUISH.play();
-        pausePhysics(game);
-        console.log("SCREEN CLEAR");
-      }
-      if (isFirstBlood(game)) {
+      gameStatePlay(game, time, delta);
+      // if (isScreenClear(game)) {
+      //   goToStateGame("screen-clear", game);
+      //   game.SOUND_MII.pause();
+      //   game.SOUND_INTRO.play();
+      //   game.SOUND_SQUISH.play();
+      //   pausePhysics(game);
+      //   console.log("SCREEN CLEAR");
+      // }
+      if (
+        isFirstBlood(game) &&
+        longEnoughSinceLastState(game.DEAD_DURATION, game)
+      ) {
         goToStateGame("first-blood", game);
         game.SOUND_MII.pause();
         game.SOUND_INTRO.play();
@@ -128,7 +138,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerHit(playerIndex, game)) {
           goToStatePlayer(player, "hurt", game);
-          player.char.attackEnergy.timestampThrow = game.time.now;
+          player.char.attackEnergy.timestampThrow = game.NanosecondsTime;
           player.char.attackEnergy.state = "released";
           turnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);
@@ -147,7 +157,7 @@ export function updatePlayers(game: Game): void {
             console.log("HERE", game.numberShotsTakenByMatrix[0]);
           }
           game.SOUND_DIE.play();
-          player.char.attackEnergy.timestampThrow = game.time.now;
+          player.char.attackEnergy.timestampThrow = game.NanosecondsTime;
           player.char.attackEnergy.state = "released";
           turnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);

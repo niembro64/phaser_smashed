@@ -1,3 +1,4 @@
+import { Time } from "phaser";
 import { setAttackEnergyCollideWithPlayers } from "../create";
 import Game from "../Game";
 import { Player } from "../interfaces";
@@ -37,8 +38,18 @@ export function isPlayerHit(playerIndex: number, game: Game): boolean {
   return false;
 }
 
-export function updateTime(game: Game): void {
-  game.NanosecondsTime = game.time.now;
+export function longEnoughSinceLastState(
+  duration: number,
+  game: Game
+): boolean {
+  if (game.NanosecondsTime > game.gameState.timestamp + duration + 20) {
+    return true;
+  }
+  return false;
+}
+
+export function updateTime(game: Game, time: number, delta: number): void {
+  game.NanosecondsTime += delta;
   game.millisecondsTime = Math.floor(game.NanosecondsTime);
   game.secondsTimePrev = game.secondsTime;
   game.secondsTime = Math.floor(game.NanosecondsTime / 1000);

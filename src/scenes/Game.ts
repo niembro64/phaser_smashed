@@ -13,8 +13,8 @@ export default class Game extends Phaser.Scene {
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
     energyAttackWrapScreen: false,
-    seeCircles: true,
-    playBackgroundMusic: false,
+    seePlayerCircles: true,
+    playBackgroundMusic: true,
     wallJumps: true,
   };
 
@@ -57,7 +57,7 @@ export default class Game extends Phaser.Scene {
   SOUND_MII: any;
 
   scoreBoardTime: any;
-  time: any;
+  // time: any;
   NanosecondsTime: number = 0;
   millisecondsTime: number = 0;
   secondsTime: number = 0;
@@ -649,7 +649,7 @@ export default class Game extends Phaser.Scene {
     create(this);
   }
 
-  update() {
-    update(this);
+  update(time: number, delta: number) {
+    update(this, time, delta);
   }
 }

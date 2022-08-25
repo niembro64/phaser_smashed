@@ -1,6 +1,7 @@
 import { BooleanLiteral } from "typescript";
 import Game from "../Game";
 import { Player } from "../interfaces";
+import { isAnyPlayerOffscreen } from "./movement";
 import { playerGrabAttackEnergy } from "./pad";
 
 export function isScreenClear(game: Game): boolean {
@@ -32,7 +33,11 @@ export function isFirstBlood(game: Game): boolean {
     temp = 0;
   }
 
-  if (isAnyPlayerCurrentlyDead(game) && numPlayersDied === 1) {
+  if (
+    numPlayersDied === 1 &&
+    isAnyPlayerCurrentlyDead(game)
+    // && isAnyPlayerOffscreen(game)
+  ) {
     return true;
   }
 

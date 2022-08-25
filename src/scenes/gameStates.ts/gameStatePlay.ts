@@ -1,16 +1,27 @@
 import Game from "../Game";
 import { updateCamera } from "../helpers/camera";
 import { updateDeathsAndKillsMatrices } from "../helpers/damage";
-import { keepObjectsFromFallingLikeCrazy, updateCirclesLocations, updateEnergyAttacksWrapScreen, updateWallTouchArray } from "../helpers/movement";
-import { assignGamePadsConnected, updateAttackEnergyFrictionGroundMovement, updateAttackEnergyFrictionGroundRotation, updateAttackEnergyFrictionWall, updatePadPreviousAndDebounced } from "../helpers/pad";
+import {
+  keepObjectsFromFallingLikeCrazy,
+  updateCirclesLocations,
+  updateEnergyAttacksWrapScreen,
+  updateWallTouchArray,
+} from "../helpers/movement";
+import {
+  assignGamePadsConnected,
+  updateAttackEnergyFrictionGroundMovement,
+  updateAttackEnergyFrictionGroundRotation,
+  updateAttackEnergyFrictionWall,
+  updatePadPreviousAndDebounced,
+} from "../helpers/pad";
 import { updateAllSpriteFilters, updateSpritesFlipX } from "../helpers/sprites";
 import { resetAllHitboxes, updateTime } from "../helpers/state";
 import { updateText } from "../helpers/text";
 import { updatePlayers } from "../update";
 
-export function gameStatePlay(game: Game): void {
+export function gameStatePlay(game: Game, time: number, delta: number): void {
   // BEFORE PLAYERS
-  updateTime(game);
+  updateTime(game, time, delta);
   assignGamePadsConnected(game);
   updateWallTouchArray(game);
   updateCamera(game);

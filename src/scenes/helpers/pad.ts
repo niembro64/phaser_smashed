@@ -192,7 +192,7 @@ export function attackEnergy(player: Player, game: Game): void {
   // if (
   //   player.pad?.X &&
   //   !player.padPrev.X &&
-  //   game.time.now >
+  //   game.NanosecondsTime >
   //     player.char.attackEnergy.timestampThrow +
   //       player.char.attackEnergy.durationBetweenThrows
   // ) {
@@ -205,13 +205,13 @@ export function attackEnergy(player: Player, game: Game): void {
   if (
     !player.pad?.X &&
     player.padPrev.X &&
-    game.time.now >
+    game.NanosecondsTime >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationBetweenThrows &&
     player.char.attackEnergy.state === "held"
   ) {
     game.SOUND_GUN.play();
-    player.char.attackEnergy.timestampThrow = game.time.now;
+    player.char.attackEnergy.timestampThrow = game.NanosecondsTime;
     player.char.attackEnergy.state = "released";
     turnOnPhysicsAttackEnergy(player);
     playerShootAttackEnergy(player, game);
@@ -220,7 +220,7 @@ export function attackEnergy(player: Player, game: Game): void {
   // HOLD
   if (
     (player.pad?.X || player.padPrev.X || player.padDebounced.X) &&
-    game.time.now >
+    game.NanosecondsTime >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationBetweenThrows
   ) {

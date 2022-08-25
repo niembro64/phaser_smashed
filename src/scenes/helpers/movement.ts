@@ -2,7 +2,7 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 
 export function updateCirclesLocations(game: Game): void {
-  if (!game.debug.seeCircles) {
+  if (!game.debug.seePlayerCircles) {
     return;
   }
 
@@ -49,7 +49,14 @@ export function updateKeepOnScreenPlayer(game: Game): void {
     }
   });
 }
-
+export function isAnyPlayerOffscreen(game: Game): boolean {
+  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+    if (isPlayerOffscreen(game.players[i], game)) {
+      return true;
+    }
+  }
+  return false;
+}
 export function isPlayerOffscreen(player: Player, game: Game): boolean {
   if (
     player.char.sprite.y < 0 ||

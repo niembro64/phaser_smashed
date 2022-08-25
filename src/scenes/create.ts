@@ -60,7 +60,7 @@ export function create(game: Game) {
 }
 
 export function createCircles(game: Game): void {
-  if (!game.debug.seeCircles) {
+  if (!game.debug.seePlayerCircles) {
     return;
   }
 
