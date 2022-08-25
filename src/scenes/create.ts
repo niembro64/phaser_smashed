@@ -474,6 +474,20 @@ export function createScoreboard(game: Game): void {
       .setOrigin(1, 1)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
+
+  game.players.forEach((player, playerIndex) => {
+    player.glass = game.add
+      .sprite(
+        game.SCREEN_DIMENSIONS.WIDTH / 2 +
+          game.playerSpawnLocations[playerIndex],
+        game.SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
+        "glass"
+      )
+      .setScale(
+        (1 / game.cameras.main.zoom) / 10,
+        (1 / game.cameras.main.zoom) / 10
+      );
+  });
 }
 
 export function setPlayersCollide(game: Game): void {

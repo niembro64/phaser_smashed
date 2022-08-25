@@ -30,6 +30,7 @@ export interface Player {
   killCount: number;
   deathCount: number;
   shotCount: number;
+  glass: any | Phaser.GameObjects.Sprite;
 }
 
 export interface Circle {

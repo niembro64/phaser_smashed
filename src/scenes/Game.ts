@@ -41,8 +41,6 @@ export default class Game extends Phaser.Scene {
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
-
-
   FILE_SOUNDS: any = {
     INTRO: "deep.mp3",
     GUN: "gun.mp3",
@@ -244,6 +242,7 @@ export default class Game extends Phaser.Scene {
   playerOptions: Player[] = [
     {
       playerNumber: 0,
+      glass: null,
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
@@ -344,6 +343,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 1,
+      glass: null,
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
@@ -443,6 +443,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 2,
+      glass: null,
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
@@ -542,6 +543,7 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 3,
       killCount: 0,
+      glass: null,
       deathCount: 0,
       shotCount: 0,
       scoreBoardDamage: "",
@@ -701,6 +703,7 @@ export default class Game extends Phaser.Scene {
     this.load.image("suburb", "images/suburb.png");
 
     this.load.image("flag_joey", "images/flagpole_JK2.png");
+    this.load.image("glass", "images/glass.png");
 
     for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
       this.players.push(
