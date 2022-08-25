@@ -1,8 +1,8 @@
 import { Key } from "react";
 
 export interface Clock {
-  gameMinutes: number;
-  gameSeconds: number;
+  minutes: number;
+  seconds: number;
 }
 
 export interface Loc {

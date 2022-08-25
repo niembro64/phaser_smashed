@@ -75,15 +75,18 @@ export function updateGameTime(game: Game, time: number, delta: number): void {
   game.gameSecondsPrev = game.gameSeconds;
   game.gameSeconds = Math.floor(game.gameNanoseconds / 1000);
   if (game.gameSeconds !== game.gameSecondsPrev) {
-    game.gameSecondsClock++;
+    game.gameSeconds++;
   }
 
-  game.gameClock.gameMinutes = Math.floor(game.gameSecondsClock / 60);
-  game.gameClock.gameSeconds = Math.floor(game.gameSecondsClock % 60);
+  game.gameClock.minutes = Math.floor(game.gameSeconds / 60);
+  game.gameClock.seconds = Math.floor(game.gameSeconds % 60);
 }
 
 export function updateTimeTime(game: Game, time: number, delta: number): void {
   game.timeNanoseconds = time;
+  game.timeSeconds = Math.floor(game.timeNanoseconds / 1000);
+  game.timeClock.minutes = Math.floor(game.timeSeconds / 60);
+  game.timeClock.seconds = Math.floor(game.timeSeconds % 60);
 }
 
 export function hasThisDurationPassed(

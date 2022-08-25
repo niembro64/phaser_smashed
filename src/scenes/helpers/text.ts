@@ -27,10 +27,10 @@ export function updateText(game: Game): void {
 
 export function updateClockText(game: Game): void {
   game.scoreBoardTime.setText(
-    game.gameClock.gameMinutes.toString() +
+    game.gameClock.minutes.toString() +
       ":" +
-      (game.gameClock.gameSeconds < 10 ? "0" : "") +
-      game.gameClock.gameSeconds.toString()
+      (game.gameClock.seconds < 10 ? "0" : "") +
+      game.gameClock.seconds.toString()
   );
 }
 
