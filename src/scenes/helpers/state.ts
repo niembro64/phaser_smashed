@@ -1,8 +1,5 @@
-import { Time } from "phaser";
-import { setAttackEnergyCollideWithPlayers } from "../create";
 import Game from "../Game";
 import { Player } from "../interfaces";
-import { hitbackFly } from "./movement";
 
 export function goToStateGame(
   state: "start" | "play" | "first-blood" | "screen-clear",
@@ -21,6 +18,20 @@ export function goToStatePlayer(
   player.gameState.name = state;
   player.gameState.gameStamp = game.gameNanoseconds;
   player.gameState.timeStamp = game.timeNanoseconds;
+}
+
+export function hasNumDeadChanged(game: Game): boolean {
+  if (game.numDead === game.numDeadPrev) {
+    return false;
+  }
+  return true;
+}
+export function updateNumCurrentlyDead(game: Game): void {
+  game.numDeadPrev = game.numDead;
+  game.numDead = 0;
+  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+    game.numDead += game.players[i].gameState.name === "dead" ? 1 : 0;
+  }
 }
 
 export function resetAllHitboxes(game: Game): void {

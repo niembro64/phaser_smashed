@@ -21,10 +21,12 @@ import { setBlinkFalse, setBlinkTrue } from "./helpers/sprites";
 import {
   goToStateGame,
   goToStatePlayer,
+  hasNumDeadChanged,
   hasThisDurationPassed,
   isPlayerHit,
   longEnoughGame,
   longEnoughTime,
+  updateNumCurrentlyDead,
   updateTimeTime,
 } from "./helpers/state";
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
@@ -36,9 +38,11 @@ import {
   isScreenClear,
 } from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
+import { pauseWiiMusic, playWiiMusic } from "./helpers/sound";
 
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
+  updateNumCurrentlyDead(game);
   console.log(
     "PLAYERS DEAD",
     game.players[0].gameState.name,
@@ -56,25 +60,31 @@ export function update(game: Game, time: number, delta: number): void {
   switch (game.state.name) {
     case "start":
       if (game.gameNanoseconds >= 0) {
-        if (game.debug.playBackgroundMusic) {
-          game.SOUND_MII.play();
+        if (game.debug.playShotsWiiBGM) {
+          pauseWiiMusic(game);
         }
         goToStateGame("play", game);
       }
       break;
     case "play":
       gameStatePlayHandler(game, time, delta);
-      if (isScreenClear(game) && longEnoughGame(game.DEAD_DURATION, game)) {
+      if (
+        isScreenClear(game) &&
+        hasNumDeadChanged(game)
+        // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
+      ) {
         goToStateGame("screen-clear", game);
-        game.SOUND_MII.pause();
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);
         console.log("SCREEN CLEAR");
       }
-      if (isFirstBlood(game) && longEnoughGame(game.DEAD_DURATION, game)) {
+      if (
+        isFirstBlood(game) &&
+        hasNumDeadChanged(game)
+        // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
+      ) {
         goToStateGame("first-blood", game);
-        game.SOUND_MII.pause();
         game.SOUND_INTRO.play();
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
@@ -83,11 +93,12 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "first-blood":
+      playWiiMusic(game);
       if (
-        longEnoughTime(game.MIN_SHOT_DURATION, game) &&
+        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
         isAllPlayersReady(game)
       ) {
-        game.SOUND_MII.resume();
+        pauseWiiMusic(game);
         goToStateGame("play", game);
         game.SOUND_START.play();
         resumePhysics(game);
@@ -95,11 +106,12 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "screen-clear":
+      playWiiMusic(game);
       if (
-        longEnoughTime(game.MIN_SHOT_DURATION, game) &&
+        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
         isAllPlayersReady(game)
       ) {
-        game.SOUND_MII.resume();
+        pauseWiiMusic(game);
         goToStateGame("play", game);
         game.SOUND_START.play();
         resumePhysics(game);
@@ -124,7 +136,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (hasThisDurationPassed(player, game.START_DELAY_DURATION, game)) {
+        if (hasThisDurationPassed(player, game.DURATION_GAME_START, game)) {
           goToStatePlayer(player, "alive", game);
           setGravityTrue(player);
           setBlinkFalse(player);
@@ -198,7 +210,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (
           !isPlayerOffscreen(player, game) &&
-          hasThisDurationPassed(player, game.HURT_DURATION, game)
+          hasThisDurationPassed(player, game.DURATION_PLAYER_HURT, game)
         ) {
           goToStatePlayer(player, "alive", game);
           setGravityTrue(player);
@@ -235,7 +247,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (hasThisDurationPassed(player, game.DEAD_DURATION, game)) {
+        if (hasThisDurationPassed(player, game.DURATION_PLAYER_DEAD, game)) {
           goToStatePlayer(player, "alive", game);
           setGravityTrue(player);
           setBlinkFalse(player);

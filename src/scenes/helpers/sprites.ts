@@ -30,7 +30,7 @@ export function updateSpriteFilter(player: Player, game: Game): void {
       if (
         Math.floor(
           (game.gameNanoseconds - player.gameState.gameStamp) /
-            game.HURT_FLICKER_SPEED
+            game.DURATION_PLAYER_FILTER
         ) %
           2 ===
         0
@@ -44,7 +44,7 @@ export function updateSpriteFilter(player: Player, game: Game): void {
       if (
         Math.floor(
           (game.gameNanoseconds - player.gameState.gameStamp) /
-            game.HURT_FLICKER_SPEED
+            game.DURATION_PLAYER_FILTER
         ) %
           2 ===
         0

@@ -194,7 +194,7 @@ export interface Debug {
   setCollidePlayerEnergyAttacks: boolean;
   energyAttackWrapScreen: boolean;
   seePlayerCircles: boolean;
-  playBackgroundMusic: boolean;
+  playShotsWiiBGM: boolean;
   wallJumps: boolean;
 }
 

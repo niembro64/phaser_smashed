@@ -15,15 +15,17 @@ export default class Game extends Phaser.Scene {
     setCollidePlayerEnergyAttacks: false,
     energyAttackWrapScreen: false,
     seePlayerCircles: true,
-    playBackgroundMusic: true,
+    playShotsWiiBGM: true,
     wallJumps: true,
   };
 
-  HURT_FLICKER_SPEED: number = 100;
-  START_DELAY_DURATION: number = 1200;
-  HURT_DURATION: number = 1000;
-  DEAD_DURATION: number = 3000;
-  MIN_SHOT_DURATION: number = 20000;
+  DURATION_GAME_START: number = 1200;
+  DURATION_GAME_PAUSE_MUSIC: number = 10000;
+  DURATION_GAME_SHOT: number = 4000;
+  DURATION_PLAYER_HURT: number = 1000;
+  DURATION_PLAYER_DEAD: number = 5000;
+  DURATION_PLAYER_FILTER: number = 100;
+
   playerSpawnOrder: number[] = [0, 1, 2, 3];
   // playerSpawnOrder: number[] = [1, 2, 3, 0];
   // playerSpawnOrder: number[] = [2, 3, 0, 1];
@@ -88,6 +90,9 @@ export default class Game extends Phaser.Scene {
   TITLE: any;
   SUBTITLE: any;
   SUPERTITLE: any;
+
+  numDead: number = 0;
+  numDeadPrev: number = 0;
   allPlayersWallTouchIterator: number = 0;
   // RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   RATIO_ACCELERATION_VELOCITY = 0.7;
