@@ -3,7 +3,7 @@ import {
   controllerMovement,
   attackEnergy,
   isAllPlayersReady,
-  resetMyHitByIfGroundAndNotHurt,
+  resetMyHitByMatrix,
 } from "./helpers/pad";
 import {
   jump,
@@ -49,13 +49,13 @@ import {
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
   updateNumCurrentlyDead(game);
-  console.log(
-    "PLAYERS DEAD",
-    game.players[0].gameState.name,
-    game.players[1].gameState.name,
-    game.players[2].gameState.name,
-    game.players[3].gameState.name
-  );
+  // console.log(
+  //   "PLAYERS DEAD",
+  //   game.players[0].gameState.name,
+  //   game.players[1].gameState.name,
+  //   game.players[2].gameState.name,
+  //   game.players[3].gameState.name
+  // );
   // console.log("DELTA", delta);
   // console.log(
   //   "GAME STATE",
@@ -163,8 +163,7 @@ export function updatePlayers(game: Game): void {
         jump(player, game);
         controllerMovement(player, game);
         upB(player, game);
-        resetMyHitByIfGroundAndNotHurt(player, playerIndex, game);
-
+        
         ////////////////////////////////
         ///////// hit => hurt
         ////////////////////////////////
@@ -185,8 +184,13 @@ export function updatePlayers(game: Game): void {
           goToStatePlayer(player, "dead", game);
           onDeadUpdateMatrix(playerIndex, game);
           if (isFirstBlood(game)) {
-            addToShotsMatrix(player, playerIndex, game);
-            console.log("HERE", game.numberShotsTakenByMatrix[0]);
+            if (isFirstBlood(game)) {
+              console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+              console.log("SHOTS", game.numberShotsTakenByMeMatrix);
+              addToShotsMatrix(player, playerIndex, game);
+              console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+              console.log("SHOTS", game.numberShotsTakenByMeMatrix);
+            }
           }
           game.SOUND_DIE.play();
           player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
@@ -197,7 +201,8 @@ export function updatePlayers(game: Game): void {
           resetDamage(player);
           setRespawn(player, game);
         }
-
+        
+        resetMyHitByMatrix(player, playerIndex, game);
         break;
       case "hurt":
         ////////////////////////////////
@@ -231,8 +236,11 @@ export function updatePlayers(game: Game): void {
           goToStatePlayer(player, "dead", game);
           onDeadUpdateMatrix(playerIndex, game);
           if (isFirstBlood(game)) {
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
             addToShotsMatrix(player, playerIndex, game);
-            console.log("HERE", game.numberShotsTakenByMatrix[0]);
+            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
+            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
           game.SOUND_DIE.play();
           player.char.attackEnergy.timestampThrow = game.time.now;

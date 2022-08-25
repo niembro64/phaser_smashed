@@ -217,7 +217,7 @@ export default class Game extends Phaser.Scene {
     [false, false, false, false],
     [false, false, false, false],
   ];
-  numberShotsTakenByMatrix: number[][] = [
+  numberShotsTakenByMeMatrix: number[][] = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],

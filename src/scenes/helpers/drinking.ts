@@ -62,13 +62,14 @@ export function addToShotsMatrix(
     return;
   }
   let hit: boolean = false;
+
   game.players.forEach((pj, j) => {
     if (game.wasLastHitByMatrix[playerIndex][j]) {
-      game.numberShotsTakenByMatrix[playerIndex][j]++;
+      game.numberShotsTakenByMeMatrix[playerIndex][j]++;
       hit = true;
     }
   });
   if (!hit) {
-    game.numberShotsTakenByMatrix[playerIndex][playerIndex]++;
+    game.numberShotsTakenByMeMatrix[playerIndex][playerIndex]++;
   }
 }

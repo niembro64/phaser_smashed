@@ -52,14 +52,12 @@ export function isPlayerHit(playerIndex: number, game: Game): boolean {
 }
 
 export function longEnoughGame(duration: number, game: Game): boolean {
-  console.log(game.gameNanoseconds, game.state.gameStamp + duration + 20);
   if (game.gameNanoseconds > game.state.gameStamp + duration + 20) {
     return true;
   }
   return false;
 }
 export function longEnoughTime(duration: number, game: Game): boolean {
-  console.log(game.timeNanoseconds, game.state.timeStamp + duration + 20);
   if (game.timeNanoseconds > game.state.timeStamp + duration + 20) {
     return true;
   }

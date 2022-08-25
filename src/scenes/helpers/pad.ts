@@ -34,12 +34,12 @@ export function isAllPlayersReady(game: Game): boolean {
   return true;
 }
 
-export function resetMyHitByIfGroundAndNotHurt(
+export function resetMyHitByMatrix(
   player: Player,
   playerIndex: number,
   game: Game
 ): void {
-  if (!player.char.sprite.body.touching.down || player.gameState.name === "hurt") {
+  if (player.gameState.name === "hurt") {
     return;
   }
   for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
