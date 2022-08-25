@@ -21,12 +21,12 @@ export function goToStatePlayer(
 }
 
 export function hasNumDeadIncrased(game: Game): boolean {
-  if (game.numDead > game.numDeadPrev) {
-    return true;
+  if (game.numDead === game.numDeadPrev) {
+    return false;
   }
-  return false;
+  return true;
 }
-export function hasNumDeadChanged(game: Game): boolean {
+export function hasNumDead(game: Game): boolean {
   if (game.numDead === game.numDeadPrev) {
     return false;
   }
@@ -75,19 +75,26 @@ export function updateGameTime(game: Game, time: number, delta: number): void {
   game.gameSecondsPrev = game.gameSeconds;
   game.gameSeconds = Math.floor(game.gameNanoseconds / 1000);
   if (game.gameSeconds !== game.gameSecondsPrev) {
-    game.gameSeconds++;
+    game.gameSecondsClock++;
   }
 
-  game.gameClock.minutes = Math.floor(game.gameSeconds / 60);
-  game.gameClock.seconds = Math.floor(game.gameSeconds % 60);
+  game.gameClock.minutes = Math.floor(game.gameSecondsClock / 60);
+  game.gameClock.seconds = Math.floor(game.gameSecondsClock % 60);
 }
 
 export function updateTimeTime(game: Game, time: number, delta: number): void {
-  game.timeNanoseconds = time;
+  game.timeNanoseconds += delta;
+  game.timeSecondsPrev = game.timeSeconds;
   game.timeSeconds = Math.floor(game.timeNanoseconds / 1000);
-  game.timeClock.minutes = Math.floor(game.timeSeconds / 60);
-  game.timeClock.seconds = Math.floor(game.timeSeconds % 60);
+  if (game.timeSeconds !== game.timeSecondsPrev) {
+    game.timeSecondsClock++;
+  }
+
+  game.timeClock.minutes = Math.floor(game.timeSecondsClock / 60);
+  game.timeClock.seconds = Math.floor(game.timeSecondsClock % 60);
 }
+
+
 
 export function hasThisDurationPassed(
   player: Player,
