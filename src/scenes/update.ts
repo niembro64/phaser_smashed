@@ -47,12 +47,13 @@ import {
   playWiiMusicWait,
   resumeMusic,
 } from "./helpers/sound";
-import { updateText } from "./helpers/text";
+import { updateGlassesTransparency, updateText } from "./helpers/text";
 
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
   updateText(game);
   updateNumCurrentlyDead(game);
+  updateGlassesTransparency(game);
   // console.log(
   //   "PLAYERS DEAD",
   //   game.players[0].gameState.name,
@@ -95,7 +96,7 @@ export function update(game: Game, time: number, delta: number): void {
       ) {
         goToStateGame("first-blood", game);
         pauseMusic(game);
-  
+
         game.SOUND_INTRO.play();
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();

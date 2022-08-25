@@ -61,6 +61,16 @@ export function updateShotsOnPlayers(game: Game) {
   });
 }
 
+export function updateGlassesTransparency(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    player.glass.setAlpha(0);
+
+    if (player.gameState.name === "dead" && game.state.name !== "play") {
+      player.glass.setAlpha(1);
+    }
+  });
+}
+
 export function updateGlasses(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
   game.players.forEach((player, playerIndex) => {
@@ -68,7 +78,8 @@ export function updateGlasses(game: Game, zoom: number, newY: number): void {
     player.glass.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
-        game.textLocationLROffset - 85) *
+        game.textLocationLROffset -
+        85) *
         (1 / zoom);
 
     player.glass.y = newY;
