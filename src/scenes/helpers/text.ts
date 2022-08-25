@@ -1,11 +1,16 @@
 import Game from "../Game";
 
 export function updateText(game: Game): void {
+  const baseTopY = game.SCREEN_DIMENSIONS.HEIGHT - 200;
   const baseDamageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
   const baseDeadKillY = game.SCREEN_DIMENSIONS.HEIGHT;
   const zoom = game.cameras.main.zoom;
   const redOffsetY =
     game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
+  const newTopY =
+    baseTopY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newUpperY =
     baseDamageY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
@@ -27,6 +32,7 @@ export function updateText(game: Game): void {
   //  game.SCREEN_DIMENSIONS.HEIGHT / 2;
 
   updateClockText(game);
+  updateGlasses(game, zoom, newTopY);
   updateDamageText(game, zoom, newUpperY);
   updateDeathsKillsText(game, zoom, newLowerY);
 }
@@ -55,6 +61,19 @@ export function updateShotsOnPlayers(game: Game) {
   });
 }
 
+export function updateGlasses(game: Game, zoom: number, newY: number): void {
+  updateShotsOnPlayers(game);
+  game.players.forEach((player, playerIndex) => {
+    player.glass.setScale(1 / zoom / 5, 1 / zoom / 5);
+    player.glass.x =
+      game.cameraMover.char.sprite.x +
+      (game.textLocations[game.playerSpawnOrder[playerIndex]] +
+        game.textLocationLROffset - 85) *
+        (1 / zoom);
+
+    player.glass.y = newY;
+  });
+}
 export function updateDamageText(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
   game.players.forEach((player, playerIndex) => {
