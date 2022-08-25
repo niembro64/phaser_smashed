@@ -43,6 +43,15 @@ export default class Game extends Phaser.Scene {
     DIE: "sword-hits-the-body-48273.mp3",
     START: "start.mp3",
     MII: "mii.mp3",
+    ENERJA_AH: "/enerja/ah.mp3",
+    ENERJA_DO_AGAIN: "/enerja/do_it_again_yeah.mp3",
+    ENERJA_FINISH: "/enerja/finishit.mp3",
+    ENERJA_GYA: "/enerja/gya.mp3",
+    ENERJA_THAT_SHIT: "/enerja/more_than_that_shit_happen.mp3",
+    ENERJA_SMASHED: "/enerja/smashed_yes_you_are_ahhhhh.mp3",
+    ENERJA_TURTLE: "/enerja/turtle.mp3",
+    ENERJA_TWO_SHOTS: "/enerja/two_shots.mp3",
+    ENERJA_UGH: "/enerja/ugh.mp3",
   };
 
   SOUND_INTRO: any;
@@ -55,6 +64,15 @@ export default class Game extends Phaser.Scene {
   SOUND_DIE: any;
   SOUND_START: any;
   SOUND_MII: any;
+  ENERJA_AH: any;
+  ENERJA_DO_AGAIN: any;
+  ENERJA_FINISH: any;
+  ENERJA_GYA: any;
+  ENERJA_HAPPEN: any;
+  ENERJA_SMASHED: any;
+  ENERJA_TURTLE: any;
+  ENERJA_TWO_SHOTS: any;
+  ENERJA_UGH: any;
 
   scoreBoardTime: any;
   // time: any;
@@ -612,6 +630,16 @@ export default class Game extends Phaser.Scene {
     this.load.audio("start", path + this.FILE_SOUNDS.START);
     this.load.audio("mii", path + this.FILE_SOUNDS.MII);
 
+    this.load.audio("enerja_ah", path + this.FILE_SOUNDS.ENERJA_AH);
+    this.load.audio("enerja_again", path + this.FILE_SOUNDS.ENERJA_DO_AGAIN);
+    this.load.audio("enerja_finish", path + this.FILE_SOUNDS.ENERJA_FINISH);
+    this.load.audio("enerja_gya", path + this.FILE_SOUNDS.ENERJA_GYA);
+    this.load.audio("enerja_shit", path + this.FILE_SOUNDS.ENERJA_THAT_SHIT);
+    this.load.audio("enerja_smashed", path + this.FILE_SOUNDS.ENERJA_SMASHED);
+    this.load.audio("enerja_turtle", path + this.FILE_SOUNDS.ENERJA_TURTLE);
+    this.load.audio("enerja_shots", path + this.FILE_SOUNDS.ENERJA_TWO_SHOTS);
+    this.load.audio("enerja_ugh", path + this.FILE_SOUNDS.ENERJA_UGH);
+
     this.load.image("laser", "images/laser.png");
     this.load.image("blockcracked", "images/blockcracked.png");
     this.load.image("fireball", "images/fireball.png");
@@ -631,6 +659,8 @@ export default class Game extends Phaser.Scene {
     this.load.image("platformVertical", "images/brickvert.bmp");
     this.load.image("brick", "images/blockcracked.png");
     this.load.image("suburb", "images/suburb.png");
+
+    this.load.image("flag_joey", "images/flagpole_JK2.png");
 
     for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
       this.players.push(

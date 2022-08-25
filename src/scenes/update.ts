@@ -28,7 +28,11 @@ import {
 import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
 import { gameStatePlay as gameStatePlayHandler } from "./gameStates.ts/gameStatePlay";
-import { addToShotsMatrix, isFirstBlood, isScreenClear } from "./helpers/drinking";
+import {
+  addToShotsMatrix,
+  isFirstBlood,
+  isScreenClear,
+} from "./helpers/drinking";
 import { pausePhysics, resumePhysics } from "./helpers/physics";
 
 export function update(game: Game, time: number, delta: number): void {
@@ -61,6 +65,7 @@ export function update(game: Game, time: number, delta: number): void {
         goToStateGame("screen-clear", game);
         game.SOUND_MII.pause();
         game.SOUND_INTRO.play();
+        game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);
         console.log("SCREEN CLEAR");

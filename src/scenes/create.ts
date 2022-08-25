@@ -17,6 +17,16 @@ export function create(game: Game) {
   game.SOUND_START = game.sound.add("start", { volume: 0.6 });
   game.SOUND_MII = game.sound.add("mii", { volume: 0.2 });
 
+  game.ENERJA_AH = game.sound.add("enerja_ah", { volume: 0.2 });
+  game.ENERJA_DO_AGAIN = game.sound.add("enerja_again", { volume: 0.2 });
+  game.ENERJA_FINISH = game.sound.add("enerja_finish", { volume: 0.2 });
+  game.ENERJA_GYA = game.sound.add("enerja_gya", { volume: 0.2 });
+  game.ENERJA_HAPPEN = game.sound.add("enerja_shit", { volume: 0.2 });
+  game.ENERJA_SMASHED = game.sound.add("enerja_smashed", { volume: 0.2 });
+  game.ENERJA_TURTLE = game.sound.add("enerja_turtle", { volume: 0.2 });
+  game.ENERJA_TWO_SHOTS = game.sound.add("enerja_shots", { volume: 0.2 });
+  game.ENERJA_UGH = game.sound.add("enerja_ugh", { volume: 0.2 });
+
   createBackground(game);
   createBackgroundTitles(game);
   createTable(game);
