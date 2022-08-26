@@ -1,3 +1,4 @@
+import { setConstantValue } from 'typescript';
 import Game from './Game';
 import { onHitHandler } from './helpers/damage';
 import { setBlinkTrue } from './helpers/sprites';
@@ -12,6 +13,7 @@ export function create(game: Game) {
   createEnergyAttacks(game);
   createPlayers(game);
   createScoreboard(game);
+  createSplashes(game);
   createCameras(game);
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
@@ -348,6 +350,36 @@ export function createBackgroundTitles(game: Game): void {
     .setOrigin(0.5)
     .setColor('black')
     .setAlpha(0.3);
+}
+
+export function createSplashes(game: Game): void {
+  game.splashes.forEach((splash, splashIndex) => {
+    splash.text = game.add
+      .text(
+        game.SCREEN_DIMENSIONS.WIDTH / 2,
+        game.SCREEN_DIMENSIONS.HEIGHT / 2,
+        splash.word,
+        {
+          // font: "Arial 100px",
+          fontSize: '100px',
+          // fontFamily: "'Courier New'",
+          fontFamily: 'Consolas',
+          // fontFamily: "'Press Start 2P'",
+          stroke: splash.color,
+          strokeThickness: 10,
+          shadow: {
+            offsetX: 0,
+            offsetY: 3,
+            color: 'black',
+            blur: 10,
+            stroke: true,
+            fill: true,
+          },
+        }
+      )
+      .setOrigin(0.5, 0.5)
+      .setAlpha(0.5);
+  });
 }
 
 export function createScoreboard(game: Game): void {
