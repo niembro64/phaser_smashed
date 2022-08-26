@@ -8,8 +8,16 @@ export function updateSplashes(game: Game, zoom: number, newY: number): void {
   });
 }
 
-export function turnOnSplash(game: Game): void {
-  game.splashes.forEach((splash, splashIndex) => {});
+export function turnOnSplash(
+  splashName: 'none' | 'start' | 'first-blood' | 'screen-clear' | 'end',
+  game: Game
+): void {
+  game.splashes.forEach((splash, splashIndex) => {
+    splash.text.setAlpha(0);
+    if (splash.name === splashName) {
+      splash.text.setAlpha(1);
+    }
+  });
 }
 
 export function updateText(game: Game): void {

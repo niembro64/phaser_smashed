@@ -9,11 +9,11 @@ export function create(game: Game) {
   createBackgroundTitles(game);
   createTable(game);
   createPlatforms(game);
+  createSplashes(game);
   createCircles(game);
   createEnergyAttacks(game);
   createPlayers(game);
   createScoreboard(game);
-  createSplashes(game);
   createCameras(game);
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
@@ -361,9 +361,9 @@ export function createSplashes(game: Game): void {
         splash.word,
         {
           // font: "Arial 100px",
-          fontSize: '100px',
+          fontSize: '120px',
           // fontFamily: "'Courier New'",
-          fontFamily: 'Consolas',
+          fontFamily: 'Impact',
           // fontFamily: "'Press Start 2P'",
           stroke: splash.color,
           strokeThickness: 10,
