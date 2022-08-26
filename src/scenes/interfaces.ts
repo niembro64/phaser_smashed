@@ -142,7 +142,7 @@ export interface UpB {
 export interface Splash {
   text: any;
   name: string;
-  size: string; 
+  size: string;
   word: string;
   color: string;
   backgroundColor: string;
@@ -209,6 +209,7 @@ export interface Debug {
   wallJumps: boolean;
   useBGM: boolean;
   BGMNumber: number;
+  statsInit: boolean;
 }
 
 export interface NormalizedVector {

@@ -1,4 +1,6 @@
+import { addEmitHelper } from 'typescript';
 import Game from '../Game';
+import { gameStatePlay } from '../gameStates.ts/gameStatePlay';
 
 export function updateSplashes(game: Game, zoom: number, newY: number): void {
   game.splashes.forEach((splash, splashIndex) => {
@@ -115,15 +117,37 @@ export function updateGlasses(game: Game, zoom: number, newY: number): void {
 }
 export function updateDamageText(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
+  if (game.debug.statsInit) {
+    game.players.forEach((player, playerIndex) => {
+      player.scoreBoardDamage
+        .setScale(1 / zoom, 1 / zoom)
+        .setText(
+          Math.round(player.char.damage).toString() +
+            game.GAMEBAR_CHARS.damage +
+            ' ' +
+            player.shotCount.toString() +
+            game.GAMEBAR_CHARS.shots
+        );
+      player.scoreBoardDamage.x =
+        game.cameraMover.char.sprite.x +
+        (game.textLocations[game.playerSpawnOrder[playerIndex]] +
+          game.textLocationLROffset) *
+          (1 / zoom);
+
+      player.scoreBoardDamage.y = newY;
+    });
+    return;
+  }
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDamage.setScale(1 / zoom, 1 / zoom).setText(
-      // "p" +
-      // playerIndex.toString() +
-      // " " +
-      (player.char.damage
-        ? Math.round(player.char.damage).toString() + '% '
-        : '') + (player.shotCount ? player.shotCount.toString() + '*' : '')
-    );
+    player.scoreBoardDamage
+      .setScale(1 / zoom, 1 / zoom)
+      .setText(
+        Math.round(player.char.damage).toString() +
+          game.GAMEBAR_CHARS.damage +
+          ' ' +
+          player.shotCount.toString() +
+          game.GAMEBAR_CHARS.shots
+      );
     player.scoreBoardDamage.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
@@ -138,12 +162,37 @@ export function updateDeathsKillsText(
   zoom: number,
   newY: number
 ): void {
+  if (game.debug.statsInit) {
+    game.players.forEach((player, playerIndex) => {
+      player.scoreBoardDeathsKillsShots
+        .setScale(1 / zoom, 1 / zoom)
+        .setText(
+          player.killCount.toString() +
+            game.GAMEBAR_CHARS.kills +
+            ' ' +
+            player.deathCount.toString() +
+            game.GAMEBAR_CHARS.deaths
+        );
+      player.scoreBoardDeathsKillsShots.x =
+        game.cameraMover.char.sprite.x +
+        (game.textLocations[game.playerSpawnOrder[playerIndex]] +
+          game.textLocationLROffset) *
+          (1 / zoom);
+
+      player.scoreBoardDeathsKillsShots.y = newY;
+    });
+    return;
+  }
+
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardDeathsKillsShots
       .setScale(1 / zoom, 1 / zoom)
       .setText(
-        (player.killCount ? player.killCount.toString() + '+ ' : '') +
-          (player.deathCount ? player.deathCount.toString() + '-' : '')
+        player.killCount.toString() +
+          game.GAMEBAR_CHARS.kills +
+          ' ' +
+          player.deathCount.toString() +
+          game.GAMEBAR_CHARS.deaths
       );
     player.scoreBoardDeathsKillsShots.x =
       game.cameraMover.char.sprite.x +

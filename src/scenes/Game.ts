@@ -26,6 +26,7 @@ export default class Game extends Phaser.Scene {
     wallJumps: true,
     useBGM: true,
     BGMNumber: 2,
+    statsInit: true,
   };
 
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
@@ -164,6 +165,8 @@ export default class Game extends Phaser.Scene {
     { graphic: null, colorNumber: 0xffc90e, colorString: '#ffc90e' },
     { graphic: null, colorNumber: 0x4e78ff, colorString: '#4e78ff' },
   ];
+
+  GAMEBAR_CHARS = { kills: 'k', deaths: 'd', damage: '%', shots: 's' };
 
   FONT_DEFAULT: string = 'Consolas';
   // FONT_DEFAULT: string = 'Courier';
