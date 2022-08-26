@@ -390,7 +390,7 @@ export function createScoreboard(game: Game): void {
     '',
     {
       // font: "Arial 100px",
-      fontSize: '60px',
+      fontSize: '80px',
       // fontFamily: "'Courier New'",
       fontFamily: game.FONT_DEFAULT,
       // fontFamily: "'Press Start 2P'",
@@ -407,7 +407,7 @@ export function createScoreboard(game: Game): void {
     }
   );
   game.scoreBoardTimeGame
-    .setOrigin(1, 0)
+    .setOrigin(0.5, 0)
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
 
   game.scoreBoardTimeTime = game.add.text(
@@ -416,10 +416,11 @@ export function createScoreboard(game: Game): void {
     '',
     {
       // font: "Arial 100px",
-      fontSize: '60px',
+      fontSize: '40px',
       // fontFamily: "'Courier New'",
       fontFamily: game.FONT_DEFAULT,
       // fontFamily: "'Press Start 2P'",
+      color: 'gray',
       stroke: 'black',
       strokeThickness: 1,
       shadow: {
@@ -433,9 +434,9 @@ export function createScoreboard(game: Game): void {
     }
   );
   game.scoreBoardTimeTime
-    .setOrigin(1, 1)
+    .setOrigin(0.5, 1)
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom)
-    .setAlpha(0.5);
+    .setAlpha(1);
 
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardDamage = game.add

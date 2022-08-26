@@ -168,7 +168,7 @@ export default class Game extends Phaser.Scene {
     { graphic: null, colorNumber: 0xe24800, colorString: '#e24800' },
     { graphic: null, colorNumber: 0x43a528, colorString: '#43a528' },
     { graphic: null, colorNumber: 0xffc90e, colorString: '#ffc90e' },
-    { graphic: null, colorNumber: 0x4e78ff, colorString: '#4e78ff' },
+    { graphic: null, colorNumber: 0x9966bb, colorString: '#9966bb' },
   ];
 
   FONT_DEFAULT: string = 'Consolas';
@@ -202,7 +202,7 @@ export default class Game extends Phaser.Scene {
       word: 'SCREEN CLEAR',
       color: '#330033',
       backgroundColor: '#bb44bb',
-      size: '300px',
+      size: '330px',
       src: 'glass.png',
       strokeThickness: 10,
     },

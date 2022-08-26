@@ -1,6 +1,4 @@
-import { addEmitHelper } from 'typescript';
 import Game from '../Game';
-import { gameStatePlay } from '../gameStates.ts/gameStatePlay';
 
 export function updateSplashes(game: Game, zoom: number, newY: number): void {
   game.splashes.forEach((splash, splashIndex) => {
@@ -56,13 +54,13 @@ export function updateText(game: Game): void {
     game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
 
   game.scoreBoardTimeGame.setScale(1 / zoom, 1 / zoom);
-  game.scoreBoardTimeGame.x =
-    game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
+  game.scoreBoardTimeGame.x = game.cameraMover.char.sprite.x;
+  // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
   game.scoreBoardTimeGame.y = newUpperY;
 
   game.scoreBoardTimeTime.setScale(1 / zoom, 1 / zoom);
-  game.scoreBoardTimeTime.x =
-    game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
+  game.scoreBoardTimeTime.x = game.cameraMover.char.sprite.x;
+  // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
   game.scoreBoardTimeTime.y = newLowerY;
   //  game.SCREEN_DIMENSIONS.HEIGHT / 2;
 
