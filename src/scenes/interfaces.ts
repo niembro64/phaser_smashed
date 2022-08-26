@@ -18,8 +18,9 @@ export interface CameraHelper {
 
 export interface Player {
   playerNumber: number;
-  scoreBoardDamage: string | any;
+  glass: any | Phaser.GameObjects.Sprite;
   scoreBoardDeathsKillsShots: string | any;
+  scoreBoardDamage: string | any;
   gameState: State;
   keyboard_static: Keyboard;
   char: Char;
@@ -30,7 +31,6 @@ export interface Player {
   killCount: number;
   deathCount: number;
   shotCount: number;
-  glass: any | Phaser.GameObjects.Sprite;
 }
 
 export interface Circle {

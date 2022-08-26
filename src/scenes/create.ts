@@ -409,6 +409,7 @@ export function createScoreboard(game: Game): void {
   game.scoreBoardTimeGame
     .setOrigin(1, 0)
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
+
   game.scoreBoardTimeTime = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
