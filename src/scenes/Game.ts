@@ -10,8 +10,6 @@ import {
   Splash,
   State,
 } from './interfaces';
-import { timeStamp } from 'console';
-import { useDebugValue } from 'react';
 
 export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
@@ -30,7 +28,8 @@ export default class Game extends Phaser.Scene {
     BGMNumber: 2,
   };
 
-  DURATION_GAME_LAST_MINUTES: number = 0.02;
+  // DURATION_GAME_LAST_MINUTES: number = 0.02;
+  DURATION_GAME_LAST_MINUTES: number = 7;
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
   DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
@@ -163,11 +162,12 @@ export default class Game extends Phaser.Scene {
     { graphic: null, colorNumber: 0xe24800, colorString: '#e24800' },
     { graphic: null, colorNumber: 0x43a528, colorString: '#43a528' },
     { graphic: null, colorNumber: 0xffc90e, colorString: '#ffc90e' },
-    { graphic: null, colorNumber: 0x8e98ff, colorString: '#8e98ff' },
+    { graphic: null, colorNumber: 0x4e78ff, colorString: '#4e78ff' },
   ];
 
+  FONT_DEFAULT: string = 'Consolas';
+  // FONT_DEFAULT: string = 'Courier';
   splashOffset: number = 50;
-
   splashes: Splash[] = [
     {
       text: null,
