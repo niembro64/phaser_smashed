@@ -1,22 +1,41 @@
-import Game from "../Game";
+import Game from '../Game';
+
+export function updateSplashes(game: Game, zoom: number, newY: number): void {
+  game.splashes.forEach((splash, splashIndex) => {
+    splash.text.setScale(2.5 / zoom, 2.5 / zoom);
+    splash.text.x = game.cameraMover.char.sprite.x;
+    splash.text.y = newY;
+  });
+}
+
+export function turnOnSplash(game: Game): void {
+  game.splashes.forEach((splash, splashIndex) => {});
+}
 
 export function updateText(game: Game): void {
-  const baseTopY = game.SCREEN_DIMENSIONS.HEIGHT - 200;
-  const baseDamageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
-  const baseDeadKillY = game.SCREEN_DIMENSIONS.HEIGHT;
+  const splashY = game.SCREEN_DIMENSIONS.HEIGHT - 500;
+  const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 200;
+  const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
+
+  const killsY = game.SCREEN_DIMENSIONS.HEIGHT;
   const zoom = game.cameras.main.zoom;
   const redOffsetY =
     game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
+
+  const newSplashY =
+    splashY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newTopY =
-    baseTopY * (1 / zoom) +
+    glassY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newUpperY =
-    baseDamageY * (1 / zoom) +
+    damageY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newLowerY =
-    baseDeadKillY * (1 / zoom) +
+    killsY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
 
@@ -34,20 +53,21 @@ export function updateText(game: Game): void {
   updateClockText(game);
   updateGlasses(game, zoom, newTopY);
   updateDamageText(game, zoom, newUpperY);
+  updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
 }
 
 export function updateClockText(game: Game): void {
   game.scoreBoardTimeGame.setText(
     game.gameClock.minutes.toString() +
-      ":" +
-      (game.gameClock.seconds < 10 ? "0" : "") +
+      ':' +
+      (game.gameClock.seconds < 10 ? '0' : '') +
       game.gameClock.seconds.toString()
   );
   game.scoreBoardTimeTime.setText(
     game.timeClock.minutes.toString() +
-      ":" +
-      (game.timeClock.seconds < 10 ? "0" : "") +
+      ':' +
+      (game.timeClock.seconds < 10 ? '0' : '') +
       game.timeClock.seconds.toString()
   );
 }
@@ -65,7 +85,7 @@ export function updateGlassesTransparency(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.glass.setAlpha(0);
 
-    if (player.gameState.name === "dead" && game.state.name !== "play") {
+    if (player.gameState.name === 'dead' && game.state.name !== 'play') {
       player.glass.setAlpha(1);
     }
   });
@@ -93,9 +113,9 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
       // playerIndex.toString() +
       // " " +
       Math.round(player.char.damage).toString() +
-        "% " +
+        '% ' +
         player.shotCount.toString() +
-        "*"
+        '*'
     );
     player.scoreBoardDamage.x =
       game.cameraMover.char.sprite.x +
@@ -115,11 +135,11 @@ export function updateDeathsKillsText(
     player.scoreBoardDeathsKillsShots
       .setScale(1 / zoom, 1 / zoom)
       .setText(
-        "" +
+        '' +
           player.killCount.toString() +
-          "+ " +
+          '+ ' +
           player.deathCount.toString() +
-          "-"
+          '-'
       );
     player.scoreBoardDeathsKillsShots.x =
       game.cameraMover.char.sprite.x +

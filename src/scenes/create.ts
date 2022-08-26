@@ -378,7 +378,7 @@ export function createSplashes(game: Game): void {
         }
       )
       .setOrigin(0.5, 0.5)
-      .setAlpha(0.5);
+      .setAlpha(1);
   });
 }
 
