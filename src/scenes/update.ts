@@ -3,7 +3,6 @@ import {
   controllerMovement,
   attackEnergy,
   isAllPlayersReady,
-  resetMyHitByMatrix,
 } from "./helpers/pad";
 import {
   jump,
@@ -24,7 +23,6 @@ import {
   hasNumDeadIncrased,
   hasThisDurationPassed,
   isPlayerHit,
-  longEnoughGame,
   longEnoughTime,
   updateNumCurrentlyDead,
   updateTimeTime,

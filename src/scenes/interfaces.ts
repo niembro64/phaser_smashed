@@ -1,4 +1,4 @@
-import { Key } from "react";
+import { Key } from 'react';
 
 export interface Clock {
   minutes: number;
@@ -112,7 +112,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: "up" | "down" | "left" | "right" | null;
+  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | null;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
 }
@@ -139,6 +139,14 @@ export interface UpB {
   x: number;
 }
 
+export interface Splash {
+  text: any;
+  name: string;
+  word: string;
+  color: string;
+  src: string;
+}
+
 export interface Velocity {
   x: number;
   y: number;
@@ -155,7 +163,7 @@ export interface AttackEnergyFriction {
 }
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: "held" | "released";
+  state: 'held' | 'released';
   timestampThrow: number;
   durationBetweenThrows: number;
   posFromCenter: PosFromCenter;
