@@ -23,7 +23,7 @@ export function turnOnSplash(
 }
 
 export function updateText(game: Game): void {
-  const splashY = game.SCREEN_DIMENSIONS.HEIGHT - 700;
+  const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
   const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 200;
   const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
 

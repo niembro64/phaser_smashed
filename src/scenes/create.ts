@@ -507,7 +507,7 @@ export function createScoreboard(game: Game): void {
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
-        'glass'
+        'glass_full'
       )
       .setScale(
         1 / game.cameras.main.zoom / 10,

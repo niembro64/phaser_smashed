@@ -29,6 +29,11 @@ export default class Game extends Phaser.Scene {
     statsInit: true,
   };
 
+  // GAMEBAR_CHARS = { kills: 'kills', deaths: 'deaths', damage: '%', shots: 'shots' };
+  // GAMEBAR_CHARS = { kills: 'k', deaths: 'd', damage: '%', shots: 's' };
+  GAMEBAR_CHARS = { kills: '+', deaths: '-', damage: '%', shots: '*' };
+  // GAMEBAR_CHARS = { kills: '+', deaths: '-', damage: '%', shots: '.' };
+
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
   DURATION_GAME_LAST_MINUTES: number = 7;
   DURATION_GAME_START: number = 1200;
@@ -165,8 +170,6 @@ export default class Game extends Phaser.Scene {
     { graphic: null, colorNumber: 0xffc90e, colorString: '#ffc90e' },
     { graphic: null, colorNumber: 0x4e78ff, colorString: '#4e78ff' },
   ];
-
-  GAMEBAR_CHARS = { kills: 'k', deaths: 'd', damage: '%', shots: 's' };
 
   FONT_DEFAULT: string = 'Consolas';
   // FONT_DEFAULT: string = 'Courier';
@@ -755,7 +758,8 @@ export default class Game extends Phaser.Scene {
     this.load.image('suburb', 'images/suburb.png');
 
     this.load.image('flag_joey', 'images/flagpole_JK2.png');
-    this.load.image('glass', 'images/glass.png');
+    this.load.image('glass_full', 'images/niemo_shot_full.png');
+    this.load.image('glass_empty', 'images/niemo_shot_empty.png');
 
     for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
       this.players.push(
