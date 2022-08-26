@@ -27,7 +27,14 @@ export default class Game extends Phaser.Scene {
     useBGM: true,
     BGMNumber: 2,
     statsInit: true,
+    useDefaultAttackDamage: true,
+    useDefaultAttackHitback: true,
+    // useDefaultPlayerHitback: true,
   };
+
+  DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
+  DEFAULT_ATTACK_HITBACK: any = { x: 0.03, y: -0.03 };
+  DEFAULT_ATTACK_DAMAGE: number = 35;
 
   // GAMEBAR_CHARS = { kills: 'kills', deaths: 'deaths', damage: '%', shots: 'shots' };
   // GAMEBAR_CHARS = { kills: 'k', deaths: 'd', damage: '%', shots: 's' };
@@ -49,7 +56,7 @@ export default class Game extends Phaser.Scene {
   // playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
-  textLocationLROffset: number = 120;
+  textLocationLROffset: number = 90;
   textLocations: number[] = [-760, -440, 440, 760];
   // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
@@ -210,11 +217,11 @@ export default class Game extends Phaser.Scene {
       text: null,
       name: 'end',
       word: 'FINISHED',
-      color: 'black',
-      backgroundColor: 'white',
+      color: 'white',
+      backgroundColor: 'black',
       size: '500px',
       src: 'glass.png',
-      strokeThickness: 10,
+      strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
     },
   ];
 

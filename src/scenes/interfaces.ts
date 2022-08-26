@@ -211,6 +211,9 @@ export interface Debug {
   useBGM: boolean;
   BGMNumber: number;
   statsInit: boolean;
+  useDefaultAttackDamage: boolean;
+  useDefaultAttackHitback: boolean;
+  // useDefaultPlayerHitback: boolean;
 }
 
 export interface NormalizedVector {

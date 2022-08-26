@@ -1,4 +1,3 @@
-import { setConstantValue } from 'typescript';
 import Game from './Game';
 import { onHitHandler } from './helpers/damage';
 import { setBlinkTrue } from './helpers/sprites';
@@ -10,6 +9,7 @@ export function create(game: Game) {
   createSplashes(game);
   createPlatforms(game);
   createTable(game);
+  createSplashEnd(game);
   createScoreboard(game);
   createCircles(game);
   createEnergyAttacks(game);
@@ -87,6 +87,17 @@ export function initializeHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.attackEnergy.sprite,
           function () {
+            if (game.debug.useDefaultAttackDamage) {
+              onHitHandler(
+                player,
+                playerIndex,
+                pj.char.attackEnergy,
+                j,
+                game.DEFAULT_ATTACK_DAMAGE,
+                game
+              );
+              return;
+            }
             onHitHandler(
               player,
               playerIndex,
@@ -352,34 +363,68 @@ export function createBackgroundTitles(game: Game): void {
     .setAlpha(0.3);
 }
 
+export function createSplashEnd(game: Game): void {
+  game.splashes.forEach((splash, splashIndex) => {
+    if (splashIndex === game.splashes.length - 1) {
+      splash.text = game.add
+        .text(
+          game.SCREEN_DIMENSIONS.WIDTH / 2,
+          game.SCREEN_DIMENSIONS.HEIGHT / 2,
+          splash.word,
+          {
+            // font: "Arial 100px",
+            fontSize: splash.size,
+            // fontFamily: "'Courier New'",
+            fontFamily: 'Impact',
+            // fontFamily: "'Press Start 2P'",
+            color: splash.color,
+            stroke: splash.backgroundColor,
+            strokeThickness: splash.strokeThickness,
+            shadow: {
+              offsetX: 0,
+              offsetY: 9,
+              color: 'black',
+              blur: 10,
+              stroke: true,
+              fill: true,
+            },
+          }
+        )
+        .setOrigin(0.5, 0.5)
+        .setAlpha(1);
+    }
+  });
+}
 export function createSplashes(game: Game): void {
   game.splashes.forEach((splash, splashIndex) => {
-    splash.text = game.add
-      .text(
-        game.SCREEN_DIMENSIONS.WIDTH / 2,
-        game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        splash.word,
-        {
-          // font: "Arial 100px",
-          fontSize: splash.size,
-          // fontFamily: "'Courier New'",
-          fontFamily: 'Impact',
-          // fontFamily: "'Press Start 2P'",
-          color: splash.color,
-          stroke: splash.backgroundColor,
-          strokeThickness: splash.strokeThickness,
-          shadow: {
-            offsetX: 0,
-            offsetY: 9,
-            color: 'black',
-            blur: 10,
-            stroke: true,
-            fill: true,
-          },
-        }
-      )
-      .setOrigin(0.5, 0.5)
-      .setAlpha(1);
+    if (splashIndex !== game.splashes.length - 1) {
+      splash.text = game.add
+        .text(
+          game.SCREEN_DIMENSIONS.WIDTH / 2,
+          game.SCREEN_DIMENSIONS.HEIGHT / 2,
+          splash.word,
+          {
+            // font: "Arial 100px",
+            fontSize: splash.size,
+            // fontFamily: "'Courier New'",
+            fontFamily: 'Impact',
+            // fontFamily: "'Press Start 2P'",
+            color: splash.color,
+            stroke: splash.backgroundColor,
+            strokeThickness: splash.strokeThickness,
+            shadow: {
+              offsetX: 0,
+              offsetY: 9,
+              color: 'black',
+              blur: 10,
+              stroke: true,
+              fill: true,
+            },
+          }
+        )
+        .setOrigin(0.5, 0.5)
+        .setAlpha(1);
+    }
   });
 }
 
@@ -390,7 +435,7 @@ export function createScoreboard(game: Game): void {
     '',
     {
       // font: "Arial 100px",
-      fontSize: '80px',
+      fontSize: '100px',
       // fontFamily: "'Courier New'",
       fontFamily: game.FONT_DEFAULT,
       // fontFamily: "'Press Start 2P'",
@@ -416,7 +461,7 @@ export function createScoreboard(game: Game): void {
     '',
     {
       // font: "Arial 100px",
-      fontSize: '40px',
+      fontSize: '30px',
       // fontFamily: "'Courier New'",
       fontFamily: game.FONT_DEFAULT,
       // fontFamily: "'Press Start 2P'",
