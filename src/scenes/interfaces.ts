@@ -142,8 +142,10 @@ export interface UpB {
 export interface Splash {
   text: any;
   name: string;
+  size: string; 
   word: string;
   color: string;
+  backgroundColor: string;
   src: string;
 }
 

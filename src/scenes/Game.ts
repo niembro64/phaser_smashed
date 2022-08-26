@@ -30,7 +30,7 @@ export default class Game extends Phaser.Scene {
     BGMNumber: 2,
   };
 
-  DURATION_GAME_LAST_MINUTES: number = 7;
+  DURATION_GAME_LAST_MINUTES: number = 0.02;
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
   DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
@@ -173,28 +173,36 @@ export default class Game extends Phaser.Scene {
       text: null,
       name: 'start',
       word: 'START',
-      color: 'blue',
+      color: 'red',
+      backgroundColor: 'blue',
+      size: '300px',
       src: 'glass.png',
     },
     {
       text: null,
       name: 'first-blood',
       word: 'FIRST BLOOD',
-      color: 'red',
+      color: '#440000',
+      backgroundColor: 'red',
+      size: '370px',
       src: 'glass.png',
     },
     {
       text: null,
       name: 'screen-clear',
       word: 'SCREEN CLEAR',
-      color: 'yellow',
+      color: '#330033',
+      backgroundColor: '#ffbbff',
+      size: '300px',
       src: 'glass.png',
     },
     {
       text: null,
       name: 'end',
-      word: 'STATS',
-      color: 'green',
+      word: 'FINISHED',
+      color: 'black',
+      backgroundColor: 'white',
+      size: '500px',
       src: 'glass.png',
     },
   ];

@@ -2,7 +2,7 @@ import Game from '../Game';
 
 export function updateSplashes(game: Game, zoom: number, newY: number): void {
   game.splashes.forEach((splash, splashIndex) => {
-    splash.text.setScale(2.5 / zoom, 2.5 / zoom);
+    splash.text.setScale(1 / zoom, 1 / zoom);
     splash.text.x = game.cameraMover.char.sprite.x;
     splash.text.y = newY;
   });
@@ -21,7 +21,7 @@ export function turnOnSplash(
 }
 
 export function updateText(game: Game): void {
-  const splashY = game.SCREEN_DIMENSIONS.HEIGHT - 500;
+  const splashY = game.SCREEN_DIMENSIONS.HEIGHT - 700;
   const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 200;
   const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
 

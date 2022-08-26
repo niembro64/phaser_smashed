@@ -111,6 +111,7 @@ export function update(game: Game, time: number, delta: number): void {
       }
       if (game.gameSecondsClock < 1) {
         goToStateGame('end', game);
+        pausePhysics(game);
         turnOnSplash('end', game);
         pauseMusic(game);
         game.ENERJA_FINISH.play();

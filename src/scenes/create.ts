@@ -7,9 +7,9 @@ export function create(game: Game) {
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
-  createTable(game);
   createPlatforms(game);
   createSplashes(game);
+  createTable(game);
   createCircles(game);
   createEnergyAttacks(game);
   createPlayers(game);
@@ -286,7 +286,7 @@ export function createPlatforms3(game: Game): void {
 export function createTable(game: Game): void {
   game.TABLE = game.physics.add.sprite(
     (1920 / 2) * game.SCREEN_SCALE.WIDTH,
-    (1080 / 2 - 40) * game.SCREEN_SCALE.HEIGHT,
+    (1080 / 2 - 43) * game.SCREEN_SCALE.HEIGHT,
     'table'
   );
   game.TABLE.setScale(1);
@@ -361,15 +361,16 @@ export function createSplashes(game: Game): void {
         splash.word,
         {
           // font: "Arial 100px",
-          fontSize: '120px',
+          fontSize: splash.size,
           // fontFamily: "'Courier New'",
           fontFamily: 'Impact',
           // fontFamily: "'Press Start 2P'",
-          stroke: splash.color,
+          color: splash.color,
+          stroke: splash.backgroundColor,
           strokeThickness: 10,
           shadow: {
             offsetX: 0,
-            offsetY: 3,
+            offsetY: 9,
             color: 'black',
             blur: 10,
             stroke: true,
