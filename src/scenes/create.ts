@@ -7,13 +7,13 @@ export function create(game: Game) {
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
-  createPlatforms(game);
   createSplashes(game);
+  createPlatforms(game);
   createTable(game);
+  createScoreboard(game);
   createCircles(game);
   createEnergyAttacks(game);
   createPlayers(game);
-  createScoreboard(game);
   createCameras(game);
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
@@ -367,7 +367,7 @@ export function createSplashes(game: Game): void {
           // fontFamily: "'Press Start 2P'",
           color: splash.color,
           stroke: splash.backgroundColor,
-          strokeThickness: 10,
+          strokeThickness: splash.strokeThickness,
           shadow: {
             offsetX: 0,
             offsetY: 9,

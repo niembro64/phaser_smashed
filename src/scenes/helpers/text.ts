@@ -20,6 +20,12 @@ export function turnOnSplash(
       splash.text.setAlpha(1);
     }
   });
+
+  if (splashName !== 'none') {
+    game.splashes[0].text.setAlpha(1);
+  } else {
+    game.splashes[0].text.setAlpha(0);
+  }
 }
 
 export function updateText(game: Game): void {

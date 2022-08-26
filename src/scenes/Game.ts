@@ -179,10 +179,12 @@ export default class Game extends Phaser.Scene {
       text: null,
       name: 'start',
       word: 'START',
-      color: 'red',
-      backgroundColor: 'blue',
+      color: '#000000',
+      backgroundColor: '#000000',
       size: '300px',
       src: 'glass.png',
+      // strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
+      strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
     },
     {
       text: null,
@@ -192,15 +194,17 @@ export default class Game extends Phaser.Scene {
       backgroundColor: 'red',
       size: '370px',
       src: 'glass.png',
+      strokeThickness: 10,
     },
     {
       text: null,
       name: 'screen-clear',
       word: 'SCREEN CLEAR',
       color: '#330033',
-      backgroundColor: '#ffbbff',
+      backgroundColor: '#bb44bb',
       size: '300px',
       src: 'glass.png',
+      strokeThickness: 10,
     },
     {
       text: null,
@@ -210,6 +214,7 @@ export default class Game extends Phaser.Scene {
       backgroundColor: 'white',
       size: '500px',
       src: 'glass.png',
+      strokeThickness: 10,
     },
   ];
 

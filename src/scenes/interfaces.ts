@@ -146,6 +146,7 @@ export interface Splash {
   word: string;
   color: string;
   backgroundColor: string;
+  strokeThickness: number;
   src: string;
 }
 
