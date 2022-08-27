@@ -20,7 +20,7 @@ export default class Game extends Phaser.Scene {
     seeCameras: true,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
-    energyAttackWrapScreen: true,
+    energyAttackWrapScreen: false,
     seePlayerCircles: true,
     playShotsWiiBGM: true,
     wallJumps: true,
