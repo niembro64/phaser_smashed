@@ -1,8 +1,8 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
+import Game from '../Game';
+import { Player } from '../interfaces';
 
 export function goToStateGame(
-  state: "start" | "play" | "pause" | "first-blood" | "screen-clear" | "end",
+  state: 'start' | 'play' | 'pause' | 'first-blood' | 'screen-clear' | 'end',
   game: Game
 ): void {
   game.state.name = state;
@@ -12,12 +12,12 @@ export function goToStateGame(
 
 export function goToStatePlayer(
   player: Player,
-  state: "start" | "alive" | "dead" | "hurt",
+  state: 'start' | 'alive' | 'dead' | 'hurt',
   game: Game
 ): void {
-  player.gameState.name = state;
-  player.gameState.gameStamp = game.gameNanoseconds;
-  player.gameState.timeStamp = game.timeNanoseconds;
+  player.state.name = state;
+  player.state.gameStamp = game.gameNanoseconds;
+  player.state.timeStamp = game.timeNanoseconds;
 }
 
 export function hasNumDeadIncrased(game: Game): boolean {
@@ -36,7 +36,7 @@ export function updateNumCurrentlyDead(game: Game): void {
   game.numDeadPrev = game.numDead;
   game.numDead = 0;
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    game.numDead += game.players[i].gameState.name === "dead" ? 1 : 0;
+    game.numDead += game.players[i].state.name === 'dead' ? 1 : 0;
   }
 }
 
@@ -104,7 +104,7 @@ export function hasThisDurationPassed(
   duration: number,
   game: Game
 ): boolean {
-  if (game.gameNanoseconds > player.gameState.gameStamp + duration) {
+  if (game.gameNanoseconds > player.state.gameStamp + duration) {
     return true;
   }
   return false;

@@ -1,14 +1,14 @@
-import { BooleanLiteral } from "typescript";
-import Game from "../Game";
-import { Player } from "../interfaces";
-import { isAnyPlayerOffscreen } from "./movement";
-import { playerGrabAttackEnergy } from "./pad";
+import { BooleanLiteral } from 'typescript';
+import Game from '../Game';
+import { Player } from '../interfaces';
+import { isAnyPlayerOffscreen } from './movement';
+import { playerGrabAttackEnergy } from './pad';
 
 export function isScreenClear(game: Game): boolean {
   // is there three people currently dead
   let numPlayersDead: number = 0;
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    if (game.players[i].gameState.name === "dead") {
+    if (game.players[i].state.name === 'dead') {
       numPlayersDead++;
     }
   }
@@ -46,7 +46,7 @@ export function isFirstBlood(game: Game): boolean {
 
 export function isAnyPlayerCurrentlyDead(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    if (game.players[i].gameState.name === "dead") {
+    if (game.players[i].state.name === 'dead') {
       return true;
     }
   }
@@ -58,7 +58,7 @@ export function addShotToMatrixFirstBlood(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.gameState.name !== "dead") {
+  if (player.state.name !== 'dead') {
     return;
   }
   let hit: boolean = false;
@@ -85,7 +85,7 @@ export function addToShotsMatrixScreenClear(
   let hit = false;
 
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    if (game.players[i].gameState.name === "dead") {
+    if (game.players[i].state.name === 'dead') {
       for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
         if (game.wasLastHitByMatrix[i][j]) {
           hit = true;

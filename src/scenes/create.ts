@@ -484,7 +484,7 @@ export function createScoreboard(game: Game): void {
     .setAlpha(1);
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDamage = game.add
+    player.scoreBoardDamageShots = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
@@ -516,7 +516,7 @@ export function createScoreboard(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDeathsKillsShots = game.add
+    player.scoreBoardDeathsKills = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
@@ -560,6 +560,12 @@ export function createScoreboard(game: Game): void {
         1 / game.cameras.main.zoom / 10
       );
   });
+
+  game.players.forEach((player, playerIndex) => {
+    // EMN
+    // player.scoreBoardReady = game.add.text();F
+  });
+  // scoreBoardReady: 'READY',
 }
 
 export function setPlayersCollide(game: Game): void {

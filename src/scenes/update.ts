@@ -163,7 +163,7 @@ export function update(game: Game, time: number, delta: number): void {
 
 export function updatePlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    switch (player.gameState.name) {
+    switch (player.state.name) {
       case 'start':
         ////////////////////////////////
         ///////// WHILE IN LOOP

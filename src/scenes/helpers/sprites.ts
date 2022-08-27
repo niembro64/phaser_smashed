@@ -1,6 +1,6 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
-import { hasPlayerTouchedWallRecently } from "./movement";
+import Game from '../Game';
+import { Player } from '../interfaces';
+import { hasPlayerTouchedWallRecently } from './movement';
 
 export function updateSpritesFlipX(game: Game): void {
   game.players.forEach((player) => {
@@ -25,11 +25,11 @@ export function updateAllSpriteFilters(game: Game): void {
 
 export function updateSpriteFilter(player: Player, game: Game): void {
   if (player.char.colorFilter) {
-    if (player.gameState.name === "hurt") {
+    if (player.state.name === 'hurt') {
       // HURT
       if (
         Math.floor(
-          (game.gameNanoseconds - player.gameState.gameStamp) /
+          (game.gameNanoseconds - player.state.gameStamp) /
             game.DURATION_PLAYER_FILTER
         ) %
           2 ===
@@ -43,7 +43,7 @@ export function updateSpriteFilter(player: Player, game: Game): void {
       // NOT HURT
       if (
         Math.floor(
-          (game.gameNanoseconds - player.gameState.gameStamp) /
+          (game.gameNanoseconds - player.state.gameStamp) /
             game.DURATION_PLAYER_FILTER
         ) %
           2 ===

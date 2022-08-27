@@ -12,20 +12,20 @@ import {
 } from './interfaces';
 
 export default class Game extends Phaser.Scene {
-  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
   debug: Debug = {
     level: 3,
     useCameras: true,
-    seeCameras: false,
+    seeCameras: true,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
-    energyAttackWrapScreen: false,
+    energyAttackWrapScreen: true,
     seePlayerCircles: true,
     playShotsWiiBGM: true,
     wallJumps: true,
     useBGM: true,
-    BGMNumber: 0,
+    BGMNumber: 2,
     statsInit: true,
     useDefaultAttackDamage: true,
     useDefaultAttackHitback: true,
@@ -33,8 +33,8 @@ export default class Game extends Phaser.Scene {
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
-  DEFAULT_ATTACK_HITBACK: any = { x: 0.03, y: -0.03 };
-  DEFAULT_ATTACK_DAMAGE: number = 35;
+  DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
+  DEFAULT_ATTACK_DAMAGE: number = 50;
 
   // GAMEBAR_CHARS = { kills: 'kills', deaths: 'deaths', damage: '%', shots: 'shots' };
   // GAMEBAR_CHARS = { kills: 'k', deaths: 'd', damage: '%', shots: 's' };
@@ -184,14 +184,24 @@ export default class Game extends Phaser.Scene {
   splashes: Splash[] = [
     {
       text: null,
-      name: 'start',
-      word: 'START',
+      name: 'black',
+      word: 'BLACK',
       color: '#000000',
       backgroundColor: '#000000',
       size: '300px',
       src: 'glass.png',
       // strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
       strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
+    },
+    {
+      text: null,
+      name: 'start',
+      word: 'START',
+      color: '#FFFFFF',
+      backgroundColor: '#000000',
+      size: '370px',
+      src: 'glass.png',
+      strokeThickness: 10,
     },
     {
       text: null,
@@ -217,8 +227,8 @@ export default class Game extends Phaser.Scene {
       text: null,
       name: 'end',
       word: 'FINISHED',
-      color: 'white',
-      backgroundColor: 'black',
+      color: '#FFFFFF',
+      backgroundColor: '#000000',
       size: '500px',
       src: 'glass.png',
       strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
@@ -313,9 +323,10 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamage: '',
-      scoreBoardDeathsKillsShots: '',
-      gameState: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: '',
+      scoreBoardDeathsKills: '',
+      scoreBoardReady: 'READY',
+      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
         down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -414,9 +425,10 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamage: '',
-      scoreBoardDeathsKillsShots: '',
-      gameState: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: '',
+      scoreBoardDeathsKills: '',
+      scoreBoardReady: 'READY',
+      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
         down: Phaser.Input.Keyboard.KeyCodes.G,
@@ -514,9 +526,10 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamage: '',
-      scoreBoardDeathsKillsShots: '',
-      gameState: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: '',
+      scoreBoardDeathsKills: '',
+      scoreBoardReady: 'READY',
+      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
         down: Phaser.Input.Keyboard.KeyCodes.K,
@@ -613,9 +626,10 @@ export default class Game extends Phaser.Scene {
       glass: null,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamage: '',
-      scoreBoardDeathsKillsShots: '',
-      gameState: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: '',
+      scoreBoardDeathsKills: '',
+      scoreBoardReady: 'READY',
+      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,

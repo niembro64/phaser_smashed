@@ -99,7 +99,7 @@ export function updateGlassesTransparency(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.glass.setAlpha(0);
 
-    if (player.gameState.name === 'dead' && game.state.name !== 'play') {
+    if (player.state.name === 'dead' && game.state.name !== 'play') {
       player.glass.setAlpha(1);
     }
   });
@@ -123,7 +123,7 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
   if (game.debug.statsInit) {
     game.players.forEach((player, playerIndex) => {
-      player.scoreBoardDamage
+      player.scoreBoardDamageShots
         .setScale(1 / zoom, 1 / zoom)
         .setText(
           Math.round(player.char.damage).toString() +
@@ -132,18 +132,18 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
             player.shotCount.toString() +
             game.GAMEBAR_CHARS.shots
         );
-      player.scoreBoardDamage.x =
+      player.scoreBoardDamageShots.x =
         game.cameraMover.char.sprite.x +
         (game.textLocations[game.playerSpawnOrder[playerIndex]] +
           game.textLocationLROffset) *
           (1 / zoom);
 
-      player.scoreBoardDamage.y = newY;
+      player.scoreBoardDamageShots.y = newY;
     });
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDamage
+    player.scoreBoardDamageShots
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         Math.round(player.char.damage).toString() +
@@ -152,13 +152,13 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
           player.shotCount.toString() +
           game.GAMEBAR_CHARS.shots
       );
-    player.scoreBoardDamage.x =
+    player.scoreBoardDamageShots.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
         game.textLocationLROffset) *
         (1 / zoom);
 
-    player.scoreBoardDamage.y = newY;
+    player.scoreBoardDamageShots.y = newY;
   });
 }
 export function updateDeathsKillsText(
@@ -168,7 +168,7 @@ export function updateDeathsKillsText(
 ): void {
   if (game.debug.statsInit) {
     game.players.forEach((player, playerIndex) => {
-      player.scoreBoardDeathsKillsShots
+      player.scoreBoardDeathsKills
         .setScale(1 / zoom, 1 / zoom)
         .setText(
           player.killCount.toString() +
@@ -177,19 +177,19 @@ export function updateDeathsKillsText(
             player.deathCount.toString() +
             game.GAMEBAR_CHARS.deaths
         );
-      player.scoreBoardDeathsKillsShots.x =
+      player.scoreBoardDeathsKills.x =
         game.cameraMover.char.sprite.x +
         (game.textLocations[game.playerSpawnOrder[playerIndex]] +
           game.textLocationLROffset) *
           (1 / zoom);
 
-      player.scoreBoardDeathsKillsShots.y = newY;
+      player.scoreBoardDeathsKills.y = newY;
     });
     return;
   }
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDeathsKillsShots
+    player.scoreBoardDeathsKills
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         player.killCount.toString() +
@@ -198,12 +198,12 @@ export function updateDeathsKillsText(
           player.deathCount.toString() +
           game.GAMEBAR_CHARS.deaths
       );
-    player.scoreBoardDeathsKillsShots.x =
+    player.scoreBoardDeathsKills.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
         game.textLocationLROffset) *
         (1 / zoom);
 
-    player.scoreBoardDeathsKillsShots.y = newY;
+    player.scoreBoardDeathsKills.y = newY;
   });
 }

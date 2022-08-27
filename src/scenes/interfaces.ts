@@ -19,9 +19,10 @@ export interface CameraHelper {
 export interface Player {
   playerNumber: number;
   glass: any | Phaser.GameObjects.Sprite;
-  scoreBoardDeathsKillsShots: string | any;
-  scoreBoardDamage: string | any;
-  gameState: State;
+  scoreBoardDamageShots: string | any;
+  scoreBoardDeathsKills: string | any;
+  scoreBoardReady: string | any; 
+  state: State;
   keyboard_static: Keyboard;
   char: Char;
   keyboard: Keyboard | any;

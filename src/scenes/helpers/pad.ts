@@ -1,12 +1,12 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
+import Game from '../Game';
+import { Player } from '../interfaces';
 import {
   isAttackEnergyMoving,
   isAttackEnergyNearPlayer,
   isAttackEnergyOffscreen,
   turnOffPhysicsAttackEnergy,
   turnOnPhysicsAttackEnergy,
-} from "./attacks";
+} from './attacks';
 
 export function assignGamePadsConnected(game: Game): void {
   for (let i = 0; i < game.input.gamepad.total; i++) {
@@ -39,7 +39,7 @@ export function resetMyHitByMatrix(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.gameState.name === "hurt") {
+  if (player.state.name === 'hurt') {
     return;
   }
   for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
@@ -132,7 +132,7 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
   if (player.char.attackEnergy.allowVelocityY) {
     player.char.attackEnergy.sprite.body.allowGravity = true;
   }
-  
+
   if (player.char.sprite.flipX) {
     player.char.attackEnergy.sprite.x =
       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
@@ -208,11 +208,11 @@ export function attackEnergy(player: Player, game: Game): void {
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationBetweenThrows &&
-    player.char.attackEnergy.state === "held"
+    player.char.attackEnergy.state === 'held'
   ) {
     game.SOUND_GUN.play();
     player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-    player.char.attackEnergy.state = "released";
+    player.char.attackEnergy.state = 'released';
     turnOnPhysicsAttackEnergy(player);
     playerShootAttackEnergy(player, game);
     return;
@@ -224,7 +224,7 @@ export function attackEnergy(player: Player, game: Game): void {
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationBetweenThrows
   ) {
-    player.char.attackEnergy.state = "held";
+    player.char.attackEnergy.state = 'held';
     turnOffPhysicsAttackEnergy(player);
     playerHoldAttackEnergy(player);
   }
@@ -443,39 +443,39 @@ export function printAllPadsActive(player: Player, game: Game): void {
 
   if (player.pad) {
     if (player.pad.B) {
-      console.log(player.playerNumber, "B");
+      console.log(player.playerNumber, 'B');
     }
     if (player.pad.A) {
-      console.log(player.playerNumber, "A");
+      console.log(player.playerNumber, 'A');
     }
     if (player.pad.X) {
-      console.log(player.playerNumber, "X");
+      console.log(player.playerNumber, 'X');
     }
     if (player.pad.Y) {
-      console.log(player.playerNumber, "Y");
+      console.log(player.playerNumber, 'Y');
       // player.char.fast = 2;
     }
 
     //  D Pad
     if (player.pad.down) {
-      console.log(player.playerNumber, "down");
+      console.log(player.playerNumber, 'down');
     }
     if (player.pad.up) {
-      console.log(player.playerNumber, "up");
+      console.log(player.playerNumber, 'up');
     }
     if (player.pad.left) {
-      console.log(player.playerNumber, "left");
+      console.log(player.playerNumber, 'left');
     }
     if (player.pad.right) {
-      console.log(player.playerNumber, "right");
+      console.log(player.playerNumber, 'right');
     }
 
     // L R Buttons
     if (player.pad.L1) {
-      console.log(player.playerNumber, "L1");
+      console.log(player.playerNumber, 'L1');
     }
     if (player.pad.R1) {
-      console.log(player.playerNumber, "R1");
+      console.log(player.playerNumber, 'R1');
     }
   }
 }
