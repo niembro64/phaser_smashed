@@ -1,4 +1,5 @@
 import Game from '../Game';
+import { isPlayerReady } from './pad';
 
 export function updateSplashes(game: Game, zoom: number, newY: number): void {
   game.splashes.forEach((splash, splashIndex) => {
@@ -67,6 +68,7 @@ export function updateText(game: Game): void {
   updateClockText(game);
   updateGlasses(game, zoom, newTopY);
   updateDamageText(game, zoom, newUpperY);
+  updateReadyText(game, zoom, newTopY);
   updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
 }
@@ -119,6 +121,7 @@ export function updateGlasses(game: Game, zoom: number, newY: number): void {
     player.glass.y = newY;
   });
 }
+
 export function updateDamageText(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
   if (game.debug.statsInit) {
@@ -161,6 +164,50 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
     player.scoreBoardDamageShots.y = newY;
   });
 }
+
+export function updateReadyText(game: Game, zoom: number, newY: number): void {
+  game.players.forEach((player, playerIndex) => {
+    if (game.state.name === 'play' || game.state.name === 'end') {
+      player.scoreBoardName.setAlpha(0);
+    } else {
+      if (isPlayerReady(player, game)) {
+        player.scoreBoardName.setAlpha(1);
+      } else {
+        player.scoreBoardName.setAlpha(0);
+      }
+    }
+  });
+
+  if (game.debug.statsInit) {
+    game.players.forEach((player, playerIndex) => {
+      player.scoreBoardName.setScale(1 / zoom, 1 / zoom);
+
+      player.scoreBoardName.x =
+        game.cameraMover.char.sprite.x +
+        game.textLocations[game.playerSpawnOrder[playerIndex]] * (1 / zoom);
+
+      player.scoreBoardName.y = newY;
+    });
+    return;
+  }
+  game.players.forEach((player, playerIndex) => {
+    player.scoreBoardName
+      .setScale(1 / zoom, 1 / zoom)
+      .setText(
+        Math.round(player.char.damage).toString() +
+          game.GAMEBAR_CHARS.damage +
+          ' ' +
+          player.shotCount.toString() +
+          game.GAMEBAR_CHARS.shots
+      );
+    player.scoreBoardName.x =
+      game.cameraMover.char.sprite.x +
+      game.textLocations[game.playerSpawnOrder[playerIndex]] * (1 / zoom);
+
+    player.scoreBoardName.y = newY;
+  });
+}
+
 export function updateDeathsKillsText(
   game: Game,
   zoom: number,

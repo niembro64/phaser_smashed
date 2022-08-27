@@ -562,10 +562,35 @@ export function createScoreboard(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    // EMN
-    // player.scoreBoardReady = game.add.text();F
+    player.scoreBoardName = game.add
+      .text(
+        game.SCREEN_DIMENSIONS.WIDTH / 2,
+        game.SCREEN_DIMENSIONS.HEIGHT / 2,
+        '- ' + player.char.name + ' Ready -',
+        {
+          // font: "Arial 100px",
+          fontSize: '40px',
+          fontFamily: 'Impact',
+          // fontFamily: game.FONT_DEFAULT,
+          // fontFamily: "'Courier New'",
+          // fontFamily: "'Press Start 2P'",
+          // color: "white",
+          color: game.circles[playerIndex].colorString,
+          // stroke: player.char.color.primary,
+          stroke: 'black',
+          strokeThickness: 1,
+          shadow: {
+            offsetX: 0,
+            offsetY: 3,
+            color: '#000',
+            blur: 3,
+            stroke: true,
+            fill: true,
+          },
+        }
+      )
+      .setOrigin(0.5, 0.5);
   });
-  // scoreBoardReady: 'READY',
 }
 
 export function setPlayersCollide(game: Game): void {

@@ -14,6 +14,25 @@ export function assignGamePadsConnected(game: Game): void {
   }
 }
 
+export function isPlayerReady(player: Player, game: Game): boolean {
+  if (
+    !player.pad.up &&
+    !player.pad.down &&
+    !player.pad.left &&
+    !player.pad.right &&
+    !player.pad.A &&
+    !player.pad.B &&
+    !player.pad.X &&
+    !player.pad.Y &&
+    !player.pad.R1 &&
+    !player.pad.L1
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
 export function isAllPlayersReady(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
     if (

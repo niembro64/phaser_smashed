@@ -325,7 +325,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamageShots: '',
       scoreBoardDeathsKills: '',
-      scoreBoardReady: 'READY',
+      scoreBoardName: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -427,7 +427,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamageShots: '',
       scoreBoardDeathsKills: '',
-      scoreBoardReady: 'READY',
+      scoreBoardName: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -528,7 +528,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamageShots: '',
       scoreBoardDeathsKills: '',
-      scoreBoardReady: 'READY',
+      scoreBoardName: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -628,7 +628,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardDamageShots: '',
       scoreBoardDeathsKills: '',
-      scoreBoardReady: 'READY',
+      scoreBoardName: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
