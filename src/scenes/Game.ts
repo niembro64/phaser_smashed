@@ -17,7 +17,7 @@ export default class Game extends Phaser.Scene {
   debug: Debug = {
     level: 3,
     useCameras: true,
-    seeCameras: true,
+    seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
     energyAttackWrapScreen: false,
@@ -319,6 +319,8 @@ export default class Game extends Phaser.Scene {
   playerOptions: Player[] = [
     {
       playerNumber: 0,
+      emitter: null,
+      particles: null,
       glass: null,
       killCount: 0,
       deathCount: 0,
@@ -421,6 +423,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 1,
+      emitter: null,
+      particles: null,
       glass: null,
       killCount: 0,
       deathCount: 0,
@@ -522,6 +526,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 2,
+      emitter: null,
+      particles: null,
       glass: null,
       killCount: 0,
       deathCount: 0,
@@ -622,6 +628,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 3,
+      emitter: null,
+      particles: null,
       killCount: 0,
       glass: null,
       deathCount: 0,
@@ -798,6 +806,10 @@ export default class Game extends Phaser.Scene {
     this.players.forEach((player, playerIndex) => {
       this.load.image(player.char.name, player.char.src);
       player.pad = Phaser.Input.Gamepad.Gamepad;
+    });
+
+    this.players.forEach((player, playerIndex) => {
+      this.load.image('tail_' + playerIndex, 'images/tail_' + playerIndex + '.png');
     });
   }
   create() {

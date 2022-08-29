@@ -147,6 +147,18 @@ export function createPlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     setBlinkTrue(player);
   });
+
+  game.players.forEach(function (player, playerIndex) {
+    player.particles = game.add.particles('tail_' + playerIndex);
+    player.emitter = player.particles.createEmitter({
+      speed: 100,
+      scale: { start: 0.05, end: 0 },
+      lifespan: 10,
+      blendMode: 'NORMAL',
+      // blendMode: 'MULTIPLY',
+    });
+    player.emitter.startFollow(player.char.sprite);
+  });
 }
 export function createEnergyAttacks(game: Game): void {
   game.players.forEach((player, playerIndex) => {
