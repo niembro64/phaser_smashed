@@ -125,11 +125,34 @@ export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
   game.players.forEach((player, playerIndex) => {
+    player.particles = game.add.particles('tail_' + playerIndex);
+    player.emitter = player.particles.createEmitter({
+      speed: 60,
+      scale: { start: 0.5, end: 0 },
+      blendMode: 'ADD',
+      // bounce: 1,
+      // length: 100,
+    });
+
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.INITIAL.POSITION.PLAYER_Y,
       player.char.name
     );
+
+    player.emitter.startFollow(player.char.sprite);
+    player.emitter.setTint(
+      game.circles[playerIndex].colorNumber,
+      game.circles[playerIndex].colorNumber,
+      game.circles[playerIndex].colorNumber,
+      game.circles[playerIndex].colorNumber
+    );
+    // player.emitter.setTint(
+    //   player.char.color.primary,
+    //   player.char.color.primary,
+    //   player.char.color.primary,
+    //   player.char.color.primary
+    // );
   });
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
@@ -141,23 +164,12 @@ export function createPlayers(game: Game): void {
     player.char.sprite.setCollideWorldBounds(false);
 
     game.physics.add.collider(player.char.sprite, game.PLATFORMS);
+
     player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
 
   game.players.forEach((player, playerIndex) => {
     setBlinkTrue(player);
-  });
-
-  game.players.forEach(function (player, playerIndex) {
-    player.particles = game.add.particles('tail_' + playerIndex);
-    player.emitter = player.particles.createEmitter({
-      speed: 100,
-      scale: { start: 0.05, end: 0 },
-      lifespan: 10,
-      blendMode: 'NORMAL',
-      // blendMode: 'MULTIPLY',
-    });
-    player.emitter.startFollow(player.char.sprite);
   });
 }
 export function createEnergyAttacks(game: Game): void {

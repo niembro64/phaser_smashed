@@ -172,10 +172,10 @@ export default class Game extends Phaser.Scene {
 
   circleOffset: number = 50;
   circles: Circle[] = [
-    { graphic: null, colorNumber: 0xe24800, colorString: '#e24800' },
+    { graphic: null, colorNumber: 0xe20000, colorString: '#e20000' },
     { graphic: null, colorNumber: 0x43a528, colorString: '#43a528' },
     { graphic: null, colorNumber: 0xffc90e, colorString: '#ffc90e' },
-    { graphic: null, colorNumber: 0x9966bb, colorString: '#9966bb' },
+    { graphic: null, colorNumber: 0x4466ff, colorString: '#4466ff' },
   ];
 
   FONT_DEFAULT: string = 'Consolas';
@@ -809,7 +809,7 @@ export default class Game extends Phaser.Scene {
     });
 
     this.players.forEach((player, playerIndex) => {
-      this.load.image('tail_' + playerIndex, 'images/tail_' + playerIndex + '.png');
+      this.load.image('tail_' + playerIndex, 'images/tail_small_' + playerIndex + '.png');
     });
   }
   create() {
