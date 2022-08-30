@@ -30,7 +30,9 @@ export interface Player {
   padPrev: PadStatePrevious;
   padDebounced: PadStateDebounced;
   particles: any;
-  emitter: any;
+  emitterLarge: any;
+  emitterMedium: any;
+  emitterSmall: any;
   killCount: number;
   deathCount: number;
   shotCount: number;

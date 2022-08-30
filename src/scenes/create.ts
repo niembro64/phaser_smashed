@@ -6,6 +6,7 @@ export function create(game: Game) {
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
+  createEmitters(game);
   createSplashes(game);
   createPlatforms(game);
   createTable(game);
@@ -121,38 +122,64 @@ export function setPlayersInitialPositions(game: Game): void {
   });
 }
 
-export function createPlayers(game: Game): void {
-  setPlayersInitialPositions(game);
-
+export function createEmitters(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.particles = game.add.particles('tail_' + playerIndex);
-    player.emitter = player.particles.createEmitter({
-      speed: 60,
-      scale: { start: 0.5, end: 0 },
+
+    player.emitterLarge = player.particles.createEmitter({
+      speed: 0,
+      // scale: { start: 0.05, end: 0 },
+      scale: { start: 2, end: 1 },
       blendMode: 'ADD',
       // bounce: 1,
       // length: 100,
     });
 
+    player.emitterMedium = player.particles.createEmitter({
+      speed: 50,
+      // scale: { start: 0.05, end: 0 },
+      scale: { start: 1, end: 0 },
+      blendMode: 'ADD',
+      // bounce: 1,
+      // length: 100,
+    });
+
+    player.emitterSmall = player.particles.createEmitter({
+      speed: 50,
+      // scale: { start: 0.05, end: 0 },
+      scale: { start: 0.6, end: 0 },
+      blendMode: 'ADD',
+      // bounce: 1,
+      // length: 100,
+    });
+  });
+}
+
+export function createPlayers(game: Game): void {
+  setPlayersInitialPositions(game);
+
+  game.players.forEach((player, playerIndex) => {
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.INITIAL.POSITION.PLAYER_Y,
       player.char.name
     );
 
-    player.emitter.startFollow(player.char.sprite);
-    player.emitter.setTint(
-      game.circles[playerIndex].colorNumber,
-      game.circles[playerIndex].colorNumber,
-      game.circles[playerIndex].colorNumber,
-      game.circles[playerIndex].colorNumber
-    );
-    // player.emitter.setTint(
-    //   player.char.color.primary,
-    //   player.char.color.primary,
-    //   player.char.color.primary,
-    //   player.char.color.primary
-    // );
+    player.emitterLarge.startFollow(player.char.sprite);
+    player.emitterMedium.startFollow(player.char.sprite);
+    player.emitterSmall.startFollow(player.char.sprite);
+
+    player.emitterLarge.setAlpha(0.03);
+    player.emitterMedium.setAlpha(0.05);
+    player.emitterSmall.setAlpha(1);
+
+    player.emitterLarge.setTint(0xffffff);
+    player.emitterMedium.setTint(game.circles[playerIndex].colorNumber);
+    player.emitterSmall.setTint(0xffffff);
+
+    player.emitterLarge.active = false;
+    player.emitterMedium.active = false;
+    player.emitterSmall.active = false;
   });
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {

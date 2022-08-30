@@ -172,10 +172,10 @@ export default class Game extends Phaser.Scene {
 
   circleOffset: number = 50;
   circles: Circle[] = [
-    { graphic: null, colorNumber: 0xe20000, colorString: '#e20000' },
-    { graphic: null, colorNumber: 0x43a528, colorString: '#43a528' },
-    { graphic: null, colorNumber: 0xffc90e, colorString: '#ffc90e' },
-    { graphic: null, colorNumber: 0x4466ff, colorString: '#4466ff' },
+    { graphic: null, colorNumber: 0xaa3333, colorString: '#aa3333' },
+    { graphic: null, colorNumber: 0x33aa33, colorString: '#33aa33' },
+    { graphic: null, colorNumber: 0xddbb33, colorString: '#ddbb33' },
+    { graphic: null, colorNumber: 0x3366dd, colorString: '#3366dd' },
   ];
 
   FONT_DEFAULT: string = 'Consolas';
@@ -319,7 +319,9 @@ export default class Game extends Phaser.Scene {
   playerOptions: Player[] = [
     {
       playerNumber: 0,
-      emitter: null,
+      emitterLarge: null,
+      emitterMedium: null,
+      emitterSmall: null,
       particles: null,
       glass: null,
       killCount: 0,
@@ -423,7 +425,9 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 1,
-      emitter: null,
+      emitterLarge: null,
+      emitterMedium: null,
+      emitterSmall: null,
       particles: null,
       glass: null,
       killCount: 0,
@@ -526,7 +530,9 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 2,
-      emitter: null,
+      emitterLarge: null,
+      emitterMedium: null,
+      emitterSmall: null,
       particles: null,
       glass: null,
       killCount: 0,
@@ -628,7 +634,9 @@ export default class Game extends Phaser.Scene {
     },
     {
       playerNumber: 3,
-      emitter: null,
+      emitterLarge: null,
+      emitterMedium: null,
+      emitterSmall: null,
       particles: null,
       killCount: 0,
       glass: null,
@@ -809,7 +817,15 @@ export default class Game extends Phaser.Scene {
     });
 
     this.players.forEach((player, playerIndex) => {
-      this.load.image('tail_' + playerIndex, 'images/tail_small_' + playerIndex + '.png');
+      // this.load.image(
+      //   'tail_' + playerIndex,
+      //   'images/tail-' + playerIndex + '.png'
+      // );
+      this.load.image('tail_' + playerIndex, 'images/white_trans.png');
+      // this.load.image(
+      //   'tail_' + playerIndex,
+      //   'images/tail_small_' + playerIndex + '.png'
+      // );
     });
   }
   create() {
