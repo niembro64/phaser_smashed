@@ -126,7 +126,7 @@ export function createEmitters(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.particles = game.add.particles('tail_' + playerIndex);
 
-    player.emitterLarge = player.particles.createEmitter({
+    player.emitterLight = player.particles.createEmitter({
       speed: 0,
       // scale: { start: 0.05, end: 0 },
       scale: { start: 2, end: 1 },
@@ -135,19 +135,20 @@ export function createEmitters(game: Game): void {
       // length: 100,
     });
 
-    player.emitterMedium = player.particles.createEmitter({
-      speed: 50,
+    player.emitterDark = player.particles.createEmitter({
+      speed: 80,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 1, end: 0 },
-      blendMode: 'ADD',
+      scale: { start: 1, end: 0.5 },
+      blendMode: 'SUBTRACT',
       // bounce: 1,
       // length: 100,
     });
 
-    player.emitterSmall = player.particles.createEmitter({
-      speed: 50,
+    player.emitterPlayer = player.particles.createEmitter({
+      speed: 100,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 0.6, end: 0 },
+      scale: { start: 0.7, end: 0 },
+      // blendMode: 'SUBTRACT',
       blendMode: 'ADD',
       // bounce: 1,
       // length: 100,
@@ -165,21 +166,22 @@ export function createPlayers(game: Game): void {
       player.char.name
     );
 
-    player.emitterLarge.startFollow(player.char.sprite);
-    player.emitterMedium.startFollow(player.char.sprite);
-    player.emitterSmall.startFollow(player.char.sprite);
+    player.emitterLight.startFollow(player.char.sprite);
+    player.emitterDark.startFollow(player.char.sprite);
+    player.emitterPlayer.startFollow(player.char.sprite);
 
-    player.emitterLarge.setAlpha(0.03);
-    player.emitterMedium.setAlpha(0.05);
-    player.emitterSmall.setAlpha(1);
+    player.emitterLight.setAlpha(0.03);
+    player.emitterDark.setAlpha(1);
+    player.emitterPlayer.setAlpha(1);
+    // player.emitterPlayer.setAlpha(0.3);
 
-    player.emitterLarge.setTint(0xffffff);
-    player.emitterMedium.setTint(game.circles[playerIndex].colorNumber);
-    player.emitterSmall.setTint(0xffffff);
+    player.emitterLight.setTint(0xffffff);
+    player.emitterDark.setTint(0x000000);
+    player.emitterPlayer.setTint(game.circles[playerIndex].colorNumber);
 
-    player.emitterLarge.active = false;
-    player.emitterMedium.active = false;
-    player.emitterSmall.active = false;
+    player.emitterLight.active = false;
+    player.emitterDark.active = false;
+    // player.emitterPlayer.active = false;
   });
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
