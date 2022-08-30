@@ -129,7 +129,7 @@ export function createEmitters(game: Game): void {
     player.emitterLight = player.particles.createEmitter({
       speed: 0,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 2, end: 1 },
+      scale: { start: 3, end: 0 },
       blendMode: 'ADD',
       // bounce: 1,
       // length: 100,
@@ -179,8 +179,8 @@ export function createPlayers(game: Game): void {
     player.emitterDark.setTint(0x000000);
     player.emitterPlayer.setTint(game.circles[playerIndex].colorNumber);
 
-    player.emitterLight.active = false;
-    // player.emitterDark.active = false;
+    // player.emitterLight.active = false;
+    player.emitterDark.active = false;
     player.emitterPlayer.active = false;
   });
   game.players.forEach((player, playerIndex) => {
