@@ -180,8 +180,8 @@ export function createPlayers(game: Game): void {
     player.emitterPlayer.setTint(game.circles[playerIndex].colorNumber);
 
     player.emitterLight.active = false;
-    player.emitterDark.active = false;
-    // player.emitterPlayer.active = false;
+    // player.emitterDark.active = false;
+    player.emitterPlayer.active = false;
   });
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {

@@ -173,9 +173,9 @@ export default class Game extends Phaser.Scene {
   circleOffset: number = 50;
   circles: Circle[] = [
     { graphic: null, colorNumber: 0xaa3333, colorString: '#aa3333' },
-    { graphic: null, colorNumber: 0x33aa33, colorString: '#33aa33' },
-    { graphic: null, colorNumber: 0xddbb33, colorString: '#ddbb33' },
     { graphic: null, colorNumber: 0x3366dd, colorString: '#3366dd' },
+    { graphic: null, colorNumber: 0xddbb33, colorString: '#ddbb33' },
+    { graphic: null, colorNumber: 0x33aa33, colorString: '#33aa33' },
   ];
 
   FONT_DEFAULT: string = 'Consolas';
