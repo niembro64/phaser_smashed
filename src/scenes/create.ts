@@ -127,9 +127,9 @@ export function createEmitters(game: Game): void {
     player.particles = game.add.particles('tail_' + playerIndex);
 
     player.emitterLight = player.particles.createEmitter({
-      speed: 0,
+      speed: 10,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 3, end: 0 },
+      scale: { start: 2, end: 0 },
       blendMode: 'ADD',
       // bounce: 1,
       // length: 100,

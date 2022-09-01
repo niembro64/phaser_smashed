@@ -16,7 +16,6 @@ import {
 } from "../helpers/pad";
 import { updateAllSpriteFilters, updateSpritesFlipX } from "../helpers/sprites";
 import { resetAllHitboxes, updateGameTime } from "../helpers/state";
-import { updateText } from "../helpers/text";
 import { updatePlayers } from "../update";
 
 export function gameStatePlay(game: Game, time: number, delta: number): void {
