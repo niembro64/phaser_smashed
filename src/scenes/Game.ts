@@ -1,6 +1,6 @@
-import 'phaser';
-import { create } from './create';
-import { update } from './update';
+import "phaser";
+import { create } from "./create";
+import { update } from "./update";
 import {
   Camera,
   Circle,
@@ -9,12 +9,12 @@ import {
   Player,
   Splash,
   State,
-} from './interfaces';
+} from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  // PLAYER_CHOICES: number[] = [3];
+  PLAYER_CHOICES: number[] = [3, 0];
   // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
-  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -39,7 +39,7 @@ export default class Game extends Phaser.Scene {
 
   // GAMEBAR_CHARS = { kills: 'kills', deaths: 'deaths', damage: '%', shots: 'shots' };
   // GAMEBAR_CHARS = { kills: 'k', deaths: 'd', damage: '%', shots: 's' };
-  GAMEBAR_CHARS = { kills: '+', deaths: '-', damage: '%', shots: '*' };
+  GAMEBAR_CHARS = { kills: "+", deaths: "-", damage: "%", shots: "*" };
   // GAMEBAR_CHARS = { kills: '+', deaths: '-', damage: '%', shots: '.' };
 
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
@@ -63,28 +63,28 @@ export default class Game extends Phaser.Scene {
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
   FILE_SOUNDS: any = {
-    INTRO: 'deep.mp3',
-    GUN: 'gun.mp3',
-    HIT: 'kick-rubber-tube-82839.mp3',
-    JUMP: 'mxl993_yarstick_swoosh_6-88322.mp3',
-    JUMP_POWER: 'quick-swhooshing-noise-80898.mp3',
-    FIRST_BLOOD: 'first_blood_echo-92250.mp3',
-    SQUISH: 'goresplat-7088.mp3',
-    DIE: 'sword-hits-the-body-48273.mp3',
-    START: 'start.mp3',
-    ENERJA_AH: '/enerja/ah.mp3',
-    ENERJA_DO_AGAIN: '/enerja/do_it_again_yeah.mp3',
-    ENERJA_FINISH: '/enerja/finishit.mp3',
-    ENERJA_GYA: '/enerja/gya.mp3',
-    ENERJA_THAT_SHIT: '/enerja/more_than_that_shit_happen.mp3',
-    ENERJA_SMASHED: '/enerja/smashed_yes_you_are_ahhhhh.mp3',
-    ENERJA_TURTLE: '/enerja/turtle.mp3',
-    ENERJA_TWO_SHOTS: '/enerja/two_shots.mp3',
-    ENERJA_UGH: '/enerja/ugh.mp3',
-    MII: 'mii.mp3',
-    BGM_DREAM: 'kirbyloop.wav',
-    BGM_MONKEY: '/na/monkeys2022.wav',
-    BGM_ROYKSOP: '/na/royksop_macumba_05loop.wav',
+    INTRO: "deep.mp3",
+    GUN: "gun.mp3",
+    HIT: "kick-rubber-tube-82839.mp3",
+    JUMP: "mxl993_yarstick_swoosh_6-88322.mp3",
+    JUMP_POWER: "quick-swhooshing-noise-80898.mp3",
+    FIRST_BLOOD: "first_blood_echo-92250.mp3",
+    SQUISH: "goresplat-7088.mp3",
+    DIE: "sword-hits-the-body-48273.mp3",
+    START: "start.mp3",
+    ENERJA_AH: "/enerja/ah.mp3",
+    ENERJA_DO_AGAIN: "/enerja/do_it_again_yeah.mp3",
+    ENERJA_FINISH: "/enerja/finishit.mp3",
+    ENERJA_GYA: "/enerja/gya.mp3",
+    ENERJA_THAT_SHIT: "/enerja/more_than_that_shit_happen.mp3",
+    ENERJA_SMASHED: "/enerja/smashed_yes_you_are_ahhhhh.mp3",
+    ENERJA_TURTLE: "/enerja/turtle.mp3",
+    ENERJA_TWO_SHOTS: "/enerja/two_shots.mp3",
+    ENERJA_UGH: "/enerja/ugh.mp3",
+    MII: "mii.mp3",
+    BGM_DREAM: "kirbyloop.wav",
+    BGM_MONKEY: "/na/monkeys2022.wav",
+    BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
   };
 
   SOUND_INTRO: any;
@@ -173,105 +173,105 @@ export default class Game extends Phaser.Scene {
 
   circleOffset: number = 50;
   circles: Circle[] = [
-    { graphic: null, colorNumber: 0xaa3333, colorString: '#aa3333' },
-    { graphic: null, colorNumber: 0x3366dd, colorString: '#3366dd' },
-    { graphic: null, colorNumber: 0xddbb33, colorString: '#ddbb33' },
-    { graphic: null, colorNumber: 0x33aa33, colorString: '#33aa33' },
+    { graphic: null, colorNumber: 0xaa3333, colorString: "#aa3333" },
+    { graphic: null, colorNumber: 0x3366dd, colorString: "#3366dd" },
+    { graphic: null, colorNumber: 0xddbb33, colorString: "#ddbb33" },
+    { graphic: null, colorNumber: 0x33aa33, colorString: "#33aa33" },
   ];
 
-  FONT_DEFAULT: string = 'Consolas';
+  FONT_DEFAULT: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
   splashOffset: number = 50;
   splashes: Splash[] = [
     {
       text: null,
-      name: 'black',
-      word: 'BLACK',
-      color: '#000000',
-      backgroundColor: '#000000',
-      size: '300px',
-      src: 'glass.png',
+      name: "black",
+      word: "BLACK",
+      color: "#000000",
+      backgroundColor: "#000000",
+      size: "300px",
+      src: "glass.png",
       // strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
       strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
     },
     {
       text: null,
-      name: 'start',
-      word: 'START',
-      color: '#FFFFFF',
-      backgroundColor: '#000000',
-      size: '370px',
-      src: 'glass.png',
+      name: "start",
+      word: "START",
+      color: "#FFFFFF",
+      backgroundColor: "#000000",
+      size: "370px",
+      src: "glass.png",
       strokeThickness: 10,
     },
     {
       text: null,
-      name: 'first-blood',
-      word: 'FIRST BLOOD',
-      color: '#440000',
-      backgroundColor: 'red',
-      size: '370px',
-      src: 'glass.png',
+      name: "first-blood",
+      word: "FIRST BLOOD",
+      color: "#440000",
+      backgroundColor: "red",
+      size: "370px",
+      src: "glass.png",
       strokeThickness: 10,
     },
     {
       text: null,
-      name: 'screen-clear',
-      word: 'SCREEN CLEAR',
-      color: '#330033',
-      backgroundColor: '#bb44bb',
-      size: '330px',
-      src: 'glass.png',
+      name: "screen-clear",
+      word: "SCREEN CLEAR",
+      color: "#330033",
+      backgroundColor: "#bb44bb",
+      size: "330px",
+      src: "glass.png",
       strokeThickness: 10,
     },
     {
       text: null,
-      name: 'end',
-      word: 'FINISHED',
-      color: '#FFFFFF',
-      backgroundColor: '#000000',
-      size: '500px',
-      src: 'glass.png',
+      name: "end",
+      word: "FINISHED",
+      color: "#FFFFFF",
+      backgroundColor: "#000000",
+      size: "500px",
+      src: "glass.png",
       strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
     },
   ];
 
   cameraPlayers: Camera = {
     char: {
-      name: 'center_10',
-      src: 'images/x.png',
+      name: "center_10",
+      src: "images/x.png",
       sprite: null,
       zoom: 0,
     },
   };
   cameraMover: Camera = {
     char: {
-      name: 'center_10',
-      src: 'images/x.png',
+      name: "center_10",
+      src: "images/x.png",
       sprite: null,
       zoom: 0,
     },
   };
   cameraPlayersHalfway: Camera = {
     char: {
-      name: 'center_80',
-      src: 'images/x.png',
+      name: "center_80",
+      src: "images/x.png",
       sprite: null,
       zoom: 0,
     },
   };
   cameraCenter: Camera = {
     char: {
-      name: 'center_80',
-      src: 'images/x.png',
+      name: "center_80",
+      src: "images/x.png",
       sprite: null,
       zoom: 0,
     },
   };
   cameraBox: Camera = {
     char: {
-      name: 'center_80',
-      src: 'images/x.png',
+      name: "center_80",
+      src: "images/x.png",
       sprite: null,
       zoom: 0,
     },
@@ -311,7 +311,7 @@ export default class Game extends Phaser.Scene {
   ];
 
   state: State = {
-    name: 'start',
+    name: "start",
     gameStamp: 0,
     timeStamp: 0,
   };
@@ -328,10 +328,10 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
-      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: "",
+      scoreBoardDeathsKills: "",
+      scoreBoardName: "READY",
+      state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
         down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -341,20 +341,20 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.X,
       },
       char: {
-        name: 'Mario',
+        name: "Mario",
         initializeCharPosition: {
           lookingRight: true,
           x: -200,
           y: 100,
         },
         color: {
-          primary: '#e24800',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#e24800",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
         colorFilter: false,
-        src: 'images/character_0_cropped.png',
+        src: "images/character_0_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -374,7 +374,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          state: 'released',
+          state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
           posFromCenter: { x: 20, y: -30 },
@@ -385,7 +385,7 @@ export default class Game extends Phaser.Scene {
             air: 1,
           },
           vel: { x: 1, y: 1 },
-          srcImage: 'fireball',
+          srcImage: "fireball",
           bounceY: 1,
           bounceX: 1,
           gravity: true,
@@ -435,10 +435,10 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
-      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: "",
+      scoreBoardDeathsKills: "",
+      scoreBoardName: "READY",
+      state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
         down: Phaser.Input.Keyboard.KeyCodes.G,
@@ -448,20 +448,20 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.B,
       },
       char: {
-        name: 'Link',
+        name: "Link",
         initializeCharPosition: {
           lookingRight: false,
           x: -110,
           y: 100,
         },
         color: {
-          primary: '#43a528',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#43a528",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
         colorFilter: false,
-        src: 'images/character_1_cropped.png',
+        src: "images/character_1_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -480,7 +480,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          state: 'released',
+          state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
           posFromCenter: { x: 50, y: 3 },
@@ -491,7 +491,7 @@ export default class Game extends Phaser.Scene {
             air: 1,
           },
           vel: { x: 1, y: -0.5 },
-          srcImage: 'sword',
+          srcImage: "sword",
           bounceY: 0,
           bounceX: 0,
           gravity: false,
@@ -541,10 +541,10 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
-      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: "",
+      scoreBoardDeathsKills: "",
+      scoreBoardName: "READY",
+      state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
         down: Phaser.Input.Keyboard.KeyCodes.K,
@@ -554,20 +554,20 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.P,
       },
       char: {
-        name: 'Pikachu',
+        name: "Pikachu",
         initializeCharPosition: {
           lookingRight: true,
           x: 110,
           y: 100,
         },
         color: {
-          primary: '#ffc90e',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#ffc90e",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
         colorFilter: false,
-        src: 'images/character_2_cropped.png',
+        src: "images/character_2_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -585,7 +585,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          state: 'released',
+          state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
           posFromCenter: { x: 0, y: -20 },
@@ -596,7 +596,7 @@ export default class Game extends Phaser.Scene {
             air: 1,
           },
           vel: { x: 1, y: -1 },
-          srcImage: 'greenshell',
+          srcImage: "greenshell",
           bounceY: 0.1,
           bounceX: 1,
           gravity: true,
@@ -646,10 +646,10 @@ export default class Game extends Phaser.Scene {
       glass: null,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
-      state: { name: 'start', gameStamp: 0, timeStamp: 0 },
+      scoreBoardDamageShots: "",
+      scoreBoardDeathsKills: "",
+      scoreBoardName: "READY",
+      state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,
@@ -659,20 +659,20 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
       },
       char: {
-        name: 'Kirby',
+        name: "Kirby",
         initializeCharPosition: {
           lookingRight: false,
           x: 200,
           y: 100,
         },
         color: {
-          primary: '#ff88ae',
-          secondary: '#e24800',
-          dark: '#1c0900',
-          light: '#ffffff',
+          primary: "#ff88ae",
+          secondary: "#e24800",
+          dark: "#1c0900",
+          light: "#ffffff",
         },
         colorFilter: false,
-        src: 'images/character_3_cropped.png',
+        src: "images/character_3_cropped.png",
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -690,7 +690,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackEnergy: {
           sprite: null,
-          state: 'released',
+          state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
           posFromCenter: { x: 10, y: -25 },
@@ -701,7 +701,7 @@ export default class Game extends Phaser.Scene {
             air: 0.8,
           },
           vel: { x: 1, y: -3 },
-          srcImage: 'hammer',
+          srcImage: "hammer",
           bounceY: 0.3,
           bounceX: 0.5,
           gravity: true,
@@ -744,69 +744,69 @@ export default class Game extends Phaser.Scene {
   ];
 
   constructor() {
-    super('game');
+    super("game");
     // this.laserGroup;
   }
 
   preload() {
-    let path = 'sounds/';
-    this.load.audio('intro', path + this.FILE_SOUNDS.INTRO);
-    this.load.audio('gun', path + this.FILE_SOUNDS.GUN);
-    this.load.audio('hit', path + this.FILE_SOUNDS.HIT);
-    this.load.audio('jump', path + this.FILE_SOUNDS.JUMP);
-    this.load.audio('jumpPower', path + this.FILE_SOUNDS.JUMP_POWER);
-    this.load.audio('firstBlood', path + this.FILE_SOUNDS.FIRST_BLOOD);
-    this.load.audio('squish', path + this.FILE_SOUNDS.SQUISH);
-    this.load.audio('die', path + this.FILE_SOUNDS.DIE);
-    this.load.audio('start', path + this.FILE_SOUNDS.START);
+    let path = "sounds/";
+    this.load.audio("intro", path + this.FILE_SOUNDS.INTRO);
+    this.load.audio("gun", path + this.FILE_SOUNDS.GUN);
+    this.load.audio("hit", path + this.FILE_SOUNDS.HIT);
+    this.load.audio("jump", path + this.FILE_SOUNDS.JUMP);
+    this.load.audio("jumpPower", path + this.FILE_SOUNDS.JUMP_POWER);
+    this.load.audio("firstBlood", path + this.FILE_SOUNDS.FIRST_BLOOD);
+    this.load.audio("squish", path + this.FILE_SOUNDS.SQUISH);
+    this.load.audio("die", path + this.FILE_SOUNDS.DIE);
+    this.load.audio("start", path + this.FILE_SOUNDS.START);
 
-    this.load.audio('enerja_ah', path + this.FILE_SOUNDS.ENERJA_AH);
-    this.load.audio('enerja_again', path + this.FILE_SOUNDS.ENERJA_DO_AGAIN);
-    this.load.audio('enerja_finish', path + this.FILE_SOUNDS.ENERJA_FINISH);
-    this.load.audio('enerja_gya', path + this.FILE_SOUNDS.ENERJA_GYA);
-    this.load.audio('enerja_shit', path + this.FILE_SOUNDS.ENERJA_THAT_SHIT);
-    this.load.audio('enerja_smashed', path + this.FILE_SOUNDS.ENERJA_SMASHED);
-    this.load.audio('enerja_turtle', path + this.FILE_SOUNDS.ENERJA_TURTLE);
-    this.load.audio('enerja_shots', path + this.FILE_SOUNDS.ENERJA_TWO_SHOTS);
-    this.load.audio('enerja_ugh', path + this.FILE_SOUNDS.ENERJA_UGH);
+    this.load.audio("enerja_ah", path + this.FILE_SOUNDS.ENERJA_AH);
+    this.load.audio("enerja_again", path + this.FILE_SOUNDS.ENERJA_DO_AGAIN);
+    this.load.audio("enerja_finish", path + this.FILE_SOUNDS.ENERJA_FINISH);
+    this.load.audio("enerja_gya", path + this.FILE_SOUNDS.ENERJA_GYA);
+    this.load.audio("enerja_shit", path + this.FILE_SOUNDS.ENERJA_THAT_SHIT);
+    this.load.audio("enerja_smashed", path + this.FILE_SOUNDS.ENERJA_SMASHED);
+    this.load.audio("enerja_turtle", path + this.FILE_SOUNDS.ENERJA_TURTLE);
+    this.load.audio("enerja_shots", path + this.FILE_SOUNDS.ENERJA_TWO_SHOTS);
+    this.load.audio("enerja_ugh", path + this.FILE_SOUNDS.ENERJA_UGH);
 
-    this.load.audio('mii', path + this.FILE_SOUNDS.MII);
+    this.load.audio("mii", path + this.FILE_SOUNDS.MII);
 
     if (this.debug.BGMNumber === 0) {
-      this.load.audio('bgm', path + this.FILE_SOUNDS.BGM_DREAM);
+      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_DREAM);
     }
     if (this.debug.BGMNumber === 1) {
-      this.load.audio('bgm', path + this.FILE_SOUNDS.BGM_MONKEY);
+      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_MONKEY);
     }
     if (this.debug.BGMNumber === 2) {
-      this.load.audio('bgm', path + this.FILE_SOUNDS.BGM_ROYKSOP);
+      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
 
-    this.load.image('laser', 'images/laser.png');
-    this.load.image('blockcracked', 'images/blockcracked.png');
-    this.load.image('fireball', 'images/fireball.png');
-    this.load.image('flagpole', 'images/flagpole.png');
-    this.load.image('greenshell', 'images/greenshell.png');
-    this.load.image('hammer', 'images/ham.png');
-    this.load.image('sword', 'images/sword_right.png');
+    this.load.image("laser", "images/laser.png");
+    this.load.image("blockcracked", "images/blockcracked.png");
+    this.load.image("fireball", "images/fireball.png");
+    this.load.image("flagpole", "images/flagpole.png");
+    this.load.image("greenshell", "images/greenshell.png");
+    this.load.image("hammer", "images/ham.png");
+    this.load.image("sword", "images/sword_right.png");
 
-    this.load.image('table', 'images/table.png');
-    this.load.image('flag', 'images/flagpole_JK2.png');
+    this.load.image("table", "images/table.png");
+    this.load.image("flag", "images/flagpole_JK2.png");
 
-    this.load.image('background', 'images/darkxp.jpg');
-    this.load.image('centerWhite', 'images/wx.png');
-    this.load.image('centerBlack', 'images/bx.png');
-    this.load.image('centerMagenta', 'images/mx.png');
-    this.load.image('centerRed', 'images/rx.png');
-    this.load.image('platformHorizontal', 'images/brickhoriz.bmp');
-    this.load.image('platformShort', 'images/brickhorizshorter.bmp');
-    this.load.image('platformVertical', 'images/brickvert.bmp');
-    this.load.image('brick', 'images/blockcracked.png');
-    this.load.image('suburb', 'images/suburb.png');
+    this.load.image("background", "images/darkxp.jpg");
+    this.load.image("centerWhite", "images/wx.png");
+    this.load.image("centerBlack", "images/bx.png");
+    this.load.image("centerMagenta", "images/mx.png");
+    this.load.image("centerRed", "images/rx.png");
+    this.load.image("platformHorizontal", "images/brickhoriz.bmp");
+    this.load.image("platformShort", "images/brickhorizshorter.bmp");
+    this.load.image("platformVertical", "images/brickvert.bmp");
+    this.load.image("brick", "images/blockcracked.png");
+    this.load.image("suburb", "images/suburb.png");
 
-    this.load.image('flag_joey', 'images/flagpole_JK2.png');
-    this.load.image('glass_full', 'images/niemo_shot_full.png');
-    this.load.image('glass_empty', 'images/niemo_shot_empty.png');
+    this.load.image("flag_joey", "images/flagpole_JK2.png");
+    this.load.image("glass_full", "images/niemo_shot_full.png");
+    this.load.image("glass_empty", "images/niemo_shot_empty.png");
 
     for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
       this.players.push(
@@ -814,7 +814,7 @@ export default class Game extends Phaser.Scene {
       );
     }
 
-    console.log('PLAYERS CURRENT', this.players);
+    console.log("PLAYERS CURRENT", this.players);
 
     this.players.forEach((player, playerIndex) => {
       this.load.image(player.char.name, player.char.src);
@@ -826,7 +826,7 @@ export default class Game extends Phaser.Scene {
       //   'tail_' + playerIndex,
       //   'images/tail-' + playerIndex + '.png'
       // );
-      this.load.image('tail_' + playerIndex, 'images/white_trans.png');
+      this.load.image("tail_" + playerIndex, "images/white_trans.png");
       // this.load.image(
       //   'tail_' + playerIndex,
       //   'images/tail_small_' + playerIndex + '.png'
