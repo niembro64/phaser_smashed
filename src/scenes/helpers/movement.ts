@@ -1,5 +1,5 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
+import Game from '../Game';
+import { Player } from '../interfaces';
 
 export function updateCirclesLocations(game: Game): void {
   if (!game.debug.seePlayerCircles) {
@@ -7,15 +7,17 @@ export function updateCirclesLocations(game: Game): void {
   }
 
   game.circles.forEach((circle, circleIndex) => {
-    circle.graphic.x = game.players[circleIndex].char.sprite.x;
-    circle.graphic.y =
-      game.players[circleIndex].char.sprite.y - game.circleOffset;
+    if (circleIndex < game.PLAYER_CHOICES.length) {
+      circle.graphic.x = game.players[circleIndex].char.sprite.x;
+      circle.graphic.y =
+        game.players[circleIndex].char.sprite.y - game.circleOffset;
 
-    circle.graphic.setRadius((1 / game.cameras.main.zoom) * 10);
-    circle.graphic.setPosition(
-      game.players[circleIndex].char.sprite.x,
-      game.players[circleIndex].char.sprite.y - game.circleOffset
-    );
+      circle.graphic.setRadius((1 / game.cameras.main.zoom) * 10);
+      circle.graphic.setPosition(
+        game.players[circleIndex].char.sprite.x,
+        game.players[circleIndex].char.sprite.y - game.circleOffset
+      );
+    }
   });
 }
 
@@ -92,16 +94,16 @@ export function updateEnergyAttacksScreenWrap(game: Game): void {
 
 export function updateLastDirectionTouched(player: Player): void {
   if (player.char.sprite.body.touching.up) {
-    player.char.lastDirectionTouched = "up";
+    player.char.lastDirectionTouched = 'up';
   }
   if (player.char.sprite.body.touching.down) {
-    player.char.lastDirectionTouched = "down";
+    player.char.lastDirectionTouched = 'down';
   }
   if (player.char.sprite.body.touching.left) {
-    player.char.lastDirectionTouched = "left";
+    player.char.lastDirectionTouched = 'left';
   }
   if (player.char.sprite.body.touching.right) {
-    player.char.lastDirectionTouched = "right";
+    player.char.lastDirectionTouched = 'right';
   }
 }
 
@@ -163,7 +165,7 @@ export function jump(player: Player, game: Game): void {
     // horizontal stuff
     if (
       game.debug.wallJumps &&
-      player.char.lastDirectionTouched === "left" &&
+      player.char.lastDirectionTouched === 'left' &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
@@ -177,7 +179,7 @@ export function jump(player: Player, game: Game): void {
     // }
     if (
       game.debug.wallJumps &&
-      player.char.lastDirectionTouched === "right" &&
+      player.char.lastDirectionTouched === 'right' &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(

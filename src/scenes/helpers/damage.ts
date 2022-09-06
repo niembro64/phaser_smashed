@@ -82,7 +82,7 @@ export function updatePlayerNumberKills(
   game: Game
 ): void {
   player.killCount = 0;
-  for (let i = 0; i < game.players.length; i++) {
+  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
     if (i !== playerIndex) {
       player.killCount += game.numberKilledByMatrix[i][playerIndex];
     }

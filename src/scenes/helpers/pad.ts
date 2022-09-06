@@ -1,7 +1,6 @@
 import Game from '../Game';
 import { Player } from '../interfaces';
 import {
-  isAttackEnergyMoving,
   isAttackEnergyNearPlayer,
   isAttackEnergyOffscreen,
   turnOffPhysicsAttackEnergy,
