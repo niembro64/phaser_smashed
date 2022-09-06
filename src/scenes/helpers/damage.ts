@@ -1,6 +1,6 @@
-import Game from '../Game';
-import { AttackEnergy, NormalizedVector, Player } from '../interfaces';
-import { hitbackFly } from './movement';
+import Game from "../Game";
+import { AttackEnergy, NormalizedVector, Player } from "../interfaces";
+import { hitbackFly } from "./movement";
 
 export function onHitHandler(
   player: Player,
@@ -10,12 +10,12 @@ export function onHitHandler(
   damage: number,
   game: Game
 ): void {
-  if (player.state.name !== 'alive') {
+  if (player.state.name !== "alive") {
     return;
   }
   game.currentlyOverlappingSpritesMatrix[playerIndex][j] = true;
 
-  for (var bj = 0; bj < game.players.length; bj++) {
+  for (var bj = 0; bj < game.PLAYER_CHOICES.length; bj++) {
     if (bj === j) {
       game.wasLastHitByMatrix[playerIndex][bj] = true;
       game.numberHitByMatrix[playerIndex][j]++;
@@ -48,7 +48,7 @@ export function onHitHandler(
 
 export function onDeadUpdateMatrix(playerIndex: number, game: Game): void {
   let killedSelf: boolean = true;
-  for (let j = 0; j < game.players.length; j++) {
+  for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
     if (game.wasLastHitByMatrix[playerIndex][j]) {
       killedSelf = false;
       game.numberKilledByMatrix[playerIndex][j]++;
@@ -90,7 +90,7 @@ export function updatePlayerNumberKills(
 }
 
 export function removeDamage(player: Player, damage: number): void {
-  if (player.state.name === 'alive') {
+  if (player.state.name === "alive") {
     player.char.damage -= damage;
   }
 }

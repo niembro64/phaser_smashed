@@ -49,7 +49,7 @@ export function resetAllHitboxes(game: Game): void {
 }
 
 export function isPlayerHit(playerIndex: number, game: Game): boolean {
-  for (let j = 0; j < game.players.length; j++) {
+  for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
     if (game.currentlyOverlappingSpritesMatrix[playerIndex][j]) {
       return true;
     }
