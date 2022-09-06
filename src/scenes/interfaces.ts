@@ -38,6 +38,35 @@ export interface Player {
   shotCount: number;
 }
 
+export interface Char {
+  name: string;
+  color: Color;
+  colorFilter: boolean;
+  src: string;
+  sprite: any | Phaser.GameObjects.Sprite;
+  shield: Shield | null;
+  zoom: number;
+  vel: { x: number; y: number };
+  pos: { x: number; y: number };
+  jumps: number[];
+  jumpPower: number;
+  jumpIndex: number;
+  upB: UpB;
+  damage: number;
+  speed: number;
+  fast: number;
+  friction_ground: number;
+  friction_air: number;
+  wallTouchArray: boolean[];
+  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | null;
+  attackEnergy: AttackEnergy;
+  initializeCharPosition: InitializeCharPosition;
+}
+
+export interface Shield {
+  circle: Circle;
+}
+
 export interface Circle {
   graphic: any;
   colorNumber: number;
@@ -96,30 +125,6 @@ export interface Keyboard {
   right: Key;
   fast: Key;
   jump: Key;
-}
-
-export interface Char {
-  name: string;
-  color: Color;
-  colorFilter: boolean;
-  src: string;
-  sprite: any | Phaser.GameObjects.Sprite;
-  zoom: number;
-  vel: { x: number; y: number };
-  pos: { x: number; y: number };
-  jumps: number[];
-  jumpPower: number;
-  jumpIndex: number;
-  upB: UpB;
-  damage: number;
-  speed: number;
-  fast: number;
-  friction_ground: number;
-  friction_air: number;
-  wallTouchArray: boolean[];
-  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | null;
-  attackEnergy: AttackEnergy;
-  initializeCharPosition: InitializeCharPosition;
 }
 
 export interface InitializeCharPosition {

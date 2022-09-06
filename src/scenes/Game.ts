@@ -12,9 +12,9 @@ import {
 } from './interfaces';
 
 export default class Game extends Phaser.Scene {
-  PLAYER_CHOICES: number[] = [3];
+  // PLAYER_CHOICES: number[] = [3];
   // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
-  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -400,6 +400,7 @@ export default class Game extends Phaser.Scene {
             speed: 400,
           },
         },
+        shield: null,
       },
       keyboard: null,
       pad: null,
@@ -505,6 +506,7 @@ export default class Game extends Phaser.Scene {
             speed: 0,
           },
         },
+        shield: null,
       },
       keyboard: null,
       pad: null,
@@ -609,6 +611,7 @@ export default class Game extends Phaser.Scene {
             speed: 0,
           },
         },
+        shield: null,
       },
       keyboard: null,
       pad: null,
@@ -713,6 +716,7 @@ export default class Game extends Phaser.Scene {
             speed: 500,
           },
         },
+        shield: null,
       },
       keyboard: null,
       pad: null,
