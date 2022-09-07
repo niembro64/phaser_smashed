@@ -69,6 +69,7 @@ export default class Game extends Phaser.Scene {
     SQUISH: 'goresplat-7088.mp3',
     DIE: 'sword-hits-the-body-48273.mp3',
     START: 'start.mp3',
+    READY: 'ready.wav',
     ENERJA_AH: '/enerja/ah.mp3',
     ENERJA_DO_AGAIN: '/enerja/do_it_again_yeah.mp3',
     ENERJA_FINISH: '/enerja/finishit.mp3',
@@ -93,6 +94,7 @@ export default class Game extends Phaser.Scene {
   SOUND_SQUISH: any;
   SOUND_DIE: any;
   SOUND_START: any;
+  SOUND_READY: any;
   ENERJA_AH: any;
   ENERJA_DO_AGAIN: any;
   ENERJA_FINISH: any;
@@ -296,13 +298,13 @@ export default class Game extends Phaser.Scene {
       emitterPlayer: null,
       emitterDark: null,
       particles: null,
-      glass: null,
+      shotGlass: null,
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
+      scoreBoardUpper: '',
+      scoreBoardLower: '',
+      scoreBoardNameReady: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -403,13 +405,13 @@ export default class Game extends Phaser.Scene {
       emitterPlayer: null,
       emitterDark: null,
       particles: null,
-      glass: null,
+      shotGlass: null,
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
+      scoreBoardUpper: '',
+      scoreBoardLower: '',
+      scoreBoardNameReady: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -509,13 +511,13 @@ export default class Game extends Phaser.Scene {
       emitterPlayer: null,
       emitterDark: null,
       particles: null,
-      glass: null,
+      shotGlass: null,
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
+      scoreBoardUpper: '',
+      scoreBoardLower: '',
+      scoreBoardNameReady: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -615,12 +617,12 @@ export default class Game extends Phaser.Scene {
       emitterDark: null,
       particles: null,
       killCount: 0,
-      glass: null,
+      shotGlass: null,
       deathCount: 0,
       shotCount: 0,
-      scoreBoardDamageShots: '',
-      scoreBoardDeathsKills: '',
-      scoreBoardName: 'READY',
+      scoreBoardUpper: '',
+      scoreBoardLower: '',
+      scoreBoardNameReady: 'READY',
       state: { name: 'start', gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -731,6 +733,7 @@ export default class Game extends Phaser.Scene {
     this.load.audio('squish', path + this.FILE_SOUNDS.SQUISH);
     this.load.audio('die', path + this.FILE_SOUNDS.DIE);
     this.load.audio('start', path + this.FILE_SOUNDS.START);
+    this.load.audio('ready', path + this.FILE_SOUNDS.READY);
 
     this.load.audio('enerja_ah', path + this.FILE_SOUNDS.ENERJA_AH);
     this.load.audio('enerja_again', path + this.FILE_SOUNDS.ENERJA_DO_AGAIN);

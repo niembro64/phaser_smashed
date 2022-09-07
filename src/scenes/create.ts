@@ -74,6 +74,7 @@ export function createSounds(game: Game): void {
   game.SOUND_SQUISH = game.sound.add('squish', { volume: 0.2 });
   game.SOUND_DIE = game.sound.add('die', { volume: 0.8 });
   game.SOUND_START = game.sound.add('start', { volume: 0.6 });
+  game.SOUND_READY = game.sound.add('ready', { volume: 0.6 });
 
   game.ENERJA_AH = game.sound.add('enerja_ah', { volume: 0.2 });
   game.ENERJA_DO_AGAIN = game.sound.add('enerja_again', { volume: 0.2 });
@@ -577,7 +578,7 @@ export function createScoreboard(game: Game): void {
     .setAlpha(1);
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDamageShots = game.add
+    player.scoreBoardUpper = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
@@ -609,7 +610,7 @@ export function createScoreboard(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDeathsKills = game.add
+    player.scoreBoardLower = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
@@ -641,7 +642,7 @@ export function createScoreboard(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.glass = game.add
+    player.shotGlass = game.add
       .sprite(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
@@ -655,7 +656,7 @@ export function createScoreboard(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardName = game.add
+    player.scoreBoardNameReady = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,

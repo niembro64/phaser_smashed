@@ -99,10 +99,10 @@ export function updateShotsOnPlayers(game: Game) {
 
 export function updateGlassesTransparency(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    player.glass.setAlpha(0);
+    player.shotGlass.setAlpha(0);
 
     if (player.state.name === 'dead' && game.state.name !== 'play') {
-      player.glass.setAlpha(1);
+      player.shotGlass.setAlpha(1);
     }
   });
 }
@@ -110,15 +110,15 @@ export function updateGlassesTransparency(game: Game): void {
 export function updateGlasses(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
   game.players.forEach((player, playerIndex) => {
-    player.glass.setScale(1 / zoom / 5, 1 / zoom / 5);
-    player.glass.x =
+    player.shotGlass.setScale(1 / zoom / 5, 1 / zoom / 5);
+    player.shotGlass.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
         game.textLocationLROffset -
         85) *
         (1 / zoom);
 
-    player.glass.y = newY;
+    player.shotGlass.y = newY;
   });
 }
 
@@ -126,7 +126,7 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
   if (game.debug.statsInit) {
     game.players.forEach((player, playerIndex) => {
-      player.scoreBoardDamageShots
+      player.scoreBoardUpper
         .setScale(1 / zoom, 1 / zoom)
         .setText(
           Math.round(player.char.damage).toString() +
@@ -135,18 +135,18 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
             player.shotCount.toString() +
             game.GAMEBAR_CHARS.shots
         );
-      player.scoreBoardDamageShots.x =
+      player.scoreBoardUpper.x =
         game.cameraMover.char.sprite.x +
         (game.textLocations[game.playerSpawnOrder[playerIndex]] +
           game.textLocationLROffset) *
           (1 / zoom);
 
-      player.scoreBoardDamageShots.y = newY;
+      player.scoreBoardUpper.y = newY;
     });
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDamageShots
+    player.scoreBoardUpper
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         Math.round(player.char.damage).toString() +
@@ -155,43 +155,48 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
           player.shotCount.toString() +
           game.GAMEBAR_CHARS.shots
       );
-    player.scoreBoardDamageShots.x =
+    player.scoreBoardUpper.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
         game.textLocationLROffset) *
         (1 / zoom);
 
-    player.scoreBoardDamageShots.y = newY;
+    player.scoreBoardUpper.y = newY;
   });
 }
 
 export function updateReadyText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
     if (game.state.name === 'play' || game.state.name === 'end') {
-      player.scoreBoardName.setAlpha(0);
+      player.scoreBoardNameReady.setAlpha(0);
     } else {
       if (isPlayerReady(player, game)) {
-        player.scoreBoardName.setAlpha(1);
+        player.scoreBoardNameReady.setAlpha(1);
+
+        
+        if (!game.SOUND_READY.isPlaying) {
+          game.SOUND_READY.play();
+        }
       } else {
-        player.scoreBoardName.setAlpha(0);
+        player.scoreBoardNameReady.setAlpha(0);
       }
     }
   });
 
   if (game.debug.statsInit) {
     game.players.forEach((player, playerIndex) => {
-      player.scoreBoardName.setScale(1 / zoom, 1 / zoom);
+      player.scoreBoardNameReady.setScale(1 / zoom, 1 / zoom);
 
-      player.scoreBoardName.x =
+      player.scoreBoardNameReady.x =
         game.cameraMover.char.sprite.x +
         game.textLocations[game.playerSpawnOrder[playerIndex]] * (1 / zoom);
 
-      player.scoreBoardName.y = newY;
+      player.scoreBoardNameReady.y = newY;
     });
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardName
+    player.scoreBoardNameReady
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         Math.round(player.char.damage).toString() +
@@ -200,11 +205,11 @@ export function updateReadyText(game: Game, zoom: number, newY: number): void {
           player.shotCount.toString() +
           game.GAMEBAR_CHARS.shots
       );
-    player.scoreBoardName.x =
+    player.scoreBoardNameReady.x =
       game.cameraMover.char.sprite.x +
       game.textLocations[game.playerSpawnOrder[playerIndex]] * (1 / zoom);
 
-    player.scoreBoardName.y = newY;
+    player.scoreBoardNameReady.y = newY;
   });
 }
 
@@ -215,7 +220,7 @@ export function updateDeathsKillsText(
 ): void {
   if (game.debug.statsInit) {
     game.players.forEach((player, playerIndex) => {
-      player.scoreBoardDeathsKills
+      player.scoreBoardLower
         .setScale(1 / zoom, 1 / zoom)
         .setText(
           player.killCount.toString() +
@@ -224,19 +229,19 @@ export function updateDeathsKillsText(
             player.deathCount.toString() +
             game.GAMEBAR_CHARS.deaths
         );
-      player.scoreBoardDeathsKills.x =
+      player.scoreBoardLower.x =
         game.cameraMover.char.sprite.x +
         (game.textLocations[game.playerSpawnOrder[playerIndex]] +
           game.textLocationLROffset) *
           (1 / zoom);
 
-      player.scoreBoardDeathsKills.y = newY;
+      player.scoreBoardLower.y = newY;
     });
     return;
   }
 
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardDeathsKills
+    player.scoreBoardLower
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         player.killCount.toString() +
@@ -245,12 +250,12 @@ export function updateDeathsKillsText(
           player.deathCount.toString() +
           game.GAMEBAR_CHARS.deaths
       );
-    player.scoreBoardDeathsKills.x =
+    player.scoreBoardLower.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
         game.textLocationLROffset) *
         (1 / zoom);
 
-    player.scoreBoardDeathsKills.y = newY;
+    player.scoreBoardLower.y = newY;
   });
 }
