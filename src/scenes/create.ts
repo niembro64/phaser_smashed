@@ -659,7 +659,7 @@ export function createScoreboard(game: Game): void {
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "- " + player.char.name + " Ready -",
+        "🎮 " + player.char.name + " Ready 🎮",
         {
           // font: "Arial 100px",
           fontSize: "40px",

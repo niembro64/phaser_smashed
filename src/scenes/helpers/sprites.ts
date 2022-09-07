@@ -31,6 +31,7 @@ export function updateSpriteFilter(
   if (player.char.colorFilter) {
     if (player.state.name === "hurt") {
       // HURT
+      player.emitterPlayer.active = true;
       if (
         Math.floor(
           (game.gameNanoseconds - player.state.gameStamp) /
@@ -45,6 +46,7 @@ export function updateSpriteFilter(
       }
     } else {
       // NOT HURT
+      player.emitterPlayer.active = false;
       if (
         Math.floor(
           (game.gameNanoseconds - player.state.gameStamp) /
