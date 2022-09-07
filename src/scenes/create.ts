@@ -3,6 +3,7 @@ import { onHitHandler } from "./helpers/damage";
 import { setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
+  initMatrices(game);
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
@@ -19,6 +20,28 @@ export function create(game: Game) {
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
   initializeHitboxOverlap(game);
+}
+
+export function initMatrices(game: Game): void {
+  game.currentlyOverlappingSpritesMatrix = [];
+  game.numberHitByMatrix = [];
+  game.numberKilledByMatrix = [];
+  game.wasLastHitByMatrix = [];
+  game.numberShotsTakenByMeMatrix = [];
+  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+    game.currentlyOverlappingSpritesMatrix.push([]);
+    game.numberHitByMatrix.push([]);
+    game.numberKilledByMatrix.push([]);
+    game.wasLastHitByMatrix.push([]);
+    game.numberShotsTakenByMeMatrix.push([]);
+    for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+      game.currentlyOverlappingSpritesMatrix[i].push(false);
+      game.numberHitByMatrix[i].push(0);
+      game.numberKilledByMatrix[i].push(0);
+      game.wasLastHitByMatrix[i].push(false);
+      game.numberShotsTakenByMeMatrix[i].push(0);
+    }
+  }
 }
 
 export function createPlatforms(game: Game): void {

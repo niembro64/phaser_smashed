@@ -31,7 +31,7 @@ export default class Game extends Phaser.Scene {
     statsInit: true,
     useDefaultAttackDamage: true,
     useDefaultAttackHitback: true,
-    useCircleColorsFilterCharacters: true,
+    useCircleColorsFilterCharacters: false,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
@@ -188,7 +188,6 @@ export default class Game extends Phaser.Scene {
       backgroundColor: "#000000",
       size: "300px",
       src: "glass.png",
-      // strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
       strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
     },
     {
@@ -276,36 +275,11 @@ export default class Game extends Phaser.Scene {
 
   // i : player
   // j : attacks from other players
-  currentlyOverlappingSpritesMatrix: boolean[][] = [
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ];
-  numberHitByMatrix: number[][] = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ];
-  numberKilledByMatrix: number[][] = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ];
-  wasLastHitByMatrix: boolean[][] = [
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ];
-  numberShotsTakenByMeMatrix: number[][] = [
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ];
+  currentlyOverlappingSpritesMatrix: boolean[][] = [];
+  numberHitByMatrix: number[][] = [];
+  numberKilledByMatrix: number[][] = [];
+  wasLastHitByMatrix: boolean[][] = [];
+  numberShotsTakenByMeMatrix: number[][] = [];
 
   state: State = {
     name: "start",
