@@ -224,6 +224,7 @@ export interface Debug {
   useDefaultAttackDamage: boolean;
   useDefaultAttackHitback: boolean;
   useCircleColorsFilterCharacters: boolean;
+  useReadySound: boolean;
 }
 
 export interface NormalizedVector {

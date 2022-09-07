@@ -173,9 +173,8 @@ export function updateReadyText(game: Game, zoom: number, newY: number): void {
       if (isPlayerReady(player, game)) {
         player.scoreBoardNameReady.setAlpha(1);
 
-        
-        if (!game.SOUND_READY.isPlaying) {
-          game.SOUND_READY.play();
+        if (!game.SOUND_READY_REPEAT.isPlaying) {
+          game.SOUND_READY_REPEAT.play();
         }
       } else {
         player.scoreBoardNameReady.setAlpha(0);

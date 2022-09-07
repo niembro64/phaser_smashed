@@ -15,7 +15,7 @@ export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [3];
   // PLAYER_CHOICES: number[] = [3, 0];
   // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
-  PLAYER_CHOICES: number[] = [0, 1];
+  PLAYER_CHOICES: number[] = [0, 1, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -32,6 +32,7 @@ export default class Game extends Phaser.Scene {
     useDefaultAttackDamage: true,
     useDefaultAttackHitback: true,
     useCircleColorsFilterCharacters: false,
+    useReadySound: true,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
@@ -70,6 +71,7 @@ export default class Game extends Phaser.Scene {
     DIE: 'sword-hits-the-body-48273.mp3',
     START: 'start.mp3',
     READY: 'ready.wav',
+    READY_REPEAT: 'ready_repeat.wav',
     ENERJA_AH: '/enerja/ah.mp3',
     ENERJA_DO_AGAIN: '/enerja/do_it_again_yeah.mp3',
     ENERJA_FINISH: '/enerja/finishit.mp3',
@@ -95,6 +97,7 @@ export default class Game extends Phaser.Scene {
   SOUND_DIE: any;
   SOUND_START: any;
   SOUND_READY: any;
+  SOUND_READY_REPEAT: any;
   ENERJA_AH: any;
   ENERJA_DO_AGAIN: any;
   ENERJA_FINISH: any;
@@ -734,6 +737,7 @@ export default class Game extends Phaser.Scene {
     this.load.audio('die', path + this.FILE_SOUNDS.DIE);
     this.load.audio('start', path + this.FILE_SOUNDS.START);
     this.load.audio('ready', path + this.FILE_SOUNDS.READY);
+    this.load.audio('readyRepeat', path + this.FILE_SOUNDS.READY_REPEAT);
 
     this.load.audio('enerja_ah', path + this.FILE_SOUNDS.ENERJA_AH);
     this.load.audio('enerja_again', path + this.FILE_SOUNDS.ENERJA_DO_AGAIN);

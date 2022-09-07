@@ -75,6 +75,10 @@ export function createSounds(game: Game): void {
   game.SOUND_DIE = game.sound.add('die', { volume: 0.8 });
   game.SOUND_START = game.sound.add('start', { volume: 0.6 });
   game.SOUND_READY = game.sound.add('ready', { volume: 0.6 });
+  game.SOUND_READY_REPEAT = game.sound.add('readyRepeat', {
+    volume: 0.3,
+    loop: true,
+  });
 
   game.ENERJA_AH = game.sound.add('enerja_ah', { volume: 0.2 });
   game.ENERJA_DO_AGAIN = game.sound.add('enerja_again', { volume: 0.2 });
@@ -91,6 +95,10 @@ export function createSounds(game: Game): void {
 
   if (!game.debug.useBGM) {
     game.SOUND_BGM.volume = 0;
+  }
+
+  if (!game.debug.useReadySound) {
+    game.SOUND_READY_REPEAT.volume = 0;
   }
 }
 

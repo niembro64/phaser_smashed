@@ -1,5 +1,5 @@
-import Game from "../Game";
-import { longEnoughTime } from "./state";
+import Game from '../Game';
+import { longEnoughTime } from './state';
 
 export function pauseWiiMusic(game: Game): void {
   game.SOUND_PAUSED.pause();
@@ -9,7 +9,7 @@ export function playWiiMusic(game: Game): void {
     return;
   }
   console.log(
-    "ENOUGH TIME",
+    'ENOUGH TIME',
     longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)
   );
   if (longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)) {
@@ -39,4 +39,16 @@ export function resumeMusic(game: Game): void {
   //   return;
   // }
   game.SOUND_BGM.resume();
+}
+
+export function playReadySound(game: Game): void {
+  if (!game.SOUND_READY_REPEAT.isPlaying) {
+    game.SOUND_READY_REPEAT.play();
+  }
+}
+
+export function pauseReadySound(game: Game): void {
+  if (game.SOUND_READY_REPEAT.isPlaying) {
+    game.SOUND_READY_REPEAT.pause();
+  }
 }
