@@ -12,10 +12,10 @@ import {
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  PLAYER_CHOICES: number[] = [3];
+  // PLAYER_CHOICES: number[] = [3];
   // PLAYER_CHOICES: number[] = [3, 0];
   // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
-  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -31,17 +31,14 @@ export default class Game extends Phaser.Scene {
     statsInit: true,
     useDefaultAttackDamage: true,
     useDefaultAttackHitback: true,
-    // useDefaultPlayerHitback: true,
+    useCircleColorsFilterCharacters: true,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
   DEFAULT_ATTACK_DAMAGE: number = 50;
 
-  // GAMEBAR_CHARS = { kills: 'kills', deaths: 'deaths', damage: '%', shots: 'shots' };
-  // GAMEBAR_CHARS = { kills: 'k', deaths: 'd', damage: '%', shots: 's' };
   GAMEBAR_CHARS = { kills: "+", deaths: "-", damage: "%", shots: "*" };
-  // GAMEBAR_CHARS = { kills: '+', deaths: '-', damage: '%', shots: '.' };
 
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
   DURATION_GAME_LAST_MINUTES: number = 7;
@@ -60,7 +57,6 @@ export default class Game extends Phaser.Scene {
 
   textLocationLROffset: number = 90;
   textLocations: number[] = [-760, -440, 440, 760];
-  // playerSpawnLocations: number[] = [-800, -400, 400, 800];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
   FILE_SOUNDS: any = {

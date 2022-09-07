@@ -141,29 +141,33 @@ export function createEmitters(game: Game): void {
     player.emitterLight = player.particles.createEmitter({
       speed: 10,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 2, end: 0 },
+      scale: { start: 1.5, end: 0 },
       blendMode: "ADD",
       // bounce: 1,
       // length: 100,
+      lifespan: 30,
     });
 
     player.emitterDark = player.particles.createEmitter({
-      speed: 80,
+      speed: 1000,
       // scale: { start: 0.05, end: 0 },
       scale: { start: 1, end: 0.5 },
       blendMode: "SUBTRACT",
       // bounce: 1,
       // length: 100,
+      lifespan: 40,
+      // gravityY: 1000,
     });
 
     player.emitterPlayer = player.particles.createEmitter({
-      speed: 100,
+      speed: 80,
       // scale: { start: 0.05, end: 0 },
       scale: { start: 0.7, end: 0 },
       // blendMode: 'SUBTRACT',
       blendMode: "ADD",
       // bounce: 1,
       // length: 100,
+      gravityY: -500,
     });
   });
 }
@@ -182,7 +186,7 @@ export function createPlayers(game: Game): void {
     player.emitterDark.startFollow(player.char.sprite);
     player.emitterPlayer.startFollow(player.char.sprite);
 
-    player.emitterLight.setAlpha(0.03);
+    player.emitterLight.setAlpha(0.3);
     player.emitterDark.setAlpha(1);
     player.emitterPlayer.setAlpha(1);
     // player.emitterPlayer.setAlpha(0.3);

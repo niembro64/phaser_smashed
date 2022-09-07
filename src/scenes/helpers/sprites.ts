@@ -1,6 +1,6 @@
-import Game from '../Game';
-import { Player } from '../interfaces';
-import { hasPlayerTouchedWallRecently } from './movement';
+import Game from "../Game";
+import { Player } from "../interfaces";
+import { hasPlayerTouchedWallRecently } from "./movement";
 
 export function updateSpritesFlipX(game: Game): void {
   game.players.forEach((player) => {
@@ -18,14 +18,18 @@ export function updateSpritesFlipX(game: Game): void {
 }
 
 export function updateAllSpriteFilters(game: Game): void {
-  game.players.forEach((player) => {
-    updateSpriteFilter(player, game);
+  game.players.forEach((player, playerIndex) => {
+    updateSpriteFilter(player, playerIndex, game);
   });
 }
 
-export function updateSpriteFilter(player: Player, game: Game): void {
+export function updateSpriteFilter(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
   if (player.char.colorFilter) {
-    if (player.state.name === 'hurt') {
+    if (player.state.name === "hurt") {
       // HURT
       if (
         Math.floor(
@@ -55,10 +59,20 @@ export function updateSpriteFilter(player: Player, game: Game): void {
       }
     }
   } else {
-    filterNormal(player);
+    filterNormal(player, playerIndex, game);
   }
 }
 
+export function filterCircle(player: Player, circleColor: number): void {
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
+  player.char.sprite.setTint(circleColor);
+  player.char.sprite.setAlpha(1);
+  // player.char.sprite.brighten(0.3);
+}
 export function filterRed(player: Player): void {
   player.char.sprite.setTint(0xaa3333);
   player.char.sprite.setAlpha(0.8);
@@ -72,9 +86,18 @@ export function filterLight(player: Player): void {
   player.char.sprite.setAlpha(0.8);
 }
 
-export function filterNormal(player: Player): void {
-  player.char.sprite.setAlpha(1);
-  player.char.sprite.setTint(0xffffff);
+export function filterNormal(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  if (game.debug.useCircleColorsFilterCharacters) {
+    filterCircle(player, game.circles[playerIndex].colorNumber);
+    player.char.sprite.setAlpha(1);
+  } else {
+    player.char.sprite.setAlpha(1);
+    player.char.sprite.setTint(0xffffff);
+  }
 }
 
 export function setBlinkTrue(player: Player): void {
