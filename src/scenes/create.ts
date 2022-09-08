@@ -557,6 +557,21 @@ export function createSplashes(game: Game): void {
 }
 
 export function createScoreboard(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    player.shotGlass = game.add
+      .sprite(
+        game.SCREEN_DIMENSIONS.WIDTH / 2 +
+          game.playerSpawnLocations[playerIndex],
+        game.SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
+        "glass_full"
+      )
+      .setScale(
+        2 / game.cameras.main.zoom / 10,
+        2 / game.cameras.main.zoom / 10
+      )
+      .setOrigin(0.5, 0.5);
+  });
+
   game.scoreBoardTimeGame = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
@@ -639,7 +654,7 @@ export function createScoreboard(game: Game): void {
           },
         }
       )
-      .setOrigin(1, 0)
+      .setOrigin(0.5, 0)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
 
@@ -671,26 +686,12 @@ export function createScoreboard(game: Game): void {
           },
         }
       )
-      .setOrigin(1, 1)
+      .setOrigin(0.5, 1)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.shotGlass = game.add
-      .sprite(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 +
-          game.playerSpawnLocations[playerIndex],
-        game.SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
-        "glass_full"
-      )
-      .setScale(
-        1 / game.cameras.main.zoom / 10,
-        1 / game.cameras.main.zoom / 10
-      );
-  });
-
-  game.players.forEach((player, playerIndex) => {
-    player.scoreBoardNameReady = game.add
+    player.scoreBoardReady = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,

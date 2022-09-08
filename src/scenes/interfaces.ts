@@ -21,7 +21,7 @@ export interface Player {
   shotGlass: any | Phaser.GameObjects.Sprite;
   scoreBoardUpper: string | any;
   scoreBoardLower: string | any;
-  scoreBoardNameReady: string | any;
+  scoreBoardReady: string | any;
   state: State;
   keyboard_static: Keyboard;
   char: Char;

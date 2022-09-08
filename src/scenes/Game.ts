@@ -57,10 +57,10 @@ export default class Game extends Phaser.Scene {
   // playerSpawnOrder: number[] = [2, 3, 0, 1];
   // playerSpawnOrder: number[] = [3, 0, 1, 2];
 
-  readyLocationLROffset: number = 140;
-  glassLocationLROffset: number = 115;
-  upperTextLocationLROffset: number = 140;
-  lowerTextLocationLROffset: number = 85;
+  readyLocationLROffset: number = 0;
+  glassLocationLROffset: number = 0;
+  upperTextLocationLROffset: number = 0;
+  lowerTextLocationLROffset: number = 0;
   textLocations: number[] = [-700, -350, 350, 700];
   playerSpawnLocations: number[] = [-200, -110, 110, 200];
 
@@ -319,7 +319,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardUpper: "",
       scoreBoardLower: "",
-      scoreBoardNameReady: "READY",
+      scoreBoardReady: "READY",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -427,7 +427,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardUpper: "",
       scoreBoardLower: "",
-      scoreBoardNameReady: "READY",
+      scoreBoardReady: "READY",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -534,7 +534,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardUpper: "",
       scoreBoardLower: "",
-      scoreBoardNameReady: "READY",
+      scoreBoardReady: "READY",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -640,7 +640,7 @@ export default class Game extends Phaser.Scene {
       shotCount: 0,
       scoreBoardUpper: "",
       scoreBoardLower: "",
-      scoreBoardNameReady: "READY",
+      scoreBoardReady: "READY",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,

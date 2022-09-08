@@ -1,6 +1,11 @@
 import Game from "../Game";
 import { isPlayerReady } from "./pad";
-import { pauseReadySound, pauseReadySoundPlayer, playReadySound, playReadySoundPlayer } from "./sound";
+import {
+  pauseReadySound,
+  pauseReadySoundPlayer,
+  playReadySound,
+  playReadySoundPlayer,
+} from "./sound";
 
 export function updateSplashes(game: Game, zoom: number, newY: number): void {
   game.splashes.forEach((splash, splashIndex) => {
@@ -111,12 +116,11 @@ export function updateGlassesTransparency(game: Game): void {
 export function updateGlasses(game: Game, zoom: number, newY: number): void {
   updateShotsOnPlayers(game);
   game.players.forEach((player, playerIndex) => {
-    player.shotGlass.setScale(1 / zoom / 5, 1 / zoom / 5);
+    player.shotGlass.setScale(0.7 / zoom, 0.7 / zoom);
     player.shotGlass.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
-        game.glassLocationLROffset -
-        85) *
+        game.glassLocationLROffset) *
         (1 / zoom);
 
     player.shotGlass.y = newY;
@@ -183,34 +187,34 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
 export function updateReadyText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
     if (game.state.name === "play" || game.state.name === "end") {
-      player.scoreBoardNameReady.setAlpha(0);
+      player.scoreBoardReady.setAlpha(0);
     } else {
       if (isPlayerReady(player, game)) {
-        player.scoreBoardNameReady.setAlpha(1);
+        player.scoreBoardReady.setAlpha(1);
         playReadySoundPlayer(player);
       } else {
-        player.scoreBoardNameReady.setAlpha(0);
+        player.scoreBoardReady.setAlpha(0);
         pauseReadySoundPlayer(player);
       }
     }
   });
 
-
-
   if (game.debug.statsInit) {
     game.players.forEach((player, playerIndex) => {
-      player.scoreBoardNameReady.setScale(1 / zoom, 1 / zoom);
+      player.scoreBoardReady.setScale(1 / zoom, 1 / zoom);
 
-      player.scoreBoardNameReady.x =
+      player.scoreBoardReady.x =
         game.cameraMover.char.sprite.x +
-        game.textLocations[game.playerSpawnOrder[playerIndex]] * (1 / zoom);
+        (game.textLocations[game.playerSpawnOrder[playerIndex]] +
+          game.readyLocationLROffset) *
+          (1 / zoom);
 
-      player.scoreBoardNameReady.y = newY;
+      player.scoreBoardReady.y = newY;
     });
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardNameReady
+    player.scoreBoardReady
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         Math.round(player.char.damage).toString() +
@@ -219,11 +223,13 @@ export function updateReadyText(game: Game, zoom: number, newY: number): void {
           player.shotCount.toString() +
           game.GAMEBAR_CHARS.shots
       );
-    player.scoreBoardNameReady.x =
+    player.scoreBoardReady.x =
       game.cameraMover.char.sprite.x +
-      game.textLocations[game.playerSpawnOrder[playerIndex]] * (1 / zoom);
+      (game.textLocations[game.playerSpawnOrder[playerIndex]] +
+        game.readyLocationLROffset) *
+        (1 / zoom);
 
-    player.scoreBoardNameReady.y = newY;
+    player.scoreBoardReady.y = newY;
   });
 }
 
