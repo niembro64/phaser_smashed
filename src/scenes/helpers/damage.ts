@@ -46,6 +46,20 @@ export function onHitHandler(
   );
 }
 
+export function turnOnActiveHurtEmitter(player: Player): void {
+  player.emitterHurt.active = true;
+}
+export function turnOffActiveHurtEmitter(player: Player): void {
+  player.emitterHurt.active = false;
+}
+
+export function turnOnVisibleHurtEmitter(player: Player): void {
+  player.emitterHurt.visible = true;
+}
+export function turnOffVisibleHurtEmitter(player: Player): void {
+  player.emitterHurt.visible = false;
+}
+
 export function onDeadUpdateMatrix(playerIndex: number, game: Game): void {
   let killedSelf: boolean = true;
   for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {

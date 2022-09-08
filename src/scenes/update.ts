@@ -28,7 +28,14 @@ import {
   updateNumCurrentlyDead,
   updateTimeTime,
 } from "./helpers/state";
-import { resetDamage, onDeadUpdateMatrix } from "./helpers/damage";
+import {
+  resetDamage,
+  onDeadUpdateMatrix,
+  turnOnActiveHurtEmitter,
+  turnOffActiveHurtEmitter,
+  turnOnVisibleHurtEmitter,
+  turnOffVisibleHurtEmitter,
+} from "./helpers/damage";
 import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
 import { gameStatePlay as gameStatePlayHandler } from "./gameStates.ts/gameStatePlay";
 import {
@@ -179,6 +186,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (hasThisDurationPassed(player, game.DURATION_GAME_START, game)) {
           goToStatePlayer(player, "alive", game);
+          turnOnActiveHurtEmitter(player);
+          turnOffVisibleHurtEmitter(player);
           setGravityTrue(player);
           setBlinkFalse(player);
         }
@@ -203,6 +212,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerHit(playerIndex, game)) {
           goToStatePlayer(player, "hurt", game);
+          turnOnActiveHurtEmitter(player);
+          turnOnVisibleHurtEmitter(player);
           player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
           player.char.attackEnergy.state = "released";
           turnOnPhysicsAttackEnergy(player);
@@ -216,6 +227,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
+          turnOffActiveHurtEmitter(player);
+          turnOnVisibleHurtEmitter(player);
           onDeadUpdateMatrix(playerIndex, game);
           if (isFirstBlood(game)) {
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
@@ -264,6 +277,8 @@ export function updatePlayers(game: Game): void {
           hasThisDurationPassed(player, game.DURATION_PLAYER_HURT, game)
         ) {
           goToStatePlayer(player, "alive", game);
+          turnOnActiveHurtEmitter(player);
+          turnOffVisibleHurtEmitter(player);
           setGravityTrue(player);
           setBlinkFalse(player);
         }
@@ -273,6 +288,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (isPlayerOffscreen(player, game)) {
           goToStatePlayer(player, "dead", game);
+          turnOffActiveHurtEmitter(player);
+          turnOnVisibleHurtEmitter(player);
           onDeadUpdateMatrix(playerIndex, game);
           if (isFirstBlood(game)) {
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
@@ -310,6 +327,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (hasThisDurationPassed(player, game.DURATION_PLAYER_DEAD, game)) {
           goToStatePlayer(player, "alive", game);
+          turnOnActiveHurtEmitter(player);
+          turnOffVisibleHurtEmitter(player);
           setGravityTrue(player);
           setBlinkFalse(player);
         }
