@@ -134,11 +134,11 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
       player.scoreBoardUpper
         .setScale(1 / zoom, 1 / zoom)
         .setText(
-          Math.round(player.char.damage).toString() +
+          Math.round((100 / (100 + player.char.damage)) * 100).toString() +
             game.GAMEBAR_CHARS.damage +
             "  " +
-            game.GAMEBAR_CHARS.shots +
-            player.shotCount.toString()
+            player.shotCount.toString() +
+            game.GAMEBAR_CHARS.shots
         );
       player.scoreBoardUpper.x =
         game.cameraMover.char.sprite.x +
@@ -245,7 +245,7 @@ export function updateDeathsKillsText(
         .setText(
           player.killCount.toString() +
             game.GAMEBAR_CHARS.kills +
-            " " +
+            "" +
             player.deathCount.toString() +
             game.GAMEBAR_CHARS.deaths
         );
@@ -266,7 +266,7 @@ export function updateDeathsKillsText(
       .setText(
         player.killCount.toString() +
           game.GAMEBAR_CHARS.kills +
-          " " +
+          "" +
           player.deathCount.toString() +
           game.GAMEBAR_CHARS.deaths
       );

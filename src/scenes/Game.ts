@@ -40,8 +40,18 @@ export default class Game extends Phaser.Scene {
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
   DEFAULT_ATTACK_DAMAGE: number = 50;
 
-  GAMEBAR_CHARS = { kills: "+💀-", deaths: "", damage: "%", shots: "🍻" };
-
+  GAMEBAR_CHARS = { kills: " ⇧💀⇩ ", deaths: "", damage: "♡", shots: "☆" };
+  //▲▼⬆⬇↑↓↑↿⇂
+  //⋆
+  //🍻
+  //★
+  //✰
+  //☆
+  //⚡
+  //❤
+  //v
+  //♡
+  //♥
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
   DURATION_GAME_LAST_MINUTES: number = 7;
   DURATION_GAME_START: number = 1200;
@@ -187,10 +197,10 @@ export default class Game extends Phaser.Scene {
 
   circleOffset: number = 50;
   circles: Circle[] = [
-    { graphic: null, colorNumber: 0xaa3333, colorString: "#aa3333" },
-    { graphic: null, colorNumber: 0x3366dd, colorString: "#3366dd" },
-    { graphic: null, colorNumber: 0xddbb33, colorString: "#ddbb33" },
-    { graphic: null, colorNumber: 0x33aa33, colorString: "#33aa33" },
+    { graphic: null, colorNumber: 0xaa6666, colorString: "#aa6666" },
+    { graphic: null, colorNumber: 0x5588ff, colorString: "#5588ff" },
+    { graphic: null, colorNumber: 0xddbb55, colorString: "#ddbb55" },
+    { graphic: null, colorNumber: 0x55aa55, colorString: "#55aa55" },
   ];
 
   FONT_DEFAULT_NICE: string = "Impact";
