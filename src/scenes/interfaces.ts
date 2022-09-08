@@ -36,6 +36,7 @@ export interface Player {
   killCount: number;
   deathCount: number;
   shotCount: number;
+  playerReadySound: any;
 }
 
 export interface Char {

@@ -1,5 +1,6 @@
-import Game from '../Game';
-import { longEnoughTime } from './state';
+import Game from "../Game";
+import { Player } from "../interfaces";
+import { longEnoughTime } from "./state";
 
 export function pauseWiiMusic(game: Game): void {
   game.SOUND_PAUSED.pause();
@@ -9,7 +10,7 @@ export function playWiiMusic(game: Game): void {
     return;
   }
   console.log(
-    'ENOUGH TIME',
+    "ENOUGH TIME",
     longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)
   );
   if (longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)) {
@@ -51,4 +52,21 @@ export function pauseReadySound(game: Game): void {
   if (game.SOUND_READY_REPEAT.isPlaying) {
     game.SOUND_READY_REPEAT.pause();
   }
+}
+export function playReadySoundPlayer(player: Player): void {
+  if (!player.playerReadySound.isPlaying) {
+    player.playerReadySound.play();
+  }
+}
+
+export function pauseReadySoundPlayer(player: Player): void {
+  if (player.playerReadySound.isPlaying) {
+    player.playerReadySound.pause();
+  }
+}
+
+export function pauseAllReadySounds(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    pauseReadySoundPlayer(player);
+  });
 }

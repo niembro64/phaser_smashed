@@ -1,5 +1,6 @@
-import Game from '../Game';
-import { isPlayerReady } from './pad';
+import Game from "../Game";
+import { isPlayerReady } from "./pad";
+import { pauseReadySound, pauseReadySoundPlayer, playReadySound, playReadySoundPlayer } from "./sound";
 
 export function updateSplashes(game: Game, zoom: number, newY: number): void {
   game.splashes.forEach((splash, splashIndex) => {
@@ -10,7 +11,7 @@ export function updateSplashes(game: Game, zoom: number, newY: number): void {
 }
 
 export function turnOnSplash(
-  splashName: 'none' | 'start' | 'first-blood' | 'screen-clear' | 'end',
+  splashName: "none" | "start" | "first-blood" | "screen-clear" | "end",
   game: Game
 ): void {
   game.splashes.forEach((splash, splashIndex) => {
@@ -20,7 +21,7 @@ export function turnOnSplash(
     }
   });
 
-  if (splashName !== 'none') {
+  if (splashName !== "none") {
     game.splashes[0].text.setAlpha(1);
   } else {
     game.splashes[0].text.setAlpha(0);
@@ -76,14 +77,14 @@ export function updateText(game: Game): void {
 export function updateClockText(game: Game): void {
   game.scoreBoardTimeGame.setText(
     game.gameClock.minutes.toString() +
-      ':' +
-      (game.gameClock.seconds < 10 ? '0' : '') +
+      ":" +
+      (game.gameClock.seconds < 10 ? "0" : "") +
       game.gameClock.seconds.toString()
   );
   game.scoreBoardTimeTime.setText(
     game.timeClock.minutes.toString() +
-      ':' +
-      (game.timeClock.seconds < 10 ? '0' : '') +
+      ":" +
+      (game.timeClock.seconds < 10 ? "0" : "") +
       game.timeClock.seconds.toString()
   );
 }
@@ -101,7 +102,7 @@ export function updateGlassesTransparency(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.shotGlass.setAlpha(0);
 
-    if (player.state.name === 'dead' && game.state.name !== 'play') {
+    if (player.state.name === "dead" && game.state.name !== "play") {
       player.shotGlass.setAlpha(1);
     }
   });
@@ -114,7 +115,7 @@ export function updateGlasses(game: Game, zoom: number, newY: number): void {
     player.shotGlass.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
-        game.textLocationLROffset -
+        game.glassLocationLROffset -
         85) *
         (1 / zoom);
 
@@ -131,14 +132,14 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
         .setText(
           Math.round(player.char.damage).toString() +
             game.GAMEBAR_CHARS.damage +
-            ' ' +
-            player.shotCount.toString() +
-            game.GAMEBAR_CHARS.shots
+            "  " +
+            game.GAMEBAR_CHARS.shots +
+            player.shotCount.toString()
         );
       player.scoreBoardUpper.x =
         game.cameraMover.char.sprite.x +
         (game.textLocations[game.playerSpawnOrder[playerIndex]] +
-          game.textLocationLROffset) *
+          game.upperTextLocationLROffset) *
           (1 / zoom);
 
       player.scoreBoardUpper.y = newY;
@@ -151,36 +152,50 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
       .setText(
         Math.round(player.char.damage).toString() +
           game.GAMEBAR_CHARS.damage +
-          ' ' +
+          " " +
           player.shotCount.toString() +
           game.GAMEBAR_CHARS.shots
       );
     player.scoreBoardUpper.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
-        game.textLocationLROffset) *
+        game.lowerTextLocationLROffset) *
         (1 / zoom);
 
     player.scoreBoardUpper.y = newY;
   });
 }
+// export function updateSomeReadySound(game: Game): void {
+//   let numPlayersReady = 0;
+//   let play = false;
+//   game.players.forEach((player, playerIndex) => {
+//     if (isPlayerReady(player, game)) {
+//       numPlayersReady++;
+//     }
+//   });
+//   if (numPlayersReady === game.PLAYER_CHOICES.length - 1) {
+//     playReadySound(game);
+//   } else {
+//     pauseReadySound(game);
+//   }
+// }
 
 export function updateReadyText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
-    if (game.state.name === 'play' || game.state.name === 'end') {
+    if (game.state.name === "play" || game.state.name === "end") {
       player.scoreBoardNameReady.setAlpha(0);
     } else {
       if (isPlayerReady(player, game)) {
         player.scoreBoardNameReady.setAlpha(1);
-
-        if (!game.SOUND_READY_REPEAT.isPlaying) {
-          game.SOUND_READY_REPEAT.play();
-        }
+        playReadySoundPlayer(player);
       } else {
         player.scoreBoardNameReady.setAlpha(0);
+        pauseReadySoundPlayer(player);
       }
     }
   });
+
+
 
   if (game.debug.statsInit) {
     game.players.forEach((player, playerIndex) => {
@@ -200,7 +215,7 @@ export function updateReadyText(game: Game, zoom: number, newY: number): void {
       .setText(
         Math.round(player.char.damage).toString() +
           game.GAMEBAR_CHARS.damage +
-          ' ' +
+          " " +
           player.shotCount.toString() +
           game.GAMEBAR_CHARS.shots
       );
@@ -224,14 +239,14 @@ export function updateDeathsKillsText(
         .setText(
           player.killCount.toString() +
             game.GAMEBAR_CHARS.kills +
-            ' ' +
+            " " +
             player.deathCount.toString() +
             game.GAMEBAR_CHARS.deaths
         );
       player.scoreBoardLower.x =
         game.cameraMover.char.sprite.x +
         (game.textLocations[game.playerSpawnOrder[playerIndex]] +
-          game.textLocationLROffset) *
+          game.lowerTextLocationLROffset) *
           (1 / zoom);
 
       player.scoreBoardLower.y = newY;
@@ -245,14 +260,14 @@ export function updateDeathsKillsText(
       .setText(
         player.killCount.toString() +
           game.GAMEBAR_CHARS.kills +
-          ' ' +
+          " " +
           player.deathCount.toString() +
           game.GAMEBAR_CHARS.deaths
       );
     player.scoreBoardLower.x =
       game.cameraMover.char.sprite.x +
       (game.textLocations[game.playerSpawnOrder[playerIndex]] +
-        game.textLocationLROffset) *
+        game.lowerTextLocationLROffset) *
         (1 / zoom);
 
     player.scoreBoardLower.y = newY;
