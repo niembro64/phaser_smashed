@@ -33,6 +33,7 @@ export interface Player {
   emitterLight: any;
   emitterDark: any;
   emitterPlayer: any;
+  emitterHurt: any;
   killCount: number;
   deathCount: number;
   shotCount: number;

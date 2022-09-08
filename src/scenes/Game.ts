@@ -320,8 +320,9 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 0,
       emitterLight: null,
-      emitterPlayer: null,
       emitterDark: null,
+      emitterPlayer: null,
+      emitterHurt: null,
       particles: null,
       shotGlass: null,
       killCount: 0,
@@ -428,8 +429,9 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 1,
       emitterLight: null,
-      emitterPlayer: null,
       emitterDark: null,
+      emitterPlayer: null,
+      emitterHurt: null,
       particles: null,
       shotGlass: null,
       killCount: 0,
@@ -535,8 +537,9 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 2,
       emitterLight: null,
-      emitterPlayer: null,
       emitterDark: null,
+      emitterPlayer: null,
+      emitterHurt: null,
       particles: null,
       shotGlass: null,
       killCount: 0,
@@ -641,8 +644,9 @@ export default class Game extends Phaser.Scene {
     {
       playerNumber: 3,
       emitterLight: null,
-      emitterPlayer: null,
       emitterDark: null,
+      emitterPlayer: null,
+      emitterHurt: null,
       particles: null,
       killCount: 0,
       shotGlass: null,

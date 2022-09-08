@@ -7,8 +7,8 @@ export function create(game: Game) {
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
-  createEmitters(game);
   createSplashes(game);
+  createEmitters(game);
   createPlatforms(game);
   createTable(game);
   createSplashEnd(game);
@@ -227,6 +227,15 @@ export function createEmitters(game: Game): void {
       // length: 100,
       gravityY: -500,
     });
+
+    player.emitterHurt = player.particles.createEmitter({
+      speed: 0,
+      // scale: { start: 0.05, end: 0 },
+      scale: { start: 0.3, end: 0 },
+      // blendMode: 'SUBTRACT',
+      // bounce: 1,
+      // length: 100,
+    });
   });
 }
 
@@ -243,20 +252,24 @@ export function createPlayers(game: Game): void {
     player.emitterLight.startFollow(player.char.sprite);
     player.emitterDark.startFollow(player.char.sprite);
     player.emitterPlayer.startFollow(player.char.sprite);
+    player.emitterHurt.startFollow(player.char.sprite);
 
     player.emitterLight.setAlpha(0.3);
     player.emitterDark.setAlpha(1);
     player.emitterPlayer.setAlpha(1);
+    player.emitterHurt.setAlpha(1);
     // player.emitterPlayer.setAlpha(0.3);
 
     player.emitterLight.setTint(0xffffff);
     player.emitterDark.setTint(0x000000);
     player.emitterPlayer.setTint(game.circles[playerIndex].colorNumber);
+    player.emitterHurt.setTint(game.circles[playerIndex].colorNumber);
 
     // EMN ACTIVE
     player.emitterLight.active = false;
     player.emitterDark.active = false;
     player.emitterPlayer.active = false;
+    player.emitterHurt.active = false;
   });
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
