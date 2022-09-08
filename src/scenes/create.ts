@@ -83,8 +83,11 @@ export function createSounds(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.playerReadySound = game.sound.add(
       "readyRepeat" + playerIndex.toString(),
-      { volume: 0.3, loop: true }
+      { volume: 0.1, loop: true }
     );
+    if (!game.debug.useReadySound) {
+      player.playerReadySound.volume = 0;
+    }
   });
   // game.SOUND_READY_REPEAT0 = game.sound.add("readyRepeat0", {
   //   volume: 0.3,
