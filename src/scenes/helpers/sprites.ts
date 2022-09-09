@@ -41,7 +41,8 @@ export function updateSpriteFilter(
       ) {
         filterRed(player);
       } else {
-        filterLight(player);
+        // filterLight(player);
+        filterNormal(player, playerIndex, game);
       }
     } else {
       // NOT HURT
@@ -55,7 +56,8 @@ export function updateSpriteFilter(
       ) {
         filterDark(player);
       } else {
-        filterLight(player);
+        // filterLight(player);
+        filterNormal(player, playerIndex, game);
       }
     }
   } else {
