@@ -45,6 +45,7 @@ export interface Char {
   color: Color;
   colorFilter: boolean;
   src: string;
+  scale: number; 
   sprite: any | Phaser.GameObjects.Sprite;
   shield: Shield | null;
   zoom: number;

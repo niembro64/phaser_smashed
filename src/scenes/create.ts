@@ -257,7 +257,7 @@ export function createPlayers(game: Game): void {
     player.emitterLight.setAlpha(0.3);
     player.emitterDark.setAlpha(1);
     player.emitterPlayer.setAlpha(1);
-    player.emitterHurt.setAlpha(1);
+    player.emitterHurt.setAlpha(0.5);
     // player.emitterPlayer.setAlpha(0.3);
 
     player.emitterLight.setTint(0xffffff);
@@ -276,7 +276,7 @@ export function createPlayers(game: Game): void {
       player.char.wallTouchArray.push(false);
     }
 
-    player.char.sprite.setScale(1);
+    player.char.sprite.setScale(player.char.scale);
     player.char.sprite.flipX = !player.char.initializeCharPosition.lookingRight;
     player.char.sprite.setCollideWorldBounds(false);
 
