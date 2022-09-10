@@ -93,7 +93,7 @@ export function filterNormal(
   playerIndex: number,
   game: Game
 ): void {
-  if (game.debug.useCircleColorsFilterCharacters) {
+  if (game.debug.useColorFilters) {
     filterCircle(player, game.circles[playerIndex].colorNumber);
     player.char.sprite.setAlpha(1);
   } else {

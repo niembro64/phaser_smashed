@@ -17,8 +17,8 @@ export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
   // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   // PLAYER_CHOICES: number[] = [4, 4, 4, 4];
-  PLAYER_CHOICES: number[] = [4, 4, 4, 5];
-  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  // PLAYER_CHOICES: number[] = [4, 4, 4, 5];
+  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -32,9 +32,9 @@ export default class Game extends Phaser.Scene {
     useBGM: true,
     BGMNumber: 2,
     statsInit: true,
-    useDefaultAttackDamage: true,
-    useDefaultAttackHitback: true,
-    useCircleColorsFilterCharacters: true,
+    useDefaultAttackDamage: false,
+    useDefaultAttackHitback: false,
+    useColorFilters: false,
     useReadySound: false,
   };
 
@@ -713,7 +713,7 @@ export default class Game extends Phaser.Scene {
             air: 0.8,
           },
           vel: { x: 1, y: -3 },
-          srcImage: "hammer",
+          srcImage: "bottle",
           bounceY: 0.3,
           bounceX: 0.5,
           gravity: true,
@@ -785,8 +785,8 @@ export default class Game extends Phaser.Scene {
           y: 100,
         },
         color: {
-          primary: "#ff88ae",
-          secondary: "#e24800",
+          primary: "#5588ff",
+          secondary: "#5548bb",
           dark: "#1c0900",
           light: "#ffffff",
         },
@@ -886,21 +886,21 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
       },
       char: {
-        name: "Dark Chez",
+        name: "Black Chez",
         initializeCharPosition: {
           lookingRight: false,
           x: 200,
           y: 100,
         },
         color: {
-          primary: "#ff88ae",
-          secondary: "#e24800",
-          dark: "#1c0900",
+          primary: "#333333",
+          secondary: "#777777",
+          dark: "#333333",
           light: "#ffffff",
         },
         colorFilter: false,
         src: "images/character_5_cropped.png",
-        scale: 0.1,
+        scale: 0.2,
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -921,7 +921,7 @@ export default class Game extends Phaser.Scene {
           state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
-          posFromCenter: { x: 35, y: -50 },
+          posFromCenter: { x: 70, y: -70 },
           friction: {
             ground: 0.7,
             wallInvertRotation: true,
@@ -929,19 +929,19 @@ export default class Game extends Phaser.Scene {
             air: 0.8,
           },
           vel: { x: 1, y: -3 },
-          srcImage: "hammer",
+          srcImage: "blackHammer",
           bounceY: 0.3,
           bounceX: 0.5,
-          gravity: true,
+          gravity: false,
           walls: true,
           damage: 25,
           hitback: { x: 0.1, y: -0.3 },
           scale: 1,
           mass: 2,
-          allowVelocityY: true,
+          allowVelocityY: false,
           rotation: {
             initial: 0,
-            speed: 500,
+            speed: 100,
           },
         },
         shield: null,
@@ -1022,7 +1022,9 @@ export default class Game extends Phaser.Scene {
     this.load.image("fireball", "images/fireball.png");
     this.load.image("flagpole", "images/flagpole.png");
     this.load.image("greenshell", "images/greenshell.png");
+    this.load.image("bottle", "images/bottle.png");
     this.load.image("hammer", "images/ham.png");
+    this.load.image("blackHammer", "images/blackHammer.png");
     this.load.image("sword", "images/sword_right.png");
 
     this.load.image("table", "images/table.png");

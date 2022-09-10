@@ -226,7 +226,7 @@ export interface Debug {
   statsInit: boolean;
   useDefaultAttackDamage: boolean;
   useDefaultAttackHitback: boolean;
-  useCircleColorsFilterCharacters: boolean;
+  useColorFilters: boolean;
   useReadySound: boolean;
 }
 
