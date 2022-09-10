@@ -124,7 +124,7 @@ export function playerHoldAttackEnergy(player: Player): void {
 
     player.char.attackEnergy.sprite.flipX = true;
     player.char.attackEnergy.sprite.setRotation(
-      player.char.attackEnergy.rotation.initial
+      (player.char.attackEnergy.rotation.initial * Math.PI) / 2
     );
     player.char.attackEnergy.sprite.setAngularVelocity(0);
   } else {
@@ -168,7 +168,7 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
 
     player.char.attackEnergy.sprite.flipX = true;
     player.char.attackEnergy.sprite.setRotation(
-      player.char.attackEnergy.rotation.initial
+      (player.char.attackEnergy.rotation.initial * Math.PI) / 2
     );
     player.char.attackEnergy.sprite.setAngularVelocity(
       player.char.attackEnergy.rotation.speed * Math.PI * -1
