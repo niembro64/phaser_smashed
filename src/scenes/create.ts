@@ -586,6 +586,67 @@ export function createScoreboard(game: Game): void {
       .setOrigin(0.5, 0.5);
   });
 
+  game.players.forEach((player, playerIndex) => {
+    player.scoreBoardController = game.add
+      .text(
+        game.SCREEN_DIMENSIONS.WIDTH / 2,
+        game.SCREEN_DIMENSIONS.HEIGHT / 2,
+        "🎮",
+        {
+          // font: "Arial 100px",
+          fontSize: "300px",
+          fontFamily: "Impact",
+          // fontFamily: game.FONT_DEFAULT,
+          // fontFamily: "'Courier New'",
+          // fontFamily: "'Press Start 2P'",
+          // color: "white",
+          color: game.circles[playerIndex].colorString,
+          // stroke: player.char.color.primary,
+          stroke: "black",
+          strokeThickness: 1,
+          shadow: {
+            offsetX: 0,
+            offsetY: 3,
+            color: "#000",
+            blur: 3,
+            stroke: true,
+            fill: true,
+          },
+        }
+      )
+      .setOrigin(0.5, 0.5);
+  });
+  game.players.forEach((player, playerIndex) => {
+    player.scoreBoardReady = game.add
+      .text(
+        game.SCREEN_DIMENSIONS.WIDTH / 2,
+        game.SCREEN_DIMENSIONS.HEIGHT / 2,
+        player.char.name + " Ready", //🎮
+        {
+          // font: "Arial 100px",
+          fontSize: "40px",
+          fontFamily: "Impact",
+          // fontFamily: game.FONT_DEFAULT,
+          // fontFamily: "'Courier New'",
+          // fontFamily: "'Press Start 2P'",
+          // color: "white",
+          color: game.circles[playerIndex].colorString,
+          // stroke: player.char.color.primary,
+          stroke: "black",
+          strokeThickness: 1,
+          shadow: {
+            offsetX: 0,
+            offsetY: 3,
+            color: "#000",
+            blur: 3,
+            stroke: true,
+            fill: true,
+          },
+        }
+      )
+      .setOrigin(0.5, 0.5);
+  });
+
   game.scoreBoardTimeGame = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
@@ -704,36 +765,6 @@ export function createScoreboard(game: Game): void {
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
 
-  game.players.forEach((player, playerIndex) => {
-    player.scoreBoardReady = game.add
-      .text(
-        game.SCREEN_DIMENSIONS.WIDTH / 2,
-        game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "🎮 " + player.char.name + " Ready 🎮",
-        {
-          // font: "Arial 100px",
-          fontSize: "40px",
-          fontFamily: "Impact",
-          // fontFamily: game.FONT_DEFAULT,
-          // fontFamily: "'Courier New'",
-          // fontFamily: "'Press Start 2P'",
-          // color: "white",
-          color: game.circles[playerIndex].colorString,
-          // stroke: player.char.color.primary,
-          stroke: "black",
-          strokeThickness: 1,
-          shadow: {
-            offsetX: 0,
-            offsetY: 3,
-            color: "#000",
-            blur: 3,
-            stroke: true,
-            fill: true,
-          },
-        }
-      )
-      .setOrigin(0.5, 0.5);
-  });
 }
 
 export function setPlayersCollide(game: Game): void {

@@ -30,7 +30,8 @@ export function turnOnSplash(
 
 export function updateText(game: Game): void {
   const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
-  const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 200;
+  const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
+  const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
   const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
 
   const killsY = game.SCREEN_DIMENSIONS.HEIGHT;
@@ -40,6 +41,10 @@ export function updateText(game: Game): void {
 
   const newSplashY =
     splashY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * (-1 / zoom + 1);
+  const newControllerY =
+    controllerY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newTopY =
@@ -69,6 +74,7 @@ export function updateText(game: Game): void {
   updateClockText(game);
   updateGlasses(game, zoom, newTopY);
   updateDamageText(game, zoom, newUpperY);
+  updateControllerText(game, zoom, newControllerY);
   updateReadyText(game, zoom, newTopY);
   updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
@@ -171,6 +177,38 @@ export function updateReadyText(game: Game, zoom: number, newY: number): void {
         (1 / zoom);
 
     player.scoreBoardReady.y = newY;
+  });
+  return;
+}
+export function updateControllerText(
+  game: Game,
+  zoom: number,
+  newY: number
+): void {
+  game.players.forEach((player, playerIndex) => {
+    if (game.state.name === "play" || game.state.name === "end") {
+      player.scoreBoardController.setAlpha(0);
+    } else {
+      if (isPlayerReady(player, game)) {
+        player.scoreBoardController.setAlpha(1);
+        playReadySoundPlayer(player);
+      } else {
+        player.scoreBoardController.setAlpha(0);
+        pauseReadySoundPlayer(player);
+      }
+    }
+  });
+
+  game.players.forEach((player, playerIndex) => {
+    player.scoreBoardController.setScale(1 / zoom, 1 / zoom);
+
+    player.scoreBoardController.x =
+      game.cameraMover.char.sprite.x +
+      (game.textLocations[game.playerSpawnOrder[playerIndex]] +
+        game.readyLocationLROffset) *
+        (1 / zoom);
+
+    player.scoreBoardController.y = newY;
   });
   return;
 }

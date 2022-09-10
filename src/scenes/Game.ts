@@ -334,6 +334,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
+      scoreBoardController: "X",
       circleOffset: 0,
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
@@ -446,6 +447,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
+      scoreBoardController: "X",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
@@ -556,6 +558,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
+      scoreBoardController: "X",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
@@ -665,6 +668,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
+      scoreBoardController: "X",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -774,6 +778,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
+      scoreBoardController: "X",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
@@ -883,6 +888,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
+      scoreBoardController: "X",
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,

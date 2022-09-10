@@ -22,6 +22,7 @@ export interface Player {
   scoreBoardUpper: string | any;
   scoreBoardLower: string | any;
   scoreBoardReady: string | any;
+  scoreBoardController: string | any;
   state: State;
   keyboard_static: Keyboard;
   char: Char;
