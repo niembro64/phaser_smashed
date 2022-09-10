@@ -17,8 +17,9 @@ export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
   // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   // PLAYER_CHOICES: number[] = [4, 4, 4, 4];
-  // PLAYER_CHOICES: number[] = [4, 4, 4, 5];
-  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  PLAYER_CHOICES: number[] = [4, 4, 4, 5];
+  // PLAYER_CHOICES: number[] = [5, 5, 5, 5];
+  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -33,7 +34,7 @@ export default class Game extends Phaser.Scene {
     BGMNumber: 2,
     useDefaultAttackDamage: false,
     useDefaultAttackHitback: false,
-    useColorFilters: false,
+    useColorFilters: true,
     useReadySound: false,
     invertHealth: false,
   };
@@ -197,7 +198,7 @@ export default class Game extends Phaser.Scene {
   CAMERA_OFFSET_Y: number = -50;
   // CAMERA_OFFSET_Y: number = 0;
 
-  circleOffset: number = 50;
+  circleOffset: number = -50;
   circles: Circle[] = [
     { graphic: null, colorNumber: 0xaa6666, colorString: "#aa6666" },
     { graphic: null, colorNumber: 0x5588ff, colorString: "#5588ff" },
@@ -333,6 +334,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
+      circleOffset: 0,
       state: { name: "start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -440,6 +442,7 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
+      circleOffset: 0,
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
@@ -549,6 +552,7 @@ export default class Game extends Phaser.Scene {
       killCount: 0,
       deathCount: 0,
       shotCount: 0,
+      circleOffset: 0,
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
@@ -657,6 +661,7 @@ export default class Game extends Phaser.Scene {
       shotGlass: null,
       deathCount: 0,
       shotCount: 0,
+      circleOffset: 0,
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
@@ -765,6 +770,7 @@ export default class Game extends Phaser.Scene {
       shotGlass: null,
       deathCount: 0,
       shotCount: 0,
+      circleOffset: -20,
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",
@@ -873,6 +879,7 @@ export default class Game extends Phaser.Scene {
       shotGlass: null,
       deathCount: 0,
       shotCount: 0,
+      circleOffset: -70,
       scoreBoardUpper: "",
       scoreBoardLower: "",
       scoreBoardReady: "READY",

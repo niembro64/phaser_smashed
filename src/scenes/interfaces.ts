@@ -38,6 +38,7 @@ export interface Player {
   deathCount: number;
   shotCount: number;
   playerReadySound: any;
+  circleOffset: number;
 }
 
 export interface Char {

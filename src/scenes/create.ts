@@ -1,6 +1,6 @@
 import Game from "./Game";
 import { onHitHandler } from "./helpers/damage";
-import { setBlinkTrue } from "./helpers/sprites";
+import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
   initMatrices(game);
@@ -311,6 +311,7 @@ export function createEnergyAttacks(game: Game): void {
         game.PLATFORMS
       );
     }
+    filterNormalAttackEnergy(player, playerIndex, game);
   });
 }
 

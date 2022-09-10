@@ -65,6 +65,19 @@ export function updateSpriteFilter(
   }
 }
 
+export function filterCircleAttackEnergy(
+  player: Player,
+  circleColor: number
+): void {
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
+  player.char.attackEnergy.sprite.setTint(circleColor);
+  player.char.attackEnergy.sprite.setAlpha(1);
+  // player.char.sprite.brighten(0.3);
+}
 export function filterCircle(player: Player, circleColor: number): void {
   // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
@@ -107,4 +120,18 @@ export function setBlinkTrue(player: Player): void {
 }
 export function setBlinkFalse(player: Player): void {
   player.char.colorFilter = false;
+}
+
+export function filterNormalAttackEnergy(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  if (game.debug.useColorFilters) {
+    filterCircleAttackEnergy(player, game.circles[playerIndex].colorNumber);
+    player.char.attackEnergy.sprite.setAlpha(1);
+  } else {
+    player.char.attackEnergy.sprite.setAlpha(1);
+    player.char.attackEnergy.sprite.setTint(0xffffff);
+  }
 }

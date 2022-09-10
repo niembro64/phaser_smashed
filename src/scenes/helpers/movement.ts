@@ -15,7 +15,9 @@ export function updateCirclesLocations(game: Game): void {
       circle.graphic.setRadius((1 / game.cameras.main.zoom) * 10);
       circle.graphic.setPosition(
         game.players[circleIndex].char.sprite.x,
-        game.players[circleIndex].char.sprite.y - game.circleOffset
+        game.players[circleIndex].char.sprite.y +
+          game.circleOffset +
+          game.players[circleIndex].circleOffset
       );
     }
   });
