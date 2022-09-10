@@ -1,4 +1,4 @@
-import { Key } from 'react';
+import { Key } from "react";
 
 export interface Clock {
   minutes: number;
@@ -45,7 +45,7 @@ export interface Char {
   color: Color;
   colorFilter: boolean;
   src: string;
-  scale: number; 
+  scale: number;
   sprite: any | Phaser.GameObjects.Sprite;
   shield: Shield | null;
   zoom: number;
@@ -61,7 +61,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | null;
+  lastDirectionTouched: "up" | "down" | "left" | "right" | null;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
 }
@@ -179,7 +179,7 @@ export interface AttackEnergyFriction {
 }
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: 'held' | 'released';
+  state: "held" | "released";
   timestampThrow: number;
   durationBetweenThrows: number;
   posFromCenter: PosFromCenter;
@@ -223,11 +223,11 @@ export interface Debug {
   wallJumps: boolean;
   useBGM: boolean;
   BGMNumber: number;
-  statsInit: boolean;
   useDefaultAttackDamage: boolean;
   useDefaultAttackHitback: boolean;
   useColorFilters: boolean;
   useReadySound: boolean;
+  invertHealth: boolean;
 }
 
 export interface NormalizedVector {

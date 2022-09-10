@@ -23,7 +23,7 @@ import {
   hasNumDeadIncrased,
   hasThisDurationPassed,
   isPlayerHit,
-  longEnoughGame,
+  // longEnoughGame,
   longEnoughTime,
   updateNumCurrentlyDead,
   updateTimeTime,
@@ -91,13 +91,12 @@ export function update(game: Game, time: number, delta: number): void {
       gameStatePlayHandler(game, time, delta);
       if (
         isScreenClear(game) &&
-        hasNumDeadIncrased(game) &&
-        longEnoughGame(game.DURATION_PLAYER_DEAD, game)
+        hasNumDeadIncrased(game)
+        // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("screen-clear", game);
         turnOnSplash("screen-clear", game);
         pauseMusic(game);
-
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         pausePhysics(game);

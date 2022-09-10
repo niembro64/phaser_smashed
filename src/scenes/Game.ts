@@ -31,11 +31,11 @@ export default class Game extends Phaser.Scene {
     wallJumps: true,
     useBGM: true,
     BGMNumber: 2,
-    statsInit: true,
     useDefaultAttackDamage: false,
     useDefaultAttackHitback: false,
     useColorFilters: false,
     useReadySound: false,
+    invertHealth: false,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
@@ -707,7 +707,7 @@ export default class Game extends Phaser.Scene {
           durationBetweenThrows: 1000,
           posFromCenter: { x: 10, y: -25 },
           friction: {
-            ground: 0.7,
+            ground: 0.9,
             wallInvertRotation: true,
             wallInvertSprite: false,
             air: 0.8,
@@ -724,7 +724,7 @@ export default class Game extends Phaser.Scene {
           mass: 2,
           allowVelocityY: true,
           rotation: {
-            initial: 0,
+            initial: (Math.PI * 3) / 4,
             speed: 500,
           },
         },
