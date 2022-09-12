@@ -59,8 +59,8 @@ export default class Game extends Phaser.Scene {
   //v
   //♡
   //♥
-  // DURATION_GAME_LAST_MINUTES: number = 0.02;
-  DURATION_GAME_LAST_MINUTES: number = 7;
+  DURATION_GAME_LAST_MINUTES: number = 0.02;
+  // DURATION_GAME_LAST_MINUTES: number = 7;
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
   DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
@@ -267,6 +267,39 @@ export default class Game extends Phaser.Scene {
     },
   ];
 
+  splashesEndData: Splash[] = [
+    {
+      text: null,
+      name: "dataMatrixHitBy",
+      word: "XXX",
+      color: "#FFFFFF",
+      backgroundColor: "#ffffff",
+      size: "50px",
+      src: "glass.png",
+      strokeThickness: 10,
+    },
+    {
+      text: null,
+      name: "dataMatrixKilledBy",
+      word: "XXX",
+      color: "#FFFFFF",
+      backgroundColor: "#ffffff",
+      size: "50px",
+      src: "glass.png",
+      strokeThickness: 10,
+    },
+    {
+      text: null,
+      name: "dataMatrixShotsBy",
+      word: "XXX",
+      color: "#FFFFFF",
+      backgroundColor: "#ffffff",
+      size: "50px",
+      src: "glass.png",
+      strokeThickness: 10,
+    },
+  ];
+
   cameraPlayers: Camera = {
     char: {
       name: "center_10",
@@ -311,9 +344,10 @@ export default class Game extends Phaser.Scene {
   // i : player
   // j : attacks from other players
   currentlyOverlappingSpritesMatrix: boolean[][] = [];
+  wasLastHitByMatrix: boolean[][] = [];
+
   numberHitByMatrix: number[][] = [];
   numberKilledByMatrix: number[][] = [];
-  wasLastHitByMatrix: boolean[][] = [];
   numberShotsTakenByMeMatrix: number[][] = [];
 
   state: State = {
@@ -995,43 +1029,73 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    let path = "sounds/";
-    this.load.audio("intro", path + this.FILE_SOUNDS.INTRO);
-    this.load.audio("gun", path + this.FILE_SOUNDS.GUN);
-    this.load.audio("hit", path + this.FILE_SOUNDS.HIT);
-    this.load.audio("jump", path + this.FILE_SOUNDS.JUMP);
-    this.load.audio("jumpPower", path + this.FILE_SOUNDS.JUMP_POWER);
-    this.load.audio("firstBlood", path + this.FILE_SOUNDS.FIRST_BLOOD);
-    this.load.audio("squish", path + this.FILE_SOUNDS.SQUISH);
-    this.load.audio("die", path + this.FILE_SOUNDS.DIE);
-    this.load.audio("start", path + this.FILE_SOUNDS.START);
-    this.load.audio("ready", path + this.FILE_SOUNDS.READY);
-    this.load.audio("readyRepeat", path + this.FILE_SOUNDS.READY_REPEAT);
-    this.load.audio("readyRepeat0", path + this.FILE_SOUNDS.READY_REPEAT0);
-    this.load.audio("readyRepeat1", path + this.FILE_SOUNDS.READY_REPEAT1);
-    this.load.audio("readyRepeat2", path + this.FILE_SOUNDS.READY_REPEAT2);
-    this.load.audio("readyRepeat3", path + this.FILE_SOUNDS.READY_REPEAT3);
+    let pathSounds = "sounds/";
+    this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);
+    this.load.audio("gun", pathSounds + this.FILE_SOUNDS.GUN);
+    this.load.audio("hit", pathSounds + this.FILE_SOUNDS.HIT);
+    this.load.audio("jump", pathSounds + this.FILE_SOUNDS.JUMP);
+    this.load.audio("jumpPower", pathSounds + this.FILE_SOUNDS.JUMP_POWER);
+    this.load.audio("firstBlood", pathSounds + this.FILE_SOUNDS.FIRST_BLOOD);
+    this.load.audio("squish", pathSounds + this.FILE_SOUNDS.SQUISH);
+    this.load.audio("die", pathSounds + this.FILE_SOUNDS.DIE);
+    this.load.audio("start", pathSounds + this.FILE_SOUNDS.START);
+    this.load.audio("ready", pathSounds + this.FILE_SOUNDS.READY);
+    this.load.audio("readyRepeat", pathSounds + this.FILE_SOUNDS.READY_REPEAT);
+    this.load.audio(
+      "readyRepeat0",
+      pathSounds + this.FILE_SOUNDS.READY_REPEAT0
+    );
+    this.load.audio(
+      "readyRepeat1",
+      pathSounds + this.FILE_SOUNDS.READY_REPEAT1
+    );
+    this.load.audio(
+      "readyRepeat2",
+      pathSounds + this.FILE_SOUNDS.READY_REPEAT2
+    );
+    this.load.audio(
+      "readyRepeat3",
+      pathSounds + this.FILE_SOUNDS.READY_REPEAT3
+    );
 
-    this.load.audio("enerja_ah", path + this.FILE_SOUNDS.ENERJA_AH);
-    this.load.audio("enerja_again", path + this.FILE_SOUNDS.ENERJA_DO_AGAIN);
-    this.load.audio("enerja_finish", path + this.FILE_SOUNDS.ENERJA_FINISH);
-    this.load.audio("enerja_gya", path + this.FILE_SOUNDS.ENERJA_GYA);
-    this.load.audio("enerja_shit", path + this.FILE_SOUNDS.ENERJA_THAT_SHIT);
-    this.load.audio("enerja_smashed", path + this.FILE_SOUNDS.ENERJA_SMASHED);
-    this.load.audio("enerja_turtle", path + this.FILE_SOUNDS.ENERJA_TURTLE);
-    this.load.audio("enerja_shots", path + this.FILE_SOUNDS.ENERJA_TWO_SHOTS);
-    this.load.audio("enerja_ugh", path + this.FILE_SOUNDS.ENERJA_UGH);
+    this.load.audio("enerja_ah", pathSounds + this.FILE_SOUNDS.ENERJA_AH);
+    this.load.audio(
+      "enerja_again",
+      pathSounds + this.FILE_SOUNDS.ENERJA_DO_AGAIN
+    );
+    this.load.audio(
+      "enerja_finish",
+      pathSounds + this.FILE_SOUNDS.ENERJA_FINISH
+    );
+    this.load.audio("enerja_gya", pathSounds + this.FILE_SOUNDS.ENERJA_GYA);
+    this.load.audio(
+      "enerja_shit",
+      pathSounds + this.FILE_SOUNDS.ENERJA_THAT_SHIT
+    );
+    this.load.audio(
+      "enerja_smashed",
+      pathSounds + this.FILE_SOUNDS.ENERJA_SMASHED
+    );
+    this.load.audio(
+      "enerja_turtle",
+      pathSounds + this.FILE_SOUNDS.ENERJA_TURTLE
+    );
+    this.load.audio(
+      "enerja_shots",
+      pathSounds + this.FILE_SOUNDS.ENERJA_TWO_SHOTS
+    );
+    this.load.audio("enerja_ugh", pathSounds + this.FILE_SOUNDS.ENERJA_UGH);
 
-    this.load.audio("mii", path + this.FILE_SOUNDS.MII);
+    this.load.audio("mii", pathSounds + this.FILE_SOUNDS.MII);
 
     if (this.debug.BGMNumber === 0) {
-      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_DREAM);
+      this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_DREAM);
     }
     if (this.debug.BGMNumber === 1) {
-      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_MONKEY);
+      this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_MONKEY);
     }
     if (this.debug.BGMNumber === 2) {
-      this.load.audio("bgm", path + this.FILE_SOUNDS.BGM_ROYKSOP);
+      this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
 
     this.load.image("laser", "images/laser.png");
@@ -1076,15 +1140,7 @@ export default class Game extends Phaser.Scene {
     });
 
     this.players.forEach((player, playerIndex) => {
-      // this.load.image(
-      //   'tail_' + playerIndex,
-      //   'images/tail-' + playerIndex + '.png'
-      // );
       this.load.image("tail_" + playerIndex, "images/white_trans.png");
-      // this.load.image(
-      //   'tail_' + playerIndex,
-      //   'images/tail_small_' + playerIndex + '.png'
-      // );
     });
   }
   create() {

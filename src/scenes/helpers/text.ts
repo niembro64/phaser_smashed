@@ -78,6 +78,8 @@ export function updateText(game: Game): void {
   updateReadyText(game, zoom, newTopY);
   updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
+
+  updateEndDataMatrices(game, zoom, newTopY);
 }
 
 export function updateClockText(game: Game): void {
@@ -238,3 +240,47 @@ export function updateDeathsKillsText(
   });
   return;
 }
+export function updateEndDataMatrices(
+  game: Game,
+  zoom: number,
+  newY: number
+): void {
+  let numSplashes: number = game.splashesEndData.length;
+
+  game.splashesEndData.forEach((splash, splashIndex) => {
+    splash.text.setScale(1 / zoom, 1 / zoom).setText("sadfg");
+    splash.text.x =
+      game.cameraMover.char.sprite.x +
+      ((game.SCREEN_DIMENSIONS.WIDTH *
+        (Math.floor(numSplashes / 2) - splashIndex)) /
+        (numSplashes + 1)) *
+        (1 / zoom);
+
+    splash.text.y = newY;
+  });
+  return;
+}
+
+// export function updateEndDataMatrices(
+//   game: Game,
+//   zoom: number,
+//   newEndSplashY: number
+// ): void {
+//   let numSplashes: number = game.splashesEndData.length;
+
+//   // game.splashesEndData.forEach((splash, splashIndex) => {
+//   //   // game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
+//   //   // game.SCREEN_DIMENSIONS.HEIGHT / 6,
+//   // });
+
+//   game.splashesEndData.forEach((splash, splashIndex) => {
+//     splash.text.setText("ASDF");
+//     splash.text.setScale(1 / zoom, 1 / zoom);
+//     splash.text.x =
+//       game.cameraMover.char.sprite.x +
+//       (game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1))) /
+//         5;
+
+//     splash.text.y = newEndSplashY;
+//   });
+// }

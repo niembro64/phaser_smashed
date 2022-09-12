@@ -20,6 +20,46 @@ export function create(game: Game) {
   setPlayersCollide(game);
   setAttackEnergyCollideWithPlayers(game);
   initializeHitboxOverlap(game);
+  createEndDataMatrices(game);
+}
+export function createEndDataMatrices(game: Game): void {
+  // game.numberHitByMatrixText = null;
+  // game.numberKilledByMatrixText = null;
+  // game.numberShotsTakenByMeMatrixText = null;
+  // game.numberHitByMatrixText = "ASDF";
+  // game.numberKilledByMatrixText = "ASDF";
+  // game.numberShotsTakenByMeMatrixText = "ASDF";
+  let numSplashes: number = game.splashesEndData.length;
+
+  game.splashesEndData.forEach((splash, splashIndex) => {
+    splash.text = game.add
+      .text(
+        // game.SCREEN_DIMENSIONS.WIDTH / 2,
+        game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
+        game.SCREEN_DIMENSIONS.HEIGHT / 6,
+        game.numberHitByMatrix[0][0].toString(),
+        {
+          // font: "Arial 100px",
+          fontSize: splash.size,
+          // fontFamily: "'Courier New'",
+          fontFamily: "Impact",
+          // fontFamily: "'Press Start 2P'",
+          color: splash.color,
+          stroke: splash.backgroundColor,
+          strokeThickness: splash.strokeThickness,
+          shadow: {
+            offsetX: 0,
+            offsetY: 9,
+            color: "black",
+            blur: 10,
+            stroke: true,
+            fill: true,
+          },
+        }
+      )
+      .setOrigin(0.5, 0.5)
+      .setAlpha(1);
+  });
 }
 
 export function initMatrices(game: Game): void {
@@ -764,7 +804,6 @@ export function createScoreboard(game: Game): void {
       .setOrigin(0.5, 1)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
   });
-
 }
 
 export function setPlayersCollide(game: Game): void {
