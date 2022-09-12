@@ -8,6 +8,7 @@ import {
   Debug,
   Player,
   Splash,
+  SplashMulti,
   State,
 } from "./interfaces";
 
@@ -59,7 +60,8 @@ export default class Game extends Phaser.Scene {
   //v
   //♡
   //♥
-  DURATION_GAME_LAST_MINUTES: number = 0.02;
+  // DURATION_GAME_LAST_MINUTES: number = 0.02;
+  DURATION_GAME_LAST_MINUTES: number = 0.3;
   // DURATION_GAME_LAST_MINUTES: number = 7;
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
@@ -213,6 +215,7 @@ export default class Game extends Phaser.Scene {
   FONT_DEFAULT_NICE: string = "Impact";
   FONT_DEFAULT_MONOSPACE: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
+
   splashOffset: number = 50;
   splashes: Splash[] = [
     {
@@ -267,36 +270,37 @@ export default class Game extends Phaser.Scene {
     },
   ];
 
-  splashesEndData: Splash[] = [
+  splashEndDataOffset: number = -870;
+  splashesEndData: SplashMulti[] = [
     {
       text: null,
-      name: "dataMatrixHitBy",
-      word: "XXX",
+      name: "Hit",
+      words: [],
       color: "#FFFFFF",
       backgroundColor: "#ffffff",
-      size: "50px",
+      size: "40px",
       src: "glass.png",
-      strokeThickness: 10,
+      strokeThickness: 2,
     },
     {
       text: null,
-      name: "dataMatrixKilledBy",
-      word: "XXX",
+      name: "Killed",
+      words: [],
       color: "#FFFFFF",
       backgroundColor: "#ffffff",
-      size: "50px",
+      size: "40px",
       src: "glass.png",
-      strokeThickness: 10,
+      strokeThickness: 2,
     },
     {
       text: null,
-      name: "dataMatrixShotsBy",
-      word: "XXX",
+      name: "Shots",
+      words: [],
       color: "#FFFFFF",
       backgroundColor: "#ffffff",
-      size: "50px",
+      size: "40px",
       src: "glass.png",
-      strokeThickness: 10,
+      strokeThickness: 2,
     },
   ];
 

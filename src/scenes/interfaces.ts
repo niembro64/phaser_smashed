@@ -164,6 +164,16 @@ export interface Splash {
   strokeThickness: number;
   src: string;
 }
+export interface SplashMulti {
+  text: any;
+  name: string;
+  size: string;
+  words: string[];
+  color: string;
+  backgroundColor: string;
+  strokeThickness: number;
+  src: string;
+}
 
 export interface Velocity {
   x: number;

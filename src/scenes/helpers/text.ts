@@ -29,6 +29,7 @@ export function turnOnSplash(
 }
 
 export function updateText(game: Game): void {
+  const dataY = game.SCREEN_DIMENSIONS.HEIGHT / 16;
   const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
   const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
   const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
@@ -39,6 +40,10 @@ export function updateText(game: Game): void {
   const redOffsetY =
     game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
 
+  const newDataY =
+    dataY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newSplashY =
     splashY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
@@ -79,7 +84,7 @@ export function updateText(game: Game): void {
   updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
 
-  updateEndDataMatrices(game, zoom, newTopY);
+  updateEndDataMatrices(game, zoom, newDataY);
 }
 
 export function updateClockText(game: Game): void {
@@ -248,17 +253,55 @@ export function updateEndDataMatrices(
   let numSplashes: number = game.splashesEndData.length;
 
   game.splashesEndData.forEach((splash, splashIndex) => {
-    splash.text.setScale(1 / zoom, 1 / zoom).setText("sadfg");
+    // for (let i = 0; i < game.players.length; i++) {
+    //   splash.text.push([""]);
+    //   for (let j = 0; j < game.players.length; j++) {
+    //     splash.text.push([""]);
+    //   }
+    // }
+    splash.text.setScale(1 / zoom, 1 / zoom);
+    for (let i = 0; i < game.players.length; i++) {
+      switch (splashIndex) {
+        case 0:
+          splash.words[i] = "[";
+          break;
+        case 1:
+          splash.words[i] = "[";
+          break;
+        case 2:
+          splash.words[i] = "[";
+          break;
+        default:
+          splash.words[i] = "[";
+      }
+      for (let j = 0; j < game.players.length; j++) {
+        switch (splashIndex) {
+          case 0:
+            splash.words[i] += game.numberHitByMatrix[i][j].toString();
+            break;
+          case 1:
+            splash.words[i] += game.numberKilledByMatrix[i][j].toString();
+            break;
+          case 2:
+            splash.words[i] += game.numberShotsTakenByMeMatrix[i][j].toString();
+            break;
+          default:
+            splash.words[i] += game.numberHitByMatrix[i][j].toString();
+        }
+      }
+      splash.words[i] += "] " + game.players[i].char.name;
+    }
+    splash.text.setText(splash.words);
     splash.text.x =
       game.cameraMover.char.sprite.x +
-      ((game.SCREEN_DIMENSIONS.WIDTH *
-        (Math.floor(numSplashes / 2) - splashIndex)) /
+      ((game.splashEndDataOffset +
+        game.SCREEN_DIMENSIONS.WIDTH *
+          (Math.floor(numSplashes / 2) - splashIndex)) /
         (numSplashes + 1)) *
         (1 / zoom);
 
     splash.text.y = newY;
   });
-  return;
 }
 
 // export function updateEndDataMatrices(

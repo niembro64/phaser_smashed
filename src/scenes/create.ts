@@ -30,19 +30,25 @@ export function createEndDataMatrices(game: Game): void {
   // game.numberKilledByMatrixText = "ASDF";
   // game.numberShotsTakenByMeMatrixText = "ASDF";
   let numSplashes: number = game.splashesEndData.length;
-
   game.splashesEndData.forEach((splash, splashIndex) => {
+    for (let i = 0; i < game.players.length + 1; i++) {
+      splash.words.push(splash.name);
+      // for (let j = 0; j < game.players.length; j++) {
+      //   splash.text.push([""]);
+      // }
+    }
     splash.text = game.add
       .text(
         // game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
         game.SCREEN_DIMENSIONS.HEIGHT / 6,
-        game.numberHitByMatrix[0][0].toString(),
+        splash.words,
         {
           // font: "Arial 100px",
           fontSize: splash.size,
           // fontFamily: "'Courier New'",
-          fontFamily: "Impact",
+          // fontFamily: "Impact",
+          fontFamily: game.FONT_DEFAULT_MONOSPACE,
           // fontFamily: "'Press Start 2P'",
           color: splash.color,
           stroke: splash.backgroundColor,
@@ -57,7 +63,7 @@ export function createEndDataMatrices(game: Game): void {
           },
         }
       )
-      .setOrigin(0.5, 0.5)
+      .setOrigin(0, 0)
       .setAlpha(1);
   });
 }
