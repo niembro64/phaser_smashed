@@ -277,17 +277,40 @@ export function updateEndDataMatrices(
       for (let j = 0; j < game.players.length; j++) {
         switch (splashIndex) {
           case 0:
-            splash.words[i] += game.numberHitByMatrix[i][j].toString();
+            if (game.numberHitByMatrix[i][j] < 10) {
+              splash.words[i] += " ";
+            }
+            if (game.numberHitByMatrix[i][j] === 0) {
+              splash.words[i] += " ";
+            } else {
+              splash.words[i] += game.numberHitByMatrix[i][j].toString();
+            }
             break;
           case 1:
-            splash.words[i] += game.numberKilledByMatrix[i][j].toString();
+            if (game.numberKilledByMatrix[i][j] < 10) {
+              splash.words[i] += " ";
+            }
+            if (game.numberKilledByMatrix[i][j] === 0) {
+              splash.words[i] += " ";
+            } else {
+              splash.words[i] += game.numberKilledByMatrix[i][j].toString();
+            }
             break;
           case 2:
-            splash.words[i] += game.numberShotsTakenByMeMatrix[i][j].toString();
+            if (game.numberShotsTakenByMeMatrix[i][j] < 10) {
+              splash.words[i] += " ";
+            }
+            if (game.numberShotsTakenByMeMatrix[i][j] === 0) {
+              splash.words[i] += " ";
+            } else {
+              splash.words[i] +=
+                game.numberShotsTakenByMeMatrix[i][j].toString();
+            }
             break;
           default:
-            splash.words[i] += game.numberHitByMatrix[i][j].toString();
+            splash.words[i] += "XXX";
         }
+        splash.words[i] += j === game.players.length - 1 ? "" : ",";
       }
       splash.words[i] += "] " + game.players[i].char.name;
     }

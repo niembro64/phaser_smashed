@@ -278,9 +278,9 @@ export default class Game extends Phaser.Scene {
       words: [],
       color: "#FFFFFF",
       backgroundColor: "#ffffff",
-      size: "40px",
+      size: "30px",
       src: "glass.png",
-      strokeThickness: 2,
+      strokeThickness: 1,
     },
     {
       text: null,
@@ -288,9 +288,9 @@ export default class Game extends Phaser.Scene {
       words: [],
       color: "#FFFFFF",
       backgroundColor: "#ffffff",
-      size: "40px",
+      size: "30px",
       src: "glass.png",
-      strokeThickness: 2,
+      strokeThickness: 1,
     },
     {
       text: null,
@@ -298,9 +298,9 @@ export default class Game extends Phaser.Scene {
       words: [],
       color: "#FFFFFF",
       backgroundColor: "#ffffff",
-      size: "40px",
+      size: "30px",
       src: "glass.png",
-      strokeThickness: 2,
+      strokeThickness: 1,
     },
   ];
 
