@@ -12,14 +12,18 @@ import {
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  // PLAYER_CHOICES: number[] = [3];
+  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   // PLAYER_CHOICES: number[] = [3, 0];
+  // PLAYER_CHOICES: number[] = [3];
+
+  // PLAYER_CHOICES: number[] = [0, 0, 0, 0];
+  // PLAYER_CHOICES: number[] = [1, 1, 1, 1];
   // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
-  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  // PLAYER_CHOICES: number[] = [3, 3, 3, 3];
   // PLAYER_CHOICES: number[] = [4, 4, 4, 4];
-  PLAYER_CHOICES: number[] = [4, 4, 4, 5];
   // PLAYER_CHOICES: number[] = [5, 5, 5, 5];
-  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  // PLAYER_CHOICES: number[] = [4, 4, 4, 5];
+
   debug: Debug = {
     level: 3,
     useCameras: true,
@@ -34,7 +38,7 @@ export default class Game extends Phaser.Scene {
     BGMNumber: 2,
     useDefaultAttackDamage: false,
     useDefaultAttackHitback: false,
-    useColorFilters: true,
+    useColorFilters: false,
     useReadySound: false,
     invertHealth: false,
   };
@@ -719,12 +723,12 @@ export default class Game extends Phaser.Scene {
             ground: 0.9,
             wallInvertRotation: true,
             wallInvertSprite: false,
-            air: 0.8,
+            air: 0.9,
           },
-          vel: { x: 1, y: -3 },
+          vel: { x: 1, y: -4 },
           srcImage: "bottle",
-          bounceY: 0.3,
-          bounceX: 0.5,
+          bounceY: 0.7,
+          bounceX: 0.7,
           gravity: true,
           walls: true,
           damage: 25,
@@ -949,8 +953,8 @@ export default class Game extends Phaser.Scene {
           walls: true,
           damage: 25,
           hitback: { x: 0.1, y: -0.3 },
-          scale: 1,
-          mass: 2,
+          scale: 2,
+          mass: 1000,
           allowVelocityY: false,
           rotation: {
             initial: 0,
