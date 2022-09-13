@@ -3,6 +3,7 @@ import {
   controllerMovement,
   attackEnergy,
   isAllPlayersReady,
+  printAllPadsActive,
 } from "./helpers/pad";
 import {
   jump,
@@ -196,6 +197,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// WHILE IN LOOP
         ////////////////////////////////
+
+        printAllPadsActive(player, game);
         attackEnergy(player, game);
         updateLastDirectionTouched(player);
         frictionGroundX(player, game);

@@ -61,8 +61,8 @@ export default class Game extends Phaser.Scene {
   //♡
   //♥
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
-  DURATION_GAME_LAST_MINUTES: number = 0.3;
-  // DURATION_GAME_LAST_MINUTES: number = 7;
+  // DURATION_GAME_LAST_MINUTES: number = 0.3;
+  DURATION_GAME_LAST_MINUTES: number = 7;
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
   DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
@@ -451,7 +451,7 @@ export default class Game extends Phaser.Scene {
         shield: null,
       },
       keyboard: null,
-      pad: null,
+      gamepad: null,
       padPrev: {
         up: false,
         down: false,
@@ -562,7 +562,7 @@ export default class Game extends Phaser.Scene {
         shield: null,
       },
       keyboard: null,
-      pad: null,
+      gamepad: null,
       padPrev: {
         up: false,
         down: false,
@@ -672,7 +672,7 @@ export default class Game extends Phaser.Scene {
         shield: null,
       },
       keyboard: null,
-      pad: null,
+      gamepad: null,
       padPrev: {
         up: false,
         down: false,
@@ -782,7 +782,7 @@ export default class Game extends Phaser.Scene {
         shield: null,
       },
       keyboard: null,
-      pad: null,
+      gamepad: null,
       padPrev: {
         up: false,
         down: false,
@@ -892,7 +892,7 @@ export default class Game extends Phaser.Scene {
         shield: null,
       },
       keyboard: null,
-      pad: null,
+      gamepad: null,
       padPrev: {
         up: false,
         down: false,
@@ -1002,7 +1002,7 @@ export default class Game extends Phaser.Scene {
         shield: null,
       },
       keyboard: null,
-      pad: null,
+      gamepad: null,
       padPrev: {
         up: false,
         down: false,
@@ -1140,7 +1140,7 @@ export default class Game extends Phaser.Scene {
 
     this.players.forEach((player, playerIndex) => {
       this.load.image(player.char.name, player.char.src);
-      player.pad = Phaser.Input.Gamepad.Gamepad;
+      player.gamepad = Phaser.Input.Gamepad.Gamepad;
     });
 
     this.players.forEach((player, playerIndex) => {

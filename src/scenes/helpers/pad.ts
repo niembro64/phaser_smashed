@@ -13,22 +13,23 @@ export function assignGamePadsConnected(game: Game): void {
     i < game.input.gamepad.total && i < game.PLAYER_CHOICES.length;
     i++
   ) {
-    game.players[game.playerSpawnOrder[i]].pad = game.input.gamepad.getPad(i);
+    game.players[game.playerSpawnOrder[i]].gamepad =
+      game.input.gamepad.getPad(i);
   }
 }
 
 export function isPlayerReady(player: Player, game: Game): boolean {
   if (
-    !player.pad.up &&
-    !player.pad.down &&
-    !player.pad.left &&
-    !player.pad.right &&
-    !player.pad.A &&
-    !player.pad.B &&
-    !player.pad.X &&
-    !player.pad.Y &&
-    !player.pad.R1 &&
-    !player.pad.L1
+    !player.gamepad.up &&
+    !player.gamepad.down &&
+    !player.gamepad.left &&
+    !player.gamepad.right &&
+    !player.gamepad.A &&
+    !player.gamepad.B &&
+    !player.gamepad.X &&
+    !player.gamepad.Y &&
+    !player.gamepad.R1 &&
+    !player.gamepad.L1
   ) {
     return false;
   }
@@ -39,16 +40,16 @@ export function isPlayerReady(player: Player, game: Game): boolean {
 export function isAllPlayersReady(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
     if (
-      !game.players[i].pad.up &&
-      !game.players[i].pad.down &&
-      !game.players[i].pad.left &&
-      !game.players[i].pad.right &&
-      !game.players[i].pad.A &&
-      !game.players[i].pad.B &&
-      !game.players[i].pad.X &&
-      !game.players[i].pad.Y &&
-      !game.players[i].pad.R1 &&
-      !game.players[i].pad.L1
+      !game.players[i].gamepad.up &&
+      !game.players[i].gamepad.down &&
+      !game.players[i].gamepad.left &&
+      !game.players[i].gamepad.right &&
+      !game.players[i].gamepad.A &&
+      !game.players[i].gamepad.B &&
+      !game.players[i].gamepad.X &&
+      !game.players[i].gamepad.Y &&
+      !game.players[i].gamepad.R1 &&
+      !game.players[i].gamepad.L1
     ) {
       return false;
     }
@@ -225,7 +226,7 @@ export function attackEnergy(player: Player, game: Game): void {
 
   // SHOOT
   if (
-    !player.pad?.X &&
+    !player.gamepad?.X &&
     player.padPrev.X &&
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
@@ -241,7 +242,7 @@ export function attackEnergy(player: Player, game: Game): void {
   }
   // HOLD
   if (
-    (player.pad?.X || player.padPrev.X || player.padDebounced.X) &&
+    (player.gamepad?.X || player.padPrev.X || player.padDebounced.X) &&
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationBetweenThrows
@@ -268,61 +269,61 @@ export function isSpriteOffscreen(
 
 export function updatePadPreviousAndDebounced(game: Game): void {
   game.players.forEach((player) => {
-    player.padPrev.up = player.pad.up;
-    player.padPrev.down = player.pad.down;
-    player.padPrev.left = player.pad.left;
-    player.padPrev.right = player.pad.right;
-    player.padPrev.A = player.pad.A;
-    player.padPrev.B = player.pad.B;
-    player.padPrev.X = player.pad.X;
-    player.padPrev.Y = player.pad.Y;
+    player.padPrev.up = player.gamepad.up;
+    player.padPrev.down = player.gamepad.down;
+    player.padPrev.left = player.gamepad.left;
+    player.padPrev.right = player.gamepad.right;
+    player.padPrev.A = player.gamepad.A;
+    player.padPrev.B = player.gamepad.B;
+    player.padPrev.X = player.gamepad.X;
+    player.padPrev.Y = player.gamepad.Y;
 
     player.char.sprite.zoom = 1;
 
-    if (player.pad.up) {
+    if (player.gamepad.up) {
       player.padDebounced.up +=
         player.padDebounced.up >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
       player.padDebounced.up += player.padDebounced.up <= 0 ? 0 : -1;
     }
-    if (player.pad.down) {
+    if (player.gamepad.down) {
       player.padDebounced.down +=
         player.padDebounced.down >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
       player.padDebounced.down += player.padDebounced.down <= 0 ? 0 : -1;
     }
-    if (player.pad.left) {
+    if (player.gamepad.left) {
       player.padDebounced.left +=
         player.padDebounced.left >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
       player.padDebounced.left += player.padDebounced.left <= 0 ? 0 : -1;
     }
-    if (player.pad.right) {
+    if (player.gamepad.right) {
       player.padDebounced.right +=
         player.padDebounced.right >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
       player.padDebounced.right += player.padDebounced.right <= 0 ? 0 : -1;
     }
 
-    if (player.pad.A) {
+    if (player.gamepad.A) {
       player.padDebounced.A +=
         player.padDebounced.A >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
       player.padDebounced.A += player.padDebounced.A <= 0 ? 0 : -1;
     }
-    if (player.pad.B) {
+    if (player.gamepad.B) {
       player.padDebounced.B +=
         player.padDebounced.B >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
       player.padDebounced.B += player.padDebounced.B <= 0 ? 0 : -1;
     }
-    if (player.pad.X) {
+    if (player.gamepad.X) {
       player.padDebounced.X +=
         player.padDebounced.X >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
       player.padDebounced.X += player.padDebounced.X <= 0 ? 0 : -1;
     }
-    if (player.pad.Y) {
+    if (player.gamepad.Y) {
       player.padDebounced.Y +=
         player.padDebounced.Y >= game.DEBOUNCE_NUMBER ? 0 : 1;
     } else {
@@ -332,12 +333,12 @@ export function updatePadPreviousAndDebounced(game: Game): void {
 }
 
 export function controllerMovement(player: Player, game: Game): void {
-  if (player.pad) {
+  if (player.gamepad) {
     if (
-      !player.pad.left &&
-      !player.pad.right &&
-      !player.pad.up &&
-      !player.pad.down
+      !player.gamepad.left &&
+      !player.gamepad.right &&
+      !player.gamepad.up &&
+      !player.gamepad.down
     ) {
       return;
     }
@@ -413,7 +414,7 @@ export function controllerMovement(player: Player, game: Game): void {
     // }
 
     // CHECK INDIVIDUALS
-    if (player.pad.up && !player.pad.Y) {
+    if (player.gamepad.up && !player.gamepad.Y) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
           -game.DEFAULT_SPEED_Y *
@@ -423,7 +424,7 @@ export function controllerMovement(player: Player, game: Game): void {
       );
       // return;
     }
-    if (player.pad.down) {
+    if (player.gamepad.down) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
           game.DEFAULT_SPEED_Y *
@@ -433,7 +434,7 @@ export function controllerMovement(player: Player, game: Game): void {
       );
       // return;
     }
-    if (player.pad.left) {
+    if (player.gamepad.left) {
       player.char.sprite.body.setVelocityX(
         player.char.sprite.body.velocity.x *
           game.RATIO_ACCELERATION_VELOCITY *
@@ -445,7 +446,7 @@ export function controllerMovement(player: Player, game: Game): void {
       );
       // return;
     }
-    if (player.pad.right) {
+    if (player.gamepad.right) {
       player.char.sprite.body.setVelocityX(
         player.char.sprite.body.velocity.x *
           game.RATIO_ACCELERATION_VELOCITY *
@@ -462,42 +463,57 @@ export function controllerMovement(player: Player, game: Game): void {
 
 export function printAllPadsActive(player: Player, game: Game): void {
   // Buttons
-
-  if (player.pad) {
-    if (player.pad.B) {
+  console.log("++++++++++++ERIC HERE");
+  if (player.gamepad) {
+    if (player.gamepad.B) {
       console.log(player.playerNumber, "B");
     }
-    if (player.pad.A) {
+    if (player.gamepad.A) {
       console.log(player.playerNumber, "A");
     }
-    if (player.pad.X) {
+    if (player.gamepad.X) {
       console.log(player.playerNumber, "X");
     }
-    if (player.pad.Y) {
+    if (player.gamepad.Y) {
       console.log(player.playerNumber, "Y");
       // player.char.fast = 2;
     }
 
     //  D Pad
-    if (player.pad.down) {
+    if (player.gamepad.down) {
       console.log(player.playerNumber, "down");
     }
-    if (player.pad.up) {
+    if (player.gamepad.up) {
       console.log(player.playerNumber, "up");
     }
-    if (player.pad.left) {
+    if (player.gamepad.left) {
       console.log(player.playerNumber, "left");
     }
-    if (player.pad.right) {
+    if (player.gamepad.right) {
       console.log(player.playerNumber, "right");
     }
 
     // L R Buttons
-    if (player.pad.L1) {
+    if (player.gamepad.L1) {
       console.log(player.playerNumber, "L1");
     }
-    if (player.pad.R1) {
+    if (player.gamepad.R1) {
       console.log(player.playerNumber, "R1");
     }
+    // L R Buttons
+    if (player.gamepad.L2) {
+      console.log(player.playerNumber, "L2");
+    }
+    if (player.gamepad.R2) {
+      console.log(player.playerNumber, "R2");
+    }
+
+    // for (let i = 0; i < player.gamepad.pad.buttons.length; i++) {
+    //   //   console.log(i);
+    //   console.log("ERIC", i, player.gamepad.pad.buttons[i].value);
+    // }
+    // console.log("ERIC", player.gamepad.pad.buttons[0].value);
+    // console.log(player.gamepad.pad.buttons[1].value);
+    // console.log(player.pad.gamepad.buttons[0].pressed);
   }
 }

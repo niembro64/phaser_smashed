@@ -4,8 +4,8 @@ import { playerGrabAttackEnergy } from "./pad";
 
 export function upB(player: Player, game: Game): void {
   if (
-    player.pad.up &&
-    player.pad.X &&
+    player.gamepad.up &&
+    player.gamepad.X &&
     !player.padPrev.X &&
     player.char.upB.canUse
   ) {

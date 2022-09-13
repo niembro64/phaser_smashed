@@ -139,7 +139,7 @@ export function jump(player: Player, game: Game): void {
     player.char.jumpIndex = 0;
   }
 
-  if (player.pad.Y && !player.padPrev.Y) {
+  if (player.gamepad.Y && !player.padPrev.Y) {
     if (
       !(
         player.char.sprite.body.touching.down ||
@@ -196,7 +196,7 @@ export function jump(player: Player, game: Game): void {
   }
 
   // holding jump
-  if (player.pad.Y) {
+  if (player.gamepad.Y) {
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y +
         -game.DEFAULT_SPEED_Y * player.char.speed * player.char.fast
@@ -211,7 +211,7 @@ export function frictionWallY(player: Player, game: Game): void {
   }
 
   if (
-    (player.pad.left || player.pad.right) &&
+    (player.gamepad.left || player.gamepad.right) &&
     (player.char.sprite.body.touching.left ||
       player.char.sprite.body.touching.right)
   ) {
@@ -240,8 +240,8 @@ export function frictionAirX(player: Player, game: Game): void {
 export function frictionGroundX(player: Player, game: Game): void {
   if (
     player.char.sprite.body.touching.down &&
-    !player.pad.left &&
-    !player.pad.right
+    !player.gamepad.left &&
+    !player.gamepad.right
   ) {
     player.char.sprite.body.setVelocityX(
       player.char.sprite.body.velocity.x *

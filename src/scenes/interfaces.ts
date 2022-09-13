@@ -27,7 +27,7 @@ export interface Player {
   keyboard_static: Keyboard;
   char: Char;
   keyboard: Keyboard | any;
-  pad: Gamepad | any;
+  gamepad: Gamepad | any;
   padPrev: PadStatePrevious;
   padDebounced: PadStateDebounced;
   particles: any;
