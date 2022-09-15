@@ -54,9 +54,10 @@ import {
   pauseMusic,
   pauseWiiMusic,
   playBGMusic,
-  playWiiMusic,
-  playWiiMusicWait,
+  playWiiMusicWaitShort,
+  playWiiMusicWaitLong,
   resumeMusic,
+  playWiiMusic,
 } from "./helpers/sound";
 import {
   turnOnSplash,
@@ -140,7 +141,7 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "first-blood":
-      playWiiMusicWait(game);
+      playWiiMusicWaitLong(game);
       // updateSomeReadySound(game);
       if (
         longEnoughTime(game.DURATION_GAME_SHOT, game) &&
@@ -159,7 +160,7 @@ export function update(game: Game, time: number, delta: number): void {
 
       break;
     case "screen-clear":
-      playWiiMusicWait(game);
+      playWiiMusicWaitLong(game);
       // updateSomeReadySound(game);
       if (
         longEnoughTime(game.DURATION_GAME_SHOT, game) &&
@@ -176,9 +177,10 @@ export function update(game: Game, time: number, delta: number): void {
       }
       break;
     case "end":
-      playWiiMusic(game);
+      playWiiMusicWaitShort(game);
       break;
     case "paused":
+      playWiiMusic(game);
       if (
         longEnoughTime(game.DURATION_GAME_SHOT, game) &&
         isAllPlayersReady(game)

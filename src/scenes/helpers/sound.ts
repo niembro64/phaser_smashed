@@ -9,6 +9,12 @@ export function playWiiMusic(game: Game): void {
   if (game.SOUND_PAUSED.isPlaying) {
     return;
   }
+  game.SOUND_PAUSED.play();
+}
+export function playWiiMusicWaitShort(game: Game): void {
+  if (game.SOUND_PAUSED.isPlaying) {
+    return;
+  }
   console.log(
     "ENOUGH TIME",
     longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)
@@ -17,7 +23,7 @@ export function playWiiMusic(game: Game): void {
     game.SOUND_PAUSED.play();
   }
 }
-export function playWiiMusicWait(game: Game): void {
+export function playWiiMusicWaitLong(game: Game): void {
   if (game.SOUND_PAUSED.isPlaying) {
     return;
   }
