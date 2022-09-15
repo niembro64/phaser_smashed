@@ -11,7 +11,13 @@ export function updateSplashes(game: Game, zoom: number, newY: number): void {
 }
 
 export function turnOnSplash(
-  splashName: "none" | "start" | "first-blood" | "screen-clear" | "end",
+  splashName:
+    | "none"
+    | "start"
+    | "paused"
+    | "first-blood"
+    | "screen-clear"
+    | "end",
   game: Game
 ): void {
   game.splashes.forEach((splash, splashIndex) => {

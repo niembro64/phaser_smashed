@@ -18,6 +18,35 @@ export function assignGamePadsConnected(game: Game): void {
   }
 }
 
+export function isAnyPlayerPausing(game: Game): boolean {
+  for (let i = 0; i < game.players.length; i++) {
+    if (playerPauses(game.players[i], game)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+export function playerPauses(player: Player, game: Game): boolean {
+  return playerAllRightButtonsPressed(player, game);
+}
+
+export function playerAllRightButtonsPressed(
+  player: Player,
+  game: Game
+): boolean {
+  if (
+    player.gamepad.A &&
+    player.gamepad.B &&
+    player.gamepad.X &&
+    player.gamepad.Y
+  ) {
+    return true;
+  }
+
+  return false;
+}
+
 export function isPlayerReady(player: Player, game: Game): boolean {
   if (
     !player.gamepad.up &&

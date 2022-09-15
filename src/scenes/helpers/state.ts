@@ -2,7 +2,7 @@ import Game from '../Game';
 import { Player } from '../interfaces';
 
 export function goToStateGame(
-  state: 'start' | 'play' | 'pause' | 'first-blood' | 'screen-clear' | 'end',
+  state: 'start' | 'play' | 'paused' | 'first-blood' | 'screen-clear' | 'end',
   game: Game
 ): void {
   game.state.name = state;
@@ -19,6 +19,11 @@ export function goToStatePlayer(
   player.state.gameStamp = game.gameNanoseconds;
   player.state.timeStamp = game.timeNanoseconds;
 }
+
+// export function pauseGame(player: Player, game: Game): void {
+
+
+// }
 
 export function hasNumDeadIncrased(game: Game): boolean {
   if (game.numDead === game.numDeadPrev) {

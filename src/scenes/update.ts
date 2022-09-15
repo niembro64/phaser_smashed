@@ -4,6 +4,9 @@ import {
   attackEnergy,
   isAllPlayersReady,
   printAllPadsActive,
+  playerAllRightButtonsPressed,
+  playerPauses,
+  isAnyPlayerPausing,
 } from "./helpers/pad";
 import {
   jump,
@@ -60,6 +63,7 @@ import {
   updateGlassesTransparency,
   updateText,
 } from "./helpers/text";
+import { Player } from "./interfaces";
 
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
@@ -90,6 +94,14 @@ export function update(game: Game, time: number, delta: number): void {
       break;
     case "play":
       gameStatePlayHandler(game, time, delta);
+      if (isAnyPlayerPausing(game)) {
+        goToStateGame("paused", game);
+        turnOnSplash("paused", game);
+        pauseMusic(game);
+        game.SOUND_START.play();
+        pausePhysics(game);
+        console.log("PAUSED");
+      }
       if (
         isScreenClear(game) &&
         hasNumDeadIncrased(game)
@@ -166,7 +178,20 @@ export function update(game: Game, time: number, delta: number): void {
     case "end":
       playWiiMusic(game);
       break;
-    case "pause":
+    case "paused":
+      if (
+        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
+        isAllPlayersReady(game)
+      ) {
+        pauseWiiMusic(game);
+        pauseAllReadySounds(game);
+        resumeMusic(game);
+        goToStateGame("play", game);
+        turnOnSplash("none", game);
+        game.SOUND_START.play();
+        resumePhysics(game);
+        console.log("ALL READY");
+      }
       break;
     default:
       break;
