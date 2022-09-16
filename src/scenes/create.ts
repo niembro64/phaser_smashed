@@ -8,6 +8,7 @@ export function create(game: Game) {
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
+  createFlag(game);
   createSplashes(game);
   createEmitters(game);
   createPlatforms(game);
@@ -492,7 +493,9 @@ export function createTable(game: Game): void {
   game.TABLE.setScale(1);
   game.TABLE.setImmovable(true);
   game.TABLE.body.allowGravity = false;
+}
 
+export function createFlag(game: Game): void {
   game.FLAG = game.physics.add.sprite(
     (1920 / 2 - 493) * game.SCREEN_SCALE.WIDTH,
     (1080 / 2 - 200 - 35) * game.SCREEN_SCALE.HEIGHT,
@@ -502,6 +505,7 @@ export function createTable(game: Game): void {
   game.FLAG.setImmovable(true);
   game.FLAG.body.allowGravity = false;
 }
+
 export function createBackgroundTitles(game: Game): void {
   game.TITLE = game.add
     .text(
