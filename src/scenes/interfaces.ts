@@ -1,5 +1,15 @@
 import { Key } from "react";
 
+export type SplashName =
+  | "black"
+  | "none"
+  | "start"
+  | "paused"
+  | "first-blood"
+  | "screen-clear"
+  | "cooldown"
+  | "finished";
+
 export interface Clock {
   minutes: number;
   seconds: number;
@@ -156,7 +166,7 @@ export interface UpB {
 
 export interface Splash {
   text: any;
-  name: string;
+  name: SplashName;
   size: string;
   word: string;
   color: string;

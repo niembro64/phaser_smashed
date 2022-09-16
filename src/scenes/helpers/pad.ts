@@ -28,9 +28,17 @@ export function isAnyPlayerPausing(game: Game): boolean {
 }
 
 export function playerPauses(player: Player, game: Game): boolean {
-  return playerAllRightButtonsPressed(player, game);
+  return playerPressedBothLR(player, game);
+  // return playerAllRightButtonsPressed(player, game);
 }
 
+export function playerPressedBothLR(player: Player, game: Game): boolean {
+  if (player.gamepad.L1 && player.gamepad.R1) {
+    return true;
+  }
+
+  return false;
+}
 export function playerAllRightButtonsPressed(
   player: Player,
   game: Game

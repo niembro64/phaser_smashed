@@ -1,26 +1,18 @@
 import Game from "../Game";
+import { SplashName } from "../interfaces";
 import { isPlayerReady } from "./pad";
 import { pauseReadySoundPlayer, playReadySoundPlayer } from "./sound";
 
 export function updateSplashes(game: Game, zoom: number, newY: number): void {
-  game.splashes.forEach((splash, splashIndex) => {
+  game.splashRules.forEach((splash, splashIndex) => {
     splash.text.setScale(1 / zoom, 1 / zoom);
     splash.text.x = game.cameraMover.char.sprite.x;
     splash.text.y = newY;
   });
 }
 
-export function turnOnSplash(
-  splashName:
-    | "none"
-    | "start"
-    | "paused"
-    | "first-blood"
-    | "screen-clear"
-    | "end",
-  game: Game
-): void {
-  game.splashes.forEach((splash, splashIndex) => {
+export function turnOnSplashRule(splashName: SplashName, game: Game): void {
+  game.splashRules.forEach((splash, splashIndex) => {
     splash.text.setAlpha(0);
     if (splash.name === splashName) {
       splash.text.setAlpha(1);
@@ -28,9 +20,9 @@ export function turnOnSplash(
   });
 
   if (splashName !== "none") {
-    game.splashes[0].text.setAlpha(1);
+    game.splashRules[0].text.setAlpha(1);
   } else {
-    game.splashes[0].text.setAlpha(0);
+    game.splashRules[0].text.setAlpha(0);
   }
 }
 

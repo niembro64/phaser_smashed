@@ -7,8 +7,8 @@ import {
   Clock,
   Debug,
   Player,
-  Splash,
-  SplashMulti,
+  Splash as SplashRules,
+  SplashMulti as SplashEndData,
   State,
 } from "./interfaces";
 
@@ -216,8 +216,8 @@ export default class Game extends Phaser.Scene {
   FONT_DEFAULT_MONOSPACE: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
 
-  splashOffset: number = 50;
-  splashes: Splash[] = [
+  splashRulesOffset: number = 50;
+  splashRules: SplashRules[] = [
     {
       text: null,
       name: "black",
@@ -270,7 +270,17 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "end",
+      name: "cooldown",
+      word: "COOLDOWN PERIOD",
+      color: "#AAAAAA",
+      backgroundColor: "#FFFFFF",
+      size: "200px",
+      src: "glass.png",
+      strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
+    },
+    {
+      text: null,
+      name: "finished",
       word: "FINISHED",
       color: "#AAAAAA",
       backgroundColor: "#FFFFFF",
@@ -281,7 +291,7 @@ export default class Game extends Phaser.Scene {
   ];
 
   splashEndDataOffset: number = -870;
-  splashesEndData: SplashMulti[] = [
+  splashesEndData: SplashEndData[] = [
     {
       text: null,
       name: "Hit",

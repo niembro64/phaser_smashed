@@ -4,9 +4,8 @@ import {
   attackEnergy,
   isAllPlayersReady,
   printAllPadsActive,
-  playerAllRightButtonsPressed,
-  playerPauses,
   isAnyPlayerPausing,
+  assignGamePadsConnected,
 } from "./helpers/pad";
 import {
   jump,
@@ -60,17 +59,17 @@ import {
   playWiiMusic,
 } from "./helpers/sound";
 import {
-  turnOnSplash,
+  turnOnSplashRule,
   updateGlassesTransparency,
   updateText,
 } from "./helpers/text";
-import { Player } from "./interfaces";
 
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
   updateText(game);
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);
+  assignGamePadsConnected(game);
   // console.log(
   //   "PLAYERS DEAD",
   //   game.players[0].gameState.name,
@@ -87,7 +86,7 @@ export function update(game: Game, time: number, delta: number): void {
   // );
   switch (game.state.name) {
     case "start":
-      turnOnSplash("none", game);
+      turnOnSplashRule("none", game);
       playBGMusic(game);
       pauseWiiMusic(game);
 
@@ -97,7 +96,7 @@ export function update(game: Game, time: number, delta: number): void {
       gameStatePlayHandler(game, time, delta);
       if (isAnyPlayerPausing(game)) {
         goToStateGame("paused", game);
-        turnOnSplash("paused", game);
+        turnOnSplashRule("paused", game);
         pauseMusic(game);
         game.SOUND_START.play();
         pausePhysics(game);
@@ -109,7 +108,7 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("screen-clear", game);
-        turnOnSplash("screen-clear", game);
+        turnOnSplashRule("screen-clear", game);
         pauseMusic(game);
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
@@ -122,7 +121,7 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         goToStateGame("first-blood", game);
-        turnOnSplash("first-blood", game);
+        turnOnSplashRule("first-blood", game);
         pauseMusic(game);
 
         game.SOUND_INTRO.play();
@@ -134,7 +133,7 @@ export function update(game: Game, time: number, delta: number): void {
       if (game.gameSecondsClock < 1) {
         goToStateGame("end", game);
         pausePhysics(game);
-        turnOnSplash("end", game);
+        turnOnSplashRule("finished", game);
         pauseMusic(game);
         game.ENERJA_FINISH.play();
         // game.SOUND_PAUSED.play()
@@ -147,11 +146,11 @@ export function update(game: Game, time: number, delta: number): void {
         longEnoughTime(game.DURATION_GAME_SHOT, game) &&
         isAllPlayersReady(game)
       ) {
-        turnOnSplash("none", game);
+        turnOnSplashRule("none", game);
         pauseWiiMusic(game);
         pauseAllReadySounds(game);
         goToStateGame("play", game);
-        turnOnSplash("none", game);
+        turnOnSplashRule("none", game);
         resumeMusic(game);
         game.SOUND_START.play();
         resumePhysics(game);
@@ -170,7 +169,7 @@ export function update(game: Game, time: number, delta: number): void {
         pauseAllReadySounds(game);
         resumeMusic(game);
         goToStateGame("play", game);
-        turnOnSplash("none", game);
+        turnOnSplashRule("none", game);
         game.SOUND_START.play();
         resumePhysics(game);
         console.log("ALL READY");
@@ -189,7 +188,7 @@ export function update(game: Game, time: number, delta: number): void {
         pauseAllReadySounds(game);
         resumeMusic(game);
         goToStateGame("play", game);
-        turnOnSplash("none", game);
+        turnOnSplashRule("none", game);
         game.SOUND_START.play();
         resumePhysics(game);
         console.log("ALL READY");

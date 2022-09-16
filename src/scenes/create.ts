@@ -1,5 +1,6 @@
 import Game from "./Game";
 import { onHitHandler } from "./helpers/damage";
+import { assignGamePadsConnected } from "./helpers/pad";
 import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 
 export function create(game: Game) {
@@ -552,8 +553,9 @@ export function createBackgroundTitles(game: Game): void {
 }
 
 export function createSplashEnd(game: Game): void {
-  game.splashes.forEach((splash, splashIndex) => {
-    if (splashIndex === game.splashes.length - 1) {
+  game.splashRules.forEach((splash, splashIndex) => {
+    // if (splashIndex === game.splashRules.length - 1) {
+    if (splash.name === "finished") {
       splash.text = game.add
         .text(
           game.SCREEN_DIMENSIONS.WIDTH / 2,
@@ -584,8 +586,8 @@ export function createSplashEnd(game: Game): void {
   });
 }
 export function createSplashes(game: Game): void {
-  game.splashes.forEach((splash, splashIndex) => {
-    if (splashIndex !== game.splashes.length - 1) {
+  game.splashRules.forEach((splash, splashIndex) => {
+    if (splashIndex !== game.splashRules.length - 1) {
       splash.text = game.add
         .text(
           game.SCREEN_DIMENSIONS.WIDTH / 2,

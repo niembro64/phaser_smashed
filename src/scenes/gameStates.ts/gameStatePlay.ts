@@ -8,7 +8,6 @@ import {
   updateWallTouchArray,
 } from "../helpers/movement";
 import {
-  assignGamePadsConnected,
   updateAttackEnergyFrictionGroundMovement,
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
@@ -21,7 +20,6 @@ import { updatePlayers } from "../update";
 export function gameStatePlay(game: Game, time: number, delta: number): void {
   // BEFORE PLAYERS
   updateGameTime(game, time, delta);
-  assignGamePadsConnected(game);
   updateWallTouchArray(game);
   updateCamera(game);
   updateAllSpriteFilters(game);
@@ -34,7 +32,7 @@ export function gameStatePlay(game: Game, time: number, delta: number): void {
   keepObjectsFromFallingLikeCrazy(game);
   updateCirclesLocations(game);
 
-  // PLAYERS
+  // UPDATE PLAYERS
   updatePlayers(game);
 
   // AFTER PLAYERS
