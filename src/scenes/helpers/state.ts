@@ -1,9 +1,9 @@
 import Game from "../Game";
 import { Player } from "../interfaces";
 
-export function _____setGameState(
-  state: "start" | "play" | "paused" | "first-blood" | "screen-clear" | "end",
-  game: Game
+export function setGameState____________________(
+  game: Game,
+  state: "start" | "play" | "paused" | "first-blood" | "screen-clear" | "end"
 ): void {
   game.state.name = state;
   game.state.gameStamp = game.gameNanoseconds;
@@ -11,7 +11,7 @@ export function _____setGameState(
   console.log("GAME STATE", game.state.name);
 }
 
-export function _____setPlayerState(
+export function setPlayerState____________________(
   player: Player,
   state: "start" | "alive" | "dead" | "hurt",
   game: Game
@@ -63,13 +63,19 @@ export function getIsPlayerHit(playerIndex: number, game: Game): boolean {
   return false;
 }
 
-export function getLongEnoughGameDuration(duration: number, game: Game): boolean {
+export function getLongEnoughGameDuration(
+  duration: number,
+  game: Game
+): boolean {
   if (game.gameNanoseconds > game.state.gameStamp + duration + 20) {
     return true;
   }
   return false;
 }
-export function getLongEnoughTimeDuration(duration: number, game: Game): boolean {
+export function getLongEnoughTimeDuration(
+  duration: number,
+  game: Game
+): boolean {
   // console.log(
   //   "HERE",
   //   game.timeNanoseconds,
