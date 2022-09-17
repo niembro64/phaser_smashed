@@ -94,6 +94,9 @@ export function createPlatforms(game: Game): void {
     case 3:
       createPlatforms3(game);
       break;
+    case 4:
+      createPlatforms4(game);
+      break;
     default:
       createPlatforms0(game);
       break;
@@ -125,22 +128,6 @@ export function createSounds(game: Game): void {
       player.playerReadySound.volume = 0;
     }
   });
-  // game.SOUND_READY_REPEAT0 = game.sound.add("readyRepeat0", {
-  //   volume: 0.3,
-  //   loop: true,
-  // });
-  // game.SOUND_READY_REPEAT1 = game.sound.add("readyRepeat1", {
-  //   volume: 0.3,
-  //   loop: true,
-  // });
-  // game.SOUND_READY_REPEAT2 = game.sound.add("readyRepeat2", {
-  //   volume: 0.3,
-  //   loop: true,
-  // });
-  // game.SOUND_READY_REPEAT3 = game.sound.add("readyRepeat3", {
-  //   volume: 0.3,
-  //   loop: true,
-  // });
 
   game.ENERJA_AH = game.sound.add("enerja_ah", { volume: 0.2 });
   game.ENERJA_DO_AGAIN = game.sound.add("enerja_again", { volume: 0.2 });
@@ -472,6 +459,70 @@ export function createPlatforms3(game: Game): void {
   );
 }
 
+export function createPlatforms4(game: Game): void {
+  game.PLATFORMS = game.physics.add.staticGroup();
+
+  for (let i = 0; i < 3; i++) {
+    game.PLATFORMS.create(
+      1207 * game.SCREEN_SCALE.WIDTH + i * game.brickWidth,
+      710 * game.SCREEN_SCALE.HEIGHT,
+      "platformVertical"
+    );
+  }
+
+  // for (let i = 0; i < 30; i++) {
+  //   game.PLATFORMS.create(
+  //     (320 + i * game.brickWidth) * game.SCREEN_SCALE.WIDTH,
+  //     1001 * game.SCREEN_SCALE.HEIGHT,
+  //     "platformVertical"
+  //   );
+  // }
+
+  for (let i = 0; i < 20; i++) {
+    game.PLATFORMS.create(
+      600,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + 300 + i * game.brickHeight,
+      "platformHorizontal"
+    );
+  }
+
+  for (let i = 0; i < 2; i++) {
+    game.PLATFORMS.create(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.brickHeight,
+      "platformHorizontal"
+    );
+  }
+
+  for (let i = 0; i < 25; i++) {
+    game.PLATFORMS.create(
+      1700 * game.SCREEN_SCALE.WIDTH,
+      (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT + game.brickHeight * i,
+      "platformShort"
+    );
+  }
+
+  // game.PLATFORMS.create(
+  //   400 * game.SCREEN_SCALE.WIDTH,
+  //   500 * game.SCREEN_SCALE.HEIGHT,
+  //   "platformShort"
+  // );
+  for (let i = 0; i < 5; i++) {
+    game.PLATFORMS.create(
+      1617 * game.SCREEN_SCALE.WIDTH,
+      (686 + i * game.brickHeight) * game.SCREEN_SCALE.HEIGHT,
+      "brick"
+    );
+  }
+  for (let i = 0; i < 5; i++) {
+    game.PLATFORMS.create(
+      1783 * game.SCREEN_SCALE.WIDTH,
+      (686 + i * game.brickHeight) * game.SCREEN_SCALE.HEIGHT,
+      "brick"
+    );
+  }
+}
+
 export function createTable(game: Game): void {
   game.TABLE = game.physics.add.sprite(
     (1920 / 2) * game.SCREEN_SCALE.WIDTH,
@@ -485,8 +536,8 @@ export function createTable(game: Game): void {
 
 export function createFlag(game: Game): void {
   game.FLAG = game.physics.add.sprite(
-    (1920 / 2 - 493) * game.SCREEN_SCALE.WIDTH,
-    (1080 / 2 - 200 - 35) * game.SCREEN_SCALE.HEIGHT,
+    (1920 - 87 - game.brickWidth * 2) * game.SCREEN_SCALE.WIDTH,
+    (1080 - 557) * game.SCREEN_SCALE.HEIGHT,
     "flag"
   );
   game.FLAG.setScale(1);

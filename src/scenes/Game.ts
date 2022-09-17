@@ -14,9 +14,11 @@ import {
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  PLAYER_CHOICES: number[] = [0, 1, 2];
+  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   // PLAYER_CHOICES: number[] = [3, 0];
   // PLAYER_CHOICES: number[] = [3];
+
+  // PLAYER_CHOICES: number[] = [4, 4, 4, 5];
 
   // PLAYER_CHOICES: number[] = [0, 0, 0, 0];
   // PLAYER_CHOICES: number[] = [1, 1, 1, 1];
@@ -24,11 +26,10 @@ export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [3, 3, 3, 3];
   // PLAYER_CHOICES: number[] = [4, 4, 4, 4];
   // PLAYER_CHOICES: number[] = [5, 5, 5, 5];
-  // PLAYER_CHOICES: number[] = [4, 4, 4, 5];
 
   debug: Debug = {
-    level: 3,
-    useCameras: true,
+    level: 4,
+    useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -134,6 +135,9 @@ export default class Game extends Phaser.Scene {
 
   SOUND_PAUSED: any;
   SOUND_BGM: any;
+
+  brickWidth: number = 33;
+  brickHeight: number = 34;
 
   scoreBoardTimeGame: any;
   scoreBoardTimeTime: any;
