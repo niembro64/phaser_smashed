@@ -27,7 +27,7 @@ export function setRuleSplashOn(game: Game, splashName: SplashName): void {
 }
 
 export function updateText(game: Game): void {
-  const dataY = game.SCREEN_DIMENSIONS.HEIGHT / 16;
+  const dataY = game.SCREEN_DIMENSIONS.HEIGHT / 32;
   const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
   const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
   const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
@@ -81,7 +81,6 @@ export function updateText(game: Game): void {
   updateReadyText(game, zoom, newTopY);
   updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
-
   updateEndDataMatrices(game, zoom, newDataY);
 }
 
@@ -272,13 +271,10 @@ export function updateEndDataMatrices(
         case 2:
           splash.words[i] = "[";
           break;
-        case 3:
+        default:
           if (splashIndex !== game.splashesEndData.length - 1) {
             splash.words[i] = "[";
           }
-          break;
-        default:
-          splash.words[i] = "[";
       }
       for (let j = 0; j < game.players.length; j++) {
         switch (splashIndex) {
@@ -313,17 +309,17 @@ export function updateEndDataMatrices(
                 game.numberShotsTakenByMeMatrix[i][j].toString();
             }
             break;
-          case 3:
-            break;
           default:
-            splash.words[i] += "XXX";
+            if (splashIndex !== game.splashesEndData.length - 1) {
+              splash.words[i] += "XXX";
+            }
         }
         if (splashIndex !== game.splashesEndData.length - 1) {
           splash.words[i] += j === game.players.length - 1 ? "" : ",";
         }
       }
       if (splashIndex !== game.splashesEndData.length - 1) {
-        splash.words[i] += "] " + game.players[i].char.name;
+        splash.words[i] += "]";
       }
     }
     splash.text.setText(splash.words);
@@ -338,27 +334,3 @@ export function updateEndDataMatrices(
     splash.text.y = newY;
   });
 }
-
-// export function updateEndDataMatrices(
-//   game: Game,
-//   zoom: number,
-//   newEndSplashY: number
-// ): void {
-//   let numSplashes: number = game.splashesEndData.length;
-
-//   // game.splashesEndData.forEach((splash, splashIndex) => {
-//   //   // game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
-//   //   // game.SCREEN_DIMENSIONS.HEIGHT / 6,
-//   // });
-
-//   game.splashesEndData.forEach((splash, splashIndex) => {
-//     splash.text.setText("ASDF");
-//     splash.text.setScale(1 / zoom, 1 / zoom);
-//     splash.text.x =
-//       game.cameraMover.char.sprite.x +
-//       (game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1))) /
-//         5;
-
-//     splash.text.y = newEndSplashY;
-//   });
-// }

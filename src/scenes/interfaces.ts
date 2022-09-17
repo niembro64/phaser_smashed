@@ -196,6 +196,7 @@ export interface Splash {
 export interface SplashMulti {
   text: any;
   name: string;
+  vertical: number;
   size: string;
   words: string[];
   color: string;

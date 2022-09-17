@@ -291,17 +291,19 @@ export default class Game extends Phaser.Scene {
     text: "",
     name: "",
     words: [],
-    size: "30px",
+    vertical: 0,
+    size: "40px",
     src: "glass.png",
     color: "#ffffff",
     backgroundColor: "#ffffff",
     strokeThickness: 1,
   };
-  splashEndDataOffset: number = -870;
+  splashEndDataOffset: number = -1500;
   splashesEndData: SplashEndData[] = [
     {
       text: null,
-      name: "Hit",
+      name: "Hit By",
+      vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
       backgroundColor: this.SplashEndDataInit.backgroundColor,
@@ -311,7 +313,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "Killed",
+      name: "Killed By",
+      vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
       backgroundColor: this.SplashEndDataInit.backgroundColor,
@@ -321,7 +324,8 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "Shots",
+      name: "Shots By",
+      vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
       backgroundColor: this.SplashEndDataInit.backgroundColor,
@@ -331,8 +335,9 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "Names",
+      name: "",
       words: [],
+      vertical: 0,
       color: this.SplashEndDataInit.color,
       backgroundColor: this.SplashEndDataInit.backgroundColor,
       size: this.SplashEndDataInit.size,

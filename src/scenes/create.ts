@@ -30,18 +30,21 @@ export function create(game: Game) {
 export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
   game.splashesEndData.forEach((splash, splashIndex) => {
-    for (let i = 0; i < game.players.length + 1; i++) {
+    for (let i = 0; i < game.players.length + 2; i++) {
       splash.words.push(splash.name);
     }
     for (let i = 0; i < game.players.length; i++) {
       splash.words[i] = game.players[i].char.name;
     }
+    splash.words[game.players.length] = "";
+    splash.words[game.players.length + 1] = splash.name;
     splash.text = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
         game.SCREEN_DIMENSIONS.HEIGHT / 6,
         splash.words,
         {
+          align: "right",
           fontSize: splash.size,
           fontFamily: game.FONT_DEFAULT_MONOSPACE,
           color: splash.color,
