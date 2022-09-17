@@ -500,10 +500,12 @@ export function updateControllerMovement(player: Player, game: Game): void {
 
 export function updatePrintAllPadsActive(player: Player, game: Game): void {
   // Buttons
-  console.log("++++++++++++ERIC HERE");
+
   if (player.gamepad) {
+
     if (player.gamepad.B) {
       console.log(player.playerNumber, "B");
+      console.log(player.playerNumber, player.gamepad);
     }
     if (player.gamepad.A) {
       console.log(player.playerNumber, "A");

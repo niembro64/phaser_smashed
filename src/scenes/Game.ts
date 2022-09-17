@@ -102,9 +102,9 @@ export default class Game extends Phaser.Scene {
     ENERJA_TWO_SHOTS: "/enerja/two_shots.mp3",
     ENERJA_UGH: "/enerja/ugh.mp3",
     MII: "wii_short.mp3",
-    BGM_DREAM: "kirby_half.mp3",
-    BGM_MONKEY: "/na/monkeys2022.mp3",
-    BGM_ROYKSOP: "/na/royksop_macumba_05loop.mp3",
+    BGM_DREAM: "kirby_half.wav",
+    BGM_MONKEY: "/na/monkeys2022.wav",
+    BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
     // BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
   };
 
