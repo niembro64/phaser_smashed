@@ -88,6 +88,9 @@ export function getLongEnoughTimeDuration(
 }
 
 export function updateGameTime(game: Game, time: number, delta: number): void {
+  if (game.gameState.name !== "game-state-play") {
+    return;
+  }
   game.gameNanoseconds += delta;
   game.gameSecondsPrev = game.gameSeconds;
   game.gameSeconds = Math.floor(game.gameNanoseconds / 1000);

@@ -29,6 +29,7 @@ import {
   getLongEnoughTimeDuration,
   updateNumCurrentlyDead,
   updateTimeTime,
+  updateGameTime,
 } from "./helpers/state";
 import {
   setResetDamage,
@@ -72,6 +73,7 @@ export function setPreUpdate(game: Game): void {
 
 export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
+  updateGameTime(game, time, delta);
   updateText(game);
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);

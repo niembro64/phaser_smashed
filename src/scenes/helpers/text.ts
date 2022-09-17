@@ -113,7 +113,10 @@ export function updateGlassesTransparency(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.shotGlass.setAlpha(0);
 
-    if (player.state.name === "player-state-dead" && game.gameState.name !== "game-state-play") {
+    if (
+      player.state.name === "player-state-dead" &&
+      game.gameState.name !== "game-state-play"
+    ) {
       player.shotGlass.setAlpha(1);
     }
   });
@@ -159,7 +162,10 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
 
 export function updateReadyText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
-    if (game.gameState.name === "game-state-play" || game.gameState.name === "game-state-finished") {
+    if (
+      game.gameState.name === "game-state-play" ||
+      game.gameState.name === "game-state-finished"
+    ) {
       player.scoreBoardReady.setAlpha(0);
     } else {
       if (isPlayerReady(player, game)) {
@@ -191,7 +197,10 @@ export function updateControllerText(
   newY: number
 ): void {
   game.players.forEach((player, playerIndex) => {
-    if (game.gameState.name === "game-state-play" || game.gameState.name === "game-state-finished") {
+    if (
+      game.gameState.name === "game-state-play" ||
+      game.gameState.name === "game-state-finished"
+    ) {
       player.scoreBoardController.setAlpha(0);
     } else {
       if (isPlayerReady(player, game)) {
@@ -251,12 +260,6 @@ export function updateEndDataMatrices(
   let numSplashes: number = game.splashesEndData.length;
 
   game.splashesEndData.forEach((splash, splashIndex) => {
-    // for (let i = 0; i < game.players.length; i++) {
-    //   splash.text.push([""]);
-    //   for (let j = 0; j < game.players.length; j++) {
-    //     splash.text.push([""]);
-    //   }
-    // }
     splash.text.setScale(1 / zoom, 1 / zoom);
     for (let i = 0; i < game.players.length; i++) {
       switch (splashIndex) {
@@ -268,6 +271,11 @@ export function updateEndDataMatrices(
           break;
         case 2:
           splash.words[i] = "[";
+          break;
+        case 3:
+          if (splashIndex !== game.splashesEndData.length - 1) {
+            splash.words[i] = "[";
+          }
           break;
         default:
           splash.words[i] = "[";
@@ -305,12 +313,18 @@ export function updateEndDataMatrices(
                 game.numberShotsTakenByMeMatrix[i][j].toString();
             }
             break;
+          case 3:
+            break;
           default:
             splash.words[i] += "XXX";
         }
-        splash.words[i] += j === game.players.length - 1 ? "" : ",";
+        if (splashIndex !== game.splashesEndData.length - 1) {
+          splash.words[i] += j === game.players.length - 1 ? "" : ",";
+        }
       }
-      splash.words[i] += "] " + game.players[i].char.name;
+      if (splashIndex !== game.splashesEndData.length - 1) {
+        splash.words[i] += "] " + game.players[i].char.name;
+      }
     }
     splash.text.setText(splash.words);
     splash.text.x =

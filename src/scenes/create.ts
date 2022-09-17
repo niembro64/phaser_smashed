@@ -4,7 +4,7 @@ import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 import { setPreUpdate } from "./update";
 
 export function create(game: Game) {
-  createMatrices(game);
+  createDataMatrices(game);
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
@@ -24,6 +24,7 @@ export function create(game: Game) {
   createHitboxOverlap(game);
   createEndDataMatrices(game);
 
+  // INIT UPDATE
   setPreUpdate(game);
 }
 export function createEndDataMatrices(game: Game): void {
@@ -31,6 +32,9 @@ export function createEndDataMatrices(game: Game): void {
   game.splashesEndData.forEach((splash, splashIndex) => {
     for (let i = 0; i < game.players.length + 1; i++) {
       splash.words.push(splash.name);
+    }
+    for (let i = 0; i < game.players.length; i++) {
+      splash.words[i] = game.players[i].char.name;
     }
     splash.text = game.add
       .text(
@@ -53,12 +57,12 @@ export function createEndDataMatrices(game: Game): void {
           },
         }
       )
-      .setOrigin(0, 0)
+      .setOrigin(0.5, 0)
       .setAlpha(1);
   });
 }
 
-export function createMatrices(game: Game): void {
+export function createDataMatrices(game: Game): void {
   game.currentlyOverlappingSpritesMatrix = [];
   game.wasLastHitByMatrix = [];
   game.numberHitByMatrix = [];

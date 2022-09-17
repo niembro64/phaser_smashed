@@ -19,7 +19,6 @@ import { updatePlayers } from "../update";
 
 export function updateGameStatePlay(game: Game, time: number, delta: number): void {
   // BEFORE PLAYERS
-  updateGameTime(game, time, delta);
   updateWallTouchArray(game);
   updateCamera(game);
   updateAllSpriteFilters(game);
