@@ -57,21 +57,21 @@ export function createEndDataMatrices(game: Game): void {
 
 export function initMatrices(game: Game): void {
   game.currentlyOverlappingSpritesMatrix = [];
+  game.wasLastHitByMatrix = [];
   game.numberHitByMatrix = [];
   game.numberKilledByMatrix = [];
-  game.wasLastHitByMatrix = [];
   game.numberShotsTakenByMeMatrix = [];
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     game.currentlyOverlappingSpritesMatrix.push([]);
+    game.wasLastHitByMatrix.push([]);
     game.numberHitByMatrix.push([]);
     game.numberKilledByMatrix.push([]);
-    game.wasLastHitByMatrix.push([]);
     game.numberShotsTakenByMeMatrix.push([]);
-    for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+    for (let j = 0; j < game.players.length; j++) {
       game.currentlyOverlappingSpritesMatrix[i].push(false);
+      game.wasLastHitByMatrix[i].push(false);
       game.numberHitByMatrix[i].push(0);
       game.numberKilledByMatrix[i].push(0);
-      game.wasLastHitByMatrix[i].push(false);
       game.numberShotsTakenByMeMatrix[i].push(0);
     }
   }

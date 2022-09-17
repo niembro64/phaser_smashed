@@ -13,7 +13,7 @@ import {
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  PLAYER_CHOICES: number[] = [0, 1, 2];
   // PLAYER_CHOICES: number[] = [3, 0];
   // PLAYER_CHOICES: number[] = [3];
 
@@ -282,37 +282,57 @@ export default class Game extends Phaser.Scene {
     },
   ];
 
+  SplashEndDataInit: SplashEndData = {
+    text: "",
+    name: "",
+    words: [],
+    size: "30px",
+    src: "glass.png",
+    color: "#ffffff",
+    backgroundColor: "#ffffff",
+    strokeThickness: 1,
+  };
   splashEndDataOffset: number = -870;
   splashesEndData: SplashEndData[] = [
     {
       text: null,
       name: "Hit",
       words: [],
-      color: "#FFFFFF",
-      backgroundColor: "#ffffff",
-      size: "30px",
-      src: "glass.png",
-      strokeThickness: 1,
+      color: this.SplashEndDataInit.color,
+      backgroundColor: this.SplashEndDataInit.backgroundColor,
+      size: this.SplashEndDataInit.size,
+      src: this.SplashEndDataInit.src,
+      strokeThickness: this.SplashEndDataInit.strokeThickness,
     },
     {
       text: null,
       name: "Killed",
       words: [],
-      color: "#FFFFFF",
-      backgroundColor: "#ffffff",
-      size: "30px",
-      src: "glass.png",
-      strokeThickness: 1,
+      color: this.SplashEndDataInit.color,
+      backgroundColor: this.SplashEndDataInit.backgroundColor,
+      size: this.SplashEndDataInit.size,
+      src: this.SplashEndDataInit.src,
+      strokeThickness: this.SplashEndDataInit.strokeThickness,
     },
     {
       text: null,
       name: "Shots",
       words: [],
-      color: "#FFFFFF",
-      backgroundColor: "#ffffff",
-      size: "30px",
-      src: "glass.png",
-      strokeThickness: 1,
+      color: this.SplashEndDataInit.color,
+      backgroundColor: this.SplashEndDataInit.backgroundColor,
+      size: this.SplashEndDataInit.size,
+      src: this.SplashEndDataInit.src,
+      strokeThickness: this.SplashEndDataInit.strokeThickness,
+    },
+    {
+      text: null,
+      name: "Names",
+      words: [],
+      color: this.SplashEndDataInit.color,
+      backgroundColor: this.SplashEndDataInit.backgroundColor,
+      size: this.SplashEndDataInit.size,
+      src: this.SplashEndDataInit.src,
+      strokeThickness: this.SplashEndDataInit.strokeThickness,
     },
   ];
 
