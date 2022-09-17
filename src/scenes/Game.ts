@@ -49,17 +49,8 @@ export default class Game extends Phaser.Scene {
   DEFAULT_ATTACK_DAMAGE: number = 50;
 
   GAMEBAR_CHARS = { kills: " ⇧💀⇩ ", deaths: "", damage: "♡", shots: "☆" };
-  //▲▼⬆⬇↑↓↑↿⇂
-  //⋆
-  //🍻
-  //★
-  //✰
-  //☆
-  //⚡
-  //❤
-  //v
-  //♡
-  //♥
+  //▲▼⬆⬇↑↓↑↿⇂⋆ // //🍻 //★//✰//☆//⚡//❤//v//♡//♥
+
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
   // DURATION_GAME_LAST_MINUTES: number = 0.3;
   DURATION_GAME_LAST_MINUTES: number = 7;
@@ -81,7 +72,7 @@ export default class Game extends Phaser.Scene {
   upperTextLocationLROffset: number = 0;
   lowerTextLocationLROffset: number = 0;
   textLocations: number[] = [-700, -350, 350, 700];
-  playerSpawnLocations: number[] = [-200, -110, 110, 200];
+  playerSpawnLocations: number[] = [-165, -100, 100, 165];
 
   FILE_SOUNDS: any = {
     INTRO: "deep.mp3",
