@@ -38,7 +38,7 @@ export default class Game extends Phaser.Scene {
     playShotsWiiBGM: true,
     wallJumps: true,
     useBGM: true,
-    BGMNumber: 2,
+    BGMNumber: 0,
     useDefaultAttackDamage: false,
     useDefaultAttackHitback: false,
     useColorFilters: false,
@@ -101,8 +101,8 @@ export default class Game extends Phaser.Scene {
     ENERJA_TURTLE: "/enerja/turtle.mp3",
     ENERJA_TWO_SHOTS: "/enerja/two_shots.mp3",
     ENERJA_UGH: "/enerja/ugh.mp3",
-    MII: "wii_short.mp3",
-    BGM_DREAM: "kirby_half.wav",
+    BGM_MII: "wii_short.wav",
+    BGM_DREAM: "kirbyloop.wav",
     BGM_MONKEY: "/na/monkeys2022.wav",
     BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
     // BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
@@ -1138,7 +1138,7 @@ export default class Game extends Phaser.Scene {
     );
     this.load.audio("enerja_ugh", pathSounds + this.FILE_SOUNDS.ENERJA_UGH);
 
-    this.load.audio("mii", pathSounds + this.FILE_SOUNDS.MII);
+    this.load.audio("mii", pathSounds + this.FILE_SOUNDS.BGM_MII);
 
     if (this.debug.BGMNumber === 0) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_DREAM);
