@@ -506,6 +506,7 @@ export function updatePrintAllPadsActive(game: Game): void {
         // console.log(playerIndex, player.gamepad);
         // console.log(playerIndex, player.gamepad.axes);
         // console.log(playerIndex, player.gamepad.buttons[0].pressed);
+        //
 
         // console.log(
         //   playerIndex,
