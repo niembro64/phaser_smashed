@@ -46,21 +46,21 @@ export function onHitHandler(
   );
 }
 
-export function turnOnActiveHurtEmitter(player: Player): void {
+export function setActiveHurtEmitterOn(player: Player): void {
   player.emitterHurt.active = true;
 }
-export function turnOffActiveHurtEmitter(player: Player): void {
+export function setActiveHurtEmitterOff(player: Player): void {
   player.emitterHurt.active = false;
 }
 
-export function turnOnVisibleHurtEmitter(player: Player): void {
+export function setVisibleHurtEmitterOn(player: Player): void {
   player.emitterHurt.visible = true;
 }
-export function turnOffVisibleHurtEmitter(player: Player): void {
+export function setVisibleHurtEmitterOff(player: Player): void {
   player.emitterHurt.visible = false;
 }
 
-export function onDeadUpdateMatrix(playerIndex: number, game: Game): void {
+export function setOnDeadUpdateMatrix(playerIndex: number, game: Game): void {
   let killedSelf: boolean = true;
   for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
     if (game.wasLastHitByMatrix[playerIndex][j]) {
@@ -109,7 +109,7 @@ export function removeDamage(player: Player, damage: number): void {
   }
 }
 
-export function resetDamage(player: Player): void {
+export function setResetDamage(player: Player): void {
   player.char.damage = 0;
 }
 

@@ -53,7 +53,7 @@ export function getIsAnyPlayerCurrentlyDead(game: Game): boolean {
   return false;
 }
 
-export function addShotToMatrixFirstBlood(
+export function setAddShotToMatrixFirstBlood(
   player: Player,
   playerIndex: number,
   game: Game
@@ -74,7 +74,7 @@ export function addShotToMatrixFirstBlood(
   }
 }
 
-export function addToShotsMatrixScreenClear(
+export function setAddToShotsMatrixScreenClear(
   player: Player,
   playerIndex: number,
   game: Game

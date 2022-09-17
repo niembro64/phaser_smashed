@@ -1,8 +1,7 @@
 import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
-import { playerGrabAttackEnergy } from "./pad";
 
-export function upB(player: Player, game: Game): void {
+export function updateUpB(player: Player, game: Game): void {
   if (
     player.gamepad.up &&
     player.gamepad.X &&
@@ -18,17 +17,17 @@ export function upB(player: Player, game: Game): void {
   }
 }
 
-export function turnOffPhysicsAttackEnergy(player: Player): void {
+export function setPhysicsAttackEnergyOff(player: Player): void {
   player.char.attackEnergy.sprite.body.enable = false;
   player.char.attackEnergy.sprite.body.allowGravity = false;
 }
-export function turnOnPhysicsAttackEnergy(player: Player): void {
+export function setPhysicsAttackEnergyOn(player: Player): void {
   player.char.attackEnergy.sprite.body.enable = true;
   player.char.attackEnergy.sprite.body.allowGravity =
     player.char.attackEnergy.gravity;
 }
 
-export function isAttackEnergyOffscreen(
+export function getIsAttackEnergyOffscreen(
   attackEnergy: AttackEnergy,
   game: Game
 ): boolean {

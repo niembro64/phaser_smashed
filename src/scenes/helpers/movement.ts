@@ -55,13 +55,13 @@ export function updateKeepOnScreenPlayer(game: Game): void {
 }
 export function isAnyPlayerOffscreen(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    if (isPlayerOffscreen(game.players[i], game)) {
+    if (getIsPlayerOffscreen(game.players[i], game)) {
       return true;
     }
   }
   return false;
 }
-export function isPlayerOffscreen(player: Player, game: Game): boolean {
+export function getIsPlayerOffscreen(player: Player, game: Game): boolean {
   if (
     player.char.sprite.y < 0 ||
     player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT ||
@@ -130,7 +130,7 @@ export function hasPlayerTouchedWallRecently(player: Player): boolean {
   return !player.char.wallTouchArray.every((b) => b === false);
 }
 
-export function jump(player: Player, game: Game): void {
+export function updateJump(player: Player, game: Game): void {
   if (
     player.char.sprite.body.touching.down ||
     player.char.sprite.body.touching.left ||
@@ -205,7 +205,7 @@ export function jump(player: Player, game: Game): void {
   }
 }
 
-export function frictionWallY(player: Player, game: Game): void {
+export function updateFrictionWallY(player: Player, game: Game): void {
   if (!game.debug.wallJumps) {
     return;
   }
@@ -219,7 +219,7 @@ export function frictionWallY(player: Player, game: Game): void {
   }
 }
 
-export function frictionAirY(player: Player, game: Game): void {
+export function updateFrictionAirY(player: Player, game: Game): void {
   if (!player.char.sprite.body.touching.down) {
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y *
@@ -228,7 +228,7 @@ export function frictionAirY(player: Player, game: Game): void {
   }
 }
 
-export function frictionAirX(player: Player, game: Game): void {
+export function updateFrictionAirX(player: Player, game: Game): void {
   if (!player.char.sprite.body.touching.down) {
     player.char.sprite.body.setVelocityX(
       player.char.sprite.body.velocity.x *
@@ -237,7 +237,7 @@ export function frictionAirX(player: Player, game: Game): void {
   }
 }
 
-export function frictionGroundX(player: Player, game: Game): void {
+export function updateFrictionGroundX(player: Player, game: Game): void {
   if (
     player.char.sprite.body.touching.down &&
     !player.gamepad.left &&

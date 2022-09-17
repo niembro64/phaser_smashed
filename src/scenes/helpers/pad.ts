@@ -2,9 +2,9 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 import {
   isAttackEnergyNearPlayer,
-  isAttackEnergyOffscreen,
-  turnOffPhysicsAttackEnergy,
-  turnOnPhysicsAttackEnergy,
+  getIsAttackEnergyOffscreen,
+  setPhysicsAttackEnergyOff,
+  setPhysicsAttackEnergyOn,
 } from "./attacks";
 
 export function updateGamePadsConnected(game: Game): void {
@@ -236,13 +236,13 @@ export function playerGrabAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.setVelocityX(0);
   player.char.attackEnergy.sprite.body.setVelocityY(0);
 }
-export function attackEnergy(player: Player, game: Game): void {
+export function updateAttackEnergy(player: Player, game: Game): void {
   // if (player.pad?.up && !(player.pad.left || player.pad.right)) {
   //   return;
   // }
 
   if (
-    !isAttackEnergyOffscreen(player.char.attackEnergy, game) &&
+    !getIsAttackEnergyOffscreen(player.char.attackEnergy, game) &&
     !isAttackEnergyNearPlayer(player)
   ) {
     return;
@@ -273,7 +273,7 @@ export function attackEnergy(player: Player, game: Game): void {
     game.SOUND_GUN.play();
     player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
     player.char.attackEnergy.state = "released";
-    turnOnPhysicsAttackEnergy(player);
+    setPhysicsAttackEnergyOn(player);
     playerShootAttackEnergy(player, game);
     return;
   }
@@ -285,7 +285,7 @@ export function attackEnergy(player: Player, game: Game): void {
         player.char.attackEnergy.durationBetweenThrows
   ) {
     player.char.attackEnergy.state = "held";
-    turnOffPhysicsAttackEnergy(player);
+    setPhysicsAttackEnergyOff(player);
     playerHoldAttackEnergy(player);
   }
 }
@@ -369,7 +369,7 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   });
 }
 
-export function controllerMovement(player: Player, game: Game): void {
+export function updateControllerMovement(player: Player, game: Game): void {
   if (player.gamepad) {
     if (
       !player.gamepad.left &&
@@ -498,7 +498,7 @@ export function controllerMovement(player: Player, game: Game): void {
   }
 }
 
-export function printAllPadsActive(player: Player, game: Game): void {
+export function updatePrintAllPadsActive(player: Player, game: Game): void {
   // Buttons
   console.log("++++++++++++ERIC HERE");
   if (player.gamepad) {

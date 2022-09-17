@@ -1,7 +1,7 @@
 import Game from "../Game";
 import { Player } from "../interfaces";
 
-export function ___setGameState(
+export function _____setGameState(
   state: "start" | "play" | "paused" | "first-blood" | "screen-clear" | "end",
   game: Game
 ): void {
@@ -11,7 +11,7 @@ export function ___setGameState(
   console.log("GAME STATE", game.state.name);
 }
 
-export function ___setPlayerState(
+export function _____setPlayerState(
   player: Player,
   state: "start" | "alive" | "dead" | "hurt",
   game: Game
@@ -54,7 +54,7 @@ export function updateResetAllHitboxes(game: Game): void {
   });
 }
 
-export function isPlayerHit(playerIndex: number, game: Game): boolean {
+export function getIsPlayerHit(playerIndex: number, game: Game): boolean {
   for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
     if (game.currentlyOverlappingSpritesMatrix[playerIndex][j]) {
       return true;
@@ -105,7 +105,7 @@ export function updateTimeTime(game: Game, time: number, delta: number): void {
   game.timeClock.seconds = Math.floor(game.timeSecondsClock % 60);
 }
 
-export function hasThisDurationPassed(
+export function getHasGameDurationPassed(
   player: Player,
   duration: number,
   game: Game
