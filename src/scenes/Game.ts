@@ -667,7 +667,7 @@ export default class Game extends Phaser.Scene {
           state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
-          posFromCenter: { x: 10, y: -25 },
+          posFromCenter: { x: -20, y: -25 },
           friction: {
             ground: 0.9,
             wallInvertRotation: true,
@@ -778,7 +778,7 @@ export default class Game extends Phaser.Scene {
           state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
-          posFromCenter: { x: 0, y: -20 },
+          posFromCenter: { x: 15, y: -30 },
           friction: {
             ground: 1,
             wallInvertRotation: false,
