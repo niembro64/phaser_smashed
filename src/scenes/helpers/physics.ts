@@ -1,9 +1,9 @@
 import Game from "../Game";
 
-export function pausePhysics(game: Game): void {
+export function setPhysicsPause(game: Game): void {
   game.physics.pause();
 }
-export function resumePhysics(game: Game): void {
+export function setPhysicsResume(game: Game): void {
   game.physics.resume();
 }
 

@@ -4,7 +4,7 @@ import { Player } from '../interfaces';
 import { isAnyPlayerOffscreen } from './movement';
 import { playerGrabAttackEnergy } from './pad';
 
-export function isScreenClear(game: Game): boolean {
+export function getIsScreenClear(game: Game): boolean {
   // is there three people currently dead
   let numPlayersDead: number = 0;
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
@@ -19,7 +19,7 @@ export function isScreenClear(game: Game): boolean {
 
   return false;
 }
-export function isFirstBlood(game: Game): boolean {
+export function getIsFirstBlood(game: Game): boolean {
   // is there only one player who has died
   let numPlayersDied = 0;
   let temp = 0;
@@ -35,7 +35,7 @@ export function isFirstBlood(game: Game): boolean {
 
   if (
     numPlayersDied === 1 &&
-    isAnyPlayerCurrentlyDead(game)
+    getIsAnyPlayerCurrentlyDead(game)
     // && isAnyPlayerOffscreen(game)
   ) {
     return true;
@@ -44,7 +44,7 @@ export function isFirstBlood(game: Game): boolean {
   return false;
 }
 
-export function isAnyPlayerCurrentlyDead(game: Game): boolean {
+export function getIsAnyPlayerCurrentlyDead(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
     if (game.players[i].state.name === 'dead') {
       return true;

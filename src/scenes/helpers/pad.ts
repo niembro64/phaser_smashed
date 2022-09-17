@@ -7,7 +7,7 @@ import {
   turnOnPhysicsAttackEnergy,
 } from "./attacks";
 
-export function assignGamePadsConnected(game: Game): void {
+export function updateGamePadsConnected(game: Game): void {
   for (
     let i = 0;
     i < game.input.gamepad.total && i < game.PLAYER_CHOICES.length;
@@ -18,7 +18,7 @@ export function assignGamePadsConnected(game: Game): void {
   }
 }
 
-export function isAnyPlayerPausing(game: Game): boolean {
+export function getIsAnyPlayerPausing(game: Game): boolean {
   for (let i = 0; i < game.players.length; i++) {
     if (playerPauses(game.players[i], game)) {
       return true;
@@ -74,7 +74,7 @@ export function isPlayerReady(player: Player, game: Game): boolean {
   return true;
 }
 
-export function isAllPlayersReady(game: Game): boolean {
+export function getIsAllPlayersReady(game: Game): boolean {
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
     if (
       !game.players[i].gamepad.up &&

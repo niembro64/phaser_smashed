@@ -2,7 +2,7 @@ import Game from "../Game";
 import { updateCamera } from "../helpers/camera";
 import { updateDeathsAndKillsMatrices } from "../helpers/damage";
 import {
-  keepObjectsFromFallingLikeCrazy,
+  updateKeepObjectsFromFallingLikeCrazy,
   updateCirclesLocations,
   updateEnergyAttacksWrapScreen,
   updateWallTouchArray,
@@ -14,10 +14,10 @@ import {
   updatePadPreviousAndDebounced,
 } from "../helpers/pad";
 import { updateAllSpriteFilters, updateSpritesFlipX } from "../helpers/sprites";
-import { resetAllHitboxes, updateGameTime } from "../helpers/state";
+import { updateResetAllHitboxes, updateGameTime } from "../helpers/state";
 import { updatePlayers } from "../update";
 
-export function gameStatePlay(game: Game, time: number, delta: number): void {
+export function updateGameStatePlay(game: Game, time: number, delta: number): void {
   // BEFORE PLAYERS
   updateGameTime(game, time, delta);
   updateWallTouchArray(game);
@@ -29,7 +29,7 @@ export function gameStatePlay(game: Game, time: number, delta: number): void {
   updateAttackEnergyFrictionWall(game);
   updateEnergyAttacksWrapScreen(game);
   updateDeathsAndKillsMatrices(game);
-  keepObjectsFromFallingLikeCrazy(game);
+  updateKeepObjectsFromFallingLikeCrazy(game);
   updateCirclesLocations(game);
 
   // UPDATE PLAYERS
@@ -37,5 +37,5 @@ export function gameStatePlay(game: Game, time: number, delta: number): void {
 
   // AFTER PLAYERS
   updatePadPreviousAndDebounced(game);
-  resetAllHitboxes(game);
+  updateResetAllHitboxes(game);
 }

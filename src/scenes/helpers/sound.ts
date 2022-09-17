@@ -1,8 +1,8 @@
 import Game from "../Game";
 import { Player } from "../interfaces";
-import { longEnoughTime } from "./state";
+import { getLongEnoughTimeDuration } from "./state";
 
-export function pauseWiiMusic(game: Game): void {
+export function setPauseWiiMusic(game: Game): void {
   game.SOUND_PAUSED.pause();
 }
 export function playWiiMusic(game: Game): void {
@@ -11,37 +11,37 @@ export function playWiiMusic(game: Game): void {
   }
   game.SOUND_PAUSED.play();
 }
-export function playWiiMusicWaitShort(game: Game): void {
+export function setPlayWiiMusicWaitShort(game: Game): void {
   if (game.SOUND_PAUSED.isPlaying) {
     return;
   }
   console.log(
     "ENOUGH TIME",
-    longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)
+    getLongEnoughTimeDuration(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)
   );
-  if (longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)) {
+  if (getLongEnoughTimeDuration(game.DURATION_GAME_PAUSE_MUSIC_SHORT, game)) {
     game.SOUND_PAUSED.play();
   }
 }
-export function playWiiMusicWaitLong(game: Game): void {
+export function setPlayWiiMusicWaitLong(game: Game): void {
   if (game.SOUND_PAUSED.isPlaying) {
     return;
   }
 
-  if (longEnoughTime(game.DURATION_GAME_PAUSE_MUSIC_LONG, game)) {
+  if (getLongEnoughTimeDuration(game.DURATION_GAME_PAUSE_MUSIC_LONG, game)) {
     game.SOUND_PAUSED.play();
   }
 }
-export function pauseMusic(game: Game): void {
+export function setMusicPause(game: Game): void {
   game.SOUND_BGM.pause();
 }
-export function playBGMusic(game: Game): void {
+export function setMusicPlay(game: Game): void {
   // if (game.SOUND_MII.isPlaying()) {
   //   return;
   // }
   game.SOUND_BGM.play();
 }
-export function resumeMusic(game: Game): void {
+export function setMusicResume(game: Game): void {
   // if (game.SOUND_MII.isPlaying()) {
   //   return;
   // }
@@ -71,7 +71,7 @@ export function pauseReadySoundPlayer(player: Player): void {
   }
 }
 
-export function pauseAllReadySounds(game: Game): void {
+export function setPauseAllReadySounds(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     pauseReadySoundPlayer(player);
   });

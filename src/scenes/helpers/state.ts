@@ -1,31 +1,32 @@
-import Game from '../Game';
-import { Player } from '../interfaces';
+import Game from "../Game";
+import { Player } from "../interfaces";
 
-export function goToStateGame(
-  state: 'start' | 'play' | 'paused' | 'first-blood' | 'screen-clear' | 'end',
+export function ___setGameState(
+  state: "start" | "play" | "paused" | "first-blood" | "screen-clear" | "end",
   game: Game
 ): void {
   game.state.name = state;
   game.state.gameStamp = game.gameNanoseconds;
   game.state.timeStamp = game.timeNanoseconds;
+  console.log("GAME STATE", game.state.name);
 }
 
-export function goToStatePlayer(
+export function ___setPlayerState(
   player: Player,
-  state: 'start' | 'alive' | 'dead' | 'hurt',
+  state: "start" | "alive" | "dead" | "hurt",
   game: Game
 ): void {
   player.state.name = state;
   player.state.gameStamp = game.gameNanoseconds;
   player.state.timeStamp = game.timeNanoseconds;
+  console.log("PLAYER STATE", player.char.name, player.state);
 }
 
 // export function pauseGame(player: Player, game: Game): void {
 
-
 // }
 
-export function hasNumDeadIncrased(game: Game): boolean {
+export function getHasNumDeadIncrased(game: Game): boolean {
   if (game.numDead === game.numDeadPrev) {
     return false;
   }
@@ -41,11 +42,11 @@ export function updateNumCurrentlyDead(game: Game): void {
   game.numDeadPrev = game.numDead;
   game.numDead = 0;
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    game.numDead += game.players[i].state.name === 'dead' ? 1 : 0;
+    game.numDead += game.players[i].state.name === "dead" ? 1 : 0;
   }
 }
 
-export function resetAllHitboxes(game: Game): void {
+export function updateResetAllHitboxes(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((p, i) => {
       game.currentlyOverlappingSpritesMatrix[playerIndex][i] = false;
@@ -62,13 +63,13 @@ export function isPlayerHit(playerIndex: number, game: Game): boolean {
   return false;
 }
 
-export function longEnoughGame(duration: number, game: Game): boolean {
+export function getLongEnoughGameDuration(duration: number, game: Game): boolean {
   if (game.gameNanoseconds > game.state.gameStamp + duration + 20) {
     return true;
   }
   return false;
 }
-export function longEnoughTime(duration: number, game: Game): boolean {
+export function getLongEnoughTimeDuration(duration: number, game: Game): boolean {
   // console.log(
   //   "HERE",
   //   game.timeNanoseconds,

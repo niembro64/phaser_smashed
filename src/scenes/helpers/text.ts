@@ -11,7 +11,7 @@ export function updateSplashes(game: Game, zoom: number, newY: number): void {
   });
 }
 
-export function turnOnSplashRule(splashName: SplashName, game: Game): void {
+export function setRuleSplashOn(splashName: SplashName, game: Game): void {
   game.splashRules.forEach((splash, splashIndex) => {
     splash.text.setAlpha(0);
     if (splash.name === splashName) {
