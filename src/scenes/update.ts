@@ -1,65 +1,65 @@
 import Game from "./Game";
 import {
-  controllerMovement,
-  attackEnergy,
-  isAllPlayersReady,
-  printAllPadsActive,
+  controllerMovement as updateControllerMovement,
+  attackEnergy as updateAttackEnergy,
+  isAllPlayersReady as getIsAllPlayersReady,
+  printAllPadsActive as updatePrintAllPadsActive,
   isAnyPlayerPausing,
-  assignGamePadsConnected,
+  assignGamePadsConnected as updateGamePadsConnected,
 } from "./helpers/pad";
 import {
-  jump,
-  frictionGroundX,
-  frictionAirX,
-  frictionAirY,
-  frictionWallY,
+  jump as updateJump,
+  frictionGroundX as updateFrictionGroundX,
+  frictionAirX as updateFrictionAirX,
+  frictionAirY as updateFrictionAirY,
+  frictionWallY as updateFrictionWallY,
   updateLastDirectionTouched,
   setRespawn,
-  isPlayerOffscreen,
+  isPlayerOffscreen as getIsPlayerOffscreen,
   setGravityTrue,
   setGravityFalse,
 } from "./helpers/movement";
 import { setBlinkFalse, setBlinkTrue } from "./helpers/sprites";
 import {
-  goToStateGame,
-  goToStatePlayer,
-  hasNumDeadIncrased,
-  hasThisDurationPassed,
-  isPlayerHit,
+  goToStateGame as setGoToStateGame,
+  goToStatePlayer as setGoToStatePlayer,
+  hasNumDeadIncrased as getHasNumDeadIncrased,
+  hasThisDurationPassed as getHasThisDurationPassed,
+  isPlayerHit as getIsPlayerHit,
   // longEnoughGame,
-  longEnoughTime,
+  longEnoughTime as getIsLongEnoughTime,
   updateNumCurrentlyDead,
   updateTimeTime,
 } from "./helpers/state";
 import {
-  resetDamage,
-  onDeadUpdateMatrix,
-  turnOnActiveHurtEmitter,
-  turnOffActiveHurtEmitter,
-  turnOnVisibleHurtEmitter,
-  turnOffVisibleHurtEmitter,
+  resetDamage as setResetDamage,
+  onDeadUpdateMatrix as setOnDeadUpdateMatrix,
+  turnOnActiveHurtEmitter as setTurnOnActiveHurtEmitter,
+  turnOffActiveHurtEmitter as setTurnOffActiveHurtEmitter,
+  turnOnVisibleHurtEmitter as setTurnOnVisibleHurtEmitter,
+  turnOffVisibleHurtEmitter as setTurnOffVisibleHurtEmitter,
 } from "./helpers/damage";
-import { turnOnPhysicsAttackEnergy, upB } from "./helpers/attacks";
-import { gameStatePlay as gameStatePlayHandler } from "./gameStates.ts/gameStatePlay";
+import { turnOnPhysicsAttackEnergy as setTurnOnPhysicsAttackEnergy, upB as updateUpB } from "./helpers/attacks";
+import { gameStatePlay as updateGameStatePlayHandler } from "./gameStates.ts/gameStatePlay";
 import {
-  addShotToMatrixFirstBlood as addToShotsMatrixFirstBlood,
+  addShotToMatrixFirstBlood as setAddToShotsMatrixFirstBlood,
   addToShotsMatrixScreenClear,
-  isFirstBlood,
-  isScreenClear,
+  isFirstBlood as getIsFirstBlood,
+  isScreenClear as getIsScreenClear,
 } from "./helpers/drinking";
-import { pausePhysics, resumePhysics } from "./helpers/physics";
+import { pausePhysics as setPausePhysics, resumePhysics as setResumePhysics } from "./helpers/physics";
 import {
-  pauseAllReadySounds,
-  pauseMusic,
-  pauseWiiMusic,
-  playBGMusic,
-  playWiiMusicWaitShort,
-  playWiiMusicWaitLong,
-  resumeMusic,
-  playWiiMusic,
+  pauseAllReadySounds as setPauseAllReadySounds,
+  pauseMusic as setPauseMusic,
+  pauseWiiMusic as setPauseWiiMusic,
+  playBGMusic as setPlayBGMusic,
+  playWiiMusicWaitShort as updatePlayWiiMusicWaitShort,
+  playWiiMusicWaitLong as updatePlayWiiMusicWaitLong,
+  resumeMusic as setResumeMusic,
+  playWiiMusic as updatePlayWiiMusic,
 } from "./helpers/sound";
 import {
-  turnOnSplashRule,
+  turnOnSplashRule as setTurnOnRuleSplash,
   updateGlassesTransparency,
   updateText,
 } from "./helpers/text";
@@ -69,7 +69,7 @@ export function update(game: Game, time: number, delta: number): void {
   updateText(game);
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);
-  assignGamePadsConnected(game);
+  updateGamePadsConnected(game);
   // console.log(
   //   "PLAYERS DEAD",
   //   game.players[0].gameState.name,
@@ -86,111 +86,110 @@ export function update(game: Game, time: number, delta: number): void {
   // );
   switch (game.state.name) {
     case "start":
-      turnOnSplashRule("none", game);
-      playBGMusic(game);
-      pauseWiiMusic(game);
+      setTurnOnRuleSplash("none", game);
+      setPlayBGMusic(game);
+      setPauseWiiMusic(game);
 
-      goToStateGame("play", game);
+      setGoToStateGame("play", game);
       break;
     case "play":
-      gameStatePlayHandler(game, time, delta);
+      updateGameStatePlayHandler(game, time, delta);
       if (isAnyPlayerPausing(game)) {
-        goToStateGame("paused", game);
-        turnOnSplashRule("paused", game);
-        pauseMusic(game);
+        setGoToStateGame("paused", game);
+        setTurnOnRuleSplash("paused", game);
+        setPauseMusic(game);
         game.SOUND_START.play();
-        pausePhysics(game);
+        setPausePhysics(game);
         console.log("PAUSED");
       }
       if (
-        isScreenClear(game) &&
-        hasNumDeadIncrased(game)
+        getIsScreenClear(game) &&
+        getHasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
-        goToStateGame("screen-clear", game);
-        turnOnSplashRule("screen-clear", game);
-        pauseMusic(game);
+        setGoToStateGame("screen-clear", game);
+        setTurnOnRuleSplash("screen-clear", game);
+        setPauseMusic(game);
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
-        pausePhysics(game);
+        setPausePhysics(game);
         console.log("SCREEN CLEAR");
       }
       if (
-        isFirstBlood(game) &&
-        hasNumDeadIncrased(game)
+        getIsFirstBlood(game) &&
+        getHasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
-        goToStateGame("first-blood", game);
-        turnOnSplashRule("first-blood", game);
-        pauseMusic(game);
-
+        setGoToStateGame("first-blood", game);
+        setTurnOnRuleSplash("first-blood", game);
+        setPauseMusic(game);
         game.SOUND_INTRO.play();
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
-        pausePhysics(game);
+        setPausePhysics(game);
         console.log("FIRST BLOOD");
       }
       if (game.gameSecondsClock < 1) {
-        goToStateGame("end", game);
-        pausePhysics(game);
-        turnOnSplashRule("finished", game);
-        pauseMusic(game);
+        setGoToStateGame("end", game);
+        setPausePhysics(game);
+        setTurnOnRuleSplash("finished", game);
+        setPauseMusic(game);
         game.ENERJA_FINISH.play();
         // game.SOUND_PAUSED.play()
       }
       break;
     case "first-blood":
-      playWiiMusicWaitLong(game);
+      updatePlayWiiMusicWaitLong(game);
       // updateSomeReadySound(game);
       if (
-        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
-        isAllPlayersReady(game)
+        getIsLongEnoughTime(game.DURATION_GAME_SHOT, game) &&
+        getIsAllPlayersReady(game)
       ) {
-        turnOnSplashRule("none", game);
-        pauseWiiMusic(game);
-        pauseAllReadySounds(game);
-        goToStateGame("play", game);
-        turnOnSplashRule("none", game);
-        resumeMusic(game);
+        setTurnOnRuleSplash("none", game);
+        setPauseWiiMusic(game);
+        setPauseAllReadySounds(game);
+        setGoToStateGame("play", game);
+        setTurnOnRuleSplash("none", game);
+        setResumeMusic(game);
         game.SOUND_START.play();
-        resumePhysics(game);
+        setResumePhysics(game);
         console.log("ALL READY");
       }
 
       break;
     case "screen-clear":
-      playWiiMusicWaitLong(game);
+      updatePlayWiiMusicWaitLong(game);
       // updateSomeReadySound(game);
       if (
-        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
-        isAllPlayersReady(game)
+        getIsLongEnoughTime(game.DURATION_GAME_SHOT, game) &&
+        getIsAllPlayersReady(game)
       ) {
-        pauseWiiMusic(game);
-        pauseAllReadySounds(game);
-        resumeMusic(game);
-        goToStateGame("play", game);
-        turnOnSplashRule("none", game);
+        setPauseWiiMusic(game);
+        setPauseAllReadySounds(game);
+        setResumeMusic(game);
+        setGoToStateGame("play", game);
+        setTurnOnRuleSplash("none", game);
         game.SOUND_START.play();
-        resumePhysics(game);
+        setResumePhysics(game);
         console.log("ALL READY");
       }
       break;
     case "end":
-      playWiiMusicWaitShort(game);
+      updatePlayWiiMusicWaitShort(game);
       break;
     case "paused":
-      playWiiMusic(game);
+      updatePlayWiiMusic(game);
       if (
-        longEnoughTime(game.DURATION_GAME_SHOT, game) &&
-        isAllPlayersReady(game)
+        getIsLongEnoughTime(game.DURATION_GAME_SHOT, game) &&
+        getIsAllPlayersReady(game)
       ) {
-        pauseWiiMusic(game);
-        pauseAllReadySounds(game);
-        resumeMusic(game);
-        goToStateGame("play", game);
-        turnOnSplashRule("none", game);
+        setPauseWiiMusic(game);
+        setPauseAllReadySounds(game);
+        setResumeMusic(game);
+        setGoToStateGame("play", game);
+        setTurnOnRuleSplash("none", game);
         game.SOUND_START.play();
-        resumePhysics(game);
+        setResumePhysics(game);
         console.log("ALL READY");
       }
       break;
@@ -210,10 +209,10 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (hasThisDurationPassed(player, game.DURATION_GAME_START, game)) {
-          goToStatePlayer(player, "alive", game);
-          turnOnActiveHurtEmitter(player);
-          turnOffVisibleHurtEmitter(player);
+        if (getHasThisDurationPassed(player, game.DURATION_GAME_START, game)) {
+          setGoToStatePlayer(player, "alive", game);
+          setTurnOnActiveHurtEmitter(player);
+          setTurnOffVisibleHurtEmitter(player);
           setGravityTrue(player);
           setBlinkFalse(player);
         }
@@ -224,27 +223,27 @@ export function updatePlayers(game: Game): void {
         ///////// WHILE IN LOOP
         ////////////////////////////////
 
-        printAllPadsActive(player, game);
-        attackEnergy(player, game);
+        updatePrintAllPadsActive(player, game);
+        updateAttackEnergy(player, game);
         updateLastDirectionTouched(player);
-        frictionGroundX(player, game);
-        frictionAirX(player, game);
-        frictionWallY(player, game);
-        frictionAirY(player, game);
-        jump(player, game);
-        controllerMovement(player, game);
-        upB(player, game);
+        updateFrictionGroundX(player, game);
+        updateFrictionAirX(player, game);
+        updateFrictionWallY(player, game);
+        updateFrictionAirY(player, game);
+        updateJump(player, game);
+        updateControllerMovement(player, game);
+        updateUpB(player, game);
 
         ////////////////////////////////
         ///////// hit => hurt
         ////////////////////////////////
-        if (isPlayerHit(playerIndex, game)) {
-          goToStatePlayer(player, "hurt", game);
-          turnOnActiveHurtEmitter(player);
-          turnOnVisibleHurtEmitter(player);
+        if (getIsPlayerHit(playerIndex, game)) {
+          setGoToStatePlayer(player, "hurt", game);
+          setTurnOnActiveHurtEmitter(player);
+          setTurnOnVisibleHurtEmitter(player);
           player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
           player.char.attackEnergy.state = "released";
-          turnOnPhysicsAttackEnergy(player);
+          setTurnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);
           setGravityTrue(player);
           game.SOUND_HIT.play();
@@ -253,19 +252,19 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// offscreen => dead
         ////////////////////////////////
-        if (isPlayerOffscreen(player, game)) {
-          goToStatePlayer(player, "dead", game);
-          turnOffActiveHurtEmitter(player);
-          turnOnVisibleHurtEmitter(player);
-          onDeadUpdateMatrix(playerIndex, game);
-          if (isFirstBlood(game)) {
+        if (getIsPlayerOffscreen(player, game)) {
+          setGoToStatePlayer(player, "dead", game);
+          setTurnOffActiveHurtEmitter(player);
+          setTurnOnVisibleHurtEmitter(player);
+          setOnDeadUpdateMatrix(playerIndex, game);
+          if (getIsFirstBlood(game)) {
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
-            addToShotsMatrixFirstBlood(player, playerIndex, game);
+            setAddToShotsMatrixFirstBlood(player, playerIndex, game);
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
-          if (isScreenClear(game)) {
+          if (getIsScreenClear(game)) {
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
             addToShotsMatrixScreenClear(player, playerIndex, game);
@@ -275,10 +274,10 @@ export function updatePlayers(game: Game): void {
           game.SOUND_DIE.play();
           player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
           player.char.attackEnergy.state = "released";
-          turnOnPhysicsAttackEnergy(player);
+          setTurnOnPhysicsAttackEnergy(player);
           setBlinkTrue(player);
           setGravityFalse(player);
-          resetDamage(player);
+          setResetDamage(player);
           setRespawn(player, game);
         }
 
@@ -289,24 +288,24 @@ export function updatePlayers(game: Game): void {
         ///////// WHILE IN LOOP
         ////////////////////////////////
         updateLastDirectionTouched(player);
-        frictionGroundX(player, game);
-        frictionAirX(player, game);
-        frictionWallY(player, game);
-        frictionAirY(player, game);
-        jump(player, game);
-        controllerMovement(player, game);
-        upB(player, game);
+        updateFrictionGroundX(player, game);
+        updateFrictionAirX(player, game);
+        updateFrictionWallY(player, game);
+        updateFrictionAirY(player, game);
+        updateJump(player, game);
+        updateControllerMovement(player, game);
+        updateUpB(player, game);
 
         ////////////////////////////////
         ///////// !offscreen && duration => alive
         ////////////////////////////////
         if (
-          !isPlayerOffscreen(player, game) &&
-          hasThisDurationPassed(player, game.DURATION_PLAYER_HURT, game)
+          !getIsPlayerOffscreen(player, game) &&
+          getHasThisDurationPassed(player, game.DURATION_PLAYER_HURT, game)
         ) {
-          goToStatePlayer(player, "alive", game);
-          turnOnActiveHurtEmitter(player);
-          turnOffVisibleHurtEmitter(player);
+          setGoToStatePlayer(player, "alive", game);
+          setTurnOnActiveHurtEmitter(player);
+          setTurnOffVisibleHurtEmitter(player);
           setGravityTrue(player);
           setBlinkFalse(player);
         }
@@ -314,19 +313,19 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// offscreen => dead
         ////////////////////////////////
-        if (isPlayerOffscreen(player, game)) {
-          goToStatePlayer(player, "dead", game);
-          turnOffActiveHurtEmitter(player);
-          turnOnVisibleHurtEmitter(player);
-          onDeadUpdateMatrix(playerIndex, game);
-          if (isFirstBlood(game)) {
+        if (getIsPlayerOffscreen(player, game)) {
+          setGoToStatePlayer(player, "dead", game);
+          setTurnOffActiveHurtEmitter(player);
+          setTurnOnVisibleHurtEmitter(player);
+          setOnDeadUpdateMatrix(playerIndex, game);
+          if (getIsFirstBlood(game)) {
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
-            addToShotsMatrixFirstBlood(player, playerIndex, game);
+            setAddToShotsMatrixFirstBlood(player, playerIndex, game);
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
-          if (isScreenClear(game)) {
+          if (getIsScreenClear(game)) {
             console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
             console.log("SHOTS", game.numberShotsTakenByMeMatrix);
             addToShotsMatrixScreenClear(player, playerIndex, game);
@@ -336,10 +335,10 @@ export function updatePlayers(game: Game): void {
           game.SOUND_DIE.play();
           player.char.attackEnergy.timestampThrow = game.time.now;
           player.char.attackEnergy.state = "released";
-          turnOnPhysicsAttackEnergy(player);
+          setTurnOnPhysicsAttackEnergy(player);
           setGravityFalse(player);
           setBlinkTrue(player);
-          resetDamage(player);
+          setResetDamage(player);
           setRespawn(player, game);
         }
 
@@ -353,10 +352,10 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (hasThisDurationPassed(player, game.DURATION_PLAYER_DEAD, game)) {
-          goToStatePlayer(player, "alive", game);
-          turnOnActiveHurtEmitter(player);
-          turnOffVisibleHurtEmitter(player);
+        if (getHasThisDurationPassed(player, game.DURATION_PLAYER_DEAD, game)) {
+          setGoToStatePlayer(player, "alive", game);
+          setTurnOnActiveHurtEmitter(player);
+          setTurnOffVisibleHurtEmitter(player);
           setGravityTrue(player);
           setBlinkFalse(player);
         }
