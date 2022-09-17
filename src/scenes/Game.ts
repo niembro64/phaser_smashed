@@ -29,7 +29,7 @@ export default class Game extends Phaser.Scene {
 
   debug: Debug = {
     level: 4,
-    useCameras: false,
+    useCameras: true,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
