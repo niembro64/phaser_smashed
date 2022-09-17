@@ -498,61 +498,161 @@ export function updateControllerMovement(player: Player, game: Game): void {
   }
 }
 
-export function updatePrintAllPadsActive(player: Player, game: Game): void {
+export function updatePrintAllPadsActive(game: Game): void {
   // Buttons
+  game.players.forEach((player, playerIndex) => {
+    if (player.gamepad) {
+      if (playerIndex === 0) {
+        // console.log(playerIndex, player.gamepad);
+        // console.log(playerIndex, player.gamepad.axes);
+        // console.log(playerIndex, player.gamepad.buttons[0].pressed);
 
-  if (player.gamepad) {
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._RCTop",
+        //   player.gamepad._RCTop
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._RCBottom",
+        //   player.gamepad._RCBottom
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._RCLeft",
+        //   player.gamepad._RCLeft
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._RCRight",
+        //   player.gamepad._RCRight
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._LCTop",
+        //   player.gamepad._LCTop
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._LCBottom",
+        //   player.gamepad._LCBottom
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._LCLeft",
+        //   player.gamepad._LCLeft
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._LCRight",
+        //   player.gamepad._LCRight
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._FBLeftBottom",
+        //   player.gamepad._FBLeftBottom
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._FBLeftTop",
+        //   player.gamepad._FBLeftTop
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._FBRightBottom",
+        //   player.gamepad._FBRightBottom
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._FBRightTop",
+        //   player.gamepad._FBRightTop
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._HAxisLeft",
+        //   player.gamepad._HAxisLeft
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._VAxisLeft",
+        //   player.gamepad._VAxisLeft
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._HAxisRight",
+        //   player.gamepad._HAxisRight
+        // );
+        // console.log(
+        //   playerIndex,
+        //   "player.gamepad._VAxisRight",
+        //   player.gamepad._VAxisRight
+        // );
+      }
+      if (player.gamepad.B) {
+        console.log(player.playerNumber, "B");
+        // // console.log(player.playerNumber, player.gamepad.id);
+        // // console.log(
+        // //   player.playerNumber,
+        // //   player.gamepad.id,
+        // //   player.gamepad._LCLeft
+        // // );
+        // console.log(player.playerNumber, player.gamepad.id, player.gamepad);
 
-    if (player.gamepad.B) {
-      console.log(player.playerNumber, "B");
-      console.log(player.playerNumber, player.gamepad);
-    }
-    if (player.gamepad.A) {
-      console.log(player.playerNumber, "A");
-    }
-    if (player.gamepad.X) {
-      console.log(player.playerNumber, "X");
-    }
-    if (player.gamepad.Y) {
-      console.log(player.playerNumber, "Y");
-      // player.char.fast = 2;
-    }
+        // for (let i = 0; i < player.gamepad.pad.buttons.length; i++) {
+        //   console.log(i, player.gamepad.pad.buttons[i].value);
+        //   // console.log(i, player.gamepad.pad.buttons[i].pressed);
+        // }
+        // for (let i = 0; i < 10; i++) {
+        //   // console.log(player.gamepad.pad.buttons[i].pressed);
+        // }
+      }
+      if (player.gamepad.A) {
+        console.log(player.playerNumber, "A");
+      }
+      if (player.gamepad.X) {
+        console.log(player.playerNumber, "X");
+      }
+      if (player.gamepad.Y) {
+        console.log(player.playerNumber, "Y");
+        // player.char.fast = 2;
+      }
 
-    //  D Pad
-    if (player.gamepad.down) {
-      console.log(player.playerNumber, "down");
-    }
-    if (player.gamepad.up) {
-      console.log(player.playerNumber, "up");
-    }
-    if (player.gamepad.left) {
-      console.log(player.playerNumber, "left");
-    }
-    if (player.gamepad.right) {
-      console.log(player.playerNumber, "right");
-    }
+      //  D Pad
+      if (player.gamepad.down) {
+        console.log(player.playerNumber, "down");
+      }
+      if (player.gamepad.up) {
+        console.log(player.playerNumber, "up");
+      }
+      if (player.gamepad.left) {
+        console.log(player.playerNumber, "left");
+      }
+      if (player.gamepad.right) {
+        console.log(player.playerNumber, "right");
+      }
 
-    // L R Buttons
-    if (player.gamepad.L1) {
-      console.log(player.playerNumber, "L1");
-    }
-    if (player.gamepad.R1) {
-      console.log(player.playerNumber, "R1");
-    }
-    // L R Buttons
-    if (player.gamepad.L2) {
-      console.log(player.playerNumber, "L2");
-    }
-    if (player.gamepad.R2) {
-      console.log(player.playerNumber, "R2");
-    }
+      // L R Buttons
+      if (player.gamepad.L1) {
+        console.log(player.playerNumber, "L1");
+      }
+      if (player.gamepad.R1) {
+        console.log(player.playerNumber, "R1");
+      }
+      // L R Buttons
+      if (player.gamepad.L2) {
+        console.log(player.playerNumber, "L2");
+      }
+      if (player.gamepad.R2) {
+        console.log(player.playerNumber, "R2");
+      }
 
-    // for (let i = 0; i < player.gamepad.pad.buttons.length; i++) {
-    //   //   console.log(i);
-    //   console.log("ERIC", i, player.gamepad.pad.buttons[i].value);
-    // }
-    // console.log("ERIC", player.gamepad.pad.buttons[0].value);
-    // console.log(player.gamepad.pad.buttons[1].value);
-    // console.log(player.pad.gamepad.buttons[0].pressed);
-  }
+      // for (let i = 0; i < player.gamepad.pad.buttons.length; i++) {
+      //   //   console.log(i);
+      //   console.log("ERIC", i, player.gamepad.pad.buttons[i].value);
+      // }
+      // console.log("ERIC", player.gamepad.pad.buttons[0].value);
+      // console.log(player.gamepad.pad.buttons[1].value);
+      // console.log(player.pad.gamepad.buttons[0].pressed);
+    }
+  });
 }

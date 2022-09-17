@@ -78,6 +78,7 @@ export function update(game: Game, time: number, delta: number): void {
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);
   updateGamePadsConnected(game);
+  updatePrintAllPadsActive(game);
 
   switch (game.gameState.name) {
     case "game-state-play":
@@ -212,7 +213,6 @@ export function updatePlayers(game: Game): void {
         ///////// WHILE IN LOOP
         ////////////////////////////////
 
-        updatePrintAllPadsActive(player, game);
         updateAttackEnergy(player, game);
         updateLastDirectionTouched(player);
         updateFrictionGroundX(player, game);

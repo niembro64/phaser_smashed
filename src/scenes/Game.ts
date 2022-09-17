@@ -38,7 +38,7 @@ export default class Game extends Phaser.Scene {
     playShotsWiiBGM: true,
     wallJumps: true,
     useBGM: true,
-    BGMNumber: 0,
+    BGMNumber: 2,
     useDefaultAttackDamage: false,
     useDefaultAttackHitback: false,
     useColorFilters: false,
