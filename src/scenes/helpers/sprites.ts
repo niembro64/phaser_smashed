@@ -29,7 +29,7 @@ export function updateSpriteFilter(
   game: Game
 ): void {
   if (player.char.colorFilter) {
-    if (player.state.name === "hurt") {
+    if (player.state.name === "player-state-hurt") {
       // HURT
       if (
         Math.floor(

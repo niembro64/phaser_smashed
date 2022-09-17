@@ -19,7 +19,7 @@ export function setRuleSplashOn(game: Game, splashName: SplashName): void {
     }
   });
 
-  if (splashName !== "none") {
+  if (splashName !== "splash-none") {
     game.splashRules[0].text.setAlpha(1);
   } else {
     game.splashRules[0].text.setAlpha(0);
@@ -113,7 +113,7 @@ export function updateGlassesTransparency(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.shotGlass.setAlpha(0);
 
-    if (player.state.name === "dead" && game.state.name !== "play") {
+    if (player.state.name === "player-state-dead" && game.gameState.name !== "game-state-play") {
       player.shotGlass.setAlpha(1);
     }
   });
@@ -159,7 +159,7 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
 
 export function updateReadyText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
-    if (game.state.name === "play" || game.state.name === "end") {
+    if (game.gameState.name === "game-state-play" || game.gameState.name === "game-state-finished") {
       player.scoreBoardReady.setAlpha(0);
     } else {
       if (isPlayerReady(player, game)) {
@@ -191,7 +191,7 @@ export function updateControllerText(
   newY: number
 ): void {
   game.players.forEach((player, playerIndex) => {
-    if (game.state.name === "play" || game.state.name === "end") {
+    if (game.gameState.name === "game-state-play" || game.gameState.name === "game-state-finished") {
       player.scoreBoardController.setAlpha(0);
     } else {
       if (isPlayerReady(player, game)) {

@@ -1,19 +1,19 @@
 import Game from "../Game";
-import { Player } from "../interfaces";
+import { GameState, Player, PlayerState } from "../interfaces";
 
 export function setGameState____________________(
   game: Game,
-  state: "start" | "play" | "paused" | "first-blood" | "screen-clear" | "end"
+  state: GameState
 ): void {
-  game.state.name = state;
-  game.state.gameStamp = game.gameNanoseconds;
-  game.state.timeStamp = game.timeNanoseconds;
-  console.log("GAME STATE", game.state.name);
+  game.gameState.name = state;
+  game.gameState.gameStamp = game.gameNanoseconds;
+  game.gameState.timeStamp = game.timeNanoseconds;
+  console.log("GAME STATE", game.gameState.name);
 }
 
 export function setPlayerState____________________(
   player: Player,
-  state: "start" | "alive" | "dead" | "hurt",
+  state: PlayerState,
   game: Game
 ): void {
   player.state.name = state;
@@ -42,7 +42,7 @@ export function updateNumCurrentlyDead(game: Game): void {
   game.numDeadPrev = game.numDead;
   game.numDead = 0;
   for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    game.numDead += game.players[i].state.name === "dead" ? 1 : 0;
+    game.numDead += game.players[i].state.name === "player-state-dead" ? 1 : 0;
   }
 }
 
@@ -67,7 +67,7 @@ export function getLongEnoughGameDuration(
   duration: number,
   game: Game
 ): boolean {
-  if (game.gameNanoseconds > game.state.gameStamp + duration + 20) {
+  if (game.gameNanoseconds > game.gameState.gameStamp + duration + 20) {
     return true;
   }
   return false;
@@ -81,7 +81,7 @@ export function getLongEnoughTimeDuration(
   //   game.timeNanoseconds,
   //   game.state.timeStamp + duration + 20
   // );
-  if (game.timeNanoseconds > game.state.timeStamp + duration + 20) {
+  if (game.timeNanoseconds > game.gameState.timeStamp + duration + 20) {
     return true;
   }
   return false;

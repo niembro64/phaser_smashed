@@ -1,14 +1,28 @@
 import { Key } from "react";
 
+export type GameState =
+  | "game-state-start"
+  | "game-state-play"
+  | "game-state-paused"
+  | "game-state-first-blood"
+  | "game-state-screen-clear"
+  | "game-state-finished";
+
+export type PlayerState =
+  | "player-state-start"
+  | "player-state-alive"
+  | "player-state-dead"
+  | "player-state-hurt";
+
 export type SplashName =
-  | "black"
-  | "none"
-  | "start"
-  | "paused"
-  | "first-blood"
-  | "screen-clear"
-  | "cooldown"
-  | "finished";
+  | "splash-black"
+  | "splash-none"
+  | "splash-start"
+  | "splash-paused"
+  | "splash-first-blood"
+  | "splash-screen-clear"
+  | "splash-cool-down"
+  | "splash-finished";
 
 export interface Clock {
   minutes: number;
@@ -33,7 +47,7 @@ export interface Player {
   scoreBoardLower: string | any;
   scoreBoardReady: string | any;
   scoreBoardController: string | any;
-  state: State;
+  state: PlayerStateWithTime;
   keyboard_static: Keyboard;
   char: Char;
   keyboard: Keyboard | any;
@@ -88,8 +102,13 @@ export interface Circle {
   colorString: string;
 }
 
-export interface State {
-  name: string;
+export interface PlayerStateWithTime {
+  name: PlayerState;
+  gameStamp: number;
+  timeStamp: number;
+}
+export interface GameStateWithTime {
+  name: GameState;
   gameStamp: number;
   timeStamp: number;
 }

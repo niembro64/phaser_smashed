@@ -1,9 +1,10 @@
 import Game from "./Game";
 import { onHitHandler } from "./helpers/damage";
 import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
+import { setPreUpdate } from "./update";
 
 export function create(game: Game) {
-  initMatrices(game);
+  createMatrices(game);
   createSounds(game);
   createBackground(game);
   createBackgroundTitles(game);
@@ -18,10 +19,12 @@ export function create(game: Game) {
   createEnergyAttacks(game);
   createPlayers(game);
   createCameras(game);
-  setPlayersCollide(game);
-  setAttackEnergyCollideWithPlayers(game);
-  initializeHitboxOverlap(game);
+  createPlayersCollide(game);
+  createAttackEnergyCollideWithPlayers(game);
+  createHitboxOverlap(game);
   createEndDataMatrices(game);
+
+  setPreUpdate(game);
 }
 export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
@@ -55,7 +58,7 @@ export function createEndDataMatrices(game: Game): void {
   });
 }
 
-export function initMatrices(game: Game): void {
+export function createMatrices(game: Game): void {
   game.currentlyOverlappingSpritesMatrix = [];
   game.wasLastHitByMatrix = [];
   game.numberHitByMatrix = [];
@@ -183,7 +186,7 @@ export function createCircles(game: Game): void {
   // });
 }
 
-export function initializeHitboxOverlap(game: Game): void {
+export function createHitboxOverlap(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((pj, j) => {
       if (player !== pj) {
@@ -348,7 +351,7 @@ export function createEnergyAttacks(game: Game): void {
   });
 }
 
-export function setAttackEnergyCollideWithPlayers(game: Game): void {
+export function createAttackEnergyCollideWithPlayers(game: Game): void {
   if (!game.debug.setCollidePlayerEnergyAttacks) {
     return;
   }
@@ -544,7 +547,7 @@ export function createBackgroundTitles(game: Game): void {
 export function createSplashEnd(game: Game): void {
   game.splashRules.forEach((splash, splashIndex) => {
     // if (splashIndex === game.splashRules.length - 1) {
-    if (splash.name === "finished") {
+    if (splash.name === "splash-finished") {
       splash.text = game.add
         .text(
           game.SCREEN_DIMENSIONS.WIDTH / 2,
@@ -803,7 +806,7 @@ export function createScoreboard(game: Game): void {
   });
 }
 
-export function setPlayersCollide(game: Game): void {
+export function createPlayersCollide(game: Game): void {
   if (!game.debug.setCollidePlayerPlayers) {
     return;
   }

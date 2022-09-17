@@ -10,7 +10,7 @@ export function onHitHandler(
   damage: number,
   game: Game
 ): void {
-  if (player.state.name !== "alive") {
+  if (player.state.name !== "player-state-alive") {
     return;
   }
   game.currentlyOverlappingSpritesMatrix[playerIndex][j] = true;
@@ -104,7 +104,7 @@ export function updatePlayerNumberKills(
 }
 
 export function removeDamage(player: Player, damage: number): void {
-  if (player.state.name === "alive") {
+  if (player.state.name === "player-state-alive") {
     player.char.damage -= damage;
   }
 }

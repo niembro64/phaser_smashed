@@ -9,7 +9,8 @@ import {
   Player,
   Splash as SplashRules,
   SplashMulti as SplashEndData,
-  State,
+  PlayerStateWithTime,
+  GameStateWithTime,
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
@@ -212,7 +213,7 @@ export default class Game extends Phaser.Scene {
   splashRules: SplashRules[] = [
     {
       text: null,
-      name: "black",
+      name: "splash-black",
       word: "BLACK",
       color: "#000000",
       backgroundColor: "#000000ff",
@@ -222,7 +223,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "start",
+      name: "splash-start",
       word: "START",
       color: "#AAAAAA",
       backgroundColor: "#00000000",
@@ -232,7 +233,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "paused",
+      name: "splash-paused",
       word: "PAUSED",
       color: "#005500",
       backgroundColor: "#00AA00",
@@ -242,7 +243,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "first-blood",
+      name: "splash-first-blood",
       word: "FIRST BLOOD",
       color: "#440000",
       backgroundColor: "#FF0000",
@@ -252,7 +253,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "screen-clear",
+      name: "splash-screen-clear",
       word: "SCREEN CLEAR",
       color: "#330033",
       backgroundColor: "#bb44bb",
@@ -262,7 +263,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "cooldown",
+      name: "splash-cool-down",
       word: "COOLDOWN PERIOD",
       color: "#ffffff",
       backgroundColor: "#00000000",
@@ -272,7 +273,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       text: null,
-      name: "finished",
+      name: "splash-finished",
       word: "FINISHED",
       color: "#ffffff",
       backgroundColor: "#000000ff",
@@ -386,8 +387,13 @@ export default class Game extends Phaser.Scene {
   numberKilledByMatrix: number[][] = [];
   numberShotsTakenByMeMatrix: number[][] = [];
 
-  state: State = {
-    name: "start",
+  gameState: GameStateWithTime = {
+    name: "game-state-start",
+    gameStamp: 0,
+    timeStamp: 0,
+  };
+  playerState: PlayerStateWithTime = {
+    name: "player-state-start",
     gameStamp: 0,
     timeStamp: 0,
   };
@@ -410,7 +416,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardReady: "READY",
       scoreBoardController: "X",
       circleOffset: 0,
-      state: { name: "start", gameStamp: 0, timeStamp: 0 },
+      state: { name: "player-state-start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.W,
         down: Phaser.Input.Keyboard.KeyCodes.S,
@@ -522,7 +528,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardLower: "",
       scoreBoardReady: "READY",
       scoreBoardController: "X",
-      state: { name: "start", gameStamp: 0, timeStamp: 0 },
+      state: { name: "player-state-start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.T,
         down: Phaser.Input.Keyboard.KeyCodes.G,
@@ -633,7 +639,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardLower: "",
       scoreBoardReady: "READY",
       scoreBoardController: "X",
-      state: { name: "start", gameStamp: 0, timeStamp: 0 },
+      state: { name: "player-state-start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.I,
         down: Phaser.Input.Keyboard.KeyCodes.K,
@@ -744,7 +750,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardLower: "",
       scoreBoardReady: "READY",
       scoreBoardController: "X",
-      state: { name: "start", gameStamp: 0, timeStamp: 0 },
+      state: { name: "player-state-start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,
@@ -854,7 +860,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardLower: "",
       scoreBoardReady: "READY",
       scoreBoardController: "X",
-      state: { name: "start", gameStamp: 0, timeStamp: 0 },
+      state: { name: "player-state-start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,
@@ -964,7 +970,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardLower: "",
       scoreBoardReady: "READY",
       scoreBoardController: "X",
-      state: { name: "start", gameStamp: 0, timeStamp: 0 },
+      state: { name: "player-state-start", gameStamp: 0, timeStamp: 0 },
       keyboard_static: {
         up: Phaser.Input.Keyboard.KeyCodes.UP,
         down: Phaser.Input.Keyboard.KeyCodes.DOWN,

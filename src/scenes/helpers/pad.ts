@@ -99,7 +99,7 @@ export function resetMyHitByMatrix(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.state.name === "hurt") {
+  if (player.state.name === "player-state-hurt") {
     return;
   }
   for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
