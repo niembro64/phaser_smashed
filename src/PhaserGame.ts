@@ -1,4 +1,6 @@
-import Game from './scenes/Game';
+import Phaser from "phaser";
+
+import Game from "./scenes/Game";
 
 const config: Phaser.Types.Core.GameConfig = {
   scale: {
@@ -16,21 +18,21 @@ const config: Phaser.Types.Core.GameConfig = {
   },
   pixelArt: false,
   type: Phaser.AUTO,
-  parent: 'phaser-container',
-  backgroundColor: '#000000',
+  parent: "phaser-container",
+  backgroundColor: "#000000",
   // backgroundColor: '#0077dd',
   input: {
     gamepad: true,
   },
   physics: {
-    default: 'arcade',
+    default: "arcade",
     arcade: {
       gravity: { y: 3000 },
       debug: false,
       // debug: true,
     },
   },
-  scene: Game,
+  scene: [Game],
   // dom: {
   //   createContainer: true,
   // },

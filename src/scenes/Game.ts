@@ -13,6 +13,10 @@ import {
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
+  connectionFunction(): void {
+    console.log("ASDFASDFASDF");
+  }
+
   PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   // PLAYER_CHOICES: number[] = [3, 0];
   // PLAYER_CHOICES: number[] = [3];
@@ -44,7 +48,7 @@ export default class Game extends Phaser.Scene {
     useReadySound: false,
     invertHealth: false,
     seeSplashDataAlways: false,
-    numUpdateLoopsToSkip:  0,
+    numUpdateLoopsToSkip: 0,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };

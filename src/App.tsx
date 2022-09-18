@@ -1,5 +1,7 @@
 // import { useState } from "react";
 import { useEffect, useState } from "react";
+import phaserGame from "./PhaserGame";
+import Game from "./scenes/Game";
 import "./App.css";
 // import "@fontsource/press-start-2p";
 
@@ -33,6 +35,8 @@ function App() {
   ];
 
   const onClickHandler = (buttonName: ButtonName) => {
+    const scene = phaserGame.scene.keys.game as Game;
+    scene.connectionFunction();
     switch (buttonName) {
       case "Controls":
         setShowControls(!showControls);
