@@ -28,8 +28,8 @@ function App() {
     { button: "Y", move: "Energy Attack", ready: "🚧" },
     { button: "L + R", move: "Pause", ready: "✔️" },
     { button: "Any", move: "UnPause", ready: "✔️" },
-    { button: "B", move: "Physical Attack", ready: "🔜" },
-    { button: "Forward + B", move: "Smash Attack", ready: "🔜" },
+    { button: "B", move: "Physical Attack", ready: "❌" },
+    { button: "Forward + B", move: "Smash Attack", ready: "❌" },
   ];
 
   const onClickHandler = (buttonName: ButtonName) => {

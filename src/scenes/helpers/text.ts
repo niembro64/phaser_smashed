@@ -27,7 +27,8 @@ export function setRuleSplashOn(game: Game, splashName: SplashName): void {
 }
 
 export function updateText(game: Game): void {
-  const dataY = game.SCREEN_DIMENSIONS.HEIGHT / 32;
+  const dataTitleY = 65;
+  const dataY = dataTitleY + 40;
   const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
   const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
   const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
@@ -38,6 +39,10 @@ export function updateText(game: Game): void {
   const redOffsetY =
     game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
 
+  const newDataTitleY =
+    dataTitleY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newDataY =
     dataY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
@@ -81,7 +86,7 @@ export function updateText(game: Game): void {
   updateReadyText(game, zoom, newTopY);
   updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
-  updateEndDataMatrices(game, zoom, newDataY);
+  updateEndDataMatrices(game, zoom, newDataY, newDataTitleY);
 }
 
 export function updateClockText(game: Game): void {
@@ -254,12 +259,14 @@ export function updateDeathsKillsText(
 export function updateEndDataMatrices(
   game: Game,
   zoom: number,
-  newY: number
+  newY: number,
+  newTitleY: number
 ): void {
   let numSplashes: number = game.splashesEndData.length;
 
   game.splashesEndData.forEach((splash, splashIndex) => {
-    splash.text.setScale(1 / zoom, 1 / zoom);
+    splash.textTitle.setScale(1 / zoom, 1 / zoom);
+    splash.textData.setScale(1 / zoom, 1 / zoom);
     for (let i = 0; i < game.players.length; i++) {
       switch (splashIndex) {
         case 0:
@@ -320,13 +327,13 @@ export function updateEndDataMatrices(
       }
       if (splashIndex !== game.splashesEndData.length - 1) {
         splash.words[i] += "]";
+        // splash.words[i] += splash.emoji;
         splash.words[i] += game.dotArray[i];
       }
     }
     // splash.words.push("ASDF");
     // splash.words.unshift("ASDF");
-    splash.text.setText(splash.words);
-    splash.text.x =
+    splash.textTitle.x =
       game.cameraMover.char.sprite.x +
       ((game.splashEndDataOffset +
         game.SCREEN_DIMENSIONS.WIDTH *
@@ -334,6 +341,16 @@ export function updateEndDataMatrices(
         (numSplashes + 1)) *
         (1 / zoom);
 
-    splash.text.y = newY;
+    splash.textData.setText(splash.words);
+    splash.textData.x =
+      game.cameraMover.char.sprite.x +
+      ((game.splashEndDataOffset +
+        game.SCREEN_DIMENSIONS.WIDTH *
+          (Math.floor(numSplashes / 2) - splashIndex)) /
+        (numSplashes + 1)) *
+        (1 / zoom);
+
+    splash.textTitle.y = newTitleY;
+    splash.textData.y = newY;
   });
 }

@@ -51,7 +51,11 @@ export default class Game extends Phaser.Scene {
   DEFAULT_ATTACK_DAMAGE: number = 50;
 
   GAMEBAR_CHARS = { kills: " ⇧💀⇩ ", deaths: "", damage: "♡", shots: "☆" };
-  //▲▼⬆⬇↑↓↑↿⇂⋆ // //🍻 //★//✰//☆//⚡//❤//v//♡//♥
+  //▲▼⬆⬇↑↓↑↿⇂⋆ // //🍻 //★//✰//☆//⚡//❤//v//♡//♥💔
+  // 💔⭐💀
+  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥💀
+  //🏴‍☠️🏳️🏁🏴
+  // 🔴🔵🟡🟢🟣🟠⚫⚪🟤
 
   // DURATION_GAME_LAST_MINUTES: number = 0.02;
   // DURATION_GAME_LAST_MINUTES: number = 0.3;
@@ -293,22 +297,26 @@ export default class Game extends Phaser.Scene {
     },
   ];
 
+  splashEndDataOffset: number = -1100;
   SplashEndDataInit: SplashEndData = {
-    text: "",
+    textTitle: "",
+    textData: "",
     name: "",
+    emoji: "",
     words: [],
     vertical: 0,
-    size: "40px",
+    size: "30px",
     src: "glass.png",
     color: "#ffffff",
     backgroundColor: "#ffffff",
     strokeThickness: 1,
   };
-  splashEndDataOffset: number = -1500;
   splashesEndData: SplashEndData[] = [
     {
-      text: null,
-      name: "Hit By",
+      textTitle: null,
+      textData: null,
+      name: "Hits",
+      emoji: "💔",
       vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
@@ -318,8 +326,10 @@ export default class Game extends Phaser.Scene {
       strokeThickness: this.SplashEndDataInit.strokeThickness,
     },
     {
-      text: null,
-      name: "Killed By",
+      textTitle: null,
+      textData: null,
+      name: "Deaths",
+      emoji: "💀",
       vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
@@ -329,8 +339,10 @@ export default class Game extends Phaser.Scene {
       strokeThickness: this.SplashEndDataInit.strokeThickness,
     },
     {
-      text: null,
-      name: "Shots By",
+      textTitle: null,
+      textData: null,
+      name: "Shots",
+      emoji: "⭐",
       vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
@@ -340,8 +352,10 @@ export default class Game extends Phaser.Scene {
       strokeThickness: this.SplashEndDataInit.strokeThickness,
     },
     {
-      text: null,
-      name: "",
+      textTitle: null,
+      textData: null,
+      name: "Characters",
+      emoji: "",
       words: [],
       vertical: 0,
       color: this.SplashEndDataInit.color,

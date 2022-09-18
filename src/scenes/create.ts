@@ -28,22 +28,39 @@ export function create(game: Game) {
   setPreUpdate(game);
 }
 
-// ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥
-//🏴‍☠️🏳️🏁🏴
-// 🔴🔵🟡🟢🟣🟠⚫⚪🟤
-
 export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
   game.splashesEndData.forEach((splash, splashIndex) => {
-    for (let i = 0; i < game.players.length + 2; i++) {
-      splash.words.push(splash.name);
-    }
     for (let i = 0; i < game.players.length; i++) {
       splash.words[i] = game.players[i].char.name + " " + game.dotArray[i];
     }
-    splash.words[game.players.length] = "";
-    splash.words[game.players.length + 1] = splash.name;
-    splash.text = game.add
+    // splash.words[game.players.length] = "";
+    // splash.words[game.players.length] = splash.name;
+    splash.textTitle = game.add
+      .text(
+        game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
+        game.SCREEN_DIMENSIONS.HEIGHT / 6,
+        splash.name + " " + splash.emoji,
+        {
+          align: "right",
+          fontSize: splash.size,
+          fontFamily: game.FONT_DEFAULT_MONOSPACE,
+          color: splash.color,
+          stroke: splash.backgroundColor,
+          strokeThickness: splash.strokeThickness,
+          shadow: {
+            offsetX: 0,
+            offsetY: 9,
+            color: "black",
+            blur: 10,
+            stroke: true,
+            fill: true,
+          },
+        }
+      )
+      .setOrigin(0.5, 0)
+      .setAlpha(1);
+    splash.textData = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
         game.SCREEN_DIMENSIONS.HEIGHT / 6,

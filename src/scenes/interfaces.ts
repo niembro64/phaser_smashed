@@ -194,8 +194,10 @@ export interface Splash {
   src: string;
 }
 export interface SplashMulti {
-  text: any;
+  textTitle: any;
+  textData: any;
   name: string;
+  emoji: string;
   vertical: number;
   size: string;
   words: string[];
