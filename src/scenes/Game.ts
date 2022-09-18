@@ -213,10 +213,15 @@ export default class Game extends Phaser.Scene {
   //   { graphic: null, colorNumber: 0x33ee33, colorString: "#33ee33" },
   // ];
   circles: Circle[] = [
-    { graphic: null, colorNumber: 0xdd5555, colorString: "#dd5555" },
-    { graphic: null, colorNumber: 0x5599ff, colorString: "#5599ff" },
-    { graphic: null, colorNumber: 0xddcc22, colorString: "#ddcc22" },
-    { graphic: null, colorNumber: 0x33ee33, colorString: "#33ee33" },
+    { graphic: null, colorNumber: 0xe81224, colorString: "#e81224" },
+    { graphic: null, colorNumber: 0x0078d7, colorString: "#0078d7" },
+    { graphic: null, colorNumber: 0xfff100, colorString: "#fff100" },
+    { graphic: null, colorNumber: 0x16c60c, colorString: "#16c60c" },
+    { graphic: null, colorNumber: 0x886ce4, colorString: "#886ce4" },
+    { graphic: null, colorNumber: 0xf7630c, colorString: "#f7630c" },
+    { graphic: null, colorNumber: 0x383838, colorString: "#383838" },
+    { graphic: null, colorNumber: 0xf2f2f2, colorString: "#f2f2f2" },
+    { graphic: null, colorNumber: 0x8e562e, colorString: "#8e562e" },
   ];
   dotArray = ["🔴", "🔵", "🟡", "🟢", "🟣", "🟠", "⚫", "⚪", "🟤"];
   FONT_DEFAULT_NICE: string = "Impact";
