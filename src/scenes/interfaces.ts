@@ -274,6 +274,7 @@ export interface Debug {
   useColorFilters: boolean;
   useReadySound: boolean;
   invertHealth: boolean;
+  seeSplashDataAlways: boolean;
 }
 
 export interface NormalizedVector {

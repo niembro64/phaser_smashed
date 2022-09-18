@@ -58,8 +58,8 @@ import {
 } from "./helpers/sound";
 import {
   setRuleSplashOn,
-  setTurnEndDataOff,
-  setTurnEndDataOn,
+  setSplashDataOff,
+  setSplashDataOn,
   updateGlassesTransparency,
   updateText,
 } from "./helpers/text";
@@ -71,7 +71,7 @@ export function setPreUpdate(game: Game): void {
   setRuleSplashOn(game, "splash-none");
   setMusicPlay(game);
   setPauseWiiMusic(game);
-  setTurnEndDataOff(game);
+  setSplashDataOff(game);
 }
 
 export function update(game: Game, time: number, delta: number): void {
@@ -89,12 +89,17 @@ export function update(game: Game, time: number, delta: number): void {
       ///////// WHILE IN LOOP
       ////////////////////////////////
       updateGameStatePlay(game, time, delta);
+
+      ////////////////////////////////
+      ///////// pausing => pause
+      ////////////////////////////////
       if (getIsAnyPlayerPausing(game)) {
         setGameState____________________(game, "game-state-paused");
         setRuleSplashOn(game, "splash-paused");
         setMusicPause(game);
         game.SOUND_START.play();
         setPhysicsPause(game);
+        setSplashDataOn(game);
       }
 
       ////////////////////////////////
@@ -111,7 +116,7 @@ export function update(game: Game, time: number, delta: number): void {
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         setPhysicsPause(game);
-        setTurnEndDataOn(game);
+        setSplashDataOn(game);
       }
 
       ////////////////////////////////
@@ -129,7 +134,7 @@ export function update(game: Game, time: number, delta: number): void {
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
         setPhysicsPause(game);
-        setTurnEndDataOn(game);
+        setSplashDataOn(game);
       }
 
       ////////////////////////////////
@@ -141,7 +146,7 @@ export function update(game: Game, time: number, delta: number): void {
         setRuleSplashOn(game, "splash-finished");
         setMusicPause(game);
         game.ENERJA_FINISH.play();
-        setTurnEndDataOn(game);
+        setSplashDataOn(game);
       }
       break;
     case "game-state-first-blood":
@@ -164,7 +169,7 @@ export function update(game: Game, time: number, delta: number): void {
         setMusicResume(game);
         game.SOUND_START.play();
         setPhysicsResume(game);
-        setTurnEndDataOff(game);
+        setSplashDataOff(game);
       }
 
       break;
@@ -188,7 +193,7 @@ export function update(game: Game, time: number, delta: number): void {
         setRuleSplashOn(game, "splash-none");
         game.SOUND_START.play();
         setPhysicsResume(game);
-        setTurnEndDataOff(game);
+        setSplashDataOff(game);
       }
       break;
     case "game-state-finished":
@@ -214,7 +219,7 @@ export function update(game: Game, time: number, delta: number): void {
         setRuleSplashOn(game, "splash-none");
         game.SOUND_START.play();
         setPhysicsResume(game);
-        setTurnEndDataOff(game);
+        setSplashDataOff(game);
       }
       break;
     default:

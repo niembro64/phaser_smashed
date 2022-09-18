@@ -1,3 +1,4 @@
+import { debug } from "console";
 import Game from "../Game";
 import { SplashName } from "../interfaces";
 import { isPlayerReady } from "./pad";
@@ -66,15 +67,23 @@ export function updateText(game: Game): void {
   updateEndDataMatrices(game, zoom, newDataY, newDataTitleY);
 }
 
-export function setTurnEndDataOn(game: Game): void {
+export function setSplashDataOn(game: Game): void {
+  if (game.debug.seeSplashDataAlways) {
+    return;
+  }
   game.splashesEndData.forEach((splash, splashIndex) => {
-    splash.textTitle.active = true;
+    splash.textTitle.visible = true;
+    splash.textData.visible = true;
   });
 }
 
-export function setTurnEndDataOff(game: Game): void {
+export function setSplashDataOff(game: Game): void {
+  if (game.debug.seeSplashDataAlways) {
+    return;
+  }
   game.splashesEndData.forEach((splash, splashIndex) => {
-    splash.textTitle.active = false;
+    splash.textTitle.visible = false;
+    splash.textData.visible = false;
   });
 }
 
@@ -159,7 +168,11 @@ export function updateDamageText(game: Game, zoom: number, newY: number): void {
     player.scoreBoardUpper
       .setScale(1 / zoom, 1 / zoom)
       .setText(
-        Math.round((100 / (100 + player.char.damage)) * 100).toString() +
+        Math.round(
+          game.debug.invertHealth
+            ? (100 / (100 + player.char.damage)) * 100
+            : player.char.damage
+        ).toString() +
           game.GAMEBAR_CHARS.damage +
           "  " +
           player.shotCount.toString() +

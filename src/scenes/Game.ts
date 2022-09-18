@@ -44,6 +44,7 @@ export default class Game extends Phaser.Scene {
     useColorFilters: false,
     useReadySound: false,
     invertHealth: false,
+    seeSplashDataAlways: true,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
@@ -225,6 +226,7 @@ export default class Game extends Phaser.Scene {
   ];
   dotArray = ["🔴", "🔵", "🟡", "🟢", "🟣", "🟠", "⚫", "⚪", "🟤"];
   FONT_DEFAULT_NICE: string = "Impact";
+  // FONT_DEFAULT_MONOSPACE: string = "Press Start 2P";
   FONT_DEFAULT_MONOSPACE: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
 
