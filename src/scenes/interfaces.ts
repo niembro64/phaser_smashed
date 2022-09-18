@@ -195,6 +195,7 @@ export interface Splash {
 }
 export interface SplashMulti {
   textTitle: any;
+  textCircles: any;
   textData: any;
   name: string;
   emoji: string;

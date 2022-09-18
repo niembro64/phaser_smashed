@@ -13,8 +13,8 @@ export function create(game: Game) {
   createPlatforms(game);
   createScoreboardShots(game);
   createEmitters(game);
-  createTable(game);
-  createSplashEnd(game);
+  createImageTable(game);
+  createSplashRuleFinished(game);
   createScoreboard(game);
   createCircles(game);
   createEnergyAttacks(game);
@@ -553,7 +553,7 @@ export function createPlatforms4(game: Game): void {
   }
 }
 
-export function createTable(game: Game): void {
+export function createImageTable(game: Game): void {
   game.TABLE = game.physics.add.sprite(
     (1920 / 2) * game.SCREEN_SCALE.WIDTH,
     (1080 / 2 - 43) * game.SCREEN_SCALE.HEIGHT,
@@ -625,7 +625,7 @@ export function createBackgroundTitles(game: Game): void {
     .setAlpha(0.3);
 }
 
-export function createSplashEnd(game: Game): void {
+export function createSplashRuleFinished(game: Game): void {
   game.splashRules.forEach((splash, splashIndex) => {
     // if (splashIndex === game.splashRules.length - 1) {
     if (splash.name === "splash-finished") {

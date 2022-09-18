@@ -308,6 +308,7 @@ export default class Game extends Phaser.Scene {
   splashEndDataOffset: number = -1100;
   SplashEndDataInit: SplashEndData = {
     textTitle: "",
+    textCircles: "",
     textData: "",
     name: "",
     emoji: "",
@@ -324,6 +325,7 @@ export default class Game extends Phaser.Scene {
   splashesEndData: SplashEndData[] = [
     {
       textTitle: null,
+      textCircles: null,
       textData: null,
       name: "Hits",
       emoji: "💔",
@@ -339,6 +341,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       textTitle: null,
+      textCircles: null,
       textData: null,
       name: "Deaths",
       emoji: "💀",
@@ -354,6 +357,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       textTitle: null,
+      textCircles: null,
       textData: null,
       name: "Shots",
       emoji: "⭐",
@@ -369,6 +373,7 @@ export default class Game extends Phaser.Scene {
     },
     {
       textTitle: null,
+      textCircles: null,
       textData: null,
       name: "Characters",
       emoji: "",
@@ -429,7 +434,6 @@ export default class Game extends Phaser.Scene {
   // j : attacks from other players
   currentlyOverlappingSpritesMatrix: boolean[][] = [];
   wasLastHitByMatrix: boolean[][] = [];
-
   numberHitByMatrix: number[][] = [];
   numberKilledByMatrix: number[][] = [];
   numberShotsTakenByMeMatrix: number[][] = [];
@@ -439,11 +443,11 @@ export default class Game extends Phaser.Scene {
     gameStamp: 0,
     timeStamp: 0,
   };
-  playerState: PlayerStateWithTime = {
-    name: "player-state-start",
-    gameStamp: 0,
-    timeStamp: 0,
-  };
+  // playerState: PlayerStateWithTime = {
+  //   name: "player-state-start",
+  //   gameStamp: 0,
+  //   timeStamp: 0,
+  // };
 
   players: Player[] = [];
   playerOptions: Player[] = [
