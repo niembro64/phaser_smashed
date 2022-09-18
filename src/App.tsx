@@ -9,7 +9,7 @@ export interface CharacterMove {
   ready: string;
 }
 
-export type ButtonName = "Home" | "Controlls" | "Rules" | "About" | "Plans";
+export type ButtonName = "Projects" | "Controls" | "Rules" | "About" | "Plans";
 
 function App() {
   const [showRules, setShowRules] = useState(false);
@@ -34,7 +34,7 @@ function App() {
 
   const onClickHandler = (buttonName: ButtonName) => {
     switch (buttonName) {
-      case "Controlls":
+      case "Controls":
         setShowControlls(!showControlls);
         setShowRules(false);
         setShowAbout(false);
@@ -75,15 +75,15 @@ function App() {
           className="linkTag btn btn-outline-light"
           href="http://niembro64.com/"
         >
-          <span>HOME</span>
+          <span>Projects</span>
         </a>
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
-            onClickHandler("Controlls");
+            onClickHandler("Controls");
           }}
         >
-          <span>CONTROLLS</span>
+          <span>Controls</span>
         </button>
         <button
           className="linkTag btn btn-outline-light"
@@ -91,7 +91,7 @@ function App() {
             onClickHandler("Rules");
           }}
         >
-          <span>RULES</span>
+          <span>Rules</span>
         </button>
         <button
           className="linkTag btn btn-outline-light"
@@ -99,7 +99,7 @@ function App() {
             onClickHandler("About");
           }}
         >
-          <span>ABOUT</span>
+          <span>About</span>
         </button>
         <button
           className="linkTag btn btn-outline-light"
@@ -107,7 +107,7 @@ function App() {
             onClickHandler("Plans");
           }}
         >
-          <span>PLANS</span>
+          <span>Plans</span>
         </button>
       </div>
       {showControlls && (
@@ -115,10 +115,10 @@ function App() {
           <div
             className="popup"
             onClick={() => {
-              onClickHandler("Controlls");
+              onClickHandler("Controls");
             }}
           >
-            <h1>CONTROLLS</h1>
+            <h1>Controls</h1>
             {characterMoves.map((cm) => {
               return (
                 <>
@@ -142,7 +142,7 @@ function App() {
               onClickHandler("Rules");
             }}
           >
-            <h1>RULES</h1>
+            <h1>Rules</h1>
             <div className="rulesOutline">
               <img
                 id="rulesImage"
@@ -161,7 +161,7 @@ function App() {
               onClickHandler("About");
             }}
           >
-            <h1>ABOUT</h1>
+            <h1>About</h1>
             <h1>🚧</h1>
           </div>
         </>
@@ -174,7 +174,7 @@ function App() {
               onClickHandler("Plans");
             }}
           >
-            <h1>PLANS</h1> <h1>🚧</h1>
+            <h1>Plans</h1> <h1>🚧</h1>
           </div>
         </>
       )}
