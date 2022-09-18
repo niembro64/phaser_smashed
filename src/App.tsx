@@ -184,7 +184,7 @@ function App() {
         <h1 id="title"># Controllers: {numControllers}</h1>
         <h1 id="boy"># Controllers: {numControllers}</h1>
       </div> */}
-      {/* <div id="phaser-container"></div> */}
+      <div id="phaser-container"></div>
     </>
   );
 }
