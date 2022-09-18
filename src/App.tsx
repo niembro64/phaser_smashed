@@ -4,6 +4,8 @@ import phaserGame from "./PhaserGame";
 import Game from "./scenes/Game";
 import "./App.css";
 // import "@fontsource/press-start-2p";
+import { setGameState } from "./scenes/helpers/state";
+
 
 export interface CharacterMove {
   button: string;
@@ -46,6 +48,8 @@ function App() {
   const onClickHandlerButtons = (buttonName: ButtonName) => {
     const game = phaserGame.scene.keys.game as Game;
     game.connectionFunction();
+    setGameState(game, "game-state-paused");
+
     switch (buttonName) {
       case "Controls":
         setShowControls(!showControls);

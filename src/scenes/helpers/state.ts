@@ -1,17 +1,50 @@
 import Game from "../Game";
-import { Player, PlayerState } from "../interfaces";
+import { GameState, Player, PlayerState } from "../interfaces";
+import { setPhysicsPause, setPhysicsResume } from "./physics";
+import { setMusicPause, setMusicResume, setPauseAllReadySounds, setPauseWiiMusic, setSoundStartPlay } from "./sound";
+import { setRuleSplashOn, setSplashDataOff, setSplashDataOn } from "./text";
 
-// export function setGameState____________________(
-//   game: Game,
-//   state: GameState
-// ): void {
-//   game.gameState.name = state;
-//   game.gameState.gameStamp = game.gameNanoseconds;
-//   game.gameState.timeStamp = game.timeNanoseconds;
-//   console.log("GAME STATE", game.gameState.name);
-// }
+export function setGameState(game: Game, state: GameState): void {
+  game.gameState.name = state;
+  game.gameState.gameStamp = game.gameNanoseconds;
+  game.gameState.timeStamp = game.timeNanoseconds;
+  console.log("GAME STATE", game.gameState.name);
 
-export function setPlayerState____________________(
+  switch (game.gameState.name) {
+    case "game-state-start":
+      //
+      break;
+    case "game-state-play":
+      setRuleSplashOn(game, "splash-none");
+      setPauseWiiMusic(game);
+      setPauseAllReadySounds(game);
+      setMusicResume(game);
+      setSoundStartPlay(game);
+      setPhysicsResume(game);
+      setSplashDataOff(game);
+      break;
+    case "game-state-paused":
+      setRuleSplashOn(game, "splash-paused");
+      setMusicPause(game);
+      setSoundStartPlay(game);
+      setPhysicsPause(game);
+      setSplashDataOn(game);
+      break;
+    case "game-state-first-blood":
+      //
+      break;
+    case "game-state-screen-clear":
+      //
+      break;
+    case "game-state-finished":
+      //
+      break;
+    default:
+      console.log("BROKEN_____________________");
+  }
+}
+
+export function setPlayerState(
   player: Player,
   state: PlayerState,
   game: Game

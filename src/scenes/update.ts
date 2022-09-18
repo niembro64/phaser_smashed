@@ -22,7 +22,7 @@ import {
 import { setBlinkFalse, setBlinkTrue } from "./helpers/sprites";
 import {
   // game.setGameState____________________,
-  setPlayerState____________________,
+  setPlayerState,
   getHasNumDeadIncrased,
   getHasGameDurationPassed,
   getIsPlayerHit,
@@ -30,6 +30,7 @@ import {
   updateNumCurrentlyDead,
   updateTimeTime,
   updateGameTime,
+  setGameState,
 } from "./helpers/state";
 import {
   setResetDamage,
@@ -65,20 +66,16 @@ import {
 } from "./helpers/sound";
 import {
   setRuleSplashOn,
-  setSplashDataOff,
   setSplashDataOn,
   updateGlassesTransparency,
   updateText,
 } from "./helpers/text";
 import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
-import { setPhysicsPause, setPhysicsResume } from "./helpers/physics";
+import { setPhysicsPause } from "./helpers/physics";
 
 export function setPreUpdate(game: Game): void {
-  game.setGameState____________________(game, "game-state-play");
-  setRuleSplashOn(game, "splash-none");
   setMusicPlay(game);
-  setPauseWiiMusic(game);
-  setSplashDataOff(game);
+  setGameState(game, "game-state-play");
 }
 
 export function update(game: Game, time: number, delta: number): void {
@@ -101,6 +98,8 @@ export function update(game: Game, time: number, delta: number): void {
   updatePrintAllPadsActive(game);
 
   switch (game.gameState.name) {
+    case "game-state-start":
+      break;
     case "game-state-play":
       ////////////////////////////////
       ///////// WHILE IN LOOP
@@ -111,12 +110,12 @@ export function update(game: Game, time: number, delta: number): void {
       ///////// pausing => pause
       ////////////////////////////////
       if (getIsAnyPlayerPausing(game)) {
-        game.setGameState____________________(game, "game-state-paused");
-        setRuleSplashOn(game, "splash-paused");
-        setMusicPause(game);
-        setSoundStartPlay(game);
-        setPhysicsPause(game);
-        setSplashDataOn(game);
+        setGameState(game, "game-state-paused");
+        // setRuleSplashOn(game, "splash-paused");
+        // setMusicPause(game);
+        // setSoundStartPlay(game);
+        // setPhysicsPause(game);
+        // setSplashDataOn(game);
       }
 
       ////////////////////////////////
@@ -127,7 +126,7 @@ export function update(game: Game, time: number, delta: number): void {
         getHasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
-        game.setGameState____________________(game, "game-state-screen-clear");
+        setGameState(game, "game-state-screen-clear");
         setRuleSplashOn(game, "splash-screen-clear");
         setMusicPause(game);
         setSoundEnerjaPlay(game);
@@ -144,7 +143,7 @@ export function update(game: Game, time: number, delta: number): void {
         getHasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
-        game.setGameState____________________(game, "game-state-first-blood");
+        setGameState(game, "game-state-first-blood");
         setRuleSplashOn(game, "splash-first-blood");
         setMusicPause(game);
         setSoundProfoundPlay(game);
@@ -158,7 +157,7 @@ export function update(game: Game, time: number, delta: number): void {
       ///////// time => finished
       ////////////////////////////////
       if (game.gameSecondsClock < 1) {
-        game.setGameState____________________(game, "game-state-finished");
+        setGameState(game, "game-state-finished");
         setPhysicsPause(game);
         setRuleSplashOn(game, "splash-finished");
         setMusicPause(game);
@@ -179,14 +178,14 @@ export function update(game: Game, time: number, delta: number): void {
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
       ) {
-        game.setGameState____________________(game, "game-state-play");
-        setRuleSplashOn(game, "splash-none");
-        setPauseWiiMusic(game);
-        setPauseAllReadySounds(game);
-        setMusicResume(game);
-        setSoundStartPlay(game);
-        setPhysicsResume(game);
-        setSplashDataOff(game);
+        setGameState(game, "game-state-play");
+        // setRuleSplashOn(game, "splash-none");
+        // setPauseWiiMusic(game);
+        // setPauseAllReadySounds(game);
+        // setMusicResume(game);
+        // setSoundStartPlay(game);
+        // setPhysicsResume(game);
+        // setSplashDataOff(game);
       }
 
       break;
@@ -203,14 +202,14 @@ export function update(game: Game, time: number, delta: number): void {
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
       ) {
-        game.setGameState____________________(game, "game-state-play");
-        setPauseWiiMusic(game);
-        setPauseAllReadySounds(game);
-        setMusicResume(game);
-        setRuleSplashOn(game, "splash-none");
-        setSoundStartPlay(game);
-        setPhysicsResume(game);
-        setSplashDataOff(game);
+        setGameState(game, "game-state-play");
+        // setPauseWiiMusic(game);
+        // setPauseAllReadySounds(game);
+        // setMusicResume(game);
+        // setRuleSplashOn(game, "splash-none");
+        // setSoundStartPlay(game);
+        // setPhysicsResume(game);
+        // setSplashDataOff(game);
       }
       break;
     case "game-state-finished":
@@ -229,14 +228,14 @@ export function update(game: Game, time: number, delta: number): void {
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
       ) {
-        game.setGameState____________________(game, "game-state-play");
-        setPauseWiiMusic(game);
-        setPauseAllReadySounds(game);
-        setMusicResume(game);
-        setRuleSplashOn(game, "splash-none");
-        setSoundStartPlay(game);
-        setPhysicsResume(game);
-        setSplashDataOff(game);
+        setGameState(game, "game-state-play");
+        // setPauseWiiMusic(game);
+        // setPauseAllReadySounds(game);
+        // setMusicResume(game);
+        // setRuleSplashOn(game, "splash-none");
+        // setSoundStartPlay(game);
+        // setPhysicsResume(game);
+        // setSplashDataOff(game);
       }
       break;
     default:
@@ -260,11 +259,7 @@ export function updatePlayers(game: Game): void {
         ///////// duration => alive
         ////////////////////////////////
         if (getHasGameDurationPassed(player, game.DURATION_GAME_START, game)) {
-          setPlayerState____________________(
-            player,
-            "player-state-alive",
-            game
-          );
+          setPlayerState(player, "player-state-alive", game);
           setActiveHurtEmitterOn(player);
           setVisibleHurtEmitterOff(player);
           setGravityTrue(player);
@@ -291,7 +286,7 @@ export function updatePlayers(game: Game): void {
         ///////// hit => hurt
         ////////////////////////////////
         if (getIsPlayerHit(playerIndex, game)) {
-          setPlayerState____________________(player, "player-state-hurt", game);
+          setPlayerState(player, "player-state-hurt", game);
           setActiveHurtEmitterOn(player);
           setVisibleHurtEmitterOn(player);
           player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
@@ -306,7 +301,7 @@ export function updatePlayers(game: Game): void {
         ///////// offscreen => dead
         ////////////////////////////////
         if (getIsPlayerOffscreen(player, game)) {
-          setPlayerState____________________(player, "player-state-dead", game);
+          setPlayerState(player, "player-state-dead", game);
           setActiveHurtEmitterOff(player);
           setVisibleHurtEmitterOn(player);
           setOnDeadUpdateMatrix(playerIndex, game);
@@ -348,11 +343,7 @@ export function updatePlayers(game: Game): void {
           !getIsPlayerOffscreen(player, game) &&
           getHasGameDurationPassed(player, game.DURATION_PLAYER_HURT, game)
         ) {
-          setPlayerState____________________(
-            player,
-            "player-state-alive",
-            game
-          );
+          setPlayerState(player, "player-state-alive", game);
           setActiveHurtEmitterOn(player);
           setVisibleHurtEmitterOff(player);
           setGravityTrue(player);
@@ -363,7 +354,7 @@ export function updatePlayers(game: Game): void {
         ///////// offscreen => dead
         ////////////////////////////////
         if (getIsPlayerOffscreen(player, game)) {
-          setPlayerState____________________(player, "player-state-dead", game);
+          setPlayerState(player, "player-state-dead", game);
           setActiveHurtEmitterOff(player);
           setVisibleHurtEmitterOn(player);
           setOnDeadUpdateMatrix(playerIndex, game);
@@ -394,11 +385,7 @@ export function updatePlayers(game: Game): void {
         ///////// duration => alive
         ////////////////////////////////
         if (getHasGameDurationPassed(player, game.DURATION_PLAYER_DEAD, game)) {
-          setPlayerState____________________(
-            player,
-            "player-state-alive",
-            game
-          );
+          setPlayerState(player, "player-state-alive", game);
           setActiveHurtEmitterOn(player);
           setVisibleHurtEmitterOff(player);
           setGravityTrue(player);

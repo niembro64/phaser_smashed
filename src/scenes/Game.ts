@@ -18,12 +18,12 @@ export default class Game extends Phaser.Scene {
     console.log("PHASER CONNECTED");
   }
 
-  setGameState____________________(game: Game, state: GameState): void {
-    game.gameState.name = state;
-    game.gameState.gameStamp = game.gameNanoseconds;
-    game.gameState.timeStamp = game.timeNanoseconds;
-    console.log("GAME STATE", game.gameState.name);
-  }
+  // setGameState(game: Game, state: GameState): void {
+  //   game.gameState.name = state;
+  //   game.gameState.gameStamp = game.gameNanoseconds;
+  //   game.gameState.timeStamp = game.timeNanoseconds;
+  //   console.log("GAME STATE", game.gameState.name);
+  // }
 
   PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   // PLAYER_CHOICES: number[] = [3, 0];
