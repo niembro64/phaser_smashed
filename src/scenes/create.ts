@@ -374,7 +374,7 @@ export function createAttackEnergyCollideWithPlayers(game: Game): void {
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+    for (let i = 0; i < game.players.length; i++) {
       if (playerIndex !== i) {
         game.physics.add.collider(
           player.char.attackEnergy.sprite,

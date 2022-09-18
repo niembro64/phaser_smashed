@@ -5,13 +5,13 @@ import { Player } from '../interfaces';
 export function getIsScreenClear(game: Game): boolean {
   // is there three people currently dead
   let numPlayersDead: number = 0;
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     if (game.players[i].state.name === 'player-state-dead') {
       numPlayersDead++;
     }
   }
 
-  if (numPlayersDead === game.PLAYER_CHOICES.length - 1) {
+  if (numPlayersDead === game.players.length - 1) {
     return true;
   }
 
@@ -21,8 +21,8 @@ export function getIsFirstBlood(game: Game): boolean {
   // is there only one player who has died
   let numPlayersDied = 0;
   let temp = 0;
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
-    for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+  for (let i = 0; i < game.players.length; i++) {
+    for (let j = 0; j < game.players.length; j++) {
       temp += game.numberKilledByMatrix[i][j];
     }
     if (temp > 0) {
@@ -43,7 +43,7 @@ export function getIsFirstBlood(game: Game): boolean {
 }
 
 export function getIsAnyPlayerCurrentlyDead(game: Game): boolean {
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     if (game.players[i].state.name === 'player-state-dead') {
       return true;
     }
@@ -82,9 +82,9 @@ export function setAddToShotsMatrixScreenClear(
 
   let hit = false;
 
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     if (game.players[i].state.name === 'player-state-dead') {
-      for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+      for (let j = 0; j < game.players.length; j++) {
         if (game.wasLastHitByMatrix[i][j]) {
           hit = true;
           game.numberShotsTakenByMeMatrix[i][j]++;

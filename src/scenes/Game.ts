@@ -13,8 +13,8 @@ import {
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
-  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
-  // PLAYER_CHOICES: number[] = [3, 0];
+  // PLAYER_CHOICES: number[] = [0, 1, 2, 3];
+  PLAYER_CHOICES: number[] = [3, 0];
   // PLAYER_CHOICES: number[] = [3];
 
   // PLAYER_CHOICES: number[] = [4, 4, 4, 5];
@@ -44,6 +44,7 @@ export default class Game extends Phaser.Scene {
     useReadySound: false,
     invertHealth: false,
     seeSplashDataAlways: false,
+    numUpdateLoopsToSkip:  100,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
@@ -1255,28 +1256,35 @@ export default class Game extends Phaser.Scene {
     this.load.image("glass_full", "images/niemo_shot_full.png");
     this.load.image("glass_empty", "images/niemo_shot_empty.png");
 
+    this.playerOptions.forEach((pOption, pOptionIndex) => {
+      this.load.image(pOption.char.name, pOption.char.src);
+    });
+    for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
+      this.load.image("tail_" + i, "images/white_trans.png");
+    }
+  }
+  create() {
     for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
       this.players.push(
         JSON.parse(JSON.stringify(this.playerOptions[this.PLAYER_CHOICES[i]]))
       );
+
+      // console.log("this.input.gamepad.total", this.input.gamepad.total);
+      if (i < this.input.gamepad.total) {
+      }
     }
 
     console.log("PLAYERS CURRENT", this.players);
 
     this.players.forEach((player, playerIndex) => {
-      this.load.image(player.char.name, player.char.src);
       player.gamepad = Phaser.Input.Gamepad.Gamepad;
     });
-
-    this.players.forEach((player, playerIndex) => {
-      this.load.image("tail_" + playerIndex, "images/white_trans.png");
-    });
-  }
-  create() {
     create(this);
   }
 
   update(time: number, delta: number) {
+    // console.log("this.input.gamepad.total", this.input.gamepad.total);
+
     update(this, time, delta);
   }
 }

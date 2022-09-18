@@ -7,7 +7,7 @@ export function updateCirclesLocations(game: Game): void {
   }
 
   game.colorCircles.forEach((circle, circleIndex) => {
-    if (circleIndex < game.PLAYER_CHOICES.length) {
+    if (circleIndex < game.players.length) {
       // circle.graphic.x = game.players[circleIndex].char.sprite.x;
       // circle.graphic.y =
       //   game.players[circleIndex].char.sprite.y - game.circleOffset;
@@ -54,7 +54,7 @@ export function updateKeepOnScreenPlayer(game: Game): void {
   });
 }
 export function isAnyPlayerOffscreen(game: Game): boolean {
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     if (getIsPlayerOffscreen(game.players[i], game)) {
       return true;
     }

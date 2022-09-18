@@ -277,6 +277,7 @@ export interface Debug {
   useReadySound: boolean;
   invertHealth: boolean;
   seeSplashDataAlways: boolean;
+  numUpdateLoopsToSkip: number;
 }
 
 export interface NormalizedVector {

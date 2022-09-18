@@ -152,7 +152,7 @@ export function updateClockTextLower(
 export function updateShotsOnPlayers(game: Game) {
   game.players.forEach((player, playerIndex) => {
     player.shotCount = 0;
-    for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+    for (let j = 0; j < game.players.length; j++) {
       player.shotCount += game.numberShotsTakenByMeMatrix[playerIndex][j];
     }
   });

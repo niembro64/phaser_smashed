@@ -41,7 +41,7 @@ export function hasNumDead(game: Game): boolean {
 export function updateNumCurrentlyDead(game: Game): void {
   game.numDeadPrev = game.numDead;
   game.numDead = 0;
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     game.numDead += game.players[i].state.name === "player-state-dead" ? 1 : 0;
   }
 }
@@ -55,7 +55,7 @@ export function updateResetAllHitboxes(game: Game): void {
 }
 
 export function getIsPlayerHit(playerIndex: number, game: Game): boolean {
-  for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+  for (let j = 0; j < game.players.length; j++) {
     if (game.currentlyOverlappingSpritesMatrix[playerIndex][j]) {
       return true;
     }

@@ -8,13 +8,11 @@ import {
 } from "./attacks";
 
 export function updateGamePadsConnected(game: Game): void {
-  for (
-    let i = 0;
-    i < game.input.gamepad.total && i < game.PLAYER_CHOICES.length;
-    i++
-  ) {
-    game.players[game.playerSpawnOrder[i]].gamepad =
-      game.input.gamepad.getPad(i);
+  for (let i = 0; i < game.input.gamepad.total; i++) {
+    if (i < game.players.length) {
+      game.players[game.playerSpawnOrder[i]].gamepad =
+        game.input.gamepad.getPad(i);
+    }
   }
 }
 
@@ -75,7 +73,7 @@ export function isPlayerReady(player: Player, game: Game): boolean {
 }
 
 export function getIsAllPlayersReady(game: Game): boolean {
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     if (
       !game.players[i].gamepad.up &&
       !game.players[i].gamepad.down &&
@@ -102,7 +100,7 @@ export function resetMyHitByMatrix(
   if (player.state.name === "player-state-hurt") {
     return;
   }
-  for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+  for (let j = 0; j < game.players.length; j++) {
     game.wasLastHitByMatrix[playerIndex][j] = false;
   }
 }
@@ -507,7 +505,6 @@ export function updatePrintAllPadsActive(game: Game): void {
         // console.log(playerIndex, player.gamepad.axes);
         // console.log(playerIndex, player.gamepad.buttons[0].pressed);
         //
-
         // console.log(
         //   playerIndex,
         //   "player.gamepad._RCTop",

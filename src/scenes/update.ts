@@ -82,6 +82,11 @@ export function setPreUpdate(game: Game): void {
 }
 
 export function update(game: Game, time: number, delta: number): void {
+  if (game.debug.numUpdateLoopsToSkip > 0) {
+    game.debug.numUpdateLoopsToSkip--;
+    return;
+  }
+
   updateTimeTime(game, time, delta);
   updateGameTime(game, time, delta);
   updateText(game);
@@ -398,4 +403,6 @@ export function updatePlayers(game: Game): void {
         break;
     }
   });
+
+  console.log("game.input.gamepad.total", game.input.gamepad.total);
 }

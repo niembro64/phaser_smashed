@@ -15,7 +15,7 @@ export function onHitHandler(
   }
   game.currentlyOverlappingSpritesMatrix[playerIndex][j] = true;
 
-  for (var bj = 0; bj < game.PLAYER_CHOICES.length; bj++) {
+  for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {
       game.wasLastHitByMatrix[playerIndex][bj] = true;
       game.numberHitByMatrix[playerIndex][j]++;
@@ -62,7 +62,7 @@ export function setVisibleHurtEmitterOff(player: Player): void {
 
 export function setOnDeadUpdateMatrix(playerIndex: number, game: Game): void {
   let killedSelf: boolean = true;
-  for (let j = 0; j < game.PLAYER_CHOICES.length; j++) {
+  for (let j = 0; j < game.players.length; j++) {
     if (game.wasLastHitByMatrix[playerIndex][j]) {
       killedSelf = false;
       game.numberKilledByMatrix[playerIndex][j]++;
@@ -96,7 +96,7 @@ export function updatePlayerNumberKills(
   game: Game
 ): void {
   player.killCount = 0;
-  for (let i = 0; i < game.PLAYER_CHOICES.length; i++) {
+  for (let i = 0; i < game.players.length; i++) {
     if (i !== playerIndex) {
       player.killCount += game.numberKilledByMatrix[i][playerIndex];
     }
