@@ -19,8 +19,6 @@ function App() {
 
   useEffect(() => {}, [showRules, showControlls, showAbout, showPlans]);
 
-  const smashRulesLocation = "smashRulesGimp01.png";
-
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
     { button: "X", move: "Jump", ready: "✔️" },
@@ -67,7 +65,9 @@ function App() {
         setShowPlans(false);
     }
   };
-  // ✔️🚧❌🚫🛑🔜
+  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥
+  //🏴‍☠️🏳️🏁🏴
+  // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
   return (
     <>
       <div className="top-bar">

@@ -47,10 +47,16 @@ body {
   align-items: center;
   z-index: 3;
 }
+.top-bar:hover {
+  background-color: black;
+}
 
 .linkTag {
   border: 0;
   padding: 0% 3%;
+}
+.linkTag:active {
+  background-color: red;
 }
 
 .popup {
