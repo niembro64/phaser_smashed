@@ -28,7 +28,7 @@ export default class Game extends Phaser.Scene {
 
   debug: Debug = {
     level: 4,
-    useCameras: false,
+    useCameras: true,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -43,7 +43,7 @@ export default class Game extends Phaser.Scene {
     useColorFilters: false,
     useReadySound: false,
     invertHealth: false,
-    seeSplashDataAlways: true,
+    seeSplashDataAlways: false,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
@@ -206,15 +206,60 @@ export default class Game extends Phaser.Scene {
   //   { graphic: null, colorNumber: 0x33ee33, colorString: "#33ee33" },
   // ];
   colorCircles: ColorCircle[] = [
-    { text: "🔴", graphic: null, colorNumber: 0xe81224, colorString: "#e81224" },
-    { text: "🔵", graphic: null, colorNumber: 0x0078d7, colorString: "#0078d7" },
-    { text: "🟡", graphic: null, colorNumber: 0xfff100, colorString: "#fff100" },
-    { text: "🟢", graphic: null, colorNumber: 0x16c60c, colorString: "#16c60c" },
-    { text: "🟣", graphic: null, colorNumber: 0x886ce4, colorString: "#886ce4" },
-    { text: "🟠", graphic: null, colorNumber: 0xf7630c, colorString: "#f7630c" },
-    { text: "⚫", graphic: null, colorNumber: 0x383838, colorString: "#383838" },
-    { text: "⚪", graphic: null, colorNumber: 0xf2f2f2, colorString: "#f2f2f2" },
-    { text: "🟤", graphic: null, colorNumber: 0x8e562e, colorString: "#8e562e" },
+    {
+      text: "🔴",
+      graphic: null,
+      colorNumber: 0xe81224,
+      colorString: "#e81224",
+    },
+    {
+      text: "🔵",
+      graphic: null,
+      colorNumber: 0x0078d7,
+      colorString: "#0078d7",
+    },
+    {
+      text: "🟡",
+      graphic: null,
+      colorNumber: 0xfff100,
+      colorString: "#fff100",
+    },
+    {
+      text: "🟢",
+      graphic: null,
+      colorNumber: 0x16c60c,
+      colorString: "#16c60c",
+    },
+    {
+      text: "🟣",
+      graphic: null,
+      colorNumber: 0x886ce4,
+      colorString: "#886ce4",
+    },
+    {
+      text: "🟠",
+      graphic: null,
+      colorNumber: 0xf7630c,
+      colorString: "#f7630c",
+    },
+    {
+      text: "⚫",
+      graphic: null,
+      colorNumber: 0x383838,
+      colorString: "#383838",
+    },
+    {
+      text: "⚪",
+      graphic: null,
+      colorNumber: 0xf2f2f2,
+      colorString: "#f2f2f2",
+    },
+    {
+      text: "🟤",
+      graphic: null,
+      colorNumber: 0x8e562e,
+      colorString: "#8e562e",
+    },
   ];
   FONT_DEFAULT_NICE: string = "Impact";
   // FONT_DEFAULT_MONOSPACE: string = "Press Start 2P";f
