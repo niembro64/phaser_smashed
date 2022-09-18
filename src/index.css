@@ -33,11 +33,11 @@ body {
   top: 0%;
   border: 0%;
 
-  height: auto;
+  height: 5%;
   width: 100%;
 
   /* border: 1% dashed black; */
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0);
 
   padding: 0.5%;
 
@@ -46,17 +46,29 @@ body {
   justify-content: space-evenly;
   align-items: center;
   z-index: 3;
+  transition: 0s ease;
 }
+
 .top-bar:hover {
   background-color: black;
 }
 
+.top-bar:hover > .linkTag {
+  /* display: block; */
+  background-color: black;
+  color: white;
+}
+
 .linkTag {
+  transition: 0s ease;
+  /* display: none; */
   border: 0;
   padding: 0% 3%;
+  color: rgba(255, 255, 255, 0.3);
 }
 .linkTag:active {
   background-color: red;
+  color: red;
 }
 
 .popup {

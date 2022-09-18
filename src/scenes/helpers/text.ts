@@ -263,18 +263,15 @@ export function updateEndDataMatrices(
     for (let i = 0; i < game.players.length; i++) {
       switch (splashIndex) {
         case 0:
-          splash.words[i] = game.dotArray[i];
-          splash.words[i] += "[";
+          splash.words[i] = "[";
           break;
-          case 1:
-          splash.words[i] = game.dotArray[i];
-          splash.words[i] += "[";
+        case 1:
+          splash.words[i] = "[";
           break;
-          case 2:
-          splash.words[i] = game.dotArray[i];
-          splash.words[i] += "[";
+        case 2:
+          splash.words[i] = "[";
           break;
-          default:
+        default:
           if (splashIndex !== game.splashesEndData.length - 1) {
             splash.words[i] = "[";
           }
@@ -323,8 +320,11 @@ export function updateEndDataMatrices(
       }
       if (splashIndex !== game.splashesEndData.length - 1) {
         splash.words[i] += "]";
+        splash.words[i] += game.dotArray[i];
       }
     }
+    // splash.words.push("ASDF");
+    // splash.words.unshift("ASDF");
     splash.text.setText(splash.words);
     splash.text.x =
       game.cameraMover.char.sprite.x +

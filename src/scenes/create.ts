@@ -39,7 +39,7 @@ export function createEndDataMatrices(game: Game): void {
       splash.words.push(splash.name);
     }
     for (let i = 0; i < game.players.length; i++) {
-      splash.words[i] = game.players[i].char.name;
+      splash.words[i] = game.players[i].char.name + " " + game.dotArray[i];
     }
     splash.words[game.players.length] = "";
     splash.words[game.players.length + 1] = splash.name;
