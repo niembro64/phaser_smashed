@@ -1,4 +1,3 @@
-import { debug } from "console";
 import Game from "../Game";
 import { SplashName } from "../interfaces";
 import { isPlayerReady } from "./pad";
@@ -9,10 +8,11 @@ export function updateText(game: Game): void {
   const dataY = dataTitleY + 40;
   const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
   const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
-  const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 150;
+  const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 180;
   const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
+  const gameTimeY = game.SCREEN_DIMENSIONS.HEIGHT - 130;
+  const killsY = game.SCREEN_DIMENSIONS.HEIGHT - 10;
 
-  const killsY = game.SCREEN_DIMENSIONS.HEIGHT;
   const zoom = game.cameras.main.zoom;
   const redOffsetY =
     game.cameraMover.char.sprite.y - game.cameraCenter.char.sprite.y;
@@ -37,6 +37,10 @@ export function updateText(game: Game): void {
     glassY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * (-1 / zoom + 1);
+  const newGameTimeY =
+    gameTimeY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * (-1 / zoom + 1);
   const newUpperY =
     damageY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
@@ -46,20 +50,10 @@ export function updateText(game: Game): void {
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
 
-  game.scoreBoardTimeGame.setScale(1 / zoom, 1 / zoom);
-  game.scoreBoardTimeGame.x = game.cameraMover.char.sprite.x;
-  // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
-  game.scoreBoardTimeGame.y = newUpperY;
-
-  game.scoreBoardTimeTime.setScale(1 / zoom, 1 / zoom);
-  game.scoreBoardTimeTime.x = game.cameraMover.char.sprite.x;
-  // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
-  game.scoreBoardTimeTime.y = newLowerY;
-  //  game.SCREEN_DIMENSIONS.HEIGHT / 2;
-
-  updateClockText(game);
+  updateClockTextUpper(game, zoom, newGameTimeY);
+  updateClockTextLower(game, zoom, newLowerY);
   updateGlasses(game, zoom, newTopY);
-  updateDamageText(game, zoom, newUpperY);
+  updateDamageShotsText(game, zoom, newUpperY);
   updateControllerText(game, zoom, newControllerY);
   updateReadyText(game, zoom, newTopY);
   updateSplashRules(game, zoom, newSplashY);
@@ -87,7 +81,11 @@ export function setSplashDataOff(game: Game): void {
   });
 }
 
-export function updateSplashRules(game: Game, zoom: number, newY: number): void {
+export function updateSplashRules(
+  game: Game,
+  zoom: number,
+  newY: number
+): void {
   game.splashRules.forEach((splash, splashIndex) => {
     splash.text.setScale(1 / zoom, 1 / zoom);
     splash.text.x = game.cameraMover.char.sprite.x;
@@ -110,13 +108,34 @@ export function setRuleSplashOn(game: Game, splashName: SplashName): void {
   }
 }
 
-export function updateClockText(game: Game): void {
+export function updateClockTextUpper(
+  game: Game,
+  zoom: number,
+  newUpperY: number
+): void {
+  game.scoreBoardTimeGame.setScale(1 / zoom, 1 / zoom);
+  game.scoreBoardTimeGame.x = game.cameraMover.char.sprite.x;
+  // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
+  game.scoreBoardTimeGame.y = newUpperY;
+
   game.scoreBoardTimeGame.setText(
     game.gameClock.minutes.toString() +
       ":" +
       (game.gameClock.seconds < 10 ? "0" : "") +
       game.gameClock.seconds.toString()
   );
+}
+export function updateClockTextLower(
+  game: Game,
+  zoom: number,
+  newLowerY: number
+): void {
+  game.scoreBoardTimeTime.setScale(1 / zoom, 1 / zoom);
+  game.scoreBoardTimeTime.x = game.cameraMover.char.sprite.x;
+  // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
+  game.scoreBoardTimeTime.y = newLowerY;
+  //  game.SCREEN_DIMENSIONS.HEIGHT / 2;
+
   game.scoreBoardTimeTime.setText(
     game.timeClock.minutes.toString() +
       ":" +
@@ -161,7 +180,11 @@ export function updateGlasses(game: Game, zoom: number, newY: number): void {
   });
 }
 
-export function updateDamageText(game: Game, zoom: number, newY: number): void {
+export function updateDamageShotsText(
+  game: Game,
+  zoom: number,
+  newY: number
+): void {
   updateShotsOnPlayers(game);
   // if (game.debug.statsInit) {
   game.players.forEach((player, playerIndex) => {
