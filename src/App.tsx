@@ -23,13 +23,13 @@ function App() {
     { button: "D-Pad", move: "Movement", ready: "✔️" },
     { button: "X", move: "Jump", ready: "✔️" },
     { button: "X", move: "Air Jump", ready: "✔️" },
-    { button: "UP + X", move: "Energy Jump", ready: "🚧" },
+    { button: "UP + X", move: "Energy Jump", ready: "✔️" },
     { button: "Forward + WallTouch", move: "Wall  Slide", ready: "✔️" },
-    { button: "Y", move: "Energy Attack", ready: "🚧" },
+    { button: "Y", move: "Energy Attack", ready: "✔️" },
     { button: "L + R", move: "Pause", ready: "✔️" },
     { button: "Any", move: "UnPause", ready: "✔️" },
-    { button: "B", move: "Physical Attack", ready: "❌" },
-    { button: "Forward + B", move: "Smash Attack", ready: "❌" },
+    { button: "B", move: "Physical Attack", ready: "🚧" },
+    { button: "Forward + B", move: "Smash Attack", ready: "🚧" },
   ];
 
   const onClickHandler = (buttonName: ButtonName) => {
@@ -66,7 +66,7 @@ function App() {
     }
   };
   // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥
-  //🏴‍☠️🏳️🏁🏴
+  // 🏴‍☠️🏳️🏁🏴
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
   return (
     <>
