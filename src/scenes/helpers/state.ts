@@ -1,15 +1,15 @@
 import Game from "../Game";
-import { GameState, Player, PlayerState } from "../interfaces";
+import { Player, PlayerState } from "../interfaces";
 
-export function setGameState____________________(
-  game: Game,
-  state: GameState
-): void {
-  game.gameState.name = state;
-  game.gameState.gameStamp = game.gameNanoseconds;
-  game.gameState.timeStamp = game.timeNanoseconds;
-  console.log("GAME STATE", game.gameState.name);
-}
+// export function setGameState____________________(
+//   game: Game,
+//   state: GameState
+// ): void {
+//   game.gameState.name = state;
+//   game.gameState.gameStamp = game.gameNanoseconds;
+//   game.gameState.timeStamp = game.timeNanoseconds;
+//   console.log("GAME STATE", game.gameState.name);
+// }
 
 export function setPlayerState____________________(
   player: Player,

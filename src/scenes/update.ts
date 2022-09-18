@@ -21,7 +21,7 @@ import {
 } from "./helpers/movement";
 import { setBlinkFalse, setBlinkTrue } from "./helpers/sprites";
 import {
-  setGameState____________________,
+  // game.setGameState____________________,
   setPlayerState____________________,
   getHasNumDeadIncrased,
   getHasGameDurationPassed,
@@ -74,7 +74,7 @@ import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
 import { setPhysicsPause, setPhysicsResume } from "./helpers/physics";
 
 export function setPreUpdate(game: Game): void {
-  setGameState____________________(game, "game-state-play");
+  game.setGameState____________________(game, "game-state-play");
   setRuleSplashOn(game, "splash-none");
   setMusicPlay(game);
   setPauseWiiMusic(game);
@@ -111,7 +111,7 @@ export function update(game: Game, time: number, delta: number): void {
       ///////// pausing => pause
       ////////////////////////////////
       if (getIsAnyPlayerPausing(game)) {
-        setGameState____________________(game, "game-state-paused");
+        game.setGameState____________________(game, "game-state-paused");
         setRuleSplashOn(game, "splash-paused");
         setMusicPause(game);
         setSoundStartPlay(game);
@@ -127,7 +127,7 @@ export function update(game: Game, time: number, delta: number): void {
         getHasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
-        setGameState____________________(game, "game-state-screen-clear");
+        game.setGameState____________________(game, "game-state-screen-clear");
         setRuleSplashOn(game, "splash-screen-clear");
         setMusicPause(game);
         setSoundEnerjaPlay(game);
@@ -144,7 +144,7 @@ export function update(game: Game, time: number, delta: number): void {
         getHasNumDeadIncrased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
-        setGameState____________________(game, "game-state-first-blood");
+        game.setGameState____________________(game, "game-state-first-blood");
         setRuleSplashOn(game, "splash-first-blood");
         setMusicPause(game);
         setSoundProfoundPlay(game);
@@ -158,7 +158,7 @@ export function update(game: Game, time: number, delta: number): void {
       ///////// time => finished
       ////////////////////////////////
       if (game.gameSecondsClock < 1) {
-        setGameState____________________(game, "game-state-finished");
+        game.setGameState____________________(game, "game-state-finished");
         setPhysicsPause(game);
         setRuleSplashOn(game, "splash-finished");
         setMusicPause(game);
@@ -179,7 +179,7 @@ export function update(game: Game, time: number, delta: number): void {
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
       ) {
-        setGameState____________________(game, "game-state-play");
+        game.setGameState____________________(game, "game-state-play");
         setRuleSplashOn(game, "splash-none");
         setPauseWiiMusic(game);
         setPauseAllReadySounds(game);
@@ -203,7 +203,7 @@ export function update(game: Game, time: number, delta: number): void {
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
       ) {
-        setGameState____________________(game, "game-state-play");
+        game.setGameState____________________(game, "game-state-play");
         setPauseWiiMusic(game);
         setPauseAllReadySounds(game);
         setMusicResume(game);
@@ -229,7 +229,7 @@ export function update(game: Game, time: number, delta: number): void {
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
       ) {
-        setGameState____________________(game, "game-state-play");
+        game.setGameState____________________(game, "game-state-play");
         setPauseWiiMusic(game);
         setPauseAllReadySounds(game);
         setMusicResume(game);
@@ -409,5 +409,5 @@ export function updatePlayers(game: Game): void {
     }
   });
 
-  console.log("game.input.gamepad.total", game.input.gamepad.total);
+  // console.log("game.input.gamepad.total", game.input.gamepad.total);
 }

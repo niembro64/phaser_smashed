@@ -34,9 +34,18 @@ function App() {
     { button: "Forward + B", move: "Smash Attack", ready: "🚧" },
   ];
 
-  const onClickHandler = (buttonName: ButtonName) => {
-    const scene = phaserGame.scene.keys.game as Game;
-    scene.connectionFunction();
+  const onClickHandlerBody = (buttonName: ButtonName) => {
+    setShowControls(false);
+    setShowRules(false);
+    setShowAbout(false);
+    setShowPlans(false);
+
+    const game = phaserGame.scene.keys.game as Game;
+    game.connectionFunction();
+  };
+  const onClickHandlerButtons = (buttonName: ButtonName) => {
+    const game = phaserGame.scene.keys.game as Game;
+    game.connectionFunction();
     switch (buttonName) {
       case "Controls":
         setShowControls(!showControls);
@@ -84,7 +93,7 @@ function App() {
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
-            onClickHandler("Controls");
+            onClickHandlerButtons("Controls");
           }}
         >
           <span>Controls</span>
@@ -92,7 +101,7 @@ function App() {
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
-            onClickHandler("Rules");
+            onClickHandlerButtons("Rules");
           }}
         >
           <span>Rules</span>
@@ -100,7 +109,7 @@ function App() {
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
-            onClickHandler("About");
+            onClickHandlerButtons("About");
           }}
         >
           <span>About</span>
@@ -108,7 +117,7 @@ function App() {
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
-            onClickHandler("Plans");
+            onClickHandlerButtons("Plans");
           }}
         >
           <span>Plans</span>
@@ -119,7 +128,7 @@ function App() {
           <div
             className="popup"
             onClick={() => {
-              onClickHandler("Controls");
+              onClickHandlerBody("Controls");
             }}
           >
             <h1>Controls</h1>
@@ -143,7 +152,7 @@ function App() {
           <div
             className="popup"
             onClick={() => {
-              onClickHandler("Rules");
+              onClickHandlerBody("Rules");
             }}
           >
             <h1>Rules</h1>
@@ -162,7 +171,7 @@ function App() {
           <div
             className="popup"
             onClick={() => {
-              onClickHandler("About");
+              onClickHandlerBody("About");
             }}
           >
             <h1>About</h1>
@@ -175,7 +184,7 @@ function App() {
           <div
             className="popup"
             onClick={() => {
-              onClickHandler("Plans");
+              onClickHandlerBody("Plans");
             }}
           >
             <h1>Plans</h1> <h1>🚧</h1>

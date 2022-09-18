@@ -10,11 +10,19 @@ import {
   Splash as SplashRules,
   SplashMulti as SplashEndData,
   GameStateWithTime,
+  GameState,
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
   connectionFunction(): void {
-    console.log("ASDFASDFASDF");
+    console.log("PHASER CONNECTED");
+  }
+
+  setGameState____________________(game: Game, state: GameState): void {
+    game.gameState.name = state;
+    game.gameState.gameStamp = game.gameNanoseconds;
+    game.gameState.timeStamp = game.timeNanoseconds;
+    console.log("GAME STATE", game.gameState.name);
   }
 
   PLAYER_CHOICES: number[] = [0, 1, 2, 3];
