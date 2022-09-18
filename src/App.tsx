@@ -119,13 +119,13 @@ function App() {
             }}
           >
             <h1>Controls</h1>
-            {characterMoves.map((cm) => {
+            {characterMoves.map((charMove, charMoveIndex) => {
               return (
                 <>
-                  <div className="move">
-                    <h5>{cm.move}</h5>
+                  <div className="move" key={charMoveIndex}>
+                    <h5>{charMove.move}</h5>
                     <h5>
-                      {cm.button} {cm.ready}
+                      {charMove.button} {charMove.ready}
                     </h5>
                   </div>
                 </>

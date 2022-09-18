@@ -83,6 +83,11 @@ export function setPreUpdate(game: Game): void {
 
 export function update(game: Game, time: number, delta: number): void {
   if (game.debug.numUpdateLoopsToSkip > 0) {
+    // if (game.debug.numUpdateLoopsToSkip === 1) {
+    // game.players.pop();
+    // game.players.pop();
+    // }
+
     game.debug.numUpdateLoopsToSkip--;
     return;
   }
