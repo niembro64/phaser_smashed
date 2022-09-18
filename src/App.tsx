@@ -1,7 +1,7 @@
 // import { useState } from "react";
 import { useEffect, useState } from "react";
 import "./App.css";
-import "@fontsource/press-start-2p";
+// import "@fontsource/press-start-2p";
 
 export interface CharacterMove {
   button: string;
