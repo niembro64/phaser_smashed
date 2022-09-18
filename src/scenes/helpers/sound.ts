@@ -2,6 +2,27 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 import { getLongEnoughTimeDuration } from "./state";
 
+export function setSoundDiePlay(game: Game): void {
+  game.SOUND_DIE.play();
+}
+export function setSoundFinishPlay(game: Game): void {
+  game.ENERJA_FINISH.play();
+}
+export function setSoundFirstBloodPlay(game: Game): void {
+  game.SOUND_FIRST_BLOOD.play();
+}
+export function setSoundProfoundPlay(game: Game): void {
+  game.SOUND_INTRO.play();
+}
+export function setSoundSquishPlay(game: Game): void {
+  game.SOUND_SQUISH.play();
+}
+export function setSoundEnerjaPlay(game: Game): void {
+  game.ENERJA_SMASHED.play();
+}
+export function setSoundStartPlay(game: Game): void {
+  game.SOUND_START.play();
+}
 export function setPauseWiiMusic(game: Game): void {
   game.SOUND_PAUSED.pause();
 }

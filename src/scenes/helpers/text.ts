@@ -62,7 +62,7 @@ export function updateText(game: Game): void {
   updateDamageText(game, zoom, newUpperY);
   updateControllerText(game, zoom, newControllerY);
   updateReadyText(game, zoom, newTopY);
-  updateSplashes(game, zoom, newSplashY);
+  updateSplashRules(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
   updateEndDataMatrices(game, zoom, newDataY, newDataTitleY);
 }
@@ -87,7 +87,7 @@ export function setSplashDataOff(game: Game): void {
   });
 }
 
-export function updateSplashes(game: Game, zoom: number, newY: number): void {
+export function updateSplashRules(game: Game, zoom: number, newY: number): void {
   game.splashRules.forEach((splash, splashIndex) => {
     splash.text.setScale(1 / zoom, 1 / zoom);
     splash.text.x = game.cameraMover.char.sprite.x;

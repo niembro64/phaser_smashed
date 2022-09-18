@@ -55,6 +55,13 @@ import {
   setPlayWiiMusicWaitLong,
   setMusicResume,
   playWiiMusic,
+  setSoundStartPlay,
+  setSoundEnerjaPlay,
+  setSoundSquishPlay,
+  setSoundProfoundPlay,
+  setSoundFirstBloodPlay,
+  setSoundFinishPlay,
+  setSoundDiePlay,
 } from "./helpers/sound";
 import {
   setRuleSplashOn,
@@ -97,7 +104,7 @@ export function update(game: Game, time: number, delta: number): void {
         setGameState____________________(game, "game-state-paused");
         setRuleSplashOn(game, "splash-paused");
         setMusicPause(game);
-        game.SOUND_START.play();
+        setSoundStartPlay(game);
         setPhysicsPause(game);
         setSplashDataOn(game);
       }
@@ -113,8 +120,8 @@ export function update(game: Game, time: number, delta: number): void {
         setGameState____________________(game, "game-state-screen-clear");
         setRuleSplashOn(game, "splash-screen-clear");
         setMusicPause(game);
-        game.ENERJA_SMASHED.play();
-        game.SOUND_SQUISH.play();
+        setSoundEnerjaPlay(game);
+        setSoundSquishPlay(game);
         setPhysicsPause(game);
         setSplashDataOn(game);
       }
@@ -130,9 +137,9 @@ export function update(game: Game, time: number, delta: number): void {
         setGameState____________________(game, "game-state-first-blood");
         setRuleSplashOn(game, "splash-first-blood");
         setMusicPause(game);
-        game.SOUND_INTRO.play();
-        game.SOUND_FIRST_BLOOD.play();
-        game.SOUND_SQUISH.play();
+        setSoundProfoundPlay(game);
+        setSoundFirstBloodPlay(game);
+        setSoundSquishPlay(game);
         setPhysicsPause(game);
         setSplashDataOn(game);
       }
@@ -145,7 +152,7 @@ export function update(game: Game, time: number, delta: number): void {
         setPhysicsPause(game);
         setRuleSplashOn(game, "splash-finished");
         setMusicPause(game);
-        game.ENERJA_FINISH.play();
+        setSoundFinishPlay(game);
         setSplashDataOn(game);
       }
       break;
@@ -167,7 +174,7 @@ export function update(game: Game, time: number, delta: number): void {
         setPauseWiiMusic(game);
         setPauseAllReadySounds(game);
         setMusicResume(game);
-        game.SOUND_START.play();
+        setSoundStartPlay(game);
         setPhysicsResume(game);
         setSplashDataOff(game);
       }
@@ -191,7 +198,7 @@ export function update(game: Game, time: number, delta: number): void {
         setPauseAllReadySounds(game);
         setMusicResume(game);
         setRuleSplashOn(game, "splash-none");
-        game.SOUND_START.play();
+        setSoundStartPlay(game);
         setPhysicsResume(game);
         setSplashDataOff(game);
       }
@@ -217,7 +224,7 @@ export function update(game: Game, time: number, delta: number): void {
         setPauseAllReadySounds(game);
         setMusicResume(game);
         setRuleSplashOn(game, "splash-none");
-        game.SOUND_START.play();
+        setSoundStartPlay(game);
         setPhysicsResume(game);
         setSplashDataOff(game);
       }
@@ -248,7 +255,6 @@ export function updatePlayers(game: Game): void {
             "player-state-alive",
             game
           );
-          console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
           setActiveHurtEmitterOn(player);
           setVisibleHurtEmitterOff(player);
           setGravityTrue(player);
@@ -295,20 +301,12 @@ export function updatePlayers(game: Game): void {
           setVisibleHurtEmitterOn(player);
           setOnDeadUpdateMatrix(playerIndex, game);
           if (getIsFirstBlood(game)) {
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
             setAddShotToMatrixFirstBlood(player, playerIndex, game);
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
           if (getIsScreenClear(game)) {
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
             setAddToShotsMatrixScreenClear(player, playerIndex, game);
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
-          game.SOUND_DIE.play();
+          setSoundDiePlay(game);
           player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
           player.char.attackEnergy.state = "released";
           setPhysicsAttackEnergyOn(player);
@@ -360,20 +358,12 @@ export function updatePlayers(game: Game): void {
           setVisibleHurtEmitterOn(player);
           setOnDeadUpdateMatrix(playerIndex, game);
           if (getIsFirstBlood(game)) {
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
             setAddShotToMatrixFirstBlood(player, playerIndex, game);
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
           if (getIsScreenClear(game)) {
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
             setAddToShotsMatrixScreenClear(player, playerIndex, game);
-            console.log("HIT BY MATRIX", game.wasLastHitByMatrix);
-            console.log("SHOTS", game.numberShotsTakenByMeMatrix);
           }
-          game.SOUND_DIE.play();
+          setSoundDiePlay(game);
           player.char.attackEnergy.timestampThrow = game.time.now;
           player.char.attackEnergy.state = "released";
           setPhysicsAttackEnergyOn(player);
