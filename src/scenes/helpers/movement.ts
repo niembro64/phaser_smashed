@@ -6,7 +6,7 @@ export function updateCirclesLocations(game: Game): void {
     return;
   }
 
-  game.circles.forEach((circle, circleIndex) => {
+  game.colorCircles.forEach((circle, circleIndex) => {
     if (circleIndex < game.PLAYER_CHOICES.length) {
       // circle.graphic.x = game.players[circleIndex].char.sprite.x;
       // circle.graphic.y =

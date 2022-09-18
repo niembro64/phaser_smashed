@@ -19,6 +19,7 @@ export function create(game: Game) {
   createCircles(game);
   createEnergyAttacks(game);
   createPlayers(game);
+  createScoreboardReady(game);
   createCameras(game);
   createPlayersCollide(game);
   createAttackEnergyCollideWithPlayers(game);
@@ -33,7 +34,7 @@ export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
   game.splashesEndData.forEach((splash, splashIndex) => {
     for (let i = 0; i < game.players.length; i++) {
-      splash.words[i] = game.players[i].char.name + " " + game.dotArray[i];
+      splash.words[i] = game.players[i].char.name + " " + game.colorCircles[i].text;
     }
     // splash.words[game.players.length] = "";
     // splash.words[game.players.length] = splash.name;
@@ -182,7 +183,7 @@ export function createSounds(game: Game): void {
 }
 
 export function createShields(game: Game): void {
-  game.circles.forEach((circle, circleIndex) => {
+  game.colorCircles.forEach((circle, circleIndex) => {
     circle.graphic = game.add.circle(0, 0, 50, circle.colorNumber);
   });
 }
@@ -193,11 +194,11 @@ export function createCircles(game: Game): void {
 
   // game.circles.forEach((circle, circleIndex) => {
   game.players.forEach((player, playerIndex) => {
-    game.circles[playerIndex].graphic = game.add.circle(
+    game.colorCircles[playerIndex].graphic = game.add.circle(
       0,
       0,
       10,
-      game.circles[playerIndex].colorNumber
+      game.colorCircles[playerIndex].colorNumber
     );
   });
   // });
@@ -315,8 +316,8 @@ export function createPlayers(game: Game): void {
 
     player.emitterLight.setTint(0xffffff);
     player.emitterDark.setTint(0x000000);
-    player.emitterPlayer.setTint(game.circles[playerIndex].colorNumber);
-    player.emitterHurt.setTint(game.circles[playerIndex].colorNumber);
+    player.emitterPlayer.setTint(game.colorCircles[playerIndex].colorNumber);
+    player.emitterHurt.setTint(game.colorCircles[playerIndex].colorNumber);
 
     // EMN ACTIVE
     player.emitterLight.active = false;
@@ -708,22 +709,22 @@ export function createScoreboardShots(game: Game): void {
   });
 }
 
-export function createScoreboard(game: Game): void {
+export function createScoreboardReady(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardController = game.add
+    player.scoreBoardReady = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "🎮",
+        player.char.name + " Ready", //🎮
         {
           // font: "Arial 100px",
-          fontSize: "300px",
+          fontSize: "40px",
           fontFamily: "Impact",
           // fontFamily: game.FONT_DEFAULT,
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
-          color: game.circles[playerIndex].colorString,
+          color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
           stroke: "black",
           strokeThickness: 1,
@@ -739,21 +740,24 @@ export function createScoreboard(game: Game): void {
       )
       .setOrigin(0.5, 0.5);
   });
+}
+
+export function createScoreboard(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    player.scoreBoardReady = game.add
+    player.scoreBoardController = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        player.char.name + " Ready", //🎮
+        "🎮",
         {
           // font: "Arial 100px",
-          fontSize: "40px",
+          fontSize: "300px",
           fontFamily: "Impact",
           // fontFamily: game.FONT_DEFAULT,
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
-          color: game.circles[playerIndex].colorString,
+          color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
           stroke: "black",
           strokeThickness: 1,
@@ -838,7 +842,7 @@ export function createScoreboard(game: Game): void {
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
-          color: game.circles[playerIndex].colorString,
+          color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
           stroke: "black",
           strokeThickness: 1,
@@ -870,7 +874,7 @@ export function createScoreboard(game: Game): void {
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
-          color: game.circles[playerIndex].colorString,
+          color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
           stroke: "black",
           strokeThickness: 1,

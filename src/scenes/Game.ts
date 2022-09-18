@@ -3,13 +3,12 @@ import { create } from "./create";
 import { update } from "./update";
 import {
   Camera,
-  Circle,
+  ColorCircle,
   Clock,
   Debug,
   Player,
   Splash as SplashRules,
   SplashMulti as SplashEndData,
-  PlayerStateWithTime,
   GameStateWithTime,
 } from "./interfaces";
 
@@ -29,7 +28,7 @@ export default class Game extends Phaser.Scene {
 
   debug: Debug = {
     level: 4,
-    useCameras: true,
+    useCameras: false,
     seeCameras: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
@@ -111,7 +110,6 @@ export default class Game extends Phaser.Scene {
     BGM_DREAM: "kirbyloop.wav",
     BGM_MONKEY: "/na/monkeys2022.wav",
     BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
-    // BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
   };
 
   SOUND_INTRO: any;
@@ -147,7 +145,6 @@ export default class Game extends Phaser.Scene {
 
   scoreBoardTimeGame: any;
   scoreBoardTimeTime: any;
-  // time: any;
   timeNanoseconds: number = 0;
   timeSeconds: number = 0;
   timeSecondsPrev: number = 0;
@@ -167,7 +164,6 @@ export default class Game extends Phaser.Scene {
   numDead: number = 0;
   numDeadPrev: number = 0;
   allPlayersWallTouchIterator: number = 0;
-  // RATIO_ANGLED_MOVEMENT: number = Math.sin(Math.PI / 4);
   RATIO_ACCELERATION_VELOCITY = 0.7;
   DEFAULT_SPEED_X: number = 700;
   DEFAULT_SPEED_Y: number = 30;
@@ -177,12 +173,10 @@ export default class Game extends Phaser.Scene {
   INITIAL = { POSITION: { PLAYER_Y: 250 } };
   DEBOUNCE_NUMBER: number = 9;
   SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
-  // SCREEN_DIMENSIONS = { WIDTH: 3840, HEIGHT: 2160 };
   SCREEN_SCALE = {
     WIDTH: this.SCREEN_DIMENSIONS.WIDTH / 1920,
     HEIGHT: this.SCREEN_DIMENSIONS.HEIGHT / 1080,
   };
-  // SCREEN_DIMENSIONS = { HEIGHT: 1080, WIDTH: 1920 };
   GRAVITY: number = 0.1;
   PLATFORMS: any | Phaser.GameObjects.Sprite;
   BACKGROUND: any | Phaser.GameObjects.Sprite;
@@ -200,12 +194,9 @@ export default class Game extends Phaser.Scene {
   ZOOM_MULTIPLIER_Y = 0.7;
   ZOOM_RATIO_SLOW = 0.995;
   ZOOM_RATIO_FAST = 0.9;
-  // BORDER_PADDING_X: number = 0;
-  // BORDER_PADDING_Y: number = 0;
   BORDER_PADDING_X: number = 200;
   BORDER_PADDING_Y: number = 100;
   CAMERA_OFFSET_Y: number = -50;
-  // CAMERA_OFFSET_Y: number = 0;
 
   circleOffset: number = -50;
   // circles: Circle[] = [
@@ -214,20 +205,19 @@ export default class Game extends Phaser.Scene {
   //   { graphic: null, colorNumber: 0xddcc22, colorString: "#ddcc22" },
   //   { graphic: null, colorNumber: 0x33ee33, colorString: "#33ee33" },
   // ];
-  circles: Circle[] = [
-    { graphic: null, colorNumber: 0xe81224, colorString: "#e81224" },
-    { graphic: null, colorNumber: 0x0078d7, colorString: "#0078d7" },
-    { graphic: null, colorNumber: 0xfff100, colorString: "#fff100" },
-    { graphic: null, colorNumber: 0x16c60c, colorString: "#16c60c" },
-    { graphic: null, colorNumber: 0x886ce4, colorString: "#886ce4" },
-    { graphic: null, colorNumber: 0xf7630c, colorString: "#f7630c" },
-    { graphic: null, colorNumber: 0x383838, colorString: "#383838" },
-    { graphic: null, colorNumber: 0xf2f2f2, colorString: "#f2f2f2" },
-    { graphic: null, colorNumber: 0x8e562e, colorString: "#8e562e" },
+  colorCircles: ColorCircle[] = [
+    { text: "🔴", graphic: null, colorNumber: 0xe81224, colorString: "#e81224" },
+    { text: "🔵", graphic: null, colorNumber: 0x0078d7, colorString: "#0078d7" },
+    { text: "🟡", graphic: null, colorNumber: 0xfff100, colorString: "#fff100" },
+    { text: "🟢", graphic: null, colorNumber: 0x16c60c, colorString: "#16c60c" },
+    { text: "🟣", graphic: null, colorNumber: 0x886ce4, colorString: "#886ce4" },
+    { text: "🟠", graphic: null, colorNumber: 0xf7630c, colorString: "#f7630c" },
+    { text: "⚫", graphic: null, colorNumber: 0x383838, colorString: "#383838" },
+    { text: "⚪", graphic: null, colorNumber: 0xf2f2f2, colorString: "#f2f2f2" },
+    { text: "🟤", graphic: null, colorNumber: 0x8e562e, colorString: "#8e562e" },
   ];
-  dotArray = ["🔴", "🔵", "🟡", "🟢", "🟣", "🟠", "⚫", "⚪", "🟤"];
   FONT_DEFAULT_NICE: string = "Impact";
-  // FONT_DEFAULT_MONOSPACE: string = "Press Start 2P";
+  // FONT_DEFAULT_MONOSPACE: string = "Press Start 2P";f
   FONT_DEFAULT_MONOSPACE: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
 
@@ -1031,7 +1021,7 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
       },
       char: {
-        name: "Black Chez",
+        name: "BlackChez",
         initializeCharPosition: {
           lookingRight: false,
           x: 200,

@@ -93,10 +93,11 @@ export interface Char {
 }
 
 export interface Shield {
-  circle: Circle;
+  circle: ColorCircle;
 }
 
-export interface Circle {
+export interface ColorCircle {
+  text: string;
   graphic: any;
   colorNumber: number;
   colorString: string;
