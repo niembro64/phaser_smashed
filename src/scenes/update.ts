@@ -58,6 +58,8 @@ import {
 } from "./helpers/sound";
 import {
   setRuleSplashOn,
+  setTurnEndDataOff,
+  setTurnEndDataOn,
   updateGlassesTransparency,
   updateText,
 } from "./helpers/text";
@@ -69,6 +71,7 @@ export function setPreUpdate(game: Game): void {
   setRuleSplashOn(game, "splash-none");
   setMusicPlay(game);
   setPauseWiiMusic(game);
+  setTurnEndDataOff(game);
 }
 
 export function update(game: Game, time: number, delta: number): void {
@@ -82,6 +85,9 @@ export function update(game: Game, time: number, delta: number): void {
 
   switch (game.gameState.name) {
     case "game-state-play":
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
       updateGameStatePlay(game, time, delta);
       if (getIsAnyPlayerPausing(game)) {
         setGameState____________________(game, "game-state-paused");
@@ -90,6 +96,10 @@ export function update(game: Game, time: number, delta: number): void {
         game.SOUND_START.play();
         setPhysicsPause(game);
       }
+
+      ////////////////////////////////
+      ///////// screenclear & deads++ => play
+      ////////////////////////////////
       if (
         getIsScreenClear(game) &&
         getHasNumDeadIncrased(game)
@@ -101,7 +111,12 @@ export function update(game: Game, time: number, delta: number): void {
         game.ENERJA_SMASHED.play();
         game.SOUND_SQUISH.play();
         setPhysicsPause(game);
+        setTurnEndDataOn(game);
       }
+
+      ////////////////////////////////
+      ///////// firstblood & deads++ => play
+      ////////////////////////////////
       if (
         getIsFirstBlood(game) &&
         getHasNumDeadIncrased(game)
@@ -110,23 +125,34 @@ export function update(game: Game, time: number, delta: number): void {
         setGameState____________________(game, "game-state-first-blood");
         setRuleSplashOn(game, "splash-first-blood");
         setMusicPause(game);
-
         game.SOUND_INTRO.play();
         game.SOUND_FIRST_BLOOD.play();
         game.SOUND_SQUISH.play();
         setPhysicsPause(game);
+        setTurnEndDataOn(game);
       }
+
+      ////////////////////////////////
+      ///////// time => finished
+      ////////////////////////////////
       if (game.gameSecondsClock < 1) {
         setGameState____________________(game, "game-state-finished");
         setPhysicsPause(game);
         setRuleSplashOn(game, "splash-finished");
         setMusicPause(game);
         game.ENERJA_FINISH.play();
-        // game.SOUND_PAUSED.play()
+        setTurnEndDataOn(game);
       }
       break;
     case "game-state-first-blood":
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
       setPlayWiiMusicWaitLong(game);
+
+      ////////////////////////////////
+      ///////// ready & duration => play
+      ////////////////////////////////
       if (
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
@@ -138,13 +164,19 @@ export function update(game: Game, time: number, delta: number): void {
         setMusicResume(game);
         game.SOUND_START.play();
         setPhysicsResume(game);
-        console.log("ALL READY");
+        setTurnEndDataOff(game);
       }
 
       break;
     case "game-state-screen-clear":
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
       setPlayWiiMusicWaitLong(game);
-      // updateSomeReadySound(game);
+
+      ////////////////////////////////
+      ///////// ready & duration => play
+      ////////////////////////////////
       if (
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
@@ -156,14 +188,21 @@ export function update(game: Game, time: number, delta: number): void {
         setRuleSplashOn(game, "splash-none");
         game.SOUND_START.play();
         setPhysicsResume(game);
-        console.log("ALL READY");
+        setTurnEndDataOff(game);
       }
       break;
     case "game-state-finished":
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
       setPlayWiiMusicWaitShort(game);
       break;
     case "game-state-paused":
       playWiiMusic(game);
+
+      ////////////////////////////////
+      ///////// ready & duration => play
+      ////////////////////////////////
       if (
         getLongEnoughTimeDuration(game.DURATION_GAME_SHOT, game) &&
         getIsAllPlayersReady(game)
@@ -175,10 +214,14 @@ export function update(game: Game, time: number, delta: number): void {
         setRuleSplashOn(game, "splash-none");
         game.SOUND_START.play();
         setPhysicsResume(game);
-        console.log("ALL READY");
+        setTurnEndDataOff(game);
       }
       break;
     default:
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
+
       break;
   }
 }

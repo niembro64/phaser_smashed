@@ -10,8 +10,9 @@ export function create(game: Game) {
   createBackgroundTitles(game);
   createFlag(game);
   createSplashes(game);
-  createEmitters(game);
   createPlatforms(game);
+  createScoreboardShots(game);
+  createEmitters(game);
   createTable(game);
   createSplashEnd(game);
   createScoreboard(game);
@@ -50,9 +51,9 @@ export function createEndDataMatrices(game: Game): void {
           strokeThickness: splash.strokeThickness,
           shadow: {
             offsetX: 0,
-            offsetY: 9,
+            offsetY: splash.offsetY,
             color: "black",
-            blur: 10,
+            blur: splash.blur,
             stroke: true,
             fill: true,
           },
@@ -74,9 +75,9 @@ export function createEndDataMatrices(game: Game): void {
           strokeThickness: splash.strokeThickness,
           shadow: {
             offsetX: 0,
-            offsetY: 9,
+            offsetY: splash.offsetY,
             color: "black",
-            blur: 10,
+            blur: splash.blur,
             stroke: true,
             fill: true,
           },
@@ -690,7 +691,7 @@ export function createSplashes(game: Game): void {
   });
 }
 
-export function createScoreboard(game: Game): void {
+export function createScoreboardShots(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.shotGlass = game.add
       .sprite(
@@ -705,7 +706,9 @@ export function createScoreboard(game: Game): void {
       )
       .setOrigin(0.5, 0.5);
   });
+}
 
+export function createScoreboard(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardController = game.add
       .text(

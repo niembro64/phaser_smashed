@@ -204,6 +204,8 @@ export interface SplashMulti {
   color: string;
   backgroundColor: string;
   strokeThickness: number;
+  blur: number;
+  offsetY: number;
   src: string;
 }
 

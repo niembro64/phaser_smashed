@@ -3,29 +3,6 @@ import { SplashName } from "../interfaces";
 import { isPlayerReady } from "./pad";
 import { pauseReadySoundPlayer, playReadySoundPlayer } from "./sound";
 
-export function updateSplashes(game: Game, zoom: number, newY: number): void {
-  game.splashRules.forEach((splash, splashIndex) => {
-    splash.text.setScale(1 / zoom, 1 / zoom);
-    splash.text.x = game.cameraMover.char.sprite.x;
-    splash.text.y = newY;
-  });
-}
-
-export function setRuleSplashOn(game: Game, splashName: SplashName): void {
-  game.splashRules.forEach((splash, splashIndex) => {
-    splash.text.setAlpha(0);
-    if (splash.name === splashName) {
-      splash.text.setAlpha(1);
-    }
-  });
-
-  if (splashName !== "splash-none") {
-    game.splashRules[0].text.setAlpha(1);
-  } else {
-    game.splashRules[0].text.setAlpha(0);
-  }
-}
-
 export function updateText(game: Game): void {
   const dataTitleY = 65;
   const dataY = dataTitleY + 40;
@@ -87,6 +64,41 @@ export function updateText(game: Game): void {
   updateSplashes(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
   updateEndDataMatrices(game, zoom, newDataY, newDataTitleY);
+}
+
+export function setTurnEndDataOn(game: Game): void {
+  game.splashesEndData.forEach((splash, splashIndex) => {
+    splash.textTitle.active = true;
+  });
+}
+
+export function setTurnEndDataOff(game: Game): void {
+  game.splashesEndData.forEach((splash, splashIndex) => {
+    splash.textTitle.active = false;
+  });
+}
+
+export function updateSplashes(game: Game, zoom: number, newY: number): void {
+  game.splashRules.forEach((splash, splashIndex) => {
+    splash.text.setScale(1 / zoom, 1 / zoom);
+    splash.text.x = game.cameraMover.char.sprite.x;
+    splash.text.y = newY;
+  });
+}
+
+export function setRuleSplashOn(game: Game, splashName: SplashName): void {
+  game.splashRules.forEach((splash, splashIndex) => {
+    splash.text.setAlpha(0);
+    if (splash.name === splashName) {
+      splash.text.setAlpha(1);
+    }
+  });
+
+  if (splashName !== "splash-none") {
+    game.splashRules[0].text.setAlpha(1);
+  } else {
+    game.splashRules[0].text.setAlpha(0);
+  }
 }
 
 export function updateClockText(game: Game): void {

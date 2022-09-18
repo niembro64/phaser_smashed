@@ -313,8 +313,10 @@ export default class Game extends Phaser.Scene {
     size: "30px",
     src: "glass.png",
     color: "#ffffff",
-    backgroundColor: "#ffffff",
-    strokeThickness: 1,
+    backgroundColor: "#000000",
+    strokeThickness: 5,
+    offsetY: 0,
+    blur: 5,
   };
   splashesEndData: SplashEndData[] = [
     {
@@ -329,6 +331,8 @@ export default class Game extends Phaser.Scene {
       size: this.SplashEndDataInit.size,
       src: this.SplashEndDataInit.src,
       strokeThickness: this.SplashEndDataInit.strokeThickness,
+      offsetY: this.SplashEndDataInit.offsetY,
+      blur: this.SplashEndDataInit.blur,
     },
     {
       textTitle: null,
@@ -342,6 +346,8 @@ export default class Game extends Phaser.Scene {
       size: this.SplashEndDataInit.size,
       src: this.SplashEndDataInit.src,
       strokeThickness: this.SplashEndDataInit.strokeThickness,
+      offsetY: this.SplashEndDataInit.offsetY,
+      blur: this.SplashEndDataInit.blur,
     },
     {
       textTitle: null,
@@ -355,6 +361,8 @@ export default class Game extends Phaser.Scene {
       size: this.SplashEndDataInit.size,
       src: this.SplashEndDataInit.src,
       strokeThickness: this.SplashEndDataInit.strokeThickness,
+      offsetY: this.SplashEndDataInit.offsetY,
+      blur: this.SplashEndDataInit.blur,
     },
     {
       textTitle: null,
@@ -368,6 +376,8 @@ export default class Game extends Phaser.Scene {
       size: this.SplashEndDataInit.size,
       src: this.SplashEndDataInit.src,
       strokeThickness: this.SplashEndDataInit.strokeThickness,
+      offsetY: this.SplashEndDataInit.offsetY,
+      blur: this.SplashEndDataInit.blur,
     },
   ];
 
