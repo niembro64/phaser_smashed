@@ -13,11 +13,11 @@ export type ButtonName = "Projects" | "Controls" | "Rules" | "About" | "Plans";
 
 function App() {
   const [showRules, setShowRules] = useState(false);
-  const [showControlls, setShowControlls] = useState(false);
+  const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
 
-  useEffect(() => {}, [showRules, showControlls, showAbout, showPlans]);
+  useEffect(() => {}, [showRules, showControls, showAbout, showPlans]);
 
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
@@ -35,31 +35,31 @@ function App() {
   const onClickHandler = (buttonName: ButtonName) => {
     switch (buttonName) {
       case "Controls":
-        setShowControlls(!showControlls);
+        setShowControls(!showControls);
         setShowRules(false);
         setShowAbout(false);
         setShowPlans(false);
         break;
       case "Rules":
-        setShowControlls(false);
+        setShowControls(false);
         setShowRules(!showRules);
         setShowAbout(false);
         setShowPlans(false);
         break;
       case "About":
-        setShowControlls(false);
+        setShowControls(false);
         setShowRules(false);
         setShowAbout(!showAbout);
         setShowPlans(false);
         break;
       case "Plans":
-        setShowControlls(false);
+        setShowControls(false);
         setShowRules(false);
         setShowAbout(false);
         setShowPlans(!showPlans);
         break;
       default:
-        setShowControlls(false);
+        setShowControls(false);
         setShowRules(false);
         setShowAbout(false);
         setShowPlans(false);
@@ -110,7 +110,7 @@ function App() {
           <span>Plans</span>
         </button>
       </div>
-      {showControlls && (
+      {showControls && (
         <>
           <div
             className="popup"
