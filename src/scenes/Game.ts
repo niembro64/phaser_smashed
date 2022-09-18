@@ -44,7 +44,7 @@ export default class Game extends Phaser.Scene {
     useReadySound: false,
     invertHealth: false,
     seeSplashDataAlways: false,
-    numUpdateLoopsToSkip:  100,
+    numUpdateLoopsToSkip:  0,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
