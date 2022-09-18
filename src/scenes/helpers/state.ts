@@ -1,7 +1,7 @@
 import Game from "../Game";
 import { GameState, Player, PlayerState } from "../interfaces";
 import { setPhysicsPause, setPhysicsResume } from "./physics";
-import { setMusicPause, setMusicResume, setPauseAllReadySounds, setPauseWiiMusic, setSoundStartPlay } from "./sound";
+import { setMusicPause, setMusicResume, setPauseAllReadySounds, setPauseWiiMusic, setSoundEnerjaPlay, setSoundFinishPlay, setSoundFirstBloodPlay, setSoundProfoundPlay, setSoundSquishPlay, setSoundStartPlay } from "./sound";
 import { setRuleSplashOn, setSplashDataOff, setSplashDataOn } from "./text";
 
 export function setGameState(game: Game, state: GameState): void {
@@ -31,13 +31,28 @@ export function setGameState(game: Game, state: GameState): void {
       setSplashDataOn(game);
       break;
     case "game-state-first-blood":
-      //
+      setRuleSplashOn(game, "splash-first-blood");
+      setMusicPause(game);
+      setSoundProfoundPlay(game);
+      setSoundFirstBloodPlay(game);
+      setSoundSquishPlay(game);
+      setPhysicsPause(game);
+      setSplashDataOn(game);
       break;
     case "game-state-screen-clear":
-      //
+      setRuleSplashOn(game, "splash-screen-clear");
+      setMusicPause(game);
+      setSoundEnerjaPlay(game);
+      setSoundSquishPlay(game);
+      setPhysicsPause(game);
+      setSplashDataOn(game);
       break;
     case "game-state-finished":
-      //
+      setPhysicsPause(game);
+      setRuleSplashOn(game, "splash-finished");
+      setMusicPause(game);
+      setSoundFinishPlay(game);
+      setSplashDataOn(game);
       break;
     default:
       console.log("BROKEN_____________________");

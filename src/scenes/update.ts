@@ -21,7 +21,6 @@ import {
 } from "./helpers/movement";
 import { setBlinkFalse, setBlinkTrue } from "./helpers/sprites";
 import {
-  // game.setGameState____________________,
   setPlayerState,
   getHasNumDeadIncrased,
   getHasGameDurationPassed,
@@ -48,30 +47,17 @@ import {
   getIsScreenClear,
 } from "./helpers/drinking";
 import {
-  setPauseAllReadySounds,
-  setMusicPause,
-  setPauseWiiMusic,
   setMusicPlay,
   setPlayWiiMusicWaitShort,
   setPlayWiiMusicWaitLong,
-  setMusicResume,
   playWiiMusic,
-  setSoundStartPlay,
-  setSoundEnerjaPlay,
-  setSoundSquishPlay,
-  setSoundProfoundPlay,
-  setSoundFirstBloodPlay,
-  setSoundFinishPlay,
   setSoundDiePlay,
 } from "./helpers/sound";
 import {
-  setRuleSplashOn,
-  setSplashDataOn,
   updateGlassesTransparency,
   updateText,
 } from "./helpers/text";
 import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
-import { setPhysicsPause } from "./helpers/physics";
 
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
@@ -127,12 +113,12 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         setGameState(game, "game-state-screen-clear");
-        setRuleSplashOn(game, "splash-screen-clear");
-        setMusicPause(game);
-        setSoundEnerjaPlay(game);
-        setSoundSquishPlay(game);
-        setPhysicsPause(game);
-        setSplashDataOn(game);
+        // setRuleSplashOn(game, "splash-screen-clear");
+        // setMusicPause(game);
+        // setSoundEnerjaPlay(game);
+        // setSoundSquishPlay(game);
+        // setPhysicsPause(game);
+        // setSplashDataOn(game);
       }
 
       ////////////////////////////////
@@ -144,13 +130,13 @@ export function update(game: Game, time: number, delta: number): void {
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         setGameState(game, "game-state-first-blood");
-        setRuleSplashOn(game, "splash-first-blood");
-        setMusicPause(game);
-        setSoundProfoundPlay(game);
-        setSoundFirstBloodPlay(game);
-        setSoundSquishPlay(game);
-        setPhysicsPause(game);
-        setSplashDataOn(game);
+        // setRuleSplashOn(game, "splash-first-blood");
+        // setMusicPause(game);
+        // setSoundProfoundPlay(game);
+        // setSoundFirstBloodPlay(game);
+        // setSoundSquishPlay(game);
+        // setPhysicsPause(game);
+        // setSplashDataOn(game);
       }
 
       ////////////////////////////////
@@ -158,11 +144,11 @@ export function update(game: Game, time: number, delta: number): void {
       ////////////////////////////////
       if (game.gameSecondsClock < 1) {
         setGameState(game, "game-state-finished");
-        setPhysicsPause(game);
-        setRuleSplashOn(game, "splash-finished");
-        setMusicPause(game);
-        setSoundFinishPlay(game);
-        setSplashDataOn(game);
+        // setPhysicsPause(game);
+        // setRuleSplashOn(game, "splash-finished");
+        // setMusicPause(game);
+        // setSoundFinishPlay(game);
+        // setSplashDataOn(game);
       }
       break;
     case "game-state-first-blood":
