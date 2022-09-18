@@ -202,13 +202,19 @@ export default class Game extends Phaser.Scene {
   // CAMERA_OFFSET_Y: number = 0;
 
   circleOffset: number = -50;
+  // circles: Circle[] = [
+  //   { graphic: null, colorNumber: 0xdd5555, colorString: "#dd5555" },
+  //   { graphic: null, colorNumber: 0x5599ff, colorString: "#5599ff" },
+  //   { graphic: null, colorNumber: 0xddcc22, colorString: "#ddcc22" },
+  //   { graphic: null, colorNumber: 0x33ee33, colorString: "#33ee33" },
+  // ];
   circles: Circle[] = [
     { graphic: null, colorNumber: 0xdd5555, colorString: "#dd5555" },
     { graphic: null, colorNumber: 0x5599ff, colorString: "#5599ff" },
     { graphic: null, colorNumber: 0xddcc22, colorString: "#ddcc22" },
     { graphic: null, colorNumber: 0x33ee33, colorString: "#33ee33" },
   ];
-
+  dotArray = ["🔴", "🔵", "🟡", "🟢", "🟣", "🟠", "⚫", "⚪", "🟤"];
   FONT_DEFAULT_NICE: string = "Impact";
   FONT_DEFAULT_MONOSPACE: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
