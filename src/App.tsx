@@ -6,6 +6,9 @@ import "./App.css";
 // import "@fontsource/press-start-2p";
 import { setGameState } from "./scenes/helpers/state";
 import { setSoundStartPlayLiquid } from "./scenes/helpers/sound";
+import { Switch, Route } from "react-router-dom";
+import Start from "./views/Start";
+import Play from "./views/Play";
 
 export interface CharacterMove {
   button: string;
@@ -21,231 +24,50 @@ export type ButtonName =
   | "Plans";
 
 function App() {
-  const [showRules, setShowRules] = useState(false);
-  const [showControls, setShowControls] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
-  const [showPlans, setShowPlans] = useState(false);
+  // The debounce function receives our function as a parameter
+  const debounce = (fn: any) => {
+    // This holds the requestAnimationFrame reference, so we can cancel it if we wish
+    let frame: any;
 
-  useEffect(() => {}, [showRules, showControls, showAbout, showPlans]);
+    // The debounce function returns a new function that can receive a variable number of arguments
+    return (...params: any[]) => {
+      // If the frame variable has been defined, clear it now, and queue for next frame
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
 
-  const characterMoves: CharacterMove[] = [
-    { button: "D-Pad", move: "Movement", ready: "✔️" },
-    { button: "X", move: "Jump", ready: "✔️" },
-    { button: "X", move: "Air Jump", ready: "✔️" },
-    { button: "UP + X", move: "Energy Jump", ready: "✔️" },
-    { button: "Forward + WallTouch", move: "Wall  Slide", ready: "✔️" },
-    { button: "Y", move: "Energy Attack", ready: "✔️" },
-    { button: "L + R", move: "Pause", ready: "✔️" },
-    { button: "Any", move: "UnPause", ready: "✔️" },
-    { button: "B", move: "Physical Attack", ready: "🚧" },
-    { button: "Forward + B", move: "Smash Attack", ready: "🚧" },
-  ];
-
-  const onClickHandlerBody = (buttonName: ButtonName) => {
-    const game = phaserGame.scene.keys.game as Game;
-    setShowControls(false);
-    setShowRules(false);
-    setShowAbout(false);
-    setShowPlans(false);
-
-    game.connectionFunction();
-    setSoundStartPlayLiquid(game);
+      // Queue our function call for the next frame
+      frame = requestAnimationFrame(() => {
+        // Call our function and pass any params we received
+        fn(...params);
+      });
+    };
   };
 
-  const onClickHandlerButtons = (buttonName: ButtonName) => {
-    const game = phaserGame.scene.keys.game as Game;
-    game.connectionFunction();
-    setSoundStartPlayLiquid(game);
-    if (
-      !(
-        game.gameState.name === "game-state-paused" ||
-        game.gameState.name === "game-state-first-blood" ||
-        game.gameState.name === "game-state-screen-clear"
-      )
-    ) {
-      setGameState(game, "game-state-paused");
-    }
-
-    switch (buttonName) {
-      case "Controls":
-        setShowControls(!showControls);
-        setShowRules(false);
-        setShowAbout(false);
-        setShowPlans(false);
-        break;
-      case "Rules":
-        setShowControls(false);
-        setShowRules(!showRules);
-        setShowAbout(false);
-        setShowPlans(false);
-        break;
-      case "About":
-        setShowControls(false);
-        setShowRules(false);
-        setShowAbout(!showAbout);
-        setShowPlans(false);
-        break;
-      case "Plans":
-        setShowControls(false);
-        setShowRules(false);
-        setShowAbout(false);
-        setShowPlans(!showPlans);
-        break;
-      default:
-        setShowControls(false);
-        setShowRules(false);
-        setShowAbout(false);
-        setShowPlans(false);
-    }
+  // Reads out the scroll position and stores it in the data attribute
+  // so we can use it in our stylesheets
+  const storeScroll = () => {
+    document.documentElement.dataset.scroll = window.scrollY.toString();
   };
-  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥
-  // 🏴‍☠️🏳️🏁🏴
-  // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
+
+  // Listen for new scroll events, here we debounce our `storeScroll` function
+  document.addEventListener("scroll", debounce(storeScroll), {
+    passive: true,
+  });
+
+  // Update scroll position for first time
+  storeScroll();
+
   return (
     <>
-      <div className="top-bar">
-        <button
-          className="linkTag btn btn-outline-light"
-          onClick={() => {
-            onClickHandlerButtons("Controls");
-          }}
-        >
-          <span>Controls</span>
-        </button>
-        <button
-          className="linkTag btn btn-outline-light"
-          onClick={() => {
-            onClickHandlerButtons("Rules");
-          }}
-        >
-          <span>Rules</span>
-        </button>
-        <button
-          className="linkTag btn btn-outline-light"
-          onClick={() => {
-            onClickHandlerButtons("Plans");
-          }}
-        >
-          <span>Plans</span>
-        </button>
-        <button
-          className="linkTag btn btn-outline-light"
-          onClick={() => {
-            onClickHandlerButtons("About");
-          }}
-        >
-          <span>About</span>
-        </button>
-      </div>
-      {showControls && (
-        <>
-          <div
-            className="popup"
-            onClick={() => {
-              onClickHandlerBody("Controls");
-            }}
-          >
-            <h1>Controls</h1>
-            {characterMoves.map((charMove, charMoveIndex) => {
-              return (
-                <>
-                  <div className="move" key={charMoveIndex}>
-                    <h5>{charMove.move}</h5>
-                    <h5>
-                      {charMove.button} {charMove.ready}
-                    </h5>
-                  </div>
-                </>
-              );
-            })}
-          </div>
-        </>
-      )}
-      {showRules && (
-        <>
-          <div
-            className="popup"
-            onClick={() => {
-              onClickHandlerBody("Rules");
-            }}
-          >
-            <h1>Rules</h1>
-            <div className="rulesOutline">
-              <img
-                id="rulesImage"
-                src="images/smashRulesGimp01.png"
-                alt="Smashed Rules"
-              />
-            </div>
-          </div>
-        </>
-      )}
-      {showAbout && (
-        <>
-          <div
-            className="popup"
-            onClick={() => {
-              onClickHandlerBody("About");
-            }}
-          >
-            <h1>About</h1>
-            <p>
-              As referenced on the rulesheet, (Chemon) Smashed was invented in
-              Glen Carbon, Illinois (near St. Louis) some time in late 2009 by a
-              group of college kids at the "Chemon" House. Since 2013, "The
-              Young Boys" have been keeping it alive in St. Louis.
-            </p>
-            <p>
-              It's normally played with the N64 Smash Bros game on the N64, Wii,
-              or Emulation, but this is my attempt at recreating it with the
-              rules baked in.
-            </p>
-            <p>
-              The thing that makes this game stand out from other smash drinking
-              games is the main rule, "Screen Clear", requiring players to time
-              their death rather than just try to not die.
-            </p>
-            <p>
-              The game has been played in at least 4 states and 3 countries.
-            </p>
-
-            <h4>Tech Used</h4>
-            <ul>
-              <li>Phaser 3</li>
-              <li>React TS</li>
-              <li>Bootstrap</li>
-              <li>Press Start 2P</li>
-            </ul>
-            <h1>🚧</h1>
-            <p>by NIEMBRO64</p>
-            <a
-              className="linkTag btn btn-outline-light"
-              href="http://niembro64.com/"
-            >
-              {/* <h4>See Other Projects</h4> */}
-              <span>See Other Projects</span>
-            </a>
-          </div>
-        </>
-      )}
-      {showPlans && (
-        <>
-          <div
-            className="popup"
-            onClick={() => {
-              onClickHandlerBody("Plans");
-            }}
-          >
-            <h1>Plans</h1>
-            <p>
-              Let me know if something weird happens, or if you have
-              suggestions.
-            </p>
-            <h1>🚧</h1>
-          </div>
-        </>
-      )}
-      <div id="phaser-container"></div>
+      <Switch>
+        <Route exact path="/">
+          <Start />
+        </Route>
+        <Route exact path="/play">
+          <Play />
+        </Route>
+      </Switch>
     </>
   );
 }

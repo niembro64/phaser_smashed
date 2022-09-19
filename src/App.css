@@ -49,6 +49,8 @@ body {
   justify-content: flex-start;
 
   /* overflow: hidden; */
+
+  z-index: -3;
 }
 
 #root {
