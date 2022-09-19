@@ -56,7 +56,13 @@ function App() {
     const game = phaserGame.scene.keys.game as Game;
     game.connectionFunction();
     setSoundStartPlayLiquid(game);
-    if (game.gameState.name !== "game-state-paused") {
+    if (
+      !(
+        game.gameState.name === "game-state-paused" ||
+        game.gameState.name === "game-state-first-blood" ||
+        game.gameState.name === "game-state-screen-clear"
+      )
+    ) {
       setGameState(game, "game-state-paused");
     }
 
