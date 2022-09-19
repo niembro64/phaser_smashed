@@ -14,7 +14,7 @@ export interface CharacterMove {
 
 export type ButtonName =
   | "See Other Projects"
-  | "New"
+  | "ReStart"
   | "Controls"
   | "Rules"
   | "About"

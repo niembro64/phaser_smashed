@@ -11,12 +11,14 @@ import {
   SplashMulti as SplashEndData,
   GameStateWithTime,
 } from "./interfaces";
+import Play from "../views/Play";
 
 export default class Game extends Phaser.Scene {
   connectionFunction(): void {
     console.log("PHASER CONNECTED");
   }
 
+  parentContext: any = Play;
   // setGameState(game: Game, state: GameState): void {
   //   game.gameState.name = state;
   //   game.gameState.gameStamp = game.gameNanoseconds;
@@ -92,9 +94,6 @@ export default class Game extends Phaser.Scene {
   lowerTextLocationLROffset: number = 0;
   textLocations: number[] = [-700, -350, 350, 700];
   playerSpawnLocations: number[] = [-165, -100, 100, 165];
-
-
-  
 
   FILE_SOUNDS: any = {
     INTRO: "deep.mp3",
@@ -1175,6 +1174,8 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
+    this.parentContext = this.game.registry.get("parentContext");
+
     let pathSounds = "sounds/";
     this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);
     this.load.audio("gun", pathSounds + this.FILE_SOUNDS.GUN);

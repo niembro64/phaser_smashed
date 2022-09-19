@@ -4,6 +4,7 @@ import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 import { setPreUpdate } from "./update";
 
 export function create(game: Game) {
+  game.parentContext.a = game.parentContext.a + 1;
   createDataMatrices(game);
   createSounds(game);
   createBackground(game);
