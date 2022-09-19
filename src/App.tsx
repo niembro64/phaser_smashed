@@ -6,7 +6,6 @@ import "./App.css";
 // import "@fontsource/press-start-2p";
 import { setGameState } from "./scenes/helpers/state";
 
-
 export interface CharacterMove {
   button: string;
   move: string;
@@ -48,7 +47,12 @@ function App() {
   const onClickHandlerButtons = (buttonName: ButtonName) => {
     const game = phaserGame.scene.keys.game as Game;
     game.connectionFunction();
-    setGameState(game, "game-state-paused");
+    // if (!(showRules || showControls || showAbout || showPlans)) {
+    //   setGameState(game, "game-state-paused");
+    // }
+    if (game.gameState.name !== "game-state-paused") {
+      setGameState(game, "game-state-paused");
+    }
 
     switch (buttonName) {
       case "Controls":
@@ -195,12 +199,6 @@ function App() {
           </div>
         </>
       )}
-      {/* <div id="top-bar">
-        <h1 id="title">SMASHED</h1>
-        <h1 id="title">{{ debug } ? "DEBUGGING" : ""}</h1>
-        <h1 id="title"># Controllers: {numControllers}</h1>
-        <h1 id="boy"># Controllers: {numControllers}</h1>
-      </div> */}
       <div id="phaser-container"></div>
     </>
   );

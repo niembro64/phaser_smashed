@@ -10,7 +10,6 @@ import {
   Splash as SplashRules,
   SplashMulti as SplashEndData,
   GameStateWithTime,
-  GameState,
 } from "./interfaces";
 
 export default class Game extends Phaser.Scene {
@@ -97,12 +96,13 @@ export default class Game extends Phaser.Scene {
   FILE_SOUNDS: any = {
     INTRO: "deep.mp3",
     GUN: "throw.wav",
-    HIT: "kick-rubber-tube-82839.mp3",
+    HIT: "punch.wav",
     JUMP: "mxl993_yarstick_swoosh_6-88322.mp3",
     JUMP_POWER: "quick-swhooshing-noise-80898.mp3",
     FIRST_BLOOD: "first_blood_echo-92250.mp3",
     SQUISH: "goresplat-7088.mp3",
     DIE: "sword-hits-the-body-48273.mp3",
+    START_LIQUID: "game-start-liquid.wav",
     START: "start.wav",
     READY: "ready.wav",
     READY_REPEAT: "ready_repeat.wav",
@@ -133,6 +133,7 @@ export default class Game extends Phaser.Scene {
   SOUND_FIRST_BLOOD: any;
   SOUND_SQUISH: any;
   SOUND_DIE: any;
+  SOUND_START_LIQUID: any;
   SOUND_START: any;
   SOUND_READY: any;
   SOUND_READY_REPEAT: any;
