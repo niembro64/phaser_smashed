@@ -82,11 +82,11 @@ body {
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 3%;
 
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .move {

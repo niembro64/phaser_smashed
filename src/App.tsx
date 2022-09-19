@@ -13,7 +13,12 @@ export interface CharacterMove {
   ready: string;
 }
 
-export type ButtonName = "Projects" | "Controls" | "Rules" | "About" | "Plans";
+export type ButtonName =
+  | "See Other Projects"
+  | "Controls"
+  | "Rules"
+  | "About"
+  | "Plans";
 
 function App() {
   const [showRules, setShowRules] = useState(false);
@@ -93,12 +98,6 @@ function App() {
   return (
     <>
       <div className="top-bar">
-        <a
-          className="linkTag btn btn-outline-light"
-          href="http://niembro64.com/"
-        >
-          <span>Projects</span>
-        </a>
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
@@ -118,18 +117,18 @@ function App() {
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
-            onClickHandlerButtons("About");
-          }}
-        >
-          <span>About</span>
-        </button>
-        <button
-          className="linkTag btn btn-outline-light"
-          onClick={() => {
             onClickHandlerButtons("Plans");
           }}
         >
           <span>Plans</span>
+        </button>
+        <button
+          className="linkTag btn btn-outline-light"
+          onClick={() => {
+            onClickHandlerButtons("About");
+          }}
+        >
+          <span>About</span>
         </button>
       </div>
       {showControls && (
@@ -184,7 +183,42 @@ function App() {
             }}
           >
             <h1>About</h1>
+            <p>
+              As referenced on the rulesheet, (Chemon) Smashed was invented in
+              Glen Carbon, Illinois (near St. Louis) some time in late 2009 by a
+              group of college kids at the "Chemon" House. Since 2013, "The
+              Young Boys" have been keeping it alive in St. Louis.
+            </p>
+            <p>
+              It's normally played with the N64 Smash Bros game on the N64, Wii,
+              or Emulation, but this is my attempt at recreating it with the
+              rules baked in.
+            </p>
+            <p>
+              The thing that makes this game stand out from other smash drinking
+              games is the main rule, "Screen Clear", requiring players to time
+              their death rather than just try to not die.
+            </p>
+            <p>
+              The game has been played in at least 4 states and 3 countries.
+            </p>
+
+            <h4>Tech Used</h4>
+            <ul>
+              <li>Phaser 3</li>
+              <li>React TS</li>
+              <li>Bootstrap</li>
+              <li>Press Start 2P</li>
+            </ul>
             <h1>🚧</h1>
+            <p>by NIEMBRO64</p>
+            <a
+              className="linkTag btn btn-outline-light"
+              href="http://niembro64.com/"
+            >
+              {/* <h4>See Other Projects</h4> */}
+              <span>See Other Projects</span>
+            </a>
           </div>
         </>
       )}
@@ -196,7 +230,12 @@ function App() {
               onClickHandlerBody("Plans");
             }}
           >
-            <h1>Plans</h1> <h1>🚧</h1>
+            <h1>Plans</h1>
+            <p>
+              Let me know if something weird happens, or if you have
+              suggestions.
+            </p>
+            <h1>🚧</h1>
           </div>
         </>
       )}

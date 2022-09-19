@@ -144,7 +144,7 @@ export function createSounds(game: Game): void {
   game.SOUND_FIRST_BLOOD = game.sound.add("firstBlood", { volume: 0.8 });
   game.SOUND_SQUISH = game.sound.add("squish", { volume: 0.2 });
   game.SOUND_DIE = game.sound.add("die", { volume: 0.8 });
-  game.SOUND_START_LIQUID = game.sound.add("startLiquid", { volume: 0.4 });
+  game.SOUND_START_LIQUID = game.sound.add("startLiquid", { volume: 0.1 });
   game.SOUND_START = game.sound.add("start", { volume: 0.4 });
   game.SOUND_READY = game.sound.add("ready", { volume: 0.6 });
   game.SOUND_READY_REPEAT = game.sound.add("readyRepeat", {
