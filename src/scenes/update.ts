@@ -40,6 +40,12 @@ import {
 import { updateGlassesTransparency, updateText } from "./helpers/text";
 import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
 
+// export function parentContextTester(game: Game): void {
+//   game.parentContext.setAdder(game.parentContext.adder++);
+//   console.log("game.parentContext.adder", game.parentContext.adder);
+//   console.log("game.parentContext.a", game.parentContext.a);
+// }
+
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
   setGameState(game, "game-state-play");
@@ -50,7 +56,7 @@ export function update(game: Game, time: number, delta: number): void {
     game.debug.numUpdateLoopsToSkip--;
     return;
   }
-
+  // parentContextTester(game);
   updateTimeTime(game, time, delta);
   updateGameTime(game, time, delta);
   updateText(game);

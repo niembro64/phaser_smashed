@@ -1174,8 +1174,6 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.parentContext = this.game.registry.get("parentContext");
-
     let pathSounds = "sounds/";
     this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);
     this.load.audio("gun", pathSounds + this.FILE_SOUNDS.GUN);
@@ -1282,6 +1280,21 @@ export default class Game extends Phaser.Scene {
     }
   }
   create() {
+    console.log("Phaser.Core.Config", Phaser.Core.Config);
+    console.log("this.game.config", this.game.config);
+    console.log(
+      "this.game.config.niemoConfigElement",
+      this.game.config.niemoConfigElement
+    );
+
+    this.parentContext = this.game.registry.get("parentContext");
+    // this.parentContext.contextFunctionTexter();
+
+    // for (let i = 0; i < 4; i++) {
+    //   this.parentContext.setAdder(this.parentContext.adder++);
+    //   console.log(this.parentContext.adder);
+    // }
+
     for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
       this.players.push(
         JSON.parse(JSON.stringify(this.playerOptions[this.PLAYER_CHOICES[i]]))

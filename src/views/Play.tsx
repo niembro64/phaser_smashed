@@ -5,13 +5,10 @@ import Phaser from "phaser";
 import Game from "../scenes/Game";
 import "../App.css";
 // import "@fontsource/press-start-2p";
-import { setGameState } from "../scenes/helpers/state";
-import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
 import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
 
 function Play() {
-  const [PhaserGame, setPhaserGame] = useState();
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -19,6 +16,11 @@ function Play() {
   let a: number = 0;
   let newGame: any;
   const config: Phaser.Types.Core.GameConfig = {
+    // const config: any = {
+    antialias: true,
+    autoFocus: true,
+    pixelArt: false,
+    roundPixels: true,
     scale: {
       mode: Phaser.Scale.FIT,
       // mode: Phaser.Scale.ENVELOP,
@@ -32,7 +34,6 @@ function Play() {
       height: 1080,
       // autoRound: true,
     },
-    pixelArt: false,
     type: Phaser.AUTO,
     parent: "phaser-container",
     backgroundColor: "#000000",
@@ -49,6 +50,7 @@ function Play() {
       },
     },
     scene: [Game],
+
     // dom: {
     //   createContainer: true,
     // },
@@ -66,7 +68,13 @@ function Play() {
 
   useEffect(() => {
     // setPhaserGame(new Phaser.Game(config));
+
+    if (newGame) {
+      newGame.destroy(true);
+    }
     newGame = new Phaser.Game(config);
+    newGame.start("Game", { score: 9 });
+    newGame.niemoConfigElement = 3;
     newGame.registry.set("parentContext", Play);
 
     // setTimeout(() => {
@@ -86,6 +94,10 @@ function Play() {
     { button: "B", move: "Physical Attack", ready: "🚧" },
     { button: "Forward + B", move: "Smash Attack", ready: "🚧" },
   ];
+
+  const contextFunctionTester = () => {
+    console.log("------------RUNNING");
+  };
 
   const onClickHandlerBody = (buttonName: ButtonName) => {
     // const game = phaserGame.scene.keys.game as Game;
@@ -118,8 +130,6 @@ function Play() {
         setShowRules(false);
         setShowAbout(false);
         setShowPlans(false);
-        newGame.destroy(true);
-        newGame = new Phaser.Game(config);
         break;
       case "Controls":
         setShowControls(!showControls);
@@ -173,6 +183,9 @@ function Play() {
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
+            newGame.destroy(true);
+            newGame = new Phaser.Game(config);
+            newGame.registry.set("parentContext", Play);
             onClickHandlerButtons("ReStart");
           }}
         >

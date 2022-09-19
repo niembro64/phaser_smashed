@@ -2,6 +2,8 @@ import Game from "./Game";
 import { onHitHandler } from "./helpers/damage";
 import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 import { setPreUpdate } from "./update";
+import Play from "../views/Play";
+import { playReadySound } from "./helpers/sound";
 
 export function create(game: Game) {
   game.parentContext.a = game.parentContext.a + 1;
@@ -30,6 +32,8 @@ export function create(game: Game) {
   // INIT UPDATE
   setPreUpdate(game);
 }
+
+
 
 export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
