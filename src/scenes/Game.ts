@@ -94,6 +94,8 @@ export default class Game extends Phaser.Scene {
   playerSpawnLocations: number[] = [-165, -100, 100, 165];
 
 
+  
+
   FILE_SOUNDS: any = {
     INTRO: "deep.mp3",
     GUN: "throw.wav",
