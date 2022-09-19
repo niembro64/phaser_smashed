@@ -66,6 +66,9 @@ function Play() {
 
   useEffect(() => {
     // setPhaserGame(new Phaser.Game(config));
+    if (newGame) {
+      newGame.destroy(true);
+    }
     newGame = new Phaser.Game(config);
     newGame.registry.set("parentContext", Play);
 
@@ -118,8 +121,6 @@ function Play() {
         setShowRules(false);
         setShowAbout(false);
         setShowPlans(false);
-        newGame.destroy(true);
-        newGame = new Phaser.Game(config);
         break;
       case "Controls":
         setShowControls(!showControls);
@@ -173,6 +174,9 @@ function Play() {
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
+            newGame.destroy(true);
+            newGame = new Phaser.Game(config);
+            newGame.registry.set("parentContext", Play);
             onClickHandlerButtons("ReStart");
           }}
         >
