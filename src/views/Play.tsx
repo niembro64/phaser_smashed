@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { useEffect, useState } from "react";
-import phaserGame from "../PhaserGame";
+// import phaserGame from "../PhaserGame";
 import Game from "../scenes/Game";
 import "../App.css";
 // import "@fontsource/press-start-2p";
@@ -10,6 +10,50 @@ import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
 
 function Play() {
+  const config: Phaser.Types.Core.GameConfig = {
+    scale: {
+      mode: Phaser.Scale.FIT,
+      // mode: Phaser.Scale.ENVELOP,
+      // mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      // width: 3840,
+      width: 1920,
+      // width: 1080,
+      // height: 2160,
+      // height: 1920,
+      height: 1080,
+      // autoRound: true,
+    },
+    pixelArt: false,
+    type: Phaser.AUTO,
+    parent: "phaser-container",
+    backgroundColor: "#000000",
+    // backgroundColor: '#0077dd',
+    input: {
+      gamepad: true,
+    },
+    physics: {
+      default: "arcade",
+      arcade: {
+        gravity: { y: 3000 },
+        debug: false,
+        // debug: true,
+      },
+    },
+    scene: [Game],
+    // dom: {
+    //   createContainer: true,
+    // },
+    // fps: {
+    //   forceSetTimeOut: true,
+    //   // forceSetTimeOut: false,
+    //   // min: 60,
+    //   // max: 60,
+    //   target: 60,
+    //   // target: 120,
+    // },
+  };
+
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -31,31 +75,52 @@ function Play() {
   ];
 
   const onClickHandlerBody = (buttonName: ButtonName) => {
-    const game = phaserGame.scene.keys.game as Game;
+    // const game = phaserGame.scene.keys.game as Game;
     setShowControls(false);
     setShowRules(false);
     setShowAbout(false);
     setShowPlans(false);
 
-    game.connectionFunction();
-    setSoundStartPlayLiquid(game);
+    // game.connectionFunction();
+    // setSoundStartPlayLiquid(game);
   };
 
   const onClickHandlerButtons = (buttonName: ButtonName) => {
-    const game = phaserGame.scene.keys.game as Game;
-    game.connectionFunction();
-    setSoundStartPlayLiquid(game);
-    if (
-      !(
-        game.gameState.name === "game-state-paused" ||
-        game.gameState.name === "game-state-first-blood" ||
-        game.gameState.name === "game-state-screen-clear"
-      )
-    ) {
-      setGameState(game, "game-state-paused");
-    }
+    // const game = phaserGame.scene.keys.game as Game;
+    // game.connectionFunction();
+    // setSoundStartPlayLiquid(game);
+    // if (
+    //   !(
+    //     game.gameState.name === "game-state-paused" ||
+    //     game.gameState.name === "game-state-first-blood" ||
+    //     game.gameState.name === "game-state-screen-clear"
+    //   )
+    // ) {
+    //   setGameState(game, "game-state-paused");
+    // }
 
     switch (buttonName) {
+      case "New":
+        setShowControls(false);
+        setShowRules(false);
+        setShowAbout(false);
+        setShowPlans(false);
+
+        let newgame = new Phaser.Game(config);
+        // let newGameNums = 0;
+        // if (newGameNums === 0) {
+        //   newGameNums++;
+        // }
+        // newgame.destroy(true);
+        // game.sys.game.destroy(true);
+
+        // document.addEventListener("mousedown", function newGame() {
+        //   newgame = new Phaser.Game(config);
+
+        //   document.removeEventListener("mousedown", newGame);
+        // });
+
+        break;
       case "Controls":
         setShowControls(!showControls);
         setShowRules(false);
@@ -99,6 +164,14 @@ function Play() {
             <span>Start New Game</span>
           </button>
         </Link>
+        <button
+          className="linkTag btn btn-outline-light"
+          onClick={() => {
+            onClickHandlerButtons("New");
+          }}
+        >
+          <span>New</span>
+        </button>
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {

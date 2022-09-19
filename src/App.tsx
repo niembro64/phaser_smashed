@@ -1,11 +1,7 @@
 // import { useState } from "react";
-import { useEffect, useState } from "react";
-import phaserGame from "./PhaserGame";
-import Game from "./scenes/Game";
 import "./App.css";
 // import "@fontsource/press-start-2p";
-import { setGameState } from "./scenes/helpers/state";
-import { setSoundStartPlayLiquid } from "./scenes/helpers/sound";
+
 import { Switch, Route } from "react-router-dom";
 import Start from "./views/Start";
 import Play from "./views/Play";
@@ -18,6 +14,7 @@ export interface CharacterMove {
 
 export type ButtonName =
   | "See Other Projects"
+  | "New"
   | "Controls"
   | "Rules"
   | "About"
