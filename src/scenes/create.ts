@@ -34,7 +34,8 @@ export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
   game.splashesEndData.forEach((splash, splashIndex) => {
     for (let i = 0; i < game.players.length; i++) {
-      splash.words[i] = game.players[i].char.name + " " + game.colorCircles[i].text;
+      splash.words[i] =
+        game.players[i].char.name + " " + game.colorCircles[i].text;
     }
     // splash.words[game.players.length] = "";
     // splash.words[game.players.length] = splash.name;
@@ -143,7 +144,8 @@ export function createSounds(game: Game): void {
   game.SOUND_FIRST_BLOOD = game.sound.add("firstBlood", { volume: 0.8 });
   game.SOUND_SQUISH = game.sound.add("squish", { volume: 0.2 });
   game.SOUND_DIE = game.sound.add("die", { volume: 0.8 });
-  game.SOUND_START = game.sound.add("start", { volume: 0.6 });
+  game.SOUND_START_LIQUID = game.sound.add("startLiquid", { volume: 0.4 });
+  game.SOUND_START = game.sound.add("start", { volume: 0.4 });
   game.SOUND_READY = game.sound.add("ready", { volume: 0.6 });
   game.SOUND_READY_REPEAT = game.sound.add("readyRepeat", {
     volume: 0.3,

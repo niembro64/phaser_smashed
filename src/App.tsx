@@ -5,6 +5,7 @@ import Game from "./scenes/Game";
 import "./App.css";
 // import "@fontsource/press-start-2p";
 import { setGameState } from "./scenes/helpers/state";
+import { setSoundStartPlayLiquid } from "./scenes/helpers/sound";
 
 export interface CharacterMove {
   button: string;
@@ -36,20 +37,20 @@ function App() {
   ];
 
   const onClickHandlerBody = (buttonName: ButtonName) => {
+    const game = phaserGame.scene.keys.game as Game;
     setShowControls(false);
     setShowRules(false);
     setShowAbout(false);
     setShowPlans(false);
 
-    const game = phaserGame.scene.keys.game as Game;
     game.connectionFunction();
+    setSoundStartPlayLiquid(game);
   };
+
   const onClickHandlerButtons = (buttonName: ButtonName) => {
     const game = phaserGame.scene.keys.game as Game;
     game.connectionFunction();
-    // if (!(showRules || showControls || showAbout || showPlans)) {
-    //   setGameState(game, "game-state-paused");
-    // }
+    setSoundStartPlayLiquid(game);
     if (game.gameState.name !== "game-state-paused") {
       setGameState(game, "game-state-paused");
     }

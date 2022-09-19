@@ -1181,6 +1181,7 @@ export default class Game extends Phaser.Scene {
     this.load.audio("firstBlood", pathSounds + this.FILE_SOUNDS.FIRST_BLOOD);
     this.load.audio("squish", pathSounds + this.FILE_SOUNDS.SQUISH);
     this.load.audio("die", pathSounds + this.FILE_SOUNDS.DIE);
+    this.load.audio("startLiquid", pathSounds + this.FILE_SOUNDS.START_LIQUID);
     this.load.audio("start", pathSounds + this.FILE_SOUNDS.START);
     this.load.audio("ready", pathSounds + this.FILE_SOUNDS.READY);
     this.load.audio("readyRepeat", pathSounds + this.FILE_SOUNDS.READY_REPEAT);

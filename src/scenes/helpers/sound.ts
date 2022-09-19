@@ -20,8 +20,13 @@ export function setSoundSquishPlay(game: Game): void {
 export function setSoundEnerjaPlay(game: Game): void {
   game.ENERJA_SMASHED.play();
 }
+export function setSoundStartPlayLiquid(game: Game): void {
+  game.SOUND_START_LIQUID.play();
+}
 export function setSoundStartPlay(game: Game): void {
-  game.SOUND_START.play();
+  if (game.timeSecondsClock > 0) {
+    game.SOUND_START.play();
+  }
 }
 export function setPauseWiiMusic(game: Game): void {
   game.SOUND_PAUSED.pause();
