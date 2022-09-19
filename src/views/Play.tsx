@@ -7,7 +7,7 @@ import "../App.css";
 import { setGameState } from "../scenes/helpers/state";
 import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
 import { ButtonName, CharacterMove } from "../App";
-
+import { Link } from "react-router-dom";
 
 function Play() {
   const [showRules, setShowRules] = useState(false);
@@ -94,6 +94,11 @@ function Play() {
     <>
       <div className="phaser-container" id="phaser-container"></div>
       <div className="top-bar">
+        <Link to={"/"} id="link">
+          <button className="linkTag btn btn-outline-light px-4 my-2">
+            <span>Start New Game</span>
+          </button>
+        </Link>
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {

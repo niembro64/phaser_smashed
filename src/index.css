@@ -33,7 +33,7 @@ body {
   top: 0%;
   border: 0%;
 
-  height: 5%;
+  height: 6%;
   width: 100%;
 
   /* border: 1% dashed black; */
@@ -51,12 +51,26 @@ body {
 
 .top-bar:hover {
   background-color: black;
+  border: 0;
 }
 
 .top-bar:hover > .linkTag {
   /* display: block; */
+  border: 0;
   background-color: black;
   color: white;
+}
+.top-bar:hover > #link > .linkTag {
+  /* display: block; */
+  border: 0;
+  background-color: black;
+  color: white;
+}
+
+#link {
+  border: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .linkTag {
@@ -65,6 +79,10 @@ body {
   border: 0;
   padding: 0% 3%;
   color: rgba(255, 255, 255, 0.3);
+}
+.linkTag:hover {
+  background-color: blue;
+  color: blue;
 }
 .linkTag:active {
   background-color: red;
