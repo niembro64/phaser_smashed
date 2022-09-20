@@ -390,15 +390,6 @@ function Play() {
 
   return (
     <div className="overDiv">
-      {/* <button
-        className="help btn btn-outline-light"
-        onClick={() => {
-          newGame.current.destroy(true);
-          newGame.current = new Phaser.Game(config);
-        }}
-      >
-        <span>XXXXXXXXXX</span>
-      </button> */}
       <div className="phaser-container" id="phaser-container"></div>
       {webState === "start" && (
         <div className="startClassDiv">
@@ -537,7 +528,7 @@ function Play() {
           </button>
         </div>
         {showControls && (
-          <div>
+          <div className="overDiv">
             <div
               className="popup"
               onClick={() => {
@@ -547,13 +538,11 @@ function Play() {
               <h1>Controls</h1>
               {characterMoves.map((charMove, charMoveIndex) => {
                 return (
-                  <div>
-                    <div className="move" key={charMoveIndex}>
-                      <h5>{charMove.move}</h5>
-                      <h5>
-                        {charMove.button} {charMove.ready}
-                      </h5>
-                    </div>
+                  <div className="move" key={charMoveIndex}>
+                    <h5>{charMove.move}</h5>
+                    <h5>
+                      {charMove.button} {charMove.ready}
+                    </h5>
                   </div>
                 );
               })}
