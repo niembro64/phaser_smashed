@@ -73,8 +73,8 @@ function Play() {
     // }
     // newGame.destroy(true);
     newGame = new Phaser.Game(config);
-    newGame.start("Game", { score: 9 });
-    newGame.niemoConfigElement = 3;
+    // newGame.start("Game", { score: 9 });
+    // newGame.niemoConfigElement = 3;
     newGame.registry.set("parentContext", Play);
 
     // setTimeout(() => {
