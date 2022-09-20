@@ -104,6 +104,7 @@ function Play() {
   let myGame: any;
 
   const onClickStartStartButton = () => {
+    setWebState("play");
     let players = [...smashConfig.players];
     let newPlayers: { characterId: number }[] = [];
     buttonsOnOff.forEach((button, buttonIndex) => {
@@ -317,7 +318,7 @@ function Play() {
   };
 
   return (
-    <>
+    <div>
       {webState === "start" && (
         <div className="startClassDiv">
           <div className="playerChoices">
@@ -330,11 +331,11 @@ function Play() {
                       onClickStartRotateSelection(playerIndex);
                     }}
                   >
-                    {buttonsOnOff[playerIndex].state && (
-                      <span className="startImageNumber">
+                    {/* {buttonsOnOff[playerIndex].state && (
+                      <span className="startCharacterId">
                         {player.characterId}
                       </span>
-                    )}
+                    )} */}
                     {buttonsOnOff[playerIndex].state && (
                       <div className="startImageWrapper">
                         <img
@@ -373,19 +374,18 @@ function Play() {
               );
             })}
           </div>
-          <Link to={"/play"} className="playLink">
-            <button
-              className="btn btn-primary px-4"
-              onClick={onClickStartStartButton}
-            >
-              Start
-            </button>
-          </Link>
+          <button
+            className="startButton btn btn-dark px-2"
+            onClick={onClickStartStartButton}
+          >
+            Start
+          </button>
         </div>
+        // <Link to={"/play"} className="playLink"></Link>
       )}
+      <div className="phaser-container" id="phaser-container"></div>
       {webState === "play" && (
-        <>
-          <div className="phaser-container" id="phaser-container"></div>
+        <div>
           <div className="top-bar">
             <button
               className="linkTag btn btn-outline-light"
@@ -421,7 +421,7 @@ function Play() {
             </button>
           </div>
           {showControls && (
-            <>
+            <div>
               <div
                 className="popup"
                 onClick={() => {
@@ -431,21 +431,21 @@ function Play() {
                 <h1>Controls</h1>
                 {characterMoves.map((charMove, charMoveIndex) => {
                   return (
-                    <>
+                    <div>
                       <div className="move" key={charMoveIndex}>
                         <h5>{charMove.move}</h5>
                         <h5>
                           {charMove.button} {charMove.ready}
                         </h5>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
               </div>
-            </>
+            </div>
           )}
           {showRules && (
-            <>
+            <div>
               <div
                 className="popup"
                 onClick={() => {
@@ -461,10 +461,10 @@ function Play() {
                   />
                 </div>
               </div>
-            </>
+            </div>
           )}
           {showAbout && (
-            <>
+            <div>
               <div
                 className="popup"
                 onClick={() => {
@@ -510,10 +510,10 @@ function Play() {
                   <span>See Other Projects</span>
                 </a>
               </div>
-            </>
+            </div>
           )}
           {showPlans && (
-            <>
+            <div>
               <div
                 className="popup"
                 onClick={() => {
@@ -527,11 +527,11 @@ function Play() {
                 </p>
                 <h1>🚧</h1>
               </div>
-            </>
+            </div>
           )}
-        </>
+        </div>
       )}
-    </>
+    </div>
   );
 }
 
