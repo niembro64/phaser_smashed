@@ -22,7 +22,6 @@ export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
 export interface PlayerConfig {
   characterId: CharacterId;
-  // name: CharacterName;
 }
 
 export interface SmashConfig {
@@ -51,34 +50,17 @@ function Play() {
   });
   const config: Phaser.Types.Core.GameConfig = {
     title: "Smashed",
-    // bannerBackgroundColor: [],
     antialias: true,
     pixelArt: false,
     scale: {
       mode: Phaser.Scale.FIT,
-      // mode: Phaser.Scale.ENVELOP,
-      // mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
-      // width: 3840,
       width: 1920,
-      // width: 1080,
-      // height: 2160,
-      // height: 1920,
       height: 1080,
-      // autoRound: true,
     },
     type: Phaser.AUTO,
     parent: "phaser-container",
-    // #{numPlayers}
-    // bannerTextColor: [
-    //   "#00000055",
-    //   "#00000055",
-    //   "#00000055",
-    //   "#00000055",
-    //   "#00000055",
-    // ],
     backgroundColor: "#00000055",
-    // backgroundColor: '#0077dd',
     input: {
       gamepad: true,
     },
@@ -87,21 +69,9 @@ function Play() {
       arcade: {
         gravity: { y: 3000 },
         debug: false,
-        // debug: true,
       },
     },
     scene: [Game],
-    // dom: {
-    //   createContainer: true,
-    // },
-    // fps: {
-    //   forceSetTimeOut: true,
-    //   // forceSetTimeOut: false,
-    //   // min: 60,
-    //   // max: 60,
-    //   target: 60,
-    //   // target: 120,
-    // },
   };
 
   const onClickStartStartButton = () => {
@@ -153,8 +123,6 @@ function Play() {
     showAbout,
     showPlans,
   ]);
-
-  // use
 
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
@@ -319,15 +287,10 @@ function Play() {
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
-                // setUseEffectFlipper(false);
-                // setUseEffectRan(false);
                 onClickPlayNavButtons("Back");
                 setWebState("start");
                 setNumClicks(numClicks + 1);
                 newGame.current.destroy(true);
-                // newGame.current = new Phaser.Game(config);
-                // console.log("MYGAME__________", newGame.current);
-                // myGame.destroy(true);
               }}
             >
               <span>Back</span>
@@ -337,15 +300,9 @@ function Play() {
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
-                // setUseEffectFlipper(false);
-                // setUseEffectRan(false);
                 onClickPlayNavButtons("ReStart");
-                // setWebState("start");
                 newGame.current.destroy(true);
                 newGame.current = new Phaser.Game(config);
-                // newGame.current = new Phaser.Game(config);
-                // console.log("MYGAME__________", newGame.current);
-                // myGame.destroy(true);
               }}
             >
               <span>ReStart</span>
