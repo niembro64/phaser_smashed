@@ -120,7 +120,7 @@ function Start() {
   };
 
   return (
-    <>
+    <div className="startClassDiv">
       <div className="playerChoices">
         {smashConfig.players.map((player, playerIndex) => {
           return (
@@ -132,7 +132,7 @@ function Start() {
                 }}
               >
                 {buttonsOnOff[playerIndex].state && (
-                  <span>{player.characterId}</span>
+                  <span className="startImageNumber">{player.characterId}</span>
                 )}
                 {buttonsOnOff[playerIndex].state && (
                   <div className="startImageWrapper">
@@ -177,7 +177,7 @@ function Start() {
           Start
         </button>
       </Link>
-    </>
+    </div>
   );
 }
 

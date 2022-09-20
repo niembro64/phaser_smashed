@@ -167,7 +167,14 @@ body {
   height: 100%;
   /* width: 90%; */
 }
-
+.startClassDiv {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 .playerChoices {
   height: 90%;
   width: 90%;
@@ -181,11 +188,10 @@ body {
 }
 
 .playerChoice {
-  width: 20%;
+  flex: 1;
   height: 100%;
-  /* background-color: red; */
   padding: 1%;
-  font-size: 300%;
+  font-size: 3vw;
 
   display: flex;
   flex-direction: column;
@@ -196,44 +202,52 @@ body {
 .playerChoice > button {
   width: 100%;
   height: 20%;
-  font-size: 80%;
+  font-size: 3vw;
 }
 
 .playLink {
   height: 15%;
-  width: 30%;
-  margin-bottom: 4%;
+  width: 90%;
+  margin-bottom: 2%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .playLink > button {
-  font-size: 300%;
-  height: 120%;
-  width: 100%;
+  font-size: 5vw;
+  height: 100%;
+  width: 90%;
 }
 
 .playerChar {
   width: 100%;
   height: 100%;
 
-  margin: 2%;
+  margin: 0%;
 
   /* background-color: red; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 
   cursor: pointer;
 }
 
 .startImageWrapper {
-  width: 200px;
-  height: 250px;
+  width: 100%;
+  height: 50%;
   margin: 2%;
   /* background-color: cyan; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+}
+.startImageNumber {
+  z-index: 3;
 }
 .startImage {
   width: 70%;
