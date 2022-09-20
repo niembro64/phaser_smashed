@@ -8,6 +8,7 @@ import "../App.css";
 import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
 import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
+import { setGameState } from "../scenes/helpers/state";
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -167,23 +168,42 @@ function Play() {
     { button: "B", move: "Physical Attack", ready: "🚧" },
     { button: "Forward + B", move: "Smash Attack", ready: "🚧" },
   ];
-  const playCLickSoundParent = () => {
-    const gameX = newGame.current.scene.keys.game as Game;
-    if (gameX) {
+  const clickSoundParent = () => {
+    if (webState === "play") {
+      const gameX = newGame.current.scene.keys.game as Game;
       setSoundStartPlayLiquid(gameX);
     }
   };
 
+  const clickPauseParent = () => {
+    if (webState === "play") {
+      const gameX = newGame.current.scene.keys.game as Game;
+      if (
+        !(
+          gameX.gameState.name === "game-state-paused" ||
+          gameX.gameState.name === "game-state-first-blood" ||
+          gameX.gameState.name === "game-state-screen-clear"
+        )
+      ) {
+        setGameState(gameX, "game-state-paused");
+      }
+    }
+  };
+
   const onClickPlayNavBody = (buttonName: ButtonName) => {
-    playCLickSoundParent();
+    clickSoundParent();
     setShowControls(false);
     setShowRules(false);
     setShowAbout(false);
     setShowPlans(false);
+
+    clickSoundParent();
   };
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {
-    playCLickSoundParent();
+    clickSoundParent();
+    clickPauseParent();
+
     switch (buttonName) {
       case "Back":
         setShowControls(false);
