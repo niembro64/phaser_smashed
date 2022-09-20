@@ -39,10 +39,13 @@ export function updateSpriteFilter(
           2 ===
         0
       ) {
-        filterRed(player);
+        filterPlayerColorRed(player);
       } else {
-        // filterLight(player);
-        filterNormal(player, playerIndex, game);
+        filterPlayerColorNormal(player, playerIndex, game);
+        // filterPlayerColorCircleFill(
+        //   player,
+        //   game.colorCircles[playerIndex].colorNumber
+        // );
       }
     } else {
       // NOT HURT
@@ -54,18 +57,22 @@ export function updateSpriteFilter(
           2 ===
         0
       ) {
-        filterDark(player);
+        filterPlayerColorDark(player);
       } else {
         // filterLight(player);
-        filterNormal(player, playerIndex, game);
+        filterPlayerColorNormal(player, playerIndex, game);
+        // filterPlayerColorCircleFill(
+        //   player,
+        //   game.colorCircles[playerIndex].colorNumber
+        // );
       }
     }
   } else {
-    filterNormal(player, playerIndex, game);
+    filterPlayerColorNormal(player, playerIndex, game);
   }
 }
 
-export function filterCircleAttackEnergy(
+export function filterAttackEnergyColorCircle(
   player: Player,
   circleColor: number
 ): void {
@@ -78,36 +85,54 @@ export function filterCircleAttackEnergy(
   player.char.attackEnergy.sprite.setAlpha(1);
   // player.char.sprite.brighten(0.3);
 }
-export function filterCircle(player: Player, circleColor: number): void {
+export function filterPlayerColorCircle(
+  player: Player,
+  circleColor: number
+): void {
   // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
   player.char.sprite.setTint(circleColor);
+  // player.char.sprite.setTintFill(circleColor);
   player.char.sprite.setAlpha(1);
   // player.char.sprite.brighten(0.3);
 }
-export function filterRed(player: Player): void {
+export function filterPlayerColorCircleFill(
+  player: Player,
+  circleColor: number
+): void {
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
+  // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
+  // player.char.sprite.setTint(circleColor);
+  player.char.sprite.setTintFill(circleColor);
+  player.char.sprite.setAlpha(1);
+  // player.char.sprite.brighten(0.3);
+}
+export function filterPlayerColorRed(player: Player): void {
   player.char.sprite.setTint(0xaa3333);
   player.char.sprite.setAlpha(0.8);
 }
-export function filterDark(player: Player): void {
+export function filterPlayerColorDark(player: Player): void {
   player.char.sprite.setTint(0x555555);
   player.char.sprite.setAlpha(0.8);
 }
-export function filterLight(player: Player): void {
+export function filterPlayerColorLight(player: Player): void {
   player.char.sprite.setTint(0x888888);
   player.char.sprite.setAlpha(0.8);
 }
 
-export function filterNormal(
+export function filterPlayerColorNormal(
   player: Player,
   playerIndex: number,
   game: Game
 ): void {
   if (game.debug.setPlayerColorFiltersActive) {
-    filterCircle(player, game.colorCircles[playerIndex].colorNumber);
+    filterPlayerColorCircle(player, game.colorCircles[playerIndex].colorNumber);
     player.char.sprite.setAlpha(1);
   } else {
     player.char.sprite.setAlpha(1);
@@ -128,7 +153,10 @@ export function filterNormalAttackEnergy(
   game: Game
 ): void {
   if (game.debug.setPlayerColorFiltersActive) {
-    filterCircleAttackEnergy(player, game.colorCircles[playerIndex].colorNumber);
+    filterAttackEnergyColorCircle(
+      player,
+      game.colorCircles[playerIndex].colorNumber
+    );
     player.char.attackEnergy.sprite.setAlpha(1);
   } else {
     player.char.attackEnergy.sprite.setAlpha(1);
