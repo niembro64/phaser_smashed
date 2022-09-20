@@ -5,20 +5,45 @@ import Phaser from "phaser";
 import Game from "../scenes/Game";
 import "../App.css";
 // import "@fontsource/press-start-2p";
-import { setGameState } from "../scenes/helpers/state";
-import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
 import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
 
+export type CharacterName =
+  | "Mario"
+  | "Link"
+  | "Pikachu"
+  | "Kirby"
+  | "Chez"
+  | "BlackChez";
+export interface PlayerConfig {
+  name: CharacterName;
+}
+
+export interface SmashConfig {
+  players: PlayerConfig[];
+}
+
 function Play() {
-  const [PhaserGame, setPhaserGame] = useState();
+  let a: number = 0;
+  let newGame: any;
+
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
-  let a: number = 0;
-  let newGame: any;
+  const smashConfig: SmashConfig = {
+    players: [
+      { name: "Mario" },
+      { name: "Link" },
+      { name: "Link" },
+      { name: "Link" },
+    ],
+  };
   const config: Phaser.Types.Core.GameConfig = {
+    title: "Smashed",
+    // bannerBackgroundColor: [],
+    antialias: true,
+    pixelArt: false,
     scale: {
       mode: Phaser.Scale.FIT,
       // mode: Phaser.Scale.ENVELOP,
@@ -32,10 +57,17 @@ function Play() {
       height: 1080,
       // autoRound: true,
     },
-    pixelArt: false,
     type: Phaser.AUTO,
     parent: "phaser-container",
-    backgroundColor: "#000000",
+    // #{numPlayers}
+    // bannerTextColor: [
+    //   "#00000055",
+    //   "#00000055",
+    //   "#00000055",
+    //   "#00000055",
+    //   "#00000055",
+    // ],
+    backgroundColor: "#00000055",
     // backgroundColor: '#0077dd',
     input: {
       gamepad: true,
@@ -71,6 +103,7 @@ function Play() {
     }
     newGame = new Phaser.Game(config);
     newGame.registry.set("parentContext", Play);
+    newGame.registry.set("smashConfig", smashConfig);
 
     // setTimeout(() => {
     //   newGame.destroy(true);

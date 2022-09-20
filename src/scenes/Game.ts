@@ -11,14 +11,14 @@ import {
   SplashMulti as SplashEndData,
   GameStateWithTime,
 } from "./interfaces";
-import Play from "../views/Play";
+import Play, { SmashConfig } from "../views/Play";
 
 export default class Game extends Phaser.Scene {
   connectionFunction(): void {
     console.log("PHASER CONNECTED");
   }
 
-  parentContext: any = Play;
+  smashConfig: SmashConfig | null = null;
   // setGameState(game: Game, state: GameState): void {
   //   game.gameState.name = state;
   //   game.gameState.gameStamp = game.gameNanoseconds;
@@ -1174,7 +1174,10 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    this.parentContext = this.game.registry.get("parentContext");
+    // this.parentContext = this.game.registry.get("parentContext");
+    this.smashConfig = this.game.registry.get("smashConfig");
+    console.log("this.smashConfig", this.smashConfig);
+    // console.log("this.game.config.backgroundColor", this.game.config);
 
     let pathSounds = "sounds/";
     this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);
