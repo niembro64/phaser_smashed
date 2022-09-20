@@ -125,14 +125,8 @@ body {
   border: 0;
   padding: 0% 3%;
   color: rgba(255, 255, 255, 0.3);
-}
-.linkTag:hover {
-  background-color: blue;
-  color: blue;
-}
-.linkTag:active {
-  background-color: red;
-  color: red;
+
+  font-size: 1.5vw;
 }
 
 .popup {

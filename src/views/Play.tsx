@@ -7,6 +7,7 @@ import "../App.css";
 // import "@fontsource/press-start-2p";
 import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
+import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -30,13 +31,9 @@ export interface SmashConfig {
 export type WebState = "start" | "play";
 
 function Play() {
-  // let myGame: Phaser.Game;
-  // const componentRef = useRef({});
-  // const { current: newGame.current }: any = componentRef;
   let newGame: any = useRef({});
   const [numClicks, setNumClicks] = useState(0);
   const [webState, setWebState] = useState<WebState>("start");
-  // const [sGame, setSGame] = useState();
   const [buttonsOnOff, setButtonsOnOff] = useState([
     { state: true },
     { state: true },
@@ -105,65 +102,9 @@ function Play() {
     //   // target: 120,
     // },
   };
-  // const configFirst: Phaser.Types.Core.GameConfig = {
-  //   title: "Smashed",
-  //   // bannerBackgroundColor: [],
-  //   antialias: true,
-  //   pixelArt: false,
-  //   scale: {
-  //     mode: Phaser.Scale.FIT,
-  //     // mode: Phaser.Scale.ENVELOP,
-  //     // mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
-  //     autoCenter: Phaser.Scale.CENTER_BOTH,
-  //     // width: 3840,
-  //     width: 1920,
-  //     // width: 1080,
-  //     // height: 2160,
-  //     // height: 1920,
-  //     height: 1080,
-  //     // autoRound: true,
-  //   },
-  //   type: Phaser.AUTO,
-  //   parent: "phaser-container",
-  //   // #{numPlayers}
-  //   // bannerTextColor: [
-  //   //   "#00000055",
-  //   //   "#00000055",
-  //   //   "#00000055",
-  //   //   "#00000055",
-  //   //   "#00000055",
-  //   // ],
-  //   backgroundColor: "#00000055",
-  //   // backgroundColor: '#0077dd',
-  //   input: {
-  //     gamepad: true,
-  //   },
-  //   physics: {
-  //     default: "arcade",
-  //     arcade: {
-  //       gravity: { y: 3000 },
-  //       debug: false,
-  //       // debug: true,
-  //     },
-  //   },
-  //   scene: [Game],
-  //   // dom: {
-  //   //   createContainer: true,
-  //   // },
-  //   // fps: {
-  //   //   forceSetTimeOut: true,
-  //   //   // forceSetTimeOut: false,
-  //   //   // min: 60,
-  //   //   // max: 60,
-  //   //   target: 60,
-  //   //   // target: 120,
-  //   // },
-  // };
 
   const onClickStartStartButton = () => {
     setWebState("play");
-    setNumClicks(numClicks + 1);
-    // setUseEffectFlipper(true);
     let players = [...smashConfig.players];
     let newPlayers: { characterId: number }[] = [];
     buttonsOnOff.forEach((button, buttonIndex) => {
@@ -171,17 +112,10 @@ function Play() {
         newPlayers.push({ characterId: players[buttonIndex].characterId });
       }
     });
-
     let newSmashConfig = { players: [...newPlayers] };
-    // myGame.destroy(true);
     newGame.current = new Phaser.Game(config);
-
     newGame.current.registry.set("parentContext", Play);
     newGame.current.registry.set("smashConfig", newSmashConfig);
-    // newGame.current.registry.set("smashConfig", smashConfig);
-    // setSGame(myGame);
-    // myGame.registry.set("smashGame", sGame);
-    console.log("MY GAME ++++++++++++", newGame.current);
   };
 
   const onClickStartOnOffButtons = (
@@ -206,37 +140,10 @@ function Play() {
   // 🏴‍☠️🏳️🏁🏴
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
 
-  // let newGame.current: any;
-  // let smashGame: any;
-  // const [useEffectFlipper, setUseEffectFlipper] = useState(false);
-  // const [useEffectRan, setUseEffectRan] = useState(false);
-
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
-  // const [smashConfig, setSmashConfig] = useState({
-  //   players: [
-  //     { characterId: 3 },
-  //     { characterId: 3 },
-  //     { characterId: 3 },
-  //     { characterId: 3 },
-  //   ],
-  // });
-  // const smashConfig: SmashConfig = {
-  //   // players: [
-  //   //   { name: "Mario" },
-  //   //   { name: "Link" },
-  //   //   { name: "Link" },
-  //   //   { name: "Link" },
-  //   // ],
-  //   players: [
-  //     { characterId: 1 },
-  //     { characterId: 2 },
-  //     { characterId: 2 },
-  //     { characterId: 2 },
-  //   ],
-  // };
 
   useEffect(() => {}, [
     webState,
@@ -246,63 +153,7 @@ function Play() {
     showPlans,
   ]);
 
-  // useEffect(() => {
-  //   // if (newGame.current) {
-  //   //   newGame.current.destroy(true);
-  //   // }
-  //   newGame.current = new Phaser.Game(config);
-  //   newGame.current.registry.set("parentContext", Play);
-  //   // newGame.current.registry.set("smashConfig", smashConfig);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (useEffectRan) {
-  //     if (useEffectFlipper) {
-  //       let players = [...smashConfig.players];
-  //       let newPlayers: { characterId: number }[] = [];
-  //       buttonsOnOff.forEach((button, buttonIndex) => {
-  //         if (button.state) {
-  //           newPlayers.push({ characterId: players[buttonIndex].characterId });
-  //         }
-  //       });
-
-  //       let newSmashConfig = { players: [...newPlayers] };
-  //       // myGame.destroy(true);
-  //       newGame.current = new Phaser.Game(config);
-
-  //       newGame.current.registry.set("parentContext", Play);
-  //       newGame.current.registry.set("smashConfig", newSmashConfig);
-  //       // newGame.current.registry.set("smashConfig", smashConfig);
-  //       // setSGame(myGame);
-  //       // myGame.registry.set("smashGame", sGame);
-  //       console.log("MY GAME ++++++++++++", newGame.current);
-  //       /////////////////////////////
-  //       /////////////////////////////
-  //       /////////////////////////////
-  //       /////////////////////////////
-  //       // // setPhaserGame(new Phaser.Game(config));
-
-  //       // // if (newGame.current) {
-  //       // // }
-  //       // // newGame.current.destroy(true);
-  //       // newGame.current = new Phaser.Game(config);
-  //       // // newGame.current.start("Game", { score: 9 });
-  //       // // newGame.current.niemoConfigElement = 3;
-  //       // newGame.current.registry.set("parentContext", Play);
-
-  //       // // setTimeout(() => {
-  //       // //   newGame.current.destroy(true);
-  //       // // }, 3000);
-  //       console.log("NEW GAME CREATE", newGame.current);
-  //     } else {
-  //       console.log("NEW GAME DESTROY BEFORE", newGame.current);
-  //       newGame.current.destroy(true);
-  //       console.log("NEW GAME DESTROY AFTER", newGame.current);
-  //     }
-  //   } else {
-  //     setUseEffectRan(true);
-  //   }
-  // }, [useEffectFlipper]);
+  // use
 
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
@@ -316,32 +167,23 @@ function Play() {
     { button: "B", move: "Physical Attack", ready: "🚧" },
     { button: "Forward + B", move: "Smash Attack", ready: "🚧" },
   ];
+  const playCLickSoundParent = () => {
+    const gameX = newGame.current.scene.keys.game as Game;
+    if (gameX) {
+      setSoundStartPlayLiquid(gameX);
+    }
+  };
 
   const onClickPlayNavBody = (buttonName: ButtonName) => {
-    // const game = phaserGame.scene.keys.game as Game;
+    playCLickSoundParent();
     setShowControls(false);
     setShowRules(false);
     setShowAbout(false);
     setShowPlans(false);
-
-    // game.connectionFunction();
-    // setSoundStartPlayLiquid(game);
   };
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {
-    // const game = phaserGame.scene.keys.game as Game;
-    // game.connectionFunction();
-    // setSoundStartPlayLiquid(game);
-    // if (
-    //   !(
-    //     game.gameState.name === "game-state-paused" ||
-    //     game.gameState.name === "game-state-first-blood" ||
-    //     game.gameState.name === "game-state-screen-clear"
-    //   )
-    // ) {
-    //   setGameState(game, "game-state-paused");
-    // }
-
+    playCLickSoundParent();
     switch (buttonName) {
       case "Back":
         setShowControls(false);
@@ -403,11 +245,6 @@ function Play() {
                       onClickStartRotateSelection(playerIndex);
                     }}
                   >
-                    {/* {buttonsOnOff[playerIndex].state && (
-                      <span className="startCharacterId">
-                        {player.characterId}
-                      </span>
-                    )} */}
                     {buttonsOnOff[playerIndex].state && (
                       <div className="startImageWrapper">
                         <img
@@ -625,10 +462,7 @@ function Play() {
               }}
             >
               <h1>Plans</h1>
-              <p>
-                Let me know if something weird happens, or if you have
-                suggestions.
-              </p>
+              <p>Let me know about bugs & suggestions.</p>
               <h1>🚧</h1>
             </div>
           </div>
