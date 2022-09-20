@@ -1,12 +1,9 @@
-// import { useState } from "react";
 import { useEffect, useRef, useState } from "react";
-// import phaserGame from "../PhaserGame";
 import Phaser from "phaser";
 import Game from "../scenes/Game";
 import "../App.css";
-// import "@fontsource/press-start-2p";
+import "@fontsource/press-start-2p";
 import { ButtonName, CharacterMove } from "../App";
-import { Link } from "react-router-dom";
 import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
 import { setGameState } from "../scenes/helpers/state";
 
@@ -31,7 +28,7 @@ export interface SmashConfig {
 export type WebState = "start" | "play";
 
 function Play() {
-  let newGame: any = useRef({});
+  let myGame: any = useRef({});
   const [numClicks, setNumClicks] = useState(0);
   const [webState, setWebState] = useState<WebState>("start");
   const [buttonsOnOff, setButtonsOnOff] = useState([
@@ -84,9 +81,9 @@ function Play() {
       }
     });
     let newSmashConfig = { players: [...newPlayers] };
-    newGame.current = new Phaser.Game(config);
-    newGame.current.registry.set("parentContext", Play);
-    newGame.current.registry.set("smashConfig", newSmashConfig);
+    myGame.current = new Phaser.Game(config);
+    myGame.current.registry.set("parentContext", Play);
+    myGame.current.registry.set("smashConfig", newSmashConfig);
   };
 
   const onClickStartOnOffButtons = (
@@ -138,22 +135,22 @@ function Play() {
   ];
   const clickSoundParent = () => {
     if (webState === "play") {
-      const gameX = newGame.current.scene.keys.game as Game;
-      setSoundStartPlayLiquid(gameX);
+      const myGameX = myGame.current.scene.keys.game as Game;
+      setSoundStartPlayLiquid(myGameX);
     }
   };
 
   const clickPauseParent = () => {
     if (webState === "play") {
-      const gameX = newGame.current.scene.keys.game as Game;
+      const myGameX = myGame.current.scene.keys.game as Game;
       if (
         !(
-          gameX.gameState.name === "game-state-paused" ||
-          gameX.gameState.name === "game-state-first-blood" ||
-          gameX.gameState.name === "game-state-screen-clear"
+          myGameX.gameState.name === "game-state-paused" ||
+          myGameX.gameState.name === "game-state-first-blood" ||
+          myGameX.gameState.name === "game-state-screen-clear"
         )
       ) {
-        setGameState(gameX, "game-state-paused");
+        setGameState(myGameX, "game-state-paused");
       }
     }
   };
@@ -178,7 +175,6 @@ function Play() {
         setShowRules(false);
         setShowAbout(false);
         setShowPlans(false);
-
         break;
       case "ReStart":
         setShowControls(false);
@@ -290,7 +286,7 @@ function Play() {
                 onClickPlayNavButtons("Back");
                 setWebState("start");
                 setNumClicks(numClicks + 1);
-                newGame.current.destroy(true);
+                myGame.current.destroy(true);
               }}
             >
               <span>Back</span>
@@ -301,8 +297,8 @@ function Play() {
               className="linkTag btn btn-outline-light"
               onClick={() => {
                 onClickPlayNavButtons("ReStart");
-                newGame.current.destroy(true);
-                newGame.current = new Phaser.Game(config);
+                myGame.current.destroy(true);
+                myGame.current = new Phaser.Game(config);
               }}
             >
               <span>ReStart</span>
