@@ -1,5 +1,5 @@
 // import { useState } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 // import phaserGame from "../PhaserGame";
 import Phaser from "phaser";
 import Game from "../scenes/Game";
@@ -30,6 +30,10 @@ export interface SmashConfig {
 export type WebState = "start" | "play";
 
 function Play() {
+  // let myGame: Phaser.Game;
+  // const componentRef = useRef({});
+  // const { current: newGame.current }: any = componentRef;
+  let newGame: any = useRef({});
   const [webState, setWebState] = useState<WebState>("start");
   // const [sGame, setSGame] = useState();
   const [buttonsOnOff, setButtonsOnOff] = useState([
@@ -46,7 +50,7 @@ function Play() {
       { characterId: 3 },
     ],
   });
-  const configFirst: Phaser.Types.Core.GameConfig = {
+  const config: Phaser.Types.Core.GameConfig = {
     title: "Smashed",
     // bannerBackgroundColor: [],
     antialias: true,
@@ -100,81 +104,7 @@ function Play() {
     //   // target: 120,
     // },
   };
-
-  let myGame: Phaser.Game;
-
-  const onClickStartStartButton = () => {
-    setWebState("play");
-    let players = [...smashConfig.players];
-    let newPlayers: { characterId: number }[] = [];
-    buttonsOnOff.forEach((button, buttonIndex) => {
-      if (button.state) {
-        newPlayers.push({ characterId: players[buttonIndex].characterId });
-      }
-    });
-
-    let newSmashConfig = { players: [...newPlayers] };
-    // myGame.destroy(true);
-    myGame = new Phaser.Game(configFirst);
-    myGame.registry.set("parentContext", Play);
-    // newGame.registry.set("smashConfig", smashConfig);
-    myGame.registry.set("smashConfig", newSmashConfig);
-    // setSGame(myGame);
-    // myGame.registry.set("smashGame", sGame);
-  };
-
-  const onClickStartOnOffButtons = (
-    playerIndex: number,
-    flipState: boolean
-  ): void => {
-    let buttons = [...buttonsOnOff];
-    let button = buttons[playerIndex];
-    button.state = flipState;
-    setButtonsOnOff([...buttons]);
-  };
-
-  const onClickStartRotateSelection = (playerIndex: number): void => {
-    let choices = [...smashConfig.players];
-    let choice = choices[playerIndex];
-    choice.characterId =
-      choice.characterId + 1 < 6 ? choice.characterId + 1 : 0;
-    setSmashConfig({ players: [...choices] });
-  };
-
-  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥
-  // 🏴‍☠️🏳️🏁🏴
-  // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
-
-  // let newGame: any;
-  // let smashGame: any;
-
-  const [showRules, setShowRules] = useState(false);
-  const [showControls, setShowControls] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
-  const [showPlans, setShowPlans] = useState(false);
-  // const [smashConfig, setSmashConfig] = useState({
-  //   players: [
-  //     { characterId: 3 },
-  //     { characterId: 3 },
-  //     { characterId: 3 },
-  //     { characterId: 3 },
-  //   ],
-  // });
-  // const smashConfig: SmashConfig = {
-  //   // players: [
-  //   //   { name: "Mario" },
-  //   //   { name: "Link" },
-  //   //   { name: "Link" },
-  //   //   { name: "Link" },
-  //   // ],
-  //   players: [
-  //     { characterId: 1 },
-  //     { characterId: 2 },
-  //     { characterId: 2 },
-  //     { characterId: 2 },
-  //   ],
-  // };
-  // const config: Phaser.Types.Core.GameConfig = {
+  // const configFirst: Phaser.Types.Core.GameConfig = {
   //   title: "Smashed",
   //   // bannerBackgroundColor: [],
   //   antialias: true,
@@ -229,16 +159,142 @@ function Play() {
   //   // },
   // };
 
+  const onClickStartStartButton = () => {
+    setWebState("play");
+    setUseEffectFlipper(true);
+    let players = [...smashConfig.players];
+    let newPlayers: { characterId: number }[] = [];
+    buttonsOnOff.forEach((button, buttonIndex) => {
+      if (button.state) {
+        newPlayers.push({ characterId: players[buttonIndex].characterId });
+      }
+    });
+
+    let newSmashConfig = { players: [...newPlayers] };
+    // myGame.destroy(true);
+    newGame.current = new Phaser.Game(config);
+
+    newGame.current.registry.set("parentContext", Play);
+    newGame.current.registry.set("smashConfig", newSmashConfig);
+    // newGame.current.registry.set("smashConfig", smashConfig);
+    // setSGame(myGame);
+    // myGame.registry.set("smashGame", sGame);
+    console.log("MY GAME ++++++++++++", newGame.current);
+  };
+
+  const onClickStartOnOffButtons = (
+    playerIndex: number,
+    flipState: boolean
+  ): void => {
+    let buttons = [...buttonsOnOff];
+    let button = buttons[playerIndex];
+    button.state = flipState;
+    setButtonsOnOff([...buttons]);
+  };
+
+  const onClickStartRotateSelection = (playerIndex: number): void => {
+    let choices = [...smashConfig.players];
+    let choice = choices[playerIndex];
+    choice.characterId =
+      choice.characterId + 1 < 6 ? choice.characterId + 1 : 0;
+    setSmashConfig({ players: [...choices] });
+  };
+
+  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥
+  // 🏴‍☠️🏳️🏁🏴
+  // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
+
+  // let newGame.current: any;
+  // let smashGame: any;
+  const [useEffectFlipper, setUseEffectFlipper] = useState(false);
+  const [useEffectRan, setUseEffectRan] = useState(false);
+
+  const [showRules, setShowRules] = useState(false);
+  const [showControls, setShowControls] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [showPlans, setShowPlans] = useState(false);
+  // const [smashConfig, setSmashConfig] = useState({
+  //   players: [
+  //     { characterId: 3 },
+  //     { characterId: 3 },
+  //     { characterId: 3 },
+  //     { characterId: 3 },
+  //   ],
+  // });
+  // const smashConfig: SmashConfig = {
+  //   // players: [
+  //   //   { name: "Mario" },
+  //   //   { name: "Link" },
+  //   //   { name: "Link" },
+  //   //   { name: "Link" },
+  //   // ],
+  //   players: [
+  //     { characterId: 1 },
+  //     { characterId: 2 },
+  //     { characterId: 2 },
+  //     { characterId: 2 },
+  //   ],
+  // };
+
   // useEffect(() => {}, [showRules, showControls, showAbout, showPlans]);
 
-  useEffect(() => {
-    // if (newGame) {
-    //   newGame.destroy(true);
-    // }
-    // newGame = new Phaser.Game(config);
-    // newGame.registry.set("parentContext", Play);
-    // newGame.registry.set("smashConfig", smashConfig);
-  }, []);
+  // useEffect(() => {
+  //   // if (newGame.current) {
+  //   //   newGame.current.destroy(true);
+  //   // }
+  //   newGame.current = new Phaser.Game(config);
+  //   newGame.current.registry.set("parentContext", Play);
+  //   // newGame.current.registry.set("smashConfig", smashConfig);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (useEffectRan) {
+  //     if (useEffectFlipper) {
+  //       let players = [...smashConfig.players];
+  //       let newPlayers: { characterId: number }[] = [];
+  //       buttonsOnOff.forEach((button, buttonIndex) => {
+  //         if (button.state) {
+  //           newPlayers.push({ characterId: players[buttonIndex].characterId });
+  //         }
+  //       });
+
+  //       let newSmashConfig = { players: [...newPlayers] };
+  //       // myGame.destroy(true);
+  //       newGame.current = new Phaser.Game(config);
+
+  //       newGame.current.registry.set("parentContext", Play);
+  //       newGame.current.registry.set("smashConfig", newSmashConfig);
+  //       // newGame.current.registry.set("smashConfig", smashConfig);
+  //       // setSGame(myGame);
+  //       // myGame.registry.set("smashGame", sGame);
+  //       console.log("MY GAME ++++++++++++", newGame.current);
+  //       /////////////////////////////
+  //       /////////////////////////////
+  //       /////////////////////////////
+  //       /////////////////////////////
+  //       // // setPhaserGame(new Phaser.Game(config));
+
+  //       // // if (newGame.current) {
+  //       // // }
+  //       // // newGame.current.destroy(true);
+  //       // newGame.current = new Phaser.Game(config);
+  //       // // newGame.current.start("Game", { score: 9 });
+  //       // // newGame.current.niemoConfigElement = 3;
+  //       // newGame.current.registry.set("parentContext", Play);
+
+  //       // // setTimeout(() => {
+  //       // //   newGame.current.destroy(true);
+  //       // // }, 3000);
+  //       console.log("NEW GAME CREATE", newGame.current);
+  //     } else {
+  //       console.log("NEW GAME DESTROY BEFORE", newGame.current);
+  //       newGame.current.destroy(true);
+  //       console.log("NEW GAME DESTROY AFTER", newGame.current);
+  //     }
+  //   } else {
+  //     setUseEffectRan(true);
+  //   }
+  // }, [useEffectFlipper]);
 
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
@@ -326,6 +382,16 @@ function Play() {
 
   return (
     <div className="overDiv">
+      {/* <button
+        className="help btn btn-outline-light"
+        onClick={() => {
+          newGame.current.destroy(true);
+          newGame.current = new Phaser.Game(config);
+        }}
+      >
+        <span>XXXXXXXXXX</span>
+      </button> */}
+      <div className="phaser-container" id="phaser-container"></div>
       {webState === "start" && (
         <div className="startClassDiv">
           <div className="playerChoices">
@@ -390,165 +456,182 @@ function Play() {
         </div>
         // <Link to={"/play"} className="playLink"></Link>
       )}
-      <div className="phaser-container" id="phaser-container"></div>
-      {webState === "play" && (
-        <div className="overDiv">
-          <div className="top-bar">
-            <button
-              className="linkTag btn btn-outline-light"
-              onClick={() => {
-                // myGame.destroy(true);
-                onClickPlayNavButtons("Back");
-                setWebState("start");
-                myGame.destroy(true);
-              }}
-            >
-              <span>Back</span>
-            </button>
-            <button
-              className="linkTag btn btn-outline-light"
-              onClick={() => {
-                onClickPlayNavButtons("Controls");
-              }}
-            >
-              <span>Controls</span>
-            </button>
-            <button
-              className="linkTag btn btn-outline-light"
-              onClick={() => {
-                onClickPlayNavButtons("Rules");
-              }}
-            >
-              <span>Rules</span>
-            </button>
-            <button
-              className="linkTag btn btn-outline-light"
-              onClick={() => {
-                onClickPlayNavButtons("Plans");
-              }}
-            >
-              <span>Plans</span>
-            </button>
-            <button
-              className="linkTag btn btn-outline-light"
-              onClick={() => {
-                onClickPlayNavButtons("About");
-              }}
-            >
-              <span>About</span>
-            </button>
-          </div>
-          {showControls && (
-            <div>
-              <div
-                className="popup"
-                onClick={() => {
-                  onClickPlayNavBody("Controls");
-                }}
-              >
-                <h1>Controls</h1>
-                {characterMoves.map((charMove, charMoveIndex) => {
-                  return (
-                    <div>
-                      <div className="move" key={charMoveIndex}>
-                        <h5>{charMove.move}</h5>
-                        <h5>
-                          {charMove.button} {charMove.ready}
-                        </h5>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-          {showRules && (
-            <div>
-              <div
-                className="popup"
-                onClick={() => {
-                  onClickPlayNavBody("Rules");
-                }}
-              >
-                <h1>Rules</h1>
-                <div className="rulesOutline">
-                  <img
-                    id="rulesImage"
-                    src="images/smashRulesGimp01.png"
-                    alt="Smashed Rules"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-          {showAbout && (
-            <div>
-              <div
-                className="popup"
-                onClick={() => {
-                  onClickPlayNavBody("About");
-                }}
-              >
-                <h1>About</h1>
-                <p>
-                  As referenced on the rulesheet, (Chemon) Smashed was invented
-                  in Glen Carbon, Illinois (near St. Louis) some time in late
-                  2009 by a group of college kids at the "Chemon" House. Since
-                  2013, "The Young Boys" have been keeping it alive in St.
-                  Louis.
-                </p>
-                <p>
-                  It's normally played with the N64 Smash Bros game on the N64,
-                  Wii, or Emulation, but this is my attempt at recreating it
-                  with the rules baked in.
-                </p>
-                <p>
-                  The thing that makes this game stand out from other smash
-                  drinking games is the main rule, "Screen Clear", requiring
-                  players to time their death rather than just try to not die.
-                </p>
-                <p>
-                  The game has been played in at least 4 states and 3 countries.
-                </p>
 
-                <h4>Tech Used</h4>
-                <ul>
-                  <li>Phaser 3</li>
-                  <li>React TS</li>
-                  <li>Bootstrap</li>
-                  <li>Press Start 2P</li>
-                </ul>
-                <h1>🚧</h1>
-                <p>by NIEMBRO64</p>
-                <a
-                  className="linkTag btn btn-outline-light"
-                  href="http://niembro64.com/"
-                >
-                  {/* <h4>See Other Projects</h4> */}
-                  <span>See Other Projects</span>
-                </a>
-              </div>
-            </div>
-          )}
-          {showPlans && (
-            <div>
-              <div
-                className="popup"
-                onClick={() => {
-                  onClickPlayNavBody("Plans");
-                }}
-              >
-                <h1>Plans</h1>
-                <p>
-                  Let me know if something weird happens, or if you have
-                  suggestions.
-                </p>
-                <h1>🚧</h1>
-              </div>
-            </div>
-          )}
+      <div className="overDiv">
+        <div className="top-bar">
+          <button
+            className="linkTag btn btn-outline-light"
+            onClick={() => {
+              // setUseEffectFlipper(false);
+              // setUseEffectRan(false);
+              onClickPlayNavButtons("Back");
+              setWebState("start");
+              newGame.current.destroy(true);
+              // newGame.current = new Phaser.Game(config);
+              // console.log("MYGAME__________", newGame.current);
+              // myGame.destroy(true);
+            }}
+          >
+            <span>Back</span>
+          </button>
+          <button
+            className="linkTag btn btn-outline-light"
+            onClick={() => {
+              // setUseEffectFlipper(false);
+              // setUseEffectRan(false);
+              onClickPlayNavButtons("ReStart");
+              // setWebState("start");
+              newGame.current.destroy(true);
+              newGame.current = new Phaser.Game(config);
+              // newGame.current = new Phaser.Game(config);
+              // console.log("MYGAME__________", newGame.current);
+              // myGame.destroy(true);
+            }}
+          >
+            <span>ReStart</span>
+          </button>
+          <button
+            className="linkTag btn btn-outline-light"
+            onClick={() => {
+              onClickPlayNavButtons("Controls");
+            }}
+          >
+            <span>Controls</span>
+          </button>
+          <button
+            className="linkTag btn btn-outline-light"
+            onClick={() => {
+              onClickPlayNavButtons("Rules");
+            }}
+          >
+            <span>Rules</span>
+          </button>
+          <button
+            className="linkTag btn btn-outline-light"
+            onClick={() => {
+              onClickPlayNavButtons("Plans");
+            }}
+          >
+            <span>Plans</span>
+          </button>
+          <button
+            className="linkTag btn btn-outline-light"
+            onClick={() => {
+              onClickPlayNavButtons("About");
+            }}
+          >
+            <span>About</span>
+          </button>
         </div>
-      )}
+        {showControls && (
+          <div>
+            <div
+              className="popup"
+              onClick={() => {
+                onClickPlayNavBody("Controls");
+              }}
+            >
+              <h1>Controls</h1>
+              {characterMoves.map((charMove, charMoveIndex) => {
+                return (
+                  <div>
+                    <div className="move" key={charMoveIndex}>
+                      <h5>{charMove.move}</h5>
+                      <h5>
+                        {charMove.button} {charMove.ready}
+                      </h5>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {showRules && (
+          <div>
+            <div
+              className="popup"
+              onClick={() => {
+                onClickPlayNavBody("Rules");
+              }}
+            >
+              <h1>Rules</h1>
+              <div className="rulesOutline">
+                <img
+                  id="rulesImage"
+                  src="images/smashRulesGimp01.png"
+                  alt="Smashed Rules"
+                />
+              </div>
+            </div>
+          </div>
+        )}
+        {showAbout && (
+          <div>
+            <div
+              className="popup"
+              onClick={() => {
+                onClickPlayNavBody("About");
+              }}
+            >
+              <h1>About</h1>
+              <p>
+                As referenced on the rulesheet, (Chemon) Smashed was invented in
+                Glen Carbon, Illinois (near St. Louis) some time in late 2009 by
+                a group of college kids at the "Chemon" House. Since 2013, "The
+                Young Boys" have been keeping it alive in St. Louis.
+              </p>
+              <p>
+                It's normally played with the N64 Smash Bros game on the N64,
+                Wii, or Emulation, but this is my attempt at recreating it with
+                the rules baked in.
+              </p>
+              <p>
+                The thing that makes this game stand out from other smash
+                drinking games is the main rule, "Screen Clear", requiring
+                players to time their death rather than just try to not die.
+              </p>
+              <p>
+                The game has been played in at least 4 states and 3 countries.
+              </p>
+
+              <h4>Tech Used</h4>
+              <ul>
+                <li>Phaser 3</li>
+                <li>React TS</li>
+                <li>Bootstrap</li>
+                <li>Press Start 2P</li>
+              </ul>
+              <h1>🚧</h1>
+              <p>by NIEMBRO64</p>
+              <a
+                className="linkTag btn btn-outline-light"
+                href="http://niembro64.com/"
+              >
+                {/* <h4>See Other Projects</h4> */}
+                <span>See Other Projects</span>
+              </a>
+            </div>
+          </div>
+        )}
+        {showPlans && (
+          <div>
+            <div
+              className="popup"
+              onClick={() => {
+                onClickPlayNavBody("Plans");
+              }}
+            >
+              <h1>Plans</h1>
+              <p>
+                Let me know if something weird happens, or if you have
+                suggestions.
+              </p>
+              <h1>🚧</h1>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
