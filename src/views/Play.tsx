@@ -397,10 +397,10 @@ function Play() {
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
-                myGame.destroy(true);
                 // myGame.destroy(true);
                 onClickPlayNavButtons("Back");
                 setWebState("start");
+                myGame.destroy(true);
               }}
             >
               <span>Back</span>
