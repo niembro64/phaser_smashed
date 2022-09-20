@@ -69,9 +69,9 @@ function Play() {
   useEffect(() => {
     // setPhaserGame(new Phaser.Game(config));
 
-    if (newGame) {
-      newGame.destroy(true);
-    }
+    // if (newGame) {
+    // }
+    // newGame.destroy(true);
     newGame = new Phaser.Game(config);
     newGame.start("Game", { score: 9 });
     newGame.niemoConfigElement = 3;

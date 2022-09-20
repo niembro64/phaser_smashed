@@ -1282,10 +1282,10 @@ export default class Game extends Phaser.Scene {
   create() {
     console.log("Phaser.Core.Config", Phaser.Core.Config);
     console.log("this.game.config", this.game.config);
-    console.log(
-      "this.game.config.niemoConfigElement",
-      this.game.config.niemoConfigElement
-    );
+    // console.log(
+    //   "this.game.config.niemoConfigElement",
+    //   this.game.config.niemoConfigElement
+    // );
 
     this.parentContext = this.game.registry.get("parentContext");
     // this.parentContext.contextFunctionTexter();
