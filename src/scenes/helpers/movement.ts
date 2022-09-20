@@ -2,7 +2,7 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 
 export function updateCirclesLocations(game: Game): void {
-  if (!game.debug.seePlayerCircles) {
+  if (!game.debug.setPlayerColorVisible) {
     return;
   }
 
@@ -24,7 +24,7 @@ export function updateCirclesLocations(game: Game): void {
 }
 
 export function updateEnergyAttacksWrapScreen(game: Game): void {
-  if (!game.debug.energyAttackWrapScreen) {
+  if (!game.debug.setEnergyAttackWrapScreen) {
     return;
   }
   game.players.forEach((player) => {
@@ -166,7 +166,7 @@ export function updateJump(player: Player, game: Game): void {
 
     // horizontal stuff
     if (
-      game.debug.wallJumps &&
+      game.debug.setWallJumpsActive &&
       player.char.lastDirectionTouched === "left" &&
       hasPlayerTouchedWallRecently(player)
     ) {
@@ -180,7 +180,7 @@ export function updateJump(player: Player, game: Game): void {
     //   return;
     // }
     if (
-      game.debug.wallJumps &&
+      game.debug.setWallJumpsActive &&
       player.char.lastDirectionTouched === "right" &&
       hasPlayerTouchedWallRecently(player)
     ) {
@@ -206,7 +206,7 @@ export function updateJump(player: Player, game: Game): void {
 }
 
 export function updateFrictionWallY(player: Player, game: Game): void {
-  if (!game.debug.wallJumps) {
+  if (!game.debug.setWallJumpsActive) {
     return;
   }
 

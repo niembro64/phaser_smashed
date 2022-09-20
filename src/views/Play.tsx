@@ -157,12 +157,11 @@ function Play() {
 
   const onClickPlayNavBody = (buttonName: ButtonName) => {
     clickSoundParent();
+
     setShowControls(false);
     setShowRules(false);
     setShowAbout(false);
     setShowPlans(false);
-
-    clickSoundParent();
   };
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {

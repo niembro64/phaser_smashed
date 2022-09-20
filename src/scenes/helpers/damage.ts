@@ -28,7 +28,7 @@ export function onHitHandler(
 
   player.char.damage += damage;
 
-  if (game.debug.useDefaultAttackHitback) {
+  if (game.debug.setDefaultAttackHitbackOverride) {
     hitbackFly(
       player,
       game,

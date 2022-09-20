@@ -184,7 +184,7 @@ export interface UpB {
   x: number;
 }
 
-export interface Splash {
+export interface SplashRules {
   text: any;
   name: SplashName;
   size: string;
@@ -194,7 +194,7 @@ export interface Splash {
   strokeThickness: number;
   src: string;
 }
-export interface SplashMulti {
+export interface SplashEndData {
   textTitle: any;
   textCircles: any;
   textData: any;
@@ -260,24 +260,24 @@ export interface Hitback {
 // }
 
 export interface Debug {
-  level: number;
-  useCameras: boolean;
-  seeCameras: boolean;
+  setLevel: number;
+  setCamerasActive: boolean;
+  setCamerasVisible: boolean;
   setCollidePlayerPlayers: boolean;
   setCollidePlayerEnergyAttacks: boolean;
-  energyAttackWrapScreen: boolean;
-  seePlayerCircles: boolean;
-  playShotsWiiBGM: boolean;
-  wallJumps: boolean;
-  useBGM: boolean;
-  BGMNumber: number;
-  useDefaultAttackDamage: boolean;
-  useDefaultAttackHitback: boolean;
-  useColorFilters: boolean;
-  useReadySound: boolean;
-  invertHealth: boolean;
-  seeSplashDataAlways: boolean;
-  numUpdateLoopsToSkip: number;
+  setEnergyAttackWrapScreen: boolean;
+  setPlayerColorVisible: boolean;
+  setPlayerColorFiltersActive: boolean;
+  setWallJumpsActive: boolean;
+  setBackgroundMusicActive: boolean;
+  setBackgroundMusicNumber: number;
+  setPauseGameMusicActive: boolean;
+  setDefaultAttackDamageOverride: boolean;
+  setDefaultAttackHitbackOverride: boolean;
+  setReadySoundActive: boolean;
+  setHealthInvertNumber: boolean;
+  setGameDataAlwaysVisible: boolean;
+  setNumUpdateLoopsToSkip: number;
 }
 
 export interface NormalizedVector {

@@ -7,8 +7,8 @@ import {
   Clock,
   Debug,
   Player,
-  Splash as SplashRules,
-  SplashMulti as SplashEndData,
+  SplashRules,
+  SplashEndData,
   GameStateWithTime,
 } from "./interfaces";
 import Play, { SmashConfig } from "../views/Play";
@@ -40,24 +40,24 @@ export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [5, 5, 5, 5];
 
   debug: Debug = {
-    level: 4,
-    useCameras: true,
-    seeCameras: false,
+    setLevel: 4,
+    setCamerasActive: true,
+    setCamerasVisible: false,
     setCollidePlayerPlayers: false,
     setCollidePlayerEnergyAttacks: false,
-    energyAttackWrapScreen: false,
-    seePlayerCircles: true,
-    playShotsWiiBGM: true,
-    wallJumps: true,
-    useBGM: true,
-    BGMNumber: 2,
-    useDefaultAttackDamage: false,
-    useDefaultAttackHitback: false,
-    useColorFilters: false,
-    useReadySound: false,
-    invertHealth: false,
-    seeSplashDataAlways: false,
-    numUpdateLoopsToSkip: 0,
+    setEnergyAttackWrapScreen: false,
+    setPlayerColorVisible: true,
+    setPauseGameMusicActive: true,
+    setWallJumpsActive: true,
+    setBackgroundMusicActive: true,
+    setBackgroundMusicNumber: 2,
+    setDefaultAttackDamageOverride: false,
+    setDefaultAttackHitbackOverride: false,
+    setPlayerColorFiltersActive: false,
+    setReadySoundActive: false,
+    setHealthInvertNumber: false,
+    setGameDataAlwaysVisible: false,
+    setNumUpdateLoopsToSkip: 0,
   };
 
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
@@ -1243,13 +1243,13 @@ export default class Game extends Phaser.Scene {
 
     this.load.audio("mii", pathSounds + this.FILE_SOUNDS.BGM_MII);
 
-    if (this.debug.BGMNumber === 0) {
+    if (this.debug.setBackgroundMusicNumber === 0) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_DREAM);
     }
-    if (this.debug.BGMNumber === 1) {
+    if (this.debug.setBackgroundMusicNumber === 1) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_MONKEY);
     }
-    if (this.debug.BGMNumber === 2) {
+    if (this.debug.setBackgroundMusicNumber === 2) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
 

@@ -111,7 +111,7 @@ export function createDataMatrices(game: Game): void {
 }
 
 export function createPlatforms(game: Game): void {
-  switch (game.debug.level) {
+  switch (game.debug.setLevel) {
     case 0:
       createPlatforms0(game);
       break;
@@ -155,7 +155,7 @@ export function createSounds(game: Game): void {
       "readyRepeat" + playerIndex.toString(),
       { volume: 0.1, loop: true }
     );
-    if (!game.debug.useReadySound) {
+    if (!game.debug.setReadySoundActive) {
       player.playerReadySound.volume = 0;
     }
   });
@@ -173,11 +173,11 @@ export function createSounds(game: Game): void {
   game.SOUND_PAUSED = game.sound.add("mii", { volume: 0.1, loop: true });
   game.SOUND_BGM = game.sound.add("bgm", { volume: 0.2, loop: true });
 
-  if (!game.debug.useBGM) {
+  if (!game.debug.setBackgroundMusicActive) {
     game.SOUND_BGM.volume = 0;
   }
 
-  if (!game.debug.useReadySound) {
+  if (!game.debug.setReadySoundActive) {
     game.SOUND_READY_REPEAT.volume = 0;
   }
 }
@@ -188,7 +188,7 @@ export function createShields(game: Game): void {
   });
 }
 export function createCircles(game: Game): void {
-  if (!game.debug.seePlayerCircles) {
+  if (!game.debug.setPlayerColorVisible) {
     return;
   }
 
@@ -212,7 +212,7 @@ export function createHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.attackEnergy.sprite,
           function () {
-            if (game.debug.useDefaultAttackDamage) {
+            if (game.debug.setDefaultAttackDamageOverride) {
               onHitHandler(
                 player,
                 playerIndex,
@@ -908,7 +908,7 @@ export function createPlayersCollide(game: Game): void {
 
 export function createCameras(game: Game): void {
   var debugAlpha = 1;
-  if (!game.debug.seeCameras) {
+  if (!game.debug.setCamerasVisible) {
     debugAlpha = 0;
   }
   game.cameraBox.char.sprite = game.physics.add

@@ -106,7 +106,7 @@ export function filterNormal(
   playerIndex: number,
   game: Game
 ): void {
-  if (game.debug.useColorFilters) {
+  if (game.debug.setPlayerColorFiltersActive) {
     filterCircle(player, game.colorCircles[playerIndex].colorNumber);
     player.char.sprite.setAlpha(1);
   } else {
@@ -127,7 +127,7 @@ export function filterNormalAttackEnergy(
   playerIndex: number,
   game: Game
 ): void {
-  if (game.debug.useColorFilters) {
+  if (game.debug.setPlayerColorFiltersActive) {
     filterCircleAttackEnergy(player, game.colorCircles[playerIndex].colorNumber);
     player.char.attackEnergy.sprite.setAlpha(1);
   } else {
