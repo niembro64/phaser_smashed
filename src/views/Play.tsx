@@ -91,6 +91,7 @@ function Play() {
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
+  const [useEffectFlipper, setUseEffectFlipper] = useState(false);
   const [useEffectRan, setUseEffectRan] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
@@ -167,7 +168,7 @@ function Play() {
     } else {
       setUseEffectRan(true);
     }
-  }, []);
+  }, [useEffectFlipper]);
 
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
