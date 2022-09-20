@@ -8,7 +8,90 @@ import "../App.css";
 import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
 
+export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
+
+// export type CharacterName =
+//   | "Mario"
+//   | "Link"
+//   | "Pikachu"
+//   | "Kirby"
+//   | "Chez"
+//   | "BlackChez";
+
+export interface PlayerConfig {
+  characterId: CharacterId;
+  // name: CharacterName;
+}
+
+export interface SmashConfig {
+  players: PlayerConfig[];
+}
+
+export type WebState = "start" | "play";
+
 function Play() {
+  const [webState, setWebState] = useState<WebState>("start");
+  // const [sGame, setSGame] = useState();
+  const [buttonsOnOff, setButtonsOnOff] = useState([
+    { state: true },
+    { state: true },
+    { state: true },
+    { state: true },
+  ]);
+  const [smashConfig, setSmashConfig] = useState({
+    players: [
+      { characterId: 0 },
+      { characterId: 1 },
+      { characterId: 2 },
+      { characterId: 3 },
+    ],
+  });
+
+  const onClickStartStartButton = () => {
+    setWebState("play");
+    let players = [...smashConfig.players];
+    let newPlayers: { characterId: number }[] = [];
+    buttonsOnOff.forEach((button, buttonIndex) => {
+      if (button.state) {
+        newPlayers.push({ characterId: players[buttonIndex].characterId });
+      }
+    });
+
+    let newSmashConfig = { players: [...newPlayers] };
+    // myGame.destroy(true);
+    newGame = new Phaser.Game(config);
+
+    newGame.registry.set("parentContext", Play);
+    newGame.registry.set("smashConfig", newSmashConfig);
+    // newGame.registry.set("smashConfig", smashConfig);
+    // setSGame(myGame);
+    // myGame.registry.set("smashGame", sGame);
+    console.log("MY GAME ++++++++++++", newGame);
+  };
+
+  const onClickStartOnOffButtons = (
+    playerIndex: number,
+    flipState: boolean
+  ): void => {
+    let buttons = [...buttonsOnOff];
+    let button = buttons[playerIndex];
+    button.state = flipState;
+    setButtonsOnOff([...buttons]);
+  };
+
+  const onClickStartRotateSelection = (playerIndex: number): void => {
+    let choices = [...smashConfig.players];
+    let choice = choices[playerIndex];
+    choice.characterId =
+      choice.characterId + 1 < 6 ? choice.characterId + 1 : 0;
+    setSmashConfig({ players: [...choices] });
+  };
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  const [useEffectRan, setUseEffectRan] = useState(false);
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
@@ -67,19 +150,23 @@ function Play() {
   useEffect(() => {}, [showRules, showControls, showAbout, showPlans]);
 
   useEffect(() => {
-    // setPhaserGame(new Phaser.Game(config));
+    if (useEffectRan) {
+      // setPhaserGame(new Phaser.Game(config));
 
-    // if (newGame) {
-    // }
-    // newGame.destroy(true);
-    newGame = new Phaser.Game(config);
-    // newGame.start("Game", { score: 9 });
-    // newGame.niemoConfigElement = 3;
-    newGame.registry.set("parentContext", Play);
+      // if (newGame) {
+      // }
+      // newGame.destroy(true);
+      newGame = new Phaser.Game(config);
+      // newGame.start("Game", { score: 9 });
+      // newGame.niemoConfigElement = 3;
+      newGame.registry.set("parentContext", Play);
 
-    // setTimeout(() => {
-    //   newGame.destroy(true);
-    // }, 3000);
+      // setTimeout(() => {
+      //   newGame.destroy(true);
+      // }, 3000);
+    } else {
+      setUseEffectRan(true);
+    }
   }, []);
 
   const characterMoves: CharacterMove[] = [
@@ -167,12 +254,77 @@ function Play() {
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
   return (
     <>
+      {webState === "start" && (
+        <div className="startClassDiv">
+          <div className="playerChoices">
+            {smashConfig.players.map((player, playerIndex) => {
+              return (
+                <div className="playerChoice" key={playerIndex}>
+                  <div
+                    className="playerChar"
+                    onClick={() => {
+                      onClickStartRotateSelection(playerIndex);
+                    }}
+                  >
+                    {/* {buttonsOnOff[playerIndex].state && (
+                      <span className="startCharacterId">
+                        {player.characterId}
+                      </span>
+                    )} */}
+                    {buttonsOnOff[playerIndex].state && (
+                      <div className="startImageWrapper">
+                        <img
+                          className="startImage"
+                          src={
+                            "images/character_" +
+                            player.characterId.toString() +
+                            "_cropped.png"
+                          }
+                          alt="char"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  {buttonsOnOff[playerIndex].state && (
+                    <button
+                      className="btn btn-success px-4"
+                      onClick={() => {
+                        onClickStartOnOffButtons(playerIndex, false);
+                      }}
+                    >
+                      ON
+                    </button>
+                  )}
+                  {!buttonsOnOff[playerIndex].state && (
+                    <button
+                      className="btn btn-danger px-4"
+                      onClick={() => {
+                        onClickStartOnOffButtons(playerIndex, true);
+                      }}
+                    >
+                      OFF
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <button
+            className="startButton btn btn-dark px-2"
+            onClick={onClickStartStartButton}
+          >
+            Start
+          </button>
+        </div>
+        // <Link to={"/play"} className="playLink"></Link>
+      )}
       <div className="phaser-container" id="phaser-container"></div>
       <div className="top-bar">
         <Link
           to={"/"}
           id="link"
           onClick={() => {
+            console.log("NEWGAME DESTROY++++++++++++", newGame);
             newGame.destroy(true);
           }}
         >
