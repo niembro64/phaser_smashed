@@ -402,10 +402,6 @@ function Play() {
       <div className="phaser-container" id="phaser-container"></div>
       {webState === "start" && (
         <div className="startClassDiv">
-          <span>
-            {numClicks}
-            {webState}-state
-          </span>
           <div className="playerChoices">
             {smashConfig.players.map((player, playerIndex) => {
               return (
@@ -423,10 +419,6 @@ function Play() {
                     )} */}
                     {buttonsOnOff[playerIndex].state && (
                       <div className="startImageWrapper">
-                        <span>
-                          {numClicks}
-                          {webState}-state
-                        </span>
                         <img
                           className="startImage"
                           src={
@@ -475,38 +467,42 @@ function Play() {
 
       <div className="overDiv">
         <div className="top-bar">
-          <button
-            className="linkTag btn btn-outline-light"
-            onClick={() => {
-              // setUseEffectFlipper(false);
-              // setUseEffectRan(false);
-              onClickPlayNavButtons("Back");
-              setWebState("start");
-              setNumClicks(numClicks + 1);
-              newGame.current.destroy(true);
-              // newGame.current = new Phaser.Game(config);
-              // console.log("MYGAME__________", newGame.current);
-              // myGame.destroy(true);
-            }}
-          >
-            <span>Back</span>
-          </button>
-          <button
-            className="linkTag btn btn-outline-light"
-            onClick={() => {
-              // setUseEffectFlipper(false);
-              // setUseEffectRan(false);
-              onClickPlayNavButtons("ReStart");
-              // setWebState("start");
-              newGame.current.destroy(true);
-              newGame.current = new Phaser.Game(config);
-              // newGame.current = new Phaser.Game(config);
-              // console.log("MYGAME__________", newGame.current);
-              // myGame.destroy(true);
-            }}
-          >
-            <span>ReStart</span>
-          </button>
+          {webState !== "start" && (
+            <button
+              className="linkTag btn btn-outline-light"
+              onClick={() => {
+                // setUseEffectFlipper(false);
+                // setUseEffectRan(false);
+                onClickPlayNavButtons("Back");
+                setWebState("start");
+                setNumClicks(numClicks + 1);
+                newGame.current.destroy(true);
+                // newGame.current = new Phaser.Game(config);
+                // console.log("MYGAME__________", newGame.current);
+                // myGame.destroy(true);
+              }}
+            >
+              <span>Back</span>
+            </button>
+          )}
+          {webState !== "start" && (
+            <button
+              className="linkTag btn btn-outline-light"
+              onClick={() => {
+                // setUseEffectFlipper(false);
+                // setUseEffectRan(false);
+                onClickPlayNavButtons("ReStart");
+                // setWebState("start");
+                newGame.current.destroy(true);
+                newGame.current = new Phaser.Game(config);
+                // newGame.current = new Phaser.Game(config);
+                // console.log("MYGAME__________", newGame.current);
+                // myGame.destroy(true);
+              }}
+            >
+              <span>ReStart</span>
+            </button>
+          )}
           <button
             className="linkTag btn btn-outline-light"
             onClick={() => {
@@ -539,10 +535,6 @@ function Play() {
           >
             <span>About</span>
           </button>
-          <span>
-            {numClicks}
-            {webState}-state
-          </span>
         </div>
         {showControls && (
           <div>
