@@ -8,6 +8,8 @@ import "../App.css";
 import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
 
+export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
+
 export type CharacterName =
   | "Mario"
   | "Link"
@@ -15,8 +17,10 @@ export type CharacterName =
   | "Kirby"
   | "Chez"
   | "BlackChez";
+
 export interface PlayerConfig {
-  name: CharacterName;
+  characterId: CharacterId;
+  // name: CharacterName;
 }
 
 export interface SmashConfig {
@@ -32,11 +36,17 @@ function Play() {
   const [showAbout, setShowAbout] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
   const smashConfig: SmashConfig = {
+    // players: [
+    //   { name: "Mario" },
+    //   { name: "Link" },
+    //   { name: "Link" },
+    //   { name: "Link" },
+    // ],
     players: [
-      { name: "Mario" },
-      { name: "Link" },
-      { name: "Link" },
-      { name: "Link" },
+      { characterId: 1 },
+      { characterId: 2 },
+      { characterId: 2 },
+      { characterId: 2 },
     ],
   };
   const config: Phaser.Types.Core.GameConfig = {
@@ -97,17 +107,12 @@ function Play() {
   useEffect(() => {}, [showRules, showControls, showAbout, showPlans]);
 
   useEffect(() => {
-    // setPhaserGame(new Phaser.Game(config));
     if (newGame) {
       newGame.destroy(true);
     }
     newGame = new Phaser.Game(config);
     newGame.registry.set("parentContext", Play);
     newGame.registry.set("smashConfig", smashConfig);
-
-    // setTimeout(() => {
-    //   newGame.destroy(true);
-    // }, 3000);
   }, []);
 
   const characterMoves: CharacterMove[] = [

@@ -1174,10 +1174,14 @@ export default class Game extends Phaser.Scene {
   }
 
   preload() {
-    // this.parentContext = this.game.registry.get("parentContext");
     this.smashConfig = this.game.registry.get("smashConfig");
     console.log("this.smashConfig", this.smashConfig);
-    // console.log("this.game.config.backgroundColor", this.game.config);
+    if (this.smashConfig) {
+      this.PLAYER_CHOICES = [];
+      this.smashConfig?.players.forEach((player, playerIndex) => {
+        this.PLAYER_CHOICES.push(player.characterId);
+      });
+    }
 
     let pathSounds = "sounds/";
     this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);

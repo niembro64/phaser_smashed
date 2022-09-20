@@ -4,7 +4,6 @@ import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 import { setPreUpdate } from "./update";
 
 export function create(game: Game) {
-  // game.smashConfig.a = game.smashConfig.a + 1;
   createDataMatrices(game);
   createSounds(game);
   createBackground(game);
@@ -38,8 +37,6 @@ export function createEndDataMatrices(game: Game): void {
       splash.words[i] =
         game.players[i].char.name + " " + game.colorCircles[i].text;
     }
-    // splash.words[game.players.length] = "";
-    // splash.words[game.players.length] = splash.name;
     splash.textTitle = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
