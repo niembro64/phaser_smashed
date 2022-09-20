@@ -31,7 +31,7 @@ export type WebState = "start" | "play";
 
 function Play() {
   const [webState, setWebState] = useState<WebState>("start");
-  const [sGame, setSGame] = useState();
+  // const [sGame, setSGame] = useState();
   const [buttonsOnOff, setButtonsOnOff] = useState([
     { state: true },
     { state: true },
@@ -101,7 +101,7 @@ function Play() {
     // },
   };
 
-  let myGame: any;
+  let myGame: Phaser.Game;
 
   const onClickStartStartButton = () => {
     setWebState("play");
@@ -114,13 +114,13 @@ function Play() {
     });
 
     let newSmashConfig = { players: [...newPlayers] };
-
+    // myGame.destroy(true);
     myGame = new Phaser.Game(configFirst);
     myGame.registry.set("parentContext", Play);
     // newGame.registry.set("smashConfig", smashConfig);
     myGame.registry.set("smashConfig", newSmashConfig);
-    setSGame(myGame);
-    myGame.registry.set("smashGame", sGame);
+    // setSGame(myGame);
+    // myGame.registry.set("smashGame", sGame);
   };
 
   const onClickStartOnOffButtons = (
@@ -145,8 +145,8 @@ function Play() {
   // 🏴‍☠️🏳️🏁🏴
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
 
-  let newGame: any;
-  let smashGame: any;
+  // let newGame: any;
+  // let smashGame: any;
 
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
@@ -279,6 +279,13 @@ function Play() {
     // }
 
     switch (buttonName) {
+      case "Back":
+        setShowControls(false);
+        setShowRules(false);
+        setShowAbout(false);
+        setShowPlans(false);
+
+        break;
       case "ReStart":
         setShowControls(false);
         setShowRules(false);
@@ -318,7 +325,7 @@ function Play() {
   };
 
   return (
-    <div>
+    <div className="overDiv">
       {webState === "start" && (
         <div className="startClassDiv">
           <div className="playerChoices">
@@ -385,8 +392,19 @@ function Play() {
       )}
       <div className="phaser-container" id="phaser-container"></div>
       {webState === "play" && (
-        <div>
+        <div className="overDiv">
           <div className="top-bar">
+            <button
+              className="linkTag btn btn-outline-light"
+              onClick={() => {
+                myGame.destroy(true);
+                // myGame.destroy(true);
+                onClickPlayNavButtons("Back");
+                setWebState("start");
+              }}
+            >
+              <span>Back</span>
+            </button>
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
