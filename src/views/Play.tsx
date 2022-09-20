@@ -30,19 +30,20 @@ export interface SmashConfig {
 function Play() {
   let a: number = 0;
   let newGame: any;
+  let smashGame: any;
 
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
-  const [smashConfig, setSmashConfig] = useState({
-    players: [
-      { characterId: 0 },
-      { characterId: 3 },
-      { characterId: 3 },
-      { characterId: 3 },
-    ],
-  });
+  // const [smashConfig, setSmashConfig] = useState({
+  //   players: [
+  //     { characterId: 3 },
+  //     { characterId: 3 },
+  //     { characterId: 3 },
+  //     { characterId: 3 },
+  //   ],
+  // });
   // const smashConfig: SmashConfig = {
   //   // players: [
   //   //   { name: "Mario" },
@@ -112,15 +113,15 @@ function Play() {
     // },
   };
 
-  useEffect(() => {}, [showRules, showControls, showAbout, showPlans]);
+  // useEffect(() => {}, [showRules, showControls, showAbout, showPlans]);
 
   useEffect(() => {
-    if (newGame) {
-      newGame.destroy(true);
-    }
-    newGame = new Phaser.Game(config);
-    newGame.registry.set("parentContext", Play);
-    newGame.registry.set("smashConfig", smashConfig);
+    // if (newGame) {
+    //   newGame.destroy(true);
+    // }
+    // newGame = new Phaser.Game(config);
+    // newGame.registry.set("parentContext", Play);
+    // newGame.registry.set("smashConfig", smashConfig);
   }, []);
 
   const characterMoves: CharacterMove[] = [
@@ -217,18 +218,18 @@ function Play() {
             <span>Back</span>
           </button>
         </Link>
-        <button
+        {/* <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
             newGame.destroy(true);
             newGame = new Phaser.Game(config);
             newGame.registry.set("parentContext", Play);
-            newGame.registry.set("smashConfig", smashConfig);
+            // newGame.registry.set("smashConfig", smashConfig);
             onClickHandlerButtons("ReStart");
           }}
         >
           <span>ReStart</span>
-        </button>
+        </button> */}
         <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
