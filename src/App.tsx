@@ -58,10 +58,10 @@ function App() {
   return (
     <>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/start">
           <Start />
         </Route>
-        <Route exact path="/play">
+        <Route exact path="/">
           <Play />
         </Route>
       </Switch>

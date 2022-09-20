@@ -13,7 +13,7 @@ import { setGameState } from "../scenes/helpers/state";
 import { type } from "os";
 
 function Start() {
-  const [smashGame, setSmashGame] = useState();
+  const [sGame, setSGame] = useState();
   const [buttonsOnOff, setButtonsOnOff] = useState([
     { state: true },
     { state: true },
@@ -28,7 +28,7 @@ function Start() {
       { characterId: 3 },
     ],
   });
-  const config: Phaser.Types.Core.GameConfig = {
+  const configFirst: Phaser.Types.Core.GameConfig = {
     title: "Smashed",
     // bannerBackgroundColor: [],
     antialias: true,
@@ -83,7 +83,7 @@ function Start() {
     // },
   };
 
-  let newGame: any;
+  let myGame: any;
 
   const onStartHandler = () => {
     let players = [...smashConfig.players];
@@ -96,12 +96,12 @@ function Start() {
 
     let newSmashConfig = { players: [...newPlayers] };
 
-    newGame = new Phaser.Game(config);
-    newGame.registry.set("parentContext", Play);
+    myGame = new Phaser.Game(configFirst);
+    myGame.registry.set("parentContext", Play);
     // newGame.registry.set("smashConfig", smashConfig);
-    newGame.registry.set("smashConfig", newSmashConfig);
-    setSmashGame(newGame);
-    newGame.registry.set("smashGame", smashGame);
+    myGame.registry.set("smashConfig", newSmashConfig);
+    setSGame(myGame);
+    myGame.registry.set("smashGame", sGame);
   };
 
   const onclickButtons = (playerIndex: number, flipState: boolean): void => {
@@ -182,3 +182,31 @@ function Start() {
 }
 
 export default Start;
+
+// {
+//   /* <Link
+//           to={"/"}
+//           id="link"
+//           onClick={() => {
+//             newGame.destroy(true);
+//           }}
+//         >
+//           <button className="linkTag btn btn-outline-light px-4 my-2">
+//             <span>Back</span>
+//           </button>
+//         </Link> */
+// }
+// {
+//   /* <button
+//           className="linkTag btn btn-outline-light"
+//           onClick={() => {
+//             newGame.destroy(true);
+//             newGame = new Phaser.Game(config);
+//             newGame.registry.set("parentContext", Play);
+//             // newGame.registry.set("smashConfig", smashConfig);
+//             onClickHandlerButtons("ReStart");
+//           }}
+//         >
+//           <span>ReStart</span>
+//         </button> */
+// }

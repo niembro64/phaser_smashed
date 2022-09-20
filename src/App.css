@@ -84,8 +84,9 @@ body {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  z-index: 3;
+  z-index: 5;
   transition: 0s ease;
+
 }
 
 .top-bar:hover {
@@ -214,6 +215,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
 }
 .playLink > button {
   font-size: 5vw;
