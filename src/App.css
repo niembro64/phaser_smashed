@@ -175,12 +175,16 @@ body {
   /* width: 90%; */
 }
 .startClassDiv {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 }
 .playerChoices {
   height: 90%;
