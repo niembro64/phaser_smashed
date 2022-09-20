@@ -28,7 +28,6 @@ export interface SmashConfig {
 }
 
 function Play() {
-  let a: number = 0;
   let newGame: any;
   let smashGame: any;
 
@@ -207,7 +206,7 @@ function Play() {
     <>
       <div className="phaser-container" id="phaser-container"></div>
       <div className="top-bar">
-        <Link
+        {/* <Link
           to={"/"}
           id="link"
           onClick={() => {
@@ -217,7 +216,7 @@ function Play() {
           <button className="linkTag btn btn-outline-light px-4 my-2">
             <span>Back</span>
           </button>
-        </Link>
+        </Link> */}
         {/* <button
           className="linkTag btn btn-outline-light"
           onClick={() => {
