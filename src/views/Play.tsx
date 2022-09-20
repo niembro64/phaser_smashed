@@ -10,13 +10,13 @@ import { Link } from "react-router-dom";
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
-export type CharacterName =
-  | "Mario"
-  | "Link"
-  | "Pikachu"
-  | "Kirby"
-  | "Chez"
-  | "BlackChez";
+// export type CharacterName =
+//   | "Mario"
+//   | "Link"
+//   | "Pikachu"
+//   | "Kirby"
+//   | "Chez"
+//   | "BlackChez";
 
 export interface PlayerConfig {
   characterId: CharacterId;
@@ -35,20 +35,28 @@ function Play() {
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
-  const smashConfig: SmashConfig = {
-    // players: [
-    //   { name: "Mario" },
-    //   { name: "Link" },
-    //   { name: "Link" },
-    //   { name: "Link" },
-    // ],
+  const [smashConfig, setSmashConfig] = useState({
     players: [
-      { characterId: 1 },
-      { characterId: 2 },
-      { characterId: 2 },
-      { characterId: 2 },
+      { characterId: 0 },
+      { characterId: 3 },
+      { characterId: 3 },
+      { characterId: 3 },
     ],
-  };
+  });
+  // const smashConfig: SmashConfig = {
+  //   // players: [
+  //   //   { name: "Mario" },
+  //   //   { name: "Link" },
+  //   //   { name: "Link" },
+  //   //   { name: "Link" },
+  //   // ],
+  //   players: [
+  //     { characterId: 1 },
+  //     { characterId: 2 },
+  //     { characterId: 2 },
+  //     { characterId: 2 },
+  //   ],
+  // };
   const config: Phaser.Types.Core.GameConfig = {
     title: "Smashed",
     // bannerBackgroundColor: [],
@@ -215,6 +223,7 @@ function Play() {
             newGame.destroy(true);
             newGame = new Phaser.Game(config);
             newGame.registry.set("parentContext", Play);
+            newGame.registry.set("smashConfig", smashConfig);
             onClickHandlerButtons("ReStart");
           }}
         >
