@@ -124,14 +124,14 @@ function Play() {
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
     { button: "X", move: "Jump", ready: "✔️" },
-    { button: "X", move: "Air Jump", ready: "✔️" },
-    { button: "UP + X", move: "Energy Jump", ready: "✔️" },
-    { button: "Forward + WallTouch", move: "Wall  Slide", ready: "✔️" },
-    { button: "Y", move: "Energy Attack", ready: "✔️" },
+    { button: "X", move: "Jump-Air", ready: "✔️" },
+    { button: "UP + X", move: "Jump-Energy", ready: "✔️" },
+    { button: "Y", move: "Attack-Energy", ready: "✔️" },
+    { button: "B", move: "Attack-Physical", ready: "🚧" },
+    { button: "Forward + B", move: "Attack-Smash", ready: "🚧" },
+    { button: "Forward + WallTouch", move: "Slide-Wall", ready: "✔️" },
     { button: "L + R", move: "Pause", ready: "✔️" },
     { button: "Any", move: "UnPause", ready: "✔️" },
-    { button: "B", move: "Physical Attack", ready: "🚧" },
-    { button: "Forward + B", move: "Smash Attack", ready: "🚧" },
   ];
   const clickSoundParent = () => {
     if (webState === "play") {
