@@ -1178,7 +1178,7 @@ export default class Game extends Phaser.Scene {
     console.log("this.smashConfig", this.smashConfig);
     if (this.smashConfig) {
       this.PLAYER_CHOICES = [];
-      this.smashConfig?.players.forEach((player, playerIndex) => {
+      this.smashConfig.players.forEach((player, playerIndex) => {
         this.PLAYER_CHOICES.push(player.characterId);
       });
     }

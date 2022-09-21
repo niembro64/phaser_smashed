@@ -367,6 +367,13 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   });
 }
 
+export function updateControllersPrintConnected(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    // console.log("PLAYER", playerIndex, "CONTROLLER", player.gamepad);
+    console.log("PLAYER", playerIndex, "CONTROLLER", player.gamepad.id);
+  });
+}
+
 export function updateControllerMovement(player: Player, game: Game): void {
   if (player.gamepad) {
     if (
@@ -496,7 +503,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
   }
 }
 
-export function updatePrintAllPadsActive(game: Game): void {
+export function updatePrintAllControllerButtonsWhenActive(game: Game): void {
   // Buttons
   game.players.forEach((player, playerIndex) => {
     if (player.gamepad) {

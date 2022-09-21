@@ -3,9 +3,10 @@ import {
   updateControllerMovement,
   updateAttackEnergy,
   getIsAllPlayersReady,
-  updatePrintAllPadsActive,
+  updatePrintAllControllerButtonsWhenActive,
   getIsAnyPlayerPausing,
   updateGamePadsConnected,
+  updateControllersPrintConnected,
 } from "./helpers/pad";
 import {
   updateJump,
@@ -57,7 +58,8 @@ export function update(game: Game, time: number, delta: number): void {
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);
   updateGamePadsConnected(game);
-  updatePrintAllPadsActive(game);
+  updatePrintAllControllerButtonsWhenActive(game);
+  updateControllersPrintConnected(game);
 
   switch (game.gameState.name) {
     case "game-state-start":
