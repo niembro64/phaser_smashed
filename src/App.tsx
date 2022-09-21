@@ -19,6 +19,7 @@ export type ButtonName =
   | "Controls"
   | "Rules"
   | "About"
+  | "History"
   | "Plans";
 
 function App() {

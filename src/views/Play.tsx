@@ -111,6 +111,7 @@ function Play() {
   const [showRules, setShowRules] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
   const [showPlans, setShowPlans] = useState(false);
 
   useEffect(() => {}, [
@@ -173,42 +174,56 @@ function Play() {
         setShowControls(false);
         setShowRules(false);
         setShowAbout(false);
+        setShowHistory(false);
         setShowPlans(false);
         break;
       case "ReStart":
         setShowControls(false);
         setShowRules(false);
         setShowAbout(false);
+        setShowHistory(false);
         setShowPlans(false);
         break;
       case "Controls":
         setShowControls(!showControls);
         setShowRules(false);
         setShowAbout(false);
+        setShowHistory(false);
         setShowPlans(false);
         break;
       case "Rules":
         setShowControls(false);
         setShowRules(!showRules);
         setShowAbout(false);
+        setShowHistory(false);
         setShowPlans(false);
         break;
       case "About":
         setShowControls(false);
         setShowRules(false);
         setShowAbout(!showAbout);
+        setShowHistory(false);
+        setShowPlans(false);
+        break;
+      case "History":
+        setShowControls(false);
+        setShowRules(false);
+        setShowAbout(false);
+        setShowHistory(!showHistory);
         setShowPlans(false);
         break;
       case "Plans":
         setShowControls(false);
         setShowRules(false);
         setShowAbout(false);
+        setShowHistory(false);
         setShowPlans(!showPlans);
         break;
       default:
         setShowControls(false);
         setShowRules(false);
         setShowAbout(false);
+        setShowHistory(false);
         setShowPlans(false);
     }
   };
@@ -330,6 +345,14 @@ function Play() {
           <button
             className="linkTag btn btn-outline-light"
             onClick={() => {
+              onClickPlayNavButtons("History");
+            }}
+          >
+            <span>History</span>
+          </button>
+          <button
+            className="linkTag btn btn-outline-light"
+            onClick={() => {
               onClickPlayNavButtons("About");
             }}
           >
@@ -387,6 +410,46 @@ function Play() {
             >
               <h1>About</h1>
               <p>
+                The thing that makes this game stand out from other smash
+                drinking games is the main rule, "Screen Clear", requiring
+                players to actively time their own death rather than just trying
+                to not die.
+              </p>
+
+              <h4>Tech Used</h4>
+              <ul>
+                <li>Phaser 3</li>
+                <li>React TS</li>
+                <li>Bootstrap</li>
+                <li>Press Start 2P</li>
+              </ul>
+              {/* <h1>🚧</h1> */}
+              <img
+                className="kirbyNiembro"
+                src="./images/character_3_cropped.png"
+                alt="kirby"
+              />
+              <p>by NIEMBRO64</p>
+              <a
+                className="linkTag btn btn-outline-light"
+                href="http://niembro64.com/"
+              >
+                {/* <h4>See Other Projects</h4> */}
+                <span>See Other Projects</span>
+              </a>
+            </div>
+          </div>
+        )}
+        {showHistory && (
+          <div>
+            <div
+              className="popup"
+              onClick={() => {
+                onClickPlayNavBody("History");
+              }}
+            >
+              <h1>History</h1>
+              <p>
                 As referenced on the rulesheet, (Chemon) Smashed was invented in
                 Glen Carbon, Illinois (near St. Louis) some time in late 2009 by
                 a group of college kids at the "Chemon" House. Since 2013, "The
@@ -398,30 +461,8 @@ function Play() {
                 the rules baked in.
               </p>
               <p>
-                The thing that makes this game stand out from other smash
-                drinking games is the main rule, "Screen Clear", requiring
-                players to time their death rather than just try to not die.
+                Smashed has been played in at least 4 states and 3 countries.
               </p>
-              <p>
-                The game has been played in at least 4 states and 3 countries.
-              </p>
-
-              <h4>Tech Used</h4>
-              <ul>
-                <li>Phaser 3</li>
-                <li>React TS</li>
-                <li>Bootstrap</li>
-                <li>Press Start 2P</li>
-              </ul>
-              <h1>🚧</h1>
-              <p>by NIEMBRO64</p>
-              <a
-                className="linkTag btn btn-outline-light"
-                href="http://niembro64.com/"
-              >
-                {/* <h4>See Other Projects</h4> */}
-                <span>See Other Projects</span>
-              </a>
             </div>
           </div>
         )}
