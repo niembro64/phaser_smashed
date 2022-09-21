@@ -155,6 +155,7 @@ function Play() {
     setShowControls(false);
     setShowRulesN64(false);
     setShowAbout(false);
+    setShowHistory(false);
   };
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {
