@@ -278,7 +278,7 @@ export default class Game extends Phaser.Scene {
     },
   ];
   FONT_DEFAULT_NICE: string = "Impact";
-  // FONT_DEFAULT_MONOSPACE: string = "Press Start 2P";f
+  // FONT_DEFAULT_MONOSPACE: string = "Press Start 2P";
   FONT_DEFAULT_MONOSPACE: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
 
@@ -308,7 +308,7 @@ export default class Game extends Phaser.Scene {
       text: null,
       name: "splash-paused",
       word: "PAUSED",
-      color: "#005500",
+      color: "#003300",
       backgroundColor: "#00AA00",
       size: "570px",
       src: "glass.png",
@@ -318,7 +318,7 @@ export default class Game extends Phaser.Scene {
       text: null,
       name: "splash-first-blood",
       word: "FIRST BLOOD",
-      color: "#440000",
+      color: "#330000",
       backgroundColor: "#FF0000",
       size: "370px",
       src: "glass.png",
