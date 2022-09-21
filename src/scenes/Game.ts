@@ -991,7 +991,7 @@ export default class Game extends Phaser.Scene {
         zoom: 1,
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
-        jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
+        jumps: [1, 1, 1, 0],
         jumpPower: 1,
         jumpIndex: 0,
         upB: { canUse: false, x: 0.5, y: -1 },
@@ -1082,7 +1082,7 @@ export default class Game extends Phaser.Scene {
         jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
       },
       char: {
-        name: "BlackChez",
+        name: "Black-Chez",
         initializeCharPosition: {
           lookingRight: false,
           x: 200,
@@ -1101,7 +1101,7 @@ export default class Game extends Phaser.Scene {
         zoom: 1,
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
-        jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
+        jumps: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         jumpPower: 1,
         jumpIndex: 0,
         upB: { canUse: false, x: 0.5, y: -1 },

@@ -18,9 +18,9 @@ export type ButtonName =
   | "ReStart"
   | "Controls"
   | "Rules"
+  | "Rules-N64"
   | "About"
-  | "History"
-  | "Plans";
+  | "History";
 
 function App() {
   // The debounce function receives our function as a parameter

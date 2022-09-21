@@ -108,19 +108,12 @@ function Play() {
   // 🏴‍☠️🏳️🏁🏴
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
 
-  const [showRules, setShowRules] = useState(false);
+  const [showRulesN64, setShowRulesN64] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
-  const [showPlans, setShowPlans] = useState(false);
 
-  useEffect(() => {}, [
-    webState,
-    showRules,
-    showControls,
-    showAbout,
-    showPlans,
-  ]);
+  useEffect(() => {}, [webState, showRulesN64, showControls, showAbout]);
 
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
@@ -160,9 +153,8 @@ function Play() {
     clickSoundParent();
 
     setShowControls(false);
-    setShowRules(false);
+    setShowRulesN64(false);
     setShowAbout(false);
-    setShowPlans(false);
   };
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {
@@ -172,59 +164,45 @@ function Play() {
     switch (buttonName) {
       case "Back":
         setShowControls(false);
-        setShowRules(false);
+        setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
-        setShowPlans(false);
         break;
       case "ReStart":
         setShowControls(false);
-        setShowRules(false);
+        setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
-        setShowPlans(false);
         break;
       case "Controls":
         setShowControls(!showControls);
-        setShowRules(false);
+        setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
-        setShowPlans(false);
         break;
-      case "Rules":
+      case "Rules-N64":
         setShowControls(false);
-        setShowRules(!showRules);
+        setShowRulesN64(!showRulesN64);
         setShowAbout(false);
         setShowHistory(false);
-        setShowPlans(false);
         break;
       case "About":
         setShowControls(false);
-        setShowRules(false);
+        setShowRulesN64(false);
         setShowAbout(!showAbout);
         setShowHistory(false);
-        setShowPlans(false);
         break;
       case "History":
         setShowControls(false);
-        setShowRules(false);
+        setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(!showHistory);
-        setShowPlans(false);
-        break;
-      case "Plans":
-        setShowControls(false);
-        setShowRules(false);
-        setShowAbout(false);
-        setShowHistory(false);
-        setShowPlans(!showPlans);
         break;
       default:
         setShowControls(false);
-        setShowRules(false);
+        setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
-        setShowPlans(false);
     }
   };
 
@@ -329,18 +307,10 @@ function Play() {
           <button
             className="linkTag btn btn-outline-light"
             onClick={() => {
-              onClickPlayNavButtons("Rules");
+              onClickPlayNavButtons("Rules-N64");
             }}
           >
-            <span>Rules</span>
-          </button>
-          <button
-            className="linkTag btn btn-outline-light"
-            onClick={() => {
-              onClickPlayNavButtons("Plans");
-            }}
-          >
-            <span>Plans</span>
+            <span>Rules-N64</span>
           </button>
           <button
             className="linkTag btn btn-outline-light"
@@ -381,20 +351,20 @@ function Play() {
             </div>
           </div>
         )}
-        {showRules && (
+        {showRulesN64 && (
           <div>
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Rules");
+                onClickPlayNavBody("Rules-N64");
               }}
             >
-              <h1>Rules</h1>
+              <h1>Rules-N64</h1>
               <div className="rulesOutline">
                 <img
-                  id="rulesImage"
+                  id="RulesN64Image"
                   src="images/smashRulesGimp01.png"
-                  alt="Smashed Rules"
+                  alt="Smashed Rules-N64"
                 />
               </div>
             </div>
@@ -417,8 +387,8 @@ function Play() {
               <h4>Tech Used</h4>
               <ul>
                 <li>Phaser 3</li>
-                <li>React TS</li>
-                <li>Bootstrap</li>
+                <li>React 17 TS</li>
+                <li>Bootstrap 5</li>
                 <li>Press Start 2P</li>
               </ul>
               {/* <h1>🚧</h1> */}
@@ -448,7 +418,7 @@ function Play() {
             >
               <h1>History</h1>
               <p>
-                As referenced on the rulesheet, (Chemon) Smashed was invented in
+                As referenced on the RulesN64heet, (Chemon) Smashed was invented in
                 Glen Carbon, Illinois (near St. Louis) some time in late 2009 by
                 a group of college kids at the "Chemon" House. Since 2013, "The
                 Young Boys" have been keeping it alive & thriving in St. Louis.
@@ -456,25 +426,11 @@ function Play() {
               <p>
                 It's normally played with the N64 Smash Bros game on the N64,
                 Wii, or Emulation, but this is my attempt at recreating it with
-                the rules baked in.
+                the RulesN64 baked in.
               </p>
               <p>
                 Smashed has been played in at least 4 states and 3 countries.
               </p>
-            </div>
-          </div>
-        )}
-        {showPlans && (
-          <div>
-            <div
-              className="popup"
-              onClick={() => {
-                onClickPlayNavBody("Plans");
-              }}
-            >
-              <h1>Plans</h1>
-              <p>Let me know about bugs & suggestions.</p>
-              <h1>🚧</h1>
             </div>
           </div>
         )}
