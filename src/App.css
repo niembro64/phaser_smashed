@@ -158,14 +158,14 @@ body {
 }
 
 .popup > p {
-  font-size: 1vw;
+  font-size: 1.3vw;
 }
 .popup > ul > li {
-  font-size: 1vw;
+  font-size: 1.3vw;
 }
 .popup > a {
   padding: 1.5% 4%;
-  font-size: 1vw;
+  font-size: 1.3vw;
 }
 .kirbyNiembro {
   margin: 1%;

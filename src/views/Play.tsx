@@ -410,12 +410,10 @@ function Play() {
             >
               <h1>About</h1>
               <p>
-                The thing that makes this game stand out from other smash
-                drinking games is the main rule, "Screen Clear", requiring
-                players to actively time their own death rather than just trying
-                to not die.
+                The primary rule "Screen Clear" makes this game stand out from
+                other smash drinking games; it requires a player to actively
+                time their own death rather than just try to not die.
               </p>
-
               <h4>Tech Used</h4>
               <ul>
                 <li>Phaser 3</li>
@@ -453,7 +451,7 @@ function Play() {
                 As referenced on the rulesheet, (Chemon) Smashed was invented in
                 Glen Carbon, Illinois (near St. Louis) some time in late 2009 by
                 a group of college kids at the "Chemon" House. Since 2013, "The
-                Young Boys" have been keeping it alive in St. Louis.
+                Young Boys" have been keeping it alive & thriving in St. Louis.
               </p>
               <p>
                 It's normally played with the N64 Smash Bros game on the N64,
