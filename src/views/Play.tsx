@@ -29,6 +29,8 @@ export type WebState = "start" | "play";
 
 function Play() {
   let myGame: any = useRef({});
+  // let pauseSound = new Audio("mariopause.mp3");
+  // let pauseSound = new Audio("../../public/sounds/mariopause.mp3");
   const [numClicks, setNumClicks] = useState(0);
   const [webState, setWebState] = useState<WebState>("start");
   const [buttonsOnOff, setButtonsOnOff] = useState([
@@ -72,6 +74,7 @@ function Play() {
   };
 
   const onClickStartStartButton = () => {
+    // pauseSound.play();
     setWebState("play");
     let players = [...smashConfig.players];
     let newPlayers: { characterId: number }[] = [];
@@ -419,10 +422,11 @@ function Play() {
             >
               <h1>History</h1>
               <p>
-                As referenced on the Rules-N64 sheet, (Chemon) Smashed was invented in
-                Glen Carbon, Illinois (near St. Louis) some time in late 2009 by
-                a group of college kids at the "Chemon" House. Since 2013, "The
-                Young Boys" have been keeping it alive & thriving in St. Louis.
+                As referenced on the Rules-N64 sheet, (Chemon) Smashed was
+                invented in Glen Carbon, Illinois (near St. Louis) some time in
+                late 2009 by a group of college kids at the "Chemon" House.
+                Since 2013, "The Young Boys" have been keeping it alive &
+                thriving in St. Louis.
               </p>
               <p>
                 It's normally played with the N64 Smash Bros game on the N64,
