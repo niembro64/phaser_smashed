@@ -8,36 +8,50 @@ import {
 } from "./attacks";
 
 export function updateGamePadsConnected(game: Game): void {
-  for (let i = 0; i < game.input.gamepad.total; i++) {
-    if (i < game.players.length) {
-      game.players[game.playerSpawnOrder[i]].gamepad =
-        game.input.gamepad.getPad(i);
+  let playerIndex = 0;
+
+  // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
+
+  for (let i = 0; i < game.input.gamepad.gamepads.length; i++) {
+    if (
+      !game.input.gamepad.gamepads[i].id.includes("Jabra") &&
+      i < game.players.length
+    ) {
+      game.players[playerIndex].gamepad = game.input.gamepad.getPad(i);
+      playerIndex++;
     }
   }
 }
 
+export function getControllerIsRealController(gamepad: Gamepad): boolean {
+  if (gamepad.id.includes("Jabra")) {
+    return false;
+  }
+  return true;
+}
+
 export function getIsAnyPlayerPausing(game: Game): boolean {
   for (let i = 0; i < game.players.length; i++) {
-    if (playerPauses(game.players[i], game)) {
+    if (getPlayerPauses(game.players[i], game)) {
       return true;
     }
   }
   return false;
 }
 
-export function playerPauses(player: Player, game: Game): boolean {
-  return playerPressedBothLR(player, game);
+export function getPlayerPauses(player: Player, game: Game): boolean {
+  return getPlayerPressedBothLR(player, game);
   // return playerAllRightButtonsPressed(player, game);
 }
 
-export function playerPressedBothLR(player: Player, game: Game): boolean {
+export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
   if (player.gamepad.L1 && player.gamepad.R1) {
     return true;
   }
 
   return false;
 }
-export function playerAllRightButtonsPressed(
+export function getPlayerAllRightButtonsPressed(
   player: Player,
   game: Game
 ): boolean {
@@ -53,7 +67,7 @@ export function playerAllRightButtonsPressed(
   return false;
 }
 
-export function isPlayerReady(player: Player, game: Game): boolean {
+export function getIsPlayerReady(player: Player, game: Game): boolean {
   if (
     !player.gamepad.up &&
     !player.gamepad.down &&
@@ -367,7 +381,7 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   });
 }
 
-export function updateControllersPrintConnected(game: Game): void {
+export function debugUpdateControllersPrintConnected(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     // console.log("PLAYER", playerIndex, "CONTROLLER", player.gamepad);
     console.log("PLAYER", playerIndex, "CONTROLLER", player.gamepad.id);
@@ -503,7 +517,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
   }
 }
 
-export function updatePrintAllControllerButtonsWhenActive(game: Game): void {
+export function debugUpdatePrintAllControllerButtonsWhenActive(game: Game): void {
   // Buttons
   game.players.forEach((player, playerIndex) => {
     if (player.gamepad) {

@@ -1,6 +1,6 @@
 import Game from "../Game";
 import { SplashName } from "../interfaces";
-import { isPlayerReady } from "./pad";
+import { getIsPlayerReady } from "./pad";
 import { pauseReadySoundPlayer, playReadySoundPlayer } from "./sound";
 
 export function updateText(game: Game): void {
@@ -225,7 +225,7 @@ export function updateReadyText(game: Game, zoom: number, newY: number): void {
     ) {
       player.scoreBoardReady.setAlpha(0);
     } else {
-      if (isPlayerReady(player, game)) {
+      if (getIsPlayerReady(player, game)) {
         player.scoreBoardReady.setAlpha(1);
         playReadySoundPlayer(player);
       } else {
@@ -260,7 +260,7 @@ export function updateControllerText(
     ) {
       player.scoreBoardController.setAlpha(0);
     } else {
-      if (isPlayerReady(player, game)) {
+      if (getIsPlayerReady(player, game)) {
         player.scoreBoardController.setAlpha(1);
         playReadySoundPlayer(player);
       } else {
