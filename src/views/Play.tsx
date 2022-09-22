@@ -66,7 +66,7 @@ function Play() {
     { state: true },
     { state: true },
     { state: true },
-    { state: false },
+    { state: true },
   ]);
   const [smashConfig, setSmashConfig] = useState({
     players: [
