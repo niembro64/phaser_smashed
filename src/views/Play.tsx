@@ -6,6 +6,18 @@ import "@fontsource/press-start-2p";
 import { ButtonName, CharacterMove } from "../App";
 import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
 import { setGameState } from "../scenes/helpers/state";
+import useSound from "use-sound";
+
+// @ts-ignore
+import importedPauseSound from "../sounds/mariopause.mp3";
+// @ts-ignore
+import importedStartSound from "../sounds/start.wav";
+// @ts-ignore
+import importedBlipSound from "../sounds/game-start-liquid.wav";
+// @ts-ignore
+import importedMonkeysMusic from "../sounds/monkeys2.wav";
+import React from "react";
+// import importedPauseSound from "../../public/sounds/mariopause.mp3";
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -29,7 +41,24 @@ export type WebState = "start" | "play";
 
 function Play() {
   let myGame: any = useRef({});
-  // let pauseSound = new Audio("mariopause.mp3");
+  // let monkeysMusic: any = useRef({});
+  // let monkeysMusic: any = React.createRef()
+  // monkeysMusic.current = new Audio("../sounds/monkeys2.wav");
+  // let monkeysMusic = new Audio("monkeys2.wav");
+
+  // @ts-ignore
+  // const [monkeysMusic, { stop, isPlaying }] = useSound(importedMonkeysMusic, {
+  //   volume: 0.4,
+  // });
+  // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
+  const [startSound] = useSound(importedStartSound, { volume: 0.4 });
+  const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
+  // @ts-ignore
+  // const [monkeysMusicPlay, { stop, isPlaying }] = useSound(
+  //   importedMonkeysMusic,
+  //   { volume: 0.3 }
+  // );
+
   // let pauseSound = new Audio("../../public/sounds/mariopause.mp3");
   const [numClicks, setNumClicks] = useState(0);
   const [webState, setWebState] = useState<WebState>("start");
@@ -75,6 +104,8 @@ function Play() {
 
   const onClickStartStartButton = () => {
     // pauseSound.play();
+    // pauseSound();
+    startSound();
     setWebState("play");
     let players = [...smashConfig.players];
     let newPlayers: { characterId: number }[] = [];
@@ -93,6 +124,7 @@ function Play() {
     playerIndex: number,
     flipState: boolean
   ): void => {
+    blipSound();
     let buttons = [...buttonsOnOff];
     let button = buttons[playerIndex];
     button.state = flipState;
@@ -100,6 +132,15 @@ function Play() {
   };
 
   const onClickStartRotateSelection = (playerIndex: number): void => {
+    // console.log("isPlaying", isPlaying);
+    // console.log("monkeysMusic", monkeysMusic);
+    // console.log("stop", stop);
+    // if (isPlaying) {
+    //   monkeysMusic();
+    // }
+    // monkeysMusic();
+    // playMonkeyMusicStartScreen();
+    blipSound();
     let choices = [...smashConfig.players];
     let choice = choices[playerIndex];
     choice.characterId =
@@ -113,10 +154,18 @@ function Play() {
 
   const [showRulesN64, setShowRulesN64] = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const [showControllers, setShowControllers] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
 
-  useEffect(() => {}, [webState, showRulesN64, showControls, showAbout]);
+  // const playMonkeyMusicStartScreen = (): void => {
+  //   if (!isPlaying) {
+  //     monkeysMusicPlay();
+  //   }
+  // };
+
+  useEffect(() => {}, []);
+  // useEffect(() => {}, [webState, showRulesN64, showControls, showAbout]);
 
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
@@ -153,57 +202,74 @@ function Play() {
   };
 
   const onClickPlayNavBody = (buttonName: ButtonName) => {
-    clickSoundParent();
+    blipSound();
+    // clickSoundParent();
 
     setShowControls(false);
+    setShowControllers(false);
     setShowRulesN64(false);
     setShowAbout(false);
     setShowHistory(false);
   };
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {
-    clickSoundParent();
+    blipSound();
+    // clickSoundParent();
     clickPauseParent();
 
     switch (buttonName) {
       case "Back":
         setShowControls(false);
+        setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
         break;
       case "ReStart":
         setShowControls(false);
+        setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
         break;
       case "Controls":
         setShowControls(!showControls);
+        setShowControllers(false);
+        setShowRulesN64(false);
+        setShowAbout(false);
+        setShowHistory(false);
+        break;
+      case "Controllers":
+        setShowControls(false);
+        setShowControllers(!showControllers);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
         break;
       case "Rules-N64":
         setShowControls(false);
+        setShowControllers(false);
         setShowRulesN64(!showRulesN64);
         setShowAbout(false);
         setShowHistory(false);
         break;
       case "About":
         setShowControls(false);
+        setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(!showAbout);
         setShowHistory(false);
         break;
       case "History":
         setShowControls(false);
+        setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(!showHistory);
         break;
       default:
         setShowControls(false);
+        setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
@@ -212,6 +278,7 @@ function Play() {
 
   return (
     <div className="overDiv">
+      {/* <audio src={monkeysMusic} ref={monkeysMusic} /> */}
       <div className="phaser-container" id="phaser-container"></div>
       {webState === "start" && (
         <div className="startClassDiv">
@@ -275,6 +342,16 @@ function Play() {
 
       <div className="overDiv">
         <div className="top-bar">
+          {webState === "start" && (
+            <button
+              className="linkTag btn btn-outline-light"
+              onClick={() => {
+                onClickPlayNavButtons("Controllers");
+              }}
+            >
+              <span>Controllers</span>
+            </button>
+          )}
           {webState !== "start" && (
             <button
               className="linkTag btn btn-outline-light"
@@ -316,14 +393,16 @@ function Play() {
           >
             <span>Rules-N64</span>
           </button>
-          <button
-            className="linkTag btn btn-outline-light"
-            onClick={() => {
-              onClickPlayNavButtons("History");
-            }}
-          >
-            <span>History</span>
-          </button>
+          {webState === "start" && (
+            <button
+              className="linkTag btn btn-outline-light"
+              onClick={() => {
+                onClickPlayNavButtons("History");
+              }}
+            >
+              <span>History</span>
+            </button>
+          )}
           <button
             className="linkTag btn btn-outline-light"
             onClick={() => {
@@ -371,6 +450,36 @@ function Play() {
                   alt="Smashed Rules-N64"
                 />
               </div>
+            </div>
+          </div>
+        )}
+        {showControllers && (
+          <div>
+            <div
+              className="popup"
+              onClick={() => {
+                onClickPlayNavBody("Controllers");
+              }}
+            >
+              <h1>Controllers</h1>
+              <p>You need at least two, ideally 4 controllers to play.</p>
+              <p>Some types of conotrollers don't work yet.</p>
+              <a
+                className="linkTag btn btn-outline-light"
+                href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
+              >
+                {/* <h4>See Other Projects</h4> */}
+                <span>Example: (2) SNES Controllers $12</span>
+              </a>
+              <a
+                className="linkTag btn btn-outline-light"
+                href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
+              >
+                {/* <h4>See Other Projects</h4> */}
+                <span>Suggested: USB Hub/Extension $13</span>
+              </a>
+
+              <h1>🚧</h1>
             </div>
           </div>
         )}

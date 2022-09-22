@@ -17,6 +17,7 @@ export type ButtonName =
   | "Back"
   | "ReStart"
   | "Controls"
+  | "Controllers"
   | "Rules"
   | "Rules-N64"
   | "About"
