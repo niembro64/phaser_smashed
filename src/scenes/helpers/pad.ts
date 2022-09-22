@@ -11,6 +11,7 @@ export function updateGamePadsConnected(game: Game): void {
   let playerIndex = 0;
 
   // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
+  // console.log("NUM GAMEPADS", game.input.gamepad.total);
 
   for (let i = 0; i < game.input.gamepad.gamepads.length; i++) {
     if (
