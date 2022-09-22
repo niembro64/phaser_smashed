@@ -419,7 +419,7 @@ function Play() {
             >
               <h1>History</h1>
               <p>
-                As referenced on the RulesN64heet, (Chemon) Smashed was invented in
+                As referenced on the Rules-N64 sheet, (Chemon) Smashed was invented in
                 Glen Carbon, Illinois (near St. Louis) some time in late 2009 by
                 a group of college kids at the "Chemon" House. Since 2013, "The
                 Young Boys" have been keeping it alive & thriving in St. Louis.
