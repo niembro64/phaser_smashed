@@ -21,6 +21,8 @@ import importedMonkeysMusic from "../sounds/monkeys2.wav";
 import React from "react";
 // import importedPauseSound from "../../public/sounds/mariopause.mp3";
 
+// test commit
+
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
 // export type CharacterName =
