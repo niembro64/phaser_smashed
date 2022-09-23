@@ -93,6 +93,7 @@ function Play() {
     { characterId: 5, scale: 1.2 },
   ];
   const config: Phaser.Types.Core.GameConfig = {
+    transparent: true,
     title: "Smashed",
     antialias: true,
     pixelArt: false,
@@ -302,6 +303,28 @@ function Play() {
   return (
     <div className="overDiv">
       {/* <audio src={monkeysMusic} ref={monkeysMusic} /> */}
+      {webState !== "start" && (
+        <div className="loader">
+          <div className="loader-inner">
+            <div className="loader-line-wrap">
+              <div className="loader-line"></div>
+            </div>
+            <div className="loader-line-wrap">
+              <div className="loader-line"></div>
+            </div>
+            <div className="loader-line-wrap">
+              <div className="loader-line"></div>
+            </div>
+            <div className="loader-line-wrap">
+              <div className="loader-line"></div>
+            </div>
+            <div className="loader-line-wrap">
+              <div className="loader-line"></div>
+            </div>
+          </div>
+          <img className="loadingTable" src="/images/table.png" alt="table" />
+        </div>
+      )}
       <div className="phaser-container" id="phaser-container"></div>
       {webState === "start" && (
         <div className="startClassDiv">
