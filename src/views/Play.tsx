@@ -9,6 +9,8 @@ import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 
 // @ts-ignore
+import titleImage from "../images/titleImage.png";
+// @ts-ignore
 import importedPauseSound from "../sounds/mariopause.mp3";
 // @ts-ignore
 import importedStartSound from "../sounds/start.wav";
@@ -29,12 +31,18 @@ export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 //   | "Chez"
 //   | "BlackChez";
 
-export interface PlayerConfig {
-  characterId: CharacterId;
-}
-
 export interface SmashConfig {
   players: PlayerConfig[];
+}
+
+export interface SmashConfigScale {
+  characterId: CharacterId;
+  scale: number;
+}
+
+export interface PlayerConfig {
+  characterId: CharacterId;
+  scale: number;
 }
 
 export type WebState = "start" | "play";
@@ -70,12 +78,20 @@ function Play() {
   ]);
   const [smashConfig, setSmashConfig] = useState({
     players: [
-      { characterId: 0 },
-      { characterId: 1 },
-      { characterId: 2 },
-      { characterId: 3 },
+      { characterId: 0, scale: 0.9 },
+      { characterId: 1, scale: 0.9 },
+      { characterId: 2, scale: 1 },
+      { characterId: 3, scale: 0.7 },
     ],
   });
+  const smashConfigScaleArray: SmashConfigScale[] = [
+    { characterId: 0, scale: 0.9 },
+    { characterId: 1, scale: 0.9 },
+    { characterId: 2, scale: 1 },
+    { characterId: 3, scale: 0.7 },
+    { characterId: 4, scale: 1.2 },
+    { characterId: 5, scale: 1.2 },
+  ];
   const config: Phaser.Types.Core.GameConfig = {
     title: "Smashed",
     antialias: true,
@@ -108,10 +124,13 @@ function Play() {
     startSound();
     setWebState("play");
     let players = [...smashConfig.players];
-    let newPlayers: { characterId: number }[] = [];
+    let newPlayers: { characterId: CharacterId; scale: number }[] = [];
     buttonsOnOff.forEach((button, buttonIndex) => {
       if (button.state) {
-        newPlayers.push({ characterId: players[buttonIndex].characterId });
+        newPlayers.push({
+          characterId: players[buttonIndex].characterId as CharacterId,
+          scale: players[buttonIndex].scale,
+        });
       }
     });
     let newSmashConfig = { players: [...newPlayers] };
@@ -145,6 +164,10 @@ function Play() {
     let choice = choices[playerIndex];
     choice.characterId =
       choice.characterId + 1 < 6 ? choice.characterId + 1 : 0;
+    let tempScale = smashConfigScaleArray.find((s, sIndex) => {
+      return s.characterId === choice.characterId;
+    })?.scale;
+    choice.scale = tempScale ? tempScale : 1;
     setSmashConfig({ players: [...choices] });
   };
 
@@ -282,45 +305,54 @@ function Play() {
       <div className="phaser-container" id="phaser-container"></div>
       {webState === "start" && (
         <div className="startClassDiv">
+          <div className="startTitle">
+            {/* <h1>Title</h1> */}
+            <img src="images/smashTitle.png" alt="smash title" />
+          </div>
           <div className="playerChoices">
-            {smashConfig.players.map((player, playerIndex) => {
+            {smashConfig.players.map((cPlayer, cPlayerIndex) => {
               return (
-                <div className="playerChoice" key={playerIndex}>
+                <div className="playerChoice" key={cPlayerIndex}>
                   <div
                     className="playerChar"
                     onClick={() => {
-                      onClickStartRotateSelection(playerIndex);
+                      onClickStartRotateSelection(cPlayerIndex);
                     }}
                   >
-                    {buttonsOnOff[playerIndex].state && (
+                    {buttonsOnOff[cPlayerIndex].state && (
                       <div className="startImageWrapper">
                         <img
                           className="startImage"
                           src={
                             "images/character_" +
-                            player.characterId.toString() +
+                            cPlayer.characterId.toString() +
                             "_cropped.png"
                           }
+                          // style={{ transform: Scale({cPlayer.scale}) }}
+                          // height={`100 * cPlayer.scale`}
+                          width={(50 * cPlayer.scale).toString() + "%"}
+                          // width={`120`}
+                          // width={{cPlayer.scale}  * 2}
                           alt="char"
                         />
                       </div>
                     )}
                   </div>
-                  {buttonsOnOff[playerIndex].state && (
+                  {buttonsOnOff[cPlayerIndex].state && (
                     <button
                       className="btn btn-success px-4"
                       onClick={() => {
-                        onClickStartOnOffButtons(playerIndex, false);
+                        onClickStartOnOffButtons(cPlayerIndex, false);
                       }}
                     >
                       ON
                     </button>
                   )}
-                  {!buttonsOnOff[playerIndex].state && (
+                  {!buttonsOnOff[cPlayerIndex].state && (
                     <button
                       className="btn btn-danger px-4"
                       onClick={() => {
-                        onClickStartOnOffButtons(playerIndex, true);
+                        onClickStartOnOffButtons(cPlayerIndex, true);
                       }}
                     >
                       OFF
@@ -331,10 +363,10 @@ function Play() {
             })}
           </div>
           <button
-            className="startButton btn btn-dark px-2"
+            className="startButton btn btn-primary px-2"
             onClick={onClickStartStartButton}
           >
-            Start
+            START
           </button>
         </div>
         // <Link to={"/play"} className="playLink"></Link>
@@ -370,8 +402,15 @@ function Play() {
               className="linkTag btn btn-outline-light"
               onClick={() => {
                 onClickPlayNavButtons("ReStart");
+                const myGameX = myGame.current.scene.keys.game as Game;
+
+                let newSmashConfig = JSON.parse(
+                  JSON.stringify(myGameX.smashConfig)
+                );
                 myGame.current.destroy(true);
                 myGame.current = new Phaser.Game(config);
+                myGame.current.registry.set("parentContext", Play);
+                myGame.current.registry.set("smashConfig", newSmashConfig);
               }}
             >
               <span>ReStart</span>
