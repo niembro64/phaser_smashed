@@ -136,7 +136,7 @@ function Play() {
       name: "TR3",
       text: "How am I supposed to make more than that... shit... happen?",
     },
-    // { name: "Chadams", text: "AAAYYYUUUGGGGHHHH!!" },
+    { name: "Chadams", text: "AAAYYYUUUGGGGHHHH!!" },
     { name: "Chadams", text: "Two Shots. Twooo Shots." },
     { name: "Chadams", text: "Spike Enerjeaoah." },
     { name: "Chadams", text: "Stop breakin' shit." },
@@ -176,14 +176,13 @@ function Play() {
     });
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
-    setTimeout(() => {
-      myGame.current.registry.set("parentContext", Play);
-      myGame.current.registry.set("smashConfig", newSmashConfig);
-      myGame.current = new Phaser.Game(config);
-    }, setTimeoutQuotesLength);
+    myGame.current.registry.set("parentContext", Play);
+    myGame.current.registry.set("smashConfig", newSmashConfig);
+    myGame.current = new Phaser.Game(config);
   };
-
+  
   const onClickStartOnOffButtons = (
+    setTimeout(() => {}, setTimeoutQuotesLength);
     playerIndex: number,
     flipState: boolean
   ): void => {
@@ -475,10 +474,10 @@ function Play() {
                     JSON.stringify(myGameX.smashConfig)
                   );
                   myGame.current.destroy(true);
+                  myGame.current.registry.set("parentContext", Play);
+                  myGame.current.registry.set("smashConfig", newSmashConfig);
+                  myGame.current = new Phaser.Game(config);
                   setTimeout(() => {
-                    myGame.current.registry.set("parentContext", Play);
-                    myGame.current.registry.set("smashConfig", newSmashConfig);
-                    myGame.current = new Phaser.Game(config);
                   }, setTimeoutQuotesLength);
                 }
               }}
