@@ -412,7 +412,7 @@ function Play() {
                         onClickStartOnOffButtons(cPlayerIndex, false);
                       }}
                     >
-                      ON
+                      <span>ON</span>
                     </button>
                   )}
                   {!buttonsOnOff[cPlayerIndex].state && (
@@ -422,7 +422,7 @@ function Play() {
                         onClickStartOnOffButtons(cPlayerIndex, true);
                       }}
                     >
-                      OFF
+                      <span>OFF</span>
                     </button>
                   )}
                 </div>
@@ -433,7 +433,7 @@ function Play() {
             className="startButton btn btn-primary px-2"
             onClick={onClickStartStartButton}
           >
-            START
+            <span>START</span>
           </button>
         </div>
         // <Link to={"/play"} className="playLink"></Link>
