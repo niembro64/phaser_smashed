@@ -176,11 +176,10 @@ function Play() {
     });
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
-    setTimeout(() => {
-      myGame.current.registry.set("parentContext", Play);
-      myGame.current.registry.set("smashConfig", newSmashConfig);
-      myGame.current = new Phaser.Game(config);
-    }, setTimeoutQuotesLength);
+    setTimeout(() => {}, setTimeoutQuotesLength);
+    myGame.current = new Phaser.Game(config);
+    myGame.current.registry.set("parentContext", Play);
+    myGame.current.registry.set("smashConfig", newSmashConfig);
   };
 
   const onClickStartOnOffButtons = (
