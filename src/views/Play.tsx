@@ -49,6 +49,11 @@ export interface PlayerConfig {
 
 export type WebState = "start" | "play";
 
+export interface Quote {
+  name: string;
+  text: string;
+}
+
 function Play() {
   let myGame: any = useRef({});
   // let monkeysMusic: any = useRef({});
@@ -120,6 +125,10 @@ function Play() {
     },
     scene: [Game],
   };
+  const quotes: Quote[] = [
+    { name: "Breezy", text: "The turtle will die." },
+    { name: "TR3", text: "Smashed." },
+  ];
 
   const onClickStartStartButton = () => {
     // pauseSound.play();
@@ -325,6 +334,8 @@ function Play() {
             </div>
           </div>
           <img className="loadingTable" src="/images/table.png" alt="table" />
+          <p className="firstLoaderP">{quotes[0].text}</p>
+          <p>- {quotes[0].name}</p>
         </div>
       )}
       <div className="phaser-container" id="phaser-container"></div>
