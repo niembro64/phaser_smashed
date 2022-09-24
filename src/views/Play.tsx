@@ -129,36 +129,35 @@ function Play() {
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
     { name: "Breezy", text: "The Turtle Will Die." },
-    { name: "Breezy", text: "Oh, is it? Oh cool. Ur soo cool." },
-    { name: "Lau", text: "I'm sorry, I didn't know it was gonna happen." },
+    // { name: "Breezy", text: "Oh, is it? Oh cool. Ur soo cool." },
+    // { name: "Lau", text: "I'm sorry, I didn't know it was gonna happen." },
     { name: "TR3", text: "Smashed." },
     {
       name: "TR3",
       text: "How am I supposed to make more than that... shit... happen?",
     },
     // { name: "Chadams", text: "AAAYYYUUUGGGGHHHH!!" },
-    { name: "Chadams", text: "Two Shots. Twooo Shots." },
-    { name: "Chadams", text: "Spike Enerjeaoah." },
-    { name: "Chadams", text: "Stop breakin' shit." },
-    { name: "Chadams", text: "Is there no one else?" },
+    { name: "Chadams", text: "Two shots, twooo shots." },
+    // { name: "Chadams", text: "Spike Enerjeaoah." },
+    // { name: "Chadams", text: "Stop breakin' shit." },
+    // { name: "Chadams", text: "Is there no one else?" },
     { name: "Eddie-Z", text: "He'll do it again, yeah!" },
     // { name: "Deen Davis Jr.", text: "VIDEOTAPE MA-SELF FUCKIN YOU UP!" },
     {
       name: "DDj",
-      text: "It's Safe to Say We're Not Going to the Bars Tonite.",
+      text: "It's safe to say we're not going to the bars tonite.",
     },
-    {
-      name: "DDj",
-      text: "I can fight you one-handed.",
-    },
-    {
-      name: "DDj",
-      text: "I thought you put Spike in there.",
-    },
+    // {
+    //   name: "DDj",
+    //   text: "I can fight you one-handed.",
+    // },
+    // {
+    //   name: "DDj",
+    //   text: "I thought you put Spike in there.",
+    // },
     { name: "Gin", text: "Clean it up, and we'll do it again." },
-    { name: "Gin", text: "Shitty, Shitty-fuckin-ass." },
+    // { name: "Gin", text: "Shitty, shitty-fuckin-ass." },
   ];
-
   const onClickStartStartButton = () => {
     // pauseSound.play();
     // pauseSound();
@@ -349,6 +348,9 @@ function Play() {
       {webState !== "start" && (
         <div className="loader">
           <div className="loader-inner">
+            <div className="loader-line-wrap">
+              <div className="loader-line"></div>
+            </div>
             <div className="loader-line-wrap">
               <div className="loader-line"></div>
             </div>
