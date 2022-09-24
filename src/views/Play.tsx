@@ -148,6 +148,10 @@ function Play() {
       name: "DDj",
       text: "It's safe to say we're not going to the bars tonite.",
     },
+    {
+      name: "DDj",
+      text: "... yes you are.",
+    },
     // {
     //   name: "DDj",
     //   text: "I can fight you one-handed.",
@@ -156,7 +160,7 @@ function Play() {
     //   name: "DDj",
     //   text: "I thought you put Spike in there.",
     // },
-    { name: "Gin", text: "Clean it up, and we'll do it again." },
+    // { name: "Gin", text: "Clean it up, and we'll do it again." },
     // { name: "Gin", text: "Shitty, shitty-fuckin-ass." },
   ];
   const onClickStartStartButton = () => {
@@ -492,6 +496,7 @@ function Play() {
                 //   myGame.current.scene.keys.game.loaded = false;
                 // }
                 if (myGame?.current?.scene?.keys?.game?.loaded) {
+                  startSound();
                   const myGameX = myGame.current.scene.keys.game as Game;
                   myGameX.loaded = false;
                   setShowLoaderIntervalFunction();
