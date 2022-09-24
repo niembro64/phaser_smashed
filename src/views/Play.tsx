@@ -125,9 +125,38 @@ function Play() {
     },
     scene: [Game],
   };
+  const setTimeoutQuotesLength: number = 300;
+  const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
-    { name: "Breezy", text: "The turtle will die." },
+    { name: "Breezy", text: "The Turtle Will Die." },
+    { name: "Breezy", text: "Oh, is it? Oh cool. Ur soo cool." },
+    { name: "Lau", text: "I'm sorry, I didn't know it was gonna happen." },
     { name: "TR3", text: "Smashed." },
+    {
+      name: "TR3",
+      text: "How am I supposed to make more than that... shit... happen?",
+    },
+    // { name: "Chadams", text: "AAAYYYUUUGGGGHHHH!!" },
+    { name: "Chadams", text: "Two Shots. Twooo Shots." },
+    { name: "Chadams", text: "Spike Enerjeaoah." },
+    { name: "Chadams", text: "Stop breakin' shit." },
+    { name: "Chadams", text: "Is there no one else?" },
+    { name: "Eddie-Z", text: "He'll do it again, yeah!" },
+    // { name: "Deen Davis Jr.", text: "VIDEOTAPE MA-SELF FUCKIN YOU UP!" },
+    {
+      name: "DDj",
+      text: "It's Safe to Say We're Not Going to the Bars Tonite.",
+    },
+    {
+      name: "DDj",
+      text: "I can fight you one-handed.",
+    },
+    {
+      name: "DDj",
+      text: "I thought you put Spike in there.",
+    },
+    { name: "Gin", text: "Clean it up, and we'll do it again." },
+    { name: "Gin", text: "Shitty, Shitty-fuckin-ass." },
   ];
 
   const onClickStartStartButton = () => {
@@ -146,9 +175,12 @@ function Play() {
       }
     });
     let newSmashConfig = { players: [...newPlayers] };
-    myGame.current = new Phaser.Game(config);
-    myGame.current.registry.set("parentContext", Play);
-    myGame.current.registry.set("smashConfig", newSmashConfig);
+    setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
+    setTimeout(() => {
+      myGame.current.registry.set("parentContext", Play);
+      myGame.current.registry.set("smashConfig", newSmashConfig);
+      myGame.current = new Phaser.Game(config);
+    }, setTimeoutQuotesLength);
   };
 
   const onClickStartOnOffButtons = (
@@ -334,8 +366,8 @@ function Play() {
             </div>
           </div>
           <img className="loadingTable" src="/images/table.png" alt="table" />
-          <p className="firstLoaderP">{quotes[0].text}</p>
-          <p>- {quotes[0].name}</p>
+          <p className="firstLoaderP">{quotes[quotesRandomNumber].text}</p>
+          <p className="secondLoaderP">- {quotes[quotesRandomNumber].name}</p>
         </div>
       )}
       <div className="phaser-container" id="phaser-container"></div>
@@ -364,11 +396,7 @@ function Play() {
                             cPlayer.characterId.toString() +
                             "_cropped.png"
                           }
-                          // style={{ transform: Scale({cPlayer.scale}) }}
-                          // height={`100 * cPlayer.scale`}
                           width={(50 * cPlayer.scale).toString() + "%"}
-                          // width={`120`}
-                          // width={{cPlayer.scale}  * 2}
                           alt="char"
                         />
                       </div>
@@ -437,16 +465,22 @@ function Play() {
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
-                onClickPlayNavButtons("ReStart");
-                const myGameX = myGame.current.scene.keys.game as Game;
-
-                let newSmashConfig = JSON.parse(
-                  JSON.stringify(myGameX.smashConfig)
-                );
-                myGame.current.destroy(true);
-                myGame.current = new Phaser.Game(config);
-                myGame.current.registry.set("parentContext", Play);
-                myGame.current.registry.set("smashConfig", newSmashConfig);
+                if (myGame.current) {
+                  setQuotesRandomNumber(
+                    Math.floor(Math.random() * quotes.length)
+                  );
+                  onClickPlayNavButtons("ReStart");
+                  const myGameX = myGame.current.scene.keys.game as Game;
+                  let newSmashConfig = JSON.parse(
+                    JSON.stringify(myGameX.smashConfig)
+                  );
+                  myGame.current.destroy(true);
+                  setTimeout(() => {
+                    myGame.current.registry.set("parentContext", Play);
+                    myGame.current.registry.set("smashConfig", newSmashConfig);
+                    myGame.current = new Phaser.Game(config);
+                  }, setTimeoutQuotesLength);
+                }
               }}
             >
               <span>ReStart</span>
