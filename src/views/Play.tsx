@@ -125,7 +125,7 @@ function Play() {
     },
     scene: [Game],
   };
-  const setTimeoutQuotesLength: number = 300;
+  const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
     { name: "Breezy", text: "The Turtle Will Die." },
@@ -176,10 +176,11 @@ function Play() {
     });
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
-    setTimeout(() => {}, setTimeoutQuotesLength);
-    myGame.current = new Phaser.Game(config);
-    myGame.current.registry.set("parentContext", Play);
-    myGame.current.registry.set("smashConfig", newSmashConfig);
+    setTimeout(() => {
+      myGame.current = new Phaser.Game(config);
+      myGame.current.registry.set("parentContext", Play);
+      myGame.current.registry.set("smashConfig", newSmashConfig);
+    }, setTimeoutQuotesLength);
   };
 
   const onClickStartOnOffButtons = (
@@ -475,9 +476,9 @@ function Play() {
                   );
                   myGame.current.destroy(true);
                   setTimeout(() => {
+                    myGame.current = new Phaser.Game(config);
                     myGame.current.registry.set("parentContext", Play);
                     myGame.current.registry.set("smashConfig", newSmashConfig);
-                    myGame.current = new Phaser.Game(config);
                   }, setTimeoutQuotesLength);
                 }
               }}
