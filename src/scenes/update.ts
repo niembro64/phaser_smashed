@@ -44,10 +44,11 @@ import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
   setGameState(game, "game-state-play");
+  game.loaded = true;
 }
 
 export function update(game: Game, time: number, delta: number): void {
-  game.loaded = true;
+  // game.loaded = true;
   if (game.debug.setNumUpdateLoopsToSkip > 0) {
     game.debug.setNumUpdateLoopsToSkip--;
     return;
@@ -263,4 +264,5 @@ export function updatePlayers(game: Game): void {
   });
 
   // console.log("game.input.gamepad.total", game.input.gamepad.total);
+  // game.loaded = true;
 }

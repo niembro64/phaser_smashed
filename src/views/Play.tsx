@@ -77,6 +77,7 @@ function Play() {
   // let pauseSound = new Audio("../../public/sounds/mariopause.mp3");
   const [numClicks, setNumClicks] = useState(0);
   const [webState, setWebState] = useState<WebState>("start");
+  const [showLoader, setShowLoader] = useState(false);
   const [buttonsOnOff, setButtonsOnOff] = useState([
     { state: true },
     { state: true },
@@ -180,6 +181,22 @@ function Play() {
       myGame.current.registry.set("parentContext", Play);
       myGame.current.registry.set("smashConfig", newSmashConfig);
     }, setTimeoutQuotesLength);
+
+    setShowLoaderIntervalFunction();
+  };
+
+  const setShowLoaderIntervalFunction = () => {
+    setShowLoader(true);
+    const myInterval = setInterval(() => {
+      console.log(
+        "myGame?.current?.scene?.keys?.game?.loaded",
+        myGame?.current?.scene?.keys?.game?.loaded
+      );
+      if (myGame?.current?.scene?.keys?.game?.loaded) {
+        setShowLoader(false);
+        clearInterval(myInterval);
+      }
+    }, 100);
   };
 
   const onClickStartOnOffButtons = (
@@ -345,7 +362,7 @@ function Play() {
   return (
     <div className="overDiv">
       {/* <audio src={monkeysMusic} ref={monkeysMusic} /> */}
-      {webState !== "start" && (
+      {webState !== "start" && showLoader && (
         <div className="loader">
           <div className="loader-inner">
             <div className="loader-line-wrap">
@@ -455,6 +472,9 @@ function Play() {
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
+                if (myGame?.current?.scene?.keys?.game) {
+                  myGame.current.scene.keys.game.loaded = false;
+                }
                 onClickPlayNavButtons("Back");
                 setWebState("start");
                 setNumClicks(numClicks + 1);
@@ -468,9 +488,13 @@ function Play() {
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
+                // if (myGame?.current?.scene?.keys?.game) {
+                //   myGame.current.scene.keys.game.loaded = false;
+                // }
                 if (myGame?.current?.scene?.keys?.game?.loaded) {
                   const myGameX = myGame.current.scene.keys.game as Game;
                   myGameX.loaded = false;
+                  setShowLoaderIntervalFunction();
                   onClickPlayNavButtons("ReStart");
                   setQuotesRandomNumber(
                     Math.floor(Math.random() * quotes.length)
