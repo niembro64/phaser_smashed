@@ -467,12 +467,14 @@ function Play() {
             <button
               className="linkTag btn btn-outline-light"
               onClick={() => {
-                if (myGame.current) {
+                if (myGame?.current?.scene?.keys?.game?.loaded) {
+                  const myGameX = myGame.current.scene.keys.game as Game;
+                  myGameX.loaded = false;
+                  onClickPlayNavButtons("ReStart");
                   setQuotesRandomNumber(
                     Math.floor(Math.random() * quotes.length)
                   );
-                  onClickPlayNavButtons("ReStart");
-                  const myGameX = myGame.current.scene.keys.game as Game;
+
                   let newSmashConfig = JSON.parse(
                     JSON.stringify(myGameX.smashConfig)
                   );

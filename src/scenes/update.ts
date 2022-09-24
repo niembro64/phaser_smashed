@@ -47,6 +47,7 @@ export function setPreUpdate(game: Game): void {
 }
 
 export function update(game: Game, time: number, delta: number): void {
+  game.loaded = true;
   if (game.debug.setNumUpdateLoopsToSkip > 0) {
     game.debug.setNumUpdateLoopsToSkip--;
     return;

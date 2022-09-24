@@ -13,11 +13,11 @@ import {
 } from "./interfaces";
 import Play, { SmashConfig } from "../views/Play";
 
-
 export default class Game extends Phaser.Scene {
   connectionFunction(): void {
     console.log("PHASER CONNECTED");
   }
+  loaded: boolean = false;
 
   smashConfig: SmashConfig | null = null;
   // setGameState(game: Game, state: GameState): void {
