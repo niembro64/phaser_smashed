@@ -376,8 +376,9 @@ function Play() {
       {webState === "start" && (
         <div className="startClassDiv">
           <div className="startTitle">
-            {/* <h1>Title</h1> */}
-            <img src="images/smashTitle.png" alt="smash title" />
+            {/* <img src="images/smashTitle.png" alt="smash title" /> */}
+            <img src="images/smashed-gif-cropped.gif" alt="smash title" />
+            <h1>SMASHED</h1>
           </div>
           <div className="playerChoices">
             {smashConfig.players.map((cPlayer, cPlayerIndex) => {
