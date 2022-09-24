@@ -163,11 +163,19 @@ body {
   font-size: 1.3vw;
 }
 .popup > ul > li {
-  font-size: 1.3vw;
+  font-size: 1vw;
 }
 .popup > a {
   padding: 1.5% 4%;
   font-size: 1.3vw;
+  margin-bottom: 1%;
+  color: white;
+}
+.popup > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
 }
 .kirbyNiembro {
   margin: 1%;

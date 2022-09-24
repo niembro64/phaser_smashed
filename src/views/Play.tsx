@@ -576,24 +576,34 @@ function Play() {
               }}
             >
               <h1>Controllers</h1>
-              <p>You need at least two, ideally 4 controllers to play.</p>
-              <p>Some types of conotrollers don't work yet.</p>
+              {/* <h1>🚧</h1> */}
+              <p>USB controllers are required. </p>
               <a
-                className="linkTag btn btn-outline-light"
+                className="linkTag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 {/* <h4>See Other Projects</h4> */}
                 <span>Example: (2) SNES Controllers $12</span>
               </a>
               <a
-                className="linkTag btn btn-outline-light"
+                className="linkTag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 {/* <h4>See Other Projects</h4> */}
                 <span>Suggested: USB Hub/Extension $13</span>
               </a>
-
-              <h1>🚧</h1>
+              <p>Some types of controllers don't work yet.</p>
+              <div>
+                <ul>
+                  ✔️ Working:
+                  <li>iNNEXT SNES Wired USB</li>
+                  <li>Nintendo Switch Pro Controller</li>
+                </ul>
+                <ul>
+                  🚧 Don't Work (yet?):
+                  <li>Nintendo Switch Wired Controller</li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
@@ -625,10 +635,7 @@ function Play() {
                 alt="kirby"
               />
               <p>by NIEMBRO64</p>
-              <a
-                className="linkTag btn btn-outline-light"
-                href="http://niembro64.com/"
-              >
+              <a className="linkTag btn btn-dark" href="http://niembro64.com/">
                 {/* <h4>See Other Projects</h4> */}
                 <span>See Other Projects</span>
               </a>
