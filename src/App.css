@@ -180,7 +180,7 @@ body {
 .kirbyNiembro {
   margin: 1%;
 }
-.move {
+#move {
   width: 70%;
   background-color: rgba(128, 128, 128, 0.1);
   padding: 1% 5% 0% 5%;
@@ -191,7 +191,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.move > h5 {
+#move > h5 {
   font-size: 1.5vw;
 }
 .rulesOutline {

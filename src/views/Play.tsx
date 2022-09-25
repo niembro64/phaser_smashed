@@ -566,7 +566,7 @@ function Play() {
               <h1>Controls</h1>
               {characterMoves.map((charMove, charMoveIndex) => {
                 return (
-                  <div className="move" key={charMoveIndex}>
+                  <div id="move" key={charMoveIndex}>
                     <h5>{charMove.move}</h5>
                     <h5>
                       {charMove.button} {charMove.ready}
