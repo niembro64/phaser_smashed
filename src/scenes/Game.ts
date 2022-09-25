@@ -579,6 +579,7 @@ export default class Game extends Phaser.Scene {
           srcImage: "flame",
           mass: 1,
           scale: 0.4,
+          audio: null,
         },
         attackEnergy: {
           sprite: null,
@@ -706,6 +707,7 @@ export default class Game extends Phaser.Scene {
           srcImage: "sword",
           mass: 1,
           scale: 0.9,
+          audio: null,
         },
         attackEnergy: {
           sprite: null,
@@ -832,6 +834,7 @@ export default class Game extends Phaser.Scene {
           srcImage: "flame",
           mass: 1,
           scale: 0.4,
+          audio: null,
         },
         attackEnergy: {
           sprite: null,
@@ -959,6 +962,7 @@ export default class Game extends Phaser.Scene {
           srcImage: "flame",
           mass: 1,
           scale: 0.4,
+          audio: null,
         },
         attackEnergy: {
           sprite: null,
@@ -1085,6 +1089,7 @@ export default class Game extends Phaser.Scene {
           srcImage: "flame",
           mass: 1,
           scale: 0.6,
+          audio: null,
         },
         attackEnergy: {
           sprite: null,
@@ -1211,6 +1216,7 @@ export default class Game extends Phaser.Scene {
           srcImage: "flame",
           mass: 1,
           scale: 1.3,
+          audio: null,
         },
         attackEnergy: {
           sprite: null,

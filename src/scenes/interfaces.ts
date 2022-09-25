@@ -236,6 +236,7 @@ export interface AttackPhysical {
   srcImage: string;
   mass: number;
   scale: number;
+  audio: any;
 }
 
 export interface AttackEnergy {

@@ -114,6 +114,7 @@ export function setAttackPhysicalState(
   switch (attackPhysical.state.name) {
     case "attackphysical-state-on":
       attackPhysical.sprite.setActive(true).setVisible(true);
+      attackPhysical.audio.play();
       break;
     case "attackphysical-state-cooldown":
       attackPhysical.sprite.setActive(false).setVisible(false);

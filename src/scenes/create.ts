@@ -8,7 +8,7 @@ import { setPreUpdate } from "./update";
 
 export function create(game: Game) {
   createDataMatrices(game);
-  createSounds(game);
+  createSoundsGame(game);
   createBackground(game);
   createBackgroundTitles(game);
   createFlag(game);
@@ -141,7 +141,7 @@ export function createPlatforms(game: Game): void {
   }
 }
 
-export function createSounds(game: Game): void {
+export function createSoundsGame(game: Game): void {
   game.SOUND_INTRO = game.sound.add("intro", { volume: 0.1 });
   game.SOUND_GUN = game.sound.add("gun", { volume: 0.6 });
   game.SOUND_HIT = game.sound.add("hit", { volume: 0.25 });
@@ -335,6 +335,8 @@ export function createPlayers(game: Game): void {
       game.INITIAL.POSITION.PLAYER_Y,
       player.char.name
     );
+
+    player.char.attackPhysical.audio = game.sound.add("gun", { volume: 0.6 });
 
     player.emitterLight.startFollow(player.char.sprite);
     player.emitterDark.startFollow(player.char.sprite);
