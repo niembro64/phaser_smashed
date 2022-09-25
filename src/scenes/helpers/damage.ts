@@ -1,8 +1,71 @@
 import Game from "../Game";
-import { AttackEnergy, NormalizedVector, Player } from "../interfaces";
+import {
+  AttackEnergy,
+  AttackPhysical,
+  NormalizedVector,
+  Player,
+} from "../interfaces";
 import { hitbackFly } from "./movement";
+import {
+  getHasGameDurationPassedAttack,
+  setAttackPhysicalState,
+  setPlayerState,
+} from "./state";
 
-export function onHitHandler(
+export function onHitHandlerAttackPhysical(
+  player: Player,
+  playerIndex: number,
+  attackPhysical: AttackPhysical,
+  j: number,
+  damage: number,
+  game: Game
+): void {
+  if (player.state.name !== "player-state-alive") {
+    return;
+  }
+
+  if (
+    game.players[j].char.attackPhysical.state.name !== "attackphysical-state-on"
+  ) {
+    return;
+  }
+
+  setPlayerState(player, playerIndex, "player-state-hurt", game);
+
+  game.overlappingPlayerIAttackPhysicalJ[playerIndex][j] = true;
+
+  for (var bj = 0; bj < game.players.length; bj++) {
+    if (bj === j) {
+      game.wasLastHitByMatrix[playerIndex][bj] = true;
+      game.numberHitByMatrix[playerIndex][j]++;
+    } else {
+      game.wasLastHitByMatrix[playerIndex][bj] = false;
+    }
+  }
+
+  let vector = getNormalizedVector(attackPhysical, player);
+
+  player.char.damage += damage;
+
+  if (game.debug.setDefaultAttackHitbackOverride) {
+    hitbackFly(
+      player,
+      game,
+      game.DEFAULT_ATTACK_HITBACK.x * vector.x,
+      game.DEFAULT_ATTACK_HITBACK.y * vector.y
+    );
+    return;
+  }
+
+  hitbackFly(
+    player,
+    game,
+    attackPhysical.hitback.x * vector.x,
+    attackPhysical.hitback.y * vector.y
+  );
+}
+
+export function onHitHandlerAttackEnergy(
   player: Player,
   playerIndex: number,
   attackEnergy: AttackEnergy,
@@ -13,7 +76,7 @@ export function onHitHandler(
   if (player.state.name !== "player-state-alive") {
     return;
   }
-  game.currentlyOverlappingSpritesMatrix[playerIndex][j] = true;
+  game.overlappingPlayerIAttackEnergyJ[playerIndex][j] = true;
 
   for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {
@@ -117,7 +180,7 @@ export function setResetDamage(player: Player): void {
 // }
 
 export function getNormalizedVector(
-  attack: AttackEnergy,
+  attack: AttackEnergy | AttackPhysical,
   player: Player
 ): NormalizedVector {
   let newX = player.char.sprite.x - attack.sprite.x;
@@ -125,4 +188,45 @@ export function getNormalizedVector(
   let newRatio = Math.sqrt(newX * newX + newY * newY);
 
   return { x: newX / newRatio, y: newY / newRatio };
+}
+
+export function updateAttackPhysicalSwitch(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  let attackPhysical = player.char.attackPhysical;
+
+  switch (attackPhysical.state.name) {
+    case "attackphysical-state-on":
+      if (!player.gamepad.A && player.padPrev.A) {
+        if (
+          getHasGameDurationPassedAttack(player.char.attackPhysical, 500, game)
+        ) {
+          setAttackPhysicalState(
+            player.char.attackPhysical,
+            playerIndex,
+            "attackphysical-state-off",
+            game
+          );
+        }
+      }
+      break;
+    case "attackphysical-state-off":
+      if (player.gamepad.A && !player.padPrev.A) {
+        setAttackPhysicalState(
+          player.char.attackPhysical,
+          playerIndex,
+          "attackphysical-state-on",
+          game
+        );
+      }
+  }
+
+  setAttackPhysicalState(
+    player.char.attackPhysical,
+    playerIndex,
+    "attackphysical-state-on",
+    game
+  );
 }

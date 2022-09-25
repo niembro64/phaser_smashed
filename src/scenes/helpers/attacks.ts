@@ -119,3 +119,13 @@ export function updatePhysicalAttackFollowPlayers(game: Game): void {
 }
 
 // player.char.sprite.body.velocity.y
+
+export function updateAttackPhysicalVisually(player: Player, game: Game): void {
+  if (player.gamepad.A) {
+    player.char.attackPhysical.sprite.setActive(true).setVisible(true);
+  } else {
+    player.char.attackPhysical.sprite
+      .setActive(false)
+      .setVisible(false);
+  }
+}

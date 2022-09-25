@@ -1,5 +1,8 @@
 import Game from "./Game";
-import { onHitHandler } from "./helpers/damage";
+import {
+  onHitHandlerAttackEnergy,
+  onHitHandlerAttackPhysical,
+} from "./helpers/damage";
 import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 import { setPreUpdate } from "./update";
 
@@ -17,12 +20,13 @@ export function create(game: Game) {
   createSplashRuleFinished(game);
   createScoreboard(game);
   createCircles(game);
+  createAttackPhysicals(game);
   createAttackEnergies(game);
   createPlayers(game);
-  createAttackPhysicals(game);
   createScoreboardReady(game);
   createCameras(game);
   createPlayersCollide(game);
+  createAttackPhysicalCollideWithPlayers(game);
   createAttackEnergyCollideWithPlayers(game);
   createHitboxOverlap(game);
   createEndDataMatrices(game);
@@ -90,19 +94,22 @@ export function createEndDataMatrices(game: Game): void {
 }
 
 export function createDataMatrices(game: Game): void {
-  game.currentlyOverlappingSpritesMatrix = [];
+  game.overlappingPlayerIAttackPhysicalJ = [];
+  game.overlappingPlayerIAttackEnergyJ = [];
   game.wasLastHitByMatrix = [];
   game.numberHitByMatrix = [];
   game.numberKilledByMatrix = [];
   game.numberShotsTakenByMeMatrix = [];
   for (let i = 0; i < game.players.length; i++) {
-    game.currentlyOverlappingSpritesMatrix.push([]);
+    game.overlappingPlayerIAttackPhysicalJ.push([]);
+    game.overlappingPlayerIAttackEnergyJ.push([]);
     game.wasLastHitByMatrix.push([]);
     game.numberHitByMatrix.push([]);
     game.numberKilledByMatrix.push([]);
     game.numberShotsTakenByMeMatrix.push([]);
     for (let j = 0; j < game.players.length; j++) {
-      game.currentlyOverlappingSpritesMatrix[i].push(false);
+      game.overlappingPlayerIAttackPhysicalJ[i].push(false);
+      game.overlappingPlayerIAttackEnergyJ[i].push(false);
       game.wasLastHitByMatrix[i].push(false);
       game.numberHitByMatrix[i].push(0);
       game.numberKilledByMatrix[i].push(0);
@@ -211,10 +218,35 @@ export function createHitboxOverlap(game: Game): void {
       if (player !== pj) {
         game.physics.add.overlap(
           player.char.sprite,
+          pj.char.attackPhysical.sprite,
+          function () {
+            if (game.debug.setDefaultAttackDamageOverride) {
+              onHitHandlerAttackPhysical(
+                player,
+                playerIndex,
+                pj.char.attackPhysical,
+                j,
+                game.DEFAULT_ATTACK_DAMAGE,
+                game
+              );
+              return;
+            }
+            onHitHandlerAttackPhysical(
+              player,
+              playerIndex,
+              pj.char.attackPhysical,
+              j,
+              pj.char.attackPhysical.damage,
+              game
+            );
+          }
+        );
+        game.physics.add.overlap(
+          player.char.sprite,
           pj.char.attackEnergy.sprite,
           function () {
             if (game.debug.setDefaultAttackDamageOverride) {
-              onHitHandler(
+              onHitHandlerAttackEnergy(
                 player,
                 playerIndex,
                 pj.char.attackEnergy,
@@ -224,7 +256,7 @@ export function createHitboxOverlap(game: Game): void {
               );
               return;
             }
-            onHitHandler(
+            onHitHandlerAttackEnergy(
               player,
               playerIndex,
               pj.char.attackEnergy,
@@ -383,6 +415,21 @@ export function createAttackEnergies(game: Game): void {
   });
 }
 
+export function createAttackPhysicalCollideWithPlayers(game: Game): void {
+  if (!game.debug.setCollidePlayerPhysicalAttacks) {
+    return;
+  }
+  game.players.forEach((player, playerIndex) => {
+    for (let i = 0; i < game.players.length; i++) {
+      if (playerIndex !== i) {
+        game.physics.add.collider(
+          player.char.attackPhysical.sprite,
+          game.players[i].char.sprite
+        );
+      }
+    }
+  });
+}
 export function createAttackEnergyCollideWithPlayers(game: Game): void {
   if (!game.debug.setCollidePlayerEnergyAttacks) {
     return;

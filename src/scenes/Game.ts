@@ -12,6 +12,7 @@ import {
   GameStateWithTime,
 } from "./interfaces";
 import { SmashConfig } from "../views/Play";
+import { timeStamp } from "console";
 
 export default class Game extends Phaser.Scene {
   connectionFunction(): void {
@@ -41,17 +42,18 @@ export default class Game extends Phaser.Scene {
   // PLAYER_CHOICES: number[] = [5, 5, 5, 5];
 
   debug: Debug = {
-    setLevel: 4,
+    setLevel: 4, //012345
     setCamerasActive: true,
     setCamerasVisible: false,
     setCollidePlayerPlayers: false,
+    setCollidePlayerPhysicalAttacks: false,
     setCollidePlayerEnergyAttacks: false,
     setEnergyAttackWrapScreen: false,
     setPlayerColorVisible: true,
     setPauseGameMusicActive: true,
     setWallJumpsActive: true,
     setBackgroundMusicActive: true,
-    setBackgroundMusicNumber: 2,
+    setBackgroundMusicNumber: 0, // 012
     setDefaultAttackDamageOverride: false,
     setDefaultAttackHitbackOverride: false,
     setPlayerColorFiltersActive: false,
@@ -124,7 +126,7 @@ export default class Game extends Phaser.Scene {
     ENERJA_UGH: "/enerja/ugh.mp3",
     BGM_MII: "wii_short.wav",
     BGM_DREAM: "kirbyloop.wav",
-    BGM_MONKEY: "/na/monkeys2022.wav",
+    BGM_MONKEY: "/na/monkeys2.wav",
     BGM_ROYKSOP: "/na/royksop_macumba_05loop.wav",
   };
 
@@ -484,7 +486,8 @@ export default class Game extends Phaser.Scene {
 
   // i : player
   // j : attacks from other players
-  currentlyOverlappingSpritesMatrix: boolean[][] = [];
+  overlappingPlayerIAttackPhysicalJ: boolean[][] = [];
+  overlappingPlayerIAttackEnergyJ: boolean[][] = [];
   wasLastHitByMatrix: boolean[][] = [];
   numberHitByMatrix: number[][] = [];
   numberKilledByMatrix: number[][] = [];
@@ -563,8 +566,14 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          state: {
+            name: "attackphysical-state-off",
+            gameStamp: 0,
+            timeStamp: 0,
+          },
           posFromCenter: { x: 20, y: 0 },
           damage: 50,
+          hitback: { x: 0.2, y: 0 },
           srcImage: "flame",
           mass: 1,
           scale: 0.4,
@@ -682,18 +691,24 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
-          posFromCenter: { x: 50, y: 3 },
+          state: {
+            name: "attackphysical-state-off",
+            gameStamp: 0,
+            timeStamp: 0,
+          },
+          posFromCenter: { x: 40, y: 3 },
           damage: 50,
-          srcImage: "flame",
+          hitback: { x: 0.2, y: 0 },
+          srcImage: "sword",
           mass: 1,
-          scale: 0.4,
+          scale: 0.9,
         },
         attackEnergy: {
           sprite: null,
           state: "released",
           timestampThrow: 0,
           durationBetweenThrows: 1000,
-          posFromCenter: { x: 50, y: 3 },
+          posFromCenter: { x: 40, y: 3 },
           friction: {
             ground: 1,
             wallInvertRotation: false,
@@ -708,7 +723,7 @@ export default class Game extends Phaser.Scene {
           walls: false,
           damage: 20,
           hitback: { x: 0.2, y: 0 },
-          scale: 1,
+          scale: 0.9,
           mass: 0.5,
           allowVelocityY: false,
           rotation: {
@@ -800,8 +815,14 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          state: {
+            name: "attackphysical-state-off",
+            gameStamp: 0,
+            timeStamp: 0,
+          },
           posFromCenter: { x: 20, y: 0 },
           damage: 50,
+          hitback: { x: 0.2, y: 0 },
           srcImage: "flame",
           mass: 1,
           scale: 0.4,
@@ -919,8 +940,14 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          state: {
+            name: "attackphysical-state-off",
+            gameStamp: 0,
+            timeStamp: 0,
+          },
           posFromCenter: { x: 15, y: 0 },
           damage: 50,
+          hitback: { x: 0.2, y: 0 },
           srcImage: "flame",
           mass: 1,
           scale: 0.4,
@@ -1037,8 +1064,14 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          state: {
+            name: "attackphysical-state-off",
+            gameStamp: 0,
+            timeStamp: 0,
+          },
           posFromCenter: { x: 25, y: 0 },
           damage: 50,
+          hitback: { x: 0.2, y: 0 },
           srcImage: "flame",
           mass: 1,
           scale: 0.6,
@@ -1155,8 +1188,14 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          state: {
+            name: "attackphysical-state-off",
+            gameStamp: 0,
+            timeStamp: 0,
+          },
           posFromCenter: { x: 50, y: 0 },
           damage: 50,
+          hitback: { x: 0.2, y: 0 },
           srcImage: "flame",
           mass: 1,
           scale: 1.3,

@@ -13,6 +13,9 @@ export type PlayerState =
   | "player-state-alive"
   | "player-state-dead"
   | "player-state-hurt";
+export type AttackState =
+  | "attackphysical-state-on"
+  | "attackphysical-state-off";
 
 export type SplashName =
   | "splash-black"
@@ -104,6 +107,11 @@ export interface ColorCircle {
   colorString: string;
 }
 
+export interface AttackStateWithTime {
+  name: AttackState;
+  gameStamp: number;
+  timeStamp: number;
+}
 export interface PlayerStateWithTime {
   name: PlayerState;
   gameStamp: number;
@@ -218,8 +226,10 @@ export interface PosFromCenter {
 
 export interface AttackPhysical {
   sprite: any | Phaser.GameObjects.Sprite;
+  state: AttackStateWithTime;
   posFromCenter: PosFromCenter;
   damage: number;
+  hitback: Hitback;
   srcImage: string;
   mass: number;
   scale: number;
@@ -269,6 +279,7 @@ export interface Debug {
   setCamerasActive: boolean;
   setCamerasVisible: boolean;
   setCollidePlayerPlayers: boolean;
+  setCollidePlayerPhysicalAttacks: boolean;
   setCollidePlayerEnergyAttacks: boolean;
   setEnergyAttackWrapScreen: boolean;
   setPlayerColorVisible: boolean;

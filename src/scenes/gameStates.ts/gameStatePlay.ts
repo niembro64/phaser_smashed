@@ -15,7 +15,7 @@ import {
   updatePadPreviousAndDebounced,
 } from "../helpers/pad";
 import { updateAllSpriteFilters, updateSpritesFlipX } from "../helpers/sprites";
-import { updateResetAllHitboxes, updateGameTime } from "../helpers/state";
+import { updateResetAllHitboxesAttackEnergy, updateGameTime } from "../helpers/state";
 import { updatePlayers } from "../update";
 
 export function updateGameStatePlay(game: Game, time: number, delta: number): void {
@@ -38,5 +38,5 @@ export function updateGameStatePlay(game: Game, time: number, delta: number): vo
 
   // AFTER PLAYERS
   updatePadPreviousAndDebounced(game);
-  updateResetAllHitboxes(game);
+  updateResetAllHitboxesAttackEnergy(game);
 }

@@ -18,17 +18,17 @@ import {
 } from "./helpers/movement";
 import {
   setPlayerState,
-  getHasNumDeadIncrased,
-  getHasGameDurationPassed,
-  getIsPlayerHit,
+  getHasNumDeadIncreased,
+  getHasGameDurationPassedPlayer,
+  getIsPlayerHitAttackEnergy,
   getLongEnoughTimeDuration,
   updateNumCurrentlyDead,
   updateTimeTime,
   updateGameTime,
   setGameState,
 } from "./helpers/state";
-import {} from "./helpers/damage";
-import { updatePhysicalAttackFollowPlayers, updateUpB } from "./helpers/attacks";
+import { updateAttackPhysicalSwitch } from "./helpers/damage";
+import { updateAttackPhysicalVisually, updateUpB } from "./helpers/attacks";
 import { getIsFirstBlood, getIsScreenClear } from "./helpers/drinking";
 import {
   setMusicPlay,
@@ -82,7 +82,7 @@ export function update(game: Game, time: number, delta: number): void {
       ////////////////////////////////
       if (
         getIsScreenClear(game) &&
-        getHasNumDeadIncrased(game)
+        getHasNumDeadIncreased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         setGameState(game, "game-state-screen-clear");
@@ -93,7 +93,7 @@ export function update(game: Game, time: number, delta: number): void {
       ////////////////////////////////
       if (
         getIsFirstBlood(game) &&
-        getHasNumDeadIncrased(game)
+        getHasNumDeadIncreased(game)
         // longEnoughGame(game.DURATION_PLAYER_DEAD, game)
       ) {
         setGameState(game, "game-state-first-blood");
@@ -178,7 +178,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (getHasGameDurationPassed(player, game.DURATION_GAME_START, game)) {
+        if (getHasGameDurationPassedPlayer(player, game.DURATION_GAME_START, game)) {
           setPlayerState(player, playerIndex, "player-state-alive", game);
         }
 
@@ -196,12 +196,20 @@ export function updatePlayers(game: Game): void {
         updateJump(player, game);
         updateControllerMovement(player, game);
         updateUpB(player, game);
-    
+        updateAttackPhysicalVisually(player, game);
+
+        // UPDATE ATTACK PHYSICAL
+        updateAttackPhysicalSwitch(player, playerIndex, game);
 
         ////////////////////////////////
-        ///////// hit => hurt
+        ///////// attackPhysical hit => hurt
+        ///////// NOTE: handled in onHitHandlerAttackPhysical()
         ////////////////////////////////
-        if (getIsPlayerHit(playerIndex, game)) {
+
+        ////////////////////////////////
+        ///////// attackEnergy hit => hurt
+        ////////////////////////////////
+        if (getIsPlayerHitAttackEnergy(playerIndex, game)) {
           setPlayerState(player, playerIndex, "player-state-hurt", game);
         }
 
@@ -232,7 +240,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (
           !getIsPlayerOffscreen(player, game) &&
-          getHasGameDurationPassed(player, game.DURATION_PLAYER_HURT, game)
+          getHasGameDurationPassedPlayer(player, game.DURATION_PLAYER_HURT, game)
         ) {
           setPlayerState(player, playerIndex, "player-state-alive", game);
         }
@@ -254,7 +262,7 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (getHasGameDurationPassed(player, game.DURATION_PLAYER_DEAD, game)) {
+        if (getHasGameDurationPassedPlayer(player, game.DURATION_PLAYER_DEAD, game)) {
           setPlayerState(player, playerIndex, "player-state-alive", game);
         }
 

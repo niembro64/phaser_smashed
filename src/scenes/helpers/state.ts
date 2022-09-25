@@ -1,8 +1,26 @@
 import Game from "../Game";
-import { GameState, Player, PlayerState } from "../interfaces";
+import {
+  AttackPhysical,
+  AttackState,
+  GameState,
+  Player,
+  PlayerState,
+} from "../interfaces";
 import { setPhysicsAttackEnergyOn } from "./attacks";
-import { setActiveHurtEmitterOff, setActiveHurtEmitterOn, setOnDeadUpdateMatrix, setResetDamage, setVisibleHurtEmitterOff, setVisibleHurtEmitterOn } from "./damage";
-import { getIsFirstBlood, getIsScreenClear, setAddShotToMatrixFirstBlood, setAddToShotsMatrixScreenClear } from "./drinking";
+import {
+  setActiveHurtEmitterOff,
+  setActiveHurtEmitterOn,
+  setOnDeadUpdateMatrix,
+  setResetDamage,
+  setVisibleHurtEmitterOff,
+  setVisibleHurtEmitterOn,
+} from "./damage";
+import {
+  getIsFirstBlood,
+  getIsScreenClear,
+  setAddShotToMatrixFirstBlood,
+  setAddToShotsMatrixScreenClear,
+} from "./drinking";
 import { setGravityFalse, setGravityTrue, setRespawn } from "./movement";
 import { setPhysicsPause, setPhysicsResume } from "./physics";
 import {
@@ -76,6 +94,25 @@ export function setGameState(game: Game, state: GameState): void {
   }
 }
 
+export function setAttackPhysicalState(
+  attackPhysical: AttackPhysical,
+  playerIndex: number,
+  state: AttackState,
+  game: Game
+): void {
+  attackPhysical.state.name = state;
+  attackPhysical.state.gameStamp = game.gameNanoseconds;
+  attackPhysical.state.timeStamp = game.timeNanoseconds;
+  console.log("APHYSICAL STATE", attackPhysical.srcImage, attackPhysical.state);
+
+  switch (attackPhysical.state.name) {
+    case "attackphysical-state-on":
+      break;
+    case "attackphysical-state-off":
+      break;
+  }
+}
+
 export function setPlayerState(
   player: Player,
   playerIndex: number,
@@ -132,7 +169,7 @@ export function setPlayerState(
 
 // }
 
-export function getHasNumDeadIncrased(game: Game): boolean {
+export function getHasNumDeadIncreased(game: Game): boolean {
   if (game.numDead === game.numDeadPrev) {
     return false;
   }
@@ -152,17 +189,39 @@ export function updateNumCurrentlyDead(game: Game): void {
   }
 }
 
-export function updateResetAllHitboxes(game: Game): void {
+export function updateResetAllHitboxesAttackPhysical(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((p, i) => {
-      game.currentlyOverlappingSpritesMatrix[playerIndex][i] = false;
+      game.overlappingPlayerIAttackPhysicalJ[playerIndex][i] = false;
     });
   });
 }
 
-export function getIsPlayerHit(playerIndex: number, game: Game): boolean {
+export function getIsPlayerHitAttackPhysical(
+  playerIndex: number,
+  game: Game
+): boolean {
   for (let j = 0; j < game.players.length; j++) {
-    if (game.currentlyOverlappingSpritesMatrix[playerIndex][j]) {
+    if (game.overlappingPlayerIAttackPhysicalJ[playerIndex][j]) {
+      return true;
+    }
+  }
+  return false;
+}
+export function updateResetAllHitboxesAttackEnergy(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    game.players.forEach((p, i) => {
+      game.overlappingPlayerIAttackEnergyJ[playerIndex][i] = false;
+    });
+  });
+}
+
+export function getIsPlayerHitAttackEnergy(
+  playerIndex: number,
+  game: Game
+): boolean {
+  for (let j = 0; j < game.players.length; j++) {
+    if (game.overlappingPlayerIAttackEnergyJ[playerIndex][j]) {
       return true;
     }
   }
@@ -220,12 +279,22 @@ export function updateTimeTime(game: Game, time: number, delta: number): void {
   game.timeClock.seconds = Math.floor(game.timeSecondsClock % 60);
 }
 
-export function getHasGameDurationPassed(
+export function getHasGameDurationPassedPlayer(
   player: Player,
   duration: number,
   game: Game
 ): boolean {
   if (game.gameNanoseconds > player.state.gameStamp + duration) {
+    return true;
+  }
+  return false;
+}
+export function getHasGameDurationPassedAttack(
+  attack: AttackPhysical,
+  duration: number,
+  game: Game
+): boolean {
+  if (game.gameNanoseconds > attack.state.gameStamp + duration) {
     return true;
   }
   return false;
