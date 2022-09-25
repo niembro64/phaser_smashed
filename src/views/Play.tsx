@@ -121,7 +121,7 @@ function Play() {
       default: "arcade",
       arcade: {
         gravity: { y: 3000 },
-        debug: true,
+        debug: false,
       },
     },
     scene: [Game],
@@ -130,10 +130,10 @@ function Play() {
   // const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
-    { name: "Breezy", text: "The Turtle Will Die." },
+    { name: "Breezy", text: "The turtle will die." },
     // { name: "Breezy", text: "Oh, is it? Oh cool. Ur soo cool." },
     // { name: "Lau", text: "I'm sorry, I didn't know it was gonna happen." },
-    { name: "TR3", text: "Smashed." },
+    { name: "TR3", text: "Smashed!" },
     {
       name: "TR3",
       text: "How am I supposed to make more than that... shit... happen?",
@@ -151,7 +151,7 @@ function Play() {
     },
     {
       name: "DDj",
-      text: "... yes you are.",
+      text: "...yes you are.",
     },
     // {
     //   name: "DDj",

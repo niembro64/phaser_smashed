@@ -280,7 +280,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     player.padPrev.X &&
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
-        player.char.attackEnergy.durationBetweenThrows &&
+        player.char.attackEnergy.durationCooldown &&
     player.char.attackEnergy.state === "held"
   ) {
     game.SOUND_GUN.play();
@@ -295,7 +295,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     (player.gamepad?.X || player.padPrev.X || player.padDebounced.X) &&
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
-        player.char.attackEnergy.durationBetweenThrows
+        player.char.attackEnergy.durationCooldown
   ) {
     player.char.attackEnergy.state = "held";
     setPhysicsAttackEnergyOff(player);

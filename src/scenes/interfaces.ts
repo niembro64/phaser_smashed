@@ -228,6 +228,8 @@ export interface PosFromCenter {
 export interface AttackPhysical {
   sprite: any | Phaser.GameObjects.Sprite;
   state: AttackStateWithTime;
+  durationAttack: number;
+  durationCooldown: number;
   posFromCenter: PosFromCenter;
   damage: number;
   hitback: Hitback;
@@ -240,7 +242,7 @@ export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
   state: "held" | "released";
   timestampThrow: number;
-  durationBetweenThrows: number;
+  durationCooldown: number;
   posFromCenter: PosFromCenter;
   friction: AttackEnergyFriction;
   vel: Velocity;

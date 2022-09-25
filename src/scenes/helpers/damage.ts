@@ -200,10 +200,14 @@ export function updateAttackPhysicalSwitch(
   switch (attackPhysical.state.name) {
     case "attackphysical-state-on":
       if (
-        getHasGameDurationPassedAttack(player.char.attackPhysical, 100, game)
+        getHasGameDurationPassedAttack(
+          attackPhysical,
+          attackPhysical.durationAttack,
+          game
+        )
       ) {
         setAttackPhysicalState(
-          player.char.attackPhysical,
+          attackPhysical,
           playerIndex,
           "attackphysical-state-cooldown",
           game
@@ -212,10 +216,14 @@ export function updateAttackPhysicalSwitch(
       break;
     case "attackphysical-state-cooldown":
       if (
-        getHasGameDurationPassedAttack(player.char.attackPhysical, 500, game)
+        getHasGameDurationPassedAttack(
+          attackPhysical,
+          attackPhysical.durationCooldown,
+          game
+        )
       ) {
         setAttackPhysicalState(
-          player.char.attackPhysical,
+          attackPhysical,
           playerIndex,
           "attackphysical-state-off",
           game
@@ -225,7 +233,7 @@ export function updateAttackPhysicalSwitch(
     case "attackphysical-state-off":
       if (player.gamepad.A && !player.padPrev.A) {
         setAttackPhysicalState(
-          player.char.attackPhysical,
+          attackPhysical,
           playerIndex,
           "attackphysical-state-on",
           game
