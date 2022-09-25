@@ -332,7 +332,9 @@ export function createPlayers(game: Game): void {
     }
 
     player.char.sprite.setScale(player.char.scale);
-    player.char.sprite.flipX = !player.char.initializeCharPosition.lookingRight;
+    // player.char.sprite.flipX = !player.char.initializeCharPosition.lookingRight;
+    player.char.sprite.flipX = playerIndex % 2 ? true : false;
+
     player.char.sprite.setCollideWorldBounds(false);
 
     game.physics.add.collider(player.char.sprite, game.PLATFORMS);

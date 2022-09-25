@@ -609,7 +609,7 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(game: Game): void
         // );
       }
       if (player.gamepad.B) {
-        console.log(player.playerNumber, "B");
+        console.log(player.playerId, "B");
         // // console.log(player.playerNumber, player.gamepad.id);
         // // console.log(
         // //   player.playerNumber,
@@ -627,43 +627,43 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(game: Game): void
         // }
       }
       if (player.gamepad.A) {
-        console.log(player.playerNumber, "A");
+        console.log(player.playerId, "A");
       }
       if (player.gamepad.X) {
-        console.log(player.playerNumber, "X");
+        console.log(player.playerId, "X");
       }
       if (player.gamepad.Y) {
-        console.log(player.playerNumber, "Y");
+        console.log(player.playerId, "Y");
         // player.char.fast = 2;
       }
 
       //  D Pad
       if (player.gamepad.down) {
-        console.log(player.playerNumber, "down");
+        console.log(player.playerId, "down");
       }
       if (player.gamepad.up) {
-        console.log(player.playerNumber, "up");
+        console.log(player.playerId, "up");
       }
       if (player.gamepad.left) {
-        console.log(player.playerNumber, "left");
+        console.log(player.playerId, "left");
       }
       if (player.gamepad.right) {
-        console.log(player.playerNumber, "right");
+        console.log(player.playerId, "right");
       }
 
       // L R Buttons
       if (player.gamepad.L1) {
-        console.log(player.playerNumber, "L1");
+        console.log(player.playerId, "L1");
       }
       if (player.gamepad.R1) {
-        console.log(player.playerNumber, "R1");
+        console.log(player.playerId, "R1");
       }
       // L R Buttons
       if (player.gamepad.L2) {
-        console.log(player.playerNumber, "L2");
+        console.log(player.playerId, "L2");
       }
       if (player.gamepad.R2) {
-        console.log(player.playerNumber, "R2");
+        console.log(player.playerId, "R2");
       }
 
       // for (let i = 0; i < player.gamepad.pad.buttons.length; i++) {

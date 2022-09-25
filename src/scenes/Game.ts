@@ -504,7 +504,7 @@ export default class Game extends Phaser.Scene {
   players: Player[] = [];
   playerOptions: Player[] = [
     {
-      playerNumber: 0,
+      playerId: 0,
       emitterLight: null,
       emitterDark: null,
       emitterPlayer: null,
@@ -531,7 +531,7 @@ export default class Game extends Phaser.Scene {
       char: {
         name: "Mario",
         initializeCharPosition: {
-          lookingRight: true,
+          // lookingRight: true,
           x: -200,
           y: 100,
         },
@@ -624,7 +624,7 @@ export default class Game extends Phaser.Scene {
       playerReadySound: null,
     },
     {
-      playerNumber: 1,
+      playerId: 1,
       emitterLight: null,
       emitterDark: null,
       emitterPlayer: null,
@@ -651,7 +651,7 @@ export default class Game extends Phaser.Scene {
       char: {
         name: "Link",
         initializeCharPosition: {
-          lookingRight: false,
+          // lookingRight: false,
           x: -110,
           y: 100,
         },
@@ -743,7 +743,7 @@ export default class Game extends Phaser.Scene {
       playerReadySound: null,
     },
     {
-      playerNumber: 2,
+      playerId: 2,
       emitterLight: null,
       emitterDark: null,
       emitterPlayer: null,
@@ -770,7 +770,7 @@ export default class Game extends Phaser.Scene {
       char: {
         name: "Pikachu",
         initializeCharPosition: {
-          lookingRight: true,
+          // lookingRight: true,
           x: 110,
           y: 100,
         },
@@ -862,7 +862,7 @@ export default class Game extends Phaser.Scene {
       playerReadySound: null,
     },
     {
-      playerNumber: 3,
+      playerId: 3,
       emitterLight: null,
       emitterDark: null,
       emitterPlayer: null,
@@ -889,7 +889,7 @@ export default class Game extends Phaser.Scene {
       char: {
         name: "Kirby",
         initializeCharPosition: {
-          lookingRight: false,
+          // lookingRight: false,
           x: 200,
           y: 100,
         },
@@ -980,7 +980,7 @@ export default class Game extends Phaser.Scene {
       playerReadySound: null,
     },
     {
-      playerNumber: 4,
+      playerId: 4,
       emitterLight: null,
       emitterDark: null,
       emitterPlayer: null,
@@ -1007,7 +1007,7 @@ export default class Game extends Phaser.Scene {
       char: {
         name: "Chez",
         initializeCharPosition: {
-          lookingRight: false,
+          // lookingRight: false,
           x: 200,
           y: 100,
         },
@@ -1098,7 +1098,7 @@ export default class Game extends Phaser.Scene {
       playerReadySound: null,
     },
     {
-      playerNumber: 5,
+      playerId: 5,
       emitterLight: null,
       emitterDark: null,
       emitterPlayer: null,
@@ -1125,7 +1125,7 @@ export default class Game extends Phaser.Scene {
       char: {
         name: "Black-Chez",
         initializeCharPosition: {
-          lookingRight: false,
+          // lookingRight: false,
           x: 200,
           y: 100,
         },

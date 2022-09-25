@@ -41,7 +41,7 @@ export interface CameraHelper {
 }
 
 export interface Player {
-  playerNumber: number;
+  playerId: number;
   shotGlass: any | Phaser.GameObjects.Sprite;
   scoreBoardUpper: string | any;
   scoreBoardLower: string | any;
@@ -164,7 +164,7 @@ export interface Keyboard {
 }
 
 export interface InitializeCharPosition {
-  lookingRight: boolean;
+  // lookingRight: boolean;
   x: number;
   y: number;
 }

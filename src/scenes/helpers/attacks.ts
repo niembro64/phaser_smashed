@@ -74,13 +74,45 @@ export function updatePhysicalAttackFollowPlayers(game: Game): void {
     player.char.attackPhysical.sprite.y =
       player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
 
+    // if (player.char.initializeCharPosition.lookingRight) {
+    //   if (player.char.sprite.flipX) {
+    //     player.char.attackPhysical.sprite.x =
+    //       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
+
+    //     player.char.attackPhysical.sprite.flipX =
+    //       player.char.initializeCharPosition.lookingRight;
+    //   } else {
+    //     player.char.attackPhysical.sprite.x =
+    //       player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
+
+    //     player.char.attackPhysical.sprite.flipX =
+    //       !player.char.initializeCharPosition.lookingRight;
+    //   }
+    // } else {
+    //   if (player.char.sprite.flipX) {
+    //     player.char.attackPhysical.sprite.x =
+    //       player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
+
+    //     player.char.attackPhysical.sprite.flipX =
+    //       player.char.initializeCharPosition.lookingRight;
+    //   } else {
+    //     player.char.attackPhysical.sprite.x =
+    //       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
+
+    //     player.char.attackPhysical.sprite.flipX =
+    //       !player.char.initializeCharPosition.lookingRight;
+    //   }
+    // }
+
     if (player.char.sprite.flipX) {
       player.char.attackPhysical.sprite.x =
         player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
+
       player.char.attackPhysical.sprite.flipX = true;
     } else {
       player.char.attackPhysical.sprite.x =
         player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
+
       player.char.attackPhysical.sprite.flipX = false;
     }
   });
