@@ -384,7 +384,9 @@ export function createAttackPhysicals(game: Game): void {
       .sprite(-300, -300, player.char.attackPhysical.srcImage)
       .setMass(player.char.attackPhysical.mass)
       .setScale(player.char.attackPhysical.scale)
-      .setOrigin(0.5, 0.5);
+      .setOrigin(0.5, 0.5)
+      .setActive(false)
+      .setVisible(false);
 
     player.char.attackPhysical.sprite.body.allowGravity = false;
   });

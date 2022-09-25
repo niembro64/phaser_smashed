@@ -15,6 +15,7 @@ export type PlayerState =
   | "player-state-hurt";
 export type AttackState =
   | "attackphysical-state-on"
+  | "attackphysical-state-cooldown"
   | "attackphysical-state-off";
 
 export type SplashName =

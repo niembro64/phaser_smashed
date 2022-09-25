@@ -28,7 +28,7 @@ import {
   setGameState,
 } from "./helpers/state";
 import { updateAttackPhysicalSwitch } from "./helpers/damage";
-import { updateAttackPhysicalVisually, updateUpB } from "./helpers/attacks";
+import { updateUpB } from "./helpers/attacks";
 import { getIsFirstBlood, getIsScreenClear } from "./helpers/drinking";
 import {
   setMusicPlay,
@@ -178,7 +178,9 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (getHasGameDurationPassedPlayer(player, game.DURATION_GAME_START, game)) {
+        if (
+          getHasGameDurationPassedPlayer(player, game.DURATION_GAME_START, game)
+        ) {
           setPlayerState(player, playerIndex, "player-state-alive", game);
         }
 
@@ -196,7 +198,6 @@ export function updatePlayers(game: Game): void {
         updateJump(player, game);
         updateControllerMovement(player, game);
         updateUpB(player, game);
-        updateAttackPhysicalVisually(player, game);
 
         // UPDATE ATTACK PHYSICAL
         updateAttackPhysicalSwitch(player, playerIndex, game);
@@ -240,7 +241,11 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         if (
           !getIsPlayerOffscreen(player, game) &&
-          getHasGameDurationPassedPlayer(player, game.DURATION_PLAYER_HURT, game)
+          getHasGameDurationPassedPlayer(
+            player,
+            game.DURATION_PLAYER_HURT,
+            game
+          )
         ) {
           setPlayerState(player, playerIndex, "player-state-alive", game);
         }
@@ -262,7 +267,13 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         ///////// duration => alive
         ////////////////////////////////
-        if (getHasGameDurationPassedPlayer(player, game.DURATION_PLAYER_DEAD, game)) {
+        if (
+          getHasGameDurationPassedPlayer(
+            player,
+            game.DURATION_PLAYER_DEAD,
+            game
+          )
+        ) {
           setPlayerState(player, playerIndex, "player-state-alive", game);
         }
 

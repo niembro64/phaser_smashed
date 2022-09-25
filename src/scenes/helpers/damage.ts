@@ -199,17 +199,27 @@ export function updateAttackPhysicalSwitch(
 
   switch (attackPhysical.state.name) {
     case "attackphysical-state-on":
-      if (!player.gamepad.A && player.padPrev.A) {
-        if (
-          getHasGameDurationPassedAttack(player.char.attackPhysical, 500, game)
-        ) {
-          setAttackPhysicalState(
-            player.char.attackPhysical,
-            playerIndex,
-            "attackphysical-state-off",
-            game
-          );
-        }
+      if (
+        getHasGameDurationPassedAttack(player.char.attackPhysical, 100, game)
+      ) {
+        setAttackPhysicalState(
+          player.char.attackPhysical,
+          playerIndex,
+          "attackphysical-state-cooldown",
+          game
+        );
+      }
+      break;
+    case "attackphysical-state-cooldown":
+      if (
+        getHasGameDurationPassedAttack(player.char.attackPhysical, 500, game)
+      ) {
+        setAttackPhysicalState(
+          player.char.attackPhysical,
+          playerIndex,
+          "attackphysical-state-off",
+          game
+        );
       }
       break;
     case "attackphysical-state-off":
@@ -222,11 +232,4 @@ export function updateAttackPhysicalSwitch(
         );
       }
   }
-
-  setAttackPhysicalState(
-    player.char.attackPhysical,
-    playerIndex,
-    "attackphysical-state-on",
-    game
-  );
 }
