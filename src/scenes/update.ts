@@ -42,6 +42,7 @@ import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
   setGameState(game, "game-state-play");
+  // setGameState(game, "game-state-paused");
   game.loaded = true;
 }
 
