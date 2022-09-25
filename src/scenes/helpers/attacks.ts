@@ -1,5 +1,6 @@
 import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
+import { playerGrabAttackEnergy } from "./pad";
 
 export function updateUpB(player: Player, game: Game): void {
   if (
@@ -70,12 +71,17 @@ export function isAttackEnergyNearPlayer(player: Player): boolean {
 
 export function updatePhysicalAttackFollowPlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    player.char.attackPhysical.sprite.y = player.char.sprite.y;
+    player.char.attackPhysical.sprite.y =
+      player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
 
     if (player.char.sprite.flipX) {
-      player.char.attackPhysical.sprite.x = player.char.sprite.x - 20;
+      player.char.attackPhysical.sprite.x =
+        player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
+      player.char.attackPhysical.sprite.flipX = true;
     } else {
-      player.char.attackPhysical.sprite.x = player.char.sprite.x + 20;
+      player.char.attackPhysical.sprite.x =
+        player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
+      player.char.attackPhysical.sprite.flipX = false;
     }
   });
 }

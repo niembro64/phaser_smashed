@@ -121,12 +121,13 @@ function Play() {
       default: "arcade",
       arcade: {
         gravity: { y: 3000 },
-        debug: false,
+        debug: true,
       },
     },
     scene: [Game],
   };
-  const setTimeoutQuotesLength: number = 1000;
+  const setTimeoutQuotesLength: number = 0;
+  // const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
     { name: "Breezy", text: "The Turtle Will Die." },

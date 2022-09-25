@@ -218,6 +218,7 @@ export interface PosFromCenter {
 
 export interface AttackPhysical {
   sprite: any | Phaser.GameObjects.Sprite;
+  posFromCenter: PosFromCenter;
   damage: number;
   srcImage: string;
   mass: number;

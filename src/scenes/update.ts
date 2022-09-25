@@ -196,7 +196,7 @@ export function updatePlayers(game: Game): void {
         updateJump(player, game);
         updateControllerMovement(player, game);
         updateUpB(player, game);
-        updatePhysicalAttackFollowPlayers(game);
+    
 
         ////////////////////////////////
         ///////// hit => hurt

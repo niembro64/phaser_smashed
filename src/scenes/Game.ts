@@ -563,10 +563,11 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          posFromCenter: { x: 25, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
-          scale: 1,
+          scale: 0.4,
         },
         attackEnergy: {
           sprite: null,
@@ -681,10 +682,11 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          posFromCenter: { x: 20, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
-          scale: 1,
+          scale: 0.4,
         },
         attackEnergy: {
           sprite: null,
@@ -798,10 +800,11 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          posFromCenter: { x: 0, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
-          scale: 1,
+          scale: 0.4,
         },
         attackEnergy: {
           sprite: null,
@@ -916,10 +919,11 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          posFromCenter: { x: 15, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
-          scale: 1,
+          scale: 0.4,
         },
         attackEnergy: {
           sprite: null,
@@ -1033,10 +1037,11 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          posFromCenter: { x: 15, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
-          scale: 1,
+          scale: 0.6,
         },
         attackEnergy: {
           sprite: null,
@@ -1150,10 +1155,11 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
+          posFromCenter: { x: -100, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
-          scale: 1,
+          scale: 1.3,
         },
         attackEnergy: {
           sprite: null,
@@ -1296,8 +1302,8 @@ export default class Game extends Phaser.Scene {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
     this.load.image("flame", "images/flame_small.png");
-
     this.load.image("laser", "images/laser.png");
+
     this.load.image("blockcracked", "images/blockcracked.png");
     this.load.image("fireball", "images/fireball.png");
     this.load.image("flagpole", "images/flagpole.png");
