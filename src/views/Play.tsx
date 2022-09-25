@@ -126,7 +126,8 @@ function Play() {
     },
     scene: [Game],
   };
-  const setTimeoutQuotesLength: number = 0;
+  const setTimeoutQuotesLengthStart: number = 1500;
+  const setTimeoutQuotesLengthReStart: number = 0;
   // const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
@@ -185,7 +186,7 @@ function Play() {
       myGame.current = new Phaser.Game(config);
       myGame.current.registry.set("parentContext", Play);
       myGame.current.registry.set("smashConfig", newSmashConfig);
-    }, setTimeoutQuotesLength);
+    }, setTimeoutQuotesLengthStart);
 
     setShowLoaderIntervalFunction();
   };
@@ -533,7 +534,7 @@ function Play() {
                     myGame.current = new Phaser.Game(config);
                     myGame.current.registry.set("parentContext", Play);
                     myGame.current.registry.set("smashConfig", newSmashConfig);
-                  }, setTimeoutQuotesLength);
+                  }, setTimeoutQuotesLengthReStart);
                 }
               }}
             >
