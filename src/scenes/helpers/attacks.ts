@@ -68,4 +68,16 @@ export function isAttackEnergyNearPlayer(player: Player): boolean {
   return false;
 }
 
+export function updatePhysicalAttackFollowPlayers(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    player.char.attackPhysical.sprite.y = player.char.sprite.y;
+
+    if (player.char.sprite.flipX) {
+      player.char.attackPhysical.sprite.x = player.char.sprite.x - 20;
+    } else {
+      player.char.attackPhysical.sprite.x = player.char.sprite.x + 20;
+    }
+  });
+}
+
 // player.char.sprite.body.velocity.y

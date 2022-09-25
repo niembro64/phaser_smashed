@@ -264,7 +264,7 @@ function Play() {
     { button: "Forward + B", move: "Attack-Smash", ready: "🚧" },
     { button: "Forward + WallTouch", move: "Slide-Wall", ready: "✔️" },
     { button: "L + R", move: "Pause", ready: "✔️" },
-    { button: "Any", move: "UnPause", ready: "✔️" },
+    { button: "All Players Ready", move: "UnPause", ready: "✔️" },
   ];
   const clickSoundParent = () => {
     if (webState === "play") {
@@ -290,7 +290,6 @@ function Play() {
 
   const onClickPlayNavBody = (buttonName: ButtonName) => {
     blipSound();
-    // clickSoundParent();
 
     setShowControls(false);
     setShowControllers(false);
@@ -301,7 +300,6 @@ function Play() {
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {
     blipSound();
-    // clickSoundParent();
     clickPauseParent();
 
     switch (buttonName) {

@@ -88,6 +88,7 @@ export interface Char {
   friction_air: number;
   wallTouchArray: boolean[];
   lastDirectionTouched: "up" | "down" | "left" | "right" | null;
+  attackPhysical: AttackPhysical;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
 }
@@ -168,11 +169,6 @@ export interface InitializeCharPosition {
   y: number;
 }
 
-export interface AttackPhysical {
-  sprite: any | Phaser.GameObjects.Sprite;
-  damage: number;
-}
-
 export interface AttackEnergyRotation {
   initial: number;
   speed: number;
@@ -219,12 +215,15 @@ export interface PosFromCenter {
   x: number;
   y: number;
 }
-export interface AttackEnergyFriction {
-  air: number;
-  ground: number;
-  wallInvertRotation: boolean;
-  wallInvertSprite: boolean;
+
+export interface AttackPhysical {
+  sprite: any | Phaser.GameObjects.Sprite;
+  damage: number;
+  srcImage: string;
+  mass: number;
+  scale: number;
 }
+
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
   state: "held" | "released";
@@ -245,7 +244,12 @@ export interface AttackEnergy {
   allowVelocityY: boolean;
   rotation: AttackEnergyRotation;
 }
-
+export interface AttackEnergyFriction {
+  air: number;
+  ground: number;
+  wallInvertRotation: boolean;
+  wallInvertSprite: boolean;
+}
 export interface Hitback {
   x: number;
   y: number;

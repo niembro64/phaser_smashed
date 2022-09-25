@@ -4,8 +4,6 @@ import {
   updateAttackEnergy,
   getIsAllPlayersReady,
   getIsAnyPlayerPausing,
-  debugUpdateControllersPrintConnected,
-  debugUpdatePrintAllControllerButtonsWhenActive,
   updateGamePadsConnected,
 } from "./helpers/pad";
 import {
@@ -30,7 +28,7 @@ import {
   setGameState,
 } from "./helpers/state";
 import {} from "./helpers/damage";
-import { updateUpB } from "./helpers/attacks";
+import { updatePhysicalAttackFollowPlayers, updateUpB } from "./helpers/attacks";
 import { getIsFirstBlood, getIsScreenClear } from "./helpers/drinking";
 import {
   setMusicPlay,
@@ -198,6 +196,7 @@ export function updatePlayers(game: Game): void {
         updateJump(player, game);
         updateControllerMovement(player, game);
         updateUpB(player, game);
+        updatePhysicalAttackFollowPlayers(game);
 
         ////////////////////////////////
         ///////// hit => hurt

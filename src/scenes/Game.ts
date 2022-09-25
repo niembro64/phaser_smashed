@@ -11,7 +11,7 @@ import {
   SplashEndData,
   GameStateWithTime,
 } from "./interfaces";
-import Play, { SmashConfig } from "../views/Play";
+import { SmashConfig } from "../views/Play";
 
 export default class Game extends Phaser.Scene {
   connectionFunction(): void {
@@ -561,6 +561,13 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attackPhysical: {
+          sprite: null,
+          damage: 50,
+          srcImage: "flame",
+          mass: 1,
+          scale: 1,
+        },
         attackEnergy: {
           sprite: null,
           state: "released",
@@ -672,6 +679,13 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.97,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attackPhysical: {
+          sprite: null,
+          damage: 50,
+          srcImage: "flame",
+          mass: 1,
+          scale: 1,
+        },
         attackEnergy: {
           sprite: null,
           state: "released",
@@ -782,6 +796,13 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.98,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attackPhysical: {
+          sprite: null,
+          damage: 50,
+          srcImage: "flame",
+          mass: 1,
+          scale: 1,
+        },
         attackEnergy: {
           sprite: null,
           state: "released",
@@ -893,6 +914,13 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.96,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attackPhysical: {
+          sprite: null,
+          damage: 50,
+          srcImage: "flame",
+          mass: 1,
+          scale: 1,
+        },
         attackEnergy: {
           sprite: null,
           state: "released",
@@ -1003,6 +1031,13 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.96,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attackPhysical: {
+          sprite: null,
+          damage: 50,
+          srcImage: "flame",
+          mass: 1,
+          scale: 1,
+        },
         attackEnergy: {
           sprite: null,
           state: "released",
@@ -1113,6 +1148,13 @@ export default class Game extends Phaser.Scene {
         friction_air: 0.96,
         wallTouchArray: [],
         lastDirectionTouched: null,
+        attackPhysical: {
+          sprite: null,
+          damage: 50,
+          srcImage: "flame",
+          mass: 1,
+          scale: 1,
+        },
         attackEnergy: {
           sprite: null,
           state: "released",
@@ -1253,6 +1295,7 @@ export default class Game extends Phaser.Scene {
     if (this.debug.setBackgroundMusicNumber === 2) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
+    this.load.image("flame", "images/flame_small.png");
 
     this.load.image("laser", "images/laser.png");
     this.load.image("blockcracked", "images/blockcracked.png");

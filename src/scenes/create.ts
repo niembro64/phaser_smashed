@@ -19,6 +19,7 @@ export function create(game: Game) {
   createCircles(game);
   createEnergyAttacks(game);
   createPlayers(game);
+  createPhysicalAttacks(game);
   createScoreboardReady(game);
   createCameras(game);
   createPlayersCollide(game);
@@ -341,6 +342,16 @@ export function createPlayers(game: Game): void {
 
   game.players.forEach((player, playerIndex) => {
     setBlinkTrue(player);
+  });
+}
+export function createPhysicalAttacks(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    player.char.attackPhysical.sprite = game.physics.add
+      .sprite(-300, -300, player.char.attackPhysical.srcImage)
+      .setMass(player.char.attackPhysical.mass)
+      .setScale(player.char.attackPhysical.scale);
+
+    player.char.attackPhysical.sprite.body.allowGravity = false;
   });
 }
 export function createEnergyAttacks(game: Game): void {
