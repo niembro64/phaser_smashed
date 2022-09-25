@@ -16,7 +16,7 @@ export function updateGamePadsConnected(game: Game): void {
   for (let i = 0; i < game.input.gamepad.gamepads.length; i++) {
     if (
       !game.input.gamepad.gamepads[i].id.includes("Jabra") &&
-      i < game.players.length
+      playerIndex < game.players.length
     ) {
       game.players[playerIndex].gamepad = game.input.gamepad.getPad(i);
       playerIndex++;
@@ -518,7 +518,9 @@ export function updateControllerMovement(player: Player, game: Game): void {
   }
 }
 
-export function debugUpdatePrintAllControllerButtonsWhenActive(game: Game): void {
+export function debugUpdatePrintAllControllerButtonsWhenActive(
+  game: Game
+): void {
   // Buttons
   game.players.forEach((player, playerIndex) => {
     if (player.gamepad) {

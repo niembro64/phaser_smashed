@@ -1394,10 +1394,6 @@ export default class Game extends Phaser.Scene {
       this.players.push(
         JSON.parse(JSON.stringify(this.playerOptions[this.PLAYER_CHOICES[i]]))
       );
-
-      // console.log("this.input.gamepad.total", this.input.gamepad.total);
-      if (i < this.input.gamepad.total) {
-      }
     }
 
     console.log("PLAYERS CURRENT", this.players);
