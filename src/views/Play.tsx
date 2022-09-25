@@ -365,9 +365,10 @@ function Play() {
   return (
     <div className="overDiv">
       {/* <audio src={monkeysMusic} ref={monkeysMusic} /> */}
+
       {webState !== "start" && showLoader && (
         <div className="loader">
-          <div className="loader-inner">
+          {/* <div className="loader-inner">
             <div className="loader-line-wrap">
               <div className="loader-line"></div>
             </div>
@@ -380,12 +381,32 @@ function Play() {
             <div className="loader-line-wrap">
               <div className="loader-line"></div>
             </div>
-            {/* <div className="loader-line-wrap">
-              <div className="loader-line"></div>
+          </div> */}
+          <div className="spinnerShrink">
+            <div className="spinnerOuterOuter">
+              <div className="spinnerOuter">
+                <div className="spinner">
+                  <div className="cube_side">
+                    <div className="cube_side_inside"></div>
+                  </div>
+                  <div className="cube_side">
+                    <div className="cube_side_inside"></div>
+                  </div>
+                  <div className="cube_side">
+                    <div className="cube_side_inside"></div>
+                  </div>
+                  <div className="cube_side">
+                    <div className="cube_side_inside"></div>
+                  </div>
+                  <div className="cube_side">
+                    <div className="cube_side_inside"></div>
+                  </div>
+                  <div className="cube_side">
+                    <div className="cube_side_inside"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="loader-line-wrap">
-              <div className="loader-line"></div>
-            </div> */}
           </div>
           <img className="loadingTable" src="/images/table.png" alt="table" />
           <p className="firstLoaderP">{quotes[quotesRandomNumber].text}</p>

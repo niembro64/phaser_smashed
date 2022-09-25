@@ -106,12 +106,12 @@ export function updatePhysicalAttackFollowPlayers(game: Game): void {
 
     if (player.char.sprite.flipX) {
       player.char.attackPhysical.sprite.x =
-        player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
+        player.char.sprite.x - player.char.attackPhysical.posFromCenter.x;
 
       player.char.attackPhysical.sprite.flipX = true;
     } else {
       player.char.attackPhysical.sprite.x =
-        player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
+        player.char.sprite.x + player.char.attackPhysical.posFromCenter.x;
 
       player.char.attackPhysical.sprite.flipX = false;
     }

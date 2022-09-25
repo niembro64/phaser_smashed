@@ -563,7 +563,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
-          posFromCenter: { x: 250, y: 0 },
+          posFromCenter: { x: 20, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
@@ -682,7 +682,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
-          posFromCenter: { x: 20, y: 0 },
+          posFromCenter: { x: 50, y: 3 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
@@ -800,7 +800,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
-          posFromCenter: { x: 300, y: 0 },
+          posFromCenter: { x: 20, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
@@ -1037,7 +1037,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
-          posFromCenter: { x: 15, y: 0 },
+          posFromCenter: { x: 25, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,
@@ -1155,7 +1155,7 @@ export default class Game extends Phaser.Scene {
         lastDirectionTouched: null,
         attackPhysical: {
           sprite: null,
-          posFromCenter: { x: -100, y: 0 },
+          posFromCenter: { x: 50, y: 0 },
           damage: 50,
           srcImage: "flame",
           mass: 1,

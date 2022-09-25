@@ -372,6 +372,7 @@ body {
   left: 0;
   background: #000;
   /* background: radial-gradient(#324, #000); */
+  /* background: radial-gradient(#fff, #000); */
   overflow: hidden;
   right: 0;
   top: 0;
@@ -431,27 +432,23 @@ body {
   /* border: 3px dashed lime; */
 }
 .loader-line-wrap:nth-child(1) {
-  /* animation-delay: -50ms; */
-  animation-delay: -30ms;
+  animation-delay: -50ms;
 }
 .loader-line-wrap:nth-child(2) {
-  /* animation-delay: -100ms; */
-  animation-delay: -60ms;
+  animation-delay: -100ms;
 }
 .loader-line-wrap:nth-child(3) {
-  /* animation-delay: -150ms; */
-  animation-delay: -90ms;
+  animation-delay: -150ms;
 }
 .loader-line-wrap:nth-child(4) {
-  /* animation-delay: -200ms; */
-  animation-delay: -120ms;
+  animation-delay: -200ms;
 }
-/* .loader-line-wrap:nth-child(5) {
+.loader-line-wrap:nth-child(5) {
   animation-delay: -250ms;
 }
 .loader-line-wrap:nth-child(6) {
   animation-delay: -300ms;
-} */
+}
 
 .loader-line-wrap:nth-child(1) .loader-line {
   border-color: #e81224;
@@ -481,7 +478,7 @@ body {
   width: 48px;
   top: 28px;
 }
-/* .loader-line-wrap:nth-child(5) .loader-line {
+.loader-line-wrap:nth-child(5) .loader-line {
   border-color: hsl(240, 80%, 75%);
   height: 34px;
   width: 34px;
@@ -492,7 +489,7 @@ body {
   height: 20px;
   width: 20px;
   top: 41px;
-} */
+}
 
 @keyframes spin {
   0%,
@@ -515,3 +512,194 @@ body {
 /* /////////////////////////////
 //// SPINNER
 ///////////////////////////// */
+
+/* * ///////////////////////////////////////////////////////////////////////// */
+.spinnerShrink {
+  transform: scale(0.5);
+  overflow: visible;
+  margin-bottom: 4%;
+}
+.spinnerOuterOuter {
+  position: relative;
+  top: 80px;
+  width: 160px;
+  height: 160px;
+
+  /* animation: spinnerAnimation0 33s infinite ease-in-out; */
+  animation: spinnerAnimation0 16.5s infinite ease-in-out;
+  transform-style: preserve-3d;
+  transition: 5s ease;
+
+  overflow: visible;
+  /* border: 3px dashed lime; */
+}
+.spinnerOuter {
+  width: 160px;
+  height: 160px;
+
+  /* animation: spinnerAnimation1 211s infinite ease-in-out; */
+  animation: spinnerAnimation1 105.5s infinite ease-in-out;
+  transform-style: preserve-3d;
+
+  overflow: visible;
+  /* border: 3px dashed lime; */
+}
+.spinner {
+  width: 160px;
+  height: 160px;
+  /* animation: spinnerAnimation2 23s infinite ease-in-out; */
+  animation: spinnerAnimation2 11.5s infinite ease-in-out;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: visible;
+  /* border: 3px dashed lime; */
+}
+
+.cube_side_inside {
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 0%;
+  background-blend-mode: multiply;
+}
+
+.cube_side {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgba(0, 0, 0, 0.1);
+
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  box-shadow: 0px 0px 0px 0px rgb(255, 255, 255),
+    0px 0px 0px 0px rgb(255, 255, 255), 0px 0px 0px 0px rgb(255, 255, 255);
+
+  filter: saturate(0%);
+  border-radius: 0px;
+}
+
+.spinner div:nth-of-type(1) {
+  transform: translateZ(-80px) rotateY(180deg);
+  background-color: rgba(255, 255, 0, 0);
+}
+.spinner div:nth-of-type(1) > div {
+  /* transform: translateZ(-80px) rotateY(180deg); */
+  /* background-color: #e81224; */
+  /* background-color: rgba(255, 255, 0, 1); */
+  background-color: rgba(255, 255, 0, 0.3);
+}
+
+.spinner div:nth-of-type(2) {
+  transform: rotateY(-270deg) translateX(50%);
+  transform-origin: top right;
+  background-color: rgba(0, 255, 255, 0);
+}
+.spinner div:nth-of-type(2) > div {
+  /* transform: rotateY(-270deg) translateX(50%);
+    transform-origin: top right; */
+  /* background-color: #0078d7; */
+  /* background-color: rgba(0, 255, 255, 1); */
+  background-color: rgba(0, 255, 255, 0.3);
+}
+
+.spinner div:nth-of-type(3) {
+  transform: rotateY(270deg) translateX(-50%);
+  transform-origin: center left;
+  background-color: rgba(255, 0, 0, 0);
+}
+.spinner div:nth-of-type(3) > div {
+  /* transform: rotateY(270deg) translateX(-50%);
+    transform-origin: center left; */
+  /* background-color: #fff100; */
+  /* background-color: rgba(255, 0, 0, 1); */
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.spinner div:nth-of-type(4) {
+  transform: rotateX(90deg) translateY(-50%);
+  transform-origin: top center;
+  background-color: rgba(255, 0, 255, 0);
+}
+.spinner div:nth-of-type(4) > div {
+  /* transform: rotateX(90deg) translateY(-50%);
+  transform-origin: top center; */
+  /* background-color: #16c60c; */
+  /* background-color: rgba(255, 0, 255, 1); */
+  background-color: rgba(255, 0, 255, 0.3);
+}
+
+.spinner div:nth-of-type(5) {
+  transform: rotateX(-90deg) translateY(50%);
+  transform-origin: bottom center;
+  background-color: rgba(0, 255, 0, 0);
+}
+.spinner div:nth-of-type(5) > div {
+  /* transform: rotateX(-90deg) translateY(50%);
+    transform-origin: bottom center; */
+  /* background-color: #886ce4; */
+  /* background-color: rgba(0, 255, 0, 1); */
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
+.spinner div:nth-of-type(6) {
+  transform: translateZ(80px);
+  background-color: rgba(0, 0, 255, 0);
+  /* background-color: rgba(0, 0, 255, 0); */
+}
+.spinner div:nth-of-type(6) > div {
+  /* transform: translateZ(80px); */
+  /* background-color: #f7630c; */
+  /* background-color: rgba(0, 0, 255, 1); */
+  background-color: rgba(0, 0, 255, 0.3);
+}
+
+@keyframes spinnerAnimation0 {
+  0% {
+    transform: rotate(0deg) rotateX(-25deg) rotateY(25deg);
+  }
+  30% {
+    transform: rotate(20deg) rotateX(-50deg) rotateY(250deg);
+  }
+  70% {
+    transform: rotate(5deg) rotateX(-100deg) rotateY(25deg);
+  }
+  100% {
+    transform: rotate(0deg) rotateX(-25deg) rotateY(25deg);
+  }
+}
+@keyframes spinnerAnimation1 {
+  0% {
+    transform: rotate(38deg) rotateX(-25deg) rotateY(2500deg);
+  }
+  30% {
+    transform: rotate(20deg) rotateX(-5000deg) rotateY(250deg);
+  }
+  70% {
+    transform: rotate(4200deg) rotateX(-100deg) rotateY(25deg);
+  }
+  100% {
+    transform: rotate(38deg) rotateX(-25deg) rotateY(2500deg);
+  }
+}
+@keyframes spinnerAnimation2 {
+  0% {
+    transform: rotate(10deg) rotateX(-10deg) rotateY(25deg);
+  }
+  30% {
+    transform: rotate(10deg) rotateX(-10deg) rotateY(50deg);
+  }
+  70% {
+    transform: rotate(452deg) rotateX(-150deg) rotateY(125deg);
+  }
+  100% {
+    transform: rotate(10deg) rotateX(-10deg) rotateY(25deg);
+  }
+}
+
+/* ///////////////////////////////////////////////////////////////////////// */
