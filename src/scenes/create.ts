@@ -17,9 +17,9 @@ export function create(game: Game) {
   createSplashRuleFinished(game);
   createScoreboard(game);
   createCircles(game);
-  createEnergyAttacks(game);
+  createAttackEnergies(game);
   createPlayers(game);
-  createPhysicalAttacks(game);
+  createAttackPhysicals(game);
   createScoreboardReady(game);
   createCameras(game);
   createPlayersCollide(game);
@@ -346,17 +346,18 @@ export function createPlayers(game: Game): void {
     setBlinkTrue(player);
   });
 }
-export function createPhysicalAttacks(game: Game): void {
+export function createAttackPhysicals(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.attackPhysical.sprite = game.physics.add
       .sprite(-300, -300, player.char.attackPhysical.srcImage)
       .setMass(player.char.attackPhysical.mass)
-      .setScale(player.char.attackPhysical.scale);
+      .setScale(player.char.attackPhysical.scale)
+      .setOrigin(0.5, 0.5);
 
     player.char.attackPhysical.sprite.body.allowGravity = false;
   });
 }
-export function createEnergyAttacks(game: Game): void {
+export function createAttackEnergies(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.attackEnergy.sprite = game.physics.add
       .sprite(-300, -300, player.char.attackEnergy.srcImage)

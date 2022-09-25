@@ -380,12 +380,12 @@ function Play() {
             <div className="loader-line-wrap">
               <div className="loader-line"></div>
             </div>
-            <div className="loader-line-wrap">
+            {/* <div className="loader-line-wrap">
               <div className="loader-line"></div>
             </div>
             <div className="loader-line-wrap">
               <div className="loader-line"></div>
-            </div>
+            </div> */}
           </div>
           <img className="loadingTable" src="/images/table.png" alt="table" />
           <p className="firstLoaderP">{quotes[quotesRandomNumber].text}</p>
