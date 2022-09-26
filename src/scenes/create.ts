@@ -421,28 +421,44 @@ export function createAttackEnergies(game: Game): void {
   });
 }
 
+export function createCollidersPvP(game: Game): void {
+  if (!game.debug.setCollidersPvP) {
+    return;
+  }
+
+  game.players.forEach((iPlayer, i) => {
+    game.colliderPvP.push([]);
+    game.players.forEach((jPlayer, j) => {
+      if (j !== i) {
+        game.colliderPvP[i].push(
+          game.physics.add.collider(iPlayer.char.sprite, jPlayer.char.sprite)
+        );
+      } else {
+        game.colliderPvP[i].push("XXX");
+      }
+    });
+  });
+}
+
 export function createCollidersPvAP(game: Game): void {
   if (!game.debug.setCollidersPvAttackPhysical) {
     return;
   }
 
-  game.colliderPvAP = [];
-  for (let i = 0; i < game.players.length; i++) {
+  game.players.forEach((iPlayer, i) => {
     game.colliderPvAP.push([]);
-    for (let j = 0; j < game.players.length; j++) {
-      game.colliderPvAP[i].push(game.physics.collide);
-    }
-  }
-
-  game.players.forEach((player, playerIndex) => {
-    for (let pj = 0; pj < game.players.length; pj++) {
-      if (playerIndex !== pj) {
-        game.colliderPvAP[playerIndex][pj] = game.physics.add.collider(
-          player.char.attackPhysical.sprite,
-          game.players[pj].char.sprite
+    game.players.forEach((jPlayer, j) => {
+      if (i !== j) {
+        game.colliderPvAP[i].push(
+          game.physics.add.collider(
+            iPlayer.char.sprite,
+            jPlayer.char.attackPhysical.sprite
+          )
         );
+      } else {
+        game.colliderPvAP[i].push("XXX");
       }
-    }
+    });
   });
 }
 export function createCollidersPvAE(game: Game): void {
@@ -450,23 +466,20 @@ export function createCollidersPvAE(game: Game): void {
     return;
   }
 
-  game.colliderPvAE = [];
-  for (let i = 0; i < game.players.length; i++) {
+  game.players.forEach((iPlayer, i) => {
     game.colliderPvAE.push([]);
-    for (let j = 0; j < game.players.length; j++) {
-      game.colliderPvAE[i].push(game.physics.collide);
-    }
-  }
-
-  game.players.forEach((player, playerIndex) => {
-    for (let pj = 0; pj < game.players.length; pj++) {
-      if (playerIndex !== pj) {
-        game.colliderPvAE[playerIndex][pj] = game.physics.add.collider(
-          player.char.attackEnergy.sprite,
-          game.players[pj].char.sprite
+    game.players.forEach((jPlayer, j) => {
+      if (i !== j) {
+        game.colliderPvAE[i].push(
+          game.physics.add.collider(
+            iPlayer.char.sprite,
+            jPlayer.char.attackEnergy.sprite
+          )
         );
+      } else {
+        game.colliderPvAE[i].push("XXX");
       }
-    }
+    });
   });
 }
 export function createCollidersAEvAE(game: Game): void {
@@ -474,23 +487,20 @@ export function createCollidersAEvAE(game: Game): void {
     return;
   }
 
-  game.colliderAEvAE = [];
-  for (let i = 0; i < game.players.length; i++) {
+  game.players.forEach((iPlayer, i) => {
     game.colliderAEvAE.push([]);
-    for (let j = 0; j < game.players.length; j++) {
-      game.colliderAEvAE[i].push(game.physics.collide);
-    }
-  }
-
-  game.players.forEach((player, playerIndex) => {
-    for (let pj = 0; pj < game.players.length; pj++) {
-      if (playerIndex !== pj) {
-        game.colliderPvP[playerIndex][pj] = game.physics.add.collider(
-          player.char.attackEnergy.sprite,
-          game.players[pj].char.attackEnergy.sprite
+    game.players.forEach((jPlayer, j) => {
+      if (i !== j) {
+        game.colliderAEvAE[i].push(
+          game.physics.add.collider(
+            iPlayer.char.attackEnergy.sprite,
+            jPlayer.char.attackEnergy.sprite
+          )
         );
+      } else {
+        game.colliderAEvAE[i].push("XXX");
       }
-    }
+    });
   });
 }
 export function createCollidersAEvAP(game: Game): void {
@@ -498,23 +508,20 @@ export function createCollidersAEvAP(game: Game): void {
     return;
   }
 
-  game.colliderAEvAP = [];
-  for (let i = 0; i < game.players.length; i++) {
+  game.players.forEach((iPlayer, i) => {
     game.colliderAEvAP.push([]);
-    for (let j = 0; j < game.players.length; j++) {
-      game.colliderAEvAP[i].push(game.physics.collide);
-    }
-  }
-
-  game.players.forEach((player, playerIndex) => {
-    for (let pj = 0; pj < game.players.length; pj++) {
-      if (playerIndex !== pj) {
-        game.colliderPvP[playerIndex][pj] = game.physics.add.collider(
-          player.char.attackEnergy.sprite,
-          game.players[pj].char.attackPhysical.sprite
+    game.players.forEach((jPlayer, j) => {
+      if (i !== j) {
+        game.colliderAEvAP[i].push(
+          game.physics.add.collider(
+            iPlayer.char.attackEnergy.sprite,
+            game.players[j].char.attackPhysical.sprite
+          )
         );
+      } else {
+        game.colliderAEvAP[i].push("XXX");
       }
-    }
+    });
   });
 }
 
@@ -1023,31 +1030,6 @@ export function createScoreboard(game: Game): void {
       )
       .setOrigin(0.5, 1)
       .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
-  });
-}
-
-export function createCollidersPvP(game: Game): void {
-  if (!game.debug.setCollidersPvP) {
-    return;
-  }
-
-  game.colliderPvP = [];
-  for (let i = 0; i < game.players.length; i++) {
-    game.colliderPvP.push([]);
-    for (let j = 0; j < game.players.length; j++) {
-      game.colliderPvP[i].push(game.physics.collide);
-    }
-  }
-
-  game.players.forEach((player, playerIndex) => {
-    game.players.forEach((p, pj) => {
-      if (pj !== playerIndex) {
-        game.colliderPvP[playerIndex][pj] = game.physics.add.collider(
-          player.char.sprite,
-          p.char.sprite
-        );
-      }
-    });
   });
 }
 

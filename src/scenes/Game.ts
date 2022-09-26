@@ -22,7 +22,7 @@ export default class Game extends Phaser.Scene {
     setUpdateLoopsNumSkip: 0,
     setCamerasActive: true,
     setCamerasVisible: false,
-    setCollidersPvP: false,
+    setCollidersPvP: true,
     setCollidersPvAttackPhysical: false,
     setCollidersPvAttackEnergy: false,
     setCollidersAEvAE: true,
