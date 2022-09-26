@@ -515,7 +515,7 @@ export function createCollidersAEvAP(game: Game): void {
         game.colliderAEvAP[i].push(
           game.physics.add.collider(
             iPlayer.char.attackEnergy.sprite,
-            game.players[j].char.attackPhysical.sprite
+            jPlayer.char.attackPhysical.sprite
           )
         );
       } else {
