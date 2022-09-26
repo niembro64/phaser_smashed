@@ -5,6 +5,8 @@ import {
   getIsAllPlayersReady,
   getIsAnyPlayerPausing,
   updateGamePadsConnected,
+  debugUpdatePrintAllControllerButtonsWhenActive,
+  debugUpdateControllersPrintConnected,
 } from "./helpers/pad";
 import {
   updateJump,
@@ -42,14 +44,12 @@ import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
   setGameState(game, "game-state-play");
-  // setGameState(game, "game-state-paused");
   game.loaded = true;
 }
 
 export function update(game: Game, time: number, delta: number): void {
-  // game.loaded = true;
-  if (game.debug.setNumUpdateLoopsToSkip > 0) {
-    game.debug.setNumUpdateLoopsToSkip--;
+  if (game.debug.setUpdateLoopsNumSkip > 0) {
+    game.debug.setUpdateLoopsNumSkip--;
     return;
   }
 
@@ -59,8 +59,8 @@ export function update(game: Game, time: number, delta: number): void {
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);
   updateGamePadsConnected(game);
-  // debugUpdatePrintAllControllerButtonsWhenActive(game);
-  // debugUpdateControllersPrintConnected(game);
+  debugUpdatePrintAllControllerButtonsWhenActive(game);
+  debugUpdateControllersPrintConnected(game);
 
   switch (game.gameState.name) {
     case "game-state-start":

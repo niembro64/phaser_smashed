@@ -67,7 +67,7 @@ export function updateText(game: Game): void {
 }
 
 export function setSplashDataOn(game: Game): void {
-  if (game.debug.setGameDataAlwaysVisible) {
+  if (game.debug.setMatricesAlwaysVisible) {
     return;
   }
   game.splashesEndData.forEach((splash, splashIndex) => {
@@ -77,7 +77,7 @@ export function setSplashDataOn(game: Game): void {
 }
 
 export function setSplashDataOff(game: Game): void {
-  if (game.debug.setGameDataAlwaysVisible) {
+  if (game.debug.setMatricesAlwaysVisible) {
     return;
   }
   game.splashesEndData.forEach((splash, splashIndex) => {
@@ -197,7 +197,7 @@ export function updateDamageShotsText(
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         Math.round(
-          game.debug.setHealthInvertNumber
+          game.debug.setHealthInverted
             ? (100 / (100 + player.char.damage)) * 100
             : player.char.damage
         ).toString() +

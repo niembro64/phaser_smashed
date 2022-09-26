@@ -25,9 +25,11 @@ export function create(game: Game) {
   createPlayers(game);
   createScoreboardReady(game);
   createCameras(game);
-  createPlayersCollide(game);
-  createAttackPhysicalCollideWithPlayers(game);
-  createAttackEnergyCollideWithPlayers(game);
+  createCollidersPvP(game);
+  createCollidersPvAP(game);
+  createCollidersPvAE(game);
+  createCollidersAEvAE(game);
+  createCollidersAEvAP(game);
   createHitboxOverlap(game);
   createEndDataMatrices(game);
 
@@ -181,7 +183,7 @@ export function createSoundsGame(game: Game): void {
   game.SOUND_PAUSED = game.sound.add("mii", { volume: 0.1, loop: true });
   game.SOUND_BGM = game.sound.add("bgm", { volume: 0.2, loop: true });
 
-  if (!game.debug.setBackgroundMusicActive) {
+  if (!game.debug.setMusicActive) {
     game.SOUND_BGM.volume = 0;
   }
 
@@ -196,7 +198,7 @@ export function createShields(game: Game): void {
   });
 }
 export function createCircles(game: Game): void {
-  if (!game.debug.setPlayerColorVisible) {
+  if (!game.debug.setPlayerIdVisible) {
     return;
   }
 
@@ -220,7 +222,7 @@ export function createHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.attackPhysical.sprite,
           function () {
-            if (game.debug.setDefaultAttackDamageOverride) {
+            if (game.debug.setDefaultDamage) {
               onHitHandlerAttackPhysical(
                 player,
                 playerIndex,
@@ -245,7 +247,7 @@ export function createHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.attackEnergy.sprite,
           function () {
-            if (game.debug.setDefaultAttackDamageOverride) {
+            if (game.debug.setDefaultDamage) {
               onHitHandlerAttackEnergy(
                 player,
                 playerIndex,
@@ -419,8 +421,8 @@ export function createAttackEnergies(game: Game): void {
   });
 }
 
-export function createAttackPhysicalCollideWithPlayers(game: Game): void {
-  if (!game.debug.setCollidePlayerPhysicalAttacks) {
+export function createCollidersPvAP(game: Game): void {
+  if (!game.debug.setCollidersPvAttackPhysical) {
     return;
   }
   game.players.forEach((player, playerIndex) => {
@@ -434,8 +436,8 @@ export function createAttackPhysicalCollideWithPlayers(game: Game): void {
     }
   });
 }
-export function createAttackEnergyCollideWithPlayers(game: Game): void {
-  if (!game.debug.setCollidePlayerEnergyAttacks) {
+export function createCollidersPvAE(game: Game): void {
+  if (!game.debug.setCollidersPvAttackEnergy) {
     return;
   }
   game.players.forEach((player, playerIndex) => {
@@ -444,6 +446,36 @@ export function createAttackEnergyCollideWithPlayers(game: Game): void {
         game.physics.add.collider(
           player.char.attackEnergy.sprite,
           game.players[i].char.sprite
+        );
+      }
+    }
+  });
+}
+export function createCollidersAEvAE(game: Game): void {
+  if (!game.debug.setCollidersAEvAE) {
+    return;
+  }
+  game.players.forEach((player, playerIndex) => {
+    for (let i = 0; i < game.players.length; i++) {
+      if (playerIndex !== i) {
+        game.physics.add.collider(
+          player.char.attackEnergy.sprite,
+          game.players[i].char.attackEnergy.sprite
+        );
+      }
+    }
+  });
+}
+export function createCollidersAEvAP(game: Game): void {
+  if (!game.debug.setCollidersAEvAP) {
+    return;
+  }
+  game.players.forEach((player, playerIndex) => {
+    for (let i = 0; i < game.players.length; i++) {
+      if (playerIndex !== i) {
+        game.physics.add.collider(
+          player.char.attackEnergy.sprite,
+          game.players[i].char.attackPhysical.sprite
         );
       }
     }
@@ -958,8 +990,8 @@ export function createScoreboard(game: Game): void {
   });
 }
 
-export function createPlayersCollide(game: Game): void {
-  if (!game.debug.setCollidePlayerPlayers) {
+export function createCollidersPvP(game: Game): void {
+  if (!game.debug.setCollidersPvP) {
     return;
   }
   game.players.forEach((player, playerIndex) => {

@@ -2,7 +2,7 @@ import Game from "../Game";
 import { Player } from "../interfaces";
 
 export function updateCirclesLocations(game: Game): void {
-  if (!game.debug.setPlayerColorVisible) {
+  if (!game.debug.setPlayerIdVisible) {
     return;
   }
 
@@ -24,7 +24,7 @@ export function updateCirclesLocations(game: Game): void {
 }
 
 export function updateEnergyAttacksWrapScreen(game: Game): void {
-  if (!game.debug.setEnergyAttackWrapScreen) {
+  if (!game.debug.setAEWrapScreen) {
     return;
   }
   game.players.forEach((player) => {

@@ -383,6 +383,9 @@ export function updatePadPreviousAndDebounced(game: Game): void {
 }
 
 export function debugUpdateControllersPrintConnected(game: Game): void {
+  if (!game.debug.setPrintControllerConnectedConsole) {
+    return;
+  }
   game.players.forEach((player, playerIndex) => {
     // console.log("PLAYER", playerIndex, "CONTROLLER", player.gamepad);
     console.log("PLAYER", playerIndex, "CONTROLLER", player.gamepad.id);
@@ -521,6 +524,9 @@ export function updateControllerMovement(player: Player, game: Game): void {
 export function debugUpdatePrintAllControllerButtonsWhenActive(
   game: Game
 ): void {
+  if (!game.debug.setPrintControllerButtonsConsole) {
+    return;
+  }
   // Buttons
   game.players.forEach((player, playerIndex) => {
     if (player.gamepad) {

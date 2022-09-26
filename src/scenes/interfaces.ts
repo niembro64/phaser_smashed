@@ -280,24 +280,28 @@ export interface Hitback {
 
 export interface Debug {
   setLevel: number;
+  setDurationMinutes: number;
+  setMusicNumber: number;
+  setMusicActive: boolean;
+  setUpdateLoopsNumSkip: number;
   setCamerasActive: boolean;
   setCamerasVisible: boolean;
-  setCollidePlayerPlayers: boolean;
-  setCollidePlayerPhysicalAttacks: boolean;
-  setCollidePlayerEnergyAttacks: boolean;
-  setEnergyAttackWrapScreen: boolean;
-  setPlayerColorVisible: boolean;
-  setPlayerColorFiltersActive: boolean;
+  setCollidersPvP: boolean;
+  setCollidersPvAttackPhysical: boolean;
+  setCollidersPvAttackEnergy: boolean;
+  setCollidersAEvAE: boolean;
+  setCollidersAEvAP: boolean;
+  setAEWrapScreen: boolean;
+  setPlayerIdVisible: boolean;
+  setPlayerIdFiltersActive: boolean;
   setWallJumpsActive: boolean;
-  setBackgroundMusicActive: boolean;
-  setBackgroundMusicNumber: number;
-  setPauseGameMusicActive: boolean;
-  setDefaultAttackDamageOverride: boolean;
-  setDefaultAttackHitbackOverride: boolean;
+  setDefaultDamage: boolean;
+  setDefaultHitback: boolean;
   setReadySoundActive: boolean;
-  setHealthInvertNumber: boolean;
-  setGameDataAlwaysVisible: boolean;
-  setNumUpdateLoopsToSkip: number;
+  setHealthInverted: boolean;
+  setMatricesAlwaysVisible: boolean;
+  setPrintControllerButtonsConsole: boolean;
+  setPrintControllerConnectedConsole: boolean;
 }
 
 export interface NormalizedVector {

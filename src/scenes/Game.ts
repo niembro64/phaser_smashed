@@ -12,61 +12,41 @@ import {
   GameStateWithTime,
 } from "./interfaces";
 import { SmashConfig } from "../views/Play";
-import { timeStamp } from "console";
 
 export default class Game extends Phaser.Scene {
-  connectionFunction(): void {
-    console.log("PHASER CONNECTED");
-  }
-  loaded: boolean = false;
-
-  smashConfig: SmashConfig | null = null;
-  // setGameState(game: Game, state: GameState): void {
-  //   game.gameState.name = state;
-  //   game.gameState.gameStamp = game.gameNanoseconds;
-  //   game.gameState.timeStamp = game.timeNanoseconds;
-  //   console.log("GAME STATE", game.gameState.name);
-  // }
-
-  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
-  // PLAYER_CHOICES: number[] = [3, 0];
-  // PLAYER_CHOICES: number[] = [3];
-
-  // PLAYER_CHOICES: number[] = [4, 4, 4, 5];
-
-  // PLAYER_CHOICES: number[] = [0, 0, 0, 0];
-  // PLAYER_CHOICES: number[] = [1, 1, 1, 1];
-  // PLAYER_CHOICES: number[] = [2, 2, 2, 2];
-  // PLAYER_CHOICES: number[] = [3, 3, 3, 3];
-  // PLAYER_CHOICES: number[] = [4, 4, 4, 4];
-  // PLAYER_CHOICES: number[] = [5, 5, 5, 5];
-
   debug: Debug = {
     setLevel: 4, //012345
+    setDurationMinutes: 3, //012345
+    setMusicNumber: 2, // 012
+    setMusicActive: true,
+    setUpdateLoopsNumSkip: 0,
     setCamerasActive: true,
     setCamerasVisible: false,
-    setCollidePlayerPlayers: false,
-    setCollidePlayerPhysicalAttacks: false,
-    setCollidePlayerEnergyAttacks: false,
-    setEnergyAttackWrapScreen: false,
-    setPlayerColorVisible: true,
-    setPauseGameMusicActive: true,
+    setCollidersPvP: false,
+    setCollidersPvAttackPhysical: false,
+    setCollidersPvAttackEnergy: false,
+    setCollidersAEvAE: true,
+    setCollidersAEvAP: false,
+    setAEWrapScreen: false,
+    setPlayerIdVisible: true,
     setWallJumpsActive: true,
-    setBackgroundMusicActive: true,
-    setBackgroundMusicNumber: 2, // 012
-    setDefaultAttackDamageOverride: false,
-    setDefaultAttackHitbackOverride: false,
-    setPlayerColorFiltersActive: false,
+    setDefaultDamage: false,
+    setDefaultHitback: false,
+    setPlayerIdFiltersActive: false,
     setReadySoundActive: false,
-    setHealthInvertNumber: false,
-    setGameDataAlwaysVisible: false,
-    setNumUpdateLoopsToSkip: 0,
+    setHealthInverted: false,
+    setMatricesAlwaysVisible: false,
+    setPrintControllerButtonsConsole: false,
+    setPrintControllerConnectedConsole: false,
   };
+  smashConfig: SmashConfig | null = null;
 
+  loaded: boolean = false;
+
+  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
   DEFAULT_ATTACK_DAMAGE: number = 50;
-
   GAMEBAR_CHARS = { kills: " ⇧💀⇩ ", deaths: "", damage: "♡", shots: "☆" };
   //▲▼⬆⬇↑↓↑↿⇂⋆ // //🍻 //★//✰//☆//⚡//❤//v//♡//♥💔
   // 💔⭐💀
@@ -74,10 +54,6 @@ export default class Game extends Phaser.Scene {
   //🏴‍☠️🏳️🏁🏴
   // 🔴🔵🟡🟢🟣🟠⚫⚪🟤
 
-  // DURATION_GAME_LAST_MINUTES: number = 0.02;
-  // DURATION_GAME_LAST_MINUTES: number = 0.3;
-  DURATION_GAME_LAST_MINUTES: number = 3;
-  // DURATION_GAME_LAST_MINUTES: number = 7;
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
   DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
@@ -173,7 +149,7 @@ export default class Game extends Phaser.Scene {
   gameNanoseconds: number = 0;
   gameSeconds: number = 0;
   gameSecondsPrev: number = 0;
-  gameSecondsClock: number = this.DURATION_GAME_LAST_MINUTES * 60;
+  gameSecondsClock: number = 10;
   gameClock: Clock = { minutes: 0, seconds: 0 };
   timer: any;
   TITLE: any;
@@ -1288,6 +1264,7 @@ export default class Game extends Phaser.Scene {
         this.PLAYER_CHOICES.push(player.characterId);
       });
     }
+    this.gameSecondsClock = this.debug.setDurationMinutes * 60;
 
     let pathSounds = "sounds/";
     this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);
@@ -1349,13 +1326,13 @@ export default class Game extends Phaser.Scene {
 
     this.load.audio("mii", pathSounds + this.FILE_SOUNDS.BGM_MII);
 
-    if (this.debug.setBackgroundMusicNumber === 0) {
+    if (this.debug.setMusicNumber === 0) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_DREAM);
     }
-    if (this.debug.setBackgroundMusicNumber === 1) {
+    if (this.debug.setMusicNumber === 1) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_MONKEY);
     }
-    if (this.debug.setBackgroundMusicNumber === 2) {
+    if (this.debug.setMusicNumber === 2) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
     this.load.image("flame", "images/flame_small.png");
