@@ -425,12 +425,21 @@ export function createCollidersPvAP(game: Game): void {
   if (!game.debug.setCollidersPvAttackPhysical) {
     return;
   }
+
+  game.colliderPvAP = [];
+  for (let i = 0; i < game.players.length; i++) {
+    game.colliderPvAP.push([]);
+    for (let j = 0; j < game.players.length; j++) {
+      game.colliderPvAP[i].push(game.physics.collide);
+    }
+  }
+
   game.players.forEach((player, playerIndex) => {
-    for (let i = 0; i < game.players.length; i++) {
-      if (playerIndex !== i) {
-        game.physics.add.collider(
+    for (let pj = 0; pj < game.players.length; pj++) {
+      if (playerIndex !== pj) {
+        game.colliderPvAP[playerIndex][pj] = game.physics.add.collider(
           player.char.attackPhysical.sprite,
-          game.players[i].char.sprite
+          game.players[pj].char.sprite
         );
       }
     }
@@ -440,12 +449,21 @@ export function createCollidersPvAE(game: Game): void {
   if (!game.debug.setCollidersPvAttackEnergy) {
     return;
   }
+
+  game.colliderPvAE = [];
+  for (let i = 0; i < game.players.length; i++) {
+    game.colliderPvAE.push([]);
+    for (let j = 0; j < game.players.length; j++) {
+      game.colliderPvAE[i].push(game.physics.collide);
+    }
+  }
+
   game.players.forEach((player, playerIndex) => {
-    for (let i = 0; i < game.players.length; i++) {
-      if (playerIndex !== i) {
-        game.physics.add.collider(
+    for (let pj = 0; pj < game.players.length; pj++) {
+      if (playerIndex !== pj) {
+        game.colliderPvAE[playerIndex][pj] = game.physics.add.collider(
           player.char.attackEnergy.sprite,
-          game.players[i].char.sprite
+          game.players[pj].char.sprite
         );
       }
     }
@@ -455,12 +473,21 @@ export function createCollidersAEvAE(game: Game): void {
   if (!game.debug.setCollidersAEvAE) {
     return;
   }
+
+  game.colliderAEvAE = [];
+  for (let i = 0; i < game.players.length; i++) {
+    game.colliderAEvAE.push([]);
+    for (let j = 0; j < game.players.length; j++) {
+      game.colliderAEvAE[i].push(game.physics.collide);
+    }
+  }
+
   game.players.forEach((player, playerIndex) => {
-    for (let i = 0; i < game.players.length; i++) {
-      if (playerIndex !== i) {
-        game.physics.add.collider(
+    for (let pj = 0; pj < game.players.length; pj++) {
+      if (playerIndex !== pj) {
+        game.colliderPvP[playerIndex][pj] = game.physics.add.collider(
           player.char.attackEnergy.sprite,
-          game.players[i].char.attackEnergy.sprite
+          game.players[pj].char.attackEnergy.sprite
         );
       }
     }
@@ -470,12 +497,21 @@ export function createCollidersAEvAP(game: Game): void {
   if (!game.debug.setCollidersAEvAP) {
     return;
   }
+
+  game.colliderAEvAP = [];
+  for (let i = 0; i < game.players.length; i++) {
+    game.colliderAEvAP.push([]);
+    for (let j = 0; j < game.players.length; j++) {
+      game.colliderAEvAP[i].push(game.physics.collide);
+    }
+  }
+
   game.players.forEach((player, playerIndex) => {
-    for (let i = 0; i < game.players.length; i++) {
-      if (playerIndex !== i) {
-        game.physics.add.collider(
+    for (let pj = 0; pj < game.players.length; pj++) {
+      if (playerIndex !== pj) {
+        game.colliderPvP[playerIndex][pj] = game.physics.add.collider(
           player.char.attackEnergy.sprite,
-          game.players[i].char.attackPhysical.sprite
+          game.players[pj].char.attackPhysical.sprite
         );
       }
     }
@@ -994,10 +1030,22 @@ export function createCollidersPvP(game: Game): void {
   if (!game.debug.setCollidersPvP) {
     return;
   }
+
+  game.colliderPvP = [];
+  for (let i = 0; i < game.players.length; i++) {
+    game.colliderPvP.push([]);
+    for (let j = 0; j < game.players.length; j++) {
+      game.colliderPvP[i].push(game.physics.collide);
+    }
+  }
+
   game.players.forEach((player, playerIndex) => {
     game.players.forEach((p, pj) => {
       if (pj !== playerIndex) {
-        game.physics.add.collider(player.char.sprite, p.char.sprite);
+        game.colliderPvP[playerIndex][pj] = game.physics.add.collider(
+          player.char.sprite,
+          p.char.sprite
+        );
       }
     });
   });

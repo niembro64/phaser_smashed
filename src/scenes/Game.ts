@@ -469,6 +469,12 @@ export default class Game extends Phaser.Scene {
   numberKilledByMatrix: number[][] = [];
   numberShotsTakenByMeMatrix: number[][] = [];
 
+  colliderPvP: any[][] = [];
+  colliderPvAP: any[][] = [];
+  colliderPvAE: any[][] = [];
+  colliderAEvAE: any[][] = [];
+  colliderAEvAP: any[][] = [];
+
   gameState: GameStateWithTime = {
     name: "game-state-start",
     gameStamp: 0,
