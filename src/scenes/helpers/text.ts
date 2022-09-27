@@ -10,9 +10,10 @@ export function updateText(game: Game): void {
   const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 220;
   const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 180;
   const readyY = game.SCREEN_DIMENSIONS.HEIGHT - 140;
-  const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 120;
-  const gameTimeY = game.SCREEN_DIMENSIONS.HEIGHT - 130;
-  const killsY = game.SCREEN_DIMENSIONS.HEIGHT - 10;
+  const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 76;
+  const gameTimeY = game.SCREEN_DIMENSIONS.HEIGHT - 85;
+  const timeTimeY = game.SCREEN_DIMENSIONS.HEIGHT - 95;
+  const killsY = game.SCREEN_DIMENSIONS.HEIGHT - 75;
 
   const zoom = game.cameras.main.zoom;
   const redOffsetY =
@@ -50,13 +51,17 @@ export function updateText(game: Game): void {
     damageY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * (-1 / zoom + 1);
+  const newTimeTimeY =
+    timeTimeY * (1 / zoom) +
+    redOffsetY * (1 / zoom) +
+    game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
   const newLowerY =
     killsY * (1 / zoom) +
     redOffsetY * (1 / zoom) +
     game.cameraMover.char.sprite.y * ((-1 * 1) / Math.pow(zoom, 1) + 1);
 
   updateClockTextUpper(game, zoom, newGameTimeY);
-  updateClockTextLower(game, zoom, newLowerY);
+  updateClockTextLower(game, zoom, newTimeTimeY);
   updateGlasses(game, zoom, newTopY);
   updateDamageShotsText(game, zoom, newUpperY);
   updateControllerText(game, zoom, newControllerY);

@@ -947,11 +947,11 @@ export function createScoreboard(game: Game): void {
     "",
     {
       // font: "Arial 100px",
-      fontSize: "30px",
+      fontSize: "20px",
       // fontFamily: "'Courier New'",
       fontFamily: game.FONT_DEFAULT_MONOSPACE,
       // fontFamily: "'Press Start 2P'",
-      color: "gray",
+      color: "white",
       stroke: "black",
       strokeThickness: 1,
       shadow: {

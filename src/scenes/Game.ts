@@ -34,7 +34,7 @@ export default class Game extends Phaser.Scene {
     setDefaultHitback: false,
     setPlayerIdFiltersActive: false,
     setReadySoundActive: false,
-    setHealthInverted: false,
+    setHealthInverted: true,
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,
