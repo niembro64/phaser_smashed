@@ -920,8 +920,9 @@ export function createScoreboard(game: Game): void {
     "",
     {
       // font: "Arial 100px",
-      fontSize: "100px",
+      fontSize: "85px",
       // fontFamily: "'Courier New'",
+      // fontFamily: game.FONT_DEFAULT_MONOSPACE,
       fontFamily: game.FONT_DEFAULT_MONOSPACE,
       // fontFamily: "'Press Start 2P'",
       stroke: "black",
@@ -979,6 +980,7 @@ export function createScoreboard(game: Game): void {
           // font: "Arial 100px",
           fontSize: "65px",
           fontFamily: game.FONT_DEFAULT_NICE,
+          // fontFamily: game.FONT_DEFAULT_MONOSPACE,
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",

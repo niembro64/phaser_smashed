@@ -257,8 +257,8 @@ export default class Game extends Phaser.Scene {
     },
   ];
   FONT_DEFAULT_NICE: string = "Impact";
-  // FONT_DEFAULT_MONOSPACE: string = "Press Start 2P";
-  FONT_DEFAULT_MONOSPACE: string = "Consolas";
+  FONT_DEFAULT_MONOSPACE: string = '"Press Start 2P"';
+  // FONT_DEFAULT_MONOSPACE: string = "Consolas";
   // FONT_DEFAULT: string = 'Courier';
 
   splashRulesOffset: number = 50;
@@ -344,7 +344,7 @@ export default class Game extends Phaser.Scene {
     emoji: "",
     words: [],
     vertical: 0,
-    size: "30px",
+    size: "22px",
     src: "glass.png",
     color: "#ffffff",
     backgroundColor: "#000000",
