@@ -1,16 +1,9 @@
-// import { useState } from "react";
-import { useEffect, useState } from "react";
-// import phaserGame from "../PhaserGame";
+import { useState } from "react";
 import Phaser from "phaser";
 import Game from "../scenes/Game";
 import "../App.css";
-// import "@fontsource/press-start-2p";
-import { ButtonName, CharacterMove } from "../App";
 import { Link } from "react-router-dom";
-import Play, { PlayerConfig, SmashConfig } from "./Play";
-import { CharacterId } from "./Play";
-import { setGameState } from "../scenes/helpers/state";
-import { type } from "os";
+import Play from "./Play";
 
 function Start() {
   const [sGame, setSGame] = useState();

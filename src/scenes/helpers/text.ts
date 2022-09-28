@@ -5,7 +5,7 @@ import { pauseReadySoundPlayer, playReadySoundPlayer } from "./sound";
 
 export function updateText(game: Game): void {
   const dataTitleY = 65;
-  const dataY = dataTitleY + 40;
+  const dataY = dataTitleY + 45;
   const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
   const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 220;
   const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 180;
@@ -388,12 +388,8 @@ export function updateEndDataMatrices(
       }
       if (splashIndex !== game.splashesEndData.length - 1) {
         splash.words[i] += "]";
-        // splash.words[i] += splash.emoji;
-        // splash.words[i] += game.dotArray[i];
       }
     }
-    // splash.words.push("ASDF");
-    // splash.words.unshift("ASDF");
     splash.textTitle.x =
       game.cameraMover.char.sprite.x +
       ((game.splashEndDataOffset +

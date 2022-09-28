@@ -9,19 +9,9 @@ import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 
 // @ts-ignore
-import titleImage from "../images/titleImage.png";
-// @ts-ignore
-import importedPauseSound from "../sounds/mariopause.mp3";
-// @ts-ignore
 import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
 import importedBlipSound from "../sounds/game-start-liquid.wav";
-// @ts-ignore
-import importedMonkeysMusic from "../sounds/monkeys2.wav";
-import React from "react";
-// import importedPauseSound from "../../public/sounds/mariopause.mp3";
-
-// test commit
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 

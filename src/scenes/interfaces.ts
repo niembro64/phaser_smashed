@@ -284,6 +284,7 @@ export interface Debug {
   setMusicNumber: number;
   setMusicActive: boolean;
   setUpdateLoopsNumSkip: number;
+  setAirFriction: boolean;
   setCamerasActive: boolean;
   setCamerasVisible: boolean;
   setCollidersPvP: boolean;

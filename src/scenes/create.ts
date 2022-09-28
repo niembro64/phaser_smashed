@@ -39,8 +39,15 @@ export function create(game: Game) {
 
 export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
+  let splashSizeTitleDefault = "30px";
+  let splashSize = "";
   game.splashesEndData.forEach((splash, splashIndex) => {
     for (let i = 0; i < game.players.length; i++) {
+      if (i === 0) {
+        splashSize = splash.size;
+      } else {
+        splashSize = splashSizeTitleDefault;
+      }
       splash.words[i] =
         game.players[i].char.name + " " + game.colorCircles[i].text;
     }
@@ -51,7 +58,7 @@ export function createEndDataMatrices(game: Game): void {
         splash.name + " " + splash.emoji,
         {
           align: "right",
-          fontSize: splash.size,
+          fontSize: splashSize,
           fontFamily: game.FONT_DEFAULT_MONOSPACE,
           color: splash.color,
           stroke: splash.backgroundColor,

@@ -20,9 +20,10 @@ export default class Game extends Phaser.Scene {
     setMusicNumber: 2, // 012
     setMusicActive: true,
     setUpdateLoopsNumSkip: 0,
+    setAirFriction: true,
     setCamerasActive: true,
     setCamerasVisible: false,
-    setCollidersPvP: true,
+    setCollidersPvP: false,
     setCollidersPvAttackPhysical: false,
     setCollidersPvAttackEnergy: false,
     setCollidersAEvAE: true,
@@ -48,9 +49,9 @@ export default class Game extends Phaser.Scene {
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
   DEFAULT_ATTACK_DAMAGE: number = 50;
   GAMEBAR_CHARS = { kills: " ⇧💀⇩ ", deaths: "", damage: "♡", shots: "☆" };
-  //▲▼⬆⬇↑↓↑↿⇂⋆ // //🍻 //★//✰//☆//⚡//❤//v//♡//♥💔
-  // 💔⭐💀
-  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥💀
+  //▲▼⬆⬇↑↓↑↿⇂⋆★✰☆⚡❤v♡♥
+  // 💔👊🏼⭐💀
+  // ✔️🚧❌🚫🛑🍻🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥💀👊🤜🎰🎱🎲🔮💡🧱✨🧙 🤜🏼👊🏼🤛🏼
   //🏴‍☠️🏳️🏁🏴
   // 🔴🔵🟡🟢🟣🟠⚫⚪🟤
 
@@ -358,7 +359,7 @@ export default class Game extends Phaser.Scene {
       textCircles: null,
       textData: null,
       name: "Hits",
-      emoji: "💔",
+      emoji: "👊🏼",
       vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
@@ -1271,6 +1272,11 @@ export default class Game extends Phaser.Scene {
       });
     }
     this.gameSecondsClock = this.debug.setDurationMinutes * 60;
+    if (!this.debug.setAirFriction) {
+      this.players.forEach((iPlayer, i) => {
+        iPlayer.char.friction_air = 2;
+      });
+    }
 
     let pathSounds = "sounds/";
     this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);
