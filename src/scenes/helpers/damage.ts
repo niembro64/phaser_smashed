@@ -192,7 +192,7 @@ export function getNormalizedVector(
 
 export function updateAttackPhysicalSwitch(
   player: Player,
-  playerIndex: number,
+  iPlayer: number,
   game: Game
 ): void {
   let attackPhysical = player.char.attackPhysical;
@@ -208,7 +208,7 @@ export function updateAttackPhysicalSwitch(
       ) {
         setAttackPhysicalState(
           attackPhysical,
-          playerIndex,
+          iPlayer,
           "attackphysical-state-cooldown",
           game
         );
@@ -224,7 +224,7 @@ export function updateAttackPhysicalSwitch(
       ) {
         setAttackPhysicalState(
           attackPhysical,
-          playerIndex,
+          iPlayer,
           "attackphysical-state-off",
           game
         );
@@ -234,7 +234,7 @@ export function updateAttackPhysicalSwitch(
       if (player.gamepad.A && !player.padPrev.A) {
         setAttackPhysicalState(
           attackPhysical,
-          playerIndex,
+          iPlayer,
           "attackphysical-state-on",
           game
         );

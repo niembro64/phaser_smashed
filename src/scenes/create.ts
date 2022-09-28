@@ -14,15 +14,15 @@ export function create(game: Game) {
   createFlag(game);
   createSplashes(game);
   createPlatforms(game);
-  createScoreboardShots(game);
+  createScoreboardShotGlass(game);
   createEmitters(game);
   createImageTable(game);
   createSplashRuleFinished(game);
-  createScoreboard(game);
-  createCircles(game);
   createAttackPhysicals(game);
   createAttackEnergies(game);
   createPlayers(game);
+  createPlayerIdCircles(game);
+  createScoreboard(game);
   createScoreboardReady(game);
   createCameras(game);
   createCollidersPvP(game);
@@ -204,7 +204,7 @@ export function createShields(game: Game): void {
     circle.graphic = game.add.circle(0, 0, 50, circle.colorNumber);
   });
 }
-export function createCircles(game: Game): void {
+export function createPlayerIdCircles(game: Game): void {
   if (!game.debug.setPlayerIdVisible) {
     return;
   }
@@ -418,7 +418,7 @@ export function createAttackEnergies(game: Game): void {
       player.char.attackEnergy.bounceY
     );
     // player.char.attackEnergy.sprite.body.gravity.set(0, 0);
-    if (player.char.attackEnergy.walls) {
+    if (player.char.attackEnergy.bouncePlatforms) {
       game.physics.add.collider(
         player.char.attackEnergy.sprite,
         game.PLATFORMS
@@ -488,6 +488,8 @@ export function createCollidersPvAE(game: Game): void {
       }
     });
   });
+
+  console.log("game.colliderPvAE", game.colliderPvAE);
 }
 export function createCollidersAEvAE(game: Game): void {
   if (!game.debug.setCollidersAEvAE) {
@@ -839,7 +841,7 @@ export function createSplashes(game: Game): void {
   });
 }
 
-export function createScoreboardShots(game: Game): void {
+export function createScoreboardShotGlass(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.shotGlass = game.add
       .sprite(

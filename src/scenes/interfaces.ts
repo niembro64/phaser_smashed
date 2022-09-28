@@ -251,7 +251,7 @@ export interface AttackEnergy {
   bounceY: number;
   bounceX: number;
   gravity: boolean;
-  walls: boolean;
+  bouncePlatforms: boolean;
   damage: number;
   hitback: Hitback;
   scale: number;

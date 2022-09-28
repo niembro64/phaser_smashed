@@ -525,8 +525,8 @@ body {
   width: 160px;
   height: 160px;
 
-  /* animation: spinnerAnimation0 33s infinite ease-in-out; */
-  animation: spinnerAnimation0 16.5s infinite ease-in-out;
+  /* animation: spinnerAnimation0 33s infinite ease; */
+  animation: spinnerAnimation0 40.5s infinite ease;
   transform-style: preserve-3d;
   transition: 5s ease;
 
@@ -537,8 +537,8 @@ body {
   width: 160px;
   height: 160px;
 
-  /* animation: spinnerAnimation1 211s infinite ease-in-out; */
-  animation: spinnerAnimation1 105.5s infinite ease-in-out;
+  /* animation: spinnerAnimation1 211s infinite ease; */
+  animation: spinnerAnimation1 125.5s infinite ease;
   transform-style: preserve-3d;
 
   overflow: visible;
@@ -547,8 +547,8 @@ body {
 .spinner {
   width: 160px;
   height: 160px;
-  /* animation: spinnerAnimation2 23s infinite ease-in-out; */
-  animation: spinnerAnimation2 11.5s infinite ease-in-out;
+  /* animation: spinnerAnimation2 23s infinite ; */
+  animation: spinnerAnimation2 138.5s infinite ease;
   transform-style: preserve-3d;
   display: flex;
   justify-content: center;
@@ -661,41 +661,41 @@ body {
 
 @keyframes spinnerAnimation0 {
   0% {
-    transform: rotate(0deg) rotateX(-25deg) rotateY(25deg);
+    transform: rotate(0deg) rotateX(-205deg) rotateY(25deg);
   }
-  30% {
+  33% {
     transform: rotate(20deg) rotateX(-50deg) rotateY(250deg);
   }
-  70% {
-    transform: rotate(5deg) rotateX(-100deg) rotateY(25deg);
+  66% {
+    transform: rotate(5deg) rotateX(-10deg) rotateY(25deg);
   }
   100% {
-    transform: rotate(0deg) rotateX(-25deg) rotateY(25deg);
+    transform: rotate(0deg) rotateX(-205deg) rotateY(25deg);
   }
 }
 @keyframes spinnerAnimation1 {
   0% {
-    transform: rotate(38deg) rotateX(-25deg) rotateY(2500deg);
+    transform: rotate(38deg) rotateX(-25deg) rotateY(250deg);
   }
-  30% {
-    transform: rotate(20deg) rotateX(-5000deg) rotateY(250deg);
+  33% {
+    transform: rotate(20deg) rotateX(50deg) rotateY(250deg);
   }
-  70% {
-    transform: rotate(4200deg) rotateX(-100deg) rotateY(25deg);
+  66% {
+    transform: rotate(42deg) rotateX(-10deg) rotateY(25deg);
   }
   100% {
-    transform: rotate(38deg) rotateX(-25deg) rotateY(2500deg);
+    transform: rotate(38deg) rotateX(-25deg) rotateY(250deg);
   }
 }
 @keyframes spinnerAnimation2 {
   0% {
     transform: rotate(10deg) rotateX(-10deg) rotateY(25deg);
   }
-  30% {
+  33% {
     transform: rotate(10deg) rotateX(-10deg) rotateY(50deg);
   }
-  70% {
-    transform: rotate(452deg) rotateX(-150deg) rotateY(125deg);
+  66% {
+    transform: rotate(42deg) rotateX(50deg) rotateY(125deg);
   }
   100% {
     transform: rotate(10deg) rotateX(-10deg) rotateY(25deg);

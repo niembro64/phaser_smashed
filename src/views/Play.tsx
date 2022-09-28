@@ -111,7 +111,8 @@ function Play() {
       default: "arcade",
       arcade: {
         gravity: { y: 3000 },
-        debug: false,
+        // debug: false,
+        debug: true,
       },
     },
     scene: [Game],
@@ -207,14 +208,6 @@ function Play() {
   };
 
   const onClickStartRotateSelection = (playerIndex: number): void => {
-    // console.log("isPlaying", isPlaying);
-    // console.log("monkeysMusic", monkeysMusic);
-    // console.log("stop", stop);
-    // if (isPlaying) {
-    //   monkeysMusic();
-    // }
-    // monkeysMusic();
-    // playMonkeyMusicStartScreen();
     blipSound();
     let choices = [...smashConfig.players];
     let choice = choices[playerIndex];
@@ -237,15 +230,6 @@ function Play() {
   const [showAbout, setShowAbout] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
 
-  // const playMonkeyMusicStartScreen = (): void => {
-  //   if (!isPlaying) {
-  //     monkeysMusicPlay();
-  //   }
-  // };
-
-  useEffect(() => {}, []);
-  // useEffect(() => {}, [webState, showRulesN64, showControls, showAbout]);
-
   const characterMoves: CharacterMove[] = [
     { button: "D-Pad", move: "Movement", ready: "✔️" },
     { button: "X", move: "Jump", ready: "✔️" },
@@ -258,12 +242,6 @@ function Play() {
     { button: "L + R", move: "Pause", ready: "✔️" },
     { button: "All Players Ready", move: "UnPause", ready: "✔️" },
   ];
-  const clickSoundParent = () => {
-    if (webState === "play") {
-      const myGameX = myGame.current.scene.keys.game as Game;
-      setSoundStartPlayLiquid(myGameX);
-    }
-  };
 
   const clickPauseParent = () => {
     if (webState === "play") {
