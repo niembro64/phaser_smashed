@@ -34,7 +34,7 @@ export function updateSpriteFilter(
       if (
         Math.floor(
           (game.gameNanoseconds - player.state.gameStamp) /
-            game.DURATION_PLAYER_FILTER
+            game.DURATION_PLAYER_FILTER_FLICKER
         ) %
           2 ===
         0
@@ -52,7 +52,7 @@ export function updateSpriteFilter(
       if (
         Math.floor(
           (game.gameNanoseconds - player.state.gameStamp) /
-            game.DURATION_PLAYER_FILTER
+            game.DURATION_PLAYER_FILTER_FLICKER
         ) %
           2 ===
         0
@@ -72,18 +72,14 @@ export function updateSpriteFilter(
   }
 }
 
-export function filterAttackEnergyColorCircle(
+export function filterAttacksColorCircle(
   player: Player,
   circleColor: number
 ): void {
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
   player.char.attackEnergy.sprite.setTint(circleColor);
   player.char.attackEnergy.sprite.setAlpha(1);
-  // player.char.sprite.brighten(0.3);
+  player.char.attackPhysical.sprite.setTint(circleColor);
+  player.char.attackPhysical.sprite.setAlpha(1);
 }
 export function filterPlayerColorCircle(
   player: Player,
@@ -153,13 +149,16 @@ export function filterNormalAttackEnergy(
   game: Game
 ): void {
   if (game.debug.setPlayerIdFiltersActive) {
-    filterAttackEnergyColorCircle(
+    filterAttacksColorCircle(
       player,
       game.colorCircles[playerIndex].colorNumber
     );
     player.char.attackEnergy.sprite.setAlpha(1);
+    player.char.attackPhysical.sprite.setAlpha(1);
   } else {
     player.char.attackEnergy.sprite.setAlpha(1);
     player.char.attackEnergy.sprite.setTint(0xffffff);
+    player.char.attackPhysical.sprite.setAlpha(1);
+    player.char.attackPhysical.sprite.setTint(0xffffff);
   }
 }

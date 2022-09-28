@@ -61,13 +61,9 @@ export default class Game extends Phaser.Scene {
   DURATION_GAME_SHOT: number = 4000;
   DURATION_PLAYER_HURT: number = 1000;
   DURATION_PLAYER_DEAD: number = 5000;
-  DURATION_PLAYER_FILTER: number = 100;
+  DURATION_PLAYER_FILTER_FLICKER: number = this.DURATION_PLAYER_HURT / 10;
 
   playerSpawnOrder: number[] = [0, 1, 2, 3];
-  // playerSpawnOrder: number[] = [1, 2, 3, 0];
-  // playerSpawnOrder: number[] = [2, 3, 0, 1];
-  // playerSpawnOrder: number[] = [3, 0, 1, 2];
-
   readyLocationLROffset: number = 0;
   glassLocationLROffset: number = 0;
   upperTextLocationLROffset: number = 0;
