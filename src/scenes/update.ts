@@ -28,8 +28,9 @@ import {
   updateTimeTime,
   updateGameTime,
   setGameState,
+  getHasGameDurationPassedAttack,
+  setAttackPhysicalState,
 } from "./helpers/state";
-import { updateAttackPhysicalSwitch } from "./helpers/damage";
 import { updateUpB } from "./helpers/attacks";
 import { getIsFirstBlood, getIsScreenClear } from "./helpers/drinking";
 import {
@@ -40,6 +41,7 @@ import {
 } from "./helpers/sound";
 import { updateGlassesTransparency, updateText } from "./helpers/text";
 import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
+import { Player } from "./interfaces";
 
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
@@ -201,7 +203,7 @@ export function updatePlayers(game: Game): void {
         updateUpB(player, game);
 
         // UPDATE ATTACK PHYSICAL
-        updateAttackPhysicalSwitch(player, playerIndex, game);
+        updateAttackPhysicals(player, playerIndex, game);
 
         ////////////////////////////////
         ///////// attackPhysical hit => hurt
@@ -284,4 +286,56 @@ export function updatePlayers(game: Game): void {
 
   // console.log("game.input.gamepad.total", game.input.gamepad.total);
   // game.loaded = true;
+}
+
+export function updateAttackPhysicals(
+  player: Player,
+  iPlayer: number,
+  game: Game
+): void {
+  let attackPhysical = player.char.attackPhysical;
+
+  switch (attackPhysical.state.name) {
+    case "attackphysical-state-on":
+      if (
+        getHasGameDurationPassedAttack(
+          attackPhysical,
+          attackPhysical.durationAttack,
+          game
+        )
+      ) {
+        setAttackPhysicalState(
+          attackPhysical,
+          iPlayer,
+          "attackphysical-state-cooldown",
+          game
+        );
+      }
+      break;
+    case "attackphysical-state-cooldown":
+      if (
+        getHasGameDurationPassedAttack(
+          attackPhysical,
+          attackPhysical.durationCooldown,
+          game
+        )
+      ) {
+        setAttackPhysicalState(
+          attackPhysical,
+          iPlayer,
+          "attackphysical-state-off",
+          game
+        );
+      }
+      break;
+    case "attackphysical-state-off":
+      if (player.gamepad.A && !player.padPrev.A) {
+        setAttackPhysicalState(
+          attackPhysical,
+          iPlayer,
+          "attackphysical-state-on",
+          game
+        );
+      }
+  }
 }
