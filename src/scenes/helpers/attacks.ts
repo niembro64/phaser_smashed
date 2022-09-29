@@ -69,51 +69,45 @@ export function isAttackEnergyNearPlayer(player: Player): boolean {
   return false;
 }
 
-export function updatePhysicalAttackFollowPlayers(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
-    player.char.attackPhysical.sprite.y =
-      player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
-
-    // if (player.char.initializeCharPosition.lookingRight) {
-    //   if (player.char.sprite.flipX) {
-    //     player.char.attackPhysical.sprite.x =
-    //       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
-
-    //     player.char.attackPhysical.sprite.flipX =
-    //       player.char.initializeCharPosition.lookingRight;
-    //   } else {
-    //     player.char.attackPhysical.sprite.x =
-    //       player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
-
-    //     player.char.attackPhysical.sprite.flipX =
-    //       !player.char.initializeCharPosition.lookingRight;
-    //   }
-    // } else {
-    //   if (player.char.sprite.flipX) {
-    //     player.char.attackPhysical.sprite.x =
-    //       player.char.sprite.x + player.char.attackEnergy.posFromCenter.x;
-
-    //     player.char.attackPhysical.sprite.flipX =
-    //       player.char.initializeCharPosition.lookingRight;
-    //   } else {
-    //     player.char.attackPhysical.sprite.x =
-    //       player.char.sprite.x - player.char.attackEnergy.posFromCenter.x;
-
-    //     player.char.attackPhysical.sprite.flipX =
-    //       !player.char.initializeCharPosition.lookingRight;
-    //   }
-    // }
-
-    if (player.char.sprite.flipX) {
-      player.char.attackPhysical.sprite.x =
-        player.char.sprite.x - player.char.attackPhysical.posFromCenter.x;
-
-      player.char.attackPhysical.sprite.flipX = true;
-    } else {
-      player.char.attackPhysical.sprite.x =
-        player.char.sprite.x + player.char.attackPhysical.posFromCenter.x;
-
-      player.char.attackPhysical.sprite.flipX = false;
-    }
-  });
+export function setPhysicalAttackOffscreen(player: Player, game: Game): void {
+  player.char.attackPhysical.sprite.y = 100;
+  player.char.attackPhysical.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
 }
+export function updatePhysicalAttackFollowsPlayer(
+  player: Player,
+  game: Game
+): void {
+  player.char.attackPhysical.sprite.y =
+    player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
+
+  if (player.char.sprite.flipX) {
+    player.char.attackPhysical.sprite.x =
+      player.char.sprite.x - player.char.attackPhysical.posFromCenter.x;
+
+    player.char.attackPhysical.sprite.flipX = true;
+  } else {
+    player.char.attackPhysical.sprite.x =
+      player.char.sprite.x + player.char.attackPhysical.posFromCenter.x;
+
+    player.char.attackPhysical.sprite.flipX = false;
+  }
+}
+
+// export function updatePhysicalAttackFollowPlayers(game: Game): void {
+//   game.players.forEach((player, playerIndex) => {
+//     player.char.attackPhysical.sprite.y =
+//       player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
+
+//     if (player.char.sprite.flipX) {
+//       player.char.attackPhysical.sprite.x =
+//         player.char.sprite.x - player.char.attackPhysical.posFromCenter.x;
+
+//       player.char.attackPhysical.sprite.flipX = true;
+//     } else {
+//       player.char.attackPhysical.sprite.x =
+//         player.char.sprite.x + player.char.attackPhysical.posFromCenter.x;
+
+//       player.char.attackPhysical.sprite.flipX = false;
+//     }
+//   });
+// }

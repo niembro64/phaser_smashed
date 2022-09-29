@@ -31,7 +31,10 @@ import {
   getHasGameDurationPassedAttack,
   setAttackPhysicalState,
 } from "./helpers/state";
-import { updateUpB } from "./helpers/attacks";
+import {
+  updatePhysicalAttackFollowsPlayer,
+  updateUpB,
+} from "./helpers/attacks";
 import { getIsFirstBlood, getIsScreenClear } from "./helpers/drinking";
 import {
   setMusicPlay,
@@ -290,13 +293,21 @@ export function updatePlayers(game: Game): void {
 
 export function updateAttackPhysicals(
   player: Player,
-  iPlayer: number,
+  playerIndex: number,
   game: Game
 ): void {
   let attackPhysical = player.char.attackPhysical;
 
   switch (attackPhysical.state.name) {
     case "attackphysical-state-on":
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
+      updatePhysicalAttackFollowsPlayer(player, game);
+
+      ////////////////////////////////
+      ///////// duration => cooldown
+      ////////////////////////////////
       if (
         getHasGameDurationPassedAttack(
           attackPhysical,
@@ -306,13 +317,21 @@ export function updateAttackPhysicals(
       ) {
         setAttackPhysicalState(
           attackPhysical,
-          iPlayer,
+          player,
+          playerIndex,
           "attackphysical-state-cooldown",
           game
         );
       }
       break;
     case "attackphysical-state-cooldown":
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
+
+      ////////////////////////////////
+      ///////// duration => off
+      ////////////////////////////////
       if (
         getHasGameDurationPassedAttack(
           attackPhysical,
@@ -322,17 +341,26 @@ export function updateAttackPhysicals(
       ) {
         setAttackPhysicalState(
           attackPhysical,
-          iPlayer,
+          player,
+          playerIndex,
           "attackphysical-state-off",
           game
         );
       }
       break;
     case "attackphysical-state-off":
+      ////////////////////////////////
+      ///////// WHILE IN LOOP
+      ////////////////////////////////
+
+      ////////////////////////////////
+      ///////// button => on
+      ////////////////////////////////
       if (player.gamepad.A && !player.padPrev.A) {
         setAttackPhysicalState(
           attackPhysical,
-          iPlayer,
+          player,
+          playerIndex,
           "attackphysical-state-on",
           game
         );

@@ -1,4 +1,5 @@
 import Game from "./Game";
+import { setPhysicalAttackOffscreen } from "./helpers/attacks";
 import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
@@ -396,10 +397,12 @@ export function createAttackPhysicals(game: Game): void {
       .setMass(player.char.attackPhysical.mass)
       .setScale(player.char.attackPhysical.scale)
       .setOrigin(0.5, 0.5)
-      .setActive(false)
-      .setVisible(false);
+      .setActive(true)
+      .setVisible(true);
 
     player.char.attackPhysical.sprite.body.allowGravity = false;
+
+    setPhysicalAttackOffscreen(player, game);
   });
 }
 export function createAttackEnergies(game: Game): void {

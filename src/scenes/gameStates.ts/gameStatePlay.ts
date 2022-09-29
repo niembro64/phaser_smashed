@@ -1,5 +1,4 @@
 import Game from "../Game";
-import { updatePhysicalAttackFollowPlayers } from "../helpers/attacks";
 import { updateCamera } from "../helpers/camera";
 import { updateDeathsAndKillsMatrices } from "../helpers/damage";
 import {
@@ -34,7 +33,7 @@ export function updateGameStatePlay(game: Game, time: number, delta: number): vo
 
   // UPDATE PLAYERS
   updatePlayers(game);
-  updatePhysicalAttackFollowPlayers(game);
+  // updatePhysicalAttackFollowPlayers(game);
 
   // AFTER PLAYERS
   updatePadPreviousAndDebounced(game);

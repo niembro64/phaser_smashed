@@ -6,7 +6,11 @@ import {
   Player,
   PlayerState,
 } from "../interfaces";
-import { setPhysicsAttackEnergyOn } from "./attacks";
+import {
+  setPhysicalAttackOffscreen,
+  setPhysicsAttackEnergyOn,
+  updatePhysicalAttackFollowsPlayer,
+} from "./attacks";
 import {
   setActiveHurtEmitterOff,
   setActiveHurtEmitterOn,
@@ -96,6 +100,7 @@ export function setGameState(game: Game, state: GameState): void {
 
 export function setAttackPhysicalState(
   attackPhysical: AttackPhysical,
+  player: Player,
   playerIndex: number,
   state: AttackState,
   game: Game
@@ -113,14 +118,17 @@ export function setAttackPhysicalState(
 
   switch (attackPhysical.state.name) {
     case "attackphysical-state-on":
-      attackPhysical.sprite.setActive(true).setVisible(true);
+      // attackPhysical.sprite.setActive(true).setVisible(true);
+
       attackPhysical.audio.play();
       break;
     case "attackphysical-state-cooldown":
-      attackPhysical.sprite.setActive(false).setVisible(false);
+      setPhysicalAttackOffscreen(player, game);
+      // attackPhysical.sprite.setActive(false).setVisible(false);
       break;
     case "attackphysical-state-off":
-      attackPhysical.sprite.setActive(false).setVisible(false);
+      setPhysicalAttackOffscreen(player, game);
+      // attackPhysical.sprite.setActive(false).setVisible(false);
       break;
   }
 }
