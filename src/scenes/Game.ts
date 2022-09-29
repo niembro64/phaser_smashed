@@ -26,8 +26,8 @@ export default class Game extends Phaser.Scene {
     setCollidersPvP: false,
     setCollidersPvAttackPhysical: false,
     setCollidersPvAttackEnergy: false,
-    setCollidersAEvAE: false,
-    setCollidersAEvAP: false,
+    setCollidersAEvAE: true,
+    setCollidersAEvAP: true,
     setAEWrapScreen: false,
     setPlayerIdVisible: true,
     setWallJumpsActive: true,
@@ -555,9 +555,9 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 20, y: 0 },
           damage: 50,
           hitback: { x: 0.2, y: 0 },
-          srcImage: "flame",
-          mass: 1,
-          scale: 0.4,
+          srcImage: "fist-gray",
+          mass: 10,
+          scale: 0.1,
           audio: null,
         },
         attackEnergy: {
@@ -684,7 +684,7 @@ export default class Game extends Phaser.Scene {
           damage: 50,
           hitback: { x: 0.2, y: 0 },
           srcImage: "sword",
-          mass: 1,
+          mass: 10,
           scale: 0.9,
           audio: null,
         },
@@ -810,9 +810,9 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 20, y: 0 },
           damage: 50,
           hitback: { x: 0.2, y: 0 },
-          srcImage: "flame",
-          mass: 1,
-          scale: 0.4,
+          srcImage: "fist-gray",
+          mass: 10,
+          scale: 0.1,
           audio: null,
         },
         attackEnergy: {
@@ -938,9 +938,9 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 15, y: 0 },
           damage: 50,
           hitback: { x: 0.2, y: 0 },
-          srcImage: "flame",
-          mass: 1,
-          scale: 0.4,
+          srcImage: "fist-gray",
+          mass: 10,
+          scale: 0.1,
           audio: null,
         },
         attackEnergy: {
@@ -1065,9 +1065,9 @@ export default class Game extends Phaser.Scene {
           posFromCenter: { x: 25, y: 0 },
           damage: 50,
           hitback: { x: 0.2, y: 0 },
-          srcImage: "flame",
-          mass: 1,
-          scale: 0.6,
+          srcImage: "fist-gray",
+          mass: 10,
+          scale: 0.2,
           audio: null,
         },
         attackEnergy: {
@@ -1189,12 +1189,12 @@ export default class Game extends Phaser.Scene {
           },
           durationAttack: 200,
           durationCooldown: 300,
-          posFromCenter: { x: 50, y: 0 },
+          posFromCenter: { x: 55, y: 0 },
           damage: 50,
           hitback: { x: 0.2, y: 0 },
-          srcImage: "flame",
-          mass: 1,
-          scale: 1.3,
+          srcImage: "fist-black",
+          mass: 10,
+          scale: 0.33,
           audio: null,
         },
         attackEnergy: {
@@ -1343,6 +1343,9 @@ export default class Game extends Phaser.Scene {
     if (this.debug.setMusicNumber === 2) {
       this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_ROYKSOP);
     }
+    this.load.image("fist-gray", "images/fist-gray.png");
+    this.load.image("fist-black", "images/fist-black.png");
+    this.load.image("fist-white", "images/fist.png");
     this.load.image("flame", "images/flame_small.png");
     this.load.image("laser", "images/laser.png");
 

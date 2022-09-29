@@ -398,7 +398,9 @@ export function createAttackPhysicals(game: Game): void {
       .setScale(player.char.attackPhysical.scale)
       .setOrigin(0.5, 0.5)
       .setActive(true)
-      .setVisible(true);
+      .setVisible(true)
+      .setTint(game.colorCircles[playerIndex].colorNumber)
+      .setAlpha(0.5);
 
     player.char.attackPhysical.sprite.body.allowGravity = false;
 

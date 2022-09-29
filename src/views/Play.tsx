@@ -111,14 +111,14 @@ function Play() {
       default: "arcade",
       arcade: {
         gravity: { y: 3000 },
-        // debug: false,
-        debug: true,
+        debug: false,
+        // debug: true,
       },
     },
     scene: [Game],
   };
-  const setTimeoutQuotesLengthStart: number = 1500;
-  const setTimeoutQuotesLengthReStart: number = 0;
+  const setTimeoutQuotesLengthStart: number = 2000;
+  const setTimeoutQuotesLengthReStart: number = 1500;
   // const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
