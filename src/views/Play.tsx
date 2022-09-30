@@ -615,10 +615,12 @@ function Play() {
 
               <div>
                 <ul>
-                  Tested Working:
+                  Best to Worst User Experience:
                   <li>✔️ iNNEXT SNES Wired USB</li>
-                  <li>✔️ Nintendo Switch Pro Controller</li>
-                  <li>✔️ Nintendo Switch Wired Controller</li>
+                  <li>✔️ Nintendo Switch Pro</li>
+                  <li>✔️ Nintendo Switch Wired</li>
+                  <li>✔️ KIWITATA Wired N64 </li>
+                  <li>✔️ Mekela NGC Wired Gamecube</li>
                 </ul>
               </div>
             </div>
