@@ -563,6 +563,7 @@ function Play() {
                   </div>
                 );
               })}
+              <span> fyi, button mapping is insane</span>
             </div>
           </div>
         )}
@@ -611,15 +612,13 @@ function Play() {
                 <span>Suggested: USB Hub/Extension $13</span>
               </a>
               <p>Some types of controllers don't work yet.</p>
+
               <div>
                 <ul>
-                  ✔️ Working:
-                  <li>iNNEXT SNES Wired USB</li>
-                  <li>Nintendo Switch Pro Controller</li>
-                </ul>
-                <ul>
-                  🚧 Don't Work (yet?):
-                  <li>Nintendo Switch Wired Controller</li>
+                  Tested Working:
+                  <li>✔️ iNNEXT SNES Wired USB</li>
+                  <li>✔️ Nintendo Switch Pro Controller</li>
+                  <li>✔️ Nintendo Switch Wired Controller</li>
                 </ul>
               </div>
             </div>
