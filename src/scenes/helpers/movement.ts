@@ -139,7 +139,62 @@ export function updateJump(player: Player, game: Game): void {
     player.char.jumpIndex = 0;
   }
 
-  if (player.gamepad.Y && !player.padPrev.Y) {
+  // if (player.gamepad.Y && !player.padPrev.Y) {
+  //   if (
+  //     !(
+  //       player.char.sprite.body.touching.down ||
+  //       player.char.sprite.body.touching.left ||
+  //       player.char.sprite.body.touching.right
+  //     ) &&
+  //     player.char.jumpIndex < 1
+  //   ) {
+  //     player.char.jumpIndex = 1;
+  //   }
+
+  //   game.SOUND_JUMP.volume = player.char.jumps[player.char.jumpIndex];
+  //   game.SOUND_JUMP.play();
+
+  //   player.char.sprite.body.setVelocityY(
+  //     player.char.sprite.body.velocity.y *
+  //       (1 - player.char.jumps[player.char.jumpIndex]) +
+  //       game.DEFAULT_JUMP *
+  //         player.char.jumpPower *
+  //         player.char.jumps[player.char.jumpIndex]
+  //   );
+  //   player.char.jumpIndex +=
+  //     player.char.jumpIndex === player.char.jumps.length - 1 ? 0 : 1;
+
+  //   // horizontal stuff
+  //   if (
+  //     game.debug.setWallJumpsActive &&
+  //     player.char.lastDirectionTouched === "left" &&
+  //     hasPlayerTouchedWallRecently(player)
+  //   ) {
+  //     player.char.sprite.body.setVelocityX(
+  //       game.DEFAULT_WALL_JUMP * player.char.speed * 0.5
+  //     );
+  //     return;
+  //   }
+  //   // if (player.pad.left && player.char.sprite.body.velocity.x > 0) {
+  //   //   player.char.sprite.body.setVelocityX(-game.DEFAULT_SPEED_X * 10);
+  //   //   return;
+  //   // }
+  //   if (
+  //     game.debug.setWallJumpsActive &&
+  //     player.char.lastDirectionTouched === "right" &&
+  //     hasPlayerTouchedWallRecently(player)
+  //   ) {
+  //     player.char.sprite.body.setVelocityX(
+  //       -game.DEFAULT_WALL_JUMP * player.char.speed * 0.5
+  //     );
+  //     return;
+  //   }
+  //   // if (player.pad.right && player.char.sprite.body.velocity.x < 0) {
+  //   //   player.char.sprite.body.setVelocityX(game.DEFAULT_SPEED_X * 10);
+  //   //   return;
+  //   // }
+  // }
+  if (player.padCurr.Y && !player.padPrev.Y) {
     if (
       !(
         player.char.sprite.body.touching.down ||
@@ -196,7 +251,14 @@ export function updateJump(player: Player, game: Game): void {
   }
 
   // holding jump
-  if (player.gamepad.Y) {
+  // if (player.gamepad.Y) {
+  //   player.char.sprite.body.setVelocityY(
+  //     player.char.sprite.body.velocity.y +
+  //       -game.DEFAULT_SPEED_Y * player.char.speed * player.char.fast
+  //   );
+  //   // return;
+  // }
+  if (player.padCurr.Y) {
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y +
         -game.DEFAULT_SPEED_Y * player.char.speed * player.char.fast
@@ -210,8 +272,15 @@ export function updateFrictionWallY(player: Player, game: Game): void {
     return;
   }
 
+  // if (
+  //   (player.gamepad.left || player.gamepad.right) &&
+  //   (player.char.sprite.body.touching.left ||
+  //     player.char.sprite.body.touching.right)
+  // ) {
+  //   player.char.sprite.body.setVelocityY(0);
+  // }
   if (
-    (player.gamepad.left || player.gamepad.right) &&
+    (player.padCurr.left || player.padCurr.right) &&
     (player.char.sprite.body.touching.left ||
       player.char.sprite.body.touching.right)
   ) {
@@ -238,10 +307,20 @@ export function updateFrictionAirX(player: Player, game: Game): void {
 }
 
 export function updateFrictionGroundX(player: Player, game: Game): void {
+  // if (
+  //   player.char.sprite.body.touching.down &&
+  //   !player.gamepad.left &&
+  //   !player.gamepad.right
+  // ) {
+  //   player.char.sprite.body.setVelocityX(
+  //     player.char.sprite.body.velocity.x *
+  //       Math.pow(player.char.friction_ground, 4)
+  //   );
+  // }
   if (
     player.char.sprite.body.touching.down &&
-    !player.gamepad.left &&
-    !player.gamepad.right
+    !player.padCurr.left &&
+    !player.padCurr.right
   ) {
     player.char.sprite.body.setVelocityX(
       player.char.sprite.body.velocity.x *

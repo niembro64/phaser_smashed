@@ -56,7 +56,8 @@ export interface Player {
   char: Char;
   keyboard: Keyboard | any;
   gamepad: Gamepad | any;
-  padPrev: PadStatePrevious;
+  padCurr: GamepadData;
+  padPrev: GamepadData;
   padDebounced: PadStateDebounced;
   particles: any;
   emitterLight: any;
@@ -141,7 +142,7 @@ export interface CameraChar {
   zoom: number;
 }
 
-export interface PadStatePrevious {
+export interface GamepadData {
   up: boolean;
   down: boolean;
   left: boolean;
@@ -150,6 +151,8 @@ export interface PadStatePrevious {
   B: boolean;
   X: boolean;
   Y: boolean;
+  R1: boolean;
+  L1: boolean;
 }
 
 export interface PadStateDebounced {

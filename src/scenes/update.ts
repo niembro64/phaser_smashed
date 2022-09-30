@@ -58,6 +58,8 @@ export function update(game: Game, time: number, delta: number): void {
     return;
   }
 
+
+
   updateTimeTime(game, time, delta);
   updateGameTime(game, time, delta);
   updateText(game);
@@ -356,7 +358,16 @@ export function updateAttackPhysicals(
       ////////////////////////////////
       ///////// button => on
       ////////////////////////////////
-      if (player.gamepad.A && !player.padPrev.A) {
+      // if (player.gamepad.A && !player.padPrev.A) {
+      //   setAttackPhysicalState(
+      //     attackPhysical,
+      //     player,
+      //     playerIndex,
+      //     "attackphysical-state-on",
+      //     game
+      //   );
+      // }
+      if (player.padCurr.A && !player.padPrev.A) {
         setAttackPhysicalState(
           attackPhysical,
           player,

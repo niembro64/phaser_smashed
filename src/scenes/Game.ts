@@ -44,6 +44,7 @@ export default class Game extends Phaser.Scene {
 
   loaded: boolean = false;
 
+  GAMEPAD_HAT_VALUES: number[] = [];
   PLAYER_CHOICES: number[] = [0, 1, 2, 3];
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
@@ -592,6 +593,18 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       gamepad: null,
+      padCurr: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+        R1: false,
+        L1: false,
+      },
       padPrev: {
         up: false,
         down: false,
@@ -601,6 +614,8 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+        R1: false,
+        L1: false,
       },
       padDebounced: {
         up: 0,
@@ -720,6 +735,18 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       gamepad: null,
+      padCurr: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+        R1: false,
+        L1: false,
+      },
       padPrev: {
         up: false,
         down: false,
@@ -729,6 +756,8 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+        R1: false,
+        L1: false,
       },
       padDebounced: {
         up: 0,
@@ -848,6 +877,18 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       gamepad: null,
+      padCurr: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+        R1: false,
+        L1: false,
+      },
       padPrev: {
         up: false,
         down: false,
@@ -857,6 +898,8 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+        R1: false,
+        L1: false,
       },
       padDebounced: {
         up: 0,
@@ -975,6 +1018,18 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       gamepad: null,
+      padCurr: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+        R1: false,
+        L1: false,
+      },
       padPrev: {
         up: false,
         down: false,
@@ -984,6 +1039,8 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+        R1: false,
+        L1: false,
       },
       padDebounced: {
         up: 0,
@@ -1102,6 +1159,18 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       gamepad: null,
+      padCurr: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+        R1: false,
+        L1: false,
+      },
       padPrev: {
         up: false,
         down: false,
@@ -1111,6 +1180,8 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+        R1: false,
+        L1: false,
       },
       padDebounced: {
         up: 0,
@@ -1229,6 +1300,18 @@ export default class Game extends Phaser.Scene {
       },
       keyboard: null,
       gamepad: null,
+      padCurr: {
+        up: false,
+        down: false,
+        left: false,
+        right: false,
+        A: false,
+        B: false,
+        X: false,
+        Y: false,
+        R1: false,
+        L1: false,
+      },
       padPrev: {
         up: false,
         down: false,
@@ -1238,6 +1321,8 @@ export default class Game extends Phaser.Scene {
         B: false,
         X: false,
         Y: false,
+        R1: false,
+        L1: false,
       },
       padDebounced: {
         up: 0,
@@ -1272,6 +1357,12 @@ export default class Game extends Phaser.Scene {
       this.players.forEach((iPlayer, i) => {
         iPlayer.char.friction_air = 2;
       });
+    }
+    let hatAdder = 0.142857;
+    let hatPos = -1 + hatAdder;
+    for (let i = 0; i < 8; i++) {
+      this.GAMEPAD_HAT_VALUES.push(hatPos);
+      hatPos += hatAdder * 2;
     }
 
     let pathSounds = "sounds/";
