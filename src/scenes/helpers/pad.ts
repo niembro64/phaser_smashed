@@ -96,8 +96,8 @@ export function updatePadCurrButtonsController(
 export function updateGamePadsConnected(game: Game): void {
   let playerIndex = 0;
 
-  console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
-  console.log("NUM GAMEPADS", game.input.gamepad.total);
+  // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
+  // console.log("NUM GAMEPADS", game.input.gamepad.total);
 
   game.input.gamepad.gamepads.forEach((gamepad, gamepadIndex) => {
     // gamepad?.axes.forEach((axis, axisIndex) => {
@@ -122,7 +122,7 @@ export function updateGamePadsConnected(game: Game): void {
 
   game.players.forEach((player, playerIndex) => {
     if (player.gamepad) {
-      if (player?.gamepad?.axes) {
+      if (player?.gamepad?.axes?.length) {
         updatePadCurrHatController(player, game);
       } else {
         updatePadCurrButtonsController(player, game);
