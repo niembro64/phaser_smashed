@@ -342,7 +342,7 @@ export function createPlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
-      game.INITIAL.POSITION.PLAYER_Y,
+      game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
       player.char.name
     );
 
@@ -649,7 +649,7 @@ export function createPlatforms4(game: Game): void {
 
   for (let i = 0; i < 3; i++) {
     game.PLATFORMS.create(
-      1207 * game.SCREEN_SCALE.WIDTH + i * game.brickWidth,
+      1207 * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
       710 * game.SCREEN_SCALE.HEIGHT,
       "platformVertical"
     );
@@ -666,7 +666,7 @@ export function createPlatforms4(game: Game): void {
   for (let i = 0; i < 20; i++) {
     game.PLATFORMS.create(
       600,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + 300 + i * game.brickHeight,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + 300 + i * game.ASSET_BRICK_HEIGHT,
       "platformHorizontal"
     );
   }
@@ -674,7 +674,7 @@ export function createPlatforms4(game: Game): void {
   for (let i = 0; i < 2; i++) {
     game.PLATFORMS.create(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.brickHeight,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
       "platformHorizontal"
     );
   }
@@ -682,7 +682,7 @@ export function createPlatforms4(game: Game): void {
   for (let i = 0; i < 25; i++) {
     game.PLATFORMS.create(
       1700 * game.SCREEN_SCALE.WIDTH,
-      (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT + game.brickHeight * i,
+      (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT + game.ASSET_BRICK_HEIGHT * i,
       "platformShort"
     );
   }
@@ -695,14 +695,14 @@ export function createPlatforms4(game: Game): void {
   for (let i = 0; i < 5; i++) {
     game.PLATFORMS.create(
       1617 * game.SCREEN_SCALE.WIDTH,
-      (686 + i * game.brickHeight) * game.SCREEN_SCALE.HEIGHT,
+      (686 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
       "brick"
     );
   }
   for (let i = 0; i < 5; i++) {
     game.PLATFORMS.create(
       1783 * game.SCREEN_SCALE.WIDTH,
-      (686 + i * game.brickHeight) * game.SCREEN_SCALE.HEIGHT,
+      (686 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
       "brick"
     );
   }
@@ -721,7 +721,7 @@ export function createImageTable(game: Game): void {
 
 export function createFlag(game: Game): void {
   game.FLAG = game.physics.add.sprite(
-    (1920 - 87 - game.brickWidth * 2) * game.SCREEN_SCALE.WIDTH,
+    (1920 - 87 - game.ASSET_BRICK_WIDTH * 2) * game.SCREEN_SCALE.WIDTH,
     (1080 - 557) * game.SCREEN_SCALE.HEIGHT,
     "flag"
   );
@@ -731,7 +731,7 @@ export function createFlag(game: Game): void {
 }
 
 export function createBackgroundTitles(game: Game): void {
-  game.TITLE = game.add
+  game.TEXT_TITLE = game.add
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       300 * game.SCREEN_SCALE.HEIGHT,
@@ -749,7 +749,7 @@ export function createBackgroundTitles(game: Game): void {
     .setOrigin(0.5)
     .setColor("black")
     .setAlpha(0.3);
-  game.SUBTITLE = game.add
+  game.TEXT_SUBTITLE = game.add
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 13,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
@@ -766,7 +766,7 @@ export function createBackgroundTitles(game: Game): void {
     .setOrigin(0.5)
     .setColor("black")
     .setAlpha(0.3);
-  game.SUPERTITLE = game.add
+  game.TEXT_SUPERTITLE = game.add
     .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, "YOUNG-CHEZ", {
       // font: "300px Impact",
       fontFamily: "Impact",

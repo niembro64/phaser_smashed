@@ -287,7 +287,7 @@ export interface Debug {
   setMusicNumber: number;
   setMusicActive: boolean;
   setUpdateLoopsNumSkip: number;
-  setAirFriction: boolean;
+  setFrictionAirActive: boolean;
   setCamerasActive: boolean;
   setCamerasVisible: boolean;
   setCollidersPvP: boolean;
@@ -308,7 +308,7 @@ export interface Debug {
   setPrintControllerConnectedConsole: boolean;
 }
 
-export interface NormalizedVector {
+export interface Vector {
   x: number;
   y: number;
 }

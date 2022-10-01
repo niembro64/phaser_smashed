@@ -206,10 +206,10 @@ export function updateDamageShotsText(
             ? (100 / (100 + player.char.damage)) * 100
             : player.char.damage
         ).toString() +
-          game.GAMEBAR_CHARS.damage +
+          game.TEXT_GAMEBAR_CHARS.damage +
           "  " +
           player.shotCount.toString() +
-          game.GAMEBAR_CHARS.shots
+          game.TEXT_GAMEBAR_CHARS.shots
       );
     player.scoreBoardUpper.x =
       game.cameraMover.char.sprite.x +
@@ -299,10 +299,10 @@ export function updateDeathsKillsText(
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         player.killCount.toString() +
-          game.GAMEBAR_CHARS.kills +
+          game.TEXT_GAMEBAR_CHARS.kills +
           "" +
           player.deathCount.toString() +
-          game.GAMEBAR_CHARS.deaths
+          game.TEXT_GAMEBAR_CHARS.deaths
       );
     player.scoreBoardLower.x =
       game.cameraMover.char.sprite.x +

@@ -359,7 +359,7 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
       player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
 
     player.char.attackEnergy.sprite.body.setVelocityX(
-      -1 * game.ATTACK_ENERGY_SPEED_X + vX
+      -1 * game.BASE_PLAYER_ATTACKENERGY.x + vX
     );
     player.char.attackEnergy.sprite.body.setVelocityY(vY);
 
@@ -377,7 +377,7 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
       player.char.sprite.y + player.char.attackEnergy.posFromCenter.y;
 
     player.char.attackEnergy.sprite.body.setVelocityX(
-      game.ATTACK_ENERGY_SPEED_X + vX
+      game.BASE_PLAYER_ATTACKENERGY.x + vX
     );
     player.char.attackEnergy.sprite.body.setVelocityY(vY);
 
@@ -540,50 +540,52 @@ export function updatePadPreviousAndDebounced(game: Game): void {
 
     if (player.padCurr.up) {
       player.padDebounced.up +=
-        player.padDebounced.up >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.up >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.up += player.padDebounced.up <= 0 ? 0 : -1;
     }
     if (player.padCurr.down) {
       player.padDebounced.down +=
-        player.padDebounced.down >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.down >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.down += player.padDebounced.down <= 0 ? 0 : -1;
     }
     if (player.padCurr.left) {
       player.padDebounced.left +=
-        player.padDebounced.left >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.left >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.left += player.padDebounced.left <= 0 ? 0 : -1;
     }
     if (player.padCurr.right) {
       player.padDebounced.right +=
-        player.padDebounced.right >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.right >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES
+          ? 0
+          : 1;
     } else {
       player.padDebounced.right += player.padDebounced.right <= 0 ? 0 : -1;
     }
 
     if (player.padCurr.A) {
       player.padDebounced.A +=
-        player.padDebounced.A >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.A >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.A += player.padDebounced.A <= 0 ? 0 : -1;
     }
     if (player.padCurr.B) {
       player.padDebounced.B +=
-        player.padDebounced.B >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.B >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.B += player.padDebounced.B <= 0 ? 0 : -1;
     }
     if (player.padCurr.X) {
       player.padDebounced.X +=
-        player.padDebounced.X >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.X >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.X += player.padDebounced.X <= 0 ? 0 : -1;
     }
     if (player.padCurr.Y) {
       player.padDebounced.Y +=
-        player.padDebounced.Y >= game.DEBOUNCE_NUMBER ? 0 : 1;
+        player.padDebounced.Y >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.Y += player.padDebounced.Y <= 0 ? 0 : -1;
     }
@@ -694,7 +696,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
     if (player.padCurr.up && !player.padCurr.Y) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
-          -game.DEFAULT_SPEED_Y *
+          -game.BASE_PLAYER_SPEED.y *
             player.char.speed *
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
@@ -704,7 +706,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
     if (player.padCurr.down) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
-          game.DEFAULT_SPEED_Y *
+          game.BASE_PLAYER_SPEED.y *
             player.char.speed *
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
@@ -716,7 +718,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
         player.char.sprite.body.velocity.x *
           game.RATIO_ACCELERATION_VELOCITY *
           Math.pow(player.char.friction_air, 3) +
-          -game.DEFAULT_SPEED_X *
+          -game.BASE_PLAYER_SPEED.x *
             player.char.speed *
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
@@ -728,7 +730,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
         player.char.sprite.body.velocity.x *
           game.RATIO_ACCELERATION_VELOCITY *
           Math.pow(player.char.friction_air, 4) +
-          game.DEFAULT_SPEED_X *
+          game.BASE_PLAYER_SPEED.x *
             player.char.speed *
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)

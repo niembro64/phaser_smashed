@@ -212,7 +212,7 @@ export function updateJump(player: Player, game: Game): void {
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y *
         (1 - player.char.jumps[player.char.jumpIndex]) +
-        game.DEFAULT_JUMP *
+        game.BASE_PLAYER_JUMP *
           player.char.jumpPower *
           player.char.jumps[player.char.jumpIndex]
     );
@@ -226,7 +226,7 @@ export function updateJump(player: Player, game: Game): void {
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        game.DEFAULT_WALL_JUMP * player.char.speed * 0.5
+        game.BASE_PLAYER_WALLJUMP * player.char.speed
       );
       return;
     }
@@ -240,7 +240,7 @@ export function updateJump(player: Player, game: Game): void {
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        -game.DEFAULT_WALL_JUMP * player.char.speed * 0.5
+        -game.BASE_PLAYER_WALLJUMP * player.char.speed
       );
       return;
     }
@@ -261,7 +261,7 @@ export function updateJump(player: Player, game: Game): void {
   if (player.padCurr.Y) {
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y +
-        -game.DEFAULT_SPEED_Y * player.char.speed * player.char.fast
+        -game.BASE_PLAYER_SPEED.y * player.char.speed * player.char.fast
     );
     // return;
   }
@@ -289,19 +289,25 @@ export function updateFrictionWallY(player: Player, game: Game): void {
 }
 
 export function updateFrictionAirY(player: Player, game: Game): void {
+  if (!game.debug.setFrictionAirActive) {
+    return;
+  }
+
   if (!player.char.sprite.body.touching.down) {
     player.char.sprite.body.setVelocityY(
-      player.char.sprite.body.velocity.y *
-        Math.pow(player.char.friction_air, 1 / player.char.friction_air)
+      player.char.sprite.body.velocity.y * (1 - player.char.friction_air)
     );
   }
 }
 
 export function updateFrictionAirX(player: Player, game: Game): void {
+  if (!game.debug.setFrictionAirActive) {
+    return;
+  }
+
   if (!player.char.sprite.body.touching.down) {
     player.char.sprite.body.setVelocityX(
-      player.char.sprite.body.velocity.x *
-        Math.pow(player.char.friction_air, 1.2)
+      player.char.sprite.body.velocity.x * (1 - player.char.friction_air)
     );
   }
 }
@@ -323,8 +329,7 @@ export function updateFrictionGroundX(player: Player, game: Game): void {
     !player.padCurr.right
   ) {
     player.char.sprite.body.setVelocityX(
-      player.char.sprite.body.velocity.x *
-        Math.pow(player.char.friction_ground, 4)
+      player.char.sprite.body.velocity.x * (1 - player.char.friction_ground)
     );
   }
 }
@@ -336,12 +341,16 @@ export function hitbackFly(
   hitbacky: number
 ): void {
   player.char.sprite.body.setVelocityY(
-    hitbacky * game.HITBACK_Y +
-      ((hitbacky > 0 ? 1 : -1) * (game.HITBACK_Y * player.char.damage)) / 5
+    hitbacky * game.BASE_PLAYER_HITBACK.y +
+      ((hitbacky > 0 ? 1 : -1) *
+        (game.BASE_PLAYER_HITBACK.y * player.char.damage)) /
+        5
   );
   player.char.sprite.body.setVelocityX(
-    hitbackx * game.HITBACK_X +
-      ((hitbackx > 0 ? 1 : -1) * (game.HITBACK_X * player.char.damage)) / 5
+    hitbackx * game.BASE_PLAYER_HITBACK.x +
+      ((hitbackx > 0 ? 1 : -1) *
+        (game.BASE_PLAYER_HITBACK.x * player.char.damage)) /
+        5
   );
   // if (player.char.sprite.flipX) {
   //   player.char.sprite.body.setVelocityX(

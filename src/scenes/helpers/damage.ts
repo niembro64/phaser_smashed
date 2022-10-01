@@ -2,7 +2,7 @@ import Game from "../Game";
 import {
   AttackEnergy,
   AttackPhysical,
-  NormalizedVector,
+  Vector,
   Player,
 } from "../interfaces";
 import { hitbackFly } from "./movement";
@@ -182,7 +182,7 @@ export function setResetDamage(player: Player): void {
 export function getNormalizedVector(
   attack: AttackEnergy | AttackPhysical,
   player: Player
-): NormalizedVector {
+): Vector {
   let newX = player.char.sprite.x - attack.sprite.x;
   let newY = player.char.sprite.y - attack.sprite.y;
   let newRatio = Math.sqrt(newX * newX + newY * newY);

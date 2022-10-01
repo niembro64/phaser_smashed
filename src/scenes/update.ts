@@ -237,8 +237,8 @@ export function updatePlayers(game: Game): void {
         ////////////////////////////////
         updateLastDirectionTouched(player);
         updateFrictionGroundX(player, game);
-        updateFrictionAirX(player, game);
         updateFrictionWallY(player, game);
+        updateFrictionAirX(player, game);
         updateFrictionAirY(player, game);
         updateJump(player, game);
         updateControllerMovement(player, game);

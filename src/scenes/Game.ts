@@ -10,17 +10,21 @@ import {
   SplashRules,
   SplashEndData,
   GameStateWithTime,
+  Vector,
 } from "./interfaces";
 import { SmashConfig } from "../views/Play";
 
 export default class Game extends Phaser.Scene {
+  ////////////////////////////////
+  ////////// GAME DEBUG
+  ////////////////////////////////
   debug: Debug = {
     setLevel: 4, //012345
     setDurationMinutes: 3, //012345
     setMusicNumber: 2, // 012
     setMusicActive: true,
     setUpdateLoopsNumSkip: 0,
-    setAirFriction: true,
+    setFrictionAirActive: true,
     setCamerasActive: true,
     setCamerasVisible: false,
     setCollidersPvP: false,
@@ -40,37 +44,36 @@ export default class Game extends Phaser.Scene {
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,
   };
-  smashConfig: SmashConfig | null = null;
 
-  loaded: boolean = false;
-
-  GAMEPAD_HAT_VALUES: number[] = [];
-  PLAYER_CHOICES: number[] = [0, 1, 2, 3];
-  DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
-  DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
-  DEFAULT_ATTACK_DAMAGE: number = 50;
-  GAMEBAR_CHARS = { kills: " ⇧💀⇩ ", deaths: "", damage: "♡", shots: "☆" };
-  //▲▼⬆⬇↑↓↑↿⇂⋆★✰☆⚡❤v♡♥
-  // 💔👊🏼⭐💀
-  // ✔️🚧❌🚫🛑🍻🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥💀👊🤜🎰🎱🎲🔮💡🧱✨🧙 🤜🏼👊🏼🤛🏼
-  //🏴‍☠️🏳️🏁🏴
-  // 🔴🔵🟡🟢🟣🟠⚫⚪🟤
-
+  ////////////////////////////////
+  ////////// GAME CONSTANTS
+  ////////////////////////////////
   DURATION_GAME_START: number = 1200;
   DURATION_GAME_PAUSE_MUSIC_SHORT: number = 2000;
   DURATION_GAME_PAUSE_MUSIC_LONG: number = 10000;
   DURATION_GAME_SHOT: number = 4000;
-  DURATION_PLAYER_HURT: number = 1000;
-  DURATION_PLAYER_DEAD: number = 5000;
-  DURATION_PLAYER_FILTER_FLICKER: number = this.DURATION_PLAYER_HURT / 10;
-
-  playerSpawnOrder: number[] = [0, 1, 2, 3];
-  readyLocationLROffset: number = 0;
-  glassLocationLROffset: number = 0;
-  upperTextLocationLROffset: number = 0;
-  lowerTextLocationLROffset: number = 0;
-  textLocations: number[] = [-700, -350, 350, 700];
-  playerSpawnLocations: number[] = [-165, -100, 100, 165];
+  TEXT_TITLE: any;
+  TEXT_SUBTITLE: any;
+  TEXT_SUPERTITLE: any;
+  TEXT_GAMEBAR_CHARS = { kills: " ⇧💀⇩ ", deaths: "", damage: "♡", shots: "☆" };
+  ASSET_BRICK_WIDTH: number = 33;
+  ASSET_BRICK_HEIGHT: number = 34;
+  SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
+  SCREEN_SCALE = {
+    WIDTH: this.SCREEN_DIMENSIONS.WIDTH / 1920,
+    HEIGHT: this.SCREEN_DIMENSIONS.HEIGHT / 1080,
+  };
+  PLATFORMS: any | Phaser.GameObjects.Sprite;
+  BACKGROUND: any | Phaser.GameObjects.Sprite;
+  TABLE: any | Phaser.GameObjects.Sprite;
+  FLAG: any | Phaser.GameObjects.Sprite;
+  ZOOM_MULTIPLIER_X = 0.95;
+  ZOOM_MULTIPLIER_Y = 0.7;
+  ZOOM_RATIO_SLOW = 0.995;
+  ZOOM_RATIO_FAST = 0.9;
+  BORDER_PADDING_X: number = 200;
+  BORDER_PADDING_Y: number = 100;
+  CAMERA_OFFSET_Y: number = -50;
 
   FILE_SOUNDS: any = {
     INTRO: "deep.mp3",
@@ -129,13 +132,25 @@ export default class Game extends Phaser.Scene {
   ENERJA_TURTLE: any;
   ENERJA_TWO_SHOTS: any;
   ENERJA_UGH: any;
-
   SOUND_PAUSED: any;
   SOUND_BGM: any;
 
-  brickWidth: number = 33;
-  brickHeight: number = 34;
+  ////////////////////////////////
+  ////////// GAME VARIABLES
+  ////////////////////////////////
+  smashConfig: SmashConfig | null = null;
+  loaded: boolean = false;
+  readyLocationLROffset: number = 0;
+  glassLocationLROffset: number = 0;
+  upperTextLocationLROffset: number = 0;
+  lowerTextLocationLROffset: number = 0;
+  textLocations: number[] = [-700, -350, 350, 700];
+  numDead: number = 0;
+  numDeadPrev: number = 0;
 
+  cameraMoverZoomStatusKeeper: number = 1;
+
+  // TIME
   scoreBoardTimeGame: any;
   scoreBoardTimeTime: any;
   timeNanoseconds: number = 0;
@@ -143,61 +158,62 @@ export default class Game extends Phaser.Scene {
   timeSecondsPrev: number = 0;
   timeSecondsClock: number = 0;
   timeClock: Clock = { minutes: 0, seconds: 0 };
-
   gameNanoseconds: number = 0;
   gameSeconds: number = 0;
   gameSecondsPrev: number = 0;
   gameSecondsClock: number = 10;
   gameClock: Clock = { minutes: 0, seconds: 0 };
   timer: any;
-  TITLE: any;
-  SUBTITLE: any;
-  SUPERTITLE: any;
 
-  numDead: number = 0;
-  numDeadPrev: number = 0;
-  allPlayersWallTouchIterator: number = 0;
+  ////////////////////////////////
+  ////////// GAMEPAD CONSTANTS
+  ////////////////////////////////
+
+  GAMEPAD_HAT_VALUES: number[] = [];
+  GAMEPAD_DEBOUNCE_NUMBER_CYCLES: number = 9;
+
+  ////////////////////////////////
+  ////////// GAMEPAD VARIABLES
+  ////////////////////////////////
+
+  ////////////////////////////////
+  ////////// PLAYER CONSTANTS
+  ////////////////////////////////
+  DURATION_PLAYER_HURT: number = 1000;
+  DURATION_PLAYER_DEAD: number = 5000;
+  DURATION_PLAYER_FILTER_FLICKER: number = this.DURATION_PLAYER_HURT / 10;
   RATIO_ACCELERATION_VELOCITY = 0.7;
-  DEFAULT_SPEED_X: number = 700;
-  DEFAULT_SPEED_Y: number = 30;
-  DEFAULT_JUMP: number = -1000;
-  DEFAULT_UPB: number = -1000;
-  DEFAULT_WALL_JUMP: number = -1 * this.DEFAULT_JUMP * 2;
-  INITIAL = { POSITION: { PLAYER_Y: 250 } };
-  DEBOUNCE_NUMBER: number = 9;
-  SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
-  SCREEN_SCALE = {
-    WIDTH: this.SCREEN_DIMENSIONS.WIDTH / 1920,
-    HEIGHT: this.SCREEN_DIMENSIONS.HEIGHT / 1080,
-  };
-  GRAVITY: number = 0.1;
-  PLATFORMS: any | Phaser.GameObjects.Sprite;
-  BACKGROUND: any | Phaser.GameObjects.Sprite;
-  TABLE: any | Phaser.GameObjects.Sprite;
-  FLAG: any | Phaser.GameObjects.Sprite;
-  cameraMoverZoomStatusKeeper: number = 1;
+  DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
+  DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
+  DEFAULT_ATTACK_DAMAGE: number = 50;
+  BASE_PLAYER_SPEED: Vector = { x: 2000, y: 30 };
+  BASE_PLAYER_JUMP: number = -1000;
+  BASE_PLAYER_UPB: number = -1000;
+  BASE_PLAYER_WALLJUMP: number = -1 * this.BASE_PLAYER_JUMP * 2;
+  BASE_PLAYER_INITIAL_POSITION = { POSITION: { PLAYER_Y: 250 } };
+  BASE_PLAYER_GRAVITY: number = 0.1;
+  BASE_PLAYER_HITBACK: Vector = { x: 120, y: 90 };
+  BASE_PLAYER_ATTACKENERGY: Vector = { x: 600, y: 600 };
 
-  HITBACK_X: number = 120;
-  HITBACK_Y: number = 90;
+  ////////////////////////////////
+  ////////// PLAYER VARIRABLES
+  ////////////////////////////////
+  playerChoices: number[] = [0, 1, 2, 3];
+  playerSpawnOrder: number[] = [0, 1, 2, 3];
+  playerSpawnLocations: number[] = [-165, -100, 100, 165];
+  allPlayersWallTouchIterator: number = 0; // need to update
 
-  ATTACK_ENERGY_SPEED_X: number = 600;
-  ATTACK_ENERGY_SPEED_Y: number = 600;
-
-  ZOOM_MULTIPLIER_X = 0.95;
-  ZOOM_MULTIPLIER_Y = 0.7;
-  ZOOM_RATIO_SLOW = 0.995;
-  ZOOM_RATIO_FAST = 0.9;
-  BORDER_PADDING_X: number = 200;
-  BORDER_PADDING_Y: number = 100;
-  CAMERA_OFFSET_Y: number = -50;
+  ////////////////////////////////
+  ////////// OTHER
+  ////////////////////////////////
+  //▲▼⬆⬇↑↓↑↿⇂⋆★✰☆⚡❤v♡♥
+  // 💔👊🏼⭐💀
+  // ✔️🚧❌🚫🛑🍻🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️
+  // 👾💣🔥💀👊🤜🎰🎱🎲🔮💡🧱✨🧙 🤜🏼👊🏼🤛🏼
+  //🏴‍☠️🏳️🏁🏴
+  // 🔴🔵🟡🟢🟣🟠⚫⚪🟤
 
   circleOffset: number = -50;
-  // circles: Circle[] = [
-  //   { graphic: null, colorNumber: 0xdd5555, colorString: "#dd5555" },
-  //   { graphic: null, colorNumber: 0x5599ff, colorString: "#5599ff" },
-  //   { graphic: null, colorNumber: 0xddcc22, colorString: "#ddcc22" },
-  //   { graphic: null, colorNumber: 0x33ee33, colorString: "#33ee33" },
-  // ];
   colorCircles: ColorCircle[] = [
     {
       text: "🔴",
@@ -458,7 +474,7 @@ export default class Game extends Phaser.Scene {
     },
   };
 
-  // i : player
+  // i : player acted upon
   // j : attacks from other players
   overlappingPlayerIAttackPhysicalJ: boolean[][] = [];
   overlappingPlayerIAttackEnergyJ: boolean[][] = [];
@@ -478,11 +494,6 @@ export default class Game extends Phaser.Scene {
     gameStamp: 0,
     timeStamp: 0,
   };
-  // playerState: PlayerStateWithTime = {
-  //   name: "player-state-start",
-  //   gameStamp: 0,
-  //   timeStamp: 0,
-  // };
 
   players: Player[] = [];
   playerOptions: Player[] = [
@@ -539,9 +550,9 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.8,
         fast: 1,
-        friction_ground: 0.8,
+        friction_ground: 0.5,
         // friction_ground: 0.94,
-        friction_air: 0.98,
+        friction_air: 0.02,
         wallTouchArray: [],
         lastDirectionTouched: null,
         attackPhysical: {
@@ -682,8 +693,8 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.7,
         fast: 1,
-        friction_ground: 0.8,
-        friction_air: 0.97,
+        friction_ground: 0.5,
+        friction_air: 0.03,
         wallTouchArray: [],
         lastDirectionTouched: null,
         attackPhysical: {
@@ -823,8 +834,8 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 1,
         fast: 1,
-        friction_ground: 0.8,
-        friction_air: 0.98,
+        friction_ground: 0.5,
+        friction_air: 0.04,
         wallTouchArray: [],
         lastDirectionTouched: null,
         attackPhysical: {
@@ -965,8 +976,8 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.9,
         fast: 1,
-        friction_ground: 0.8,
-        friction_air: 0.96,
+        friction_ground: 0.5,
+        friction_air: 0.04,
         wallTouchArray: [],
         lastDirectionTouched: null,
         attackPhysical: {
@@ -1106,8 +1117,8 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.9,
         fast: 1,
-        friction_ground: 0.8,
-        friction_air: 0.96,
+        friction_ground: 0.5,
+        friction_air: 0.04,
         wallTouchArray: [],
         lastDirectionTouched: null,
         attackPhysical: {
@@ -1247,8 +1258,8 @@ export default class Game extends Phaser.Scene {
         damage: 0,
         speed: 0.9,
         fast: 1,
-        friction_ground: 0.8,
-        friction_air: 0.96,
+        friction_ground: 0.5,
+        friction_air: 0.04,
         wallTouchArray: [],
         lastDirectionTouched: null,
         attackPhysical: {
@@ -1347,15 +1358,15 @@ export default class Game extends Phaser.Scene {
     this.smashConfig = this.game.registry.get("smashConfig");
     console.log("this.smashConfig", this.smashConfig);
     if (this.smashConfig) {
-      this.PLAYER_CHOICES = [];
+      this.playerChoices = [];
       this.smashConfig.players.forEach((player, playerIndex) => {
-        this.PLAYER_CHOICES.push(player.characterId);
+        this.playerChoices.push(player.characterId);
       });
     }
     this.gameSecondsClock = this.debug.setDurationMinutes * 60;
-    if (!this.debug.setAirFriction) {
+    if (!this.debug.setFrictionAirActive) {
       this.players.forEach((iPlayer, i) => {
-        iPlayer.char.friction_air = 2;
+        iPlayer.char.friction_air = 0;
       });
     }
     let hatAdder = 0.142857;
@@ -1470,14 +1481,14 @@ export default class Game extends Phaser.Scene {
     this.playerOptions.forEach((pOption, pOptionIndex) => {
       this.load.image(pOption.char.name, pOption.char.src);
     });
-    for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
+    for (let i = 0; i < this.playerChoices.length; i++) {
       this.load.image("tail_" + i, "images/white_trans.png");
     }
   }
   create() {
-    for (let i = 0; i < this.PLAYER_CHOICES.length; i++) {
+    for (let i = 0; i < this.playerChoices.length; i++) {
       this.players.push(
-        JSON.parse(JSON.stringify(this.playerOptions[this.PLAYER_CHOICES[i]]))
+        JSON.parse(JSON.stringify(this.playerOptions[this.playerChoices[i]]))
       );
     }
 
