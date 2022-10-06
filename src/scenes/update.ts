@@ -17,7 +17,7 @@ import {
   updateLastDirectionTouched,
   setRespawn,
   getIsPlayerOffscreen,
-  updateJumpPhysicalOnTouch,
+  updateJumpPhysicalOnWall,
   updateJumpFloat,
 } from "./helpers/movement";
 import {
@@ -203,7 +203,7 @@ export function updatePlayers(game: Game): void {
         updateFrictionAirX(player, game);
         updateFrictionWallY(player, game);
         updateFrictionAirY(player, game);
-        updateJumpPhysicalOnTouch(player, game);
+        updateJumpPhysicalOnWall(player, game);
         updateJumpPhysical(player, game);
         updateJumpFloat(player, game);
         updateControllerMovement(player, game);

@@ -130,7 +130,7 @@ export function hasPlayerTouchedWallRecently(player: Player): boolean {
   return !player.char.wallTouchArray.every((b) => b === false);
 }
 
-export function updateJumpPhysicalOnTouch(player: Player, game: Game): void {
+export function updateJumpPhysicalOnWall(player: Player, game: Game): void {
   if (
     player.char.sprite.body.touching.down ||
     player.char.sprite.body.touching.left ||
@@ -195,7 +195,9 @@ export function updateJumpPhysical(player: Player, game: Game): void {
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        game.BASE_PLAYER_JUMP_WALL * player.char.speed
+        game.BASE_PLAYER_JUMP_WALL *
+          player.char.speed *
+          (player.padCurr.left ? 300 : 1)
       );
       return;
     }
@@ -206,7 +208,9 @@ export function updateJumpPhysical(player: Player, game: Game): void {
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        -game.BASE_PLAYER_JUMP_WALL * player.char.speed
+        -game.BASE_PLAYER_JUMP_WALL *
+          player.char.speed *
+          (player.padCurr.right ? 300 : 1)
       );
       return;
     }

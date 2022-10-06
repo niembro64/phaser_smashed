@@ -40,14 +40,14 @@ export function create(game: Game) {
 
 export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
-  let splashSizeTitleDefault = "30px";
+  // let splashSizeTitleDefault = "40px";
   let splashSize = "";
   game.splashesEndData.forEach((splash, splashIndex) => {
     for (let i = 0; i < game.players.length; i++) {
       if (i === 0) {
         splashSize = splash.size;
       } else {
-        splashSize = splashSizeTitleDefault;
+        splashSize = game.splashSizeTitleDefault;
       }
       splash.words[i] =
         game.players[i].char.name + " " + game.colorCircles[i].text;
@@ -937,7 +937,7 @@ export function createScoreboard(game: Game): void {
       fontSize: "85px",
       // fontFamily: "'Courier New'",
       // fontFamily: game.FONT_DEFAULT_MONOSPACE,
-      fontFamily: game.FONT_DEFAULT_MONOSPACE,
+      fontFamily: game.FONT_DEFAULT_VIDEOGAME,
       // fontFamily: "'Press Start 2P'",
       stroke: "black",
       strokeThickness: 1,
@@ -963,7 +963,7 @@ export function createScoreboard(game: Game): void {
       // font: "Arial 100px",
       fontSize: "20px",
       // fontFamily: "'Courier New'",
-      fontFamily: game.FONT_DEFAULT_MONOSPACE,
+      fontFamily: game.FONT_DEFAULT_VIDEOGAME,
       // fontFamily: "'Press Start 2P'",
       color: "white",
       stroke: "black",
