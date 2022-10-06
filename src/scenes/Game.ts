@@ -20,7 +20,7 @@ export default class Game extends Phaser.Scene {
   ////////////////////////////////
   debug: Debug = {
     setLevel: 4, //012345
-    setDurationMinutes: 3, //012345
+    setDurationMinutes: 8, //012345
     setMusicNumber: 2, // 012
     setMusicActive: true,
     setUpdateLoopsNumSkip: 0,

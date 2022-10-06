@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Phaser from "phaser";
 import Game from "../scenes/Game";
 import "../App.css";
 import "@fontsource/press-start-2p";
 import { ButtonName, CharacterMove } from "../App";
-import { setSoundStartPlayLiquid } from "../scenes/helpers/sound";
 import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 

@@ -17,6 +17,8 @@ import {
   updateLastDirectionTouched,
   setRespawn,
   getIsPlayerOffscreen,
+  updateJumpIndexOnTouch,
+  updateJumpFloat,
 } from "./helpers/movement";
 import {
   setPlayerState,
@@ -57,8 +59,6 @@ export function update(game: Game, time: number, delta: number): void {
     game.debug.setUpdateLoopsNumSkip--;
     return;
   }
-
-
 
   updateTimeTime(game, time, delta);
   updateGameTime(game, time, delta);
@@ -203,7 +203,9 @@ export function updatePlayers(game: Game): void {
         updateFrictionAirX(player, game);
         updateFrictionWallY(player, game);
         updateFrictionAirY(player, game);
+        updateJumpIndexOnTouch(player, game);
         updateJump(player, game);
+        updateJumpFloat(player, game);
         updateControllerMovement(player, game);
         updateUpB(player, game);
 
