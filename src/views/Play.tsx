@@ -188,7 +188,7 @@ function Play() {
     setDurationMinutes: 8, //012345
     setUpdateLoopsNumSkip: 0,
     setMusicNumber: 2, // 012
-    setMusicActive: true,
+    setMusicActive: false,
     setReadySoundActive: true,
     setFrictionAirActive: true,
     setCamerasActive: true,
