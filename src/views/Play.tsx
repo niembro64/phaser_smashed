@@ -643,7 +643,7 @@ function Play() {
               <h4>Tech Used</h4>
               <ul>
                 <li>Phaser 3</li>
-                <li>React 17 TS</li>
+                <li>ReactTS 17</li>
                 <li>Bootstrap 5</li>
                 <li>Press Start 2P</li>
               </ul>

@@ -38,7 +38,7 @@ export default class Game extends Phaser.Scene {
     setDefaultDamage: false,
     setDefaultHitback: false,
     setPlayerIdFiltersActive: false,
-    setReadySoundActive: false,
+    setReadySoundActive: true,
     setHealthInverted: true,
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,
@@ -92,6 +92,10 @@ export default class Game extends Phaser.Scene {
     READY_REPEAT1: "ready_1.wav",
     READY_REPEAT2: "ready_2.wav",
     READY_REPEAT3: "ready_3.wav",
+    W0: "w0.wav",
+    W1: "w1.wav",
+    W2: "w2.wav",
+    W3: "w3.wav",
     ENERJA_AH: "/enerja/ah.mp3",
     ENERJA_DO_AGAIN: "/enerja/do_it_again_yeah.mp3",
     ENERJA_FINISH: "/enerja/finishit.mp3",
@@ -123,6 +127,10 @@ export default class Game extends Phaser.Scene {
   SOUND_READY_REPEAT1: any;
   SOUND_READY_REPEAT2: any;
   SOUND_READY_REPEAT3: any;
+  W0: any;
+  W1: any;
+  W2: any;
+  W3: any;
   ENERJA_AH: any;
   ENERJA_DO_AGAIN: any;
   ENERJA_FINISH: any;
@@ -1389,22 +1397,26 @@ export default class Game extends Phaser.Scene {
     this.load.audio("start", pathSounds + this.FILE_SOUNDS.START);
     this.load.audio("ready", pathSounds + this.FILE_SOUNDS.READY);
     this.load.audio("readyRepeat", pathSounds + this.FILE_SOUNDS.READY_REPEAT);
-    this.load.audio(
-      "readyRepeat0",
-      pathSounds + this.FILE_SOUNDS.READY_REPEAT0
-    );
-    this.load.audio(
-      "readyRepeat1",
-      pathSounds + this.FILE_SOUNDS.READY_REPEAT1
-    );
-    this.load.audio(
-      "readyRepeat2",
-      pathSounds + this.FILE_SOUNDS.READY_REPEAT2
-    );
-    this.load.audio(
-      "readyRepeat3",
-      pathSounds + this.FILE_SOUNDS.READY_REPEAT3
-    );
+    this.load.audio("readyRepeat0", pathSounds + this.FILE_SOUNDS.W0);
+    this.load.audio("readyRepeat1", pathSounds + this.FILE_SOUNDS.W1);
+    this.load.audio("readyRepeat2", pathSounds + this.FILE_SOUNDS.W2);
+    this.load.audio("readyRepeat3", pathSounds + this.FILE_SOUNDS.W3);
+    // this.load.audio(
+    //   "readyRepeat0",
+    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT0
+    // );
+    // this.load.audio(
+    //   "readyRepeat1",
+    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT1
+    // );
+    // this.load.audio(
+    //   "readyRepeat2",
+    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT2
+    // );
+    // this.load.audio(
+    //   "readyRepeat3",
+    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT3
+    // );
 
     this.load.audio("enerja_ah", pathSounds + this.FILE_SOUNDS.ENERJA_AH);
     this.load.audio(

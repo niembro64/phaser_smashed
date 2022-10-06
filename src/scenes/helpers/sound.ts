@@ -86,12 +86,14 @@ export function pauseReadySound(game: Game): void {
   }
 }
 export function playReadySoundPlayer(player: Player): void {
+  console.log("PLAY READY SOUND ", player.playerId);
   if (!player.playerReadySound.isPlaying) {
     player.playerReadySound.play();
   }
 }
 
 export function pauseReadySoundPlayer(player: Player): void {
+  console.log("PLAY READY SOUND ", player.playerId);
   if (player.playerReadySound.isPlaying) {
     player.playerReadySound.pause();
   }
