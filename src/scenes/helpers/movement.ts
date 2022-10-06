@@ -168,26 +168,26 @@ export function updateJumpPhysical(player: Player, game: Game): void {
     player.char.jumpIndex +=
       player.char.jumpIndex === player.char.jumps.length - 1 ? 0 : 1;
 
-    // horizontal stuff IS TOUCHING
-    if (
-      game.debug.setWallJumpsActive &&
-      player.char.sprite.body.touching.left
-    ) {
-      player.char.sprite.body.setVelocityX(
-        game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
-      );
-      return;
-    }
+    // // horizontal stuff IS TOUCHING
+    // if (
+    //   game.debug.setWallJumpsActive &&
+    //   player.char.sprite.body.touching.left
+    // ) {
+    //   player.char.sprite.body.setVelocityX(
+    //     game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
+    //   );
+    //   return;
+    // }
 
-    if (
-      game.debug.setWallJumpsActive &&
-      player.char.sprite.body.touching.right
-    ) {
-      player.char.sprite.body.setVelocityX(
-        -game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
-      );
-      return;
-    }
+    // if (
+    //   game.debug.setWallJumpsActive &&
+    //   player.char.sprite.body.touching.right
+    // ) {
+    //   player.char.sprite.body.setVelocityX(
+    //     -game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
+    //   );
+    //   return;
+    // }
     // horizontal stuff WAS TOUCHING
     if (
       game.debug.setWallJumpsActive &&

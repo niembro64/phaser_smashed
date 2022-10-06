@@ -21,9 +21,10 @@ export default class Game extends Phaser.Scene {
   debug: Debug = {
     setLevel: 4, //012345
     setDurationMinutes: 8, //012345
+    setUpdateLoopsNumSkip: 0,
     setMusicNumber: 2, // 012
     setMusicActive: false,
-    setUpdateLoopsNumSkip: 0,
+    setReadySoundActive: true,
     setFrictionAirActive: true,
     setCamerasActive: true,
     setCamerasVisible: false,
@@ -38,8 +39,7 @@ export default class Game extends Phaser.Scene {
     setDefaultDamage: false,
     setDefaultHitback: false,
     setPlayerIdFiltersActive: false,
-    setReadySoundActive: true,
-    setHealthInverted: true,
+    setHealthInverted: false,
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,
