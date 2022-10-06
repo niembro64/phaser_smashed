@@ -281,32 +281,32 @@ export interface Hitback {
 //     jump: typeof Phaser.Input.Keyboard.Key | any;
 // }
 
-export interface Debug {
-  setLevel: number;
-  setDurationMinutes: number;
-  setMusicNumber: number;
-  setMusicActive: boolean;
-  setUpdateLoopsNumSkip: number;
-  setFrictionAirActive: boolean;
-  setCamerasActive: boolean;
-  setCamerasVisible: boolean;
-  setCollidersPvP: boolean;
-  setCollidersPvAttackPhysical: boolean;
-  setCollidersPvAttackEnergy: boolean;
-  setCollidersAEvAE: boolean;
-  setCollidersAEvAP: boolean;
-  setAEWrapScreen: boolean;
-  setPlayerIdVisible: boolean;
-  setPlayerIdFiltersActive: boolean;
-  setWallJumpsActive: boolean;
-  setDefaultDamage: boolean;
-  setDefaultHitback: boolean;
-  setReadySoundActive: boolean;
-  setHealthInverted: boolean;
-  setMatricesAlwaysVisible: boolean;
-  setPrintControllerButtonsConsole: boolean;
-  setPrintControllerConnectedConsole: boolean;
-}
+// export interface Debug {
+//   setLevel: number;
+//   setDurationMinutes: number;
+//   setMusicNumber: number;
+//   setMusicActive: boolean;
+//   setUpdateLoopsNumSkip: number;
+//   setFrictionAirActive: boolean;
+//   setCamerasActive: boolean;
+//   setCamerasVisible: boolean;
+//   setCollidersPvP: boolean;
+//   setCollidersPvAttackPhysical: boolean;
+//   setCollidersPvAttackEnergy: boolean;
+//   setCollidersAEvAE: boolean;
+//   setCollidersAEvAP: boolean;
+//   setAEWrapScreen: boolean;
+//   setPlayerIdVisible: boolean;
+//   setPlayerIdFiltersActive: boolean;
+//   setWallJumpsActive: boolean;
+//   setDefaultDamage: boolean;
+//   setDefaultHitback: boolean;
+//   setReadySoundActive: boolean;
+//   setHealthInverted: boolean;
+//   setMatricesAlwaysVisible: boolean;
+//   setPrintControllerButtonsConsole: boolean;
+//   setPrintControllerConnectedConsole: boolean;
+// }
 
 export interface Vector {
   x: number;

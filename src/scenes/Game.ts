@@ -5,45 +5,19 @@ import {
   Camera,
   ColorCircle,
   Clock,
-  Debug,
   Player,
   SplashRules,
   SplashEndData,
   GameStateWithTime,
   Vector,
 } from "./interfaces";
-import { SmashConfig } from "../views/Play";
+import { Debug, SmashConfig } from "../views/Play";
 
 export default class Game extends Phaser.Scene {
   ////////////////////////////////
   ////////// GAME DEBUG
   ////////////////////////////////
-  debug: Debug = {
-    setLevel: 4, //012345
-    setDurationMinutes: 8, //012345
-    setUpdateLoopsNumSkip: 0,
-    setMusicNumber: 2, // 012
-    setMusicActive: false,
-    setReadySoundActive: true,
-    setFrictionAirActive: true,
-    setCamerasActive: true,
-    setCamerasVisible: false,
-    setCollidersPvP: false,
-    setCollidersPvAttackPhysical: false,
-    setCollidersPvAttackEnergy: false,
-    setCollidersAEvAE: true,
-    setCollidersAEvAP: true,
-    setAEWrapScreen: false,
-    setPlayerIdVisible: true,
-    setWallJumpsActive: true,
-    setDefaultDamage: false,
-    setDefaultHitback: false,
-    setPlayerIdFiltersActive: false,
-    setHealthInverted: false,
-    setMatricesAlwaysVisible: false,
-    setPrintControllerButtonsConsole: false,
-    setPrintControllerConnectedConsole: false,
-  };
+  debug: Debug | any;
 
   ////////////////////////////////
   ////////// GAME CONSTANTS
@@ -1364,6 +1338,7 @@ export default class Game extends Phaser.Scene {
 
   preload() {
     this.smashConfig = this.game.registry.get("smashConfig");
+    this.debug = this.game.registry.get("debug");
     console.log("this.smashConfig", this.smashConfig);
     if (this.smashConfig) {
       this.playerChoices = [];

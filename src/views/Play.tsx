@@ -43,6 +43,34 @@ export interface Quote {
   text: string;
 }
 
+export interface Debug {
+  setLevel: number;
+  setDurationMinutes: number;
+  setMusicNumber: number;
+  setMusicActive: boolean;
+  setUpdateLoopsNumSkip: number;
+  setFrictionAirActive: boolean;
+  setCamerasActive: boolean;
+  setCamerasVisible: boolean;
+  setCollidersPvP: boolean;
+  setCollidersPvAttackPhysical: boolean;
+  setCollidersPvAttackEnergy: boolean;
+  setCollidersAEvAE: boolean;
+  setCollidersAEvAP: boolean;
+  setAEWrapScreen: boolean;
+  setPlayerIdVisible: boolean;
+  setPlayerIdFiltersActive: boolean;
+  setWallJumpsActive: boolean;
+  setDefaultDamage: boolean;
+  setDefaultHitback: boolean;
+  setReadySoundActive: boolean;
+  setHealthInverted: boolean;
+  setMatricesAlwaysVisible: boolean;
+  setPrintControllerButtonsConsole: boolean;
+  setPrintControllerConnectedConsole: boolean;
+  setLoadTimeExtra: boolean;
+}
+
 function Play() {
   let myGame: any = useRef({});
   // let monkeysMusic: any = useRef({});
@@ -116,8 +144,8 @@ function Play() {
     },
     scene: [Game],
   };
-  const setTimeoutQuotesLengthStart: number = 2000;
-  const setTimeoutQuotesLengthReStart: number = 1500;
+  let setTimeoutQuotesLengthStart: number = 2000;
+  let setTimeoutQuotesLengthReStart: number = 1500;
   // const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
@@ -155,6 +183,33 @@ function Play() {
     // { name: "Gin", text: "Clean it up, and we'll do it again." },
     // { name: "Gin", text: "Shitty, shitty-fuckin-ass." },
   ];
+  const debug: Debug = {
+    setLevel: 4, //012345
+    setDurationMinutes: 8, //012345
+    setUpdateLoopsNumSkip: 0,
+    setMusicNumber: 2, // 012
+    setMusicActive: true,
+    setReadySoundActive: true,
+    setFrictionAirActive: true,
+    setCamerasActive: true,
+    setCamerasVisible: false,
+    setCollidersPvP: false,
+    setCollidersPvAttackPhysical: false,
+    setCollidersPvAttackEnergy: false,
+    setCollidersAEvAE: true,
+    setCollidersAEvAP: true,
+    setAEWrapScreen: false,
+    setPlayerIdVisible: true,
+    setWallJumpsActive: true,
+    setDefaultDamage: false,
+    setDefaultHitback: false,
+    setPlayerIdFiltersActive: false,
+    setHealthInverted: false,
+    setMatricesAlwaysVisible: false,
+    setPrintControllerButtonsConsole: false,
+    setPrintControllerConnectedConsole: false,
+    setLoadTimeExtra: false,
+  };
   const onClickStartStartButton = () => {
     // pauseSound.play();
     // pauseSound();
@@ -172,10 +227,15 @@ function Play() {
     });
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
+
+    if (!debug.setLoadTimeExtra) {
+      setTimeoutQuotesLengthStart = 0;
+    }
     setTimeout(() => {
       myGame.current = new Phaser.Game(config);
       myGame.current.registry.set("parentContext", Play);
       myGame.current.registry.set("smashConfig", newSmashConfig);
+      myGame.current.registry.set("debug", debug);
     }, setTimeoutQuotesLengthStart);
 
     setShowLoaderIntervalFunction();
@@ -376,7 +436,13 @@ function Play() {
               </div>
             </div>
           </div>
-          <img className="loadingTable" src="/images/table.png" alt="table" />
+          <div className="loading-table-wrapper">
+            <img
+              className="loading-table"
+              src="/images/table.png"
+              alt="table"
+            />
+          </div>
           <p className="firstLoaderP">{quotes[quotesRandomNumber].text}</p>
           <p className="secondLoaderP">- {quotes[quotesRandomNumber].name}</p>
         </div>
@@ -496,11 +562,17 @@ function Play() {
                   let newSmashConfig = JSON.parse(
                     JSON.stringify(myGameX.smashConfig)
                   );
+                  let newDebug = JSON.parse(JSON.stringify(myGameX.debug));
                   myGame.current.destroy(true);
+
+                  if (!debug.setLoadTimeExtra) {
+                    setTimeoutQuotesLengthReStart = 0;
+                  }
                   setTimeout(() => {
                     myGame.current = new Phaser.Game(config);
                     myGame.current.registry.set("parentContext", Play);
                     myGame.current.registry.set("smashConfig", newSmashConfig);
+                    myGame.current.registry.set("debug", newDebug);
                   }, setTimeoutQuotesLengthReStart);
                 }
               }}
