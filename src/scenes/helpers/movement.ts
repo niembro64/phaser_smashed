@@ -130,7 +130,7 @@ export function hasPlayerTouchedWallRecently(player: Player): boolean {
   return !player.char.wallTouchArray.every((b) => b === false);
 }
 
-export function updateJumpIndexOnTouch(player: Player, game: Game): void {
+export function updateJumpPhysicalOnTouch(player: Player, game: Game): void {
   if (
     player.char.sprite.body.touching.down ||
     player.char.sprite.body.touching.left ||
@@ -140,7 +140,7 @@ export function updateJumpIndexOnTouch(player: Player, game: Game): void {
   }
 }
 
-export function updateJump(player: Player, game: Game): void {
+export function updateJumpPhysical(player: Player, game: Game): void {
   if (player.padCurr.Y && !player.padPrev.Y) {
     if (
       !(
@@ -153,27 +153,49 @@ export function updateJump(player: Player, game: Game): void {
       player.char.jumpIndex = 1;
     }
 
-    game.SOUND_JUMP.volume = player.char.jumps[player.char.jumpIndex];
-    game.SOUND_JUMP.play();
+    if (player.char.jumpIndex !== player.char.jumps.length - 1) {
+      game.SOUND_JUMP.volume = player.char.jumps[player.char.jumpIndex];
+      game.SOUND_JUMP.play();
+    }
 
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y *
         (1 - player.char.jumps[player.char.jumpIndex]) +
-        game.BASE_PLAYER_JUMP *
+        game.BASE_PLAYER_JUMP_PHYSICAL *
           player.char.jumpPower *
           player.char.jumps[player.char.jumpIndex]
     );
     player.char.jumpIndex +=
       player.char.jumpIndex === player.char.jumps.length - 1 ? 0 : 1;
 
-    // horizontal stuff
+    // horizontal stuff IS TOUCHING
+    if (
+      game.debug.setWallJumpsActive &&
+      player.char.sprite.body.touching.left
+    ) {
+      player.char.sprite.body.setVelocityX(
+        game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
+      );
+      return;
+    }
+
+    if (
+      game.debug.setWallJumpsActive &&
+      player.char.sprite.body.touching.right
+    ) {
+      player.char.sprite.body.setVelocityX(
+        -game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
+      );
+      return;
+    }
+    // horizontal stuff WAS TOUCHING
     if (
       game.debug.setWallJumpsActive &&
       player.char.lastDirectionTouched === "left" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        game.BASE_PLAYER_WALLJUMP * player.char.speed
+        game.BASE_PLAYER_JUMP_WALL * player.char.speed
       );
       return;
     }
@@ -184,7 +206,7 @@ export function updateJump(player: Player, game: Game): void {
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        -game.BASE_PLAYER_WALLJUMP * player.char.speed
+        -game.BASE_PLAYER_JUMP_WALL * player.char.speed
       );
       return;
     }

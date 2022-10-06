@@ -22,7 +22,7 @@ export default class Game extends Phaser.Scene {
     setLevel: 4, //012345
     setDurationMinutes: 8, //012345
     setMusicNumber: 2, // 012
-    setMusicActive: true,
+    setMusicActive: false,
     setUpdateLoopsNumSkip: 0,
     setFrictionAirActive: true,
     setCamerasActive: true,
@@ -195,9 +195,9 @@ export default class Game extends Phaser.Scene {
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
   DEFAULT_ATTACK_DAMAGE: number = 50;
   BASE_PLAYER_SPEED: Vector = { x: 2000, y: 30 };
-  BASE_PLAYER_JUMP: number = -1000;
-  BASE_PLAYER_UPB: number = -1000;
-  BASE_PLAYER_WALLJUMP: number = -1 * this.BASE_PLAYER_JUMP * 2;
+  BASE_PLAYER_JUMP_PHYSICAL: number = -1000;
+  BASE_PLAYER_JUMP_ENERGY: number = -1000;
+  BASE_PLAYER_JUMP_WALL: number = -1 * this.BASE_PLAYER_JUMP_PHYSICAL;
   BASE_PLAYER_INITIAL_POSITION = { POSITION: { PLAYER_Y: 250 } };
   BASE_PLAYER_GRAVITY: number = 0.1;
   BASE_PLAYER_HITBACK: Vector = { x: 120, y: 90 };

@@ -20,7 +20,7 @@ export function updateUpB(player: Player, game: Game): void {
     player.char.upB.canUse
   ) {
     game.SOUND_JUMP_POWER.play();
-    player.char.sprite.body.setVelocityY(game.BASE_PLAYER_UPB);
+    player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
     player.char.upB.canUse = false;
   }
   if (player.char.sprite.body.touching.down) {

@@ -9,7 +9,7 @@ import {
   debugUpdateControllersPrintConnected,
 } from "./helpers/pad";
 import {
-  updateJump,
+  updateJumpPhysical,
   updateFrictionGroundX,
   updateFrictionAirX,
   updateFrictionAirY,
@@ -17,7 +17,7 @@ import {
   updateLastDirectionTouched,
   setRespawn,
   getIsPlayerOffscreen,
-  updateJumpIndexOnTouch,
+  updateJumpPhysicalOnTouch,
   updateJumpFloat,
 } from "./helpers/movement";
 import {
@@ -203,8 +203,8 @@ export function updatePlayers(game: Game): void {
         updateFrictionAirX(player, game);
         updateFrictionWallY(player, game);
         updateFrictionAirY(player, game);
-        updateJumpIndexOnTouch(player, game);
-        updateJump(player, game);
+        updateJumpPhysicalOnTouch(player, game);
+        updateJumpPhysical(player, game);
         updateJumpFloat(player, game);
         updateControllerMovement(player, game);
         updateUpB(player, game);
@@ -242,7 +242,7 @@ export function updatePlayers(game: Game): void {
         updateFrictionWallY(player, game);
         updateFrictionAirX(player, game);
         updateFrictionAirY(player, game);
-        updateJump(player, game);
+        updateJumpPhysical(player, game);
         updateControllerMovement(player, game);
         updateUpB(player, game);
 
