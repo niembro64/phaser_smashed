@@ -155,7 +155,7 @@ export function createSoundsGame(game: Game): void {
   game.SOUND_INTRO = game.sound.add("intro", { volume: 0.1 });
   game.SOUND_GUN = game.sound.add("gun", { volume: 0.6 });
   game.SOUND_HIT = game.sound.add("hit", { volume: 0.25 });
-  game.SOUND_JUMP = game.sound.add("jump", { volume: 1.5 });
+  game.SOUND_JUMP = game.sound.add("jump", { volume: 0.8 });
   game.SOUND_JUMP_POWER = game.sound.add("jumpPower", { volume: 0.8 });
   game.SOUND_FIRST_BLOOD = game.sound.add("firstBlood", { volume: 0.8 });
   game.SOUND_SQUISH = game.sound.add("squish", { volume: 0.2 });
