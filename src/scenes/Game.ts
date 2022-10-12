@@ -53,7 +53,7 @@ export default class Game extends Phaser.Scene {
     INTRO: "deep.mp3",
     GUN: "throw.wav",
     HIT: "punch.wav",
-    JUMP: "woosh2.wav",
+    JUMP: "woosh_quiet.mp3",
     JUMP_POWER: "quick-swhooshing-noise-80898.mp3",
     FIRST_BLOOD: "first_blood_echo-92250.mp3",
     SQUISH: "goresplat-7088.mp3",
