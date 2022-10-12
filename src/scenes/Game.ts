@@ -12,6 +12,7 @@ import {
   Vector,
 } from "./interfaces";
 import { Debug, SmashConfig } from "../views/Play";
+import { preload } from "./preload";
 
 export default class Game extends Phaser.Scene {
   ////////////////////////////////
@@ -1334,163 +1335,16 @@ export default class Game extends Phaser.Scene {
 
   constructor() {
     super("game");
-    // this.laserGroup;
   }
 
   preload() {
-    this.smashConfig = this.game.registry.get("smashConfig");
-    this.debug = this.game.registry.get("debug");
-    console.log("this.smashConfig", this.smashConfig);
-    if (this.smashConfig) {
-      this.playerChoices = [];
-      this.smashConfig.players.forEach((player, playerIndex) => {
-        this.playerChoices.push(player.characterId);
-      });
-    }
-    this.gameSecondsClock = this.debug.setDurationMinutes * 60;
-    if (!this.debug.setFrictionAirActive) {
-      this.players.forEach((iPlayer, i) => {
-        iPlayer.char.friction_air = 0;
-      });
-    }
-    let hatAdder = 0.142857;
-    let hatPos = -1 + hatAdder;
-    for (let i = 0; i < 8; i++) {
-      this.GAMEPAD_HAT_VALUES.push(hatPos);
-      hatPos += hatAdder * 2;
-    }
-
-    let pathSounds = "sounds/";
-    this.load.audio("intro", pathSounds + this.FILE_SOUNDS.INTRO);
-    this.load.audio("gun", pathSounds + this.FILE_SOUNDS.GUN);
-    this.load.audio("hit", pathSounds + this.FILE_SOUNDS.HIT);
-    this.load.audio("jump", pathSounds + this.FILE_SOUNDS.JUMP);
-    this.load.audio("jumpPower", pathSounds + this.FILE_SOUNDS.JUMP_POWER);
-    this.load.audio("firstBlood", pathSounds + this.FILE_SOUNDS.FIRST_BLOOD);
-    this.load.audio("squish", pathSounds + this.FILE_SOUNDS.SQUISH);
-    this.load.audio("die", pathSounds + this.FILE_SOUNDS.DIE);
-    this.load.audio("startLiquid", pathSounds + this.FILE_SOUNDS.START_LIQUID);
-    this.load.audio("start", pathSounds + this.FILE_SOUNDS.START);
-    this.load.audio("ready", pathSounds + this.FILE_SOUNDS.READY);
-    this.load.audio("readyRepeat", pathSounds + this.FILE_SOUNDS.READY_REPEAT);
-    this.load.audio("readyRepeat0", pathSounds + this.FILE_SOUNDS.W0);
-    this.load.audio("readyRepeat1", pathSounds + this.FILE_SOUNDS.W1);
-    this.load.audio("readyRepeat2", pathSounds + this.FILE_SOUNDS.W2);
-    this.load.audio("readyRepeat3", pathSounds + this.FILE_SOUNDS.W3);
-    // this.load.audio(
-    //   "readyRepeat0",
-    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT0
-    // );
-    // this.load.audio(
-    //   "readyRepeat1",
-    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT1
-    // );
-    // this.load.audio(
-    //   "readyRepeat2",
-    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT2
-    // );
-    // this.load.audio(
-    //   "readyRepeat3",
-    //   pathSounds + this.FILE_SOUNDS.READY_REPEAT3
-    // );
-
-    this.load.audio("enerja_ah", pathSounds + this.FILE_SOUNDS.ENERJA_AH);
-    this.load.audio(
-      "enerja_again",
-      pathSounds + this.FILE_SOUNDS.ENERJA_DO_AGAIN
-    );
-    this.load.audio(
-      "enerja_finish",
-      pathSounds + this.FILE_SOUNDS.ENERJA_FINISH
-    );
-    this.load.audio("enerja_gya", pathSounds + this.FILE_SOUNDS.ENERJA_GYA);
-    this.load.audio(
-      "enerja_shit",
-      pathSounds + this.FILE_SOUNDS.ENERJA_THAT_SHIT
-    );
-    this.load.audio(
-      "enerja_smashed",
-      pathSounds + this.FILE_SOUNDS.ENERJA_SMASHED
-    );
-    this.load.audio(
-      "enerja_turtle",
-      pathSounds + this.FILE_SOUNDS.ENERJA_TURTLE
-    );
-    this.load.audio(
-      "enerja_shots",
-      pathSounds + this.FILE_SOUNDS.ENERJA_TWO_SHOTS
-    );
-    this.load.audio("enerja_ugh", pathSounds + this.FILE_SOUNDS.ENERJA_UGH);
-
-    this.load.audio("mii", pathSounds + this.FILE_SOUNDS.BGM_MII);
-
-    if (this.debug.setMusicNumber === 0) {
-      this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_DREAM);
-    }
-    if (this.debug.setMusicNumber === 1) {
-      this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_MONKEY);
-    }
-    if (this.debug.setMusicNumber === 2) {
-      this.load.audio("bgm", pathSounds + this.FILE_SOUNDS.BGM_ROYKSOP);
-    }
-    this.load.image("fist-gray", "images/fist-gray.png");
-    this.load.image("fist-black", "images/fist-black.png");
-    this.load.image("fist-white", "images/fist.png");
-    this.load.image("flame", "images/flame_small.png");
-    this.load.image("laser", "images/laser.png");
-
-    this.load.image("blockcracked", "images/blockcracked.png");
-    this.load.image("fireball", "images/fireball.png");
-    this.load.image("flagpole", "images/flagpole.png");
-    this.load.image("greenshell", "images/greenshell.png");
-    this.load.image("bottle", "images/bottle.png");
-    this.load.image("hammer", "images/ham.png");
-    this.load.image("blackHammer", "images/blackHammer.png");
-    this.load.image("sword", "images/sword_right.png");
-
-    this.load.image("table", "images/table.png");
-    this.load.image("flag", "images/flagpole_JK2.png");
-
-    this.load.image("background", "images/darkxp.jpg");
-    this.load.image("centerWhite", "images/wx.png");
-    this.load.image("centerBlack", "images/bx.png");
-    this.load.image("centerMagenta", "images/mx.png");
-    this.load.image("centerRed", "images/rx.png");
-    this.load.image("platformHorizontal", "images/brickhoriz.bmp");
-    this.load.image("platformShort", "images/brickhorizshorter.bmp");
-    this.load.image("platformVertical", "images/brickvert.bmp");
-    this.load.image("brick", "images/blockcracked.png");
-    this.load.image("suburb", "images/suburb.png");
-
-    this.load.image("flag_joey", "images/flagpole_JK2.png");
-    this.load.image("glass_full", "images/niemo_shot_full.png");
-    this.load.image("glass_empty", "images/niemo_shot_empty.png");
-
-    this.playerOptions.forEach((pOption, pOptionIndex) => {
-      this.load.image(pOption.char.name, pOption.char.src);
-    });
-    for (let i = 0; i < this.playerChoices.length; i++) {
-      this.load.image("tail_" + i, "images/white_trans.png");
-    }
+    preload(this);
   }
   create() {
-    for (let i = 0; i < this.playerChoices.length; i++) {
-      this.players.push(
-        JSON.parse(JSON.stringify(this.playerOptions[this.playerChoices[i]]))
-      );
-    }
-
-    console.log("PLAYERS CURRENT", this.players);
-
-    this.players.forEach((player, playerIndex) => {
-      player.gamepad = Phaser.Input.Gamepad.Gamepad;
-    });
     create(this);
   }
 
   update(time: number, delta: number) {
-    // console.log("this.input.gamepad.total", this.input.gamepad.total);
-
     update(this, time, delta);
   }
 }

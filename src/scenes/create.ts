@@ -8,6 +8,7 @@ import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
 import { setPreUpdate } from "./update";
 
 export function create(game: Game) {
+  createPreCreate(game);
   createDataMatrices(game);
   createSoundsGame(game);
   createBackground(game);
@@ -36,6 +37,20 @@ export function create(game: Game) {
 
   // INIT UPDATE
   setPreUpdate(game);
+}
+
+export function createPreCreate(game: Game): void {
+  for (let i = 0; i < game.playerChoices.length; i++) {
+    game.players.push(
+      JSON.parse(JSON.stringify(game.playerOptions[game.playerChoices[i]]))
+    );
+  }
+
+  console.log("PLAYERS CURRENT", game.players);
+
+  game.players.forEach((player, playerIndex) => {
+    player.gamepad = Phaser.Input.Gamepad.Gamepad;
+  });
 }
 
 export function createEndDataMatrices(game: Game): void {
