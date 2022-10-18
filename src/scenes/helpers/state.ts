@@ -9,7 +9,6 @@ import {
 import {
   setPhysicalAttackOffscreen,
   setPhysicsAttackEnergyOn,
-  updatePhysicalAttackFollowsPlayer,
 } from "./attacks";
 import {
   setActiveHurtEmitterOff,
@@ -185,10 +184,6 @@ export function setPlayerState(
   }
 }
 
-// export function pauseGame(player: Player, game: Game): void {
-
-// }
-
 export function getHasNumDeadIncreased(game: Game): boolean {
   if (game.numDead === game.numDeadPrev) {
     return false;
@@ -261,11 +256,6 @@ export function getLongEnoughTimeDuration(
   duration: number,
   game: Game
 ): boolean {
-  // console.log(
-  //   "HERE",
-  //   game.timeNanoseconds,
-  //   game.state.timeStamp + duration + 20
-  // );
   if (game.timeNanoseconds > game.gameState.timeStamp + duration + 20) {
     return true;
   }

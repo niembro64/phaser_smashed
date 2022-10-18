@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Phaser from "phaser";
 import Game from "../scenes/Game";
 import "../App.css";
@@ -185,11 +185,11 @@ function Play() {
   ];
   const debug: Debug = {
     setLevel: 4, //012345
-    setDurationMinutes: 8, //012345
+    setDurationMinutes: 7, //012345
     setUpdateLoopsNumSkip: 0,
     setMusicNumber: 2, // 012
     setMusicActive: false,
-    setReadySoundActive: true,
+    setReadySoundActive: false,
     setFrictionAirActive: true,
     setCamerasActive: true,
     setCamerasVisible: false,
@@ -389,6 +389,13 @@ function Play() {
         setShowHistory(false);
     }
   };
+
+  useEffect(() => {
+    console.log(
+      "SECONDS",
+      myGame?.current?.scene?.keys?.game?.gameClock?.seconds
+    );
+  }, [myGame?.current?.scene?.keys?.game?.timeSeconds]);
 
   return (
     <div className="overDiv">
