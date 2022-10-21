@@ -290,7 +290,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 1px dashed lime; */
   filter: grayscale(1) brightness(3) brightness(0.3);
   transition: 1s ease;
   cursor: pointer;
@@ -302,7 +301,6 @@ body {
 }
 .startTitle:active {
   height: 50%;
-  /* filter: grayscale(1) brightness(3) hue-rotate(180deg); */
   transition: 0.1s ease;
   animation-name: titleAnimation;
   animation-duration: 0.07s;
@@ -311,17 +309,17 @@ body {
 
 @keyframes titleAnimation {
   0% {
-    filter: brightness(0.3) sepia(1) hue-rotate(0deg) brightness(2)
+    filter: brightness(0.3) sepia(2) hue-rotate(0deg) brightness(2.2)
       contrast(1.8);
     transform: rotateZ(1deg);
   }
   50% {
-    filter: brightness(0.3) sepia(1) hue-rotate(180deg) brightness(2)
+    filter: brightness(0.3) sepia(2) hue-rotate(180deg) brightness(2.2)
       contrast(1.8);
     transform: rotateZ(-1deg);
   }
   100% {
-    filter: brightness(0.3) sepia(1) hue-rotate(360deg) brightness(2)
+    filter: brightness(0.3) sepia(2) hue-rotate(360deg) brightness(2.2)
       contrast(1.8);
     transform: rotateZ(1deg);
   }
