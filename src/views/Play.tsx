@@ -458,10 +458,18 @@ function Play() {
       <div className="phaser-container" id="phaser-container"></div>
       {webState === "start" && (
         <div className="startClassDiv">
-          <div className="startTitle">
-            {/* <img src="images/smashTitle.png" alt="smash title" /> */}
-            <img src="images/smashed-gif-cropped.gif" alt="smash title" />
-            <h1>SMASHED</h1>
+          <div className="startTitleWrapper2">
+            <div className="startTitleWrapper1">
+              <div className="startTitle">
+                {/* <img src="images/smashTitle.png" alt="smash title" /> */}
+                <img
+                  className="startGif"
+                  src="images/smashed-gif-cropped.gif"
+                  alt="smash title"
+                />
+                <h1>SMASHED</h1>
+              </div>
+            </div>
           </div>
           <div className="playerChoices">
             {smashConfig.players.map((cPlayer, cPlayerIndex) => {

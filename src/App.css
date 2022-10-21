@@ -291,11 +291,88 @@ body {
   justify-content: center;
   align-items: center;
   /* border: 1px dashed lime; */
+  filter: grayscale(1) brightness(3) brightness(0.3);
+  transition: 1s ease;
+  cursor: pointer;
 }
-.startTitle > img {
+.startTitle:hover {
   height: 50%;
-  /* border: 1px dashed lime; */
+  filter: grayscale(0) brightness(1);
+  transition: 0.2s ease;
 }
+.startTitle:active {
+  height: 50%;
+  /* filter: grayscale(1) brightness(3) hue-rotate(180deg); */
+  transition: 0.1s ease;
+  animation-name: titleAnimation;
+  animation-duration: 0.07s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes titleAnimation {
+  0% {
+    filter: brightness(0.3) sepia(1) hue-rotate(0deg) brightness(2)
+      contrast(1.8);
+    transform: rotateZ(1deg);
+  }
+  50% {
+    filter: brightness(0.3) sepia(1) hue-rotate(180deg) brightness(2)
+      contrast(1.8);
+    transform: rotateZ(-1deg);
+  }
+  100% {
+    filter: brightness(0.3) sepia(1) hue-rotate(360deg) brightness(2)
+      contrast(1.8);
+    transform: rotateZ(1deg);
+  }
+}
+.startTitleWrapper1:active {
+  transition: 0.1s ease;
+  animation-name: wrapperAnimation1;
+  animation-duration: 0.09s;
+  animation-iteration-count: infinite;
+}
+.startTitleWrapper2:active {
+  transition: 0.1s ease;
+
+  animation-name: wrapperAnimation2;
+  animation-duration: 0.05s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes wrapperAnimation1 {
+  0% {
+    filter: hue-rotate(0deg);
+    transform: translateX(5px);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+    transform: translateX(-5px);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+    transform: translateX(5px);
+  }
+}
+@keyframes wrapperAnimation2 {
+  0% {
+    filter: hue-rotate(0deg);
+    transform: translateY(5px);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+    transform: translateY(-5px);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+    transform: translateY(5px);
+  }
+}
+
+.startGif {
+  height: 50%;
+}
+
 .startTitle > h1 {
   /* height: 100%; */
   /* border: 1px dashed lime; */
