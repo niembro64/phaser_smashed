@@ -160,6 +160,9 @@ export function createPlatforms(game: Game): void {
     case 4:
       createPlatforms4(game);
       break;
+    case 5:
+      createPlatforms5(game);
+      break;
     default:
       createPlatforms0(game);
       break;
@@ -670,14 +673,6 @@ export function createPlatforms4(game: Game): void {
     );
   }
 
-  // for (let i = 0; i < 30; i++) {
-  //   game.PLATFORMS.create(
-  //     (320 + i * game.brickWidth) * game.SCREEN_SCALE.WIDTH,
-  //     1001 * game.SCREEN_SCALE.HEIGHT,
-  //     "platformVertical"
-  //   );
-  // }
-
   for (let i = 0; i < 20; i++) {
     game.PLATFORMS.create(
       600,
@@ -702,11 +697,6 @@ export function createPlatforms4(game: Game): void {
     );
   }
 
-  // game.PLATFORMS.create(
-  //   400 * game.SCREEN_SCALE.WIDTH,
-  //   500 * game.SCREEN_SCALE.HEIGHT,
-  //   "platformShort"
-  // );
   for (let i = 0; i < 5; i++) {
     game.PLATFORMS.create(
       1617 * game.SCREEN_SCALE.WIDTH,
@@ -719,6 +709,57 @@ export function createPlatforms4(game: Game): void {
       1783 * game.SCREEN_SCALE.WIDTH,
       (686 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
       "brick"
+    );
+  }
+}
+export function createPlatforms5(game: Game): void {
+  game.PLATFORMS = game.physics.add.staticGroup();
+
+  // for (let i = 0; i < 3; i++) {
+  //   game.PLATFORMS.create(
+  //     1920 * game.SCREEN_SCALE.WIDTH * game.ASSET_BRICK_WIDTH,
+  //     1080 * game.SCREEN_SCALE.HEIGHT * i,
+  //     "platformVertical"
+  //   );
+  // }
+
+  // for (let i = 0; i < 25; i++) {
+  //   game.PLATFORMS.create(
+  //     1700 * game.SCREEN_SCALE.WIDTH,
+  //     (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT + game.ASSET_BRICK_HEIGHT * i,
+  //     "platformShort"
+  //   );
+  // }
+
+  for (let i = 0; i < 2; i++) {
+    game.PLATFORMS.create(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
+      "platformHorizontal"
+    );
+  }
+
+  for (let i = 0; i < 2; i++) {
+    game.PLATFORMS.create(
+      614 * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
+      710 * game.SCREEN_SCALE.HEIGHT,
+      "platformVertical"
+    );
+  }
+
+  for (let i = 0; i < 2; i++) {
+    game.PLATFORMS.create(
+      (1207 + 34 * 5) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
+      (710 - 34) * game.SCREEN_SCALE.HEIGHT,
+      "platformVertical"
+    );
+  }
+
+  for (let i = 0; i < 6; i++) {
+    game.PLATFORMS.create(
+      (1518 + 0 * 33) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
+      (924 - 34 * 2) * game.SCREEN_SCALE.HEIGHT,
+      "platformVertical"
     );
   }
 }

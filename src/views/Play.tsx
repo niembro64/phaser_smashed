@@ -152,13 +152,13 @@ function Play() {
     { name: "Breezy", text: "The turtle will die." },
     // { name: "Breezy", text: "Oh, is it? Oh cool. Ur soo cool." },
     // { name: "Lau", text: "I'm sorry, I didn't know it was gonna happen." },
-    { name: "TR3", text: "Smashed!" },
+    { name: "TR3", text: "Smashed." },
     {
       name: "TR3",
       text: "How am I supposed to make more than that... shit... happen?",
     },
     // { name: "Chadams", text: "AAAYYYUUUGGGGHHHH!!" },
-    { name: "Chadams", text: "Two shots, twooo shots." },
+    { name: "Chadams", text: "Two shots... two shots." },
     // { name: "Chadams", text: "Spike Enerjeaoah." },
     // { name: "Chadams", text: "Stop breakin' shit." },
     // { name: "Chadams", text: "Is there no one else?" },
@@ -181,12 +181,13 @@ function Play() {
     //   text: "I thought you put Spike in there.",
     // },
     // { name: "Gin", text: "Clean it up, and we'll do it again." },
+    { name: "Ginman", text: "Set it up... and we'll do it... again." },
     // { name: "Gin", text: "Shitty, shitty-fuckin-ass." },
   ];
   const debug: Debug = {
-    setLevel: 4, //012345
-    setDurationMinutes: 7, //012345
-    setUpdateLoopsNumSkip: 0,
+    setLevel: 5, //012345
+    setDurationMinutes: 7, //01234567
+    setUpdateLoopsNumSkip: 2, // 012
     setMusicNumber: 2, // 012
     setMusicActive: false,
     setReadySoundActive: false,
