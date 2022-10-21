@@ -11,22 +11,24 @@ import useSound from "use-sound";
 import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
 import importedBlipSound from "../sounds/game-start-liquid.wav";
+import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
-// export type CharacterName =
-//   | "Mario"
-//   | "Link"
-//   | "Pikachu"
-//   | "Kirby"
-//   | "Chez"
-//   | "BlackChez";
+export type CharacterName =
+  | "Mario"
+  | "Link"
+  | "Pikachu"
+  | "Kirby"
+  | "Chez"
+  | "BlackChez";
 
 export interface SmashConfig {
   players: PlayerConfig[];
 }
 
 export interface SmashConfigScale {
+  name: CharacterName;
   characterId: CharacterId;
   scale: number;
 }
@@ -103,19 +105,20 @@ function Play() {
   ]);
   const [smashConfig, setSmashConfig] = useState({
     players: [
-      { characterId: 0, scale: 0.9 },
-      { characterId: 1, scale: 0.9 },
-      { characterId: 2, scale: 1 },
-      { characterId: 3, scale: 0.7 },
+      { characterId: 0, scale: 0.9, name: "Mario" },
+      { characterId: 1, scale: 0.9, name: "Link" },
+      { characterId: 2, scale: 1, name: "Pikachu" },
+      { characterId: 3, scale: 0.7, name: "Kirby" },
     ],
   });
+
   const smashConfigScaleArray: SmashConfigScale[] = [
-    { characterId: 0, scale: 0.9 },
-    { characterId: 1, scale: 0.9 },
-    { characterId: 2, scale: 1 },
-    { characterId: 3, scale: 0.7 },
-    { characterId: 4, scale: 1.2 },
-    { characterId: 5, scale: 1.2 },
+    { characterId: 0, scale: 0.9, name: "Mario" },
+    { characterId: 1, scale: 0.9, name: "Link" },
+    { characterId: 2, scale: 1, name: "Pikachu" },
+    { characterId: 3, scale: 0.7, name: "Kirby" },
+    { characterId: 4, scale: 1.2, name: "Chez" },
+    { characterId: 5, scale: 1.2, name: "BlackChez" },
   ];
   const config: Phaser.Types.Core.GameConfig = {
     transparent: true,
@@ -217,10 +220,15 @@ function Play() {
     startSound();
     setWebState("play");
     let players = [...smashConfig.players];
-    let newPlayers: { characterId: CharacterId; scale: number }[] = [];
+    let newPlayers: {
+      name: CharacterName;
+      characterId: CharacterId;
+      scale: number;
+    }[] = [];
     buttonsOnOff.forEach((button, buttonIndex) => {
       if (button.state) {
         newPlayers.push({
+          name: players[buttonIndex].name as CharacterName,
           characterId: players[buttonIndex].characterId as CharacterId,
           scale: players[buttonIndex].scale,
         });
@@ -276,7 +284,11 @@ function Play() {
     let tempScale = smashConfigScaleArray.find((s, sIndex) => {
       return s.characterId === choice.characterId;
     })?.scale;
+    let tempName = smashConfigScaleArray.find((s, sIndex) => {
+      return s.characterId === choice.characterId;
+    })?.name;
     choice.scale = tempScale ? tempScale : 1;
+    choice.name = tempName ? tempName : "";
     setSmashConfig({ players: [...choices] });
   };
 
@@ -498,12 +510,12 @@ function Play() {
                   </div>
                   {buttonsOnOff[cPlayerIndex].state && (
                     <button
-                      className="btn btn-success px-4"
+                      className="btn btn-dark px-4"
                       onClick={() => {
                         onClickStartOnOffButtons(cPlayerIndex, false);
                       }}
                     >
-                      <span>ON</span>
+                      <span>{cPlayer.name}</span>
                     </button>
                   )}
                   {!buttonsOnOff[cPlayerIndex].state && (
@@ -532,6 +544,11 @@ function Play() {
 
       <div className="overDiv">
         <div className="top-bar">
+          <img
+            className="question-mark"
+            src="/images/qblack_trans.png"
+            alt="question mark"
+          />
           {webState === "start" && (
             <button
               className="linkTag btn btn-outline-light"
@@ -689,20 +706,20 @@ function Play() {
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 {/* <h4>See Other Projects</h4> */}
-                <span>Example: (2) SNES Controllers $12</span>
+                <span>Amazon: (2) SNES Controllers $12</span>
               </a>
               <a
                 className="linkTag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 {/* <h4>See Other Projects</h4> */}
-                <span>Suggested: USB Hub/Extension $13</span>
+                <span>Amazon: USB Hub/Extension $13</span>
               </a>
-              <p>Some types of controllers don't work yet.</p>
+              {/* <p>Some types of controllers don't work yet.</p> */}
 
               <div>
                 <ul>
-                  Best to Worst User Experience:
+                  These work:
                   <li>✔️ iNNEXT SNES Wired USB</li>
                   <li>✔️ Nintendo Switch Pro</li>
                   <li>✔️ Nintendo Switch Wired</li>

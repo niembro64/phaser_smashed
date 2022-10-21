@@ -93,32 +93,37 @@ body {
   /* border: 1% dashed black; */
   background-color: rgba(0, 0, 0, 0);
 
-  padding: 0.5%;
+  padding: 0.5% 5.5% 0.5% 0.5%;
 
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   z-index: 3;
-  transition: 0s ease;
+  transition: 2s ease;
 }
 
 .top-bar:hover {
   background-color: black;
   border: 0;
+  transition: 0.1s ease;
 }
 
-.top-bar:hover > .linkTag {
+.top-bar:hover > .linkTag,
+.top-bar:hover > .question-mark {
   /* display: block; */
   border: 0;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0);
   color: white;
+  filter: opacity(1);
+  transition: 0.1s ease;
 }
-.top-bar:hover > #link > .linkTag {
-  /* display: block; */
-  border: 0;
-  background-color: black;
-  color: white;
+
+.question-mark {
+  height: 100%;
+  justify-self: flex-start;
+  filter: opacity(0.3);
+  transition: 2s ease;
 }
 
 #link {
@@ -132,9 +137,10 @@ body {
   /* display: none; */
   border: 0;
   padding: 0% 1%;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0);
 
   font-size: 1.3vw;
+  transition: 2s ease;
 }
 
 .popup {
@@ -254,17 +260,18 @@ body {
 }
 .playerChoice > button {
   width: 100%;
-  height: 20%;
+  height: 22%;
   padding: 0;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 3vh;
 }
-.playerChoiice > button > span {
+/* .playerChoiice > button > span {
   font-size: 4vh;
-}
+} */
 
 .playLink {
   height: 15%;
@@ -372,21 +379,15 @@ body {
 }
 
 .startTitle > h1 {
-  /* height: 100%; */
-  /* border: 1px dashed lime; */
   margin: 0;
   padding: 0;
   font-size: 15vh;
-
-  /* font-size: 800%; */
 }
 .startButton {
   flex: 0.7;
-  /* height: 20%; */
-  width: 40%;
+  width: 20%;
   padding: 0;
   margin-bottom: 1%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -395,28 +396,23 @@ body {
 .startButton > span {
   margin: 0;
   padding: 0;
-  font-size: 4vh;
+  font-size: 5vh;
 }
 
 .playerChar {
   width: 100%;
   height: 100%;
-
   margin: 0%;
-
-  /* background-color: red; */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-
   cursor: pointer;
 }
 
 .startImageWrapper {
   width: 100%;
   height: auto;
-
   /* background-color: cyan; */
   display: flex;
   flex-direction: column;
