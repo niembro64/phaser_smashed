@@ -510,7 +510,7 @@ function Play() {
                   </div>
                   {buttonsOnOff[cPlayerIndex].state && (
                     <button
-                      className="btn btn-dark px-4"
+                      className="b-dark px-4"
                       onClick={() => {
                         onClickStartOnOffButtons(cPlayerIndex, false);
                       }}
@@ -520,7 +520,7 @@ function Play() {
                   )}
                   {!buttonsOnOff[cPlayerIndex].state && (
                     <button
-                      className="btn btn-danger px-4"
+                      className="px-4 b-black"
                       onClick={() => {
                         onClickStartOnOffButtons(cPlayerIndex, true);
                       }}
@@ -533,7 +533,7 @@ function Play() {
             })}
           </div>
           <button
-            className="startButton btn btn-primary px-2"
+            className="startButton b-start px-2"
             onClick={onClickStartStartButton}
           >
             <span>START</span>
