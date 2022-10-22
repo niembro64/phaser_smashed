@@ -12,6 +12,7 @@ import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
 import importedBlipSound from "../sounds/game-start-liquid.wav";
 import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
+import { BooleanSchemaDefinition } from "mongoose";
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -71,6 +72,7 @@ export interface Debug {
   setPrintControllerButtonsConsole: boolean;
   setPrintControllerConnectedConsole: boolean;
   setLoadTimeExtra: boolean;
+  setChezSecret: boolean;
 }
 
 function Play() {
@@ -213,6 +215,7 @@ function Play() {
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,
     setLoadTimeExtra: false,
+    setChezSecret: true,
   };
   const onClickStartStartButton = () => {
     // pauseSound.play();
@@ -279,8 +282,13 @@ function Play() {
     blipSound();
     let choices = [...smashConfig.players];
     let choice = choices[playerIndex];
-    choice.characterId =
-      choice.characterId + 1 < 6 ? choice.characterId + 1 : 0;
+    if (debug.setChezSecret) {
+      choice.characterId =
+        choice.characterId + 1 < 4 ? choice.characterId + 1 : 0;
+    } else {
+      choice.characterId =
+        choice.characterId + 1 < 6 ? choice.characterId + 1 : 0;
+    }
     let tempScale = smashConfigScaleArray.find((s, sIndex) => {
       return s.characterId === choice.characterId;
     })?.scale;
