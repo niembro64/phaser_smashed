@@ -278,6 +278,27 @@ function Play() {
     setButtonsOnOff([...buttons]);
   };
 
+  const setAllChez = () => {
+    if (!debug.setChezSecret) {
+      return;
+    }
+    // blipSound();
+    for (let i = 0; i < 4; i++) {
+      let choices = [...smashConfig.players];
+      let choice = choices[i];
+      choice.characterId = 4;
+      let tempScale = smashConfigScaleArray.find((s, sIndex) => {
+        return s.characterId === choice.characterId;
+      })?.scale;
+      let tempName = smashConfigScaleArray.find((s, sIndex) => {
+        return s.characterId === choice.characterId;
+      })?.name;
+      choice.scale = tempScale ? tempScale : 1;
+      choice.name = tempName ? tempName : "";
+      setSmashConfig({ players: [...choices] });
+    }
+  };
+
   const onClickStartRotateSelection = (playerIndex: number): void => {
     blipSound();
     let choices = [...smashConfig.players];
@@ -480,7 +501,22 @@ function Play() {
         <div className="startClassDiv">
           <div className="startTitleWrapper2">
             <div className="startTitleWrapper1">
-              <div className="startTitle">
+              <div
+                className="startTitle"
+                onMouseDown={() => {
+                  console.log("MOUSE DOWN");
+                  setAllChez();
+                }}
+                onMouseUp={() => {
+                  console.log("MOUSE UP");
+                }}
+                onMouseEnter={() => {
+                  console.log("MOUSE ENTER");
+                }}
+                onMouseLeave={() => {
+                  console.log("MOUSE LEAVE");
+                }}
+              >
                 {/* <img src="images/smashTitle.png" alt="smash title" /> */}
                 <img
                   className="startGif"
