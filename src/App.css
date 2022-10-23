@@ -290,16 +290,48 @@ body {
   color: white;
 } */
 .b-start {
-  background-color: rgba(255, 255, 255, 0.1);
+  /* background-color: blue; */
+  background-color: hsl(200, 70%, 10%);
   border-color: transparent;
   border: none;
   color: rgba(255, 255, 255, 1);
+  /* color: rgba(0, 0, 0, 1); */
+  font-size: 3vw;
+  padding: 0.5% 3% 0% 3%;
+  transition: 0.5s ease;
 }
 .b-start:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  transition: 0.2s ease;
+  /* background-color: rgba(255, 255, 255, 0.2); */
+  background-image: linear-gradient(
+    to right,
+    hsl(200, 100%, 20%),
+    hsl(250, 100%, 20%)
+  );
+  padding: 0.5% 4% 0% 4%;
   border-color: transparent;
   border: none;
+  /* color: black; */
   color: rgba(255, 255, 255, 1);
+
+  animation: startAnimation 5s linear infinite;
+  /* animation-name: startAnimation;
+  animation-duration: 2s;
+  animation-iteration-count: infinite; */
+}
+@keyframes startAnimation {
+  0% {
+    filter: hue-rotate(0deg);
+    /* transform: translateX(5px); */
+  }
+  50% {
+    filter: hue-rotate(180deg);
+    /* transform: translateX(-5px); */
+  }
+  100% {
+    filter: hue-rotate(360deg);
+    /* transform: translateX(5px); */
+  }
 }
 .b-dark {
   background-color: rgba(255, 255, 255, 0.1);
@@ -333,24 +365,40 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  filter: grayscale(1) brightness(3) brightness(0.3);
   transition: 1s ease;
   /* cursor: pointer; */
+  animation: titleInit 5s linear both;
 }
-.startTitle:hover {
-  height: 50%;
+@keyframes titleInit {
+  0% {
+    filter: grayscale(1) brightness(3) brightness(0);
+  }
+  70% {
+    filter: grayscale(1) brightness(3) brightness(0.1);
+  }
+  90% {
+    filter: grayscale(1) brightness(3) brightness(0.2);
+  }
+  100% {
+    filter: grayscale(0) brightness(1);
+    transition: 0.2s ease;
+  }
+}
+
+/* .startTitle:hover {
   filter: grayscale(0) brightness(1);
   transition: 0.2s ease;
-}
+} */
 .startTitle:active {
   height: 50%;
   transition: 0.1s ease;
-  animation-name: titleAnimation;
+  animation: titleShake 0.07 infinite both;
+  /* animation-name: titleShake;
   animation-duration: 0.07s;
-  animation-iteration-count: infinite;
+  animation-iteration-count: infinite; */
 }
 
-@keyframes titleAnimation {
+@keyframes titleShake {
   0% {
     filter: brightness(0.3) sepia(2) hue-rotate(0deg) brightness(2.2)
       contrast(1.8);
@@ -419,11 +467,11 @@ body {
   padding: 0;
   font-size: 10vw;
 }
-.startButton {
+/* .startButton {
   flex: 0.7;
   width: 20%;
   padding: 0;
-  margin-bottom: 1%;
+  margin-bottom: 0.5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -432,8 +480,8 @@ body {
 .startButton > span {
   margin: 0;
   padding: 0;
-  font-size: 3vw;
-}
+  font-size: 2vw;
+} */
 
 .playerChar {
   width: 100%;

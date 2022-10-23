@@ -284,10 +284,12 @@ function Play() {
   const setAllCharacter = (charId: number) => {
     // startSound();
     // specialSound();
-    if (!debug.setChezSecret) {
+    if (!debug.setChezSecret || webState === "play") {
       return;
     }
-    // blipSound();
+    if (charId === 4) {
+      specialSound();
+    }
     for (let i = 0; i < 4; i++) {
       let choices = [...smashConfig.players];
       let choice = choices[i];
@@ -566,10 +568,7 @@ function Play() {
               );
             })}
           </div>
-          <button
-            className="startButton b-start px-2"
-            onClick={onClickStartStartButton}
-          >
+          <button className="b-start" onClick={onClickStartStartButton}>
             <span>START</span>
           </button>
         </div>
@@ -793,7 +792,6 @@ function Play() {
                 onMouseDown={() => {
                   console.log("MOUSE DOWN");
                   setAllCharacter(4);
-                  specialSound();
                 }}
                 // onMouseUp={() => {
                 //   console.log("MOUSE UP");
