@@ -446,20 +446,27 @@ function Play() {
     }
   };
 
-  let gameInfo: any = useRef(null);
-  useEffect(() => {
-    if (gameInfo.current) {
-      clearInterval(gameInfo.current);
-    }
-    gameInfo.current = setInterval(() => {
-      console.log(myPhaser?.current?.scene?.keys?.game?.gameClock);
-    }, 1000);
+  // let gameInfo: any = useRef(null);
+  // const [secondsUpUp, setSecondsUpUp] = useState({});
+  // const [secondsDownDown, setSecondsDownDown] = useState({});
+  // useEffect(() => {
+  //   if (gameInfo.current) {
+  //     clearInterval(gameInfo.current);
+  //   }
+  //   gameInfo.current = setInterval(() => {
+  //     if (myPhaser.current) {
+  //       myGame.current = myPhaser.current?.scene?.keys?.game;
+  //       setSecondsUpUp(myPhaser.current?.scene?.keys?.game.timeClock);
+  //       setSecondsDownDown(myPhaser.current?.scene?.keys?.game.gameClock);
+  //       console.log("TIME SECONDS", secondsUpUp, secondsDownDown);
+  //     }
+  //   }, 100);
 
-    if (myPhaser?.current?.scene?.keys?.game) {
-      myGame.current = myPhaser.current.scene.keys.game as Game;
-      // myGame.current.addEventListener("ASDF", () => {});
-    }
-  }, [myPhaser?.current?.scene?.keys?.game?.gameClock]);
+  //   if (myPhaser?.current?.scene?.keys?.game) {
+  //     myGame.current = myPhaser.current.scene.keys.game as Game;
+  //     // myGame.current.addEventListener("ASDF", () => {});
+  //   }
+  // }, [myGame.current?.loaded]);
 
   return (
     <div className="overDiv">
