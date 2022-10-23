@@ -446,27 +446,38 @@ function Play() {
     }
   };
 
-  // let gameInfo: any = useRef(null);
-  // const [secondsUpUp, setSecondsUpUp] = useState({});
-  // const [secondsDownDown, setSecondsDownDown] = useState({});
-  // useEffect(() => {
-  //   if (gameInfo.current) {
-  //     clearInterval(gameInfo.current);
-  //   }
-  //   gameInfo.current = setInterval(() => {
-  //     if (myPhaser.current) {
-  //       myGame.current = myPhaser.current?.scene?.keys?.game;
-  //       setSecondsUpUp(myPhaser.current?.scene?.keys?.game.timeClock);
-  //       setSecondsDownDown(myPhaser.current?.scene?.keys?.game.gameClock);
-  //       console.log("TIME SECONDS", secondsUpUp, secondsDownDown);
-  //     }
-  //   }, 100);
+  useEffect(() => {
+    console.log(
+      "+++++++++++++++++++++++",
+      "myGame.current?.loaded",
+      myGame.current?.loaded
+    );
+  }, [myGame.current?.loaded]);
 
-  //   if (myPhaser?.current?.scene?.keys?.game) {
-  //     myGame.current = myPhaser.current.scene.keys.game as Game;
-  //     // myGame.current.addEventListener("ASDF", () => {});
-  //   }
-  // }, [myGame.current?.loaded]);
+  let gameInfo: any = useRef(null);
+  const [clockTime, setClockTime] = useState({ minutes: 0, seconds: 0 });
+  const [clockGame, setClockGame] = useState({
+    minutes: 0,
+    seconds: 0,
+  });
+  useEffect(() => {
+    if (gameInfo.current) {
+      clearInterval(gameInfo.current);
+    }
+    gameInfo.current = setInterval(() => {
+      if (myPhaser.current) {
+        myGame.current = myPhaser.current?.scene?.keys?.game;
+        setClockTime(JSON.parse(JSON.stringify(myGame.current.timeClock)));
+        setClockGame(JSON.parse(JSON.stringify(myGame.current.gameClock)));
+        console.log("TIME SECONDS", clockTime, clockGame);
+      }
+    }, 100);
+
+    if (myPhaser?.current?.scene?.keys?.game) {
+      myGame.current = myPhaser.current.scene.keys.game as Game;
+      // myGame.current.addEventListener("ASDF", () => {});
+    }
+  }, [myGame.current?.loaded]);
 
   return (
     <div className="overDiv">
@@ -877,6 +888,24 @@ function Play() {
           </div>
         )}
       </div>
+      {webState === "play" && (
+        <div className="game-bar">
+          <div className="game-bar-time">
+            <p>
+              {clockGame.minutes}:
+              {clockGame.seconds < 10
+                ? "0" + clockGame.seconds.toString()
+                : clockGame.seconds}
+            </p>
+            <h1>
+              {clockTime.minutes}:
+              {clockTime.seconds < 10
+                ? "0" + clockTime.seconds.toString()
+                : clockTime.seconds}
+            </h1>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
