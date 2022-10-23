@@ -524,6 +524,7 @@ function Play() {
               </div>
             </div>
           </div>
+          <div className="black-hiding-div"></div>
           <div className="playerChoices">
             {smashConfig.players.map((cPlayer, cPlayerIndex) => {
               return (

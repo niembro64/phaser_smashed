@@ -298,7 +298,8 @@ body {
   /* color: rgba(0, 0, 0, 1); */
   font-size: 3vw;
   padding: 0.5% 3% 0% 3%;
-  transition: 0.5s ease;
+  transition: 0.3s ease;
+  /* animation: 3s opacityAnimation ease both; */
 }
 .b-start:hover {
   transition: 0.2s ease;
@@ -314,7 +315,7 @@ body {
   /* color: black; */
   color: rgba(255, 255, 255, 1);
 
-  animation: startAnimation 5s linear infinite;
+  animation: startAnimation 3s linear infinite;
   /* animation-name: startAnimation;
   animation-duration: 2s;
   animation-iteration-count: infinite; */
@@ -340,7 +341,7 @@ body {
   color: rgba(255, 255, 255, 1);
 }
 .b-dark:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 .b-black {
   background-color: transparent;
@@ -349,7 +350,7 @@ body {
   color: rgba(255, 255, 255, 0.3);
 }
 .b-black:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.01);
 }
 
 .startTitle {
@@ -367,21 +368,80 @@ body {
   align-items: center;
   transition: 1s ease;
   /* cursor: pointer; */
-  animation: titleInit 5s linear both;
+  animation: titleInit 3s ease-out both;
 }
 @keyframes titleInit {
   0% {
+    transform: translateY(130px);
     filter: grayscale(1) brightness(3) brightness(0);
   }
-  70% {
+  50% {
+    transform: translateY(130px);
     filter: grayscale(1) brightness(3) brightness(0.1);
   }
-  90% {
+  60% {
     filter: grayscale(1) brightness(3) brightness(0.2);
   }
+  70% {
+    filter: grayscale(1) brightness(3) brightness(0.7);
+    transform: translateY(0px);
+  }
+  90% {
+    filter: grayscale(1) brightness(3) brightness(1);
+    transform: translateY(0px);
+  }
   100% {
+    transform: translateY(0px);
     filter: grayscale(0) brightness(1);
     transition: 0.2s ease;
+  }
+}
+.black-hiding-div {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 50%;
+  background-color: black;
+  animation: revealAnimation 2s ease-out both;
+}
+
+@keyframes revealAnimation {
+  0% {
+    transform: translateY(0%);
+  }
+  80% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+.startGif {
+  width: 50vw;
+}
+
+.startTitle > h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 8vw;
+  animation: titleGrow 3s linear both;
+}
+@keyframes titleGrow {
+  0% {
+    /* transform: scale(0.8); */
+    filter: brightness(0);
+  }
+  80% {
+    /* transform: scale(0.8); */
+    filter: brightness(0.5);
+  }
+  90% {
+    /* transform: scale(0.8); */
+    filter: brightness(0.5);
+  }
+  100% {
+    /* transform: scale(0.8); */
+    filter: brightness(1);
   }
 }
 
@@ -425,7 +485,7 @@ body {
   transition: 0.1s ease;
 
   animation-name: wrapperAnimation2;
-  animation-duration: 0.05s;
+  animation-duration: 0.03s;
   animation-iteration-count: infinite;
 }
 
@@ -458,15 +518,6 @@ body {
   }
 }
 
-.startGif {
-  width: 50vw;
-}
-
-.startTitle > h1 {
-  margin: 0;
-  padding: 0;
-  font-size: 10vw;
-}
 /* .startButton {
   flex: 0.7;
   width: 20%;
@@ -685,9 +736,9 @@ body {
   height: 160px;
 
   /* animation: spinnerAnimation0 33s infinite ease; */
-  animation: spinnerAnimation0 40.5s infinite ease;
+  animation: spinnerAnimation0 40.3s infinite ease;
   transform-style: preserve-3d;
-  transition: 5s ease;
+  transition: 3s ease;
 
   overflow: visible;
   /* border: 3px dashed lime; */
@@ -697,7 +748,7 @@ body {
   height: 160px;
 
   /* animation: spinnerAnimation1 211s infinite ease; */
-  animation: spinnerAnimation1 125.5s infinite ease;
+  animation: spinnerAnimation1 125.3s infinite ease;
   transform-style: preserve-3d;
 
   overflow: visible;
@@ -707,7 +758,7 @@ body {
   width: 160px;
   height: 160px;
   /* animation: spinnerAnimation2 23s infinite ; */
-  animation: spinnerAnimation2 138.5s infinite ease;
+  animation: spinnerAnimation2 138.3s infinite ease;
   transform-style: preserve-3d;
   display: flex;
   justify-content: center;
