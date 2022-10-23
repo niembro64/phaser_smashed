@@ -7,12 +7,14 @@ import { ButtonName, CharacterMove } from "../App";
 import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 
+// // @ts-ignore
+// import importedSpecialSound from "../sounds/special.wav";
 // @ts-ignore
 import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
 import importedBlipSound from "../sounds/game-start-liquid.wav";
-import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
-import { BooleanSchemaDefinition } from "mongoose";
+// import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
+// import { BooleanSchemaDefinition } from "mongoose";
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
 
@@ -87,6 +89,7 @@ function Play() {
   //   volume: 0.4,
   // });
   // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
+  // const [specialSound] = useSound(importedSpecialSound, { volume: 0.4 });
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
   // @ts-ignore
@@ -278,7 +281,9 @@ function Play() {
     setButtonsOnOff([...buttons]);
   };
 
-  const setAllChez = () => {
+  const setAllCharacter = (charId: number) => {
+    startSound();
+    // specialSound();
     if (!debug.setChezSecret) {
       return;
     }
@@ -286,7 +291,7 @@ function Play() {
     for (let i = 0; i < 4; i++) {
       let choices = [...smashConfig.players];
       let choice = choices[i];
-      choice.characterId = 4;
+      choice.characterId = charId;
       let tempScale = smashConfigScaleArray.find((s, sIndex) => {
         return s.characterId === choice.characterId;
       })?.scale;
@@ -501,22 +506,7 @@ function Play() {
         <div className="startClassDiv">
           <div className="startTitleWrapper2">
             <div className="startTitleWrapper1">
-              <div
-                className="startTitle"
-                onMouseDown={() => {
-                  console.log("MOUSE DOWN");
-                  setAllChez();
-                }}
-                onMouseUp={() => {
-                  console.log("MOUSE UP");
-                }}
-                onMouseEnter={() => {
-                  console.log("MOUSE ENTER");
-                }}
-                onMouseLeave={() => {
-                  console.log("MOUSE LEAVE");
-                }}
-              >
+              <div className="startTitle">
                 {/* <img src="images/smashTitle.png" alt="smash title" /> */}
                 <img
                   className="startGif"
@@ -595,7 +585,7 @@ function Play() {
           />
           {webState === "start" && (
             <button
-              className="linkTag btn btn-outline-light"
+              className="linkTag b-top"
               onClick={() => {
                 onClickPlayNavButtons("Controllers");
               }}
@@ -605,7 +595,7 @@ function Play() {
           )}
           {webState !== "start" && (
             <button
-              className="linkTag btn btn-outline-light"
+              className="linkTag b-top"
               onClick={() => {
                 if (myGame?.current?.scene?.keys?.game) {
                   myGame.current.scene.keys.game.loaded = false;
@@ -621,7 +611,7 @@ function Play() {
           )}
           {webState !== "start" && (
             <button
-              className="linkTag btn btn-outline-light"
+              className="linkTag b-top"
               onClick={() => {
                 // if (myGame?.current?.scene?.keys?.game) {
                 //   myGame.current.scene.keys.game.loaded = false;
@@ -658,7 +648,7 @@ function Play() {
             </button>
           )}
           <button
-            className="linkTag btn btn-outline-light"
+            className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons("Controls");
             }}
@@ -666,7 +656,7 @@ function Play() {
             <span>Controls</span>
           </button>
           <button
-            className="linkTag btn btn-outline-light"
+            className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons("Rules-N64");
             }}
@@ -675,7 +665,7 @@ function Play() {
           </button>
           {webState === "start" && (
             <button
-              className="linkTag btn btn-outline-light"
+              className="linkTag b-top"
               onClick={() => {
                 onClickPlayNavButtons("History");
               }}
@@ -684,7 +674,7 @@ function Play() {
             </button>
           )}
           <button
-            className="linkTag btn btn-outline-light"
+            className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons("About");
             }}
@@ -800,6 +790,19 @@ function Play() {
                 className="kirbyNiembro"
                 src="./images/character_3_cropped.png"
                 alt="kirby"
+                onMouseDown={() => {
+                  console.log("MOUSE DOWN");
+                  setAllCharacter(4);
+                }}
+                onMouseUp={() => {
+                  console.log("MOUSE UP");
+                }}
+                onMouseEnter={() => {
+                  console.log("MOUSE ENTER");
+                }}
+                onMouseLeave={() => {
+                  console.log("MOUSE LEAVE");
+                }}
               />
               <p>by NIEMBRO64</p>
               <a className="linkTag btn btn-dark" href="http://niembro64.com/">

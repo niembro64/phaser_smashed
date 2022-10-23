@@ -103,11 +103,11 @@ body {
   transition: 2s ease;
 }
 
-.top-bar:hover {
+/* .top-bar:hover {
   background-color: black;
   border: 0;
   transition: 0.1s ease;
-}
+} */
 
 .top-bar:hover > .linkTag,
 .top-bar:hover > .question-mark {
@@ -133,6 +133,7 @@ body {
 }
 
 .linkTag {
+  background-color: transparent;
   transition: 0s ease;
   /* display: none; */
   border: 0;
@@ -284,6 +285,10 @@ body {
   align-items: center;
   text-decoration: none;
 }
+/* .b-top {
+  background-color: transparent;
+  color: white;
+} */
 .b-start {
   background-color: rgba(255, 255, 255, 0.1);
   border-color: transparent;
