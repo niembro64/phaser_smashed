@@ -603,7 +603,9 @@ function Play() {
               className="linkTag b-top"
               onClick={() => {
                 if (myGame?.current?.scene?.keys?.game) {
-                  myGame.current.scene.keys.game.loaded = false;
+                  const myGameX = myGame.current.scene.keys.game as Game;
+                  myGameX.loaded = false;
+                  // myGame.current.scene.keys.game.loaded = false;
                 }
                 onClickPlayNavButtons("Back");
                 setWebState("start");
