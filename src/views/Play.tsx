@@ -202,7 +202,7 @@ function Play() {
     setDurationMinutes: 7, //01234567
     setUpdateLoopsNumSkip: 2, // 012
     setMusicNumber: 2, // 012
-    setMusicActive: false,
+    setMusicActive: true,
     setReadySoundActive: false,
     setFrictionAirActive: true,
     setCamerasActive: true,
@@ -892,16 +892,16 @@ function Play() {
         <div className="game-bar">
           <div className="game-bar-time">
             <p>
-              {clockGame.minutes}:
-              {clockGame.seconds < 10
-                ? "0" + clockGame.seconds.toString()
-                : clockGame.seconds}
-            </p>
-            <h1>
               {clockTime.minutes}:
               {clockTime.seconds < 10
                 ? "0" + clockTime.seconds.toString()
                 : clockTime.seconds}
+            </p>
+            <h1>
+              {clockGame.minutes}:
+              {clockGame.seconds < 10
+                ? "0" + clockGame.seconds.toString()
+                : clockGame.seconds}
             </h1>
           </div>
         </div>
