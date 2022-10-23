@@ -8,7 +8,9 @@ import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 
 // @ts-ignore
-import importedSpecialSound from "../sounds/special-m5.wav";
+import importedSpecial12Sound from "../sounds/special-m12.wav";
+// @ts-ignore
+import importedSpecial5Sound from "../sounds/special-m5.wav";
 // @ts-ignore
 import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
@@ -89,7 +91,8 @@ function Play() {
   //   volume: 0.4,
   // });
   // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
-  const [specialSound] = useSound(importedSpecialSound, { volume: 0.2 });
+  const [special12Sound] = useSound(importedSpecial12Sound, { volume: 0.2 });
+  const [special5Sound] = useSound(importedSpecial5Sound, { volume: 0.2 });
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
   // @ts-ignore
@@ -288,22 +291,24 @@ function Play() {
       return;
     }
     if (charId === 4) {
-      specialSound();
+      special5Sound();
     }
-    for (let i = 0; i < 4; i++) {
-      let choices = [...smashConfig.players];
-      let choice = choices[i];
-      choice.characterId = charId;
-      let tempScale = smashConfigScaleArray.find((s, sIndex) => {
-        return s.characterId === choice.characterId;
-      })?.scale;
-      let tempName = smashConfigScaleArray.find((s, sIndex) => {
-        return s.characterId === choice.characterId;
-      })?.name;
-      choice.scale = tempScale ? tempScale : 1;
-      choice.name = tempName ? tempName : "";
-      setSmashConfig({ players: [...choices] });
+    if (charId === 5) {
+      special12Sound();
     }
+    let choices = [...smashConfig.players];
+    let choice = choices[0];
+    choice.characterId = charId;
+    let tempScale = smashConfigScaleArray.find((s, sIndex) => {
+      return s.characterId === choice.characterId;
+    })?.scale;
+    let tempName = smashConfigScaleArray.find((s, sIndex) => {
+      return s.characterId === choice.characterId;
+    })?.name;
+    choice.scale = tempScale ? tempScale : 1;
+    choice.name = tempName ? tempName : "";
+    setSmashConfig({ players: [...choices] });
+    // for (let i = 0; i < 4; i++) {}
   };
 
   const onClickStartRotateSelection = (playerIndex: number): void => {
@@ -782,7 +787,14 @@ function Play() {
                 <li>Phaser 3</li>
                 <li>ReactTS 17</li>
                 <li>Bootstrap 5</li>
-                <li>Press Start 2P</li>
+                <li
+                  onMouseDown={() => {
+                    console.log("MOUSE ENTER");
+                    setAllCharacter(5);
+                  }}
+                >
+                  Press Start 2P
+                </li>
               </ul>
               {/* <h1>🚧</h1> */}
               <img
@@ -833,12 +845,7 @@ function Play() {
                 Wii, or Emulation, but this is my attempt at recreating it with
                 the RulesN64 baked in.
               </p>
-              <p
-                onMouseEnter={() => {
-                  console.log("MOUSE ENTER");
-                  setAllCharacter(5);
-                }}
-              >
+              <p>
                 Smashed has been played in at least 4 states and 3 countries.
               </p>
             </div>
