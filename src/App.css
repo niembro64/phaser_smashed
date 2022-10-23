@@ -103,11 +103,11 @@ body {
   transition: 2s ease;
 }
 
-/* .top-bar:hover {
+.top-bar:hover {
   background-color: black;
   border: 0;
   transition: 0.1s ease;
-} */
+}
 
 .top-bar:hover > .linkTag,
 .top-bar:hover > .question-mark {
