@@ -7,8 +7,8 @@ import { ButtonName, CharacterMove } from "../App";
 import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 
-// // @ts-ignore
-// import importedSpecialSound from "../sounds/special.wav";
+// @ts-ignore
+import importedSpecialSound from "../sounds/special-m5.wav";
 // @ts-ignore
 import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
@@ -89,7 +89,7 @@ function Play() {
   //   volume: 0.4,
   // });
   // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
-  // const [specialSound] = useSound(importedSpecialSound, { volume: 0.4 });
+  const [specialSound] = useSound(importedSpecialSound, { volume: 0.2 });
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
   // @ts-ignore
@@ -282,7 +282,7 @@ function Play() {
   };
 
   const setAllCharacter = (charId: number) => {
-    startSound();
+    // startSound();
     // specialSound();
     if (!debug.setChezSecret) {
       return;
@@ -793,16 +793,18 @@ function Play() {
                 onMouseDown={() => {
                   console.log("MOUSE DOWN");
                   setAllCharacter(4);
+                  specialSound();
                 }}
-                onMouseUp={() => {
-                  console.log("MOUSE UP");
-                }}
-                onMouseEnter={() => {
-                  console.log("MOUSE ENTER");
-                }}
-                onMouseLeave={() => {
-                  console.log("MOUSE LEAVE");
-                }}
+                // onMouseUp={() => {
+                //   console.log("MOUSE UP");
+                // }}
+                // onMouseEnter={() => {
+                //   console.log("MOUSE ENTER");
+                //   setAllCharacter(5);
+                // }}
+                // onMouseLeave={() => {
+                //   console.log("MOUSE LEAVE");
+                // }}
               />
               <p>by NIEMBRO64</p>
               <a className="linkTag btn btn-dark" href="http://niembro64.com/">
@@ -833,7 +835,12 @@ function Play() {
                 Wii, or Emulation, but this is my attempt at recreating it with
                 the RulesN64 baked in.
               </p>
-              <p>
+              <p
+                onMouseEnter={() => {
+                  console.log("MOUSE ENTER");
+                  setAllCharacter(5);
+                }}
+              >
                 Smashed has been played in at least 4 states and 3 countries.
               </p>
             </div>
