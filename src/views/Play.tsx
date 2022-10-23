@@ -80,8 +80,9 @@ export interface Debug {
 }
 
 function Play() {
-  let myGame = null;
-  let myPhaser: any = useRef({});
+  // let myGame.current: null | Game = null;
+  let myGame: any = useRef(null);
+  let myPhaser: any = useRef(null);
   // let monkeysMusic: any = useRef({});
   // let monkeysMusic: any = React.createRef()
   // monkeysMusic.current = new Audio("../sounds/monkeys2.wav");
@@ -264,7 +265,7 @@ function Play() {
     setShowLoader(true);
     const myInterval = setInterval(() => {
       console.log(
-        "myGame?.current?.scene?.keys?.game?.loaded",
+        "myGame.current?.current?.scene?.keys?.game?.loaded",
         myPhaser?.current?.scene?.keys?.game?.loaded
       );
       if (myPhaser?.current?.scene?.keys?.game?.loaded) {
@@ -359,15 +360,15 @@ function Play() {
 
   const clickPauseParent = () => {
     if (webState === "play") {
-      myGame = myPhaser.current.scene.keys.game as Game;
+      myGame.current = myPhaser.current.scene.keys.game as Game;
       if (
         !(
-          myGame.gameState.name === "game-state-paused" ||
-          myGame.gameState.name === "game-state-first-blood" ||
-          myGame.gameState.name === "game-state-screen-clear"
+          myGame.current.gameState.name === "game-state-paused" ||
+          myGame.current.gameState.name === "game-state-first-blood" ||
+          myGame.current.gameState.name === "game-state-screen-clear"
         )
       ) {
-        setGameState(myGame, "game-state-paused");
+        setGameState(myGame.current, "game-state-paused");
       }
     }
   };
@@ -445,21 +446,20 @@ function Play() {
     }
   };
 
+  let gameInfo: any = useRef(null);
   useEffect(() => {
-    console.log(
-      "SECONDS",
-      myPhaser?.current?.scene?.keys?.game?.gameClock?.seconds,
-      myPhaser?.current?.scene?.keys?.game?.gameClock
-    );
-
-    setInterval(() => {
+    if (gameInfo.current) {
+      clearInterval(gameInfo.current);
+    }
+    gameInfo.current = setInterval(() => {
       console.log(myPhaser?.current?.scene?.keys?.game?.gameClock);
-    }, 100);
+    }, 1000);
 
     if (myPhaser?.current?.scene?.keys?.game) {
-      myGame = myPhaser.current.scene.keys.game as Game;
+      myGame.current = myPhaser.current.scene.keys.game as Game;
+      // myGame.current.addEventListener("ASDF", () => {});
     }
-  }, []);
+  }, [myPhaser?.current?.scene?.keys?.game?.gameClock]);
 
   return (
     <div className="overDiv">
@@ -613,9 +613,9 @@ function Play() {
               className="linkTag b-top"
               onClick={() => {
                 if (myPhaser?.current?.scene?.keys?.game) {
-                  myGame = myPhaser.current.scene.keys.game as Game;
-                  myGame.loaded = false;
-                  // myGame.current.scene.keys.game.loaded = false;
+                  myGame.current = myPhaser.current.scene.keys.game as Game;
+                  myGame.current.loaded = false;
+                  // myGame.current.current.scene.keys.game.loaded = false;
                 }
                 onClickPlayNavButtons("Back");
                 setWebState("start");
@@ -630,13 +630,13 @@ function Play() {
             <button
               className="linkTag b-top"
               onClick={() => {
-                // if (myGame?.current?.scene?.keys?.game) {
-                //   myGame.current.scene.keys.game.loaded = false;
+                // if (myGame.current?.current?.scene?.keys?.game) {
+                //   myGame.current.current.scene.keys.game.loaded = false;
                 // }
                 if (myPhaser?.current?.scene?.keys?.game?.loaded) {
                   startSound();
-                  myGame = myPhaser.current.scene.keys.game as Game;
-                  myGame.loaded = false;
+                  myGame.current = myPhaser.current.scene.keys.game as Game;
+                  myGame.current.loaded = false;
                   setShowLoaderIntervalFunction();
                   onClickPlayNavButtons("ReStart");
                   setQuotesRandomNumber(
@@ -644,9 +644,11 @@ function Play() {
                   );
 
                   let newSmashConfig = JSON.parse(
-                    JSON.stringify(myGame.smashConfig)
+                    JSON.stringify(myGame.current.smashConfig)
                   );
-                  let newDebug = JSON.parse(JSON.stringify(myGame.debug));
+                  let newDebug = JSON.parse(
+                    JSON.stringify(myGame.current.debug)
+                  );
                   myPhaser.current.destroy(true);
 
                   if (!debug.setLoadTimeExtra) {
@@ -655,7 +657,10 @@ function Play() {
                   setTimeout(() => {
                     myPhaser.current = new Phaser.Game(config);
                     myPhaser.current.registry.set("parentContext", Play);
-                    myPhaser.current.registry.set("smashConfig", newSmashConfig);
+                    myPhaser.current.registry.set(
+                      "smashConfig",
+                      newSmashConfig
+                    );
                     myPhaser.current.registry.set("debug", newDebug);
                   }, setTimeoutQuotesLengthReStart);
                 }
