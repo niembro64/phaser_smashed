@@ -453,13 +453,63 @@ function Play() {
       myGame.current?.loaded
     );
   }, [myGame.current?.loaded]);
+  useEffect(() => {
+    if (myPhaser.current) {
+      myGame.current = myPhaser.current?.scene?.keys?.game;
+      setClockTime(JSON.parse(JSON.stringify(myGame.current.timeClock)));
+      setClockGame(JSON.parse(JSON.stringify(myGame.current.gameClock)));
+      console.log(
+        "+++++++++++++++++++++++",
+        "myGame.current?.timeSecondsClock",
+        myGame.current?.timeSecondsClock
+      );
+    }
+  }, [myGame.current?.timeSecondsClock]);
 
   let gameInfo: any = useRef(null);
+
   const [clockTime, setClockTime] = useState({ minutes: 0, seconds: 0 });
   const [clockGame, setClockGame] = useState({
     minutes: 0,
     seconds: 0,
   });
+
+  const [APJ, setAPJ] = useState([
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+  ]);
+  const [AEJ, setAEJ] = useState([
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+  ]);
+  const [LH, setLH] = useState([
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+    [false, false, false, false],
+  ]);
+  const [NH, setNH] = useState([
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ]);
+  const [NK, setNK] = useState([
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ]);
+  const [NS, setNS] = useState([
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ]);
   useEffect(() => {
     if (gameInfo.current) {
       clearInterval(gameInfo.current);
@@ -467,9 +517,37 @@ function Play() {
     gameInfo.current = setInterval(() => {
       if (myPhaser.current) {
         myGame.current = myPhaser.current?.scene?.keys?.game;
-        setClockTime(JSON.parse(JSON.stringify(myGame.current.timeClock)));
-        setClockGame(JSON.parse(JSON.stringify(myGame.current.gameClock)));
-        console.log("TIME SECONDS", clockTime, clockGame);
+        // setClockTime(JSON.parse(JSON.stringify(myGame.current.timeClock)));
+        // setClockGame(JSON.parse(JSON.stringify(myGame.current.gameClock)));
+
+        setAPJ(
+          JSON.parse(
+            JSON.stringify(myGame.current.overlappingPlayerIAttackPhysicalJ)
+          )
+        );
+        setAEJ(
+          JSON.parse(
+            JSON.stringify(myGame.current.overlappingPlayerIAttackEnergyJ)
+          )
+        );
+        setLH(JSON.parse(JSON.stringify(myGame.current.wasLastHitByMatrix)));
+        setNH(JSON.parse(JSON.stringify(myGame.current.numberHitByMatrix)));
+        setNK(JSON.parse(JSON.stringify(myGame.current.numberKilledByMatrix)));
+        setNS(
+          JSON.parse(JSON.stringify(myGame.current.numberShotsTakenByMeMatrix))
+        );
+
+        // console.log(
+        //   "TIME SECONDS",
+        //   myGame.current.timeClock,
+        //   clockGame,
+        //   clockTime,
+        //   NS,
+        //   NK,
+        //   NH,
+        //   AEJ,
+        //   APJ
+        // );
       }
     }, 100);
 
@@ -888,7 +966,7 @@ function Play() {
           </div>
         )}
       </div>
-      {webState === "play" && (
+      {webState === "play" && myGame.current?.loaded && (
         <div className="game-bar">
           <div className="game-bar-time">
             <p>
