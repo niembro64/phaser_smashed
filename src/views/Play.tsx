@@ -455,7 +455,9 @@ function Play() {
   }, [myGame.current?.loaded]);
   useEffect(() => {
     if (myPhaser.current) {
-      myGame.current = myPhaser.current?.scene?.keys?.game;
+      if (!myGame.current) {
+        myGame.current = myPhaser.current?.scene?.keys?.game;
+      }
       setClockTime(JSON.parse(JSON.stringify(myGame.current.timeClock)));
       setClockGame(JSON.parse(JSON.stringify(myGame.current.gameClock)));
       console.log(
@@ -536,18 +538,6 @@ function Play() {
         setNS(
           JSON.parse(JSON.stringify(myGame.current.numberShotsTakenByMeMatrix))
         );
-
-        // console.log(
-        //   "TIME SECONDS",
-        //   myGame.current.timeClock,
-        //   clockGame,
-        //   clockTime,
-        //   NS,
-        //   NK,
-        //   NH,
-        //   AEJ,
-        //   APJ
-        // );
       }
     }, 100);
 
