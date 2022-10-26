@@ -7,7 +7,7 @@ import { ButtonName, CharacterMove } from "../App";
 import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 // import { Howl } from "howler";
-import { Howl, HowlOptions, HowlCallback, HowlErrorCallback } from "howler";
+// import { Howl, HowlOptions, HowlCallback, HowlErrorCallback } from "howler";
 
 // import ReactHowler from 'react-howler';
 
