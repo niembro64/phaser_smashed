@@ -8,6 +8,8 @@ import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 
 // @ts-ignore
+import importedTrance from "../sounds/trance-loop.wav";
+// @ts-ignore
 import importedSpecial12Sound from "../sounds/special-m12.wav";
 // @ts-ignore
 import importedSpecial5Sound from "../sounds/special-m5.wav";
@@ -92,6 +94,9 @@ function Play() {
   // const [monkeysMusic, { stop, isPlaying }] = useSound(importedMonkeysMusic, {
   //   volume: 0.4,
   // });
+  // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
+  // const [trance] = useSound(importedTrance, { volume: 0.2 });
+  const trance = new Audio(importedTrance);
   // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
   const [special12Sound] = useSound(importedSpecial12Sound, { volume: 0.2 });
   const [special5Sound] = useSound(importedSpecial5Sound, { volume: 0.2 });
@@ -286,7 +291,21 @@ function Play() {
     setButtonsOnOff([...buttons]);
   };
 
-  const setAllCharacter = (charId: number) => {
+  const trancePlay = (): void => {
+    if (trance.paused) {
+      trance.play();
+      trance.addEventListener("ended", () => {
+        trance.play();
+      });
+    }
+  };
+  const trancePause = (): void => {
+    if (!trance.paused) {
+      trance.pause();
+    }
+  };
+
+  const setAllCharacter = (charId: number): void => {
     // startSound();
     // specialSound();
     if (!debug.setChezSecret || webState === "play") {
@@ -609,7 +628,11 @@ function Play() {
         <div className="startClassDiv">
           <div className="startTitleWrapper2">
             <div className="startTitleWrapper1">
-              <div className="startTitle">
+              <div
+                className="startTitle"
+                onMouseDown={trancePlay}
+                onMouseUp={trancePause}
+              >
                 {/* <img src="images/smashTitle.png" alt="smash title" /> */}
                 <img
                   className="startGif"
