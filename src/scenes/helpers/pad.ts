@@ -18,9 +18,9 @@ export function updatePadCurrControllerTypeHat(
   player.padCurr.L1 = player.gamepad.L1;
   player.padCurr.R1 = player.gamepad.R1;
 
-  for (let i = 0; i < player?.gamepad?.axes.length; i++) {
-    console.log(i, player?.gamepad?.axes[i]?.getValue());
-  }
+  // for (let i = 0; i < player?.gamepad?.axes.length; i++) {
+  //   console.log(i, player?.gamepad?.axes[i]?.getValue());
+  // }
   let stickX = player?.gamepad?.axes[0]?.getValue();
   let stickY = player?.gamepad?.axes[1]?.getValue();
 

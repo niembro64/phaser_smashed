@@ -7,9 +7,16 @@ import { ButtonName, CharacterMove } from "../App";
 import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
 // import { Howl } from "howler";
+import { Howl, HowlOptions, HowlCallback, HowlErrorCallback } from "howler";
+
+// import ReactHowler from 'react-howler';
 
 // @ts-ignore
-import importedTrance from "../sounds/trance-loop.wav";
+import importedWoah from "../sounds/BlackBetty_Woah.mp3";
+// @ts-ignore
+import importedBambalam from "../sounds/BlackBetty_Bambalam.mp3";
+// @ts-ignore
+import importedTrance from "../sounds/trance.wav";
 // @ts-ignore
 import importedSpecial12Sound from "../sounds/special-m12.wav";
 // @ts-ignore
@@ -97,6 +104,22 @@ function Play() {
   // });
   // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
   // const [trance] = useSound(importedTrance, { volume: 0.2 });
+
+  // const trance = new Howl({
+  //   // src: ["../sounds/mariopause.mp3"],
+  //   // src: ["../sounds/tranceshorter.wav"],
+  //   // src: ["../sounds/t.wav"],
+  //   src: ["../sounds/trance-loop.ogg"],
+  //   // src: ["../sounds/special.wav"],
+  //   // src: ["../sounds/trance-loop.mp3"],
+  //   // src: ["../sounds/trance-loop.wav"],
+  //   html5: true,
+  //   volume: 0.6,
+  //   loop: true,
+  // });
+
+  const woah = new Audio(importedWoah);
+  const bam = new Audio(importedBambalam);
   const trance = new Audio(importedTrance);
   // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
   const [special12Sound] = useSound(importedSpecial12Sound, { volume: 0.2 });
@@ -226,8 +249,8 @@ function Play() {
     setPlayerIdFiltersActive: false,
     setHealthInverted: false,
     setMatricesAlwaysVisible: false,
-    setPrintControllerButtonsConsole: true,
-    setPrintControllerConnectedConsole: true,
+    setPrintControllerButtonsConsole: false,
+    setPrintControllerConnectedConsole: false,
     setLoadTimeExtra: false,
     setChezSecret: true,
   };
@@ -292,16 +315,27 @@ function Play() {
     setButtonsOnOff([...buttons]);
   };
 
+  const bamPlay = (): void => {
+    bam.play();
+  };
+  const woahPlay = (): void => {
+    woah.play();
+  };
+
+  let playNumber: number = 0;
+
   const trancePlay = (): void => {
     if (trance.paused) {
       trance.play();
-      trance.addEventListener(
-        "ended",
-        () => {
-          trancePlay();
-        },
-        { once: true }
-      );
+      if (playNumber === 0) {
+        trance.addEventListener(
+          "ended",
+          () => {
+            setAllCharacter(4);
+          },
+          { once: true }
+        );
+      }
     }
   };
   const trancePause = (): void => {
@@ -309,6 +343,13 @@ function Play() {
       trance.pause();
     }
   };
+  // const trancePlay = (): void => {
+  //   console.log(trance);
+  //   trance.play();
+  // };
+  // const trancePause = (): void => {
+  //   trance.pause();
+  // };
 
   const setAllCharacter = (charId: number): void => {
     // startSound();
@@ -317,10 +358,12 @@ function Play() {
       return;
     }
     if (charId === 4) {
-      special5Sound();
+      // special5Sound();
+      bamPlay();
     }
     if (charId === 5) {
-      special12Sound();
+      woahPlay();
+      // special12Sound();
     }
     let choices = [...smashConfig.players];
     let choice = choices[0];
@@ -933,9 +976,13 @@ function Play() {
                 className="kirbyNiembro"
                 src="./images/character_3_cropped.png"
                 alt="kirby"
+                // onMouseDown={() => {
+                //   console.log("MOUSE ENTER");
+                //   setAllCharacter(5);
+                // }}
                 onMouseDown={() => {
                   console.log("MOUSE DOWN");
-                  setAllCharacter(4);
+                  setAllCharacter(5);
                 }}
                 // onMouseUp={() => {
                 //   console.log("MOUSE UP");
