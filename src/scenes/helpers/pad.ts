@@ -7,22 +7,6 @@ import {
   setPhysicsAttackEnergyOn,
 } from "./attacks";
 
-// export function updatePadCurrControllerTypeStick(
-//   player: Player,
-//   game: Game
-// ): void {
-//   player.padCurr.A = player.gamepad.A;
-//   player.padCurr.B = player.gamepad.B;
-//   player.padCurr.X = player.gamepad.X;
-//   player.padCurr.Y = player.gamepad.Y;
-//   player.padCurr.L1 = player.gamepad.L1;
-//   player.padCurr.R1 = player.gamepad.R1;
-
-//   player.padCurr.up = false;
-//   player.padCurr.down = false;
-//   player.padCurr.left = true;
-//   player.padCurr.right = false;
-// }
 export function updatePadCurrControllerTypeHat(
   player: Player,
   game: Game
@@ -33,11 +17,6 @@ export function updatePadCurrControllerTypeHat(
   player.padCurr.Y = player.gamepad.Y;
   player.padCurr.L1 = player.gamepad.L1;
   player.padCurr.R1 = player.gamepad.R1;
-
-  // player.padCurr.up = false;
-  // player.padCurr.down = false;
-  // player.padCurr.left = false;
-  // player.padCurr.right = false;
 
   for (let i = 0; i < player?.gamepad?.axes.length; i++) {
     console.log(i, player?.gamepad?.axes[i]?.getValue());
@@ -138,14 +117,6 @@ export function updatePadCurrControllerTypeHat(
     player.padCurr.left = false;
     player.padCurr.right = false;
   }
-  // player.padCurr.up = true;
-  // player.padCurr.down = true;
-  // player.padCurr.left = true;
-  // player.padCurr.right = true;
-  // player.padCurr.up = player.gamepad.up;
-  // player.padCurr.down = player.gamepad.down;
-  // player.padCurr.left = player.gamepad.left;
-  // player.padCurr.right = player.gamepad.right;
 }
 export function updatePadCurrControllerTypeButtons(
   player: Player,
