@@ -6,6 +6,7 @@ import "@fontsource/press-start-2p";
 import { ButtonName, CharacterMove } from "../App";
 import { setGameState } from "../scenes/helpers/state";
 import useSound from "use-sound";
+// import { Howl } from "howler";
 
 // @ts-ignore
 import importedTrance from "../sounds/trance-loop.wav";
@@ -294,9 +295,13 @@ function Play() {
   const trancePlay = (): void => {
     if (trance.paused) {
       trance.play();
-      trance.addEventListener("ended", () => {
-        trance.play();
-      });
+      trance.addEventListener(
+        "ended",
+        () => {
+          trancePlay();
+        },
+        { once: true }
+      );
     }
   };
   const trancePause = (): void => {
