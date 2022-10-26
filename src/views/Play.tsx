@@ -663,7 +663,7 @@ function Play() {
                         onClickStartOnOffButtons(cPlayerIndex, true);
                       }}
                     >
-                      <span>OFF</span>
+                      <span>Off</span>
                     </button>
                   )}
                 </div>

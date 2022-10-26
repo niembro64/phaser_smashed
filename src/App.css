@@ -285,41 +285,71 @@ body {
   align-items: center;
   text-decoration: none;
 }
-/* .b-top {
-  background-color: transparent;
-  color: white;
-} */
 .b-start {
-  /* background-color: blue; */
   background-color: hsl(200, 70%, 10%);
-  border-color: transparent;
-  border: none;
+  border: 4px solid;
+  border-top-color: hsl(200, 30%, 15%);
+  border-left-color: hsl(200, 30%, 15%);
+  border-bottom-color: hsl(200, 30%, 3%);
+  border-right-color: hsl(200, 30%, 3%);
   color: rgba(255, 255, 255, 1);
   /* color: rgba(0, 0, 0, 1); */
   font-size: 3vw;
   padding: 0.5% 3% 0% 3%;
   margin: 0% 0% 1% 0%;
-  transition: 0.3s ease;
+  transition: 0.5s ease;
+  /* border-radius: 50px; */
   /* animation: 3s opacityAnimation ease both; */
 }
 .b-start:hover {
-  transition: 0.2s ease;
-  /* background-color: rgba(255, 255, 255, 0.2); */
-  background-image: linear-gradient(
+  transition: 0s ease;
+  /* background-image: linear-gradient(
     to right,
     hsl(200, 100%, 20%),
     hsl(250, 100%, 20%)
-  );
-  padding: 0.5% 4% 0% 4%;
-  border-color: transparent;
-  border: none;
-  /* color: black; */
-  color: rgba(255, 255, 255, 1);
+    ); */
 
-  animation: startAnimation 3s linear infinite;
-  /* animation-name: startAnimation;
-  animation-duration: 2s;
-  animation-iteration-count: infinite; */
+  background-color: hsl(200, 70%, 15%);
+  border: 4px solid;
+  border-top-color: hsl(200, 30%, 20%);
+  border-left-color: hsl(200, 30%, 20%);
+  border-bottom-color: hsl(200, 30%, 6%);
+  border-right-color: hsl(200, 30%, 6%);
+  /* border: 2px solid;
+    border-bottom-color: rgba(255, 255, 255, 1);
+    border-right-color: rgba(255, 255, 255, 1);
+    border-top-color: rgba(255, 255, 255, 1);
+    border-left-color: rgba(255, 255, 255, 1); */
+
+  /* color: rgba(255, 255, 255, 1); */
+
+  /* animation: startAnimation 0.1s linear infinite; */
+  /* box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.25); */
+}
+.b-start:active {
+  transition: 0s ease;
+  /* background-image: linear-gradient(
+    to right,
+    hsl(200, 100%, 20%),
+    hsl(250, 100%, 20%)
+  ); */
+  color: grey;
+  background-color: hsl(200, 70%, 05%);
+  border: 4px solid;
+  border-bottom-color: hsl(200, 30%, 20%);
+  border-right-color: hsl(200, 30%, 20%);
+  border-top-color: hsl(200, 30%, 6%);
+  border-left-color: hsl(200, 30%, 6%);
+  /* border: 2px solid;
+  border-bottom-color: rgba(255, 255, 255, 1);
+  border-right-color: rgba(255, 255, 255, 1);
+  border-top-color: rgba(255, 255, 255, 1);
+  border-left-color: rgba(255, 255, 255, 1); */
+
+  /* color: rgba(255, 255, 255, 1); */
+
+  /* animation: startAnimation 0.1s linear infinite; */
+  /* box-shadow: 0px 0px 10px 3px rgba(255, 255, 255, 0.25); */
 }
 @keyframes startAnimation {
   0% {
@@ -336,13 +366,36 @@ body {
   }
 }
 .b-dark {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: transparent;
-  border: none;
+  background-color: hsl(200, 0%, 10%);
+  /* border-color: transparent;
+  border: none; */
   color: rgba(255, 255, 255, 1);
+
+  border: 4px solid;
+  border-top-color: hsl(200, 0%, 15%);
+  border-left-color: hsl(200, 0%, 15%);
+  border-bottom-color: hsl(200, 0%, 5%);
+  border-right-color: hsl(200, 0%, 5%);
 }
 .b-dark:hover {
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: hsl(200, 0%, 20%);
+  border: 4px solid;
+  border-top-color: hsl(200, 0%, 25%);
+  border-left-color: hsl(200, 0%, 25%);
+  border-bottom-color: hsl(200, 0%, 15%);
+  border-right-color: hsl(200, 0%, 15%);
+}
+.b-dark:active {
+  background-color: hsl(200, 0%, 10%);
+  /* border-color: transparent;
+  border: none; */
+  color: grey;
+
+  border: 4px solid;
+  border-bottom-color: hsl(200, 0%, 15%);
+  border-right-color: hsl(200, 0%, 15%);
+  border-top-color: hsl(200, 0%, 5%);
+  border-left-color: hsl(200, 0%, 5%);
 }
 .b-black {
   background-color: transparent;
@@ -352,6 +405,10 @@ body {
 }
 .b-black:hover {
   background-color: rgba(255, 255, 255, 0.01);
+}
+.b-black:active {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.02);
 }
 
 .startTitle {
