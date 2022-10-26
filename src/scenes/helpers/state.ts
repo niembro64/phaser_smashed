@@ -108,12 +108,12 @@ export function setAttackPhysicalState(
   attackPhysical.state.gameStamp = game.gameNanoseconds;
   attackPhysical.state.timeStamp = game.timeNanoseconds;
 
-  console.log(
-    playerIndex,
-    "ATTACK PHYSICAL STATE",
-    attackPhysical.srcImage,
-    attackPhysical.state
-  );
+  // console.log(
+  //   playerIndex,
+  //   "ATTACK PHYSICAL STATE",
+  //   attackPhysical.srcImage,
+  //   attackPhysical.state
+  // );
 
   switch (attackPhysical.state.name) {
     case "attackphysical-state-on":

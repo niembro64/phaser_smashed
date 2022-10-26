@@ -220,8 +220,8 @@ function Play() {
     setPlayerIdFiltersActive: false,
     setHealthInverted: false,
     setMatricesAlwaysVisible: false,
-    setPrintControllerButtonsConsole: false,
-    setPrintControllerConnectedConsole: false,
+    setPrintControllerButtonsConsole: true,
+    setPrintControllerConnectedConsole: true,
     setLoadTimeExtra: false,
     setChezSecret: true,
   };
@@ -460,11 +460,11 @@ function Play() {
       }
       setClockTime(JSON.parse(JSON.stringify(myGame.current.timeClock)));
       setClockGame(JSON.parse(JSON.stringify(myGame.current.gameClock)));
-      console.log(
-        "+++++++++++++++++++++++",
-        "myGame.current?.timeSecondsClock",
-        myGame.current?.timeSecondsClock
-      );
+      // console.log(
+      //   "+++++++++++++++++++++++",
+      //   "myGame.current?.timeSecondsClock",
+      //   myGame.current?.timeSecondsClock
+      // );
     }
   }, [myGame.current?.timeSecondsClock]);
 
