@@ -25,69 +25,16 @@ import importedSpecial5Sound from "../sounds/special-m5.wav";
 import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
 import importedBlipSound from "../sounds/game-start-liquid.wav";
+import {
+  CharacterId,
+  CharacterName,
+  Debug,
+  Quote,
+  SmashConfigScale,
+  WebState,
+} from "./ViewInterfaces";
 // import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
 // import { BooleanSchemaDefinition } from "mongoose";
-
-export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
-
-export type CharacterName =
-  | "Mario"
-  | "Link"
-  | "Pikachu"
-  | "Kirby"
-  | "Chez"
-  | "BlackChez";
-
-export interface SmashConfig {
-  players: PlayerConfig[];
-}
-
-export interface SmashConfigScale {
-  name: CharacterName;
-  characterId: CharacterId;
-  scale: number;
-}
-
-export interface PlayerConfig {
-  characterId: CharacterId;
-  scale: number;
-}
-
-export type WebState = "start" | "play";
-
-export interface Quote {
-  name: string;
-  text: string;
-}
-
-export interface Debug {
-  setLevel: number;
-  setDurationMinutes: number;
-  setMusicNumber: number;
-  setMusicActive: boolean;
-  setUpdateLoopsNumSkip: number;
-  setFrictionAirActive: boolean;
-  setCamerasActive: boolean;
-  setCamerasVisible: boolean;
-  setCollidersPvP: boolean;
-  setCollidersPvAttackPhysical: boolean;
-  setCollidersPvAttackEnergy: boolean;
-  setCollidersAEvAE: boolean;
-  setCollidersAEvAP: boolean;
-  setAEWrapScreen: boolean;
-  setPlayerIdVisible: boolean;
-  setPlayerIdFiltersActive: boolean;
-  setWallJumpsActive: boolean;
-  setDefaultDamage: boolean;
-  setDefaultHitback: boolean;
-  setReadySoundActive: boolean;
-  setHealthInverted: boolean;
-  setMatricesAlwaysVisible: boolean;
-  setPrintControllerButtonsConsole: boolean;
-  setPrintControllerConnectedConsole: boolean;
-  setLoadTimeExtra: boolean;
-  setChezSecret: boolean;
-}
 
 function Play() {
   // let myGame.current: null | Game = null;

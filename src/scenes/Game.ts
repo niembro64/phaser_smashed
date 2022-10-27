@@ -11,8 +11,8 @@ import {
   GameStateWithTime,
   Vector,
 } from "./interfaces";
-import { Debug, SmashConfig } from "../views/Play";
 import { preload } from "./preload";
+import { Debug, SmashConfig } from "../views/ViewInterfaces";
 
 export default class Game extends Phaser.Scene {
   ////////////////////////////////
