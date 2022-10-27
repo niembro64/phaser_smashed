@@ -65,12 +65,18 @@ function Play() {
   //   loop: true,
   // });
 
-  const woah = new Audio(importedWoah);
-  const bam = new Audio(importedBambalam);
-  const trance = new Audio(importedTrance);
+  // const woah = new Audio(importedWoah);
+  // const bam = new Audio(importedBambalam);
+  // const trance = new Audio(importedTrance);
+  const [woah] = useSound(importedWoah, { volume: 0.2 });
+  const [bam] = useSound(importedBambalam, { volume: 0.2 });
+  const [trance, { stop }] = useSound(importedTrance, {
+    volume: 0.2,
+  });
+
   // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
-  const [special12Sound] = useSound(importedSpecial12Sound, { volume: 0.2 });
-  const [special5Sound] = useSound(importedSpecial5Sound, { volume: 0.2 });
+  // const [special12Sound] = useSound(importedSpecial12Sound, { volume: 0.2 });
+  // const [special5Sound] = useSound(importedSpecial5Sound, { volume: 0.2 });
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
   // @ts-ignore
@@ -263,32 +269,31 @@ function Play() {
   };
 
   const bamPlay = (): void => {
-    bam.play();
+    bam();
   };
   const woahPlay = (): void => {
-    woah.play();
+    woah();
   };
 
   let playNumber: number = 0;
 
   const trancePlay = (): void => {
-    if (trance.paused) {
-      trance.play();
-      if (playNumber === 0) {
-        trance.addEventListener(
-          "ended",
-          () => {
-            setAllCharacter(4);
-          },
-          { once: true }
-        );
-      }
+    if (playNumber === 0) {
+      playNumber += 1;
+      trance();
+      // .addEventListener(
+      //   "ended",
+      //   () => {
+      //     setAllCharacter(4);
+      //   },
+      //   { once: true }
+      // );
     }
   };
   const trancePause = (): void => {
-    if (!trance.paused) {
-      trance.pause();
-    }
+    // if (!trance.paused) {
+    //   trance();
+    // }
   };
   // const trancePlay = (): void => {
   //   console.log(trance);
