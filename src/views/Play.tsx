@@ -29,8 +29,8 @@ import {
   CharacterId,
   CharacterName,
   Debug,
+  PlayerConfig,
   Quote,
-  SmashConfigScale,
   WebState,
 } from "./ViewInterfaces";
 // import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
@@ -98,7 +98,7 @@ function Play() {
     ],
   });
 
-  const smashConfigScaleArray: SmashConfigScale[] = [
+  const smashConfigScaleArray: PlayerConfig[] = [
     { characterId: 0, scale: 0.9, name: "Mario" },
     { characterId: 1, scale: 0.9, name: "Link" },
     { characterId: 2, scale: 1, name: "Pikachu" },

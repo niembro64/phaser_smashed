@@ -12,12 +12,6 @@ export interface SmashConfig {
   players: PlayerConfig[];
 }
 
-export interface SmashConfigScale {
-  name: CharacterName;
-  characterId: CharacterId;
-  scale: number;
-}
-
 export interface PlayerConfig {
   name: CharacterName;
   characterId: CharacterId;
