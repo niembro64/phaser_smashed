@@ -204,7 +204,7 @@ function Play() {
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,
-    setLoadTimeExtra: false,
+    setLoadTimeExtra: true,
     setChezSecret: true,
   };
   const onClickStartStartButton = () => {
@@ -232,7 +232,7 @@ function Play() {
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
     if (!debug.setLoadTimeExtra) {
-      setTimeoutQuotesLengthStart = 0;
+      setTimeoutQuotesLengthStart = 10000;
     }
     setTimeout(() => {
       myPhaser.current = new Phaser.Game(config);

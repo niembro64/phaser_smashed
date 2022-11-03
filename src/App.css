@@ -770,11 +770,14 @@ body {
 }
 
 .firstLoaderP {
+  width: 30%; 
   margin: 3% 0% 0% 0%;
+  /* border: 1px dashed lime;  */
 }
 
 .secondLoaderP {
-  margin: 0% 0% 0% 10%;
+  margin: 0% 0% 0% 15%;
+  /* border: 1px dashed lime;  */
 }
 
 /* /////////////////////////////
