@@ -512,22 +512,22 @@ function Play() {
   ]);
 
   const componentPseudoLoad = useRef(true);
-  const interval: any = useRef(null);
+  const intervalClock: any = useRef(null);
 
   useEffect(() => {
     if (componentPseudoLoad.current) {
       componentPseudoLoad.current = false;
 
-      interval.current = setInterval(() => {
+      intervalClock.current = setInterval(() => {
         if (myPhaser.current?.scene?.keys?.game) {
           setClockTime(
             JSON.parse(
-              JSON.stringify(myPhaser?.current?.scene?.keys?.game?.timeClock)
+              JSON.stringify(myPhaser.current.scene.keys.game.timeClock)
             )
           );
           setClockGame(
             JSON.parse(
-              JSON.stringify(myPhaser?.current?.scene?.keys?.game?.gameClock)
+              JSON.stringify(myPhaser.current.scene.keys.game.gameClock)
             )
           );
           // setAPJ(
@@ -594,7 +594,7 @@ function Play() {
           //   myPhaser.current.scene.keys.game.gameClock.seconds
           // );
         }
-      }, 500);
+      }, 1000);
     }
     console.log(
       "+++++++++++++++++++++++",
@@ -842,8 +842,8 @@ function Play() {
                 onClickPlayNavButtons("Back");
                 setWebState("start");
                 setNumClicks(numClicks + 1);
-                clearInterval(interval.current);
-                interval.current = null;
+                clearInterval(intervalClock.current);
+                intervalClock.current = null;
                 componentPseudoLoad.current = true;
                 myPhaser.current.destroy(true);
               }}
@@ -875,8 +875,8 @@ function Play() {
                   let newDebug = JSON.parse(
                     JSON.stringify(myPhaser.current?.scene?.keys?.game.debug)
                   );
-                  clearInterval(interval.current);
-                  interval.current = null;
+                  clearInterval(intervalClock.current);
+                  intervalClock.current = null;
                   componentPseudoLoad.current = true;
                   myPhaser.current.destroy(true);
 
