@@ -514,94 +514,95 @@ function Play() {
   const componentPseudoLoad = useRef(true);
   const intervalClock: any = useRef(null);
 
-  useEffect(() => {
-    if (componentPseudoLoad.current) {
-      componentPseudoLoad.current = false;
+  // REACT TIME
+  // useEffect(() => {
+  //   if (componentPseudoLoad.current) {
+  //     componentPseudoLoad.current = false;
 
-      intervalClock.current = setInterval(() => {
-        if (myPhaser.current?.scene?.keys?.game) {
-          setClockTime(
-            JSON.parse(
-              JSON.stringify(myPhaser.current.scene.keys.game.timeClock)
-            )
-          );
-          setClockGame(
-            JSON.parse(
-              JSON.stringify(myPhaser.current.scene.keys.game.gameClock)
-            )
-          );
-          // setAPJ(
-          //   JSON.parse(
-          //     JSON.stringify(
-          //       myPhaser.current?.scene?.keys?.game
-          //         .overlappingPlayerIAttackPhysicalJ
-          //     )
-          //   )
-          // );
-          // setAEJ(
-          //   JSON.parse(
-          //     JSON.stringify(
-          //       myPhaser.current?.scene?.keys?.game
-          //         .overlappingPlayerIAttackEnergyJ
-          //     )
-          //   )
-          // );
-          // setLH(
-          //   JSON.parse(
-          //     JSON.stringify(
-          //       myPhaser.current?.scene?.keys?.game.wasLastHitByMatrix
-          //     )
-          //   )
-          // );
-          // setNH(
-          //   JSON.parse(
-          //     JSON.stringify(
-          //       myPhaser.current?.scene?.keys?.game.numberHitByMatrix
-          //     )
-          //   )
-          // );
-          // setNK(
-          //   JSON.parse(
-          //     JSON.stringify(
-          //       myPhaser.current?.scene?.keys?.game.numberKilledByMatrix
-          //     )
-          //   )
-          // );
-          // setNS(
-          //   JSON.parse(
-          //     JSON.stringify(
-          //       myPhaser.current?.scene?.keys?.game.numberShotsTakenByMeMatrix
-          //     )
-          //   )
-          // );
+  //     intervalClock.current = setInterval(() => {
+  //       if (myPhaser.current?.scene?.keys?.game) {
+  //         setClockTime(
+  //           JSON.parse(
+  //             JSON.stringify(myPhaser.current.scene.keys.game.timeClock)
+  //           )
+  //         );
+  //         setClockGame(
+  //           JSON.parse(
+  //             JSON.stringify(myPhaser.current.scene.keys.game.gameClock)
+  //           )
+  //         );
+  //         // setAPJ(
+  //         //   JSON.parse(
+  //         //     JSON.stringify(
+  //         //       myPhaser.current?.scene?.keys?.game
+  //         //         .overlappingPlayerIAttackPhysicalJ
+  //         //     )
+  //         //   )
+  //         // );
+  //         // setAEJ(
+  //         //   JSON.parse(
+  //         //     JSON.stringify(
+  //         //       myPhaser.current?.scene?.keys?.game
+  //         //         .overlappingPlayerIAttackEnergyJ
+  //         //     )
+  //         //   )
+  //         // );
+  //         // setLH(
+  //         //   JSON.parse(
+  //         //     JSON.stringify(
+  //         //       myPhaser.current?.scene?.keys?.game.wasLastHitByMatrix
+  //         //     )
+  //         //   )
+  //         // );
+  //         // setNH(
+  //         //   JSON.parse(
+  //         //     JSON.stringify(
+  //         //       myPhaser.current?.scene?.keys?.game.numberHitByMatrix
+  //         //     )
+  //         //   )
+  //         // );
+  //         // setNK(
+  //         //   JSON.parse(
+  //         //     JSON.stringify(
+  //         //       myPhaser.current?.scene?.keys?.game.numberKilledByMatrix
+  //         //     )
+  //         //   )
+  //         // );
+  //         // setNS(
+  //         //   JSON.parse(
+  //         //     JSON.stringify(
+  //         //       myPhaser.current?.scene?.keys?.game.numberShotsTakenByMeMatrix
+  //         //     )
+  //         //   )
+  //         // );
 
-          // setClockTime(myPhaser.current.scene.keys.game.timeClock);
-          // setClockGame(myPhaser.current.scene.keys.game.gameClock);
-          // setAPJ(
-          //   myPhaser.current.scene.keys.game.overlappingPlayerIAttackPhysicalJ
-          // );
-          // setAEJ(
-          //   myPhaser.current.scene.keys.game.overlappingPlayerIAttackEnergyJ
-          // );
-          // setLH(myPhaser.current.scene.keys.game.wasLastHitByMatrix);
-          // setNH(myPhaser.current.scene.keys.game.numberHitByMatrix);
-          // setNK(myPhaser.current.scene.keys.game.numberKilledByMatrix);
-          // setNS(myPhaser.current.scene.keys.game.numberShotsTakenByMeMatrix);
+  //         // setClockTime(myPhaser.current.scene.keys.game.timeClock);
+  //         // setClockGame(myPhaser.current.scene.keys.game.gameClock);
+  //         // setAPJ(
+  //         //   myPhaser.current.scene.keys.game.overlappingPlayerIAttackPhysicalJ
+  //         // );
+  //         // setAEJ(
+  //         //   myPhaser.current.scene.keys.game.overlappingPlayerIAttackEnergyJ
+  //         // );
+  //         // setLH(myPhaser.current.scene.keys.game.wasLastHitByMatrix);
+  //         // setNH(myPhaser.current.scene.keys.game.numberHitByMatrix);
+  //         // setNK(myPhaser.current.scene.keys.game.numberKilledByMatrix);
+  //         // setNS(myPhaser.current.scene.keys.game.numberShotsTakenByMeMatrix);
 
-          // console.log(
-          //   "myPhaser.current.scene.keys.game",
-          //   myPhaser.current.scene.keys.game.gameClock.minutes,
-          //   myPhaser.current.scene.keys.game.gameClock.seconds
-          // );
-        }
-      }, 1000);
-    }
-    console.log(
-      "+++++++++++++++++++++++",
-      "myPhaser.current?.scene?.keys?.game?.loaded",
-      myPhaser.current?.scene?.keys?.game?.loaded
-    );
-  }, [myPhaser?.current?.scene?.keys?.game?.loaded]);
+  //         // console.log(
+  //         //   "myPhaser.current.scene.keys.game",
+  //         //   myPhaser.current.scene.keys.game.gameClock.minutes,
+  //         //   myPhaser.current.scene.keys.game.gameClock.seconds
+  //         // );
+  //       }
+  //     }, 1000);
+  //   }
+  //   console.log(
+  //     "+++++++++++++++++++++++",
+  //     "myPhaser.current?.scene?.keys?.game?.loaded",
+  //     myPhaser.current?.scene?.keys?.game?.loaded
+  //   );
+  // }, [myPhaser?.current?.scene?.keys?.game?.loaded]);
 
   // useEffect(() => {
   //   if (myPhaser.current) {

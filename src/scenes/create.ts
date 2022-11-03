@@ -1039,8 +1039,8 @@ export function createScoreboard(game: Game): void {
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom)
     .setAlpha(1);
 
-  game.scoreBoardTimeGame.setAlpha(0);
-  game.scoreBoardTimeTime.setAlpha(0);
+  game.scoreBoardTimeGame.setAlpha(1);
+  game.scoreBoardTimeTime.setAlpha(1);
 
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardUpper = game.add
