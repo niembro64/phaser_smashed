@@ -97,14 +97,11 @@ export function updateEnergyAttacksScreenWrap(game: Game): void {
 export function updateLastDirectionTouched(player: Player): void {
   if (player.char.sprite.body.touching.up) {
     player.char.lastDirectionTouched = "up";
-  }
-  if (player.char.sprite.body.touching.down) {
+  } else if (player.char.sprite.body.touching.down) {
     player.char.lastDirectionTouched = "down";
-  }
-  if (player.char.sprite.body.touching.left) {
+  } else if (player.char.sprite.body.touching.left) {
     player.char.lastDirectionTouched = "left";
-  }
-  if (player.char.sprite.body.touching.right) {
+  } else if (player.char.sprite.body.touching.right) {
     player.char.lastDirectionTouched = "right";
   }
 }
@@ -165,39 +162,43 @@ export function updateJumpPhysical(player: Player, game: Game): void {
           player.char.jumpPower *
           player.char.jumps[player.char.jumpIndex]
     );
+
     player.char.jumpIndex +=
       player.char.jumpIndex === player.char.jumps.length - 1 ? 0 : 1;
 
-    // // horizontal stuff IS TOUCHING
+    // // // horizontal stuff IS TOUCHING
     // if (
     //   game.debug.setWallJumpsActive &&
+    //   player.padCurr.left &&
     //   player.char.sprite.body.touching.left
     // ) {
     //   player.char.sprite.body.setVelocityX(
-    //     game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
+    //     game.BASE_PLAYER_JUMP_WALL *
+    //       player.char.speed *
+    //       (player.padCurr.left ? 300 : 1)
     //   );
     //   return;
     // }
 
     // if (
     //   game.debug.setWallJumpsActive &&
+    //   player.padCurr.right &&
     //   player.char.sprite.body.touching.right
     // ) {
     //   player.char.sprite.body.setVelocityX(
-    //     -game.BASE_PLAYER_JUMP_WALL * player.char.speed * 1000
+    //     -game.BASE_PLAYER_JUMP_WALL * player.char.speed * 3000
     //   );
     //   return;
     // }
-    // horizontal stuff WAS TOUCHING
+
+    // // horizontal stuff WAS TOUCHING
     if (
       game.debug.setWallJumpsActive &&
       player.char.lastDirectionTouched === "left" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
-        game.BASE_PLAYER_JUMP_WALL *
-          player.char.speed *
-          (player.padCurr.left ? 300 : 1)
+        game.BASE_PLAYER_JUMP_WALL * player.char.speed * 3000
       );
       return;
     }

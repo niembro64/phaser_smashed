@@ -170,6 +170,7 @@ export default class Game extends Phaser.Scene {
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
   DEFAULT_ATTACK_DAMAGE: number = 50;
   BASE_PLAYER_SPEED: Vector = { x: 600, y: 30 };
+  // BASE_PLAYER_SPEED: Vector = { x: 600, y: 30 };
   BASE_PLAYER_JUMP_PHYSICAL: number = -1000;
   BASE_PLAYER_JUMP_ENERGY: number = -1000;
   BASE_PLAYER_JUMP_WALL: number = -1 * this.BASE_PLAYER_JUMP_PHYSICAL;
