@@ -232,7 +232,7 @@ function Play() {
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
     if (!debug.setLoadTimeExtra) {
-      setTimeoutQuotesLengthStart = 10000;
+      setTimeoutQuotesLengthStart = 0;
     }
     setTimeout(() => {
       myPhaser.current = new Phaser.Game(config);
