@@ -231,33 +231,15 @@ export function updateFrictionWallY(player: Player, game: Game): void {
     return;
   }
 
-  // if (
-  //   (player.padCurr.left || player.padCurr.right) &&
-  //   hasPlayerTouchedWallRecently(player)
-  // ) {
-  //   player.char.sprite.body.setVelocityY(
-  //     player.char.sprite.body.velocity.y * 0.8 - 40
-  //   );
-  // }
   if (player.char.sprite.body.velocity.y < 0) {
     return;
   }
-  if (player.padCurr.left && player.char.sprite.body.touching.left) {
+  if (
+    (player.padCurr.left && player.char.sprite.body.touching.left) ||
+    (player.padCurr.right && player.char.sprite.body.touching.right)
+  ) {
     player.char.sprite.body.setVelocityY(0);
   }
-  if (player.padCurr.right && player.char.sprite.body.touching.right) {
-    player.char.sprite.body.setVelocityY(0);
-  }
-  // if (player.padCurr.left && player.char.sprite.body.touching.left) {
-  //   player.char.sprite.body.setVelocityY(
-  //     player.char.sprite.body.velocity.y * 0.8 - 40
-  //   );
-  // }
-  // if (player.padCurr.right && player.char.sprite.body.touching.right) {
-  //   player.char.sprite.body.setVelocityY(
-  //     player.char.sprite.body.velocity.y * 0.8 - 40
-  //   );
-  // }
 }
 
 export function updateFrictionAirY(player: Player, game: Game): void {
