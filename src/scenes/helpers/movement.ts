@@ -199,7 +199,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
       player.char.sprite.body.setVelocityX(
         game.BASE_PLAYER_JUMP_WALL *
           player.char.speed *
-          (player.padCurr.right ? 2 : 1)
+          (player.padCurr.left ? 2 : 1)
       );
       return;
     }
