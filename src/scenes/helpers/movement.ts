@@ -143,6 +143,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
       !player.char.sprite.body.touching.down &&
       !player.char.sprite.body.touching.left &&
       !player.char.sprite.body.touching.right &&
+      !hasPlayerTouchedWallRecently(player) &&
       player.char.jumpIndex < 1
     ) {
       player.char.jumpIndex = 1;
