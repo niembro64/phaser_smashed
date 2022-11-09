@@ -758,7 +758,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
       player.char.sprite.body.setVelocityX(
         player.char.sprite.body.velocity.x *
           game.RATIO_ACCELERATION_VELOCITY *
-          Math.pow(player.char.friction_air, 3) +
+          Math.pow(1 - player.char.friction_air, 3) +
           -game.BASE_PLAYER_SPEED.x *
             player.char.speed *
             player.char.fast *
@@ -770,7 +770,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
       player.char.sprite.body.setVelocityX(
         player.char.sprite.body.velocity.x *
           game.RATIO_ACCELERATION_VELOCITY *
-          Math.pow(player.char.friction_air, 4) +
+          Math.pow(1 - player.char.friction_air, 3) +
           game.BASE_PLAYER_SPEED.x *
             player.char.speed *
             player.char.fast *

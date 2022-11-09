@@ -140,11 +140,9 @@ export function updateJumpPhysicalOnWall(player: Player, game: Game): void {
 export function updateJumpPhysical(player: Player, game: Game): void {
   if (player.padCurr.Y && !player.padPrev.Y) {
     if (
-      !(
-        player.char.sprite.body.touching.down ||
-        player.char.sprite.body.touching.left ||
-        player.char.sprite.body.touching.right
-      ) &&
+      !player.char.sprite.body.touching.down &&
+      !player.char.sprite.body.touching.left &&
+      !player.char.sprite.body.touching.right &&
       player.char.jumpIndex < 1
     ) {
       player.char.jumpIndex = 1;
@@ -200,7 +198,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
       player.char.sprite.body.setVelocityX(
         game.BASE_PLAYER_JUMP_WALL *
           player.char.speed *
-          (player.padCurr.right ? 300 : 1)
+          (player.padCurr.right ? 2 : 1)
       );
       return;
     }
@@ -213,7 +211,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
       player.char.sprite.body.setVelocityX(
         -game.BASE_PLAYER_JUMP_WALL *
           player.char.speed *
-          (player.padCurr.right ? 300 : 1)
+          (player.padCurr.right ? 2 : 1)
       );
       return;
     }
