@@ -288,10 +288,10 @@ body {
 .b-start {
   background-color: hsl(200, 70%, 10%);
   border: 0px solid;
-  border-top-color: hsl(200, 30%, 15%);
+  /* border-top-color: hsl(200, 30%, 15%);
   border-left-color: hsl(200, 30%, 15%);
   border-bottom-color: hsl(200, 30%, 3%);
-  border-right-color: hsl(200, 30%, 3%);
+  border-right-color: hsl(200, 30%, 3%); */
   color: rgba(255, 255, 255, 1);
   /* color: rgba(0, 0, 0, 1); */
   font-size: 3vw;
@@ -311,10 +311,10 @@ body {
 
   background-color: hsl(200, 70%, 15%);
   border: 0px solid;
-  border-top-color: hsl(200, 30%, 20%);
+  /* border-top-color: hsl(200, 30%, 20%);
   border-left-color: hsl(200, 30%, 20%);
   border-bottom-color: hsl(200, 30%, 6%);
-  border-right-color: hsl(200, 30%, 6%);
+  border-right-color: hsl(200, 30%, 6%); */
   /* border: 2px solid;
     border-bottom-color: rgba(255, 255, 255, 1);
     border-right-color: rgba(255, 255, 255, 1);
@@ -336,10 +336,10 @@ body {
   color: grey;
   background-color: hsl(200, 70%, 05%);
   border: 0px solid;
-  border-bottom-color: hsl(200, 30%, 20%);
+  /* border-bottom-color: hsl(200, 30%, 20%);
   border-right-color: hsl(200, 30%, 20%);
   border-top-color: hsl(200, 30%, 6%);
-  border-left-color: hsl(200, 30%, 6%);
+  border-left-color: hsl(200, 30%, 6%); */
   /* border: 2px solid;
   border-bottom-color: rgba(255, 255, 255, 1);
   border-right-color: rgba(255, 255, 255, 1);
@@ -370,20 +370,22 @@ body {
   /* border-color: transparent;
   border: none; */
   color: rgba(255, 255, 255, 1);
-
+  
   border: 0px solid;
-  border-top-color: hsl(200, 0%, 15%);
+  /* border-top-color: hsl(200, 0%, 15%);
   border-left-color: hsl(200, 0%, 15%);
   border-bottom-color: hsl(200, 0%, 5%);
   border-right-color: hsl(200, 0%, 5%);
+  transition: 0.5s ease; */
 }
 .b-dark:hover {
   background-color: hsl(200, 0%, 20%);
   border: 0px solid;
-  border-top-color: hsl(200, 0%, 25%);
+  /* border-top-color: hsl(200, 0%, 25%);
   border-left-color: hsl(200, 0%, 25%);
   border-bottom-color: hsl(200, 0%, 15%);
   border-right-color: hsl(200, 0%, 15%);
+  transition: 0s ease; */
 }
 .b-dark:active {
   background-color: hsl(200, 0%, 10%);
@@ -392,10 +394,10 @@ body {
   color: grey;
 
   border: 0px solid;
-  border-bottom-color: hsl(200, 0%, 15%);
+  /* border-bottom-color: hsl(200, 0%, 15%);
   border-right-color: hsl(200, 0%, 15%);
   border-top-color: hsl(200, 0%, 5%);
-  border-left-color: hsl(200, 0%, 5%);
+  border-left-color: hsl(200, 0%, 5%); */
 }
 .b-black {
   background-color: transparent;
@@ -770,7 +772,7 @@ body {
 }
 
 .firstLoaderP {
-  width: 30%; 
+  width: 30%;
   margin: 3% 0% 0% 0%;
   /* border: 1px dashed lime;  */
 }
