@@ -11,12 +11,12 @@ import {
   setPhysicsAttackEnergyOn,
 } from "./attacks";
 import {
-  setActiveHurtEmitterOff,
-  setActiveHurtEmitterOn,
+  setEmitterHurtActiveOff,
+  setEmitterHurtActiveOn,
   setOnDeadUpdateMatrix,
   setResetDamage,
-  setVisibleHurtEmitterOff,
-  setVisibleHurtEmitterOn,
+  setEmitterHurtVisibleOff,
+  setEmitterHurtVisibleOn,
 } from "./damage";
 import {
   getIsFirstBlood,
@@ -147,14 +147,14 @@ export function setPlayerState(
     case "player-state-start":
       break;
     case "player-state-alive":
-      setActiveHurtEmitterOn(player);
-      setVisibleHurtEmitterOff(player);
+      setEmitterHurtActiveOn(player);
+      setEmitterHurtVisibleOff(player);
       setGravityTrue(player);
       setBlinkFalse(player);
       break;
     case "player-state-dead":
-      setActiveHurtEmitterOff(player);
-      setVisibleHurtEmitterOn(player);
+      setEmitterHurtActiveOff(player);
+      setEmitterHurtVisibleOn(player);
       setOnDeadUpdateMatrix(playerIndex, game);
       if (getIsFirstBlood(game)) {
         setAddShotToMatrixFirstBlood(player, playerIndex, game);
@@ -172,8 +172,8 @@ export function setPlayerState(
       setRespawn(player, game);
       break;
     case "player-state-hurt":
-      setActiveHurtEmitterOn(player);
-      setVisibleHurtEmitterOn(player);
+      setEmitterHurtActiveOn(player);
+      setEmitterHurtVisibleOn(player);
       player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
       player.char.attackEnergy.state = "released";
       setPhysicsAttackEnergyOn(player);

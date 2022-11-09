@@ -109,18 +109,32 @@ export function onHitHandlerAttackEnergy(
   );
 }
 
-export function setActiveHurtEmitterOn(player: Player): void {
+export function setEmitterHurtActiveOn(player: Player): void {
   player.emitterHurt.active = true;
 }
-export function setActiveHurtEmitterOff(player: Player): void {
+export function setEmitterHurtActiveOff(player: Player): void {
   player.emitterHurt.active = false;
 }
 
-export function setVisibleHurtEmitterOn(player: Player): void {
+export function setEmitterHurtVisibleOn(player: Player): void {
   player.emitterHurt.visible = true;
 }
-export function setVisibleHurtEmitterOff(player: Player): void {
+export function setEmitterHurtVisibleOff(player: Player): void {
   player.emitterHurt.visible = false;
+}
+
+export function setEmitterPlayerActiveOn(player: Player): void {
+  player.emitterPlayer.active = true;
+}
+export function setEmitterPlayerActiveOff(player: Player): void {
+  player.emitterPlayer.active = false;
+}
+
+export function setEmitterPlayerVisibleOn(player: Player): void {
+  player.emitterPlayer.visible = true;
+}
+export function setEmitterPlayerVisibleOff(player: Player): void {
+  player.emitterPlayer.visible = false;
 }
 
 export function setOnDeadUpdateMatrix(playerIndex: number, game: Game): void {

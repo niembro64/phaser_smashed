@@ -370,7 +370,7 @@ body {
   /* border-color: transparent;
   border: none; */
   color: rgba(255, 255, 255, 1);
-  
+
   border: 0px solid;
   /* border-top-color: hsl(200, 0%, 15%);
   border-left-color: hsl(200, 0%, 15%);
@@ -775,10 +775,13 @@ body {
   width: 30%;
   margin: 3% 0% 0% 0%;
   /* border: 1px dashed lime;  */
+  margin-left: -100%;
+  margin-right: -100%;
+  text-align: center;
 }
 
 .secondLoaderP {
-  margin: 0% 0% 0% 15%;
+  margin: 0% 0% 0% 12%;
   /* border: 1px dashed lime;  */
 }
 

@@ -285,7 +285,7 @@ function Play() {
       trance.addEventListener(
         "ended",
         () => {
-          setAllCharacter(4);
+          setFirstCharacterSlot(4);
         },
         { once: true }
       );
@@ -302,7 +302,7 @@ function Play() {
   //   trance.pause();
   // };
 
-  const setAllCharacter = (charId: number): void => {
+  const setFirstCharacterSlot = (charId: number): void => {
     // startSound();
     // specialSound();
     if (!debug.setChezSecret || webState === "play") {
@@ -1038,7 +1038,7 @@ function Play() {
                 <li
                   onMouseDown={() => {
                     console.log("MOUSE ENTER");
-                    setAllCharacter(5);
+                    setFirstCharacterSlot(5);
                   }}
                 >
                   Press Start 2P
@@ -1055,7 +1055,7 @@ function Play() {
                 // }}
                 onMouseDown={() => {
                   console.log("MOUSE DOWN");
-                  setAllCharacter(5);
+                  setFirstCharacterSlot(5);
                 }}
                 // onMouseUp={() => {
                 //   console.log("MOUSE UP");
