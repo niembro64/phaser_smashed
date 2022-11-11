@@ -1,6 +1,5 @@
 import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
-import { playerGrabAttackEnergy } from "./pad";
 
 export function updateJumpEnergy(player: Player, game: Game): void {
   if (
@@ -12,9 +11,25 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     game.SOUND_JUMP_ENERGY.play();
     player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
     player.char.upB.canUse = false;
+    player.emitterPlayer.active = true;
+    // player.emitterPlayer.visible = true;
+    player.emitterPlayer.on = true;
+    // player.emitterPlayer.setAlpha(1);
   }
   if (player.char.sprite.body.touching.down) {
     player.char.upB.canUse = true;
+    player.emitterPlayer.on = false;
+    // player.emitterPlayer.active = false;
+    // player.emitterPlayer.setAlpha(0);
+    // player.emitterPlayer.setALpha(0.5);
+    // player.emitterPlayer.stop;
+    // setTimeout(() => {
+    //   player.emitterPlayer.active = false;
+    //   player.emitterPlayer.visible = false;
+    // }, 300);
+  }
+  if (player.char.sprite.body.velocity.y > 0) {
+    player.emitterPlayer.on = false;
   }
 }
 
