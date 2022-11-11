@@ -2,7 +2,7 @@ import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
 import { playerGrabAttackEnergy } from "./pad";
 
-export function updateUpB(player: Player, game: Game): void {
+export function updateJumpEnergy(player: Player, game: Game): void {
   // if (
   //   player.gamepad.up &&
   //   player.gamepad.X &&
@@ -19,7 +19,7 @@ export function updateUpB(player: Player, game: Game): void {
     !player.padPrev.X &&
     player.char.upB.canUse
   ) {
-    game.SOUND_JUMP_POWER.play();
+    game.SOUND_JUMP_ENERGY.play();
     player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
     player.char.upB.canUse = false;
   }

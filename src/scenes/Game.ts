@@ -89,8 +89,8 @@ export default class Game extends Phaser.Scene {
   SOUND_INTRO: any;
   SOUND_GUN: any;
   SOUND_HIT: any;
-  SOUND_JUMP: any;
-  SOUND_JUMP_POWER: any;
+  SOUND_JUMP_PHYSICAL: any;
+  SOUND_JUMP_ENERGY: any;
   SOUND_FIRST_BLOOD: any;
   SOUND_SQUISH: any;
   SOUND_DIE: any;

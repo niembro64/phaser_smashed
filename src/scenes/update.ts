@@ -35,7 +35,7 @@ import {
 } from "./helpers/state";
 import {
   updatePhysicalAttackFollowsPlayer,
-  updateUpB,
+  updateJumpEnergy,
 } from "./helpers/attacks";
 import { getIsFirstBlood, getIsScreenClear } from "./helpers/drinking";
 import {
@@ -207,7 +207,7 @@ export function updatePlayers(game: Game): void {
         updateJumpPhysical(player, game);
         updateJumpFloat(player, game);
         updateControllerMovement(player, game);
-        updateUpB(player, game);
+        updateJumpEnergy(player, game);
 
         // UPDATE ATTACK PHYSICAL
         updateAttackPhysicals(player, playerIndex, game);
@@ -244,7 +244,7 @@ export function updatePlayers(game: Game): void {
         updateFrictionAirY(player, game);
         updateJumpPhysical(player, game);
         updateControllerMovement(player, game);
-        updateUpB(player, game);
+        updateJumpEnergy(player, game);
 
         ////////////////////////////////
         ///////// !offscreen && duration => alive
