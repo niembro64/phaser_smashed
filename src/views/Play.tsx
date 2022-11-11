@@ -687,46 +687,50 @@ function Play() {
 
       {webState !== "start" && showLoader && (
         <div className="loader">
-          {/* <div className="loader-inner">
-            <div className="loader-line-wrap">
-              <div className="loader-line"></div>
+          {quotesRandomNumber % 2 === 0 && (
+            <div className="loader-inner">
+              <div className="loader-line-wrap">
+                <div className="loader-line"></div>
+              </div>
+              <div className="loader-line-wrap">
+                <div className="loader-line"></div>
+              </div>
+              <div className="loader-line-wrap">
+                <div className="loader-line"></div>
+              </div>
+              <div className="loader-line-wrap">
+                <div className="loader-line"></div>
+              </div>
             </div>
-            <div className="loader-line-wrap">
-              <div className="loader-line"></div>
-            </div>
-            <div className="loader-line-wrap">
-              <div className="loader-line"></div>
-            </div>
-            <div className="loader-line-wrap">
-              <div className="loader-line"></div>
-            </div>
-          </div> */}
-          <div className="spinnerShrink">
-            <div className="spinnerOuterOuter">
-              <div className="spinnerOuter">
-                <div className="spinner">
-                  <div className="cube_side">
-                    <div className="cube_side_inside"></div>
-                  </div>
-                  <div className="cube_side">
-                    <div className="cube_side_inside"></div>
-                  </div>
-                  <div className="cube_side">
-                    <div className="cube_side_inside"></div>
-                  </div>
-                  <div className="cube_side">
-                    <div className="cube_side_inside"></div>
-                  </div>
-                  <div className="cube_side">
-                    <div className="cube_side_inside"></div>
-                  </div>
-                  <div className="cube_side">
-                    <div className="cube_side_inside"></div>
+          )}
+          {quotesRandomNumber % 2 !== 0 && (
+            <div className="spinnerShrink">
+              <div className="spinnerOuterOuter">
+                <div className="spinnerOuter">
+                  <div className="spinner">
+                    <div className="cube_side">
+                      <div className="cube_side_inside"></div>
+                    </div>
+                    <div className="cube_side">
+                      <div className="cube_side_inside"></div>
+                    </div>
+                    <div className="cube_side">
+                      <div className="cube_side_inside"></div>
+                    </div>
+                    <div className="cube_side">
+                      <div className="cube_side_inside"></div>
+                    </div>
+                    <div className="cube_side">
+                      <div className="cube_side_inside"></div>
+                    </div>
+                    <div className="cube_side">
+                      <div className="cube_side_inside"></div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
           <div className="loading-table-wrapper">
             <img
               className="loading-table"
