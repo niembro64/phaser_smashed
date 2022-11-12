@@ -1,11 +1,13 @@
-import Game from "../Game";
-import { AttackEnergy, Player } from "../interfaces";
+import Game from '../Game';
+import { AttackEnergy, Player } from '../interfaces';
 
 export function updateJumpEnergy(player: Player, game: Game): void {
   if (
     player.padCurr.up &&
-    player.padCurr.X &&
-    !player.padPrev.X &&
+    player.padCurr.B &&
+    !player.padPrev.B &&
+    // player.padCurr.X &&
+    // !player.padPrev.X &&
     player.char.upB.canUse
   ) {
     game.SOUND_JUMP_ENERGY.play();
