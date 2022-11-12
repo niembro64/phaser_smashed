@@ -162,7 +162,7 @@ export function updateGamePadsConnected(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    if (player.gamepad) {
+    if (player.gamepad && !player.emitterPlayer.on) {
       if (player?.gamepad?.axes?.length) {
         updatePadCurrControllerTypeHat(player, game);
       } else {
