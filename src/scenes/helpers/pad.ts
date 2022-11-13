@@ -175,10 +175,10 @@ export function updateGamePadsConnected(game: Game): void {
       player.padCurr.down = false;
       player.padCurr.left = false;
       player.padCurr.right = false;
-      player.padCurr.A = false;
-      player.padCurr.B = false;
-      player.padCurr.X = false;
-      player.padCurr.Y = false;
+      // player.padCurr.A = false;
+      // player.padCurr.B = false;
+      // player.padCurr.X = false;
+      // player.padCurr.Y = false;
     }
   });
 
