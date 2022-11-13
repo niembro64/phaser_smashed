@@ -21,19 +21,48 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     !player.char.sprite.body.touching.right
   ) {
     game.SOUND_JUMP_ENERGY.play();
-    if (player.padCurr.up) {
+    if (player.padCurr.up && player.padCurr.left) {
+      player.char.sprite.body.setVelocityY(
+        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+      player.char.sprite.body.setVelocityX(
+        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+    } else if (player.padCurr.up && player.padCurr.right) {
+      player.char.sprite.body.setVelocityY(
+        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+      player.char.sprite.body.setVelocityX(
+        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+    } else if (player.padCurr.down && player.padCurr.left) {
+      player.char.sprite.body.setVelocityY(
+        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+      player.char.sprite.body.setVelocityX(
+        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+    } else if (player.padCurr.down && player.padCurr.right) {
+      player.char.sprite.body.setVelocityY(
+        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+      player.char.sprite.body.setVelocityX(
+        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
+      );
+    } else if (player.padCurr.up) {
       player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
-    }
-    if (player.padCurr.down) {
+      player.char.sprite.body.setVelocityX(0);
+    } else if (player.padCurr.down) {
       player.char.sprite.body.setVelocityY(-game.BASE_PLAYER_JUMP_ENERGY);
-    }
-    // player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
-    if (player.padCurr.left) {
+      player.char.sprite.body.setVelocityX(0);
+    } else if (player.padCurr.left) {
+      player.char.sprite.body.setVelocityY(0);
       player.char.sprite.body.setVelocityX(game.BASE_PLAYER_JUMP_ENERGY);
-    }
-    if (player.padCurr.right) {
+    } else if (player.padCurr.right) {
+      player.char.sprite.body.setVelocityY(0);
       player.char.sprite.body.setVelocityX(-game.BASE_PLAYER_JUMP_ENERGY);
     }
+    // player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
     player.char.upB.canUse = false;
     player.emitterPlayer.active = true;
     // player.emitterPlayer.visible = true;
