@@ -150,7 +150,8 @@ export function updateJumpPhysical(player: Player, game: Game): void {
     }
 
     if (player.char.jumpIndex !== player.char.jumps.length - 1) {
-      game.SOUND_JUMP_PHYSICAL.volume = player.char.jumps[player.char.jumpIndex];
+      game.SOUND_JUMP_PHYSICAL.volume =
+        player.char.jumps[player.char.jumpIndex];
       game.SOUND_JUMP_PHYSICAL.play();
     }
 
@@ -220,6 +221,9 @@ export function updateJumpPhysical(player: Player, game: Game): void {
 }
 
 export function updateJumpFloat(player: Player, game: Game): void {
+  if (player.emitterPlayer.on) {
+    return;
+  }
   if (player.padCurr.Y && player.padPrev.Y) {
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y +

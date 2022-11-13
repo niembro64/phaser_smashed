@@ -2,8 +2,15 @@ import Game from "../Game";
 import { AttackEnergy, Player } from "../interfaces";
 
 export function updateJumpEnergy(player: Player, game: Game): void {
+  // if (
+  //   !player.padCurr.up &&
+  //   !player.padCurr.down &&
+  //   !player.padCurr.left &&
+  //   !player.padCurr.right
+  // ) {
+  //   return;
+  // }
   if (
-    player.padCurr.up &&
     player.padCurr.B &&
     !player.padPrev.B &&
     // player.padCurr.X &&
@@ -14,24 +21,35 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     !player.char.sprite.body.touching.right
   ) {
     game.SOUND_JUMP_ENERGY.play();
-    player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
-    player.char.sprite.body.setVelocityX(0);
+    if (player.padCurr.up) {
+      player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
+    }
+    if (player.padCurr.down) {
+      player.char.sprite.body.setVelocityY(-game.BASE_PLAYER_JUMP_ENERGY);
+    }
+    // player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
+    if (player.padCurr.left) {
+      player.char.sprite.body.setVelocityX(game.BASE_PLAYER_JUMP_ENERGY);
+    }
+    if (player.padCurr.right) {
+      player.char.sprite.body.setVelocityX(-game.BASE_PLAYER_JUMP_ENERGY);
+    }
     player.char.upB.canUse = false;
     player.emitterPlayer.active = true;
     // player.emitterPlayer.visible = true;
     player.emitterPlayer.on = true;
     // player.emitterPlayer.setAlpha(1);
-    setTimeout(() => {
-      player.emitterPlayer.on = false;
-    }, 1000);
+    // setTimeout(() => {
+    //   player.emitterPlayer.on = false;
+    // }, 1000);
   }
 
   if (!player.padCurr.B && !player.padPrev.B) {
     player.emitterPlayer.on = false;
   }
-  if (player.char.sprite.body.velocity.y > 0) {
-    player.emitterPlayer.on = false;
-  }
+  // if (player.char.sprite.body.velocity.y > 0) {
+  //   player.emitterPlayer.on = false;
+  // }
   if (
     player.char.sprite.body.touching.down ||
     player.char.sprite.body.touching.left ||
