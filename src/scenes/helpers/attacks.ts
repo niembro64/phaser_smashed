@@ -8,7 +8,10 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     !player.padPrev.B &&
     // player.padCurr.X &&
     // !player.padPrev.X &&
-    player.char.upB.canUse
+    player.char.upB.canUse &&
+    !player.char.sprite.body.touching.down &&
+    !player.char.sprite.body.touching.left &&
+    !player.char.sprite.body.touching.right
   ) {
     game.SOUND_JUMP_ENERGY.play();
     player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
@@ -20,7 +23,7 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     // player.emitterPlayer.setAlpha(1);
     setTimeout(() => {
       player.emitterPlayer.on = false;
-    }, 200);
+    }, 1000);
   }
   if (
     player.char.sprite.body.touching.down ||
