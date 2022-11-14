@@ -145,7 +145,7 @@ body {
 }
 
 #controls-col {
-  width: 100%; 
+  width: 100%;
   /* border: 1px dashed lime;  */
 
   display: flex;
@@ -648,7 +648,8 @@ body {
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #000;
+  background: transparent;
+  /* background: #000; */
   /* background: radial-gradient(#324, #000); */
   /* background: radial-gradient(#fff, #000); */
   overflow: hidden;
@@ -738,6 +739,7 @@ body {
   height: 90px;
   width: 90px;
   top: 7px;
+  /* border: 1px dashed lime; */
 }
 .loader-line-wrap:nth-child(2) .loader-line {
   border-color: #0078d7;

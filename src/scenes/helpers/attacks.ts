@@ -86,12 +86,12 @@ export function updateJumpEnergy(player: Player, game: Game): void {
   //   player.emitterPlayer.on = false;
   // }
   if (
-    player.char.sprite.body.touching.down ||
+    (player.char.sprite.body.touching.down ||
     player.char.sprite.body.touching.left ||
-    player.char.sprite.body.touching.right
+    player.char.sprite.body.touching.right) && !player.emitterPlayer.on
   ) {
     player.char.upB.canUse = true;
-    player.emitterPlayer.on = false;
+    // player.emitterPlayer.on = false;
   }
   updatePlayerGravityIfEmitterPlayer(player);
 }

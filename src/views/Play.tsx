@@ -515,177 +515,8 @@ function Play() {
   const componentPseudoLoad = useRef(true);
   const intervalClock: any = useRef(null);
 
-  // REACT TIME
-  // useEffect(() => {
-  //   if (componentPseudoLoad.current) {
-  //     componentPseudoLoad.current = false;
-
-  //     intervalClock.current = setInterval(() => {
-  //       if (myPhaser.current?.scene?.keys?.game) {
-  //         setClockTime(
-  //           JSON.parse(
-  //             JSON.stringify(myPhaser.current.scene.keys.game.timeClock)
-  //           )
-  //         );
-  //         setClockGame(
-  //           JSON.parse(
-  //             JSON.stringify(myPhaser.current.scene.keys.game.gameClock)
-  //           )
-  //         );
-  //         // setAPJ(
-  //         //   JSON.parse(
-  //         //     JSON.stringify(
-  //         //       myPhaser.current?.scene?.keys?.game
-  //         //         .overlappingPlayerIAttackPhysicalJ
-  //         //     )
-  //         //   )
-  //         // );
-  //         // setAEJ(
-  //         //   JSON.parse(
-  //         //     JSON.stringify(
-  //         //       myPhaser.current?.scene?.keys?.game
-  //         //         .overlappingPlayerIAttackEnergyJ
-  //         //     )
-  //         //   )
-  //         // );
-  //         // setLH(
-  //         //   JSON.parse(
-  //         //     JSON.stringify(
-  //         //       myPhaser.current?.scene?.keys?.game.wasLastHitByMatrix
-  //         //     )
-  //         //   )
-  //         // );
-  //         // setNH(
-  //         //   JSON.parse(
-  //         //     JSON.stringify(
-  //         //       myPhaser.current?.scene?.keys?.game.numberHitByMatrix
-  //         //     )
-  //         //   )
-  //         // );
-  //         // setNK(
-  //         //   JSON.parse(
-  //         //     JSON.stringify(
-  //         //       myPhaser.current?.scene?.keys?.game.numberKilledByMatrix
-  //         //     )
-  //         //   )
-  //         // );
-  //         // setNS(
-  //         //   JSON.parse(
-  //         //     JSON.stringify(
-  //         //       myPhaser.current?.scene?.keys?.game.numberShotsTakenByMeMatrix
-  //         //     )
-  //         //   )
-  //         // );
-
-  //         // setClockTime(myPhaser.current.scene.keys.game.timeClock);
-  //         // setClockGame(myPhaser.current.scene.keys.game.gameClock);
-  //         // setAPJ(
-  //         //   myPhaser.current.scene.keys.game.overlappingPlayerIAttackPhysicalJ
-  //         // );
-  //         // setAEJ(
-  //         //   myPhaser.current.scene.keys.game.overlappingPlayerIAttackEnergyJ
-  //         // );
-  //         // setLH(myPhaser.current.scene.keys.game.wasLastHitByMatrix);
-  //         // setNH(myPhaser.current.scene.keys.game.numberHitByMatrix);
-  //         // setNK(myPhaser.current.scene.keys.game.numberKilledByMatrix);
-  //         // setNS(myPhaser.current.scene.keys.game.numberShotsTakenByMeMatrix);
-
-  //         // console.log(
-  //         //   "myPhaser.current.scene.keys.game",
-  //         //   myPhaser.current.scene.keys.game.gameClock.minutes,
-  //         //   myPhaser.current.scene.keys.game.gameClock.seconds
-  //         // );
-  //       }
-  //     }, 1000);
-  //   }
-  //   console.log(
-  //     "+++++++++++++++++++++++",
-  //     "myPhaser.current?.scene?.keys?.game?.loaded",
-  //     myPhaser.current?.scene?.keys?.game?.loaded
-  //   );
-  // }, [myPhaser?.current?.scene?.keys?.game?.loaded]);
-
-  // useEffect(() => {
-  //   if (myPhaser.current) {
-  //     setClockTime(
-  //       JSON.parse(
-  //         JSON.stringify(myPhaser?.current?.scene?.keys?.game?.timeClock)
-  //       )
-  //     );
-  //     setClockGame(
-  //       JSON.parse(
-  //         JSON.stringify(myPhaser?.current?.scene?.keys?.game?.gameClock)
-  //       )
-  //     );
-  //     console.log(
-  //       "+++++++++++++++++++++++",
-  //       "myPhaser.current?.scene?.keys?.game?.timeSecondsClock",
-  //       myPhaser.current?.scene?.keys?.game?.timeSecondsClock
-  //     );
-  //   }
-  // }, [myPhaser?.current?.scene?.keys?.game?.timeSecondsClock]);
-
-  // useEffect(() => {
-  //   if (gameInfo.current) {
-  //     clearInterval(gameInfo.current);
-  //   }
-  //   gameInfo.current = setInterval(() => {
-  //     if (myPhaser.current) {
-  //       // setClockTime(JSON.parse(JSON.stringify(myPhaser.current?.scene?.keys?.game.timeClock)));
-  //       // setClockGame(JSON.parse(JSON.stringify(myPhaser.current?.scene?.keys?.game.gameClock)));
-
-  //       setAPJ(
-  //         JSON.parse(
-  //           JSON.stringify(
-  //             myPhaser.current?.scene?.keys?.game
-  //               .overlappingPlayerIAttackPhysicalJ
-  //           )
-  //         )
-  //       );
-  //       setAEJ(
-  //         JSON.parse(
-  //           JSON.stringify(
-  //             myPhaser.current?.scene?.keys?.game
-  //               .overlappingPlayerIAttackEnergyJ
-  //           )
-  //         )
-  //       );
-  //       setLH(
-  //         JSON.parse(
-  //           JSON.stringify(
-  //             myPhaser.current?.scene?.keys?.game.wasLastHitByMatrix
-  //           )
-  //         )
-  //       );
-  //       setNH(
-  //         JSON.parse(
-  //           JSON.stringify(
-  //             myPhaser.current?.scene?.keys?.game.numberHitByMatrix
-  //           )
-  //         )
-  //       );
-  //       setNK(
-  //         JSON.parse(
-  //           JSON.stringify(
-  //             myPhaser.current?.scene?.keys?.game.numberKilledByMatrix
-  //           )
-  //         )
-  //       );
-  //       setNS(
-  //         JSON.parse(
-  //           JSON.stringify(
-  //             myPhaser.current?.scene?.keys?.game.numberShotsTakenByMeMatrix
-  //           )
-  //         )
-  //       );
-  //     }
-  //   }, 100);
-  // }, [myPhaser?.current?.scene?.keys?.game?.loaded]);
-
   return (
     <div className="overDiv">
-      {/* <audio src={importedMonkeysMusic} ref={importedMonkeysMusic} /> */}
-
       {webState !== "start" && showLoader && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
@@ -817,7 +648,6 @@ function Play() {
             <span>START</span>
           </button>
         </div>
-        // <Link to={"/play"} className="playLink"></Link>
       )}
 
       <div className="overDiv">
@@ -843,7 +673,6 @@ function Play() {
               onClick={() => {
                 if (myPhaser?.current?.scene?.keys?.game) {
                   myPhaser.current.scene.keys.game.loaded = false;
-                  // myPhaser.current?.scene?.keys?.game.current.scene.keys.game.loaded = false;
                 }
                 onClickPlayNavButtons("Back");
                 setWebState("start");
@@ -861,9 +690,6 @@ function Play() {
             <button
               className="linkTag b-top"
               onClick={() => {
-                // if (myPhaser.current?.scene?.keys?.game?.current?.scene?.keys?.game) {
-                //   myPhaser.current?.scene?.keys?.game.current.scene.keys.game.loaded = false;
-                // }
                 if (myPhaser?.current?.scene?.keys?.game?.loaded) {
                   startSound();
                   myPhaser.current.scene.keys.game.loaded = false;
@@ -959,16 +785,6 @@ function Play() {
                     </div>
                   );
                 })}
-                {/* {characterMoves.map((charMove, charMoveIndex) => {
-                  return (
-                    <div id="move" key={charMoveIndex}>
-                      <h5>{charMove.move}</h5>
-                      <h5>
-                        {charMove.button} {charMove.status}
-                      </h5>
-                    </div>
-                  );
-                })} */}
               </div>
               <p> fyi, button mapping is insane</p>
             </div>
@@ -1015,11 +831,8 @@ function Play() {
                 className="linkTag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
-                {/* <h4>See Other Projects</h4> */}
                 <span>Amazon: USB Hub/Extension $13</span>
               </a>
-              {/* <p>Some types of controllers don't work yet.</p> */}
-
               <div>
                 <ul>
                   These work:
@@ -1066,28 +879,13 @@ function Play() {
                 className="kirbyNiembro"
                 src="./images/character_3_cropped.png"
                 alt="kirby"
-                // onMouseDown={() => {
-                //   console.log("MOUSE ENTER");
-                //   setAllCharacter(5);
-                // }}
                 onMouseDown={() => {
                   console.log("MOUSE DOWN");
                   setFirstCharacterSlot(5);
                 }}
-                // onMouseUp={() => {
-                //   console.log("MOUSE UP");
-                // }}
-                // onMouseEnter={() => {
-                //   console.log("MOUSE ENTER");
-                //   setAllCharacter(5);
-                // }}
-                // onMouseLeave={() => {
-                //   console.log("MOUSE LEAVE");
-                // }}
               />
               <p>by NIEMBRO64</p>
               <a className="linkTag btn btn-dark" href="http://niembro64.com/">
-                {/* <h4>See Other Projects</h4> */}
                 <span>See Other Projects</span>
               </a>
             </div>
