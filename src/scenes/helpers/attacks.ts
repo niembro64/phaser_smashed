@@ -61,6 +61,12 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     } else if (player.padCurr.right) {
       player.char.sprite.body.setVelocityY(0);
       player.char.sprite.body.setVelocityX(-game.BASE_PLAYER_JUMP_ENERGY);
+    } else if (player.char.sprite.flipX) {
+      player.char.sprite.body.setVelocityY(0);
+      player.char.sprite.body.setVelocityX(game.BASE_PLAYER_JUMP_ENERGY);
+    } else if (!player.char.sprite.flipX) {
+      player.char.sprite.body.setVelocityY(0);
+      player.char.sprite.body.setVelocityX(-game.BASE_PLAYER_JUMP_ENERGY);
     }
     // player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
     player.char.upB.canUse = false;
