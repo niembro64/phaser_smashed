@@ -9,7 +9,7 @@ import Play from "./views/Play";
 export interface CharacterMove {
   button: string;
   move: string;
-  ready: string;
+  status: string;
 }
 
 export type ButtonName =

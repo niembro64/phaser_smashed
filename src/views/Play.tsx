@@ -364,16 +364,17 @@ function Play() {
   const [showHistory, setShowHistory] = useState(false);
 
   const characterMoves: CharacterMove[] = [
-    { button: "D-Pad", move: "Movement", ready: "✔️" },
-    { button: "X", move: "Jump", ready: "✔️" },
-    { button: "X", move: "Jump-Air", ready: "✔️" },
-    { button: "UP + X", move: "Jump-Energy", ready: "✔️" },
-    { button: "Y", move: "Attack-Energy", ready: "✔️" },
-    { button: "B", move: "Attack-Physical", ready: "🚧" },
-    { button: "Forward + B", move: "Attack-Smash", ready: "🚧" },
-    { button: "Forward + WallTouch", move: "Slide-Wall", ready: "✔️" },
-    { button: "L + R", move: "Pause", ready: "✔️" },
-    { button: "All Players Ready", move: "UnPause", ready: "✔️" },
+    { button: "D-Pad", move: "Movement", status: "✔️" },
+    { button: "Ground + X", move: "Jump", status: "✔️" },
+    { button: "Air + X", move: "Jump-Air", status: "✔️" },
+    { button: "Air + D-Pad + A", move: "Jump-Fire", status: "🚧" },
+    { button: "Y", move: "Attack-Energy", status: "✔️" },
+    { button: "B", move: "Attack-Physical", status: "🚧" },
+    { button: "Forward + B", move: "Attack-Smash", status: "🚧" },
+    { button: "Air + Wall + Forward", move: "Slide-Wall", status: "✔️" },
+    { button: "L + R", move: "Pause", status: "✔️" },
+    { button: "Paused + Any Button", move: "Ready", status: "✔️" },
+    { button: "Paused + All Ready", move: "UnPause", status: "✔️" },
   ];
 
   const clickPauseParent = () => {
@@ -947,17 +948,29 @@ function Play() {
               }}
             >
               <h1>Controls</h1>
-              {characterMoves.map((charMove, charMoveIndex) => {
-                return (
-                  <div id="move" key={charMoveIndex}>
-                    <h5>{charMove.move}</h5>
-                    <h5>
-                      {charMove.button} {charMove.ready}
-                    </h5>
-                  </div>
-                );
-              })}
-              <span> fyi, button mapping is insane</span>
+              <div id="controls-col">
+                {characterMoves.map((charMove, charMoveIndex) => {
+                  return (
+                    <div id="move" key={charMoveIndex}>
+                      <h5>{charMove.move}</h5>
+                      <h5>
+                        {charMove.button} {charMove.status}
+                      </h5>
+                    </div>
+                  );
+                })}
+                {/* {characterMoves.map((charMove, charMoveIndex) => {
+                  return (
+                    <div id="move" key={charMoveIndex}>
+                      <h5>{charMove.move}</h5>
+                      <h5>
+                        {charMove.button} {charMove.status}
+                      </h5>
+                    </div>
+                  );
+                })} */}
+              </div>
+              <p> fyi, button mapping is insane</p>
             </div>
           </div>
         )}
