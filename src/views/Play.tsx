@@ -1,30 +1,30 @@
-import { useEffect, useRef, useState } from "react";
-import Phaser from "phaser";
-import Game from "../scenes/Game";
-import "../App.css";
-import "@fontsource/press-start-2p";
-import { ButtonName, CharacterMove } from "../App";
-import { setGameState } from "../scenes/helpers/state";
-import useSound from "use-sound";
+import { useEffect, useRef, useState } from 'react';
+import Phaser from 'phaser';
+import Game from '../scenes/Game';
+import '../App.css';
+import '@fontsource/press-start-2p';
+import { ButtonName, CharacterMove } from '../App';
+import { setGameState } from '../scenes/helpers/state';
+import useSound from 'use-sound';
 // import { Howl } from "howler";
 // import { Howl, HowlOptions, HowlCallback, HowlErrorCallback } from "howler";
 
 // import ReactHowler from 'react-howler';
 
 // @ts-ignore
-import importedWoah from "../sounds/BlackBetty_Woah.mp3";
+import importedWoah from '../sounds/BlackBetty_Woah.mp3';
 // @ts-ignore
-import importedBambalam from "../sounds/BlackBetty_Bambalam.mp3";
+import importedBambalam from '../sounds/BlackBetty_Bambalam.mp3';
 // @ts-ignore
-import importedTrance from "../sounds/trance.wav";
+import importedTrance from '../sounds/trance.wav';
 // @ts-ignore
-import importedSpecial12Sound from "../sounds/special-m12.wav";
+import importedSpecial12Sound from '../sounds/special-m12.wav';
 // @ts-ignore
-import importedSpecial5Sound from "../sounds/special-m5.wav";
+import importedSpecial5Sound from '../sounds/special-m5.wav';
 // @ts-ignore
-import importedStartSound from "../sounds/start.wav";
+import importedStartSound from '../sounds/start.wav';
 // @ts-ignore
-import importedBlipSound from "../sounds/game-start-liquid.wav";
+import importedBlipSound from '../sounds/game-start-liquid.wav';
 import {
   CharacterId,
   CharacterName,
@@ -32,7 +32,7 @@ import {
   PlayerConfig,
   Quote,
   WebState,
-} from "./ViewInterfaces";
+} from './ViewInterfaces';
 // import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
 // import { BooleanSchemaDefinition } from "mongoose";
 
@@ -87,7 +87,7 @@ function Play() {
 
   // let pauseSound = new Audio("../../public/sounds/mariopause.mp3");
   const [numClicks, setNumClicks] = useState(0);
-  const [webState, setWebState] = useState<WebState>("start");
+  const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState(false);
   const [buttonsOnOff, setButtonsOnOff] = useState([
     { state: true },
@@ -97,24 +97,24 @@ function Play() {
   ]);
   const [smashConfig, setSmashConfig] = useState({
     players: [
-      { characterId: 0, scale: 0.9, name: "Mario" },
-      { characterId: 1, scale: 0.9, name: "Link" },
-      { characterId: 2, scale: 1, name: "Pikachu" },
-      { characterId: 3, scale: 0.7, name: "Kirby" },
+      { characterId: 0, scale: 0.9, name: 'Mario' },
+      { characterId: 1, scale: 0.9, name: 'Link' },
+      { characterId: 2, scale: 1, name: 'Pikachu' },
+      { characterId: 3, scale: 0.7, name: 'Kirby' },
     ],
   });
 
   const smashConfigScaleArray: PlayerConfig[] = [
-    { characterId: 0, scale: 0.9, name: "Mario" },
-    { characterId: 1, scale: 0.9, name: "Link" },
-    { characterId: 2, scale: 1, name: "Pikachu" },
-    { characterId: 3, scale: 0.7, name: "Kirby" },
-    { characterId: 4, scale: 1.2, name: "Chez" },
-    { characterId: 5, scale: 1.2, name: "BlackChez" },
+    { characterId: 0, scale: 0.9, name: 'Mario' },
+    { characterId: 1, scale: 0.9, name: 'Link' },
+    { characterId: 2, scale: 1, name: 'Pikachu' },
+    { characterId: 3, scale: 0.7, name: 'Kirby' },
+    { characterId: 4, scale: 1.2, name: 'Chez' },
+    { characterId: 5, scale: 1.2, name: 'BlackChez' },
   ];
   const config: Phaser.Types.Core.GameConfig = {
     transparent: true,
-    title: "Smashed",
+    title: 'Smashed',
     antialias: true,
     pixelArt: false,
     scale: {
@@ -124,13 +124,13 @@ function Play() {
       height: 1080,
     },
     type: Phaser.AUTO,
-    parent: "phaser-container",
-    backgroundColor: "#00000055",
+    parent: 'phaser-container',
+    backgroundColor: '#00000055',
     input: {
       gamepad: true,
     },
     physics: {
-      default: "arcade",
+      default: 'arcade',
       arcade: {
         gravity: { y: 3000 },
         debug: false,
@@ -144,28 +144,28 @@ function Play() {
   // const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
-    { name: "Breezy", text: "The turtle will die." },
+    { name: 'Breezy', text: 'The turtle will die.' },
     // { name: "Breezy", text: "Oh, is it? Oh cool. Ur soo cool." },
     // { name: "Lau", text: "I'm sorry, I didn't know it was gonna happen." },
-    { name: "TR3", text: "Smashed." },
+    { name: 'TR3', text: 'Smashed.' },
     {
-      name: "TR3",
-      text: "How am I supposed to make more than that... shit... happen?",
+      name: 'TR3',
+      text: 'How am I supposed to make more than that... shit... happen?',
     },
     // { name: "Chadams", text: "AAAYYYUUUGGGGHHHH!!" },
-    { name: "Chadams", text: "Two shots... two shots." },
+    { name: 'Chadams', text: 'Two shots... two shots.' },
     // { name: "Chadams", text: "Spike Enerjeaoah." },
     // { name: "Chadams", text: "Stop breakin' shit." },
     // { name: "Chadams", text: "Is there no one else?" },
-    { name: "Eddie-Z", text: "He'll do it again, yeah!" },
+    { name: 'Eddie-Z', text: "He'll do it again, yeah!" },
     // { name: "Deen Davis Jr.", text: "VIDEOTAPE MA-SELF FUCKIN YOU UP!" },
     {
-      name: "DDj",
+      name: 'DDj',
       text: "It's safe to say we're not going to the bars tonite.",
     },
     {
-      name: "DDj",
-      text: "...yes you are.",
+      name: 'DDj',
+      text: '...yes you are.',
     },
     // {
     //   name: "DDj",
@@ -176,7 +176,7 @@ function Play() {
     //   text: "I thought you put Spike in there.",
     // },
     // { name: "Gin", text: "Clean it up, and we'll do it again." },
-    { name: "Ginman", text: "Set it up... and we'll do it... again." },
+    { name: 'Ginman', text: "Set it up... and we'll do it... again." },
     // { name: "Gin", text: "Shitty, shitty-fuckin-ass." },
   ];
   const debug: Debug = {
@@ -212,7 +212,7 @@ function Play() {
     // pauseSound();
     trance.pause();
     startSound();
-    setWebState("play");
+    setWebState('play');
     let players = [...smashConfig.players];
     let newPlayers: {
       name: CharacterName;
@@ -236,9 +236,9 @@ function Play() {
     }
     setTimeout(() => {
       myPhaser.current = new Phaser.Game(config);
-      myPhaser.current.registry.set("parentContext", Play);
-      myPhaser.current.registry.set("smashConfig", newSmashConfig);
-      myPhaser.current.registry.set("debug", debug);
+      myPhaser.current.registry.set('parentContext', Play);
+      myPhaser.current.registry.set('smashConfig', newSmashConfig);
+      myPhaser.current.registry.set('debug', debug);
     }, setTimeoutQuotesLengthStart);
 
     setShowLoaderIntervalFunction();
@@ -248,7 +248,7 @@ function Play() {
     setShowLoader(true);
     const myInterval = setInterval(() => {
       console.log(
-        "myPhaser.current?.scene?.keys?.game?.loaded",
+        'myPhaser.current?.scene?.keys?.game?.loaded',
         myPhaser?.current?.scene?.keys?.game?.loaded
       );
       if (myPhaser?.current?.scene?.keys?.game?.loaded) {
@@ -283,7 +283,7 @@ function Play() {
       playNumber.current += 1;
       trance.play();
       trance.addEventListener(
-        "ended",
+        'ended',
         () => {
           setFirstCharacterSlot(4);
         },
@@ -305,7 +305,7 @@ function Play() {
   const setFirstCharacterSlot = (charId: number): void => {
     // startSound();
     // specialSound();
-    if (!debug.setChezSecret || webState === "play") {
+    if (!debug.setChezSecret || webState === 'play') {
       return;
     }
     if (charId === 4) {
@@ -326,7 +326,7 @@ function Play() {
       return s.characterId === choice.characterId;
     })?.name;
     choice.scale = tempScale ? tempScale : 1;
-    choice.name = tempName ? tempName : "";
+    choice.name = tempName ? tempName : '';
     setSmashConfig({ players: [...choices] });
     // for (let i = 0; i < 4; i++) {}
   };
@@ -349,7 +349,7 @@ function Play() {
       return s.characterId === choice.characterId;
     })?.name;
     choice.scale = tempScale ? tempScale : 1;
-    choice.name = tempName ? tempName : "";
+    choice.name = tempName ? tempName : '';
     setSmashConfig({ players: [...choices] });
   };
 
@@ -364,32 +364,32 @@ function Play() {
   const [showHistory, setShowHistory] = useState(false);
 
   const characterMoves: CharacterMove[] = [
-    { button: "D-Pad", move: "Movement", status: "✔️" },
-    { button: "Ground + X", move: "Jump", status: "✔️" },
-    { button: "Air + X", move: "Jump-Air", status: "✔️" },
-    { button: "Air + D-Pad + A", move: "Jump-Fire", status: "🚧" },
-    { button: "Y", move: "Attack-Energy", status: "✔️" },
-    { button: "B", move: "Attack-Physical", status: "🚧" },
-    { button: "Forward + B", move: "Attack-Smash", status: "🚧" },
-    { button: "Air + Wall + Forward", move: "Slide-Wall", status: "✔️" },
-    { button: "L + R", move: "Pause", status: "✔️" },
-    { button: "Paused + Any Button", move: "Ready", status: "✔️" },
-    { button: "Paused + All Ready", move: "UnPause", status: "✔️" },
+    { button: 'D-Pad', move: 'Movement', status: '✔️' },
+    { button: 'Ground + X', move: 'Jump', status: '✔️' },
+    { button: 'Air + X', move: 'Jump-Air', status: '✔️' },
+    { button: 'Air + D-Pad + A', move: 'Jump-Fire', status: '🚧' },
+    { button: 'Y', move: 'Attack-Energy', status: '✔️' },
+    { button: 'B', move: 'Attack-Physical', status: '🚧' },
+    { button: 'Forward + B', move: 'Attack-Smash', status: '🚧' },
+    { button: 'Air + Wall + Forward', move: 'Slide-Wall', status: '✔️' },
+    { button: 'L + R', move: 'Pause', status: '✔️' },
+    { button: 'Paused + Any Button', move: 'Ready', status: '✔️' },
+    { button: 'Paused + All Ready', move: 'UnPause', status: '✔️' },
   ];
 
   const clickPauseParent = () => {
-    if (webState === "play") {
+    if (webState === 'play') {
       if (
         !(
           myPhaser.current.scene.keys.game.gameState.name ===
-            "game-state-paused" ||
+            'game-state-paused' ||
           myPhaser.current?.scene?.keys?.game.gameState.name ===
-            "game-state-first-blood" ||
+            'game-state-first-blood' ||
           myPhaser.current?.scene?.keys?.game.gameState.name ===
-            "game-state-screen-clear"
+            'game-state-screen-clear'
         )
       ) {
-        setGameState(myPhaser.current?.scene?.keys?.game, "game-state-paused");
+        setGameState(myPhaser.current?.scene?.keys?.game, 'game-state-paused');
       }
     }
   };
@@ -409,49 +409,49 @@ function Play() {
     clickPauseParent();
 
     switch (buttonName) {
-      case "Back":
+      case 'Back':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
         break;
-      case "ReStart":
+      case 'ReStart':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
         break;
-      case "Controls":
+      case 'Controls':
         setShowControls(!showControls);
         setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
         break;
-      case "Controllers":
+      case 'Controllers':
         setShowControls(false);
         setShowControllers(!showControllers);
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
         break;
-      case "Rules-N64":
+      case 'Rules-N64':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(!showRulesN64);
         setShowAbout(false);
         setShowHistory(false);
         break;
-      case "About":
+      case 'About':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
         setShowAbout(!showAbout);
         setShowHistory(false);
         break;
-      case "History":
+      case 'History':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -517,7 +517,7 @@ function Play() {
 
   return (
     <div className="overDiv">
-      {webState !== "start" && showLoader && (
+      {webState !== 'start' && showLoader && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
             <div className="loader-inner">
@@ -575,7 +575,7 @@ function Play() {
         </div>
       )}
       <div className="phaser-container" id="phaser-container"></div>
-      {webState === "start" && (
+      {webState === 'start' && (
         <div className="startClassDiv">
           <div className="startTitleWrapper2">
             <div className="startTitleWrapper1">
@@ -610,11 +610,11 @@ function Play() {
                         <img
                           className="startImage"
                           src={
-                            "images/character_" +
+                            'images/character_' +
                             cPlayer.characterId.toString() +
-                            "_cropped.png"
+                            '_cropped.png'
                           }
-                          width={(50 * cPlayer.scale).toString() + "%"}
+                          width={(50 * cPlayer.scale).toString() + '%'}
                           alt="char"
                         />
                       </div>
@@ -657,25 +657,26 @@ function Play() {
             src="/images/qblack_trans.png"
             alt="question mark"
           />
-          {webState === "start" && (
+          {webState === 'start' && (
             <button
               className="linkTag b-top"
               onClick={() => {
-                onClickPlayNavButtons("Controllers");
+                onClickPlayNavButtons('Controllers');
               }}
             >
-              <span>Controllers</span>
+              {showControllers && <span>...........</span>}
+              {!showControllers && <span>Controllers</span>}
             </button>
           )}
-          {webState !== "start" && (
+          {webState !== 'start' && (
             <button
               className="linkTag b-top"
               onClick={() => {
                 if (myPhaser?.current?.scene?.keys?.game) {
                   myPhaser.current.scene.keys.game.loaded = false;
                 }
-                onClickPlayNavButtons("Back");
-                setWebState("start");
+                onClickPlayNavButtons('Back');
+                setWebState('start');
                 setNumClicks(numClicks + 1);
                 clearInterval(intervalClock.current);
                 intervalClock.current = null;
@@ -686,7 +687,7 @@ function Play() {
               <span>Back</span>
             </button>
           )}
-          {webState !== "start" && (
+          {webState !== 'start' && (
             <button
               className="linkTag b-top"
               onClick={() => {
@@ -694,7 +695,7 @@ function Play() {
                   startSound();
                   myPhaser.current.scene.keys.game.loaded = false;
                   setShowLoaderIntervalFunction();
-                  onClickPlayNavButtons("ReStart");
+                  onClickPlayNavButtons('ReStart');
                   setQuotesRandomNumber(
                     Math.floor(Math.random() * quotes.length)
                   );
@@ -717,12 +718,12 @@ function Play() {
                   }
                   setTimeout(() => {
                     myPhaser.current = new Phaser.Game(config);
-                    myPhaser.current.registry.set("parentContext", Play);
+                    myPhaser.current.registry.set('parentContext', Play);
                     myPhaser.current.registry.set(
-                      "smashConfig",
+                      'smashConfig',
                       newSmashConfig
                     );
-                    myPhaser.current.registry.set("debug", newDebug);
+                    myPhaser.current.registry.set('debug', newDebug);
                   }, setTimeoutQuotesLengthReStart);
                 }
               }}
@@ -733,36 +734,40 @@ function Play() {
           <button
             className="linkTag b-top"
             onClick={() => {
-              onClickPlayNavButtons("Controls");
+              onClickPlayNavButtons('Controls');
             }}
           >
-            <span>Controls</span>
+            {showControls && <span>........</span>}
+            {!showControls && <span>Controls</span>}
           </button>
           <button
             className="linkTag b-top"
             onClick={() => {
-              onClickPlayNavButtons("Rules-N64");
+              onClickPlayNavButtons('Rules-N64');
             }}
           >
-            <span>Rules-N64</span>
+            {showRulesN64 && <span>.........</span>}
+            {!showRulesN64 && <span>Rules-N64</span>}
           </button>
-          {webState === "start" && (
+          {webState === 'start' && (
             <button
               className="linkTag b-top"
               onClick={() => {
-                onClickPlayNavButtons("History");
+                onClickPlayNavButtons('History');
               }}
             >
-              <span>History</span>
+              {showHistory && <span>.......</span>}
+              {!showHistory && <span>History</span>}
             </button>
           )}
           <button
             className="linkTag b-top"
             onClick={() => {
-              onClickPlayNavButtons("About");
+              onClickPlayNavButtons('About');
             }}
           >
-            <span>About</span>
+            {showAbout && <span>.....</span>}
+            {!showAbout && <span>About</span>}
           </button>
         </div>
         {showControls && (
@@ -770,7 +775,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Controls");
+                onClickPlayNavBody('Controls');
               }}
             >
               <h1>Controls</h1>
@@ -795,7 +800,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Rules-N64");
+                onClickPlayNavBody('Rules-N64');
               }}
             >
               <h1>Rules-N64</h1>
@@ -814,7 +819,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Controllers");
+                onClickPlayNavBody('Controllers');
               }}
             >
               <h1>Controllers</h1>
@@ -851,7 +856,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("About");
+                onClickPlayNavBody('About');
               }}
             >
               <h1>About</h1>
@@ -860,6 +865,7 @@ function Play() {
                 other smash drinking games; it requires a player to actively
                 time their own death rather than just try to not die.
               </p>
+              <p>Everything that you don't immediately recognize is OC.</p>
               <h4>Tech Used</h4>
               <ul>
                 <li>Phaser 3</li>
@@ -867,7 +873,7 @@ function Play() {
                 <li>Bootstrap 5</li>
                 <li
                   onMouseDown={() => {
-                    console.log("MOUSE ENTER");
+                    console.log('MOUSE ENTER');
                     setFirstCharacterSlot(5);
                   }}
                 >
@@ -880,7 +886,7 @@ function Play() {
                 src="./images/character_3_cropped.png"
                 alt="kirby"
                 onMouseDown={() => {
-                  console.log("MOUSE DOWN");
+                  console.log('MOUSE DOWN');
                   setFirstCharacterSlot(5);
                 }}
               />
@@ -896,7 +902,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("History");
+                onClickPlayNavBody('History');
               }}
             >
               <h1>History</h1>
@@ -919,19 +925,19 @@ function Play() {
           </div>
         )}
       </div>
-      {webState === "play" && myPhaser.current?.scene?.keys?.game?.loaded && (
+      {webState === 'play' && myPhaser.current?.scene?.keys?.game?.loaded && (
         <div className="game-bar">
           <div className="game-bar-time">
             <p>
               {clockTime.minutes}:
               {clockTime.seconds < 10
-                ? "0" + clockTime.seconds.toString()
+                ? '0' + clockTime.seconds.toString()
                 : clockTime.seconds}
             </p>
             <h1>
               {clockGame.minutes}:
               {clockGame.seconds < 10
-                ? "0" + clockGame.seconds.toString()
+                ? '0' + clockGame.seconds.toString()
                 : clockGame.seconds}
             </h1>
           </div>
