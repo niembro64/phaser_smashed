@@ -1,13 +1,13 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
+import Game from '../Game';
+import { Player } from '../interfaces';
 import {
   isAttackEnergyNearPlayer,
   getIsAttackEnergyOffscreen,
   setPhysicsAttackEnergyOff,
   setPhysicsAttackEnergyOn,
-} from "./attacks";
+} from './attacks';
 
-export function updatePadCurrControllerTypeHat(
+export function updatePadCurrControllerTypePro(
   player: Player,
   game: Game
 ): void {
@@ -23,50 +23,118 @@ export function updatePadCurrControllerTypeHat(
   // }
   let stickX = player?.gamepad?.axes[0]?.getValue();
   let stickY = player?.gamepad?.axes[1]?.getValue();
+  let tol = 0.3;
 
-  if (stickX || stickY) {
-    if (stickX === -1 && stickY === -1) {
-      player.padCurr.left = true;
-      player.padCurr.right = !player.padCurr.left;
-      player.padCurr.up = true;
-      player.padCurr.down = !player.padCurr.up;
-      return;
-    } else if (stickX === -1 && stickY === 1) {
-      player.padCurr.left = true;
-      player.padCurr.right = !player.padCurr.left;
-      player.padCurr.up = false;
-      player.padCurr.down = !player.padCurr.up;
-      return;
-    } else if (stickX === 1 && stickY === -1) {
+  if (stickX !== null || stickY !== null) {
+    if (stickX === 0 && stickY === 0) {
       player.padCurr.left = false;
-      player.padCurr.right = !player.padCurr.left;
-      player.padCurr.up = true;
-      player.padCurr.down = !player.padCurr.up;
-      return;
-    } else if (stickX === 1 && stickY === 1) {
-      player.padCurr.left = false;
-      player.padCurr.right = !player.padCurr.left;
+      player.padCurr.right = false;
       player.padCurr.up = false;
-      player.padCurr.down = !player.padCurr.up;
-      return;
+      player.padCurr.down = false;
     }
+    console.log('stickX', stickX);
+    console.log('stickY', stickY);
+    // if (stickX === -1 && stickY === -1) {
+    //   player.padCurr.left = true;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = true;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // } else if (stickX === -1 && stickY === 1) {
+    //   player.padCurr.left = true;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = false;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // } else if (stickX === 1 && stickY === -1) {
+    //   player.padCurr.left = false;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = true;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // } else if (stickX === 1 && stickY === 1) {
+    //   player.padCurr.left = false;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = false;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // }
 
-    if (stickX === -1) {
+    // if (stickX === -1) {
+    //   player.padCurr.left = true;
+    //   player.padCurr.right = !player.padCurr.left;
+    // } else if (stickX === 1) {
+    //   player.padCurr.left = false;
+    //   player.padCurr.right = !player.padCurr.left;
+    // }
+    // if (stickY === -1) {
+    //   player.padCurr.up = true;
+    //   player.padCurr.down = !player.padCurr.up;
+    // } else if (stickY === 1) {
+    //   player.padCurr.up = false;
+    //   player.padCurr.down = !player.padCurr.up;
+    // }
+
+    //  non boolean
+    // if (stickX < -tol && stickY < -tol) {
+    //   player.padCurr.left = true;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = true;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // } else if (stickX < -tol && stickY > tol) {
+    //   player.padCurr.left = true;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = false;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // } else if (stickX > tol && stickY < -tol) {
+    //   player.padCurr.left = false;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = true;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // } else if (stickX > tol && stickY > tol) {
+    //   player.padCurr.left = false;
+    //   player.padCurr.right = !player.padCurr.left;
+    //   player.padCurr.up = false;
+    //   player.padCurr.down = !player.padCurr.up;
+    //   return;
+    // }
+
+    if (stickX < -tol) {
       player.padCurr.left = true;
       player.padCurr.right = !player.padCurr.left;
-    } else if (stickX === 1) {
+    } else if (stickX > tol) {
       player.padCurr.left = false;
       player.padCurr.right = !player.padCurr.left;
+    } else {
+      player.padCurr.left = false;
+      player.padCurr.right = false;
     }
-    if (stickY === -1) {
+    if (stickY < -tol) {
       player.padCurr.up = true;
       player.padCurr.down = !player.padCurr.up;
-    } else if (stickY === 1) {
+    } else if (stickY > tol) {
       player.padCurr.up = false;
       player.padCurr.down = !player.padCurr.up;
+    } else {
+      player.padCurr.up = false;
+      player.padCurr.down = false;
     }
-    return;
   }
+}
+
+export function updatePadCurrControllerTypeHat(
+  player: Player,
+  game: Game
+): void {
+  player.padCurr.A = player.gamepad.A;
+  player.padCurr.B = player.gamepad.B;
+  player.padCurr.X = player.gamepad.X;
+  player.padCurr.Y = player.gamepad.Y;
+  player.padCurr.L1 = player.gamepad.L1;
+  player.padCurr.R1 = player.gamepad.R1;
 
   // NO STICK TRY HAT
   let hatVal = player?.gamepad?.axes[9]?.getValue();
@@ -118,6 +186,7 @@ export function updatePadCurrControllerTypeHat(
     player.padCurr.right = false;
   }
 }
+
 export function updatePadCurrControllerTypeButtons(
   player: Player,
   game: Game
@@ -154,7 +223,7 @@ export function updateGamePadsConnected(game: Game): void {
     });
     // console.log(gamepadIndex, "ID", gamepad.id);
 
-    if (!gamepad?.id.includes("Jabra") && playerIndex < game.players.length) {
+    if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
       game.players[playerIndex].gamepad =
         game.input.gamepad.getPad(gamepadIndex);
       playerIndex++;
@@ -163,7 +232,10 @@ export function updateGamePadsConnected(game: Game): void {
 
   game.players.forEach((player, playerIndex) => {
     if (player.gamepad) {
-      if (player?.gamepad?.axes?.length) {
+      if (player?.gamepad?.axes?.length === 4) {
+        console.log('CONTROLLER TYPE: PRO', player.gamepad);
+        updatePadCurrControllerTypePro(player, game);
+      } else if (player?.gamepad?.axes?.length) {
         updatePadCurrControllerTypeHat(player, game);
       } else {
         updatePadCurrControllerTypeButtons(player, game);
@@ -205,7 +277,7 @@ export function updateGamePadsConnected(game: Game): void {
 }
 
 export function getControllerIsRealController(gamepad: Gamepad): boolean {
-  if (gamepad.id.includes("Jabra")) {
+  if (gamepad.id.includes('Jabra')) {
     return false;
   }
   return true;
@@ -310,7 +382,7 @@ export function resetMyHitByMatrix(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.state.name === "player-state-hurt") {
+  if (player.state.name === 'player-state-hurt') {
     return;
   }
   for (let j = 0; j < game.players.length; j++) {
@@ -479,11 +551,11 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationCooldown &&
-    player.char.attackEnergy.state === "held"
+    player.char.attackEnergy.state === 'held'
   ) {
     game.SOUND_GUN.play();
     player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-    player.char.attackEnergy.state = "released";
+    player.char.attackEnergy.state = 'released';
     setPhysicsAttackEnergyOn(player);
     playerShootAttackEnergy(player, game);
     return;
@@ -495,7 +567,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationCooldown
   ) {
-    player.char.attackEnergy.state = "held";
+    player.char.attackEnergy.state = 'held';
     setPhysicsAttackEnergyOff(player);
     playerHoldAttackEnergy(player);
   }
@@ -931,39 +1003,39 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
         // );
       }
       if (player.padCurr.B) {
-        console.log(player.playerId, "B");
+        console.log(player.playerId, 'B');
       }
       if (player.padCurr.A) {
-        console.log(player.playerId, "A");
+        console.log(player.playerId, 'A');
       }
       if (player.padCurr.X) {
-        console.log(player.playerId, "X");
+        console.log(player.playerId, 'X');
       }
       if (player.padCurr.Y) {
-        console.log(player.playerId, "Y");
+        console.log(player.playerId, 'Y');
         // player.char.fast = 2;
       }
 
       //  D Pad
       if (player.padCurr.down) {
-        console.log(player.playerId, "down");
+        console.log(player.playerId, 'down');
       }
       if (player.padCurr.up) {
-        console.log(player.playerId, "up");
+        console.log(player.playerId, 'up');
       }
       if (player.padCurr.left) {
-        console.log(player.playerId, "left");
+        console.log(player.playerId, 'left');
       }
       if (player.padCurr.right) {
-        console.log(player.playerId, "right");
+        console.log(player.playerId, 'right');
       }
 
       // L R Buttons
       if (player.padCurr.L1) {
-        console.log(player.playerId, "L1");
+        console.log(player.playerId, 'L1');
       }
       if (player.padCurr.R1) {
-        console.log(player.playerId, "R1");
+        console.log(player.playerId, 'R1');
       }
 
       // if (player.gamepad.B) {
