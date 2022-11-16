@@ -370,7 +370,7 @@ function Play() {
     { button: 'Air + D-Pad + A', move: 'Jump-Fire', status: '🚧' },
     { button: 'Y', move: 'Attack-Energy', status: '✔️' },
     { button: 'B', move: 'Attack-Physical', status: '🚧' },
-    { button: 'Forward + B', move: 'Attack-Smash', status: '🚧' },
+    { button: 'Forward + B', move: 'Attack-Smash', status: '🔜' },
     { button: 'Air + Wall + Forward', move: 'Slide-Wall', status: '✔️' },
     { button: 'L + R', move: 'Pause', status: '✔️' },
     { button: 'Paused + Any Button', move: 'Ready', status: '✔️' },
