@@ -876,7 +876,7 @@ function Play() {
                 player to actively time their own death rather than just try to
                 not die.
               </p>
-              <p>Everything that you don't immediately recognize is OC.</p>
+              <p>Assets & sounds that you don't immediately recognize are probably OC.</p>
               <h4>Tech Used</h4>
               <ul>
                 <li>Phaser 3</li>
