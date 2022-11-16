@@ -21,101 +21,136 @@ export function updatePadCurrControllerTypeHat(
   // for (let i = 0; i < player?.gamepad?.axes.length; i++) {
   //   console.log(i, player?.gamepad?.axes[i]?.getValue());
   // }
-  let stickX = player?.gamepad?.axes[0]?.getValue();
-  let stickY = player?.gamepad?.axes[1]?.getValue();
+  if (player?.gamepad?.axes?.length) {
+    let stickX = player?.gamepad?.axes[0]?.getValue();
+    let stickY = player?.gamepad?.axes[1]?.getValue();
 
-  if (stickX || stickY) {
-    if (stickX === -1 && stickY === -1) {
-      player.padCurr.left = true;
-      player.padCurr.right = !player.padCurr.left;
-      player.padCurr.up = true;
-      player.padCurr.down = !player.padCurr.up;
-      return;
-    } else if (stickX === -1 && stickY === 1) {
-      player.padCurr.left = true;
-      player.padCurr.right = !player.padCurr.left;
-      player.padCurr.up = false;
-      player.padCurr.down = !player.padCurr.up;
-      return;
-    } else if (stickX === 1 && stickY === -1) {
-      player.padCurr.left = false;
-      player.padCurr.right = !player.padCurr.left;
-      player.padCurr.up = true;
-      player.padCurr.down = !player.padCurr.up;
-      return;
-    } else if (stickX === 1 && stickY === 1) {
-      player.padCurr.left = false;
-      player.padCurr.right = !player.padCurr.left;
-      player.padCurr.up = false;
-      player.padCurr.down = !player.padCurr.up;
-      return;
+    if (stickX || stickY) {
+      if (stickX === -1 && stickY === -1) {
+        player.padCurr.left = true;
+        player.padCurr.right = !player.padCurr.left;
+        player.padCurr.up = true;
+        player.padCurr.down = !player.padCurr.up;
+        return;
+      } else if (stickX === -1 && stickY === 1) {
+        player.padCurr.left = true;
+        player.padCurr.right = !player.padCurr.left;
+        player.padCurr.up = false;
+        player.padCurr.down = !player.padCurr.up;
+        return;
+      } else if (stickX === 1 && stickY === -1) {
+        player.padCurr.left = false;
+        player.padCurr.right = !player.padCurr.left;
+        player.padCurr.up = true;
+        player.padCurr.down = !player.padCurr.up;
+        return;
+      } else if (stickX === 1 && stickY === 1) {
+        player.padCurr.left = false;
+        player.padCurr.right = !player.padCurr.left;
+        player.padCurr.up = false;
+        player.padCurr.down = !player.padCurr.up;
+        return;
+      }
+
+      if (stickX === -1) {
+        player.padCurr.left = true;
+        player.padCurr.right = !player.padCurr.left;
+      } else if (stickX === 1) {
+        player.padCurr.left = false;
+        player.padCurr.right = !player.padCurr.left;
+      }
+      if (stickY === -1) {
+        player.padCurr.up = true;
+        player.padCurr.down = !player.padCurr.up;
+      } else if (stickY === 1) {
+        player.padCurr.up = false;
+        player.padCurr.down = !player.padCurr.up;
+      }
     }
 
-    if (stickX === -1) {
-      player.padCurr.left = true;
-      player.padCurr.right = !player.padCurr.left;
-    } else if (stickX === 1) {
-      player.padCurr.left = false;
-      player.padCurr.right = !player.padCurr.left;
+    if (
+      player.padCurr.up ||
+      player.padCurr.down ||
+      player.padCurr.left ||
+      player.padCurr.right
+    ) {
+      return;
     }
-    if (stickY === -1) {
-      player.padCurr.up = true;
-      player.padCurr.down = !player.padCurr.up;
-    } else if (stickY === 1) {
-      player.padCurr.up = false;
-      player.padCurr.down = !player.padCurr.up;
-    }
-    return;
   }
 
   // NO STICK TRY HAT
-  let hatVal = player?.gamepad?.axes[9]?.getValue();
-  let vals = game.GAMEPAD_HAT_VALUES;
-  if (hatVal < vals[0]) {
-    player.padCurr.up = true;
-    player.padCurr.down = false;
-    player.padCurr.left = false;
-    player.padCurr.right = false;
-  } else if (hatVal < vals[1]) {
-    player.padCurr.up = true;
-    player.padCurr.down = false;
-    player.padCurr.left = false;
-    player.padCurr.right = true;
-  } else if (hatVal < vals[2]) {
-    player.padCurr.up = false;
-    player.padCurr.down = false;
-    player.padCurr.left = false;
-    player.padCurr.right = true;
-  } else if (hatVal < vals[3]) {
-    player.padCurr.up = false;
-    player.padCurr.down = true;
-    player.padCurr.left = false;
-    player.padCurr.right = true;
-  } else if (hatVal < vals[4]) {
-    player.padCurr.up = false;
-    player.padCurr.down = true;
-    player.padCurr.left = false;
-    player.padCurr.right = false;
-  } else if (hatVal < vals[5]) {
-    player.padCurr.up = false;
-    player.padCurr.down = true;
-    player.padCurr.left = true;
-    player.padCurr.right = false;
-  } else if (hatVal < vals[6]) {
-    player.padCurr.up = false;
-    player.padCurr.down = false;
-    player.padCurr.left = true;
-    player.padCurr.right = false;
-  } else if (hatVal < vals[7]) {
-    player.padCurr.up = true;
-    player.padCurr.down = false;
-    player.padCurr.left = true;
-    player.padCurr.right = false;
-  } else {
-    player.padCurr.up = false;
-    player.padCurr.down = false;
-    player.padCurr.left = false;
-    player.padCurr.right = false;
+  if (player?.gamepad?.axes?.length) {
+    let hatVal = player?.gamepad?.axes[9]?.getValue();
+    let vals = game.GAMEPAD_HAT_VALUES;
+    if (hatVal) {
+      if (hatVal < vals[0]) {
+        player.padCurr.up = true;
+        player.padCurr.down = false;
+        player.padCurr.left = false;
+        player.padCurr.right = false;
+      } else if (hatVal < vals[1]) {
+        player.padCurr.up = true;
+        player.padCurr.down = false;
+        player.padCurr.left = false;
+        player.padCurr.right = true;
+      } else if (hatVal < vals[2]) {
+        player.padCurr.up = false;
+        player.padCurr.down = false;
+        player.padCurr.left = false;
+        player.padCurr.right = true;
+      } else if (hatVal < vals[3]) {
+        player.padCurr.up = false;
+        player.padCurr.down = true;
+        player.padCurr.left = false;
+        player.padCurr.right = true;
+      } else if (hatVal < vals[4]) {
+        player.padCurr.up = false;
+        player.padCurr.down = true;
+        player.padCurr.left = false;
+        player.padCurr.right = false;
+      } else if (hatVal < vals[5]) {
+        player.padCurr.up = false;
+        player.padCurr.down = true;
+        player.padCurr.left = true;
+        player.padCurr.right = false;
+      } else if (hatVal < vals[6]) {
+        player.padCurr.up = false;
+        player.padCurr.down = false;
+        player.padCurr.left = true;
+        player.padCurr.right = false;
+      } else if (hatVal < vals[7]) {
+        player.padCurr.up = true;
+        player.padCurr.down = false;
+        player.padCurr.left = true;
+        player.padCurr.right = false;
+      } else {
+        player.padCurr.up = false;
+        player.padCurr.down = false;
+        player.padCurr.left = false;
+        player.padCurr.right = false;
+      }
+    }
+
+    if (
+      player.padCurr.up ||
+      player.padCurr.down ||
+      player.padCurr.left ||
+      player.padCurr.right
+    ) {
+      return;
+    }
+  }
+
+  if (
+    player.gamepad.up ||
+    player.gamepad.down ||
+    player.gamepad.left ||
+    player.gamepad.right
+  ) {
+    player.padCurr.up = player.gamepad.up;
+    player.padCurr.down = player.gamepad.down;
+    player.padCurr.left = player.gamepad.left;
+    player.padCurr.right = player.gamepad.right;
   }
 }
 export function updatePadCurrControllerTypeButtons(
@@ -163,11 +198,12 @@ export function updateGamePadsConnected(game: Game): void {
 
   game.players.forEach((player, playerIndex) => {
     if (player.gamepad) {
-      if (player?.gamepad?.axes?.length) {
-        updatePadCurrControllerTypeHat(player, game);
-      } else {
-        updatePadCurrControllerTypeButtons(player, game);
-      }
+      updatePadCurrControllerTypeHat(player, game);
+      // if (player?.gamepad?.axes?.length) {
+      //   updatePadCurrControllerTypeHat(player, game);
+      // } else {
+      //   updatePadCurrControllerTypeButtons(player, game);
+      // }
     }
 
     if (player.emitterPlayer.on) {
