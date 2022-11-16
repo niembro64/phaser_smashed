@@ -861,9 +861,20 @@ function Play() {
             >
               <h1>About</h1>
               <p>
-                The primary rule "Screen Clear" makes this game stand out from
-                other smash drinking games; it requires a player to actively
-                time their own death rather than just try to not die.
+                Since the inception in 2009, Niemo has been actively persuing
+                the fundamental polished essense of Smashed; both as an exercise
+                of logic, and such that one day it could be realized as a fully
+                functional, independent game.
+              </p>
+              <p>
+                The rules are described - and this is the start of that game -
+                on github - such that it may live on and be expanded upon.
+              </p>
+              <p>
+                IMO, the primary rule "Screen Clear" is what makes these rules
+                stand out from other smash drinking games; this rule pushes a
+                player to actively time their own death rather than just try to
+                not die.
               </p>
               <p>Everything that you don't immediately recognize is OC.</p>
               <h4>Tech Used</h4>
