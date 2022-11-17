@@ -585,10 +585,7 @@ function Play() {
                 onMouseUp={trancePause}
               >
                 {/* <img src="images/smashTitle.png" alt="smash title" /> */}
-                <img
-                  src="images/smashed-gif-cropped.gif"
-                  alt="smash title"
-                />
+                <img src="images/smashed-gif-cropped.gif" alt="smash title" />
                 <h1>SMASHED</h1>
               </div>
             </div>
@@ -789,7 +786,7 @@ function Play() {
                     </div>
                   );
                 })}
-              <p> fyi, button mapping is insane</p>
+                <p> fyi, button mapping is insane</p>
               </div>
             </div>
           </div>
@@ -875,7 +872,10 @@ function Play() {
                 player to actively time their own death rather than just try to
                 not die.
               </p>
-              <p>Assets & sounds that you don't immediately recognize are probably OC.</p>
+              <p>
+                Assets & sounds that you don't immediately recognize are
+                probably OC.
+              </p>
               <h4>Tech Used</h4>
               <ul>
                 <li>Phaser 3</li>

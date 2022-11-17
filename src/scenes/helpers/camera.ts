@@ -162,6 +162,11 @@ export function getCameraPlayerStatus(game: Game): Loc {
     y_high = player.char.sprite.y < y_high ? y_high : player.char.sprite.y;
   });
 
+   x_low = game.cameraCenter.char.sprite.x > x_low ? x_low : game.cameraCenter.char.sprite.x;
+   x_high = game.cameraCenter.char.sprite.x < x_high ? x_high : game.cameraCenter.char.sprite.x;
+   y_low = game.cameraCenter.char.sprite.y > y_low ? y_low : game.cameraCenter.char.sprite.y;
+   y_high = game.cameraCenter.char.sprite.y < y_high ? y_high : game.cameraCenter.char.sprite.y;
+
   return {
     x: (x_low + x_high) / 2,
     y: (y_low + y_high) / 2,
