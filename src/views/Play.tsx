@@ -586,7 +586,6 @@ function Play() {
               >
                 {/* <img src="images/smashTitle.png" alt="smash title" /> */}
                 <img
-                  className="cc"
                   src="images/smashed-gif-cropped.gif"
                   alt="smash title"
                 />
@@ -790,8 +789,8 @@ function Play() {
                     </div>
                   );
                 })}
-              </div>
               <p> fyi, button mapping is insane</p>
+              </div>
             </div>
           </div>
         )}
