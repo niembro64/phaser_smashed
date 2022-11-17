@@ -586,7 +586,7 @@ function Play() {
               >
                 {/* <img src="images/smashTitle.png" alt="smash title" /> */}
                 <img
-                  className="startGif"
+                  className="cc"
                   src="images/smashed-gif-cropped.gif"
                   alt="smash title"
                 />
@@ -614,7 +614,7 @@ function Play() {
                             cPlayer.characterId.toString() +
                             '_cropped.png'
                           }
-                          width={(50 * cPlayer.scale).toString() + '%'}
+                          width={(55 * cPlayer.scale).toString() + '%'}
                           alt="char"
                         />
                       </div>
