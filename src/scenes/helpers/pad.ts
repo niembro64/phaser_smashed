@@ -232,20 +232,17 @@ export function updateGamePadsConnected(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    if (player.keyboard) {
-      updatePadCurrKeyboard(player, game);
-    } else {
-      if (player.gamepad) {
-        if (player?.gamepad?.axes?.length === 4) {
-          console.log('CONTROLLER TYPE: PRO', player.gamepad);
-          updatePadCurrControllerTypePro(player, game);
-        } else if (player?.gamepad?.axes?.length) {
-          updatePadCurrControllerTypeHat(player, game);
-        } else {
-          updatePadCurrControllerTypeButtons(player, game);
-        }
+    if (player.gamepad) {
+      if (player?.gamepad?.axes?.length === 4) {
+        console.log('CONTROLLER TYPE: PRO', player.gamepad);
+        updatePadCurrControllerTypePro(player, game);
+      } else if (player?.gamepad?.axes?.length) {
+        updatePadCurrControllerTypeHat(player, game);
+      } else {
+        updatePadCurrControllerTypeButtons(player, game);
       }
     }
+    updatePadCurrKeyboard(player, game);
 
     if (player.emitterPlayer.on) {
       player.padCurr.up = false;

@@ -22,17 +22,23 @@ export function printKeyboard(game: Game) {
 
 export function updatePadCurrKeyboard(player: Player, game: Game): void {
   if (player.keyboard) {
-    player.padCurr.up = player.keyboard.up.isDown;
-    player.padCurr.down = player.keyboard.down.isDown;
-    player.padCurr.left = player.keyboard.left.isDown;
-    player.padCurr.right = player.keyboard.right.isDown;
+    player.padCurr.up = player.padCurr.up ? true : player.keyboard.up.isDown;
+    player.padCurr.down = player.padCurr.down
+      ? true
+      : player.keyboard.down.isDown;
+    player.padCurr.left = player.padCurr.left
+      ? true
+      : player.keyboard.left.isDown;
+    player.padCurr.right = player.padCurr.right
+      ? true
+      : player.keyboard.right.isDown;
 
-    player.padCurr.A = player.keyboard.A.isDown;
-    player.padCurr.B = player.keyboard.B.isDown;
-    player.padCurr.X = player.keyboard.X.isDown;
-    player.padCurr.Y = player.keyboard.Y.isDown;
+    player.padCurr.A = player.padCurr.A ? true : player.keyboard.A.isDown;
+    player.padCurr.B = player.padCurr.B ? true : player.keyboard.B.isDown;
+    player.padCurr.X = player.padCurr.X ? true : player.keyboard.X.isDown;
+    player.padCurr.Y = player.padCurr.Y ? true : player.keyboard.Y.isDown;
 
-    player.padCurr.L = player.keyboard.L.isDown;
-    player.padCurr.R = player.keyboard.R.isDown;
+    player.padCurr.L = player.padCurr.L ? true : player.keyboard.L.isDown;
+    player.padCurr.R = player.padCurr.R ? true : player.keyboard.R.isDown;
   }
 }
