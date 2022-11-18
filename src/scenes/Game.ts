@@ -10,6 +10,8 @@ import {
   SplashEndData,
   GameStateWithTime,
   Vector,
+  keyboardHandPositions,
+  keyboardHandPosition,
 } from './interfaces';
 import { preload } from './preload';
 import { Debug, SmashConfig } from '../views/ViewInterfaces';
@@ -479,6 +481,58 @@ export default class Game extends Phaser.Scene {
     gameStamp: 0,
     timeStamp: 0,
   };
+  keyboardHandPositions: keyboardHandPosition[] = [
+    {
+      up: Phaser.Input.Keyboard.KeyCodes.W,
+      down: Phaser.Input.Keyboard.KeyCodes.S,
+      left: Phaser.Input.Keyboard.KeyCodes.A,
+      right: Phaser.Input.Keyboard.KeyCodes.D,
+      A: Phaser.Input.Keyboard.KeyCodes.F,
+      B: Phaser.Input.Keyboard.KeyCodes.G,
+      X: Phaser.Input.Keyboard.KeyCodes.H,
+      Y: Phaser.Input.Keyboard.KeyCodes.J,
+    },
+    {
+      up: Phaser.Input.Keyboard.KeyCodes.UP,
+      down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+      left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+      right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+      A: Phaser.Input.Keyboard.KeyCodes.NUMPAD_ONE,
+      B: Phaser.Input.Keyboard.KeyCodes.NUMPAD_TWO,
+      X: Phaser.Input.Keyboard.KeyCodes.NUMPAD_THREE,
+      Y: Phaser.Input.Keyboard.KeyCodes.ENTER,
+    },
+    // {
+    //   up: Phaser.Input.Keyboard.KeyCodes.T,
+    //   down: Phaser.Input.Keyboard.KeyCodes.G,
+    //   left: Phaser.Input.Keyboard.KeyCodes.F,
+    //   right: Phaser.Input.Keyboard.KeyCodes.H,
+    //   A: Phaser.Input.Keyboard.KeyCodes.V,
+    //   B: Phaser.Input.Keyboard.KeyCodes.B,
+    //   X: Phaser.Input.Keyboard.KeyCodes.B,
+    //   Y: Phaser.Input.Keyboard.KeyCodes.B,
+    // },
+    // {
+    //   up: Phaser.Input.Keyboard.KeyCodes.I,
+    //   down: Phaser.Input.Keyboard.KeyCodes.K,
+    //   left: Phaser.Input.Keyboard.KeyCodes.J,
+    //   right: Phaser.Input.Keyboard.KeyCodes.L,
+    //   A: Phaser.Input.Keyboard.KeyCodes.O,
+    //   B: Phaser.Input.Keyboard.KeyCodes.P,
+    //   X: Phaser.Input.Keyboard.KeyCodes.P,
+    //   Y: Phaser.Input.Keyboard.KeyCodes.P,
+    // },
+    // {
+    //   up: Phaser.Input.Keyboard.KeyCodes.UP,
+    //   down: Phaser.Input.Keyboard.KeyCodes.DOWN,
+    //   left: Phaser.Input.Keyboard.KeyCodes.LEFT,
+    //   right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
+    //   A: Phaser.Input.Keyboard.KeyCodes.END,
+    //   B: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
+    //   X: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
+    //   Y: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
+    // },
+  ];
 
   players: Player[] = [];
   playerOptions: Player[] = [
@@ -499,14 +553,6 @@ export default class Game extends Phaser.Scene {
       scoreBoardController: 'X',
       circleOffset: 0,
       state: { name: 'player-state-start', gameStamp: 0, timeStamp: 0 },
-      keyboard_static: {
-        up: Phaser.Input.Keyboard.KeyCodes.W,
-        down: Phaser.Input.Keyboard.KeyCodes.S,
-        left: Phaser.Input.Keyboard.KeyCodes.A,
-        right: Phaser.Input.Keyboard.KeyCodes.D,
-        fast: Phaser.Input.Keyboard.KeyCodes.Z,
-        jump: Phaser.Input.Keyboard.KeyCodes.X,
-      },
       char: {
         name: 'Mario',
         initializeCharPosition: {
@@ -642,14 +688,6 @@ export default class Game extends Phaser.Scene {
       scoreBoardReady: 'READY',
       scoreBoardController: 'X',
       state: { name: 'player-state-start', gameStamp: 0, timeStamp: 0 },
-      keyboard_static: {
-        up: Phaser.Input.Keyboard.KeyCodes.T,
-        down: Phaser.Input.Keyboard.KeyCodes.G,
-        left: Phaser.Input.Keyboard.KeyCodes.F,
-        right: Phaser.Input.Keyboard.KeyCodes.H,
-        fast: Phaser.Input.Keyboard.KeyCodes.V,
-        jump: Phaser.Input.Keyboard.KeyCodes.B,
-      },
       char: {
         name: 'Link',
         initializeCharPosition: {
@@ -784,14 +822,6 @@ export default class Game extends Phaser.Scene {
       scoreBoardReady: 'READY',
       scoreBoardController: 'X',
       state: { name: 'player-state-start', gameStamp: 0, timeStamp: 0 },
-      keyboard_static: {
-        up: Phaser.Input.Keyboard.KeyCodes.I,
-        down: Phaser.Input.Keyboard.KeyCodes.K,
-        left: Phaser.Input.Keyboard.KeyCodes.J,
-        right: Phaser.Input.Keyboard.KeyCodes.L,
-        fast: Phaser.Input.Keyboard.KeyCodes.O,
-        jump: Phaser.Input.Keyboard.KeyCodes.P,
-      },
       char: {
         name: 'Pikachu',
         initializeCharPosition: {
@@ -926,14 +956,6 @@ export default class Game extends Phaser.Scene {
       scoreBoardReady: 'READY',
       scoreBoardController: 'X',
       state: { name: 'player-state-start', gameStamp: 0, timeStamp: 0 },
-      keyboard_static: {
-        up: Phaser.Input.Keyboard.KeyCodes.UP,
-        down: Phaser.Input.Keyboard.KeyCodes.DOWN,
-        left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-        right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-        fast: Phaser.Input.Keyboard.KeyCodes.END,
-        jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
-      },
       char: {
         name: 'Kirby',
         initializeCharPosition: {
@@ -1067,14 +1089,6 @@ export default class Game extends Phaser.Scene {
       scoreBoardReady: 'READY',
       scoreBoardController: 'X',
       state: { name: 'player-state-start', gameStamp: 0, timeStamp: 0 },
-      keyboard_static: {
-        up: Phaser.Input.Keyboard.KeyCodes.UP,
-        down: Phaser.Input.Keyboard.KeyCodes.DOWN,
-        left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-        right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-        fast: Phaser.Input.Keyboard.KeyCodes.END,
-        jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
-      },
       char: {
         name: 'Chez',
         initializeCharPosition: {
@@ -1208,14 +1222,6 @@ export default class Game extends Phaser.Scene {
       scoreBoardReady: 'READY',
       scoreBoardController: 'X',
       state: { name: 'player-state-start', gameStamp: 0, timeStamp: 0 },
-      keyboard_static: {
-        up: Phaser.Input.Keyboard.KeyCodes.UP,
-        down: Phaser.Input.Keyboard.KeyCodes.DOWN,
-        left: Phaser.Input.Keyboard.KeyCodes.LEFT,
-        right: Phaser.Input.Keyboard.KeyCodes.RIGHT,
-        fast: Phaser.Input.Keyboard.KeyCodes.END,
-        jump: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
-      },
       char: {
         name: 'Black-Chez',
         initializeCharPosition: {

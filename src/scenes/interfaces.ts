@@ -1,32 +1,32 @@
-import { Key } from "react";
+import { Key } from 'react';
 
 export type GameState =
-  | "game-state-start"
-  | "game-state-play"
-  | "game-state-paused"
-  | "game-state-first-blood"
-  | "game-state-screen-clear"
-  | "game-state-finished";
+  | 'game-state-start'
+  | 'game-state-play'
+  | 'game-state-paused'
+  | 'game-state-first-blood'
+  | 'game-state-screen-clear'
+  | 'game-state-finished';
 
 export type PlayerState =
-  | "player-state-start"
-  | "player-state-alive"
-  | "player-state-dead"
-  | "player-state-hurt";
+  | 'player-state-start'
+  | 'player-state-alive'
+  | 'player-state-dead'
+  | 'player-state-hurt';
 export type AttackState =
-  | "attackphysical-state-on"
-  | "attackphysical-state-cooldown"
-  | "attackphysical-state-off";
+  | 'attackphysical-state-on'
+  | 'attackphysical-state-cooldown'
+  | 'attackphysical-state-off';
 
 export type SplashName =
-  | "splash-black"
-  | "splash-none"
-  | "splash-start"
-  | "splash-paused"
-  | "splash-first-blood"
-  | "splash-screen-clear"
-  | "splash-cool-down"
-  | "splash-finished";
+  | 'splash-black'
+  | 'splash-none'
+  | 'splash-start'
+  | 'splash-paused'
+  | 'splash-first-blood'
+  | 'splash-screen-clear'
+  | 'splash-cool-down'
+  | 'splash-finished';
 
 export interface Clock {
   minutes: number;
@@ -52,7 +52,7 @@ export interface Player {
   scoreBoardReady: string | any;
   scoreBoardController: string | any;
   state: PlayerStateWithTime;
-  keyboard_static: Keyboard;
+  // keyboard_static: Keyboard;
   char: Char;
   keyboard: Keyboard | any;
   gamepad: Gamepad | any;
@@ -92,7 +92,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: "up" | "down" | "left" | "right" | null;
+  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | null;
   attackPhysical: AttackPhysical;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
@@ -244,7 +244,7 @@ export interface AttackPhysical {
 
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: "held" | "released";
+  state: 'held' | 'released';
   timestampThrow: number;
   durationCooldown: number;
   posFromCenter: PosFromCenter;
@@ -311,4 +311,15 @@ export interface Hitback {
 export interface Vector {
   x: number;
   y: number;
+}
+
+export interface keyboardHandPosition {
+  up: any;
+  down: any;
+  left: any;
+  right: any;
+  A: any;
+  B: any;
+  X: any;
+  Y: any;
 }
