@@ -792,16 +792,16 @@ function Play() {
                 <div id="keyboard">
                   <h3>P1 Keyboard</h3>
                   <p>(Left-Side)</p>
-                  <p>D-Pad: WASD</p>
-                  <p>ABXY: FGHJ</p>
-                  <p>LR: TY</p>
+                  <p>D-Pad: W-A-S-D</p>
+                  <p>A-B-X-Y: F-G-H-SPACE</p>
+                  <p>L-R: T-Y</p>
                 </div>
                 <div id="keyboard">
                   <h3>P2 Keyboard</h3>
                   <p>(Right-Side)</p>
                   <p>D-Pad: Arrows</p>
-                  <p>ABXY: 123ENTER</p>
-                  <p>LR: 56</p>
+                  <p>A-B-X-Y: 1-2-3-0</p>
+                  <p>L-R: 5-6</p>
                 </div>
               </div>
             </div>
