@@ -92,8 +92,8 @@ function Play() {
   const [buttonsOnOff, setButtonsOnOff] = useState([
     { state: true },
     { state: true },
-    { state: true },
-    { state: true },
+    { state: false },
+    { state: false },
   ]);
   const [smashConfig, setSmashConfig] = useState({
     players: [

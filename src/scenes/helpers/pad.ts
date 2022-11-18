@@ -311,6 +311,7 @@ export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
 }
 
 export function getIsPlayerReady(player: Player, game: Game): boolean {
+  
   if (
     !player.padCurr.up &&
     !player.padCurr.down &&
