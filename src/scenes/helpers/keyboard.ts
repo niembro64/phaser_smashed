@@ -1,4 +1,5 @@
 import Game from '../Game';
+import { Player } from '../interfaces';
 
 export function printKeyboard(game: Game) {
   game.players.forEach((player, playerIndex) => {
@@ -17,4 +18,21 @@ export function printKeyboard(game: Game) {
       console.log('player.keyboard.R.isDown', player.keyboard.R.isDown);
     }
   });
+}
+
+export function updatePadCurrKeyboard(player: Player, game: Game): void {
+  if (player.keyboard) {
+    player.padCurr.up = player.keyboard.up.isDown;
+    player.padCurr.down = player.keyboard.down.isDown;
+    player.padCurr.left = player.keyboard.left.isDown;
+    player.padCurr.right = player.keyboard.right.isDown;
+
+    player.padCurr.A = player.keyboard.A.isDown;
+    player.padCurr.B = player.keyboard.B.isDown;
+    player.padCurr.X = player.keyboard.X.isDown;
+    player.padCurr.Y = player.keyboard.Y.isDown;
+
+    player.padCurr.L = player.keyboard.L.isDown;
+    player.padCurr.R = player.keyboard.R.isDown;
+  }
 }

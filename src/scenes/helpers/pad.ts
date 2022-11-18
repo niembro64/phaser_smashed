@@ -6,6 +6,7 @@ import {
   setPhysicsAttackEnergyOff,
   setPhysicsAttackEnergyOn,
 } from './attacks';
+import { updatePadCurrKeyboard } from './keyboard';
 
 export function updatePadCurrControllerTypePro(
   player: Player,
@@ -231,14 +232,18 @@ export function updateGamePadsConnected(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    if (player.gamepad) {
-      if (player?.gamepad?.axes?.length === 4) {
-        console.log('CONTROLLER TYPE: PRO', player.gamepad);
-        updatePadCurrControllerTypePro(player, game);
-      } else if (player?.gamepad?.axes?.length) {
-        updatePadCurrControllerTypeHat(player, game);
-      } else {
-        updatePadCurrControllerTypeButtons(player, game);
+    if (player.keyboard) {
+      updatePadCurrKeyboard(player, game);
+    } else {
+      if (player.gamepad) {
+        if (player?.gamepad?.axes?.length === 4) {
+          console.log('CONTROLLER TYPE: PRO', player.gamepad);
+          updatePadCurrControllerTypePro(player, game);
+        } else if (player?.gamepad?.axes?.length) {
+          updatePadCurrControllerTypeHat(player, game);
+        } else {
+          updatePadCurrControllerTypeButtons(player, game);
+        }
       }
     }
 
