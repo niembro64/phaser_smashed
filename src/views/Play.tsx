@@ -252,7 +252,9 @@ function Play() {
         myPhaser?.current?.scene?.keys?.game?.loaded
       );
       if (myPhaser?.current?.scene?.keys?.game?.loaded) {
-        setShowLoader(false);
+        setTimeout(() => {
+          setShowLoader(false);
+        }, 100);
         clearInterval(myInterval);
       }
     }, 100);
