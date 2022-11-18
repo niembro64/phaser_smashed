@@ -10,7 +10,6 @@ import {
   SplashEndData,
   GameStateWithTime,
   Vector,
-  keyboardHandPositions,
   keyboardHandPosition,
 } from './interfaces';
 import { preload } from './preload';
