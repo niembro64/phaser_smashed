@@ -788,7 +788,21 @@ function Play() {
                     </div>
                   );
                 })}
-                <p> fyi, button mapping is insane</p>
+                {/* <p> fyi, button mapping is insane</p> */}
+                <div id="keyboard">
+                  <h3>P1 Keyboard</h3>
+                  <p>(Left-Side)</p>
+                  <p>D-Pad: WASD</p>
+                  <p>ABXY: FGHJ</p>
+                  <p>LR: TY</p>
+                </div>
+                <div id="keyboard">
+                  <h3>P2 Keyboard</h3>
+                  <p>(Right-Side)</p>
+                  <p>D-Pad: Arrows</p>
+                  <p>ABXY: 123ENTER</p>
+                  <p>LR: 56</p>
+                </div>
               </div>
             </div>
           </div>
@@ -822,7 +836,7 @@ function Play() {
             >
               <h1>Controllers</h1>
               {/* <h1>🚧</h1> */}
-              <p>USB controllers are required. </p>
+              <p>USB controllers are recommended. </p>
               <a
                 className="linkTag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
