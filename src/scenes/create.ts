@@ -1,11 +1,11 @@
-import Game from "./Game";
-import { setPhysicalAttackOffscreen } from "./helpers/attacks";
+import Game from './Game';
+import { setPhysicalAttackOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
-} from "./helpers/damage";
-import { filterNormalAttackEnergy, setBlinkTrue } from "./helpers/sprites";
-import { setPreUpdate } from "./update";
+} from './helpers/damage';
+import { filterNormalAttackEnergy, setBlinkTrue } from './helpers/sprites';
+import { setPreUpdate } from './update';
 
 export function create(game: Game) {
   createPreCreate(game);
@@ -23,6 +23,7 @@ export function create(game: Game) {
   createAttackPhysicals(game);
   createAttackEnergies(game);
   createPlayers(game);
+  createKeyboards(game);
   createPlayerIdCircles(game);
   createScoreboard(game);
   createScoreboardReady(game);
@@ -46,7 +47,7 @@ export function createPreCreate(game: Game): void {
     );
   }
 
-  console.log("PLAYERS CURRENT", game.players);
+  console.log('PLAYERS CURRENT', game.players);
 
   game.players.forEach((player, playerIndex) => {
     player.gamepad = Phaser.Input.Gamepad.Gamepad;
@@ -56,7 +57,7 @@ export function createPreCreate(game: Game): void {
 export function createEndDataMatrices(game: Game): void {
   let numSplashes: number = game.splashesEndData.length;
   // let splashSizeTitleDefault = "40px";
-  let splashSize = "";
+  let splashSize = '';
   game.splashesEndData.forEach((splash, splashIndex) => {
     for (let i = 0; i < game.players.length; i++) {
       if (i === 0) {
@@ -65,15 +66,15 @@ export function createEndDataMatrices(game: Game): void {
         splashSize = game.splashSizeTitleDefault;
       }
       splash.words[i] =
-        game.players[i].char.name + " " + game.colorCircles[i].text;
+        game.players[i].char.name + ' ' + game.colorCircles[i].text;
     }
     splash.textTitle = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
         game.SCREEN_DIMENSIONS.HEIGHT / 6,
-        splash.name + " " + splash.emoji,
+        splash.name + ' ' + splash.emoji,
         {
-          align: "right",
+          align: 'right',
           fontSize: splashSize,
           fontFamily: game.FONT_DEFAULT_MONOSPACE,
           color: splash.color,
@@ -82,7 +83,7 @@ export function createEndDataMatrices(game: Game): void {
           shadow: {
             offsetX: 0,
             offsetY: splash.offsetY,
-            color: "black",
+            color: 'black',
             blur: splash.blur,
             stroke: true,
             fill: true,
@@ -97,7 +98,7 @@ export function createEndDataMatrices(game: Game): void {
         game.SCREEN_DIMENSIONS.HEIGHT / 6,
         splash.words,
         {
-          align: "right",
+          align: 'right',
           fontSize: splash.size,
           fontFamily: game.FONT_DEFAULT_MONOSPACE,
           color: splash.color,
@@ -106,7 +107,7 @@ export function createEndDataMatrices(game: Game): void {
           shadow: {
             offsetX: 0,
             offsetY: splash.offsetY,
-            color: "black",
+            color: 'black',
             blur: splash.blur,
             stroke: true,
             fill: true,
@@ -170,25 +171,25 @@ export function createPlatforms(game: Game): void {
 }
 
 export function createSoundsGame(game: Game): void {
-  game.SOUND_INTRO = game.sound.add("intro", { volume: 0.1 });
-  game.SOUND_GUN = game.sound.add("gun", { volume: 0.6 });
-  game.SOUND_HIT = game.sound.add("hit", { volume: 0.25 });
-  game.SOUND_JUMP_PHYSICAL = game.sound.add("jump", { volume: 1 });
-  game.SOUND_JUMP_ENERGY = game.sound.add("jumpPower", { volume: 0.8 });
-  game.SOUND_FIRST_BLOOD = game.sound.add("firstBlood", { volume: 0.8 });
-  game.SOUND_SQUISH = game.sound.add("squish", { volume: 0.2 });
-  game.SOUND_DIE = game.sound.add("die", { volume: 0.8 });
-  game.SOUND_START_LIQUID = game.sound.add("startLiquid", { volume: 0.1 });
-  game.SOUND_START = game.sound.add("start", { volume: 0.4 });
-  game.SOUND_READY = game.sound.add("ready", { volume: 0.6 });
-  game.SOUND_READY_REPEAT = game.sound.add("readyRepeat", {
+  game.SOUND_INTRO = game.sound.add('intro', { volume: 0.1 });
+  game.SOUND_GUN = game.sound.add('gun', { volume: 0.6 });
+  game.SOUND_HIT = game.sound.add('hit', { volume: 0.25 });
+  game.SOUND_JUMP_PHYSICAL = game.sound.add('jump', { volume: 1 });
+  game.SOUND_JUMP_ENERGY = game.sound.add('jumpPower', { volume: 0.8 });
+  game.SOUND_FIRST_BLOOD = game.sound.add('firstBlood', { volume: 0.8 });
+  game.SOUND_SQUISH = game.sound.add('squish', { volume: 0.2 });
+  game.SOUND_DIE = game.sound.add('die', { volume: 0.8 });
+  game.SOUND_START_LIQUID = game.sound.add('startLiquid', { volume: 0.1 });
+  game.SOUND_START = game.sound.add('start', { volume: 0.4 });
+  game.SOUND_READY = game.sound.add('ready', { volume: 0.6 });
+  game.SOUND_READY_REPEAT = game.sound.add('readyRepeat', {
     volume: 0.3,
     loop: true,
   });
 
   game.players.forEach((player, playerIndex) => {
     player.playerReadySound = game.sound.add(
-      "readyRepeat" + playerIndex.toString(),
+      'readyRepeat' + playerIndex.toString(),
       { volume: 0.3, loop: true }
     );
     if (!game.debug.setReadySoundActive) {
@@ -196,18 +197,18 @@ export function createSoundsGame(game: Game): void {
     }
   });
 
-  game.ENERJA_AH = game.sound.add("enerja_ah", { volume: 0.2 });
-  game.ENERJA_DO_AGAIN = game.sound.add("enerja_again", { volume: 0.2 });
-  game.ENERJA_FINISH = game.sound.add("enerja_finish", { volume: 0.2 });
-  game.ENERJA_GYA = game.sound.add("enerja_gya", { volume: 0.2 });
-  game.ENERJA_HAPPEN = game.sound.add("enerja_shit", { volume: 0.2 });
-  game.ENERJA_SMASHED = game.sound.add("enerja_smashed", { volume: 0.8 });
-  game.ENERJA_TURTLE = game.sound.add("enerja_turtle", { volume: 0.2 });
-  game.ENERJA_TWO_SHOTS = game.sound.add("enerja_shots", { volume: 0.2 });
-  game.ENERJA_UGH = game.sound.add("enerja_ugh", { volume: 0.2 });
+  game.ENERJA_AH = game.sound.add('enerja_ah', { volume: 0.2 });
+  game.ENERJA_DO_AGAIN = game.sound.add('enerja_again', { volume: 0.2 });
+  game.ENERJA_FINISH = game.sound.add('enerja_finish', { volume: 0.2 });
+  game.ENERJA_GYA = game.sound.add('enerja_gya', { volume: 0.2 });
+  game.ENERJA_HAPPEN = game.sound.add('enerja_shit', { volume: 0.2 });
+  game.ENERJA_SMASHED = game.sound.add('enerja_smashed', { volume: 0.8 });
+  game.ENERJA_TURTLE = game.sound.add('enerja_turtle', { volume: 0.2 });
+  game.ENERJA_TWO_SHOTS = game.sound.add('enerja_shots', { volume: 0.2 });
+  game.ENERJA_UGH = game.sound.add('enerja_ugh', { volume: 0.2 });
 
-  game.SOUND_PAUSED = game.sound.add("mii", { volume: 0.1, loop: true });
-  game.SOUND_BGM = game.sound.add("bgm", { volume: 0.2, loop: true });
+  game.SOUND_PAUSED = game.sound.add('mii', { volume: 0.1, loop: true });
+  game.SOUND_BGM = game.sound.add('bgm', { volume: 0.2, loop: true });
 
   if (!game.debug.setMusicActive) {
     game.SOUND_BGM.volume = 0;
@@ -298,7 +299,15 @@ export function createHitboxOverlap(game: Game): void {
     });
   });
 }
-
+export function createKeyboards(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (game.keyboardHandPositions[playerIndex]) {
+      player.keyboard = game.input.keyboard.addKeys(
+        game.keyboardHandPositions[playerIndex]
+      );
+    }
+  });
+}
 export function setPlayersInitialPositions(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.initializeCharPosition.x =
@@ -309,13 +318,13 @@ export function setPlayersInitialPositions(game: Game): void {
 
 export function createEmitters(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    player.particles = game.add.particles("tail_" + playerIndex);
+    player.particles = game.add.particles('tail_' + playerIndex);
 
     player.emitterLight = player.particles.createEmitter({
       speed: 10,
       // scale: { start: 0.05, end: 0 },
       scale: { start: 1.5, end: 0 },
-      blendMode: "ADD",
+      blendMode: 'ADD',
       // bounce: 1,
       // length: 100,
       lifespan: 30,
@@ -325,7 +334,7 @@ export function createEmitters(game: Game): void {
       speed: 1000,
       // scale: { start: 0.05, end: 0 },
       scale: { start: 1, end: 0.5 },
-      blendMode: "SUBTRACT",
+      blendMode: 'SUBTRACT',
       // bounce: 1,
       // length: 100,
       lifespan: 40,
@@ -337,7 +346,7 @@ export function createEmitters(game: Game): void {
       // scale: { start: 0.05, end: 0 },
       scale: { start: 0.7, end: 0 },
       // blendMode: 'SUBTRACT',
-      blendMode: "ADD",
+      blendMode: 'ADD',
       // bounce: 1,
       // length: 100,
       gravityY: -500,
@@ -364,7 +373,7 @@ export function createPlayers(game: Game): void {
       player.char.name
     );
 
-    player.char.attackPhysical.audio = game.sound.add("gun", { volume: 0.6 });
+    player.char.attackPhysical.audio = game.sound.add('gun', { volume: 0.6 });
 
     player.emitterLight.startFollow(player.char.sprite);
     player.emitterDark.startFollow(player.char.sprite);
@@ -401,7 +410,7 @@ export function createPlayers(game: Game): void {
 
     game.physics.add.collider(player.char.sprite, game.PLATFORMS);
 
-    player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
+    // player.keyboard = game.input.keyboard.addKeys(player.keyboard_static);
   });
 
   game.players.forEach((player, playerIndex) => {
@@ -464,7 +473,7 @@ export function createCollidersPvP(game: Game): void {
           game.physics.add.collider(iPlayer.char.sprite, jPlayer.char.sprite)
         );
       } else {
-        game.colliderPvP[i].push("XXX");
+        game.colliderPvP[i].push('XXX');
       }
     });
   });
@@ -486,7 +495,7 @@ export function createCollidersPvAP(game: Game): void {
           )
         );
       } else {
-        game.colliderPvAP[i].push("XXX");
+        game.colliderPvAP[i].push('XXX');
       }
     });
   });
@@ -507,12 +516,12 @@ export function createCollidersPvAE(game: Game): void {
           )
         );
       } else {
-        game.colliderPvAE[i].push("XXX");
+        game.colliderPvAE[i].push('XXX');
       }
     });
   });
 
-  console.log("game.colliderPvAE", game.colliderPvAE);
+  console.log('game.colliderPvAE', game.colliderPvAE);
 }
 export function createCollidersAEvAE(game: Game): void {
   if (!game.debug.setCollidersAEvAE) {
@@ -530,7 +539,7 @@ export function createCollidersAEvAE(game: Game): void {
           )
         );
       } else {
-        game.colliderAEvAE[i].push("XXX");
+        game.colliderAEvAE[i].push('XXX');
       }
     });
   });
@@ -551,7 +560,7 @@ export function createCollidersAEvAP(game: Game): void {
           )
         );
       } else {
-        game.colliderAEvAP[i].push("XXX");
+        game.colliderAEvAP[i].push('XXX');
       }
     });
   });
@@ -561,7 +570,7 @@ export function createBackground(game: Game): void {
   game.BACKGROUND = game.physics.add.sprite(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "background"
+    'background'
   );
   game.BACKGROUND.setScale(game.SCREEN_SCALE.WIDTH, game.SCREEN_SCALE.HEIGHT);
   // game.BACKGROUND.setOrigin(0.5, 0.5);
@@ -575,7 +584,7 @@ export function createPlatforms0(game: Game): void {
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "platformHorizontal"
+    'platformHorizontal'
   );
 }
 export function createPlatforms1(game: Game): void {
@@ -584,12 +593,12 @@ export function createPlatforms1(game: Game): void {
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 3 + 320,
-    "platformVertical"
+    'platformVertical'
   );
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "platformHorizontal"
+    'platformHorizontal'
   );
 }
 export function createPlatforms2(game: Game): void {
@@ -598,17 +607,17 @@ export function createPlatforms2(game: Game): void {
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "platformHorizontal"
+    'platformHorizontal'
   );
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2 - 34 * 10,
     game.SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
-    "brick"
+    'brick'
   );
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2 + 34 * 10,
     game.SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
-    "brick"
+    'brick'
   );
 }
 
@@ -617,48 +626,48 @@ export function createPlatforms3(game: Game): void {
   game.PLATFORMS.create(
     1200 * game.SCREEN_SCALE.WIDTH,
     700 * game.SCREEN_SCALE.HEIGHT,
-    "platformVertical"
+    'platformVertical'
   );
   game.PLATFORMS.create(
     1200 * game.SCREEN_SCALE.WIDTH,
     850 * game.SCREEN_SCALE.HEIGHT,
-    "platformShort"
+    'platformShort'
   );
   game.PLATFORMS.create(
     800 * game.SCREEN_SCALE.WIDTH,
     900 * game.SCREEN_SCALE.HEIGHT,
-    "platformShort"
+    'platformShort'
   );
   game.PLATFORMS.create(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "platformHorizontal"
+    'platformHorizontal'
   );
   game.PLATFORMS.create(
     300 * game.SCREEN_SCALE.WIDTH,
     (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
-    "platformHorizontal"
+    'platformHorizontal'
   );
   game.PLATFORMS.create(
     1700 * game.SCREEN_SCALE.WIDTH,
     (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT,
-    "platformHorizontal"
+    'platformHorizontal'
   );
 
   game.PLATFORMS.create(
     400 * game.SCREEN_SCALE.WIDTH,
     500 * game.SCREEN_SCALE.HEIGHT,
-    "platformShort"
+    'platformShort'
   );
   game.PLATFORMS.create(
     320 * game.SCREEN_SCALE.WIDTH,
     (500 - 33) * game.SCREEN_SCALE.HEIGHT,
-    "brick"
+    'brick'
   );
   game.PLATFORMS.create(
     480 * game.SCREEN_SCALE.WIDTH,
     (500 - 33) * game.SCREEN_SCALE.HEIGHT,
-    "brick"
+    'brick'
   );
 }
 
@@ -669,7 +678,7 @@ export function createPlatforms4(game: Game): void {
     game.PLATFORMS.create(
       1207 * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
       710 * game.SCREEN_SCALE.HEIGHT,
-      "platformVertical"
+      'platformVertical'
     );
   }
 
@@ -677,7 +686,7 @@ export function createPlatforms4(game: Game): void {
     game.PLATFORMS.create(
       600,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + 300 + i * game.ASSET_BRICK_HEIGHT,
-      "platformHorizontal"
+      'platformHorizontal'
     );
   }
 
@@ -685,7 +694,7 @@ export function createPlatforms4(game: Game): void {
     game.PLATFORMS.create(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
-      "platformHorizontal"
+      'platformHorizontal'
     );
   }
 
@@ -693,7 +702,7 @@ export function createPlatforms4(game: Game): void {
     game.PLATFORMS.create(
       1700 * game.SCREEN_SCALE.WIDTH,
       (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT + game.ASSET_BRICK_HEIGHT * i,
-      "platformShort"
+      'platformShort'
     );
   }
 
@@ -701,14 +710,14 @@ export function createPlatforms4(game: Game): void {
     game.PLATFORMS.create(
       1617 * game.SCREEN_SCALE.WIDTH,
       (686 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
-      "brick"
+      'brick'
     );
   }
   for (let i = 0; i < 5; i++) {
     game.PLATFORMS.create(
       1783 * game.SCREEN_SCALE.WIDTH,
       (686 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
-      "brick"
+      'brick'
     );
   }
 }
@@ -735,7 +744,7 @@ export function createPlatforms5(game: Game): void {
     game.PLATFORMS.create(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
-      "platformHorizontal"
+      'platformHorizontal'
     );
   }
 
@@ -743,7 +752,7 @@ export function createPlatforms5(game: Game): void {
     game.PLATFORMS.create(
       614 * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
       710 * game.SCREEN_SCALE.HEIGHT,
-      "platformVertical"
+      'platformVertical'
     );
   }
 
@@ -751,7 +760,7 @@ export function createPlatforms5(game: Game): void {
     game.PLATFORMS.create(
       (1207 + 34 * 5) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
       (710 - 34) * game.SCREEN_SCALE.HEIGHT,
-      "platformVertical"
+      'platformVertical'
     );
   }
 
@@ -759,7 +768,7 @@ export function createPlatforms5(game: Game): void {
     game.PLATFORMS.create(
       (1518 + 0 * 33) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
       (924 - 34 * 2) * game.SCREEN_SCALE.HEIGHT,
-      "platformVertical"
+      'platformVertical'
     );
   }
 }
@@ -768,7 +777,7 @@ export function createImageTable(game: Game): void {
   game.TABLE = game.physics.add.sprite(
     (1920 / 2) * game.SCREEN_SCALE.WIDTH,
     (1080 / 2 - 43) * game.SCREEN_SCALE.HEIGHT,
-    "table"
+    'table'
   );
   game.TABLE.setScale(1);
   game.TABLE.setImmovable(true);
@@ -779,7 +788,7 @@ export function createFlag(game: Game): void {
   game.FLAG = game.physics.add.sprite(
     (1920 - 87 - game.ASSET_BRICK_WIDTH * 2) * game.SCREEN_SCALE.WIDTH,
     (1080 - 557) * game.SCREEN_SCALE.HEIGHT,
-    "flag"
+    'flag'
   );
   game.FLAG.setScale(1);
   game.FLAG.setImmovable(true);
@@ -791,55 +800,55 @@ export function createBackgroundTitles(game: Game): void {
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       300 * game.SCREEN_SCALE.HEIGHT,
-      "SMASHED",
+      'SMASHED',
       {
         // font: "300px Impact",
-        fontFamily: "Impact",
+        fontFamily: 'Impact',
         // fontFamily: "'Press Start 2P'",
         // font: "64px Press Start 2P",
         // font: '"Press Start 2P"',
-        fontSize: "500px",
+        fontSize: '500px',
         // fontSize: "500px",
       }
     )
     .setOrigin(0.5)
-    .setColor("black")
+    .setColor('black')
     .setAlpha(0.3);
   game.TEXT_SUBTITLE = game.add
     .text(
       game.SCREEN_DIMENSIONS.WIDTH / 13,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
-      "NIEMBRO64",
+      'NIEMBRO64',
       {
         // font: "300px Impact",
-        fontFamily: "Impact",
+        fontFamily: 'Impact',
         // fontFamily: "'Press Start 2P'",
         // font: "64px Press Start 2P",
         // font: '"Press Start 2P"',
-        fontSize: "50px",
+        fontSize: '50px',
       }
     )
     .setOrigin(0.5)
-    .setColor("black")
+    .setColor('black')
     .setAlpha(0.3);
   game.TEXT_SUPERTITLE = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, "YOUNG-CHEZ", {
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, 'YOUNG-CHEZ', {
       // font: "300px Impact",
-      fontFamily: "Impact",
+      fontFamily: 'Impact',
       // fontFamily: "'Press Start 2P'",
       // font: "64px Press Start 2P",
       // font: '"Press Start 2P"',
-      fontSize: "80px",
+      fontSize: '80px',
     })
     .setOrigin(0.5)
-    .setColor("black")
+    .setColor('black')
     .setAlpha(0.3);
 }
 
 export function createSplashRuleFinished(game: Game): void {
   game.splashRules.forEach((splash, splashIndex) => {
     // if (splashIndex === game.splashRules.length - 1) {
-    if (splash.name === "splash-finished") {
+    if (splash.name === 'splash-finished') {
       splash.text = game.add
         .text(
           game.SCREEN_DIMENSIONS.WIDTH / 2,
@@ -849,7 +858,7 @@ export function createSplashRuleFinished(game: Game): void {
             // font: "Arial 100px",
             fontSize: splash.size,
             // fontFamily: "'Courier New'",
-            fontFamily: "Impact",
+            fontFamily: 'Impact',
             // fontFamily: "'Press Start 2P'",
             color: splash.color,
             stroke: splash.backgroundColor,
@@ -857,7 +866,7 @@ export function createSplashRuleFinished(game: Game): void {
             shadow: {
               offsetX: 0,
               offsetY: 9,
-              color: "black",
+              color: 'black',
               blur: 10,
               stroke: true,
               fill: true,
@@ -881,7 +890,7 @@ export function createSplashes(game: Game): void {
             // font: "Arial 100px",
             fontSize: splash.size,
             // fontFamily: "'Courier New'",
-            fontFamily: "Impact",
+            fontFamily: 'Impact',
             // fontFamily: "'Press Start 2P'",
             color: splash.color,
             stroke: splash.backgroundColor,
@@ -889,7 +898,7 @@ export function createSplashes(game: Game): void {
             shadow: {
               offsetX: 0,
               offsetY: 9,
-              color: "black",
+              color: 'black',
               blur: 10,
               stroke: true,
               fill: true,
@@ -909,7 +918,7 @@ export function createScoreboardShotGlass(game: Game): void {
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
-        "glass_full"
+        'glass_full'
       )
       .setScale(
         2 / game.cameras.main.zoom / 10,
@@ -925,23 +934,23 @@ export function createScoreboardReady(game: Game): void {
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        player.char.name + " Ready", //🎮
+        player.char.name + ' Ready', //🎮
         {
           // font: "Arial 100px",
-          fontSize: "40px",
-          fontFamily: "Impact",
+          fontSize: '40px',
+          fontFamily: 'Impact',
           // fontFamily: game.FONT_DEFAULT,
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
           color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
-          stroke: "black",
+          stroke: 'black',
           strokeThickness: 1,
           shadow: {
             offsetX: 0,
             offsetY: 3,
-            color: "#000",
+            color: '#000',
             blur: 3,
             stroke: true,
             fill: true,
@@ -958,23 +967,23 @@ export function createScoreboard(game: Game): void {
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2,
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "🎮",
+        '🎮',
         {
           // font: "Arial 100px",
-          fontSize: "300px",
-          fontFamily: "Impact",
+          fontSize: '300px',
+          fontFamily: 'Impact',
           // fontFamily: game.FONT_DEFAULT,
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
           color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
-          stroke: "black",
+          stroke: 'black',
           strokeThickness: 1,
           shadow: {
             offsetX: 0,
             offsetY: 3,
-            color: "#000",
+            color: '#000',
             blur: 3,
             stroke: true,
             fill: true,
@@ -987,20 +996,20 @@ export function createScoreboard(game: Game): void {
   game.scoreBoardTimeGame = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
-    "",
+    '',
     {
       // font: "Arial 100px",
-      fontSize: "85px",
+      fontSize: '85px',
       // fontFamily: "'Courier New'",
       // fontFamily: game.FONT_DEFAULT_MONOSPACE,
       fontFamily: game.FONT_DEFAULT_VIDEOGAME,
       // fontFamily: "'Press Start 2P'",
-      stroke: "black",
+      stroke: 'black',
       strokeThickness: 1,
       shadow: {
         offsetX: 0,
         offsetY: 3,
-        color: "#000",
+        color: '#000',
         blur: 10,
         stroke: true,
         fill: true,
@@ -1014,20 +1023,20 @@ export function createScoreboard(game: Game): void {
   game.scoreBoardTimeTime = game.add.text(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
-    "",
+    '',
     {
       // font: "Arial 100px",
-      fontSize: "20px",
+      fontSize: '20px',
       // fontFamily: "'Courier New'",
       fontFamily: game.FONT_DEFAULT_VIDEOGAME,
       // fontFamily: "'Press Start 2P'",
-      color: "white",
-      stroke: "black",
+      color: 'white',
+      stroke: 'black',
       strokeThickness: 1,
       shadow: {
         offsetX: 0,
         offsetY: 3,
-        color: "#000",
+        color: '#000',
         blur: 10,
         stroke: true,
         fill: true,
@@ -1048,10 +1057,10 @@ export function createScoreboard(game: Game): void {
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        "XXX",
+        'XXX',
         {
           // font: "Arial 100px",
-          fontSize: "65px",
+          fontSize: '65px',
           fontFamily: game.FONT_DEFAULT_NICE,
           // fontFamily: game.FONT_DEFAULT_MONOSPACE,
           // fontFamily: "'Courier New'",
@@ -1059,12 +1068,12 @@ export function createScoreboard(game: Game): void {
           // color: "white",
           color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
-          stroke: "black",
+          stroke: 'black',
           strokeThickness: 1,
           shadow: {
             offsetX: 0,
             offsetY: 3,
-            color: "#000",
+            color: '#000',
             blur: 10,
             stroke: true,
             fill: true,
@@ -1081,22 +1090,22 @@ export function createScoreboard(game: Game): void {
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
           game.playerSpawnLocations[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
-        "XXX",
+        'XXX',
         {
           // font: "Arial 100px",
-          fontSize: "35px",
+          fontSize: '35px',
           fontFamily: game.FONT_DEFAULT_NICE,
           // fontFamily: "'Courier New'",
           // fontFamily: "'Press Start 2P'",
           // color: "white",
           color: game.colorCircles[playerIndex].colorString,
           // stroke: player.char.color.primary,
-          stroke: "black",
+          stroke: 'black',
           strokeThickness: 1,
           shadow: {
             offsetX: 0,
             offsetY: 3,
-            color: "#000",
+            color: '#000',
             blur: 10,
             stroke: true,
             fill: true,
@@ -1117,7 +1126,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setScale(0.05)
     .setAlpha(0);
@@ -1129,7 +1138,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
@@ -1142,7 +1151,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setRotation(Math.PI / 4)
     .setScale(0.05)
@@ -1155,7 +1164,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setScale(0.05)
     .setRotation(Math.PI / 4)
@@ -1168,7 +1177,7 @@ export function createCameras(game: Game): void {
     .sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      "centerWhite"
+      'centerWhite'
     )
     .setScale(0.08)
     .setAlpha(debugAlpha)

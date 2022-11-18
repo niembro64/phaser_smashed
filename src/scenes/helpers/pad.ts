@@ -15,8 +15,8 @@ export function updatePadCurrControllerTypePro(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L1 = player.gamepad.L1;
-  player.padCurr.R1 = player.gamepad.R1;
+  player.padCurr.L = player.gamepad.L;
+  player.padCurr.R = player.gamepad.R;
 
   // for (let i = 0; i < player?.gamepad?.axes.length; i++) {
   //   console.log(i, player?.gamepad?.axes[i]?.getValue());
@@ -133,8 +133,8 @@ export function updatePadCurrControllerTypeHat(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L1 = player.gamepad.L1;
-  player.padCurr.R1 = player.gamepad.R1;
+  player.padCurr.L = player.gamepad.L;
+  player.padCurr.R = player.gamepad.R;
 
   // NO STICK TRY HAT
   let hatVal = player?.gamepad?.axes[9]?.getValue();
@@ -199,8 +199,8 @@ export function updatePadCurrControllerTypeButtons(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L1 = player.gamepad.L1;
-  player.padCurr.R1 = player.gamepad.R1;
+  player.padCurr.L = player.gamepad.L;
+  player.padCurr.R = player.gamepad.R;
 }
 
 export function updateGamePadsConnected(game: Game): void {
@@ -298,10 +298,10 @@ export function getPlayerPauses(player: Player, game: Game): boolean {
 }
 
 export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
-  // if (player.gamepad.L1 && player.gamepad.R1) {
+  // if (player.gamepad.L && player.gamepad.R) {
   //   return true;
   // }
-  if (player.padCurr.L1 && player.padCurr.R1) {
+  if (player.padCurr.L && player.padCurr.R) {
     return true;
   }
 
@@ -318,8 +318,8 @@ export function getIsPlayerReady(player: Player, game: Game): boolean {
     !player.padCurr.B &&
     !player.padCurr.X &&
     !player.padCurr.Y &&
-    !player.padCurr.R1 &&
-    !player.padCurr.L1
+    !player.padCurr.R &&
+    !player.padCurr.L
   ) {
     return false;
   }
@@ -332,8 +332,8 @@ export function getIsPlayerReady(player: Player, game: Game): boolean {
   //   !player.gamepad.B &&
   //   !player.gamepad.X &&
   //   !player.gamepad.Y &&
-  //   !player.gamepad.R1 &&
-  //   !player.gamepad.L1
+  //   !player.gamepad.R &&
+  //   !player.gamepad.L
   // ) {
   //   return false;
   // }
@@ -352,8 +352,8 @@ export function getIsAllPlayersReady(game: Game): boolean {
       !game.players[i].padCurr.B &&
       !game.players[i].padCurr.X &&
       !game.players[i].padCurr.Y &&
-      !game.players[i].padCurr.R1 &&
-      !game.players[i].padCurr.L1
+      !game.players[i].padCurr.R &&
+      !game.players[i].padCurr.L
     ) {
       return false;
     }
@@ -368,8 +368,8 @@ export function getIsAllPlayersReady(game: Game): boolean {
   //     !game.players[i].gamepad.B &&
   //     !game.players[i].gamepad.X &&
   //     !game.players[i].gamepad.Y &&
-  //     !game.players[i].gamepad.R1 &&
-  //     !game.players[i].gamepad.L1
+  //     !game.players[i].gamepad.R &&
+  //     !game.players[i].gamepad.L
   //   ) {
   //     return false;
   //   }
@@ -1031,11 +1031,11 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
       }
 
       // L R Buttons
-      if (player.padCurr.L1) {
-        console.log(player.playerId, 'L1');
+      if (player.padCurr.L) {
+        console.log(player.playerId, 'L');
       }
-      if (player.padCurr.R1) {
-        console.log(player.playerId, 'R1');
+      if (player.padCurr.R) {
+        console.log(player.playerId, 'R');
       }
 
       // if (player.gamepad.B) {
@@ -1067,11 +1067,11 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
       // }
 
       // // L R Buttons
-      // if (player.gamepad.L1) {
-      //   console.log(player.playerId, "L1");
+      // if (player.gamepad.L) {
+      //   console.log(player.playerId, "L");
       // }
-      // if (player.gamepad.R1) {
-      //   console.log(player.playerId, "R1");
+      // if (player.gamepad.R) {
+      //   console.log(player.playerId, "R");
       // }
       // // L R Buttons
       // if (player.gamepad.L2) {

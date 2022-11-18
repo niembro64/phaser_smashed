@@ -54,7 +54,7 @@ export interface Player {
   state: PlayerStateWithTime;
   // keyboard_static: Keyboard;
   char: Char;
-  keyboard: Keyboard | any;
+  keyboard: keyboard | any;
   gamepad: Gamepad | any;
   padCurr: GamepadData;
   padPrev: GamepadData;
@@ -151,8 +151,8 @@ export interface GamepadData {
   B: boolean;
   X: boolean;
   Y: boolean;
-  R1: boolean;
-  L1: boolean;
+  R: boolean;
+  L: boolean;
 }
 
 export interface PadStateDebounced {
@@ -164,16 +164,18 @@ export interface PadStateDebounced {
   B: number;
   X: number;
   Y: number;
+  L: number;
+  R: number;
 }
 
-export interface Keyboard {
-  up: Key;
-  down: Key;
-  left: Key;
-  right: Key;
-  fast: Key;
-  jump: Key;
-}
+// export interface Keyboard {
+//   up: Key;
+//   down: Key;
+//   left: Key;
+//   right: Key;
+//   fast: Key;
+//   jump: Key;
+// }
 
 export interface InitializeCharPosition {
   // lookingRight: boolean;
@@ -313,7 +315,7 @@ export interface Vector {
   y: number;
 }
 
-export interface keyboardHandPosition {
+export interface keyboard {
   up: any;
   down: any;
   left: any;
@@ -322,4 +324,6 @@ export interface keyboardHandPosition {
   B: any;
   X: any;
   Y: any;
+  L: any;
+  R: any;
 }
