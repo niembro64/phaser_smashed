@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Phaser from 'phaser';
 import Game from '../scenes/Game';
 import '../App.css';
@@ -18,10 +18,6 @@ import importedBambalam from '../sounds/BlackBetty_Bambalam.mp3';
 // @ts-ignore
 import importedTrance from '../sounds/trance.wav';
 // @ts-ignore
-import importedSpecial12Sound from '../sounds/special-m12.wav';
-// @ts-ignore
-import importedSpecial5Sound from '../sounds/special-m5.wav';
-// @ts-ignore
 import importedStartSound from '../sounds/start.wav';
 // @ts-ignore
 import importedBlipSound from '../sounds/game-start-liquid.wav';
@@ -33,59 +29,16 @@ import {
   Quote,
   WebState,
 } from './ViewInterfaces';
-// import { playerGrabAttackEnergy } from "../scenes/helpers/pad";
-// import { BooleanSchemaDefinition } from "mongoose";
 
 function Play() {
-  // let myPhaser.current?.scene?.keys?.game: null | Game = null;
   let myPhaser: any = useRef(null);
-  // let monkeysMusic: any = useRef({});
-  // let monkeysMusic: any = React.createRef()
-  // monkeysMusic.current = new Audio("../sounds/monkeys2.wav");
-  // let monkeysMusic = new Audio("monkeys2.wav");
 
-  // @ts-ignore
-  // const [monkeysMusic, { stop, isPlaying }] = useSound(importedMonkeysMusic, {
-  //   volume: 0.4,
-  // });
-  // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
-  // const [trance] = useSound(importedTrance, { volume: 0.2 });
-
-  // const trance = new Howl({
-  //   // src: ["../sounds/mariopause.mp3"],
-  //   // src: ["../sounds/tranceshorter.wav"],
-  //   // src: ["../sounds/t.wav"],
-  //   src: ["../sounds/trance-loop.ogg"],
-  //   // src: ["../sounds/special.wav"],
-  //   // src: ["../sounds/trance-loop.mp3"],
-  //   // src: ["../sounds/trance-loop.wav"],
-  //   html5: true,
-  //   volume: 0.6,
-  //   loop: true,
-  // });
-
-  // const woah = new Audio(importedWoah);
-  // const bam = new Audio(importedBambalam);
   const trance = new Audio(importedTrance);
   trance.volume = 0.3;
   const [woah] = useSound(importedWoah, { volume: 0.2 });
   const [bam] = useSound(importedBambalam, { volume: 0.2 });
-  // const [trance, { stop }] = useSound(importedTrance, {
-  //   volume: 0.2,
-  // });
-
-  // const [pauseSound] = useSound(importedPauseSound, { volume: 0.4 });
-  // const [special12Sound] = useSound(importedSpecial12Sound, { volume: 0.2 });
-  // const [special5Sound] = useSound(importedSpecial5Sound, { volume: 0.2 });
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
-  // @ts-ignore
-  // const [monkeysMusicPlay, { stop, isPlaying }] = useSound(
-  //   importedMonkeysMusic,
-  //   { volume: 0.3 }
-  // );
-
-  // let pauseSound = new Audio("../../public/sounds/mariopause.mp3");
   const [numClicks, setNumClicks] = useState(0);
   const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState(false);
@@ -134,31 +87,29 @@ function Play() {
       arcade: {
         gravity: { y: 3000 },
         debug: false,
-        // debug: true,
       },
     },
     scene: [Game],
   };
   let setTimeoutQuotesLengthStart: number = 2000;
   let setTimeoutQuotesLengthReStart: number = 1500;
-  // const setTimeoutQuotesLength: number = 1000;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
     { name: 'Breezy', text: 'The turtle will die.' },
-    // { name: "Breezy", text: "Oh, is it? Oh cool. Ur soo cool." },
-    // { name: "Lau", text: "I'm sorry, I didn't know it was gonna happen." },
+    { name: 'Breezy', text: 'Oh, is it? Oh cool. Ur soo cool.' },
+    { name: 'Lau', text: "I'm sorry, I didn't know it was gonna happen." },
     { name: 'TR3', text: 'Smashed.' },
     {
       name: 'TR3',
       text: 'How am I supposed to make more than that... shit... happen?',
     },
-    // { name: "Chadams", text: "AAAYYYUUUGGGGHHHH!!" },
+    { name: 'Chadams', text: 'AAAYYYUUUGGGGHHHH!!' },
     { name: 'Chadams', text: 'Two shots... two shots.' },
-    // { name: "Chadams", text: "Spike Enerjeaoah." },
-    // { name: "Chadams", text: "Stop breakin' shit." },
-    // { name: "Chadams", text: "Is there no one else?" },
+    { name: 'Chadams', text: 'Spike Enerjeaoah.' },
+    { name: 'Chadams', text: "Stop breakin' shit." },
+    { name: 'Chadams', text: 'Is there no one else?' },
     { name: 'Eddie-Z', text: "He'll do it again, yeah!" },
-    // { name: "Deen Davis Jr.", text: "VIDEOTAPE MA-SELF FUCKIN YOU UP!" },
+    { name: 'Deen Davis Jr.', text: 'VIDEOTAPE MA-SELF FUCKIN YOU UP!' },
     {
       name: 'DDj',
       text: "It's safe to say we're not going to the bars tonite.",
@@ -167,17 +118,17 @@ function Play() {
       name: 'DDj',
       text: '...yes you are.',
     },
-    // {
-    //   name: "DDj",
-    //   text: "I can fight you one-handed.",
-    // },
-    // {
-    //   name: "DDj",
-    //   text: "I thought you put Spike in there.",
-    // },
+    {
+      name: 'DDj',
+      text: 'I can fight you one-handed.',
+    },
+    {
+      name: 'DDj',
+      text: 'I thought you put Spike in there.',
+    },
     // { name: "Gin", text: "Clean it up, and we'll do it again." },
     { name: 'Ginman', text: "Set it up... and we'll do it... again." },
-    // { name: "Gin", text: "Shitty, shitty-fuckin-ass." },
+    { name: 'Gin', text: 'Shitty, shitty-fuckin-ass.' },
   ];
   const debug: Debug = {
     setLevel: 5, //012345
@@ -206,14 +157,13 @@ function Play() {
     setPrintControllerConnectedConsole: false,
     setLoadTimeExtra: true,
     setChezSecret: true,
-    setIsDevMode: true,
+    setIsDevMode: false,
   };
   const onClickStartStartButton = () => {
-    // pauseSound.play();
-    // pauseSound();
     trance.pause();
     startSound();
     setWebState('play');
+
     let players = [...smashConfig.players];
     let newPlayers: {
       name: CharacterName;
@@ -257,11 +207,11 @@ function Play() {
           () => {
             setShowLoader(false);
           },
-          debug.setIsDevMode ? 0 : 100
+          debug.setIsDevMode ? 0 : 1
         );
         clearInterval(myInterval);
       }
-    }, 100);
+    }, 1);
   };
 
   const onClickStartOnOffButtons = (
@@ -300,28 +250,18 @@ function Play() {
   const trancePause = (): void => {
     trance.pause();
   };
-  // const trancePlay = (): void => {
-  //   console.log(trance);
-  //   trance.play();
-  // };
-  // const trancePause = (): void => {
-  //   trance.pause();
-  // };
 
   const setFirstCharacterSlot = (charId: number): void => {
-    // startSound();
-    // specialSound();
     if (!debug.setChezSecret || webState === 'play') {
       return;
     }
     if (charId === 4) {
-      // special5Sound();
       bamPlay();
     }
     if (charId === 5) {
       woahPlay();
-      // special12Sound();
     }
+
     let choices = [...smashConfig.players];
     let choice = choices[0];
     choice.characterId = charId;
@@ -334,7 +274,6 @@ function Play() {
     choice.scale = tempScale ? tempScale : 1;
     choice.name = tempName ? tempName : '';
     setSmashConfig({ players: [...choices] });
-    // for (let i = 0; i < 4; i++) {}
   };
 
   const onClickStartRotateSelection = (playerIndex: number): void => {
@@ -473,50 +412,14 @@ function Play() {
     }
   };
 
-  let gameInfo: any = useRef(null);
-
-  const [clockTime, setClockTime] = useState({ minutes: 0, seconds: 0 });
+  const [clockTime, setClockTime] = useState({
+    minutes: 0,
+    seconds: 0,
+  });
   const [clockGame, setClockGame] = useState({
     minutes: 0,
     seconds: 0,
   });
-
-  const [APJ, setAPJ] = useState([
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ]);
-  const [AEJ, setAEJ] = useState([
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ]);
-  const [LH, setLH] = useState([
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ]);
-  const [NH, setNH] = useState([
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ]);
-  const [NK, setNK] = useState([
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ]);
-  const [NS, setNS] = useState([
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-    [0, 0, 0, 0],
-  ]);
 
   const componentPseudoLoad = useRef(true);
   const intervalClock: any = useRef(null);
