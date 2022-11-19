@@ -206,6 +206,7 @@ function Play() {
     setPrintControllerConnectedConsole: false,
     setLoadTimeExtra: true,
     setChezSecret: true,
+    setIsDevMode: true,
   };
   const onClickStartStartButton = () => {
     // pauseSound.play();
@@ -231,7 +232,7 @@ function Play() {
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
-    if (!debug.setLoadTimeExtra) {
+    if (!debug.setLoadTimeExtra || debug.setIsDevMode) {
       setTimeoutQuotesLengthStart = 0;
     }
     setTimeout(() => {
@@ -252,9 +253,12 @@ function Play() {
         myPhaser?.current?.scene?.keys?.game?.loaded
       );
       if (myPhaser?.current?.scene?.keys?.game?.loaded) {
-        setTimeout(() => {
-          setShowLoader(false);
-        }, 100);
+        setTimeout(
+          () => {
+            setShowLoader(false);
+          },
+          debug.setIsDevMode ? 0 : 100
+        );
         clearInterval(myInterval);
       }
     }, 100);
@@ -592,7 +596,7 @@ function Play() {
               </div>
             </div>
           </div>
-          <div className="black-hiding-div"></div>
+          {!debug.setIsDevMode && <div className="black-hiding-div"></div>}
           <div className="playerChoices">
             {smashConfig.players.map((cPlayer, cPlayerIndex) => {
               return (

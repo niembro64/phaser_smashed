@@ -17,9 +17,9 @@ export function create(game: Game) {
   createSplashes(game);
   createPlatforms(game);
   createScoreboardShotGlass(game);
-  createEmitters(game);
   createImageTable(game);
   createSplashRuleFinished(game);
+  createEmitters(game);
   createAttackPhysicals(game);
   createAttackEnergies(game);
   createPlayers(game);

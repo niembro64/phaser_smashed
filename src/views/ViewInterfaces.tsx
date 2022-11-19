@@ -52,6 +52,7 @@ export interface Debug {
   setPrintControllerConnectedConsole: boolean;
   setLoadTimeExtra: boolean;
   setChezSecret: boolean;
+  setIsDevMode: boolean;
 }
 
 export interface ButtonOnOff {
