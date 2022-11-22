@@ -44,6 +44,13 @@ export interface CameraHelper {
   helperState: Loc | any;
 }
 
+export type InputType =
+  | 'keyboard-wasd'
+  | 'keyboard-arrowKeys'
+  | 'gamePad-innextSnes'
+  | 'gamePad-switchWired'
+  | 'gamePad-switchPro';
+
 export interface Player {
   playerId: number;
   shotGlass: any | Phaser.GameObjects.Sprite;
@@ -52,8 +59,8 @@ export interface Player {
   scoreBoardReady: string | any;
   scoreBoardController: string | any;
   state: PlayerStateWithTime;
-  // keyboard_static: Keyboard;
   char: Char;
+  inputType: InputType | any;
   keyboard: keyboard | any;
   gamepad: Gamepad | any;
   padCurr: GamepadData;

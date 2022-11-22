@@ -636,6 +636,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
+      inputType: null,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -772,6 +773,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
+      inputType: null,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -908,6 +910,7 @@ export default class Game extends Phaser.Scene {
 
         shield: null,
       },
+      inputType: null,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1043,6 +1046,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
+      inputType: null,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1178,6 +1182,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
+      inputType: null,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1313,6 +1318,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
+      inputType: null,
       keyboard: null,
       gamepad: null,
       padCurr: {
