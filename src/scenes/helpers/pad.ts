@@ -8,6 +8,80 @@ import {
 } from './attacks';
 import { updatePadCurrKeyboard } from './keyboard';
 
+export function updateGamePadsConnected(game: Game): void {
+  let playerIndex = 0;
+
+  // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
+  // console.log("NUM GAMEPADS", game.input.gamepad.total);
+
+  game.input.gamepad.gamepads.forEach((gamepad, gamepadIndex) => {
+    gamepad?.axes.forEach((axis, axisIndex) => {
+      // console.log(
+      //   "#PADS",
+      //   game.input.gamepad.gamepads.length,
+      //   "PAD",
+      //   gamepadIndex,
+      //   "AXIS",
+      //   axisIndex,
+      //   Math.round(axis.getValue())
+      // );
+    });
+    // console.log(gamepadIndex, "ID", gamepad.id);
+
+    if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
+      game.players[playerIndex].gamepad =
+        game.input.gamepad.getPad(gamepadIndex);
+      playerIndex++;
+    }
+  });
+
+  game.players.forEach((player, playerIndex) => {
+    if (player.gamepad) {
+      if (player?.gamepad?.axes?.length === 4) {
+        console.log('CONTROLLER TYPE: PRO', player.gamepad);
+        updatePadCurrControllerTypePro(player, game);
+      } else if (player?.gamepad?.axes?.length) {
+        updatePadCurrControllerTypeHat(player, game);
+      } else {
+        updatePadCurrControllerTypeButtons(player, game);
+      }
+    }
+    updatePadCurrKeyboard(player, game);
+
+    if (player.emitterPlayer.on) {
+      player.padCurr.up = false;
+      player.padCurr.down = false;
+      player.padCurr.left = false;
+      player.padCurr.right = false;
+      // player.padCurr.A = false;
+      // player.padCurr.B = false;
+      // player.padCurr.X = false;
+      // player.padCurr.Y = false;
+    }
+  });
+
+  // for (let i = 0; i < game.input.gamepad.gamepads.length; i++) {
+  //   for (let j = 0; j < game.input.gamepad.gamepads[i].axes.length; j++) {
+  //     console.log(
+  //       "#PADS",
+  //       game.input.gamepad.gamepads.length,
+  //       "PAD",
+  //       i,
+  //       "AXIS",
+  //       j,
+  //       Math.round(game.input.gamepad.gamepads[i].axes[j].getValue())
+  //     );
+  //   }
+  //   if (
+  //     !game.input.gamepad.gamepads[i]?.id.includes("Jabra") &&
+  //     playerIndex < game.players.length
+  //   ) {
+  //     game.players[playerIndex].gamepad = game.input.gamepad.getPad(i);
+  //     playerIndex++;
+  //   }
+  // }
+}
+
 export function updatePadCurrControllerTypePro(
   player: Player,
   game: Game
@@ -204,80 +278,6 @@ export function updatePadCurrControllerTypeButtons(
   player.padCurr.R = player.gamepad.R;
 }
 
-export function updateGamePadsConnected(game: Game): void {
-  let playerIndex = 0;
-
-  // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
-  // console.log("NUM GAMEPADS", game.input.gamepad.total);
-
-  game.input.gamepad.gamepads.forEach((gamepad, gamepadIndex) => {
-    gamepad?.axes.forEach((axis, axisIndex) => {
-      // console.log(
-      //   "#PADS",
-      //   game.input.gamepad.gamepads.length,
-      //   "PAD",
-      //   gamepadIndex,
-      //   "AXIS",
-      //   axisIndex,
-      //   Math.round(axis.getValue())
-      // );
-    });
-    // console.log(gamepadIndex, "ID", gamepad.id);
-
-    if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
-      game.players[playerIndex].gamepad =
-        game.input.gamepad.getPad(gamepadIndex);
-      playerIndex++;
-    }
-  });
-
-  game.players.forEach((player, playerIndex) => {
-    if (player.gamepad) {
-      if (player?.gamepad?.axes?.length === 4) {
-        console.log('CONTROLLER TYPE: PRO', player.gamepad);
-        updatePadCurrControllerTypePro(player, game);
-      } else if (player?.gamepad?.axes?.length) {
-        updatePadCurrControllerTypeHat(player, game);
-      } else {
-        updatePadCurrControllerTypeButtons(player, game);
-      }
-    }
-    updatePadCurrKeyboard(player, game);
-
-    if (player.emitterPlayer.on) {
-      player.padCurr.up = false;
-      player.padCurr.down = false;
-      player.padCurr.left = false;
-      player.padCurr.right = false;
-      // player.padCurr.A = false;
-      // player.padCurr.B = false;
-      // player.padCurr.X = false;
-      // player.padCurr.Y = false;
-    }
-  });
-
-  // for (let i = 0; i < game.input.gamepad.gamepads.length; i++) {
-  //   for (let j = 0; j < game.input.gamepad.gamepads[i].axes.length; j++) {
-  //     console.log(
-  //       "#PADS",
-  //       game.input.gamepad.gamepads.length,
-  //       "PAD",
-  //       i,
-  //       "AXIS",
-  //       j,
-  //       Math.round(game.input.gamepad.gamepads[i].axes[j].getValue())
-  //     );
-  //   }
-  //   if (
-  //     !game.input.gamepad.gamepads[i]?.id.includes("Jabra") &&
-  //     playerIndex < game.players.length
-  //   ) {
-  //     game.players[playerIndex].gamepad = game.input.gamepad.getPad(i);
-  //     playerIndex++;
-  //   }
-  // }
-}
-
 export function getControllerIsRealController(gamepad: Gamepad): boolean {
   if (gamepad.id.includes('Jabra')) {
     return false;
@@ -311,7 +311,6 @@ export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
 }
 
 export function getIsPlayerReady(player: Player, game: Game): boolean {
-  
   if (
     !player.padCurr.up &&
     !player.padCurr.down &&
