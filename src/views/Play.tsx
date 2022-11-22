@@ -29,6 +29,7 @@ import {
   Quote,
   WebState,
 } from './ViewInterfaces';
+import { InputType } from '../scenes/interfaces';
 
 function Play() {
   let myPhaser: any = useRef(null);
@@ -48,12 +49,50 @@ function Play() {
     { state: false },
     { state: false },
   ]);
+
+  const inputTypeConfig: InputType[] = [
+    'wasd',
+    'arrows',
+    'snes',
+    's-wired',
+    's-pro',
+  ];
+  const inputEmojiConfig: string[] = ['⌨️​', '⌨️​', '🎮', '🎮', '🎮'];
+
   const [smashConfig, setSmashConfig] = useState({
     players: [
-      { characterId: 0, scale: 0.9, name: 'Mario' },
-      { characterId: 1, scale: 0.9, name: 'Link' },
-      { characterId: 2, scale: 1, name: 'Pikachu' },
-      { characterId: 3, scale: 0.7, name: 'Kirby' },
+      {
+        characterId: 0,
+        scale: 0.9,
+        name: 'Mario',
+        inputIndex: 0,
+        inputType: 'wasd',
+        inputEmoji: '⌨️​',
+      },
+      {
+        characterId: 1,
+        scale: 0.9,
+        name: 'Link',
+        inputIndex: 1,
+        inputType: 'arrows',
+        inputEmoji: '⌨️​',
+      },
+      {
+        characterId: 2,
+        scale: 1,
+        name: 'Pikachu',
+        inputIndex: 2,
+        inputType: 'snes',
+        inputEmoji: '🎮',
+      },
+      {
+        characterId: 3,
+        scale: 0.7,
+        name: 'Kirby',
+        inputIndex: 2,
+        inputType: 'snes',
+        inputEmoji: '🎮',
+      },
     ],
   });
 
@@ -214,6 +253,17 @@ function Play() {
     }, 1);
   };
 
+  const onClickRotateInput = (index: number): void => {
+    let newPlayers = [...smashConfig.players];
+    newPlayers[index].inputIndex + 1 > inputTypeConfig.length - 1
+      ? (newPlayers[index].inputIndex = 0)
+      : newPlayers[index].inputIndex++;
+    newPlayers[index].inputType = inputTypeConfig[newPlayers[index].inputIndex];
+    newPlayers[index].inputEmoji =
+      inputEmojiConfig[newPlayers[index].inputIndex];
+    setSmashConfig({ players: [...newPlayers] });
+  };
+
   const onClickStartOnOffButtons = (
     playerIndex: number,
     flipState: boolean
@@ -298,9 +348,10 @@ function Play() {
     setSmashConfig({ players: [...choices] });
   };
 
-  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥
+  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥​➡️​⌨️​⌨
   // 🏴‍☠️🏳️🏁🏴
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
+  // ⌨🎮
 
   const [showRulesN64, setShowRulesN64] = useState(false);
   const [showControls, setShowControls] = useState(false);
@@ -525,6 +576,21 @@ function Play() {
                       </div>
                     )}
                   </div>
+                  {buttonsOnOff[cPlayerIndex].state && (
+                    <button
+                      className="b-dark d-flex flex-row justify-content-between align-items-center"
+                      onClick={() => {
+                        onClickRotateInput(cPlayerIndex);
+                      }}
+                    >
+                      <div className="center-my-children-small">
+                        <span id="button-input-emoji">{cPlayer.inputEmoji} </span>
+                      </div>
+                      <div className="center-my-children-big">
+                        <span id="button-input-name">&nbsp; {cPlayer.inputType}</span>
+                      </div>
+                    </button>
+                  )}
                   {buttonsOnOff[cPlayerIndex].state && (
                     <button
                       className="b-dark px-4"

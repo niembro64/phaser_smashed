@@ -1,4 +1,3 @@
-import { Key } from 'react';
 
 export type GameState =
   | 'game-state-start'
@@ -45,11 +44,11 @@ export interface CameraHelper {
 }
 
 export type InputType =
-  | 'keyboard-wasd'
-  | 'keyboard-arrowKeys'
-  | 'gamePad-innextSnes'
-  | 'gamePad-switchWired'
-  | 'gamePad-switchPro';
+  | 'wasd'
+  | 'arrows'
+  | 'snes'
+  | 's-wired'
+  | 's-pro';
 
 export interface Player {
   playerId: number;

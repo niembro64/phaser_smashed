@@ -359,6 +359,32 @@ body {
     /* transform: translateX(5px); */
   }
 }
+.center-my-children-small {
+  width: 80px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.center-my-children-big {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+#button-input-name {
+  /* font-size: small; */
+  padding: 0;
+  margin: 0;
+}
+#button-input-emoji {
+  height: 10vh;
+  font-size: 5vh;
+  padding: 0;
+  margin: 0;
+}
 .b-dark {
   background-color: hsl(200, 0%, 10%);
 
