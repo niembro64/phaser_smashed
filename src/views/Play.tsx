@@ -208,6 +208,7 @@ function Play() {
       name: CharacterName;
       characterId: CharacterId;
       scale: number;
+      inputType: InputType;
     }[] = [];
     buttonsOnOff.forEach((button, buttonIndex) => {
       if (button.state) {
@@ -215,6 +216,7 @@ function Play() {
           name: players[buttonIndex].name as CharacterName,
           characterId: players[buttonIndex].characterId as CharacterId,
           scale: players[buttonIndex].scale,
+          inputType: players[buttonIndex].inputType as InputType,
         });
       }
     });
