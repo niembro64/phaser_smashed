@@ -473,6 +473,7 @@ body {
   height: 50%;
   background-color: black;
   animation: revealAnimation 5s ease-out both;
+  z-index: 1;
 }
 
 @keyframes revealAnimation {
@@ -573,6 +574,7 @@ body {
   height: 100%;
   flex: 0.6;
   overflow: visible;
+  z-index: 2;
 }
 .startTitleWrapper2:active {
   transition: 0.1s ease;
@@ -651,8 +653,15 @@ body {
   align-self: center;
   z-index: 3;
 }
-.startImage {
+.startImageNormal {
   margin-bottom: 2%;
+  transform : scale(1);
+  z-index: 0;
+}
+.startImageInverse {
+  margin-bottom: 2%;
+  transform: scaleX(-1);
+  z-index: 0;
 }
 
 /* /////////////////////////////

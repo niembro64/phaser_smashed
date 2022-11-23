@@ -1,3 +1,4 @@
+import { matchPath } from 'react-router-dom';
 import Game from './Game';
 import { setPhysicalAttackOffscreen } from './helpers/attacks';
 import {
@@ -300,21 +301,31 @@ export function createHitboxOverlap(game: Game): void {
   });
 }
 export function createKeyboards(game: Game): void {
-  const numK = game.keyboardHandPositions.length;
-  const numP = game.players.length;
-  let diff = 0;
+  const k = game.keyboardHandPositions.length;
+  const p = game.players.length;
+  const d = p - k > 0 ? p - k : 0;
 
-  if (numP > numK) {
-    for (let i = 0; i < numK - numP; i++) {}
-  }
-
-  game.players.forEach((player, playerIndex) => {
-    if (game.keyboardHandPositions[playerIndex]) {
-      player.keyboard = game.input.keyboard.addKeys(
-        game.keyboardHandPositions[playerIndex]
+  for (let i = 0; i < k; i++) {
+    if (game?.players[i + d]) {
+      game.players[i + d].keyboard = game.input.keyboard.addKeys(
+        game.keyboardHandPositions[i]
       );
     }
-  });
+  }
+
+  // for (let i = 0; i < Math.min(k, p); i++) {
+  //   game.players[p - 1 - i].keyboard = game.input.keyboard.addKeys(
+  //     game.keyboardHandPositions[k - 1 - i]
+  //   );
+  // }
+
+  // game.players.forEach((player, playerIndex) => {
+  //   if (game.keyboardHandPositions[playerIndex]) {
+  //     player.keyboard = game.input.keyboard.addKeys(
+  //       game.keyboardHandPositions[playerIndex]
+  //     );
+  //   }
+  // });
 }
 export function setPlayersInitialPositions(game: Game): void {
   game.players.forEach((player, playerIndex) => {

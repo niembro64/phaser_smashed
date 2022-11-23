@@ -44,9 +44,9 @@ function Play() {
   const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState(false);
   const [buttonsOnOff, setButtonsOnOff] = useState([
-    { state: true },
-    { state: true },
     { state: false },
+    { state: true },
+    { state: true },
     { state: false },
   ]);
 
@@ -62,6 +62,14 @@ function Play() {
   const [smashConfig, setSmashConfig] = useState({
     players: [
       {
+        characterId: 2,
+        scale: 1,
+        name: 'Pikachu',
+        inputIndex: 2,
+        inputType: 'snes',
+        inputEmoji: '🎮',
+      },
+      {
         characterId: 0,
         scale: 0.9,
         name: 'Mario',
@@ -76,14 +84,6 @@ function Play() {
         inputIndex: 1,
         inputType: 'arrows',
         inputEmoji: '⌨️​',
-      },
-      {
-        characterId: 2,
-        scale: 1,
-        name: 'Pikachu',
-        inputIndex: 2,
-        inputType: 'snes',
-        inputEmoji: '🎮',
       },
       {
         characterId: 3,
@@ -566,7 +566,9 @@ function Play() {
                     {buttonsOnOff[cPlayerIndex].state && (
                       <div className="startImageWrapper">
                         <img
-                          className="startImage"
+                          className={
+                            'startImage' + (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                          }
                           src={
                             'images/character_' +
                             cPlayer.characterId.toString() +
@@ -578,7 +580,7 @@ function Play() {
                       </div>
                     )}
                   </div>
-                  {buttonsOnOff[cPlayerIndex].state && (
+                  {/* {buttonsOnOff[cPlayerIndex].state && (
                     <button
                       className="b-dark d-flex flex-row justify-content-between align-items-center"
                       onClick={() => {
@@ -592,7 +594,7 @@ function Play() {
                         <span id="button-input-name">&nbsp; {cPlayer.inputType}</span>
                       </div>
                     </button>
-                  )}
+                  )} */}
                   {buttonsOnOff[cPlayerIndex].state && (
                     <button
                       className="b-dark px-4"
