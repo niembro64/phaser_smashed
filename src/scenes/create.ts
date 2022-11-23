@@ -300,6 +300,14 @@ export function createHitboxOverlap(game: Game): void {
   });
 }
 export function createKeyboards(game: Game): void {
+  const numK = game.keyboardHandPositions.length;
+  const numP = game.players.length;
+  let diff = 0;
+
+  if (numP > numK) {
+    for (let i = 0; i < numK - numP; i++) {}
+  }
+
   game.players.forEach((player, playerIndex) => {
     if (game.keyboardHandPositions[playerIndex]) {
       player.keyboard = game.input.keyboard.addKeys(

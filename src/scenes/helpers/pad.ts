@@ -28,6 +28,8 @@ export function updateGamePadsConnected(game: Game): void {
     });
     // console.log(gamepadIndex, "ID", gamepad.id);
 
+
+
     if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
       game.players[playerIndex].gamepad =
         game.input.gamepad.getPad(gamepadIndex);
@@ -36,7 +38,7 @@ export function updateGamePadsConnected(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    if (player.gamepad) {
+    if (player?.gamepad) {
       if (player?.gamepad?.axes?.length === 4) {
         console.log('CONTROLLER TYPE: PRO', player.gamepad);
         updatePadCurrControllerTypePro(player, game);
@@ -48,7 +50,7 @@ export function updateGamePadsConnected(game: Game): void {
     }
     updatePadCurrKeyboard(player, game);
 
-    if (player.emitterPlayer.on) {
+    if (player?.emitterPlayer.on) {
       player.padCurr.up = false;
       player.padCurr.down = false;
       player.padCurr.left = false;
