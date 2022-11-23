@@ -6,6 +6,8 @@ import '@fontsource/press-start-2p';
 import { ButtonName, CharacterMove } from '../App';
 import { setGameState } from '../scenes/helpers/state';
 import useSound from 'use-sound';
+// import { useGamepads } from 'react-gamepads';
+
 // import { Howl } from "howler";
 // import { Howl, HowlOptions, HowlCallback, HowlErrorCallback } from "howler";
 
@@ -33,6 +35,14 @@ import { InputType } from '../scenes/interfaces';
 
 function Play() {
   let myPhaser: any = useRef(null);
+
+  // const [gamePads, setGamePads] = useState<any[]>([]);
+
+  // useGamepads((pad) => {
+  //   setGamePads(Object.values(pad));
+  // });
+
+  
 
   const trance = new Audio(importedTrance);
   trance.volume = 0.3;
@@ -135,20 +145,20 @@ function Play() {
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
     { name: 'Breezy', text: 'The turtle will die.' },
-    { name: 'Breezy', text: 'Oh, is it? Oh cool. Ur soo cool.' },
-    { name: 'Lau', text: "I'm sorry, I didn't know it was gonna happen." },
+    // { name: 'Breezy', text: 'Oh, is it? Oh cool. Ur soo cool.' },
+    // { name: 'Lau', text: "I'm sorry, I didn't know it was gonna happen." },
     { name: 'TR3', text: 'Smashed.' },
     {
       name: 'TR3',
       text: 'How am I supposed to make more than that... shit... happen?',
     },
-    { name: 'Chadams', text: 'AAAYYYUUUGGGGHHHH!!' },
+    // { name: 'Chadams', text: 'AAAYYYUUUGGGGHHHH!!' },
     { name: 'Chadams', text: 'Two shots... two shots.' },
-    { name: 'Chadams', text: 'Spike Enerjeaoah.' },
-    { name: 'Chadams', text: "Stop breakin' shit." },
-    { name: 'Chadams', text: 'Is there no one else?' },
+    // { name: 'Chadams', text: 'Spike Enerjeaoah.' },
+    // { name: 'Chadams', text: "Stop breakin' shit." },
+    // { name: 'Chadams', text: 'Is there no one else?' },
     { name: 'Eddie-Z', text: "He'll do it again, yeah!" },
-    { name: 'Deen Davis Jr.', text: 'VIDEOTAPE MA-SELF FUCKIN YOU UP!' },
+    // { name: 'Deen Davis Jr.', text: 'VIDEOTAPE MA-SELF FUCKIN YOU UP!' },
     {
       name: 'DDj',
       text: "It's safe to say we're not going to the bars tonite.",
@@ -157,17 +167,17 @@ function Play() {
       name: 'DDj',
       text: '...yes you are.',
     },
-    {
-      name: 'DDj',
-      text: 'I can fight you one-handed.',
-    },
-    {
-      name: 'DDj',
-      text: 'I thought you put Spike in there.',
-    },
+    // {
+    //   name: 'DDj',
+    //   text: 'I can fight you one-handed.',
+    // },
+    // {
+    //   name: 'DDj',
+    //   text: 'I thought you put Spike in there.',
+    // },
     // { name: "Gin", text: "Clean it up, and we'll do it again." },
-    { name: 'Ginman', text: "Set it up... and we'll do it... again." },
-    { name: 'Gin', text: 'Shitty, shitty-fuckin-ass.' },
+    // { name: 'Ginman', text: "Set it up... and we'll do it... again." },
+    // { name: 'Gin', text: 'Shitty, shitty-fuckin-ass.' },
   ];
   const debug: Debug = {
     setLevel: 5, //012345
@@ -567,7 +577,8 @@ function Play() {
                       <div className="startImageWrapper">
                         <img
                           className={
-                            'startImage' + (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                            'startImage' +
+                            (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
                           }
                           src={
                             'images/character_' +
