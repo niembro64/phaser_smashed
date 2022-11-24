@@ -42,8 +42,6 @@ function Play() {
   //   setGamePads(Object.values(pad));
   // });
 
-  
-
   const trance = new Audio(importedTrance);
   trance.volume = 0.3;
   const [woah] = useSound(importedWoah, { volume: 0.2 });
@@ -319,9 +317,11 @@ function Play() {
     }
     if (charId === 4) {
       bamPlay();
+      onClickStartOnOffButtons(0, true);
     }
     if (charId === 5) {
       woahPlay();
+      onClickStartOnOffButtons(0, true);
     }
 
     let choices = [...smashConfig.players];
