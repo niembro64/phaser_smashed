@@ -28,8 +28,6 @@ export function updateGamePadsConnected(game: Game): void {
     });
     // console.log(gamepadIndex, "ID", gamepad.id);
 
-
-
     if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
       game.players[playerIndex].gamepad =
         game.input.gamepad.getPad(gamepadIndex);
@@ -740,87 +738,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
     ) {
       return;
     }
-    // if (player.gamepad) {
-    //   if (
-    //     !player.gamepad.left &&
-    //     !player.gamepad.right &&
-    //     !player.gamepad.up &&
-    //     !player.gamepad.down
-    //   ) {
-    //     return;
-    //   }
 
-    // // CHECK ANGLED
-    // if (player.pad.left && player.pad.up) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       -game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       -game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
-    // if (player.pad.right && player.pad.up) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       -game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
-    // if (player.pad.left && player.pad.down) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       -game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
-    // if (player.pad.right && player.pad.down) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
-
-    // CHECK INDIVIDUALS
     if (player.padCurr.up && !player.padCurr.Y) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
