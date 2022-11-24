@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Phaser from 'phaser';
 import Game from '../scenes/Game';
 import '../App.css';
@@ -256,12 +256,36 @@ function Play() {
           () => {
             setShowLoader(false);
           },
-          debug.setIsDevMode ? 0 : 1
+          debug.setIsDevMode ? 0 : 20
         );
         clearInterval(myInterval);
       }
-    }, 1);
+    }, 20);
   };
+
+  // useEffect(() => {
+  //   console.log(
+  //     'useEffect',
+  //     'chonk',
+  //     'myPhaser?.current?.scene?.keys?.game?.loaded',
+  //     myPhaser?.current?.scene?.keys?.game?.loaded
+  //   );
+  //   if (myPhaser?.current?.scene?.keys?.game?.loaded) {
+  //     setTimeout(
+  //       () => {
+  //         setShowLoader(false);
+  //       },
+  //       debug.setIsDevMode ? 0 : 20
+  //     );
+  //   }
+  // }, [
+  //   myPhaser,
+  //   myPhaser.current.scene,
+  //   myPhaser.current.scene.keys,
+  //   myPhaser.current.scene.keys.game,
+  //   myPhaser.current.scene.keys.game.loaded,
+  //   debug.setIsDevMode,
+  // ]);
 
   const onClickRotateInput = (index: number): void => {
     let newPlayers = [...smashConfig.players];
