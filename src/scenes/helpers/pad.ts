@@ -267,16 +267,20 @@ export function updatePadCurrControllerTypeButtons(
   player: Player,
   game: Game
 ): void {
-  player.padCurr.up = player.gamepad.up;
-  player.padCurr.down = player.gamepad.down;
-  player.padCurr.left = player.gamepad.left;
-  player.padCurr.right = player.gamepad.right;
-  player.padCurr.A = player.gamepad.A;
-  player.padCurr.B = player.gamepad.B;
-  player.padCurr.X = player.gamepad.X;
-  player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L1;
-  player.padCurr.R = player.gamepad.R1;
+  if (player?.gamepad) {
+    player.padCurr.start = player.gamepad?.buttons[9]?.pressed ? true : false;
+    player.padCurr.select = player.gamepad?.buttons[8]?.pressed ? true : false;
+    player.padCurr.up = player.gamepad.up;
+    player.padCurr.down = player.gamepad.down;
+    player.padCurr.left = player.gamepad.left;
+    player.padCurr.right = player.gamepad.right;
+    player.padCurr.A = player.gamepad.A;
+    player.padCurr.B = player.gamepad.B;
+    player.padCurr.X = player.gamepad.X;
+    player.padCurr.Y = player.gamepad.Y;
+    player.padCurr.L = player.gamepad.L1;
+    player.padCurr.R = player.gamepad.R1;
+  }
 }
 
 export function getControllerIsRealController(gamepad: Gamepad): boolean {
@@ -296,8 +300,23 @@ export function getIsAnyPlayerPausing(game: Game): boolean {
 }
 
 export function getPlayerPauses(player: Player, game: Game): boolean {
-  return getPlayerPressedBothLR(player, game);
+  return (
+    getPlayerPressedBothLR(player, game) || getPlayerPressedStart(player, game)
+  );
   // return playerAllRightButtonsPressed(player, game);
+}
+
+export function getPlayerPressedStart(player: Player, game: Game): boolean {
+  // if (player.gamepad.L1 && player.gamepad.R1) {
+  //   return true;
+  // }
+  // console.log(player.playerId, 'player.gamepad.L1', player.gamepad.L1);
+  // console.log(player.playerId, 'player.gamepad.R1', player.gamepad.R1);
+  if (player.padCurr.start) {
+    return true;
+  }
+
+  return false;
 }
 
 export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
@@ -656,6 +675,8 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   //   }
   // });
   game.players.forEach((player) => {
+    player.padPrev.start = player.gamepad.start;
+    player.padPrev.select = player.gamepad.select;
     player.padPrev.up = player.padCurr.up;
     player.padPrev.down = player.padCurr.down;
     player.padPrev.left = player.padCurr.left;
@@ -667,6 +688,22 @@ export function updatePadPreviousAndDebounced(game: Game): void {
 
     player.char.sprite.zoom = 1;
 
+    if (player.padCurr.start) {
+      player.padDebounced.start +=
+        player.padDebounced.start >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES
+          ? 0
+          : 1;
+    } else {
+      player.padDebounced.start += player.padDebounced.start <= 0 ? 0 : -1;
+    }
+    if (player.padCurr.select) {
+      player.padDebounced.select +=
+        player.padDebounced.select >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES
+          ? 0
+          : 1;
+    } else {
+      player.padDebounced.select += player.padDebounced.select <= 0 ? 0 : -1;
+    }
     if (player.padCurr.up) {
       player.padDebounced.up +=
         player.padDebounced.up >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
@@ -845,16 +882,15 @@ export function debugUpdatePrintFullControllerZero(game: Game): void {
     return;
   }
   game.players.forEach((player, playerIndex) => {
-
     if (player?.gamepad?.buttons) {
       const buttons = player.gamepad.buttons;
       // const axes = player.gamepad.axes;
 
-      buttons.forEach((button: { pressed: any; }, buttonIndex: any) => { 
+      buttons.forEach((button: { pressed: any }, buttonIndex: any) => {
         if (button?.pressed) {
           console.log('PLAYER', playerIndex, 'BUTTON', buttonIndex, button);
         }
-      })
+      });
 
       // console.log('PLAYER', playerIndex, 'CONTROLLER', player.gamepad);
     }
@@ -862,7 +898,7 @@ export function debugUpdatePrintFullControllerZero(game: Game): void {
     //   const buttons = player.gamepad.pad.buttons;
     //   // const axes = player.gamepad.axes;
 
-    //   buttons.forEach((button: { pressed: any; }, buttonIndex: any) => { 
+    //   buttons.forEach((button: { pressed: any; }, buttonIndex: any) => {
     //     if (button?.pressed) {
     //       console.log('PLAYER', playerIndex, 'BUTTON', buttonIndex, button);
     //     }
@@ -871,7 +907,7 @@ export function debugUpdatePrintFullControllerZero(game: Game): void {
     //   // console.log('PLAYER', playerIndex, 'CONTROLLER', player.gamepad);
     // }
   });
-// console.log('gamepad', game.input.gamepad.gamepads);  
+  // console.log('gamepad', game.input.gamepad.gamepads);
   // for (let i = 0; i < game.players[0].gamepad.buttons.length; i++) {
   //   console.log('PLAYER 0', game?.players[0]?.gamepad?.buttons[i]?.value);
   // }
