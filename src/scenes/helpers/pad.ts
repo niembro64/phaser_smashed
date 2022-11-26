@@ -268,8 +268,22 @@ export function updatePadCurrControllerTypeButtons(
   game: Game
 ): void {
   if (player?.gamepad) {
-    player.padCurr.start = player.gamepad?.buttons[9]?.pressed ? true : false;
-    player.padCurr.select = player.gamepad?.buttons[8]?.pressed ? true : false;
+    if (
+      player?.gamepad?.buttons?.length &&
+      player?.gamepad?.buttons[9]?.pressed !== undefined &&
+      player?.gamepad?.buttons[9]?.pressed !== null
+    ) {
+      player.padCurr.start = player.gamepad?.buttons[9]?.pressed ? true : false;
+    }
+    if (
+      player?.gamepad?.buttons?.length &&
+      player?.gamepad?.buttons[8]?.pressed !== undefined &&
+      player?.gamepad?.buttons[8]?.pressed !== null
+    ) {
+      player.padCurr.select = player.gamepad?.buttons[8]?.pressed
+        ? true
+        : false;
+    }
     player.padCurr.up = player.gamepad.up;
     player.padCurr.down = player.gamepad.down;
     player.padCurr.left = player.gamepad.left;
