@@ -389,14 +389,15 @@ body {
   color: rgba(255, 255, 255, 0.25);
 }
 .b-dark {
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
+  background-color: hsl(200, 0%, 5%);
 
   color: rgba(255, 255, 255, 1);
 
   border: 0px solid;
 }
 .b-dark:hover {
-  background-color: hsl(200, 0%, 20%);
+  background-color: hsl(200, 0%, 10%);
   border: 0px solid;
 }
 .b-dark:active {

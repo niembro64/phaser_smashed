@@ -87,6 +87,15 @@ export default class Game extends Phaser.Scene {
     BGM_ROYKSOP: '/na/royksop_macumba_05loop.wav',
   };
 
+  FILE_HEADS: any = [
+    'MarioHeadSSB',
+    'LinkHeadSSB',
+    'PikachuHeadSSB',
+    'KirbyHeadSSB',
+    'NessHeadSSB',
+    'MetalMarioHeadSSB',
+  ];
+
   SOUND_INTRO: any;
   SOUND_GUN: any;
   SOUND_HIT: any;
@@ -572,6 +581,7 @@ export default class Game extends Phaser.Scene {
         colorFilter: false,
         src: 'images/character_0_cropped.png',
         scale: 1,
+        spriteHead: null,
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -710,6 +720,7 @@ export default class Game extends Phaser.Scene {
         colorFilter: false,
         src: 'images/character_1_cropped.png',
         scale: 1,
+        spriteHead: null,
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -847,6 +858,7 @@ export default class Game extends Phaser.Scene {
         colorFilter: false,
         src: 'images/character_2_cropped.png',
         scale: 1,
+        spriteHead: null,
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -984,6 +996,7 @@ export default class Game extends Phaser.Scene {
         colorFilter: false,
         src: 'images/character_3_cropped.png',
         scale: 1,
+        spriteHead: null,
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -1120,6 +1133,7 @@ export default class Game extends Phaser.Scene {
         colorFilter: false,
         src: 'images/character_4_cropped.png',
         scale: 0.1,
+        spriteHead: null,
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },
@@ -1241,7 +1255,7 @@ export default class Game extends Phaser.Scene {
       scoreBoardController: 'X',
       state: { name: 'player-state-start', gameStamp: 0, timeStamp: 0 },
       char: {
-        name: 'Black-Chez',
+        name: 'BlackChez',
         initializeCharPosition: {
           // lookingRight: false,
           x: 200,
@@ -1256,6 +1270,7 @@ export default class Game extends Phaser.Scene {
         colorFilter: false,
         src: 'images/character_5_cropped.png',
         scale: 0.2,
+        spriteHead: null,
         sprite: null,
         zoom: 1,
         vel: { x: 0, y: 0 },

@@ -5,6 +5,7 @@ import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
 } from './helpers/damage';
+import { playerGrabAttackEnergy } from './helpers/pad';
 import { filterNormalAttackEnergy, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
@@ -386,6 +387,8 @@ export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
   game.players.forEach((player, playerIndex) => {
+    player.char.spriteHead = game.add.sprite(0, 0, 'head' + player.char.name);
+
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
