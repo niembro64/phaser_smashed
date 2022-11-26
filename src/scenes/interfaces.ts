@@ -146,6 +146,8 @@ export interface CameraChar {
 }
 
 export interface GamepadData {
+  start: boolean;
+  select: boolean;
   up: boolean;
   down: boolean;
   left: boolean;
@@ -159,6 +161,8 @@ export interface GamepadData {
 }
 
 export interface PadStateDebounced {
+  start: number
+  select: number;
   up: number;
   down: number;
   left: number;

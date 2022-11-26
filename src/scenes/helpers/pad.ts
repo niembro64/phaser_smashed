@@ -91,8 +91,8 @@ export function updatePadCurrControllerTypePro(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L11;
-  player.padCurr.R = player.gamepad.R11;
+  player.padCurr.L = player.gamepad.L1;
+  player.padCurr.R = player.gamepad.R1;
 
   // for (let i = 0; i < player?.gamepad?.axes.length; i++) {
   //   console.log(i, player?.gamepad?.axes[i]?.getValue());

@@ -652,6 +652,8 @@ export default class Game extends Phaser.Scene {
       keyboard: null,
       gamepad: null,
       padCurr: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -664,6 +666,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padPrev: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -676,6 +680,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padDebounced: {
+        start: 0,
+        select: 0,
         up: 0,
         down: 0,
         left: 0,
@@ -790,6 +796,8 @@ export default class Game extends Phaser.Scene {
       keyboard: null,
       gamepad: null,
       padCurr: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -802,6 +810,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padPrev: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -814,6 +824,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padDebounced: {
+        start: 0,
+        select: 0,
         up: 0,
         down: 0,
         left: 0,
@@ -928,6 +940,8 @@ export default class Game extends Phaser.Scene {
       keyboard: null,
       gamepad: null,
       padCurr: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -940,6 +954,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padPrev: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -952,6 +968,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padDebounced: {
+        start: 0,
+        select: 0,
         up: 0,
         down: 0,
         left: 0,
@@ -1065,6 +1083,8 @@ export default class Game extends Phaser.Scene {
       keyboard: null,
       gamepad: null,
       padCurr: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -1077,6 +1097,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padPrev: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -1089,6 +1111,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padDebounced: {
+        start: 0,
+        select: 0,  
         up: 0,
         down: 0,
         left: 0,
@@ -1202,6 +1226,8 @@ export default class Game extends Phaser.Scene {
       keyboard: null,
       gamepad: null,
       padCurr: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -1214,6 +1240,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padPrev: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -1226,6 +1254,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padDebounced: {
+        start: 0,
+        select: 0,
         up: 0,
         down: 0,
         left: 0,
@@ -1339,6 +1369,8 @@ export default class Game extends Phaser.Scene {
       keyboard: null,
       gamepad: null,
       padCurr: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -1351,6 +1383,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padPrev: {
+        start: false,
+        select: false,
         up: false,
         down: false,
         left: false,
@@ -1363,6 +1397,8 @@ export default class Game extends Phaser.Scene {
         L: false,
       },
       padDebounced: {
+        start: 0,
+        select: 0,
         up: 0,
         down: 0,
         left: 0,
