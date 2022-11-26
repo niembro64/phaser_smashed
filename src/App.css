@@ -121,7 +121,7 @@ body {
 .question-mark {
   height: 100%;
   justify-self: flex-start;
-  filter: opacity(0.3);
+  filter: opacity(0.25);
   transition: 2s ease;
 }
 
@@ -385,8 +385,11 @@ body {
   padding: 0;
   margin: 0;
 }
+.b-top-dark {
+  color: rgba(255, 255, 255, 0.25);
+}
 .b-dark {
-  background-color: hsl(200, 0%, 10%);
+  background-color: rgb(255, 255, 255);
 
   color: rgba(255, 255, 255, 1);
 
@@ -655,7 +658,7 @@ body {
 }
 .startImageNormal {
   margin-bottom: 2%;
-  transform : scale(1);
+  transform: scale(1);
   z-index: 0;
 }
 .startImageInverse {

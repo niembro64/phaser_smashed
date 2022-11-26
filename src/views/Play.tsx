@@ -674,7 +674,9 @@ function Play() {
                 onClickPlayNavButtons('Controllers');
               }}
             >
-              {showControllers && <span>...........</span>}
+              {showControllers && (
+                <span className="b-top-dark">Controllers</span>
+              )}
               {!showControllers && <span>Controllers</span>}
             </button>
           )}
@@ -747,7 +749,7 @@ function Play() {
               onClickPlayNavButtons('Controls');
             }}
           >
-            {showControls && <span>........</span>}
+            {showControls && <span className="b-top-dark">Controls</span>}
             {!showControls && <span>Controls</span>}
           </button>
           <button
@@ -756,7 +758,7 @@ function Play() {
               onClickPlayNavButtons('Rules-N64');
             }}
           >
-            {showRulesN64 && <span>.........</span>}
+            {showRulesN64 && <span className="b-top-dark">Rules-N64</span>}
             {!showRulesN64 && <span>Rules-N64</span>}
           </button>
           {webState === 'start' && (
@@ -766,7 +768,7 @@ function Play() {
                 onClickPlayNavButtons('History');
               }}
             >
-              {showHistory && <span>.......</span>}
+              {showHistory && <span className="b-top-dark">History</span>}
               {!showHistory && <span>History</span>}
             </button>
           )}
@@ -776,7 +778,7 @@ function Play() {
               onClickPlayNavButtons('About');
             }}
           >
-            {showAbout && <span>.....</span>}
+            {showAbout && <span className="b-top-dark">About</span>}
             {!showAbout && <span>About</span>}
           </button>
         </div>
