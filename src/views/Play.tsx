@@ -509,17 +509,17 @@ function Play() {
     }
   };
 
-  const [clockTime, setClockTime] = useState({
-    minutes: 0,
-    seconds: 0,
-  });
-  const [clockGame, setClockGame] = useState({
-    minutes: 0,
-    seconds: 0,
-  });
+  // const [clockTime, setClockTime] = useState({
+  //   minutes: 0,
+  //   seconds: 0,
+  // });
+  // const [clockGame, setClockGame] = useState({
+  //   minutes: 0,
+  //   seconds: 0,
+  // });
 
-  const componentPseudoLoad = useRef(true);
-  const intervalClock: any = useRef(null);
+  // const componentPseudoLoad = useRef(true);
+  // const intervalClock: any = useRef(null);
 
   return (
     <div className="overDiv">
@@ -700,9 +700,9 @@ function Play() {
                 onClickPlayNavButtons('Back');
                 setWebState('start');
                 setNumClicks(numClicks + 1);
-                clearInterval(intervalClock.current);
-                intervalClock.current = null;
-                componentPseudoLoad.current = true;
+                // clearInterval(intervalClock.current);
+                // intervalClock.current = null;
+                // componentPseudoLoad.current = true;
                 myPhaser.current.destroy(true);
               }}
             >
@@ -730,9 +730,9 @@ function Play() {
                   let newDebug = JSON.parse(
                     JSON.stringify(myPhaser.current?.scene?.keys?.game.debug)
                   );
-                  clearInterval(intervalClock.current);
-                  intervalClock.current = null;
-                  componentPseudoLoad.current = true;
+                  // clearInterval(intervalClock.current);
+                  // intervalClock.current = null;
+                  // componentPseudoLoad.current = true;
                   myPhaser.current.destroy(true);
 
                   if (!debug.setLoadTimeExtra) {
@@ -977,7 +977,7 @@ function Play() {
       </div>
       {webState === 'play' && myPhaser.current?.scene?.keys?.game?.loaded && (
         <div className="game-bar">
-          <div className="game-bar-time">
+          {/* <div className="game-bar-time">
             <p>
               {clockTime.minutes}:
               {clockTime.seconds < 10
@@ -990,7 +990,7 @@ function Play() {
                 ? '0' + clockGame.seconds.toString()
                 : clockGame.seconds}
             </h1>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
