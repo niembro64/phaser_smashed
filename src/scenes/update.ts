@@ -7,6 +7,7 @@ import {
   updateGamePadsConnected,
   debugUpdatePrintAllControllerButtonsWhenActive,
   debugUpdateControllersPrintConnected,
+  debugUpdatePrintFullControllerZero,
 } from './helpers/pad';
 import {
   updateJumpPhysical,
@@ -71,6 +72,7 @@ export function update(game: Game, time: number, delta: number): void {
   updateGamePadsConnected(game);
   debugUpdatePrintAllControllerButtonsWhenActive(game);
   debugUpdateControllersPrintConnected(game);
+  debugUpdatePrintFullControllerZero(game);
 
   switch (game.gameState.name) {
     case 'game-state-start':

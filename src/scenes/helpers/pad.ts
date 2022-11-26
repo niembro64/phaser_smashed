@@ -1,3 +1,4 @@
+import { createNoSubstitutionTemplateLiteral } from 'typescript';
 import Game from '../Game';
 import { Player } from '../interfaces';
 import {
@@ -90,8 +91,8 @@ export function updatePadCurrControllerTypePro(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L;
-  player.padCurr.R = player.gamepad.R;
+  player.padCurr.L = player.gamepad.L11;
+  player.padCurr.R = player.gamepad.R11;
 
   // for (let i = 0; i < player?.gamepad?.axes.length; i++) {
   //   console.log(i, player?.gamepad?.axes[i]?.getValue());
@@ -208,8 +209,8 @@ export function updatePadCurrControllerTypeHat(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L;
-  player.padCurr.R = player.gamepad.R;
+  player.padCurr.L = player.gamepad.L1;
+  player.padCurr.R = player.gamepad.R1;
 
   // NO STICK TRY HAT
   let hatVal = player?.gamepad?.axes[9]?.getValue();
@@ -274,8 +275,8 @@ export function updatePadCurrControllerTypeButtons(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L;
-  player.padCurr.R = player.gamepad.R;
+  player.padCurr.L = player.gamepad.L1;
+  player.padCurr.R = player.gamepad.R1;
 }
 
 export function getControllerIsRealController(gamepad: Gamepad): boolean {
@@ -300,9 +301,11 @@ export function getPlayerPauses(player: Player, game: Game): boolean {
 }
 
 export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
-  // if (player.gamepad.L && player.gamepad.R) {
+  // if (player.gamepad.L1 && player.gamepad.R1) {
   //   return true;
   // }
+  // console.log(player.playerId, 'player.gamepad.L1', player.gamepad.L1);
+  // console.log(player.playerId, 'player.gamepad.R1', player.gamepad.R1);
   if (player.padCurr.L && player.padCurr.R) {
     return true;
   }
@@ -334,8 +337,8 @@ export function getIsPlayerReady(player: Player, game: Game): boolean {
   //   !player.gamepad.B &&
   //   !player.gamepad.X &&
   //   !player.gamepad.Y &&
-  //   !player.gamepad.R &&
-  //   !player.gamepad.L
+  //   !player.gamepad.R1 &&
+  //   !player.gamepad.L1
   // ) {
   //   return false;
   // }
@@ -370,8 +373,8 @@ export function getIsAllPlayersReady(game: Game): boolean {
   //     !game.players[i].gamepad.B &&
   //     !game.players[i].gamepad.X &&
   //     !game.players[i].gamepad.Y &&
-  //     !game.players[i].gamepad.R &&
-  //     !game.players[i].gamepad.L
+  //     !game.players[i].gamepad.R1 &&
+  //     !game.players[i].gamepad.L1
   //   ) {
   //     return false;
   //   }
@@ -723,8 +726,8 @@ export function debugUpdateControllersPrintConnected(game: Game): void {
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    // console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad);
-    // console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad.id);
+    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad);
+    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad?.id);
   });
 }
 
@@ -739,7 +742,15 @@ export function updateControllerMovement(player: Player, game: Game): void {
       return;
     }
 
-    if (player.padCurr.up && !player.padCurr.Y) {
+    // if (player.padCurr.up && !player.padCurr.Y) {
+    //   player.char.sprite.body.setVelocityY(
+    //     player.char.sprite.body.velocity.y +
+    //       -game.BASE_PLAYER_SPEED.y *
+    //         player.char.speed *
+    //         player.char.fast *
+    //         (1 - game.RATIO_ACCELERATION_VELOCITY)
+    //   );
+    if (player.padCurr.up) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
           -game.BASE_PLAYER_SPEED.y *
@@ -829,6 +840,16 @@ export function updateControllerMovement(player: Player, game: Game): void {
   }
 }
 
+export function debugUpdatePrintFullControllerZero(game: Game): void {
+  if (!game.debug.setPrintControllerZeroConsole) {
+    return;
+  }
+console.log('gamepad', game.input.gamepad.gamepads);  
+  // for (let i = 0; i < game.players[0].gamepad.buttons.length; i++) {
+  //   console.log('PLAYER 0', game?.players[0]?.gamepad?.buttons[i]?.value);
+  // }
+}
+
 export function debugUpdatePrintAllControllerButtonsWhenActive(
   game: Game
 ): void {
@@ -837,93 +858,92 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
   }
   // Buttons
   game.players.forEach((player, playerIndex) => {
-    if (player.gamepad) {
-      if (playerIndex === 0) {
-        // console.log(playerIndex, player.gamepad);
-        // console.log(playerIndex, player.gamepad.axes);
-        // console.log(playerIndex, player.gamepad.buttons[0].pressed);
-        //
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._RCTop",
-        //   player.gamepad._RCTop
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._RCBottom",
-        //   player.gamepad._RCBottom
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._RCLeft",
-        //   player.gamepad._RCLeft
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._RCRight",
-        //   player.gamepad._RCRight
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._LCTop",
-        //   player.gamepad._LCTop
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._LCBottom",
-        //   player.gamepad._LCBottom
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._LCLeft",
-        //   player.gamepad._LCLeft
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._LCRight",
-        //   player.gamepad._LCRight
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._FBLeftBottom",
-        //   player.gamepad._FBLeftBottom
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._FBLeftTop",
-        //   player.gamepad._FBLeftTop
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._FBRightBottom",
-        //   player.gamepad._FBRightBottom
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._FBRightTop",
-        //   player.gamepad._FBRightTop
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._HAxisLeft",
-        //   player.gamepad._HAxisLeft
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._VAxisLeft",
-        //   player.gamepad._VAxisLeft
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._HAxisRight",
-        //   player.gamepad._HAxisRight
-        // );
-        // console.log(
-        //   playerIndex,
-        //   "player.gamepad._VAxisRight",
-        //   player.gamepad._VAxisRight
-        // );
-      }
+    if (player?.gamepad) {
+      // console.log(playerIndex, player.gamepad);
+      // console.log(playerIndex, player.gamepad.axes);
+      // console.log(playerIndex, player.gamepad.buttons[0].pressed);
+      //
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._RCTop",
+      //   player.gamepad._RCTop
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._RCBottom",
+      //   player.gamepad._RCBottom
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._RCLeft",
+      //   player.gamepad._RCLeft
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._RCRight",
+      //   player.gamepad._RCRight
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._LCTop",
+      //   player.gamepad._LCTop
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._LCBottom",
+      //   player.gamepad._LCBottom
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._LCLeft",
+      //   player.gamepad._LCLeft
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._LCRight",
+      //   player.gamepad._LCRight
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._FBLeftBottom",
+      //   player.gamepad._FBLeftBottom
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._FBLeftTop",
+      //   player.gamepad._FBLeftTop
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._FBRightBottom",
+      //   player.gamepad._FBRightBottom
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._FBRightTop",
+      //   player.gamepad._FBRightTop
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._HAxisLeft",
+      //   player.gamepad._HAxisLeft
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._VAxisLeft",
+      //   player.gamepad._VAxisLeft
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._HAxisRight",
+      //   player.gamepad._HAxisRight
+      // );
+      // console.log(
+      //   playerIndex,
+      //   "player.gamepad._VAxisRight",
+      //   player.gamepad._VAxisRight
+      // );
+
       if (player.padCurr.B) {
         console.log(player.playerId, 'B');
       }
@@ -989,10 +1009,10 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
       // }
 
       // // L R Buttons
-      // if (player.gamepad.L) {
+      // if (player.gamepad.L1) {
       //   console.log(player.playerId, "L");
       // }
-      // if (player.gamepad.R) {
+      // if (player.gamepad.R1) {
       //   console.log(player.playerId, "R");
       // }
       // // L R Buttons
@@ -1005,7 +1025,7 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
 
       // for (let i = 0; i < player.gamepad.pad.buttons.length; i++) {
       //   //   console.log(i);
-      //   console.log("ERIC", i, player.gamepad.pad.buttons[i].value);
+      //   console.log('ERIC', i, player.gamepad.pad.buttons);
       // }
       // console.log("ERIC", player.gamepad.pad.buttons[0].value);
       // console.log(player.gamepad.pad.buttons[1].value);

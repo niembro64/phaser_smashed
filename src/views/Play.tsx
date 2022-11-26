@@ -30,12 +30,50 @@ import {
   PlayerConfig,
   Quote,
   WebState,
-} from './ViewInterfaces';
+} from '../scenes/interfaces';
+// import {
+//   CharacterId,
+//   CharacterName,
+//   Debug,
+//   PlayerConfig,
+//   Quote,
+//   WebState,
+// } from './ViewInterfaces';
 import { InputType } from '../scenes/interfaces';
 
 function Play() {
   let myPhaser: any = useRef(null);
 
+  const debug: Debug = {
+    setLevel: 5, //012345
+    setDurationMinutes: 7, //01234567
+    setUpdateLoopsNumSkip: 2, // 012
+    setMusicNumber: 2, // 012
+    setMusicActive: true,
+    setReadySoundActive: false,
+    setFrictionAirActive: true,
+    setCamerasActive: true,
+    setCamerasVisible: false,
+    setCollidersPvP: false,
+    setCollidersPvAttackPhysical: false,
+    setCollidersPvAttackEnergy: false,
+    setCollidersAEvAE: true,
+    setCollidersAEvAP: true,
+    setAEWrapScreen: false,
+    setPlayerIdVisible: true,
+    setWallJumpsActive: true,
+    setDefaultDamage: false,
+    setDefaultHitback: false,
+    setPlayerIdFiltersActive: false,
+    setHealthInverted: false,
+    setMatricesAlwaysVisible: false,
+    setPrintControllerButtonsConsole: false,
+    setPrintControllerConnectedConsole: false,
+    setPrintControllerZeroConsole: true,
+    setLoadTimeExtra: true,
+    setChezSecret: true,
+    setIsDevMode: true,
+  };
   // const [gamePads, setGamePads] = useState<any[]>([]);
 
   // useGamepads((pad) => {
@@ -177,35 +215,7 @@ function Play() {
     // { name: 'Ginman', text: "Set it up... and we'll do it... again." },
     // { name: 'Gin', text: 'Shitty, shitty-fuckin-ass.' },
   ];
-  const debug: Debug = {
-    setLevel: 5, //012345
-    setDurationMinutes: 7, //01234567
-    setUpdateLoopsNumSkip: 2, // 012
-    setMusicNumber: 2, // 012
-    setMusicActive: true,
-    setReadySoundActive: false,
-    setFrictionAirActive: true,
-    setCamerasActive: true,
-    setCamerasVisible: false,
-    setCollidersPvP: false,
-    setCollidersPvAttackPhysical: false,
-    setCollidersPvAttackEnergy: false,
-    setCollidersAEvAE: true,
-    setCollidersAEvAP: true,
-    setAEWrapScreen: false,
-    setPlayerIdVisible: true,
-    setWallJumpsActive: true,
-    setDefaultDamage: false,
-    setDefaultHitback: false,
-    setPlayerIdFiltersActive: false,
-    setHealthInverted: false,
-    setMatricesAlwaysVisible: false,
-    setPrintControllerButtonsConsole: false,
-    setPrintControllerConnectedConsole: false,
-    setLoadTimeExtra: true,
-    setChezSecret: true,
-    setIsDevMode: false,
-  };
+
   const onClickStartStartButton = () => {
     trance.pause();
     startSound();
