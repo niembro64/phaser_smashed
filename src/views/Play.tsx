@@ -414,8 +414,8 @@ function Play() {
     { button: 'B', move: 'Punch', status: '🚧' },
     { button: 'Forward + B', move: 'Smash', status: '❌' },
     { button: 'Air + Wall + Forward', move: 'Wall Slide', status: '✔️' },
-    { button: 'L + R', move: 'Pause', status: '✔️' },
-    { button: 'Paused + Any Button', move: 'Ready', status: '✔️' },
+    { button: 'L + R or Start', move: 'Pause', status: '✔️' },
+    { button: 'Any Button Execpt Start', move: 'Ready', status: '✔️' },
     { button: 'Paused + All Ready', move: 'UnPause', status: '✔️' },
   ];
 
