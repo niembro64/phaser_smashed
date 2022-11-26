@@ -1,3 +1,4 @@
+import { SpawnSyncOptions } from 'child_process';
 
 export type GameState =
   | 'game-state-start'
@@ -43,12 +44,7 @@ export interface CameraHelper {
   helperState: Loc | any;
 }
 
-export type InputType =
-  | 'wasd'
-  | 'arrows'
-  | 'snes'
-  | 's-wired'
-  | 's-pro';
+export type InputType = 'wasd' | 'arrows' | 'snes' | 's-wired' | 's-pro';
 
 export interface Player {
   playerId: number;
@@ -60,7 +56,7 @@ export interface Player {
   state: PlayerStateWithTime;
   char: Char;
   inputType: InputType | any;
-  keyboard: keyboard | any;
+  keyboard: Keyboard | any;
   gamepad: Gamepad | any;
   padCurr: GamepadData;
   padPrev: GamepadData;
@@ -91,7 +87,7 @@ export interface Char {
   jumps: number[];
   jumpPower: number;
   jumpIndex: number;
-  upB: UpB;
+  jumpEnergy: JumpEnergy;
   damage: number;
   speed: number;
   fast: number;
@@ -194,7 +190,7 @@ export interface AttackEnergyRotation {
   speed: number;
 }
 
-export interface UpB {
+export interface JumpEnergy {
   canUse: boolean;
   y: number;
   x: number;
@@ -321,7 +317,7 @@ export interface Vector {
   y: number;
 }
 
-export interface keyboard {
+export interface Keyboard {
   up: any;
   down: any;
   left: any;
@@ -332,4 +328,15 @@ export interface keyboard {
   Y: any;
   L: any;
   R: any;
+}
+
+export interface SpecBiasPlayer {
+  char: SpecBias;
+  attackPhysical: SpecBias;
+  attackEnergy: SpecBias;
+}
+
+export interface SpecBias {
+  multiplierDamage: number;
+  multiplierHitback: number;
 }

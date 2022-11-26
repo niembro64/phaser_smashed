@@ -1,5 +1,5 @@
-import Game from "../Game";
-import { AttackEnergy, Player } from "../interfaces";
+import Game from '../Game';
+import { AttackEnergy, Player } from '../interfaces';
 
 export function updateJumpEnergy(player: Player, game: Game): void {
   // if (
@@ -15,7 +15,7 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     !player.padPrev.B &&
     // player.padCurr.X &&
     // !player.padPrev.X &&
-    player.char.upB.canUse &&
+    player.char.jumpEnergy.canUse &&
     !player.char.sprite.body.touching.down &&
     !player.char.sprite.body.touching.left &&
     !player.char.sprite.body.touching.right
@@ -69,7 +69,7 @@ export function updateJumpEnergy(player: Player, game: Game): void {
       player.char.sprite.body.setVelocityX(-game.BASE_PLAYER_JUMP_ENERGY);
     }
     // player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
-    player.char.upB.canUse = false;
+    player.char.jumpEnergy.canUse = false;
     player.emitterPlayer.active = true;
     // player.emitterPlayer.visible = true;
     player.emitterPlayer.on = true;
@@ -87,10 +87,11 @@ export function updateJumpEnergy(player: Player, game: Game): void {
   // }
   if (
     (player.char.sprite.body.touching.down ||
-    player.char.sprite.body.touching.left ||
-    player.char.sprite.body.touching.right) && !player.emitterPlayer.on
+      player.char.sprite.body.touching.left ||
+      player.char.sprite.body.touching.right) &&
+    !player.emitterPlayer.on
   ) {
-    player.char.upB.canUse = true;
+    player.char.jumpEnergy.canUse = true;
     // player.emitterPlayer.on = false;
   }
   updatePlayerGravityIfEmitterPlayer(player);
