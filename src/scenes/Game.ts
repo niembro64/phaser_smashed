@@ -12,7 +12,7 @@ import {
   Vector,
   Keyboard,
   Debug,
-  SmashConfig
+  SmashConfig,
 } from './interfaces';
 import { preload } from './preload';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
@@ -1112,7 +1112,7 @@ export default class Game extends Phaser.Scene {
       },
       padDebounced: {
         start: 0,
-        select: 0,  
+        select: 0,
         up: 0,
         down: 0,
         left: 0,

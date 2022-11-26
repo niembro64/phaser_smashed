@@ -703,6 +703,12 @@ function Play() {
                 clearInterval(intervalClock.current);
                 intervalClock.current = null;
                 componentPseudoLoad.current = true;
+
+                // delete myPhaser.current;
+                // myPhaser.current = null;
+                myPhaser.current.events.on('destroy', () => {
+                  console.log('destroyed');
+                });
                 myPhaser.current.destroy(true);
               }}
             >
@@ -733,7 +739,10 @@ function Play() {
                   clearInterval(intervalClock.current);
                   intervalClock.current = null;
                   componentPseudoLoad.current = true;
+
                   myPhaser.current.destroy(true);
+                  // delete myPhaser.current;
+                  // myPhaser.current = null;
 
                   if (!debug.setLoadTimeExtra) {
                     setTimeoutQuotesLengthReStart = 0;
