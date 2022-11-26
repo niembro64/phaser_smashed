@@ -387,8 +387,6 @@ export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
   game.players.forEach((player, playerIndex) => {
-    player.char.spriteHead = game.add.sprite(0, 0, 'head' + player.char.name);
-
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
@@ -1038,6 +1036,7 @@ export function createScoreboard(game: Game): void {
       },
     }
   );
+
   game.scoreBoardTimeGame
     .setOrigin(0.5, 0)
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
@@ -1073,6 +1072,10 @@ export function createScoreboard(game: Game): void {
   game.scoreBoardTimeGame.setAlpha(1);
   game.scoreBoardTimeTime.setAlpha(1);
 
+  game.players.forEach((player, playerIndex) => {
+    player.char.spriteHead = game.add.sprite(0, 0, 'head' + player.char.name);
+  });
+  
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardUpper = game.add
       .text(

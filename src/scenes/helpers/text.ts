@@ -295,6 +295,10 @@ export function updateDeathsKillsText(
   newY: number
 ): void {
   game.players.forEach((player, playerIndex) => {
+    player.char.spriteHead.setScale(0.7 / zoom, 0.7 / zoom);
+    player.char.spriteHead.x = game.cameraMover.char.sprite.x;
+    player.char.spriteHead.y = newY;
+
     player.scoreBoardLower
       .setScale(1 / zoom, 1 / zoom)
       .setText(
