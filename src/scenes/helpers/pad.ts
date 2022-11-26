@@ -844,7 +844,34 @@ export function debugUpdatePrintFullControllerZero(game: Game): void {
   if (!game.debug.setPrintControllerZeroConsole) {
     return;
   }
-console.log('gamepad', game.input.gamepad.gamepads);  
+  game.players.forEach((player, playerIndex) => {
+
+    if (player?.gamepad?.buttons) {
+      const buttons = player.gamepad.buttons;
+      // const axes = player.gamepad.axes;
+
+      buttons.forEach((button: { pressed: any; }, buttonIndex: any) => { 
+        if (button?.pressed) {
+          console.log('PLAYER', playerIndex, 'BUTTON', buttonIndex, button);
+        }
+      })
+
+      // console.log('PLAYER', playerIndex, 'CONTROLLER', player.gamepad);
+    }
+    // if (player?.gamepad?.pad?.buttons) {
+    //   const buttons = player.gamepad.pad.buttons;
+    //   // const axes = player.gamepad.axes;
+
+    //   buttons.forEach((button: { pressed: any; }, buttonIndex: any) => { 
+    //     if (button?.pressed) {
+    //       console.log('PLAYER', playerIndex, 'BUTTON', buttonIndex, button);
+    //     }
+    //   })
+
+    //   // console.log('PLAYER', playerIndex, 'CONTROLLER', player.gamepad);
+    // }
+  });
+// console.log('gamepad', game.input.gamepad.gamepads);  
   // for (let i = 0; i < game.players[0].gamepad.buttons.length; i++) {
   //   console.log('PLAYER 0', game?.players[0]?.gamepad?.buttons[i]?.value);
   // }
