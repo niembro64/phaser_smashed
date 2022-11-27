@@ -1073,10 +1073,6 @@ export function createScoreboard(game: Game): void {
   game.scoreBoardTimeTime.setAlpha(1);
 
   game.players.forEach((player, playerIndex) => {
-    player.char.spriteHead = game.add.sprite(0, 0, 'head' + player.char.name);
-  });
-  
-  game.players.forEach((player, playerIndex) => {
     player.scoreBoardUpper = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
