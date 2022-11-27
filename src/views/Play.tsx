@@ -626,7 +626,7 @@ function Play() {
                     )}
                   </div>
                   {/* {buttonsOnOff[cPlayerIndex].state && (
-                    <button
+                    <button type="button"
                       className="b-dark d-flex flex-row justify-content-between align-items-center"
                       onClick={() => {
                         onClickRotateInput(cPlayerIndex);
@@ -642,6 +642,7 @@ function Play() {
                   )} */}
                   {buttonsOnOff[cPlayerIndex].state && (
                     <button
+                      type="button"
                       className="b-dark px-4"
                       onClick={() => {
                         onClickStartOnOffButtons(cPlayerIndex, false);
@@ -652,6 +653,7 @@ function Play() {
                   )}
                   {!buttonsOnOff[cPlayerIndex].state && (
                     <button
+                      type="button"
                       className="px-4 b-black"
                       onClick={() => {
                         onClickStartOnOffButtons(cPlayerIndex, true);
@@ -664,7 +666,11 @@ function Play() {
               );
             })}
           </div>
-          <button className="b-start" onClick={onClickStartStartButton}>
+          <button
+            type="button"
+            className="b-start"
+            onClick={onClickStartStartButton}
+          >
             <span>START</span>
           </button>
         </div>
@@ -679,6 +685,7 @@ function Play() {
           />
           {webState === 'start' && (
             <button
+              type="button"
               className="linkTag b-top"
               onClick={() => {
                 onClickPlayNavButtons('Controllers');
@@ -692,6 +699,7 @@ function Play() {
           )}
           {webState !== 'start' && (
             <button
+              type="button"
               className="linkTag b-top"
               onClick={() => {
                 if (myPhaser?.current?.scene?.keys?.game) {
@@ -717,6 +725,7 @@ function Play() {
           )}
           {webState !== 'start' && (
             <button
+              type="button"
               className="linkTag b-top"
               onClick={() => {
                 if (myPhaser?.current?.scene?.keys?.game?.loaded) {
@@ -763,6 +772,7 @@ function Play() {
             </button>
           )}
           <button
+            type="button"
             className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons('Controls');
@@ -772,6 +782,7 @@ function Play() {
             {!showControls && <span>Controls</span>}
           </button>
           <button
+            type="button"
             className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons('Rules-N64');
@@ -782,6 +793,7 @@ function Play() {
           </button>
           {webState === 'start' && (
             <button
+              type="button"
               className="linkTag b-top"
               onClick={() => {
                 onClickPlayNavButtons('History');
@@ -792,6 +804,7 @@ function Play() {
             </button>
           )}
           <button
+            type="button"
             className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons('About');
