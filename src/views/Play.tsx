@@ -999,7 +999,7 @@ function Play() {
       </div>
       {webState === 'play' && myPhaser.current?.scene?.keys?.game?.loaded && (
         <div className="game-bar">
-          <div className="game-bar-time">
+          {/* <div className="game-bar-time">
             <p>
               {clockTime.minutes}:
               {clockTime.seconds < 10
@@ -1012,7 +1012,7 @@ function Play() {
                 ? '0' + clockGame.seconds.toString()
                 : clockGame.seconds}
             </h1>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
