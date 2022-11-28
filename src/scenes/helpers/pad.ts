@@ -504,6 +504,41 @@ export function playerHoldAttackEnergy(player: Player): void {
   }
 }
 
+export function playerReturnedAttackEnergy(player: Player): void {
+  if (!player.char.attackEnergy.followOnOffscreen) {
+    return;
+  }
+
+  player.char.attackEnergy.sprite.body.allowGravity = false;
+
+  // player.char.attackEnergy.sprite.body.setVelocityX(0);
+  // player.char.attackEnergy.sprite.body.setVelocityY(0);
+
+  if (player.char.sprite.flipX) {
+    player.char.attackEnergy.sprite.x =
+      player.char.sprite.x - player.char.attackEnergy.followOnOffscreenOffset.x;
+    player.char.attackEnergy.sprite.y =
+      player.char.sprite.y + player.char.attackEnergy.followOnOffscreenOffset.y;
+
+    player.char.attackEnergy.sprite.flipX = true;
+    player.char.attackEnergy.sprite.setRotation(
+      (player.char.attackEnergy.rotation.initial * Math.PI) / 2
+    );
+    player.char.attackEnergy.sprite.setAngularVelocity(0);
+  } else {
+    player.char.attackEnergy.sprite.x =
+      player.char.sprite.x + player.char.attackEnergy.followOnOffscreenOffset.x;
+    player.char.attackEnergy.sprite.y =
+      player.char.sprite.y + player.char.attackEnergy.followOnOffscreenOffset.y;
+
+    player.char.attackEnergy.sprite.flipX = false;
+    player.char.attackEnergy.sprite.setRotation(
+      player.char.attackEnergy.rotation.initial
+    );
+    player.char.attackEnergy.sprite.setAngularVelocity(0);
+  }
+}
+
 export function playerShootAttackEnergy(player: Player, game: Game): void {
   var vX =
     player.char.sprite.body.velocity.x * player.char.attackEnergy.vel.x * 0.5;
@@ -595,7 +630,8 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationCooldown &&
-    player.char.attackEnergy.state === 'held'
+    (player.char.attackEnergy.state === 'held' ||
+      player.char.attackEnergy.state === 'returned')
   ) {
     game.SOUND_GUN.play();
     player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
@@ -619,10 +655,14 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   // STATE RETURNED
   if (
     !player.char.attackEnergy.offscreenCurr &&
-    player.char.attackEnergy.offscreenPrev
+    player.char.attackEnergy.offscreenPrev &&
+    game.gameNanoseconds >
+      player.char.attackEnergy.timestampThrow +
+        player.char.attackEnergy.durationCooldown
   ) {
     player.char.attackEnergy.state = 'returned';
     setPhysicsAttackEnergyOff(player);
+    playerReturnedAttackEnergy(player);
   }
 }
 export function isSpriteOffscreen(
