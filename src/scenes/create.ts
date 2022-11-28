@@ -391,8 +391,17 @@ export function createPlayers(game: Game): void {
       game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
       player.char.name
     );
+  });
 
+  game.players.forEach((player, playerIndex) => {
     player.char.attackPhysical.audio = game.sound.add('gun', { volume: 0.6 });
+  });
+
+  game.players.forEach((player, playerIndex) => {
+    player.emitterLight.setScale(1 / player.char.scale);
+    player.emitterDark.setScale(1 / player.char.scale);
+    player.emitterPlayer.setScale(1 / player.char.scale);
+    player.emitterHurt.setScale(1 / player.char.scale);
 
     player.emitterLight.startFollow(player.char.sprite);
     player.emitterDark.startFollow(player.char.sprite);
@@ -416,6 +425,7 @@ export function createPlayers(game: Game): void {
     player.emitterPlayer.active = false;
     player.emitterHurt.active = false;
   });
+
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < 15; i++) {
       player.char.wallTouchArray.push(false);
