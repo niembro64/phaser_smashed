@@ -5,6 +5,7 @@ import {
   getIsAttackEnergyOffscreen,
   setPhysicsAttackEnergyOff,
   setPhysicsAttackEnergyOn,
+  updateAttackEnergyOffscreen,
 } from './attacks';
 import { updatePadCurrKeyboard } from './keyboard';
 
@@ -565,6 +566,8 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   //   return;
   // }
 
+  updateAttackEnergyOffscreen(player.char.attackEnergy, game);
+
   if (
     !getIsAttackEnergyOffscreen(player.char.attackEnergy, game) &&
     !isAttackEnergyNearPlayer(player)
@@ -585,7 +588,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   //   playerGrabAttackEnergy(player);
   // }
 
-  // SHOOT
+  // STATE SHOOT
   if (
     !player.gamepad?.X &&
     player.padPrev.X &&
@@ -601,7 +604,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     playerShootAttackEnergy(player, game);
     return;
   }
-  // HOLD
+  // STATE HOLD
   if (
     (player.gamepad?.X || player.padPrev.X || player.padDebounced.X) &&
     game.gameNanoseconds >
@@ -611,6 +614,15 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     player.char.attackEnergy.state = 'held';
     setPhysicsAttackEnergyOff(player);
     playerHoldAttackEnergy(player);
+  }
+
+  // STATE RETURNED
+  if (
+    !player.char.attackEnergy.offscreenCurr &&
+    player.char.attackEnergy.offscreenPrev
+  ) {
+    player.char.attackEnergy.state = 'returned';
+    setPhysicsAttackEnergyOff(player);
   }
 }
 export function isSpriteOffscreen(

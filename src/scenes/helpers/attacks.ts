@@ -1,5 +1,5 @@
-import Game from "../Game";
-import { AttackEnergy, Player } from "../interfaces";
+import Game from '../Game';
+import { AttackEnergy, Player } from '../interfaces';
 
 export function updateJumpEnergy(player: Player, game: Game): void {
   // if (
@@ -87,8 +87,9 @@ export function updateJumpEnergy(player: Player, game: Game): void {
   // }
   if (
     (player.char.sprite.body.touching.down ||
-    player.char.sprite.body.touching.left ||
-    player.char.sprite.body.touching.right) && !player.emitterPlayer.on
+      player.char.sprite.body.touching.left ||
+      player.char.sprite.body.touching.right) &&
+    !player.emitterPlayer.on
   ) {
     player.char.upB.canUse = true;
     // player.emitterPlayer.on = false;
@@ -112,6 +113,18 @@ export function setPhysicsAttackEnergyOn(player: Player): void {
   player.char.attackEnergy.sprite.body.enable = true;
   player.char.attackEnergy.sprite.body.allowGravity =
     player.char.attackEnergy.gravity;
+}
+export function updateAttackEnergyOffscreen(
+  attackEnergy: AttackEnergy,
+  game: Game
+): void {
+  if (getIsAttackEnergyOffscreen(attackEnergy, game)) {
+    attackEnergy.offscreenCurr = true;
+  } else {
+    attackEnergy.offscreenCurr = false;
+  }
+
+  attackEnergy.offscreenPrev = attackEnergy.offscreenCurr;
 }
 
 export function getIsAttackEnergyOffscreen(

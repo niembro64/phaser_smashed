@@ -250,7 +250,7 @@ export interface AttackPhysical {
 
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: 'held' | 'released';
+  state: 'held' | 'released' | 'returned';
   timestampThrow: number;
   durationCooldown: number;
   posFromCenter: PosFromCenter;
@@ -269,6 +269,8 @@ export interface AttackEnergy {
   rotation: AttackEnergyRotation;
   followOnOffscreen: boolean;
   followOnOffscreenOffset: { x: number; y: number };
+  offscreenCurr: boolean;
+  offscreenPrev: boolean;
 }
 export interface AttackEnergyFriction {
   air: number;
