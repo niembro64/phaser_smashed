@@ -141,6 +141,8 @@ body {
 
   font-size: 1.3vw;
   transition: 2s ease;
+
+  cursor: pointer;
 }
 
 #controls-col {

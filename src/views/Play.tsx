@@ -635,7 +635,7 @@ function Play() {
             alt="question mark"
           />
           {webState === 'start' && (
-            <button
+            <div
               className="linkTag b-top"
               onClick={() => {
                 onClickPlayNavButtons('Controllers');
@@ -645,10 +645,10 @@ function Play() {
                 <span className="dark-span">Controllers</span>
               )}
               {!showControllers && <span>Controllers</span>}
-            </button>
+            </div>
           )}
           {webState !== 'start' && (
-            <button
+            <div
               className="linkTag b-top"
               onClick={() => {
                 if (myPhaser?.current?.scene?.keys?.game) {
@@ -664,10 +664,10 @@ function Play() {
               }}
             >
               <span>Back</span>
-            </button>
+            </div>
           )}
           {webState !== 'start' && (
-            <button
+            <div
               className="linkTag b-top"
               onClick={() => {
                 if (myPhaser?.current?.scene?.keys?.game?.loaded) {
@@ -708,9 +708,9 @@ function Play() {
               }}
             >
               <span>ReStart</span>
-            </button>
+            </div>
           )}
-          <button
+          <div
             className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons('Controls');
@@ -718,8 +718,8 @@ function Play() {
           >
             {showControls && <span className="dark-span">Controls</span>}
             {!showControls && <span>Controls</span>}
-          </button>
-          <button
+          </div>
+          <div
             className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons('Rules-N64');
@@ -727,9 +727,9 @@ function Play() {
           >
             {showRulesN64 && <span className="dark-span">Rules-N64</span>}
             {!showRulesN64 && <span>Rules-N64</span>}
-          </button>
+          </div>
           {webState === 'start' && (
-            <button
+            <div
               className="linkTag b-top"
               onClick={() => {
                 onClickPlayNavButtons('History');
@@ -737,9 +737,9 @@ function Play() {
             >
               {showHistory && <span className="dark-span">History</span>}
               {!showHistory && <span>History</span>}
-            </button>
+            </div>
           )}
-          <button
+          <div
             className="linkTag b-top"
             onClick={() => {
               onClickPlayNavButtons('About');
@@ -747,7 +747,7 @@ function Play() {
           >
             {showAbout && <span className="dark-span">About</span>}
             {!showAbout && <span>About</span>}
-          </button>
+          </div>
         </div>
         {showControls && (
           <div className="overDiv">
