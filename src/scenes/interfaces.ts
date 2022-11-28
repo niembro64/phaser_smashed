@@ -332,4 +332,6 @@ export interface keyboard {
   Y: any;
   L: any;
   R: any;
+  start: any;
+  select: any;
 }
