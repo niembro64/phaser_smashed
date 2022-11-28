@@ -845,7 +845,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
     // }
 
     // CHECK INDIVIDUALS
-    if (player.padCurr.up && !player.padCurr.Y) {
+    if (player.padCurr.up) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
           -game.BASE_PLAYER_SPEED.y *
@@ -853,6 +853,14 @@ export function updateControllerMovement(player: Player, game: Game): void {
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
+    // if (player.padCurr.up && !player.padCurr.Y) {
+    //   player.char.sprite.body.setVelocityY(
+    //     player.char.sprite.body.velocity.y +
+    //       -game.BASE_PLAYER_SPEED.y *
+    //         player.char.speed *
+    //         player.char.fast *
+    //         (1 - game.RATIO_ACCELERATION_VELOCITY)
+    //   );
       // return;
     }
     if (player.padCurr.down) {
