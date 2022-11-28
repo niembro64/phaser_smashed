@@ -770,19 +770,45 @@ function Play() {
                 })}
                 {/* <p> fyi, button mapping is insane</p> */}
                 <div id="keyboard">
-                  <h3>P1 Keyboard</h3>
-                  <p>(Left-Side)</p>
-                  <p>D-Pad: W-A-S-D</p>
-                  <p>A-B-X-Y: F-G-H-SPACE</p>
-                  <p>L-R: T-Y</p>
+                  <div id="keyboard-top">
+                    <h3>First Keyboard</h3>
+                  </div>
+                  <div id="keyboard-bottom">
+                    <div id="keyboard-left">
+                      <p>W-A-S-D</p>
+                      <p>F-G-H-SPACE</p>
+                      <p>R-T-Y-U</p>
+                    </div>
+                    <div id="keyboard-right">
+                      <p>D-Pad</p>
+                      <p>A-X-B-Y</p>
+                      <p>L-Select-Start-R</p>
+                    </div>
+                  </div>
                 </div>
                 <div id="keyboard">
-                  <h3>P2 Keyboard</h3>
-                  <p>(Right-Side)</p>
-                  <p>D-Pad: Arrows</p>
-                  <p>A-B-X-Y: 1-2-3-0</p>
-                  <p>L-R: 5-6</p>
+                  <div id="keyboard-top">
+                    <h3>Second Keyboard</h3>
+                  </div>
+                  <div id="keyboard-bottom">
+                    <div id="keyboard-left">
+                      <p>ArrowKeys</p>
+                      <p>4-5-6-Enter</p>
+                      <p>7-8-9-Plus</p>
+                    </div>
+                    <div id="keyboard-right">
+                      <p>D-Pad</p>
+                      <p>A-X-B-Y</p>
+                      <p>L-Select-Start-R</p>
+                    </div>
+                  </div>
                 </div>
+                {/* <div id="keyboard">
+                  <h3>Second Keyboard</h3>
+                  <p>ArrowKeys : D-Pad</p>
+                  <p>4-5-6-Enter : A-X-B-Y</p>
+                  <p>7-8-9-Plus : L-Select-Start-R</p>
+                </div> */}
               </div>
             </div>
           </div>
