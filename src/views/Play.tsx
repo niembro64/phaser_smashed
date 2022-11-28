@@ -309,9 +309,11 @@ function Play() {
     }
     if (charId === 4) {
       bamPlay();
+      onClickStartOnOffButtons(0, true);
     }
     if (charId === 5) {
       woahPlay();
+      onClickStartOnOffButtons(0, true);
     }
 
     let choices = [...smashConfig.players];
@@ -567,7 +569,8 @@ function Play() {
                       <div className="startImageWrapper">
                         <img
                           className={
-                            'startImage' + (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                            'startImage' +
+                            (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
                           }
                           src={
                             'images/character_' +
