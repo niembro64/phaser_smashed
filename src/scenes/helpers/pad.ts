@@ -268,8 +268,8 @@ export function updatePadCurrControllerTypeButtons(
 ): void {
   player.padCurr.up = player.gamepad.up;
   player.padCurr.down = player.gamepad.down;
-  player.padCurr.left = player.gamepad.l1eft;
-  player.padCurr.right = player.gamepad.r1ight;
+  player.padCurr.left = player.gamepad.left;
+  player.padCurr.right = player.gamepad.right;
   player.padCurr.A = player.gamepad.A;
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
@@ -354,8 +354,8 @@ export function getIsPlayerReady(player: Player, game: Game): boolean {
   // if (
   //   !player.gamepad.up &&
   //   !player.gamepad.down &&
-  //   !player.gamepad.l1eft &&
-  //   !player.gamepad.r1ight &&
+  //   !player.gamepad.left &&
+  //   !player.gamepad.right &&
   //   !player.gamepad.A &&
   //   !player.gamepad.B &&
   //   !player.gamepad.X &&
@@ -390,8 +390,8 @@ export function getIsAllPlayersReady(game: Game): boolean {
   //   if (
   //     !game.players[i].gamepad.up &&
   //     !game.players[i].gamepad.down &&
-  //     !game.players[i].gamepad.l1eft &&
-  //     !game.players[i].gamepad.r1ight &&
+  //     !game.players[i].gamepad.left &&
+  //     !game.players[i].gamepad.right &&
   //     !game.players[i].gamepad.A &&
   //     !game.players[i].gamepad.B &&
   //     !game.players[i].gamepad.X &&
@@ -619,8 +619,8 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   // game.players.forEach((player) => {
   //   player.padPrev.up = player.gamepad.up;
   //   player.padPrev.down = player.gamepad.down;
-  //   player.padPrev.left = player.gamepad.l1eft;
-  //   player.padPrev.right = player.gamepad.r1ight;
+  //   player.padPrev.left = player.gamepad.left;
+  //   player.padPrev.right = player.gamepad.right;
   //   player.padPrev.A = player.gamepad.A;
   //   player.padPrev.B = player.gamepad.B;
   //   player.padPrev.X = player.gamepad.X;
@@ -640,13 +640,13 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   //   } else {
   //     player.padDebounced.down += player.padDebounced.down <= 0 ? 0 : -1;
   //   }
-  //   if (player.gamepad.l1eft) {
+  //   if (player.gamepad.left) {
   //     player.padDebounced.left +=
   //       player.padDebounced.left >= game.DEBOUNCE_NUMBER ? 0 : 1;
   //   } else {
   //     player.padDebounced.left += player.padDebounced.left <= 0 ? 0 : -1;
   //   }
-  //   if (player.gamepad.r1ight) {
+  //   if (player.gamepad.right) {
   //     player.padDebounced.right +=
   //       player.padDebounced.right >= game.DEBOUNCE_NUMBER ? 0 : 1;
   //   } else {
@@ -766,8 +766,8 @@ export function updateControllerMovement(player: Player, game: Game): void {
     }
     // if (player.gamepad) {
     //   if (
-    //     !player.gamepad.l1eft &&
-    //     !player.gamepad.r1ight &&
+    //     !player.gamepad.left &&
+    //     !player.gamepad.right &&
     //     !player.gamepad.up &&
     //     !player.gamepad.down
     //   ) {
@@ -908,7 +908,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
       //   );
       //   // return;
       // }
-      // if (player.gamepad.l1eft) {
+      // if (player.gamepad.left) {
       //   player.char.sprite.body.setVelocityX(
       //     player.char.sprite.body.velocity.x *
       //       game.RATIO_ACCELERATION_VELOCITY *
@@ -920,7 +920,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
       //   );
       //   // return;
       // }
-      // if (player.gamepad.r1ight) {
+      // if (player.gamepad.right) {
       //   player.char.sprite.body.setVelocityX(
       //     player.char.sprite.body.velocity.x *
       //       game.RATIO_ACCELERATION_VELOCITY *
@@ -1087,10 +1087,10 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
       // if (player.gamepad.up) {
       //   console.log(player.playerId, "up");
       // }
-      // if (player.gamepad.l1eft) {
+      // if (player.gamepad.left) {
       //   console.log(player.playerId, "left");
       // }
-      // if (player.gamepad.r1ight) {
+      // if (player.gamepad.right) {
       //   console.log(player.playerId, "right");
       // }
 
