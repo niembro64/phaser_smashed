@@ -627,7 +627,6 @@ function Play() {
           </button>
         </div>
       )}
-
       <div className="overDiv">
         <div className="top-bar">
           <img
@@ -642,7 +641,9 @@ function Play() {
                 onClickPlayNavButtons('Controllers');
               }}
             >
-              {showControllers && <span>...........</span>}
+              {showControllers && (
+                <span className="dark-span">Controllers</span>
+              )}
               {!showControllers && <span>Controllers</span>}
             </button>
           )}
@@ -715,7 +716,7 @@ function Play() {
               onClickPlayNavButtons('Controls');
             }}
           >
-            {showControls && <span>........</span>}
+            {showControls && <span className="dark-span">Controls</span>}
             {!showControls && <span>Controls</span>}
           </button>
           <button
@@ -724,7 +725,7 @@ function Play() {
               onClickPlayNavButtons('Rules-N64');
             }}
           >
-            {showRulesN64 && <span>.........</span>}
+            {showRulesN64 && <span className="dark-span">Rules-N64</span>}
             {!showRulesN64 && <span>Rules-N64</span>}
           </button>
           {webState === 'start' && (
@@ -734,7 +735,7 @@ function Play() {
                 onClickPlayNavButtons('History');
               }}
             >
-              {showHistory && <span>.......</span>}
+              {showHistory && <span className="dark-span">History</span>}
               {!showHistory && <span>History</span>}
             </button>
           )}
@@ -744,7 +745,7 @@ function Play() {
               onClickPlayNavButtons('About');
             }}
           >
-            {showAbout && <span>.....</span>}
+            {showAbout && <span className="dark-span">About</span>}
             {!showAbout && <span>About</span>}
           </button>
         </div>

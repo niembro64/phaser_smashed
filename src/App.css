@@ -276,6 +276,9 @@ body {
   align-items: center;
   overflow: hide;
 }
+.dark-span {
+  color: rgba(255, 255, 255, 0.25);
+}
 
 #RulesN64Image {
   height: 100%;
