@@ -90,8 +90,8 @@ export function updatePadCurrControllerTypePro(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L;
-  player.padCurr.R = player.gamepad.R;
+  player.padCurr.L = player.gamepad.L1;
+  player.padCurr.R = player.gamepad.R1;
 
   // for (let i = 0; i < player?.gamepad?.axes.length; i++) {
   //   console.log(i, player?.gamepad?.axes[i]?.getValue());
@@ -208,8 +208,8 @@ export function updatePadCurrControllerTypeHat(
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L;
-  player.padCurr.R = player.gamepad.R;
+  player.padCurr.L = player.gamepad.L1;
+  player.padCurr.R = player.gamepad.R1;
 
   // NO STICK TRY HAT
   let hatVal = player?.gamepad?.axes[9]?.getValue();
@@ -268,14 +268,14 @@ export function updatePadCurrControllerTypeButtons(
 ): void {
   player.padCurr.up = player.gamepad.up;
   player.padCurr.down = player.gamepad.down;
-  player.padCurr.left = player.gamepad.left;
-  player.padCurr.right = player.gamepad.right;
+  player.padCurr.left = player.gamepad.l1eft;
+  player.padCurr.right = player.gamepad.r1ight;
   player.padCurr.A = player.gamepad.A;
   player.padCurr.B = player.gamepad.B;
   player.padCurr.X = player.gamepad.X;
   player.padCurr.Y = player.gamepad.Y;
-  player.padCurr.L = player.gamepad.L;
-  player.padCurr.R = player.gamepad.R;
+  player.padCurr.L = player.gamepad.L1;
+  player.padCurr.R = player.gamepad.R1;
   if (
     player?.gamepad?.buttons?.length &&
     player?.gamepad?.buttons[9]?.pressed !== undefined &&
@@ -309,12 +309,24 @@ export function getIsAnyPlayerPausing(game: Game): boolean {
 }
 
 export function getPlayerPauses(player: Player, game: Game): boolean {
-  return getPlayerPressedBothLR(player, game);
+  return (
+    getPlayerPressedBothLR(player, game) || getPlayerPressedStart(player, game)
+  );
   // return playerAllRightButtonsPressed(player, game);
 }
 
+export function getPlayerPressedStart(player: Player, game: Game): boolean {
+  // if (player.gamepad.L1 && player.gamepad.R1) {
+  //   return true;
+  // }
+  if (player.padCurr.start) {
+    return true;
+  }
+
+  return false;
+}
 export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
-  // if (player.gamepad.L && player.gamepad.R) {
+  // if (player.gamepad.L1 && player.gamepad.R1) {
   //   return true;
   // }
   if (player.padCurr.L && player.padCurr.R) {
@@ -342,14 +354,14 @@ export function getIsPlayerReady(player: Player, game: Game): boolean {
   // if (
   //   !player.gamepad.up &&
   //   !player.gamepad.down &&
-  //   !player.gamepad.left &&
-  //   !player.gamepad.right &&
+  //   !player.gamepad.l1eft &&
+  //   !player.gamepad.r1ight &&
   //   !player.gamepad.A &&
   //   !player.gamepad.B &&
   //   !player.gamepad.X &&
   //   !player.gamepad.Y &&
-  //   !player.gamepad.R &&
-  //   !player.gamepad.L
+  //   !player.gamepad.R1 &&
+  //   !player.gamepad.L1
   // ) {
   //   return false;
   // }
@@ -378,14 +390,14 @@ export function getIsAllPlayersReady(game: Game): boolean {
   //   if (
   //     !game.players[i].gamepad.up &&
   //     !game.players[i].gamepad.down &&
-  //     !game.players[i].gamepad.left &&
-  //     !game.players[i].gamepad.right &&
+  //     !game.players[i].gamepad.l1eft &&
+  //     !game.players[i].gamepad.r1ight &&
   //     !game.players[i].gamepad.A &&
   //     !game.players[i].gamepad.B &&
   //     !game.players[i].gamepad.X &&
   //     !game.players[i].gamepad.Y &&
-  //     !game.players[i].gamepad.R &&
-  //     !game.players[i].gamepad.L
+  //     !game.players[i].gamepad.R1 &&
+  //     !game.players[i].gamepad.L1
   //   ) {
   //     return false;
   //   }
@@ -607,8 +619,8 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   // game.players.forEach((player) => {
   //   player.padPrev.up = player.gamepad.up;
   //   player.padPrev.down = player.gamepad.down;
-  //   player.padPrev.left = player.gamepad.left;
-  //   player.padPrev.right = player.gamepad.right;
+  //   player.padPrev.left = player.gamepad.l1eft;
+  //   player.padPrev.right = player.gamepad.r1ight;
   //   player.padPrev.A = player.gamepad.A;
   //   player.padPrev.B = player.gamepad.B;
   //   player.padPrev.X = player.gamepad.X;
@@ -628,13 +640,13 @@ export function updatePadPreviousAndDebounced(game: Game): void {
   //   } else {
   //     player.padDebounced.down += player.padDebounced.down <= 0 ? 0 : -1;
   //   }
-  //   if (player.gamepad.left) {
+  //   if (player.gamepad.l1eft) {
   //     player.padDebounced.left +=
   //       player.padDebounced.left >= game.DEBOUNCE_NUMBER ? 0 : 1;
   //   } else {
   //     player.padDebounced.left += player.padDebounced.left <= 0 ? 0 : -1;
   //   }
-  //   if (player.gamepad.right) {
+  //   if (player.gamepad.r1ight) {
   //     player.padDebounced.right +=
   //       player.padDebounced.right >= game.DEBOUNCE_NUMBER ? 0 : 1;
   //   } else {
@@ -754,8 +766,8 @@ export function updateControllerMovement(player: Player, game: Game): void {
     }
     // if (player.gamepad) {
     //   if (
-    //     !player.gamepad.left &&
-    //     !player.gamepad.right &&
+    //     !player.gamepad.l1eft &&
+    //     !player.gamepad.r1ight &&
     //     !player.gamepad.up &&
     //     !player.gamepad.down
     //   ) {
@@ -896,7 +908,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
       //   );
       //   // return;
       // }
-      // if (player.gamepad.left) {
+      // if (player.gamepad.l1eft) {
       //   player.char.sprite.body.setVelocityX(
       //     player.char.sprite.body.velocity.x *
       //       game.RATIO_ACCELERATION_VELOCITY *
@@ -908,7 +920,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
       //   );
       //   // return;
       // }
-      // if (player.gamepad.right) {
+      // if (player.gamepad.r1ight) {
       //   player.char.sprite.body.setVelocityX(
       //     player.char.sprite.body.velocity.x *
       //       game.RATIO_ACCELERATION_VELOCITY *
@@ -1075,25 +1087,25 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
       // if (player.gamepad.up) {
       //   console.log(player.playerId, "up");
       // }
-      // if (player.gamepad.left) {
+      // if (player.gamepad.l1eft) {
       //   console.log(player.playerId, "left");
       // }
-      // if (player.gamepad.right) {
+      // if (player.gamepad.r1ight) {
       //   console.log(player.playerId, "right");
       // }
 
       // // L R Buttons
-      // if (player.gamepad.L) {
+      // if (player.gamepad.L1) {
       //   console.log(player.playerId, "L");
       // }
-      // if (player.gamepad.R) {
+      // if (player.gamepad.R1) {
       //   console.log(player.playerId, "R");
       // }
       // // L R Buttons
-      // if (player.gamepad.L2) {
+      // if (player.gamepad.L12) {
       //   console.log(player.playerId, "L2");
       // }
-      // if (player.gamepad.R2) {
+      // if (player.gamepad.R12) {
       //   console.log(player.playerId, "R2");
       // }
 
