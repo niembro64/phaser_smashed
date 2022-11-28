@@ -159,6 +159,8 @@ export interface GamepadData {
   Y: boolean;
   R: boolean;
   L: boolean;
+  start: boolean;
+  select: boolean;
 }
 
 export interface PadStateDebounced {
@@ -172,6 +174,8 @@ export interface PadStateDebounced {
   Y: number;
   L: number;
   R: number;
+  start: number;
+  select: number;
 }
 
 // export interface Keyboard {
