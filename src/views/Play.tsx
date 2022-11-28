@@ -134,6 +134,7 @@ function Play() {
     ],
   });
 
+  // always keep Chez and BlackChez at positions 4 and 5
   const smashConfigScaleArray: PlayerConfig[] = [
     { characterId: 0, scale: 0.9, name: 'Mario' },
     { characterId: 1, scale: 0.9, name: 'Link' },
@@ -320,10 +321,16 @@ function Play() {
     if (charId === 4) {
       bamPlay();
       onClickStartOnOffButtons(0, true);
+      onClickStartOnOffButtons(1, false);
+      onClickStartOnOffButtons(2, false);
+      onClickStartOnOffButtons(3, false);
     }
     if (charId === 5) {
       woahPlay();
       onClickStartOnOffButtons(0, true);
+      onClickStartOnOffButtons(1, false);
+      onClickStartOnOffButtons(2, false);
+      onClickStartOnOffButtons(3, false);
     }
 
     let choices = [...smashConfig.players];
@@ -344,13 +351,21 @@ function Play() {
     blipSound();
     let choices = [...smashConfig.players];
     let choice = choices[playerIndex];
+
+    // player cannot directly select Chez or BlackChez
+
+    let newCharacterId = choice.characterId + 1;
     if (debug.setChezSecret) {
-      choice.characterId =
-        choice.characterId + 1 < 4 ? choice.characterId + 1 : 0;
-    } else {
-      choice.characterId =
-        choice.characterId + 1 < 6 ? choice.characterId + 1 : 0;
+      while (newCharacterId === 4 || newCharacterId === 5) {
+        newCharacterId++;
+      }
     }
+    if (newCharacterId > smashConfigScaleArray.length - 1) {
+      newCharacterId = 0;
+    }
+
+    choice.characterId = newCharacterId;
+
     let tempScale = smashConfigScaleArray.find((s, sIndex) => {
       return s.characterId === choice.characterId;
     })?.scale;
@@ -380,7 +395,7 @@ function Play() {
     { button: 'Air + D-Pad + A', move: 'Jump-Fire', status: '🚧' },
     { button: 'Y', move: 'Attack-Energy', status: '✔️' },
     { button: 'B', move: 'Attack-Physical', status: '🚧' },
-    { button: 'Forward + B', move: 'Attack-Smash', status: '🔜' },
+    { button: 'Forward + B', move: 'Attack-Smash', status: '❌' },
     { button: 'Air + Wall + Forward', move: 'Slide-Wall', status: '✔️' },
     { button: 'L + R', move: 'Pause', status: '✔️' },
     { button: 'Paused + Any Button', move: 'Ready', status: '✔️' },
