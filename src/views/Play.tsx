@@ -42,6 +42,36 @@ import {
 function Play() {
   let myPhaser: any = useRef(null);
 
+  const debug: Debug = {
+    setLevel: 5, //012345
+    setDurationMinutes: 7, //01234567
+    setUpdateLoopsNumSkip: 2, // 012
+    setMusicNumber: 2, // 012
+    setMusicActive: true,
+    setReadySoundActive: false,
+    setFrictionAirActive: true,
+    setCamerasActive: true,
+    setCamerasVisible: false,
+    setCollidersPvP: false,
+    setCollidersPvAttackPhysical: false,
+    setCollidersPvAttackEnergy: false,
+    setCollidersAEvAE: true,
+    setCollidersAEvAP: true,
+    setAEWrapScreen: false,
+    setPlayerIdVisible: true,
+    setWallJumpsActive: true,
+    setDefaultDamage: false,
+    setDefaultHitback: false,
+    setPlayerIdFiltersActive: false,
+    setHealthInverted: false,
+    setMatricesAlwaysVisible: false,
+    setPrintControllerButtonsConsole: false,
+    setPrintControllerConnectedConsole: false,
+    setLoadTimeExtra: true,
+    setChezSecret: true,
+    setIsDevMode: false,
+  };
+
   const trance = new Audio(importedTrance);
   trance.volume = 0.3;
   const [woah] = useSound(importedWoah, { volume: 0.2 });
@@ -177,35 +207,7 @@ function Play() {
     // { name: 'Ginman', text: "Set it up... and we'll do it... again." },
     // { name: 'Gin', text: 'Shitty, shitty-fuckin-ass.' },
   ];
-  const debug: Debug = {
-    setLevel: 5, //012345
-    setDurationMinutes: 7, //01234567
-    setUpdateLoopsNumSkip: 2, // 012
-    setMusicNumber: 2, // 012
-    setMusicActive: true,
-    setReadySoundActive: false,
-    setFrictionAirActive: true,
-    setCamerasActive: true,
-    setCamerasVisible: false,
-    setCollidersPvP: false,
-    setCollidersPvAttackPhysical: false,
-    setCollidersPvAttackEnergy: false,
-    setCollidersAEvAE: true,
-    setCollidersAEvAP: true,
-    setAEWrapScreen: false,
-    setPlayerIdVisible: true,
-    setWallJumpsActive: true,
-    setDefaultDamage: false,
-    setDefaultHitback: false,
-    setPlayerIdFiltersActive: false,
-    setHealthInverted: false,
-    setMatricesAlwaysVisible: false,
-    setPrintControllerButtonsConsole: false,
-    setPrintControllerConnectedConsole: false,
-    setLoadTimeExtra: true,
-    setChezSecret: true,
-    setIsDevMode: false,
-  };
+
   const onClickStartStartButton = () => {
     trance.pause();
     startSound();
