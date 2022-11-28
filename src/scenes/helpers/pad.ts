@@ -28,8 +28,6 @@ export function updateGamePadsConnected(game: Game): void {
     });
     // console.log(gamepadIndex, "ID", gamepad.id);
 
-
-
     if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
       game.players[playerIndex].gamepad =
         game.input.gamepad.getPad(gamepadIndex);
@@ -278,6 +276,20 @@ export function updatePadCurrControllerTypeButtons(
   player.padCurr.Y = player.gamepad.Y;
   player.padCurr.L = player.gamepad.L;
   player.padCurr.R = player.gamepad.R;
+  if (
+    player?.gamepad?.buttons?.length &&
+    player?.gamepad?.buttons[9]?.pressed !== undefined &&
+    player?.gamepad?.buttons[9]?.pressed !== null
+  ) {
+    player.padCurr.start = player.gamepad?.buttons[9]?.pressed ? true : false;
+  }
+  if (
+    player?.gamepad?.buttons?.length &&
+    player?.gamepad?.buttons[8]?.pressed !== undefined &&
+    player?.gamepad?.buttons[8]?.pressed !== null
+  ) {
+    player.padCurr.select = player.gamepad?.buttons[8]?.pressed ? true : false;
+  }
 }
 
 export function getControllerIsRealController(gamepad: Gamepad): boolean {

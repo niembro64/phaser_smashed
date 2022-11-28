@@ -40,5 +40,8 @@ export function updatePadCurrKeyboard(player: Player, game: Game): void {
 
     player.padCurr.L = player.padCurr.L ? true : player.keyboard.L.isDown;
     player.padCurr.R = player.padCurr.R ? true : player.keyboard.R.isDown;
+
+    player.padCurr.start = player.padCurr.start ? true : player.keyboard.start.isDown;
+    player.padCurr.select = player.padCurr.select ? true : player.keyboard.select.isDown;
   }
 }
