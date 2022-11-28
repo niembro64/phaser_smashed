@@ -93,6 +93,10 @@ export function updatePadCurrControllerTypePro(
   player.padCurr.L = player.gamepad.L1;
   player.padCurr.R = player.gamepad.R1;
 
+  // EMN TODO Not Ideal
+  player.padCurr.start = false;
+  player.padCurr.select = false;
+
   // for (let i = 0; i < player?.gamepad?.axes.length; i++) {
   //   console.log(i, player?.gamepad?.axes[i]?.getValue());
   // }
@@ -211,6 +215,10 @@ export function updatePadCurrControllerTypeHat(
   player.padCurr.L = player.gamepad.L1;
   player.padCurr.R = player.gamepad.R1;
 
+  // EMN TODO Not Ideal
+  player.padCurr.start = false;
+  player.padCurr.select = false;
+
   // NO STICK TRY HAT
   let hatVal = player?.gamepad?.axes[9]?.getValue();
   let vals = game.GAMEPAD_HAT_VALUES;
@@ -276,6 +284,11 @@ export function updatePadCurrControllerTypeButtons(
   player.padCurr.Y = player.gamepad.Y;
   player.padCurr.L = player.gamepad.L1;
   player.padCurr.R = player.gamepad.R1;
+
+  // EMN TODO Not Ideal
+  player.padCurr.start = false;
+  player.padCurr.select = false;
+
   if (
     player?.gamepad?.buttons?.length &&
     player?.gamepad?.buttons[9]?.pressed !== undefined &&
