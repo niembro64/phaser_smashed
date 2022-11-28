@@ -267,6 +267,8 @@ export interface AttackEnergy {
   mass: number;
   allowVelocityY: boolean;
   rotation: AttackEnergyRotation;
+  followOnOffscreen: boolean;
+  followOnOffscreenOffset: { x: number; y: number };
 }
 export interface AttackEnergyFriction {
   air: number;
