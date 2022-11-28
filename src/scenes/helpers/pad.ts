@@ -687,6 +687,8 @@ export function updatePadPreviousAndDebounced(game: Game): void {
     player.padPrev.B = player.padCurr.B;
     player.padPrev.X = player.padCurr.X;
     player.padPrev.Y = player.padCurr.Y;
+    player.padPrev.start = player.padCurr.start;
+    player.padPrev.select = player.padCurr.select;
 
     player.char.sprite.zoom = 1;
 
@@ -740,6 +742,23 @@ export function updatePadPreviousAndDebounced(game: Game): void {
         player.padDebounced.Y >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES ? 0 : 1;
     } else {
       player.padDebounced.Y += player.padDebounced.Y <= 0 ? 0 : -1;
+    }
+
+    if (player.padCurr.start) {
+      player.padDebounced.start +=
+        player.padDebounced.start >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES
+          ? 0
+          : 1;
+    } else {
+      player.padDebounced.start += player.padDebounced.start <= 0 ? 0 : -1;
+    }
+    if (player.padCurr.select) {
+      player.padDebounced.select +=
+        player.padDebounced.select >= game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES
+          ? 0
+          : 1;
+    } else {
+      player.padDebounced.select += player.padDebounced.select <= 0 ? 0 : -1;
     }
   });
 }
@@ -853,14 +872,14 @@ export function updateControllerMovement(player: Player, game: Game): void {
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
-    // if (player.padCurr.up && !player.padCurr.Y) {
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       -game.BASE_PLAYER_SPEED.y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         (1 - game.RATIO_ACCELERATION_VELOCITY)
-    //   );
+      // if (player.padCurr.up && !player.padCurr.Y) {
+      //   player.char.sprite.body.setVelocityY(
+      //     player.char.sprite.body.velocity.y +
+      //       -game.BASE_PLAYER_SPEED.y *
+      //         player.char.speed *
+      //         player.char.fast *
+      //         (1 - game.RATIO_ACCELERATION_VELOCITY)
+      //   );
       // return;
     }
     if (player.padCurr.down) {
