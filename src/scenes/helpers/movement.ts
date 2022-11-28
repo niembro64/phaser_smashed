@@ -1,5 +1,5 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
+import Game from '../Game';
+import { Player } from '../interfaces';
 
 export function updateCirclesLocations(game: Game): void {
   if (!game.debug.setPlayerIdVisible) {
@@ -82,27 +82,27 @@ export function setRespawn(player: Player, game: Game): void {
   player.char.sprite.body.setVelocityY(0);
 }
 
-export function updateEnergyAttacksScreenWrap(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
-    if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
-      // player.char.attackEnergy.sprite.body.setVelocityX(0);
-      // player.char.attackEnergy.sprite.body.setVelocityY(0);
-      player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
-      player.char.attackEnergy.sprite.Y = game.SCREEN_DIMENSIONS.HEIGHT / 2;
-      player.char.attackEnergy.sprite.body.allowGravity = false;
-    }
-  });
-}
+// export function updateEnergyAttacksScreenWrap(game: Game): void {
+//   game.players.forEach((player, playerIndex) => {
+//     if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
+//       // player.char.attackEnergy.sprite.body.setVelocityX(0);
+//       // player.char.attackEnergy.sprite.body.setVelocityY(0);
+//       player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
+//       player.char.attackEnergy.sprite.Y = game.SCREEN_DIMENSIONS.HEIGHT / 2;
+//       player.char.attackEnergy.sprite.body.allowGravity = false;
+//     }
+//   });
+// }
 
 export function updateLastDirectionTouched(player: Player): void {
   if (player.char.sprite.body.touching.up) {
-    player.char.lastDirectionTouched = "up";
+    player.char.lastDirectionTouched = 'up';
   } else if (player.char.sprite.body.touching.down) {
-    player.char.lastDirectionTouched = "down";
+    player.char.lastDirectionTouched = 'down';
   } else if (player.char.sprite.body.touching.left) {
-    player.char.lastDirectionTouched = "left";
+    player.char.lastDirectionTouched = 'left';
   } else if (player.char.sprite.body.touching.right) {
-    player.char.lastDirectionTouched = "right";
+    player.char.lastDirectionTouched = 'right';
   }
 }
 
@@ -194,7 +194,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
     // // horizontal stuff WAS TOUCHING
     if (
       game.debug.setWallJumpsActive &&
-      player.char.lastDirectionTouched === "left" &&
+      player.char.lastDirectionTouched === 'left' &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
@@ -207,7 +207,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
 
     if (
       game.debug.setWallJumpsActive &&
-      player.char.lastDirectionTouched === "right" &&
+      player.char.lastDirectionTouched === 'right' &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
