@@ -142,6 +142,7 @@ function Play() {
     { characterId: 3, scale: 0.7, name: 'Kirby' },
     { characterId: 4, scale: 1.2, name: 'Chez' },
     { characterId: 5, scale: 1.2, name: 'BlackChez' },
+    { characterId: 6, scale: 0.5, name: 'GreenKoopa' },
   ];
   const config: Phaser.Types.Core.GameConfig = {
     transparent: true,

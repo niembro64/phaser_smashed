@@ -338,7 +338,7 @@ export interface keyboard {
 // VIEW INTERFACES
 //////////////////
 
-export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5;
+export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 
 export type CharacterName =
   | 'Mario'
@@ -346,7 +346,8 @@ export type CharacterName =
   | 'Pikachu'
   | 'Kirby'
   | 'Chez'
-  | 'BlackChez';
+  | 'BlackChez'
+  | 'GreenKoopa';
 
 export interface SmashConfig {
   players: PlayerConfig[];
