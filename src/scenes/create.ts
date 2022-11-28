@@ -342,7 +342,7 @@ export function createEmitters(game: Game): void {
     player.emitterLight = player.particles.createEmitter({
       speed: 10,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 1.5, end: 0 },
+      scale: { start: 1.5 * player.char.scaleCharSpriteReality, end: 0 },
       blendMode: 'ADD',
       // bounce: 1,
       // length: 100,
@@ -352,7 +352,7 @@ export function createEmitters(game: Game): void {
     player.emitterDark = player.particles.createEmitter({
       speed: 1000,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 1, end: 0.5 },
+      scale: { start: 1 * player.char.scaleCharSpriteReality, end: 0.5 },
       blendMode: 'SUBTRACT',
       // bounce: 1,
       // length: 100,
@@ -363,7 +363,7 @@ export function createEmitters(game: Game): void {
     player.emitterPlayer = player.particles.createEmitter({
       speed: 80,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 0.7, end: 0 },
+      scale: { start: 0.7 * player.char.scaleCharSpriteReality, end: 0 },
       // blendMode: 'SUBTRACT',
       blendMode: 'ADD',
       // bounce: 1,
@@ -374,8 +374,8 @@ export function createEmitters(game: Game): void {
     player.emitterHurt = player.particles.createEmitter({
       speed: 0,
       // scale: { start: 0.05, end: 0 },
-      scale: { start: 0.3, end: 0 },
-      // blendMode: 'SUBTRACT',
+      scale: { start: 0.3 * player.char.scaleCharSpriteReality, end: 0 },
+      // blendMode: 'SUBTRACT'3,
       // bounce: 1,
       // length: 100,
     });
@@ -398,10 +398,10 @@ export function createPlayers(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.emitterLight.setScale(1 / player.char.scale);
-    player.emitterDark.setScale(1 / player.char.scale);
-    player.emitterPlayer.setScale(1 / player.char.scale);
-    player.emitterHurt.setScale(1 / player.char.scale);
+    // player.emitterLight.setScale(player.char.scaleCharSpriteReality);
+    // player.emitterDark.setScale(player.char.scaleCharSpriteReality);
+    // player.emitterPlayer.setScale(player.char.scaleCharSpriteReality);
+    // player.emitterHurt.setScale(player.char.scaleCharSpriteReality);
 
     player.emitterLight.startFollow(player.char.sprite);
     player.emitterDark.startFollow(player.char.sprite);
@@ -431,7 +431,7 @@ export function createPlayers(game: Game): void {
       player.char.wallTouchArray.push(false);
     }
 
-    player.char.sprite.setScale(player.char.scale);
+    player.char.sprite.setScale(player.char.scaleCharSpriteImage);
     // player.char.sprite.flipX = !player.char.initializeCharPosition.lookingRight;
     player.char.sprite.flipX = playerIndex % 2 ? true : false;
 
