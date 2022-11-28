@@ -21,15 +21,23 @@ import importedTrance from '../sounds/trance.wav';
 import importedStartSound from '../sounds/start.wav';
 // @ts-ignore
 import importedBlipSound from '../sounds/game-start-liquid.wav';
+// import {
+//   CharacterId,
+//   CharacterName,
+//   Debug,
+//   PlayerConfig,
+//   Quote,
+//   WebState,
+// } from './ViewInterfaces';
 import {
+  InputType,
   CharacterId,
   CharacterName,
   Debug,
   PlayerConfig,
   Quote,
   WebState,
-} from './ViewInterfaces';
-import { InputType } from '../scenes/interfaces';
+} from '../scenes/interfaces';
 
 function Play() {
   let myPhaser: any = useRef(null);
