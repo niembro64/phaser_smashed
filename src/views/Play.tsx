@@ -43,14 +43,14 @@ function Play() {
   let myPhaser: any = useRef(null);
 
   const debug: Debug = {
-    setLevel: 5, //012345
+    setLevel: 6, //0123456
     setDurationMinutes: 7, //01234567
     setUpdateLoopsNumSkip: 2, // 012
     setMusicNumber: 2, // 012
     setMusicActive: true,
     setReadySoundActive: false,
     setFrictionAirActive: true,
-    setCamerasActive: true,
+    setCamerasActive: false,
     setCamerasVisible: false,
     setCollidersPvP: false,
     setCollidersPvAttackPhysical: false,

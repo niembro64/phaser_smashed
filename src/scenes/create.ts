@@ -18,12 +18,15 @@ export function create(game: Game) {
   createSplashes(game);
   createPlatforms(game);
   createScoreboardShotGlass(game);
-  createImageTable(game);
+  createTable(game);
+  createColliderTablePlatforms(game);
   createSplashRuleFinished(game);
   createEmitters(game);
   createAttackPhysicals(game);
   createAttackEnergies(game);
+  createColliderTableAttackEnergies(game);
   createPlayers(game);
+  createColliderTablePlayers(game);
   createKeyboards(game);
   createPlayerIdCircles(game);
   createScoreboard(game);
@@ -164,6 +167,9 @@ export function createPlatforms(game: Game): void {
       break;
     case 5:
       createPlatforms5(game);
+      break;
+    case 6:
+      createPlatforms6(game);
       break;
     default:
       createPlatforms0(game);
@@ -379,6 +385,20 @@ export function createEmitters(game: Game): void {
       // bounce: 1,
       // length: 100,
     });
+  });
+}
+
+export function createColliderTablePlayers(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    game.physics.add.collider(player.char.sprite, game.TABLE);
+  });
+}
+
+export function createColliderTableAttackEnergies(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.attackEnergy.bouncePlatforms) {
+      game.physics.add.collider(player.char.attackEnergy.sprite, game.TABLE);
+    }
   });
 }
 
@@ -802,15 +822,119 @@ export function createPlatforms5(game: Game): void {
   }
 }
 
-export function createImageTable(game: Game): void {
+export function createPlatforms6(game: Game): void {
+  game.PLATFORMS = game.physics.add.staticGroup();
+
+  // for (let i = 0; i < 3; i++) {
+  //   game.PLATFORMS.create(
+  //     1920 * game.SCREEN_SCALE.WIDTH * game.ASSET_BRICK_WIDTH,
+  //     1080 * game.SCREEN_SCALE.HEIGHT * i,
+  //     "platformVertical"
+  //   );
+  // }
+
+  // for (let i = 0; i < 25; i++) {
+  //   game.PLATFORMS.create(
+  //     1700 * game.SCREEN_SCALE.WIDTH,
+  //     (1080 / 1.5) * game.SCREEN_SCALE.HEIGHT + game.ASSET_BRICK_HEIGHT * i,
+  //     "platformShort"
+  //   );
+  // }
+
+  for (let i = 0; i < 2; i++) {
+    game.PLATFORMS.create(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
+      'platformHorizontal'
+    );
+  }
+
+  for (let i = 0; i < 3; i++) {
+    game.PLATFORMS.create(
+      (614 - 8 * 33) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
+      (710 + 5 * 34) * game.SCREEN_SCALE.HEIGHT,
+      'platformVertical'
+    );
+  }
+
+  for (let i = 0; i < 2; i++) {
+    game.PLATFORMS.create(
+      (1207 + 33 * 5) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
+      (710 - 5 * 34) * game.SCREEN_SCALE.HEIGHT,
+      'platformVertical'
+    );
+  }
+
+  for (let i = 0; i < 6; i++) {
+    game.PLATFORMS.create(
+      (1518 + 0 * 33) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
+      (924 - 34 * 2) * game.SCREEN_SCALE.HEIGHT,
+      'platformVertical'
+    );
+  }
+
+  for (let i = 0; i < 5; i++) {
+    game.PLATFORMS.create(
+      1617 * game.SCREEN_SCALE.WIDTH,
+      (686 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+      'brick'
+    );
+  }
+  for (let i = 0; i < 3; i++) {
+    game.PLATFORMS.create(
+      1617 * game.SCREEN_SCALE.WIDTH,
+      (686 - 68 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+      'brick'
+    );
+  }
+  for (let i = 0; i < 2; i++) {
+    game.PLATFORMS.create(
+      (1617 - 33) * game.SCREEN_SCALE.WIDTH,
+      (686 - 34 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+      'brick'
+    );
+  }
+  for (let i = 0; i < 1; i++) {
+    game.PLATFORMS.create(
+      (1617 - 66) * game.SCREEN_SCALE.WIDTH,
+      (686 - 0 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+      'brick'
+    );
+  }
+  for (let i = 0; i < 50; i++) {
+    game.PLATFORMS.create(
+      (1617 - 33 * i) * game.SCREEN_SCALE.WIDTH,
+      (686 + 34 * 1 * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+      'brick'
+    );
+  }
+}
+
+export function createTable(game: Game): void {
   game.TABLE = game.physics.add.sprite(
-    (1920 / 2) * game.SCREEN_SCALE.WIDTH,
-    (1080 / 2 - 43) * game.SCREEN_SCALE.HEIGHT,
+    (game.SCREEN_DIMENSIONS.WIDTH / 2) * game.SCREEN_SCALE.WIDTH,
+    (game.SCREEN_DIMENSIONS.HEIGHT / 2 - 1043) * game.SCREEN_SCALE.HEIGHT,
     'table'
   );
+  // game.TABLE = game.physics.add.sprite(
+  //   (1920 / 2) * game.SCREEN_SCALE.WIDTH,
+  //   (1080 / 2 - 43) * game.SCREEN_SCALE.HEIGHT,
+  //   'table'
+  // );
   game.TABLE.setScale(1);
-  game.TABLE.setImmovable(true);
-  game.TABLE.body.allowGravity = false;
+  game.TABLE.setMass(1);
+  // game.TABLE.setCollideWorldBounds(true);
+  game.TABLE.setBounce(0.3);
+  // game.TABLE.setImmovable(true);
+
+  // game.physics.add.collider(game.TABLE, game.PLATFORMS);
+
+  // game.TABLE.setImmovable(true);
+  // game.TABLE.body.allowGravity = false;
+}
+
+export function createColliderTablePlatforms(game: Game): void {
+  game.physics.add.collider(game.TABLE, game.PLATFORMS);
 }
 
 export function createFlag(game: Game): void {

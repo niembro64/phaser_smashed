@@ -6,6 +6,7 @@ import {
   updateCirclesLocations,
   updateEnergyAttacksWrapScreen,
   updateWallTouchArray,
+  updateTable,
 } from "../helpers/movement";
 import {
   updateAttackEnergyFrictionGroundMovement,
@@ -30,6 +31,7 @@ export function updateGameStatePlay(game: Game, time: number, delta: number): vo
   updateDeathsAndKillsMatrices(game);
   updateKeepObjectsFromFallingLikeCrazy(game);
   updateCirclesLocations(game);
+  updateTable(game);
 
   // UPDATE PLAYERS
   updatePlayers(game);

@@ -23,6 +23,13 @@ export function updateCirclesLocations(game: Game): void {
   });
 }
 
+export function updateTable(game: Game): void {
+  if (game.TABLE.body.touching.down) {
+    game.TABLE.body.setVelocityX(game.TABLE.body.velocity.x * 0.95);
+  }
+  // game.TABLE.velocityY = 0;
+}
+
 export function updateEnergyAttacksWrapScreen(game: Game): void {
   if (!game.debug.setAEWrapScreen) {
     return;
