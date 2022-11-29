@@ -1085,7 +1085,7 @@ export default class Game extends Phaser.Scene {
           bounceX: 1,
           gravity: false,
           bouncePlatforms: true,
-          damage: 10,
+          damage: 30,
           hitback: { x: 0.1, y: 0.2 },
           scale: 1.3,
           mass: 10,

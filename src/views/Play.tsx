@@ -742,8 +742,8 @@ function Play() {
               onClickPlayNavButtons('Controls');
             }}
           >
-            {showControls && <span className="dark-span">Controls</span>}
-            {!showControls && <span>Controls</span>}
+            {showControls && <span className="dark-span">Buttons</span>}
+            {!showControls && <span>Buttons</span>}
           </div>
           <div
             className="linkTag b-top"
@@ -751,10 +751,10 @@ function Play() {
               onClickPlayNavButtons('Rules-N64');
             }}
           >
-            {showRulesN64 && <span className="dark-span">Rules-N64</span>}
-            {!showRulesN64 && <span>Rules-N64</span>}
+            {showRulesN64 && <span className="dark-span">Rules</span>}
+            {!showRulesN64 && <span>Rules</span>}
           </div>
-          {webState === 'start' && (
+          {/* {webState === 'start' && (
             <div
               className="linkTag b-top"
               onClick={() => {
@@ -764,16 +764,18 @@ function Play() {
               {showHistory && <span className="dark-span">History</span>}
               {!showHistory && <span>History</span>}
             </div>
+          )} */}
+          {webState === 'start' && (
+            <div
+              className="linkTag b-top"
+              onClick={() => {
+                onClickPlayNavButtons('About');
+              }}
+            >
+              {showAbout && <span className="dark-span">About</span>}
+              {!showAbout && <span>About</span>}
+            </div>
           )}
-          <div
-            className="linkTag b-top"
-            onClick={() => {
-              onClickPlayNavButtons('About');
-            }}
-          >
-            {showAbout && <span className="dark-span">About</span>}
-            {!showAbout && <span>About</span>}
-          </div>
         </div>
         {showControls && (
           <div className="overDiv">
@@ -783,7 +785,7 @@ function Play() {
                 onClickPlayNavBody('Controls');
               }}
             >
-              <h1>Controls</h1>
+              <h1>Buttons</h1>
               <div id="controls-col">
                 {characterMoves.map((charMove, charMoveIndex) => {
                   return (
@@ -796,6 +798,24 @@ function Play() {
                   );
                 })}
                 {/* <p> fyi, button mapping is insane</p> */}
+                <div id="keyboard">
+                  <div id="keyboard-top">
+                    <h3>Controllers</h3>
+                  </div>
+                  <div id="keyboard-top">
+                    Use As Described
+                    {/* <div id="keyboard-left">
+                      <p>W-A-S-D</p>
+                      <p>F-G-H-SPACE</p>
+                      <p>R-T-Y-U</p>
+                    </div>
+                    <div id="keyboard-right">
+                      <p>D-Pad</p>
+                      <p>A-X-B-Y</p>
+                      <p>L-Select-Start-R</p>
+                    </div> */}
+                  </div>
+                </div>
                 <div id="keyboard">
                   <div id="keyboard-top">
                     <h3>First Keyboard</h3>
@@ -906,21 +926,36 @@ function Play() {
             >
               <h1>About</h1>
               <p>
+                As referenced on the Rules-N64 sheet, (Chemon) Smashed was
+                invented in Glen Carbon, Illinois (near St. Louis) some time in
+                late 2009 by a group of college kids at the "Chemon" House.
+                Since 2013, "The Young Boys" have been keeping it alive &
+                thriving in St. Louis.
+              </p>
+              <p>
+                It's normally played with the N64 Smash Bros game on the N64,
+                Wii, or Emulation, but this is my attempt at recreating it with
+                the RulesN64 baked in.
+              </p>
+              <p>
+                Smashed has been played in at least 4 states and 3 countries.
+              </p>
+              <p>
                 Since the inception in 2009, Niemo has been actively persuing
                 the fundamental polished essense of Smashed; both as an exercise
                 of logic, and such that one day it could be realized as a fully
                 functional, independent game.
               </p>
-              <p>
+              {/* <p>
                 The rules are described - and this is the start of that game -
                 on github - such that it may live on and be expanded upon.
-              </p>
-              <p>
+              </p> */}
+              {/* <p>
                 IMO, the primary rule "Screen Clear" is what makes these rules
                 stand out from other smash drinking games; this rule pushes a
                 player to actively time their own death rather than just try to
                 not die.
-              </p>
+              </p> */}
               <p>
                 Assets & sounds that you don't immediately recognize are
                 probably OC.
@@ -956,7 +991,7 @@ function Play() {
             </div>
           </div>
         )}
-        {showHistory && (
+        {/* {showHistory && (
           <div>
             <div
               className="popup"
@@ -982,7 +1017,7 @@ function Play() {
               </p>
             </div>
           </div>
-        )}
+        )} */}
       </div>
       {webState === 'play' && myPhaser.current?.scene?.keys?.game?.loaded && (
         <div className="game-bar">
