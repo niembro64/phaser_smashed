@@ -50,7 +50,7 @@ function Play() {
     setMusicActive: true,
     setReadySoundActive: false,
     setFrictionAirActive: true,
-    setCamerasActive: false,
+    setCamerasActive: true,
     setCamerasVisible: false,
     setCollidersPvP: false,
     setCollidersPvAttackPhysical: false,
