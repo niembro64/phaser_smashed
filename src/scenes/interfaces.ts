@@ -387,7 +387,7 @@ export interface Debug {
   setCollidersAEvAP: boolean;
   setAEWrapScreen: boolean;
   setPlayerIdVisible: boolean;
-  setPlayerIdFiltersActive: boolean;
+  setPlayerColorFilterStateNormalActive: boolean;
   setWallJumpsActive: boolean;
   setDefaultDamage: boolean;
   setDefaultHitback: boolean;

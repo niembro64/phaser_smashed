@@ -62,7 +62,7 @@ function Play() {
     setWallJumpsActive: true,
     setDefaultDamage: false,
     setDefaultHitback: false,
-    setPlayerIdFiltersActive: false,
+    setPlayerColorFilterStateNormalActive: true,
     setHealthInverted: false,
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,

@@ -5,7 +5,10 @@ import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
 } from './helpers/damage';
-import { filterNormalAttackEnergy, setBlinkTrue } from './helpers/sprites';
+import {
+  filterAttackEnergyColorStateNormal,
+  setBlinkTrue,
+} from './helpers/sprites';
 import { setPreUpdate } from './update';
 
 export function create(game: Game) {
@@ -507,7 +510,7 @@ export function createAttackEnergies(game: Game): void {
         game.PLATFORMS
       );
     }
-    filterNormalAttackEnergy(player, playerIndex, game);
+    filterAttackEnergyColorStateNormal(player, playerIndex, game);
   });
 }
 

@@ -1,6 +1,6 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
-import { hasPlayerTouchedWallRecently } from "./movement";
+import Game from '../Game';
+import { Player } from '../interfaces';
+import { hasPlayerTouchedWallRecently } from './movement';
 
 export function updateSpritesFlipX(game: Game): void {
   game.players.forEach((player) => {
@@ -29,7 +29,7 @@ export function updateSpriteFilter(
   game: Game
 ): void {
   if (player.char.colorFilter) {
-    if (player.state.name === "player-state-hurt") {
+    if (player.state.name === 'player-state-hurt') {
       // HURT
       if (
         Math.floor(
@@ -41,7 +41,7 @@ export function updateSpriteFilter(
       ) {
         filterPlayerColorRed(player);
       } else {
-        filterPlayerColorNormal(player, playerIndex, game);
+        filterPlayerSpriteColorStateNormal(player, playerIndex, game);
         // filterPlayerColorCircleFill(
         //   player,
         //   game.colorCircles[playerIndex].colorNumber
@@ -60,7 +60,7 @@ export function updateSpriteFilter(
         filterPlayerColorDark(player);
       } else {
         // filterLight(player);
-        filterPlayerColorNormal(player, playerIndex, game);
+        filterPlayerSpriteColorStateNormal(player, playerIndex, game);
         // filterPlayerColorCircleFill(
         //   player,
         //   game.colorCircles[playerIndex].colorNumber
@@ -68,7 +68,7 @@ export function updateSpriteFilter(
       }
     }
   } else {
-    filterPlayerColorNormal(player, playerIndex, game);
+    filterPlayerSpriteColorStateNormal(player, playerIndex, game);
   }
 }
 
@@ -122,12 +122,12 @@ export function filterPlayerColorLight(player: Player): void {
   player.char.sprite.setAlpha(0.8);
 }
 
-export function filterPlayerColorNormal(
+export function filterPlayerSpriteColorStateNormal(
   player: Player,
   playerIndex: number,
   game: Game
 ): void {
-  if (game.debug.setPlayerIdFiltersActive) {
+  if (game.debug.setPlayerColorFilterStateNormalActive) {
     filterPlayerColorCircle(player, game.colorCircles[playerIndex].colorNumber);
     player.char.sprite.setAlpha(1);
   } else {
@@ -143,12 +143,12 @@ export function setBlinkFalse(player: Player): void {
   player.char.colorFilter = false;
 }
 
-export function filterNormalAttackEnergy(
+export function filterAttackEnergyColorStateNormal(
   player: Player,
   playerIndex: number,
   game: Game
 ): void {
-  if (game.debug.setPlayerIdFiltersActive) {
+  if (game.debug.setPlayerColorFilterStateNormalActive) {
     filterAttacksColorCircle(
       player,
       game.colorCircles[playerIndex].colorNumber
