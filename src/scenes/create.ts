@@ -843,10 +843,20 @@ export function createPlatforms6(game: Game): void {
   //   );
   // }
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 1; i++) {
     game.PLATFORMS.create(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
       game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT + 3 * 34,
+      'platformHorizontal'
+    );
+  }
+  for (let i = 0; i < 3; i++) {
+    game.PLATFORMS.create(
+      game.SCREEN_DIMENSIONS.WIDTH / 2 - 10 * 33,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 +
+        10 * 34 +
+        i * game.ASSET_BRICK_HEIGHT +
+        3 * 34,
       'platformHorizontal'
     );
   }
@@ -859,17 +869,21 @@ export function createPlatforms6(game: Game): void {
     );
   }
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 1; i++) {
     game.PLATFORMS.create(
-      (1207 + 33 * 5) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
-      (710 - 5 * 34) * game.SCREEN_SCALE.HEIGHT,
+      (1207 + 33 * 5) * game.SCREEN_SCALE.WIDTH +
+        i * game.ASSET_BRICK_WIDTH +
+        13,
+      (710 - 5 * 34) * game.SCREEN_SCALE.HEIGHT + 10 + 34,
       'platformVertical'
     );
   }
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     game.PLATFORMS.create(
-      (1518 + 0 * 33) * game.SCREEN_SCALE.WIDTH + i * game.ASSET_BRICK_WIDTH,
+      (1518 + 1 * 33) * game.SCREEN_SCALE.WIDTH +
+        i * game.ASSET_BRICK_WIDTH +
+        3 * 33,
       (924 - 34 * 2) * game.SCREEN_SCALE.HEIGHT,
       'platformVertical'
     );
@@ -882,34 +896,60 @@ export function createPlatforms6(game: Game): void {
       'brick'
     );
   }
-  for (let i = 0; i < 3; i++) {
-    game.PLATFORMS.create(
-      1617 * game.SCREEN_SCALE.WIDTH,
-      (686 - 68 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
-      'brick'
-    );
+  for (let j = 0; j < 20; j++) {
+    for (let i = 0; i < 9; i++) {
+      game.PLATFORMS.create(
+        1617 * game.SCREEN_SCALE.WIDTH - j * 33,
+        (686 - 68 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT +
+          j * 34 +
+          4 * 34,
+        'brick'
+      );
+    }
   }
-  for (let i = 0; i < 2; i++) {
-    game.PLATFORMS.create(
-      (1617 - 33) * game.SCREEN_SCALE.WIDTH,
-      (686 - 34 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
-      'brick'
-    );
+  for (let j = 0; j < 2; j++) {
+    for (let i = 0; i < 2; i++) {
+      game.PLATFORMS.create(
+        1617 * game.SCREEN_SCALE.WIDTH - j * 33 + 33 * 6,
+        (686 - 68 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT +
+          j * 34 +
+          2 * 34,
+        'brick'
+      );
+    }
   }
-  for (let i = 0; i < 1; i++) {
-    game.PLATFORMS.create(
-      (1617 - 66) * game.SCREEN_SCALE.WIDTH,
-      (686 - 0 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
-      'brick'
-    );
+  for (let j = 0; j < 6; j++) {
+    for (let i = 0; i < 2; i++) {
+      game.PLATFORMS.create(
+        1617 * game.SCREEN_SCALE.WIDTH - j * 33 - 33 * 7,
+        (686 - 68 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT +
+          j * 34 +
+          3 * 34,
+        'brick'
+      );
+    }
   }
-  for (let i = 0; i < 50; i++) {
-    game.PLATFORMS.create(
-      (1617 - 33 * i) * game.SCREEN_SCALE.WIDTH,
-      (686 + 34 * 1 * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
-      'brick'
-    );
-  }
+  // for (let i = 0; i < 3; i++) {
+  //   game.PLATFORMS.create(
+  //     (1617 - 33) * game.SCREEN_SCALE.WIDTH,
+  //     (686 - 34 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+  //     'brick'
+  //   );
+  // }
+  // for (let i = 0; i < 3; i++) {
+  //   game.PLATFORMS.create(
+  //     (1617 - 66) * game.SCREEN_SCALE.WIDTH,
+  //     (686 - 0 + i * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+  //     'brick'
+  //   );
+  // }
+  // for (let i = 0; i < 50; i++) {
+  //   game.PLATFORMS.create(
+  //     (1617 - 33 * i) * game.SCREEN_SCALE.WIDTH,
+  //     (686 + 34 * 1 * game.ASSET_BRICK_HEIGHT) * game.SCREEN_SCALE.HEIGHT,
+  //     'brick'
+  //   );
+  // }
 }
 
 export function createTable(game: Game): void {
