@@ -21,7 +21,8 @@ export default class Game extends Phaser.Scene {
   ////////////////////////////////
   ////////// GAME DEBUG
   ////////////////////////////////
-  debug: Debug | any;
+  debug!: Debug;
+  // debug: Debug | any;
 
   ////////////////////////////////
   ////////// GAME CONSTANTS
