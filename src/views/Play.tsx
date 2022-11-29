@@ -787,17 +787,6 @@ function Play() {
             >
               <h1>Buttons</h1>
               <div id="controls-col">
-                {characterMoves.map((charMove, charMoveIndex) => {
-                  return (
-                    <div id="move" key={charMoveIndex}>
-                      <h5>{charMove.move}</h5>
-                      <h5>
-                        {charMove.button} {charMove.status}
-                      </h5>
-                    </div>
-                  );
-                })}
-                {/* <p> fyi, button mapping is insane</p> */}
                 <div id="keyboard">
                   <div id="keyboard-top">
                     <h3>Controllers</h3>
@@ -850,6 +839,18 @@ function Play() {
                     </div>
                   </div>
                 </div>
+                {characterMoves.map((charMove, charMoveIndex) => {
+                  return (
+                    <div id="move" key={charMoveIndex}>
+                      <h5>{charMove.move}</h5>
+                      <h5>
+                        {charMove.button} {charMove.status}
+                      </h5>
+                    </div>
+                  );
+                })}
+                {/* <p> fyi, button mapping is insane</p> */}
+
                 {/* <div id="keyboard">
                   <h3>Second Keyboard</h3>
                   <p>ArrowKeys : D-Pad</p>
