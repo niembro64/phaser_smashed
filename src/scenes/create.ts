@@ -336,8 +336,10 @@ export function createKeyboards(game: Game): void {
 export function setPlayersInitialPositions(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.initializeCharPosition.x =
-      // game.playerSpawnLocations[playerIndex];
-      game.playerSpawnLocations[game.playerSpawnOrder[playerIndex]];
+      game.playerSpawnLocationsX[game.playerSpawnOrder[playerIndex]];
+
+    player.char.initializeCharPosition.y =
+      game.playerSpawnLocationsY[game.playerSpawnOrder[playerIndex]];
   });
 }
 
@@ -844,7 +846,7 @@ export function createPlatforms6(game: Game): void {
   for (let i = 0; i < 2; i++) {
     game.PLATFORMS.create(
       game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT + 3 * 34,
       'platformHorizontal'
     );
   }
@@ -1069,7 +1071,7 @@ export function createScoreboardShotGlass(game: Game): void {
     player.shotGlass = game.add
       .sprite(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
-          game.playerSpawnLocations[playerIndex],
+          game.playerSpawnLocationsX[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
         'glass_full'
       )
@@ -1208,7 +1210,7 @@ export function createScoreboard(game: Game): void {
     player.scoreBoardUpper = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
-          game.playerSpawnLocations[playerIndex],
+          game.playerSpawnLocationsX[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2,
         'XXX',
         {
@@ -1241,7 +1243,7 @@ export function createScoreboard(game: Game): void {
     player.scoreBoardLower = game.add
       .text(
         game.SCREEN_DIMENSIONS.WIDTH / 2 +
-          game.playerSpawnLocations[playerIndex],
+          game.playerSpawnLocationsX[playerIndex],
         game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
         'XXX',
         {

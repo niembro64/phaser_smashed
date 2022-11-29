@@ -187,7 +187,8 @@ export default class Game extends Phaser.Scene {
   ////////////////////////////////
   playerChoices: number[] = [0, 1, 2, 3];
   playerSpawnOrder: number[] = [0, 1, 2, 3];
-  playerSpawnLocations: number[] = [-165, -100, 100, 165];
+  playerSpawnLocationsX: number[] = [-165, -100, 100, 165];
+  playerSpawnLocationsY: number[] = [400, 400, 400, 400];
   allPlayersWallTouchIterator: number = 0; // need to update
 
   ////////////////////////////////
