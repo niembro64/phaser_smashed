@@ -109,6 +109,7 @@ export function preload(game: Game): void {
   game.load.image("flag", "images/flagpole_JK2.png");
 
   game.load.image("background", "images/darkxp.jpg");
+  game.load.image("background_outline", "images/outline.png");
   game.load.image("centerWhite", "images/wx.png");
   game.load.image("centerBlack", "images/bx.png");
   game.load.image("centerMagenta", "images/mx.png");

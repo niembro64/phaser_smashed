@@ -17,9 +17,11 @@ export function create(game: Game) {
   createSoundsGame(game);
   createBackground(game);
   createBackgroundTitles(game);
+  createSplashBlack(game);
   createFlag(game);
   createSplashes(game);
   createPlatforms(game);
+  createBackgroundOutline(game);
   createScoreboardShotGlass(game);
   createTable(game);
   createColliderTablePlatforms(game);
@@ -632,6 +634,21 @@ export function createBackground(game: Game): void {
   game.BACKGROUND.body.allowGravity = false;
 }
 
+export function createBackgroundOutline(game: Game): void {
+  game.BACKGROUND_OUTLINE = game.physics.add.sprite(
+    game.SCREEN_DIMENSIONS.WIDTH / 2,
+    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    'background_outline'
+  );
+  game.BACKGROUND_OUTLINE.setScale(
+    game.SCREEN_SCALE.WIDTH,
+    game.SCREEN_SCALE.HEIGHT
+  );
+  // game.BACKGROUND_OUTLINE.setOrigin(0.5, 0.5);
+  game.BACKGROUND_OUTLINE.setImmovable(true);
+  game.BACKGROUND_OUTLINE.body.allowGravity = false;
+}
+
 export function createPlatforms0(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
 
@@ -1085,9 +1102,39 @@ export function createSplashRuleFinished(game: Game): void {
     }
   });
 }
+export function createSplashBlack(game: Game): void {
+  let splash = game.splashRules[0];
+  splash.text = game.add
+    .text(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      splash.word,
+      {
+        // font: "Arial 100px",
+        fontSize: splash.size,
+        // fontFamily: "'Courier New'",
+        fontFamily: 'Impact',
+        // fontFamily: "'Press Start 2P'",
+        color: splash.color,
+        stroke: splash.backgroundColor,
+        strokeThickness: splash.strokeThickness,
+        shadow: {
+          offsetX: 0,
+          offsetY: 9,
+          color: 'black',
+          blur: 10,
+          stroke: true,
+          fill: true,
+        },
+      }
+    )
+    .setOrigin(0.5, 0.5)
+    .setAlpha(1);
+}
+
 export function createSplashes(game: Game): void {
   game.splashRules.forEach((splash, splashIndex) => {
-    if (splashIndex !== game.splashRules.length - 1) {
+    if (splashIndex !== 0 && splashIndex !== game.splashRules.length - 1) {
       splash.text = game.add
         .text(
           game.SCREEN_DIMENSIONS.WIDTH / 2,

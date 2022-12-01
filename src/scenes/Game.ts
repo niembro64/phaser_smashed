@@ -44,6 +44,7 @@ export default class Game extends Phaser.Scene {
   };
   PLATFORMS: any | Phaser.GameObjects.Sprite;
   BACKGROUND: any | Phaser.GameObjects.Sprite;
+  BACKGROUND_OUTLINE: any | Phaser.GameObjects.Sprite;
   TABLE: any | Phaser.GameObjects.Sprite;
   FLAG: any | Phaser.GameObjects.Sprite;
   ZOOM_MULTIPLIER_X = 0.95;
