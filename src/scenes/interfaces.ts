@@ -273,6 +273,12 @@ export interface AttackEnergy {
   followOnOffscreenOffset: { x: number; y: number };
   offscreenCurr: boolean;
   offscreenPrev: boolean;
+  findAndFollowAcceleration: FindAndFollowAcceleration;
+}
+
+export interface FindAndFollowAcceleration {
+  x: number;
+  y: number;
 }
 export interface AttackEnergyFriction {
   air: number;
