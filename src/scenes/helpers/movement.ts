@@ -418,3 +418,39 @@ export function updateKeepObjectsFromFallingLikeCrazy(game: Game): void {
     }
   });
 }
+
+export function updateAttackEnergyFollow(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    let goHereX: number = player.char.sprite.x;
+    if (player.char.attackEnergy.findAndFollowAcceleration.x) {
+      goHereX = getNearestPlayerX(player, playerIndex, game);
+    }
+    player.char.attackEnergy.sprite.body.setVelocityX(
+      player.char.attackEnergy.sprite.body.velocity.x +
+        (goHereX < player.char.sprite.x ? -1 : 1) *
+          100 *
+          player.char.attackEnergy.findAndFollowAcceleration.x
+    );
+  });
+}
+
+export function getNearestPlayerX(
+  player: Player,
+  pIndex: number,
+  game: Game
+): number {
+  let goToX = game.SCREEN_DIMENSIONS.WIDTH / 2;
+  let myX = player.char.attackEnergy.sprite.x;
+  let diffX = Math.abs(goToX - myX);
+  game.players.forEach((player, playerIndex) => {
+    if (pIndex !== playerIndex) {
+      let otherPlayerX = player.char.sprite.x;
+      let newDiffX = Math.abs(otherPlayerX - myX);
+      if (newDiffX < diffX) {
+        goToX = otherPlayerX;
+        diffX = newDiffX;
+      }
+    }
+  });
+  return goToX;
+}
