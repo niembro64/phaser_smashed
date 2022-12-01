@@ -359,7 +359,8 @@ export type CharacterName =
   | 'Kirby'
   | 'Chez'
   | 'BlackChez'
-  | 'GreenKoopa';
+  | 'GreenKoopa'
+  | 'RedKoopa';
 
 export interface SmashConfig {
   players: PlayerConfig[];

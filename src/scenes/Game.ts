@@ -1639,7 +1639,7 @@ export default class Game extends Phaser.Scene {
           light: '#ffffff',
         },
         colorFilter: false,
-        src: 'images/character_6_cropped.png',
+        src: 'images/character_7_cropped.png',
         scaleCharSpriteReality: 0.7,
         scaleCharSpriteImage: 0.7,
         sprite: null,
