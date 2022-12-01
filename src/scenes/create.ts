@@ -461,7 +461,7 @@ export function createPlayers(game: Game): void {
     player.emitterLight.on = false;
     player.emitterDark.on = false;
     player.emitterPlayer.on = false;
-    player.emitterHurt.on = false;
+    player.emitterHurt.on = true; // always on
   });
 
   game.players.forEach((player, playerIndex) => {
