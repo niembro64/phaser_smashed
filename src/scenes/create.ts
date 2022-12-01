@@ -18,6 +18,8 @@ export function create(game: Game) {
   createBackground(game);
   createBackgroundTitles(game);
   createSplashBlack(game);
+  createBackgroundOutline(game);
+  createSplashes(game);
   createFlag(game);
   createPlatforms(game);
   createTable(game);
@@ -27,9 +29,7 @@ export function create(game: Game) {
   createColliderTableAttackPhysicals(game);
   createAttackEnergies(game);
   createColliderTableAttackEnergies(game);
-  createBackgroundOutline(game);
   createScoreboardShotGlass(game);
-  createSplashes(game);
   createSplashRuleFinished(game);
   createPlayers(game);
   createColliderTablePlayers(game);
@@ -1072,7 +1072,7 @@ export function createBackgroundTitles(game: Game): void {
     .setColor('black')
     .setAlpha(0.3);
   game.TEXT_SUPERTITLE = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, 'YOUNG-CHEZ', {
+    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, 'WEB', {
       // font: "300px Impact",
       fontFamily: 'Impact',
       // fontFamily: "'Press Start 2P'",
