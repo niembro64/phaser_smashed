@@ -276,6 +276,7 @@ export function updatePlayers(game: Game): void {
         ///////// WHILE IN LOOP
         ////////////////////////////////
         setRespawn(player, game);
+        updateJumpEnergy(player, game);
 
         ////////////////////////////////
         ///////// duration => alive

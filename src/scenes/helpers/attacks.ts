@@ -1,7 +1,12 @@
 import Game from '../Game';
 import { AttackEnergy, Player } from '../interfaces';
+import { setEmitterPlayerOnFalse } from './damage';
 
 export function updateJumpEnergy(player: Player, game: Game): void {
+  if (player.state.name === 'player-state-dead') {
+    setEmitterPlayerOnFalse(player);
+    return;
+  }
   // if (
   //   !player.padCurr.up &&
   //   !player.padCurr.down &&

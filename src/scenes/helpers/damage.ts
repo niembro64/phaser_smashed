@@ -1,16 +1,11 @@
-import Game from "../Game";
-import {
-  AttackEnergy,
-  AttackPhysical,
-  Vector,
-  Player,
-} from "../interfaces";
-import { hitbackFly } from "./movement";
+import Game from '../Game';
+import { AttackEnergy, AttackPhysical, Vector, Player } from '../interfaces';
+import { hitbackFly } from './movement';
 import {
   getHasGameDurationPassedAttack,
   setAttackPhysicalState,
   setPlayerState,
-} from "./state";
+} from './state';
 
 export function onHitHandlerAttackPhysical(
   player: Player,
@@ -20,17 +15,17 @@ export function onHitHandlerAttackPhysical(
   damage: number,
   game: Game
 ): void {
-  if (player.state.name !== "player-state-alive") {
+  if (player.state.name !== 'player-state-alive') {
     return;
   }
 
   if (
-    game.players[j].char.attackPhysical.state.name !== "attackphysical-state-on"
+    game.players[j].char.attackPhysical.state.name !== 'attackphysical-state-on'
   ) {
     return;
   }
 
-  setPlayerState(player, playerIndex, "player-state-hurt", game);
+  setPlayerState(player, playerIndex, 'player-state-hurt', game);
 
   game.overlappingPlayerIAttackPhysicalJ[playerIndex][j] = true;
 
@@ -73,7 +68,7 @@ export function onHitHandlerAttackEnergy(
   damage: number,
   game: Game
 ): void {
-  if (player.state.name !== "player-state-alive") {
+  if (player.state.name !== 'player-state-alive') {
     return;
   }
   game.overlappingPlayerIAttackEnergyJ[playerIndex][j] = true;
@@ -109,31 +104,37 @@ export function onHitHandlerAttackEnergy(
   );
 }
 
-export function setEmitterHurtActiveOn(player: Player): void {
+export function setEmitterPlayerOnFalse(player: Player): void {
+  player.emitterHurt.on = false;
+}
+export function setEmitterPlayerOnTrue(player: Player): void {
+  player.emitterHurt.on = false;
+}
+export function setEmitterHurtActiveTrue(player: Player): void {
   player.emitterHurt.active = true;
 }
-export function setEmitterHurtActiveOff(player: Player): void {
+export function setEmitterHurtActiveFalse(player: Player): void {
   player.emitterHurt.active = false;
 }
 
-export function setEmitterHurtVisibleOn(player: Player): void {
+export function setEmitterHurtVisibleTrue(player: Player): void {
   player.emitterHurt.visible = true;
 }
-export function setEmitterHurtVisibleOff(player: Player): void {
+export function setEmitterHurtVisibleFalse(player: Player): void {
   player.emitterHurt.visible = false;
 }
 
-export function setEmitterPlayerActiveOn(player: Player): void {
+export function setEmitterPlayerActiveTrue(player: Player): void {
   player.emitterPlayer.active = true;
 }
-export function setEmitterPlayerActiveOff(player: Player): void {
+export function setEmitterPlayerActiveFalse(player: Player): void {
   player.emitterPlayer.active = false;
 }
 
-export function setEmitterPlayerVisibleOn(player: Player): void {
+export function setEmitterPlayerVisibleTrue(player: Player): void {
   player.emitterPlayer.visible = true;
 }
-export function setEmitterPlayerVisibleOff(player: Player): void {
+export function setEmitterPlayerVisibleFalse(player: Player): void {
   player.emitterPlayer.visible = false;
 }
 
@@ -181,7 +182,7 @@ export function updatePlayerNumberKills(
 }
 
 export function removeDamage(player: Player, damage: number): void {
-  if (player.state.name === "player-state-alive") {
+  if (player.state.name === 'player-state-alive') {
     player.char.damage -= damage;
   }
 }
@@ -203,4 +204,3 @@ export function getNormalizedVector(
 
   return { x: newX / newRatio, y: newY / newRatio };
 }
-
