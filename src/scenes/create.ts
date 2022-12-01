@@ -634,12 +634,17 @@ export function createCollidersAEvAP(game: Game): void {
 }
 
 export function createBackground(game: Game): void {
+  const scaleUp = 1.1;
+
   game.BACKGROUND = game.physics.add.sprite(
     game.SCREEN_DIMENSIONS.WIDTH / 2,
     game.SCREEN_DIMENSIONS.HEIGHT / 2,
     'background'
   );
-  game.BACKGROUND.setScale(game.SCREEN_SCALE.WIDTH, game.SCREEN_SCALE.HEIGHT);
+  game.BACKGROUND.setScale(
+    game.SCREEN_SCALE.WIDTH * scaleUp,
+    game.SCREEN_SCALE.HEIGHT * scaleUp
+  );
   // game.BACKGROUND.setOrigin(0.5, 0.5);
   game.BACKGROUND.setImmovable(true);
   game.BACKGROUND.body.allowGravity = false;
