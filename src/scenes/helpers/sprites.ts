@@ -28,6 +28,18 @@ export function updateSpriteFilter(
   playerIndex: number,
   game: Game
 ): void {
+  if (player.emitterPlayer.on) {
+    // filterPlayerColorCircleFill(
+    //   player,
+    //   game.colorCircles[playerIndex].colorNumber
+    // );
+    filterPlayerColorCircle(
+      player,
+      game.colorCircles[playerIndex].colorNumber
+    );
+    return;
+  }
+
   if (player.char.colorFilter) {
     if (player.state.name === 'player-state-hurt') {
       // HURT
@@ -104,7 +116,7 @@ export function filterPlayerColorCircleFill(
   // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
-  // player.char.sprite.setTint(circleColor);
+  player.char.sprite.setTint('transparent');
   player.char.sprite.setTintFill(circleColor);
   player.char.sprite.setAlpha(1);
   // player.char.sprite.brighten(0.3);
