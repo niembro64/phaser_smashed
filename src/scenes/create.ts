@@ -1000,7 +1000,7 @@ export function createPlatforms6(game: Game): void {
 export function createTable(game: Game): void {
   game.TABLE = game.physics.add.sprite(
     (game.SCREEN_DIMENSIONS.WIDTH / 2) * game.SCREEN_SCALE.WIDTH,
-    (game.SCREEN_DIMENSIONS.HEIGHT / 2 - 1043) * game.SCREEN_SCALE.HEIGHT,
+    (game.SCREEN_DIMENSIONS.HEIGHT / 2 - 300) * game.SCREEN_SCALE.HEIGHT,
     'table'
   );
   // game.TABLE = game.physics.add.sprite(
@@ -1011,7 +1011,7 @@ export function createTable(game: Game): void {
   game.TABLE.setScale(1);
   game.TABLE.setMass(2);
   // game.TABLE.setCollideWorldBounds(true);
-  game.TABLE.setBounce(0.3);
+  game.TABLE.setBounce(0.5);
   // game.TABLE.setImmovable(true);
 
   // game.physics.add.collider(game.TABLE, game.PLATFORMS);
