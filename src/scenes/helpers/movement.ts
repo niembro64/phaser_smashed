@@ -421,16 +421,15 @@ export function updateKeepObjectsFromFallingLikeCrazy(game: Game): void {
 
 export function updateAttackEnergyFollow(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    let goHereX: number = player.char.sprite.x;
-    if (player.char.attackEnergy.findAndFollowAcceleration.x) {
-      goHereX = getNearestPlayerX(player, playerIndex, game);
+    if (player.char.attackEnergy.findAndFollowAcceleration.x !== 0) {
+      let goHereX: number = getNearestPlayerX(player, playerIndex, game);
+      player.char.attackEnergy.sprite.body.setVelocityX(
+        player.char.attackEnergy.sprite.body.velocity.x * 0.98 +
+          (goHereX < player.char.attackEnergy.sprite.x ? -1 : 1) *
+            100 *
+            player.char.attackEnergy.findAndFollowAcceleration.x
+      );
     }
-    player.char.attackEnergy.sprite.body.setVelocityX(
-      player.char.attackEnergy.sprite.body.velocity.x +
-        (goHereX < player.char.sprite.x ? -1 : 1) *
-          100 *
-          player.char.attackEnergy.findAndFollowAcceleration.x
-    );
   });
 }
 
@@ -439,7 +438,7 @@ export function getNearestPlayerX(
   pIndex: number,
   game: Game
 ): number {
-  let goToX = game.SCREEN_DIMENSIONS.WIDTH / 2;
+  let goToX = Infinity;
   let myX = player.char.attackEnergy.sprite.x;
   let diffX = Math.abs(goToX - myX);
   game.players.forEach((player, playerIndex) => {
