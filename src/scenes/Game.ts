@@ -272,7 +272,7 @@ export default class Game extends Phaser.Scene {
       name: 'splash-black',
       word: 'BLACK',
       color: '#00000000',
-      backgroundColor: '#081F2B',
+      backgroundColor: '#101018',
       // backgroundColor: '#111111ff',
       shadowColor: '#11111100',
       size: '300px',
