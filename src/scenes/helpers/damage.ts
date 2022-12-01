@@ -105,10 +105,10 @@ export function onHitHandlerAttackEnergy(
 }
 
 export function setEmitterPlayerOnFalse(player: Player): void {
-  player.emitterHurt.on = false;
+  player.emitterPlayer.on = false;
 }
 export function setEmitterPlayerOnTrue(player: Player): void {
-  player.emitterHurt.on = true;
+  player.emitterPlayer.on = true;
 }
 export function setEmitterHurtActiveTrue(player: Player): void {
   player.emitterHurt.active = true;
