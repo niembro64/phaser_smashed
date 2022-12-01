@@ -24,8 +24,8 @@ export function create(game: Game) {
   createColliderTablePlatforms(game);
   createEmitters(game);
   createAttackPhysicals(game);
+  createColliderTableAttackPhysicals(game);
   createAttackEnergies(game);
-  // createColliderTableAttackPhysicals(game);
   createColliderTableAttackEnergies(game);
   createBackgroundOutline(game);
   createScoreboardShotGlass(game);
@@ -402,6 +402,11 @@ export function createColliderTablePlayers(game: Game): void {
   });
 }
 
+export function createColliderTableAttackPhysicals(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    game.physics.add.collider(player.char.attackPhysical.sprite, game.TABLE);
+  });
+}
 export function createColliderTableAttackEnergies(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.attackEnergy.bouncePlatforms) {
@@ -477,7 +482,7 @@ export function createPlayers(game: Game): void {
 export function createAttackPhysicals(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.attackPhysical.sprite = game.physics.add
-      .sprite(-300, -300, player.char.attackPhysical.srcImage)
+      .sprite(-500, -500, player.char.attackPhysical.srcImage)
       .setMass(player.char.attackPhysical.mass)
       .setScale(player.char.attackPhysical.scale)
       .setOrigin(0.5, 0.5)
