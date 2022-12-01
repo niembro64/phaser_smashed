@@ -50,7 +50,7 @@ function Play() {
     setMusicActive: true,
     setReadySoundActive: false,
     setFrictionAirActive: true,
-    setCamerasActive: true,
+    setCamerasActive: false,
     setCamerasVisible: false,
     setCollidersPvP: false,
     setCollidersPvAttackPhysical: false,
@@ -67,7 +67,7 @@ function Play() {
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,
-    setLoadTimeExtra: true,
+    setLoadTimeExtra: false,
     setChezSecret: true,
     setIsDevMode: false,
   };
