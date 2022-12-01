@@ -1009,7 +1009,7 @@ export function createTable(game: Game): void {
   //   'table'
   // );
   game.TABLE.setScale(1);
-  game.TABLE.setMass(1);
+  game.TABLE.setMass(2);
   // game.TABLE.setCollideWorldBounds(true);
   game.TABLE.setBounce(0.3);
   // game.TABLE.setImmovable(true);
