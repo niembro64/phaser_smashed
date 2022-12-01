@@ -457,7 +457,7 @@ export function createPlayers(game: Game): void {
     player.emitterDark.active = false;
     player.emitterPlayer.active = false;
     player.emitterHurt.active = false;
-    
+
     player.emitterLight.on = false;
     player.emitterDark.on = false;
     player.emitterPlayer.on = false;
@@ -1101,7 +1101,7 @@ export function createSplashRuleFinished(game: Game): void {
             shadow: {
               offsetX: 0,
               offsetY: 9,
-              color: 'black',
+              color: splash.shadowColor,
               blur: 10,
               stroke: true,
               fill: true,

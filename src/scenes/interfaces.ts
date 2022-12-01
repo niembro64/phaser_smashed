@@ -206,6 +206,7 @@ export interface SplashRules {
   word: string;
   color: string;
   backgroundColor: string;
+  shadowColor: string;
   strokeThickness: number;
   src: string;
 }
