@@ -108,7 +108,7 @@ export function setEmitterPlayerOnFalse(player: Player): void {
   player.emitterHurt.on = false;
 }
 export function setEmitterPlayerOnTrue(player: Player): void {
-  player.emitterHurt.on = false;
+  player.emitterHurt.on = true;
 }
 export function setEmitterHurtActiveTrue(player: Player): void {
   player.emitterHurt.active = true;
