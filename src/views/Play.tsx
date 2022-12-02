@@ -664,9 +664,23 @@ function Play() {
                       </div>
                     </button>
                   )} */}
-                  {(inputArray[cPlayerIndex] === 1 ||
-                    inputArray[cPlayerIndex] === 2) && (
-                    <button
+                  {inputArray[cPlayerIndex] === 0 && (
+                    <div
+                      className="b-black px-4"
+                      onClick={() => {
+                        onClickCycleInputArray(
+                          cPlayerIndex,
+                          inputArray[cPlayerIndex] + 1 > 2
+                            ? (0 as Input)
+                            : ((inputArray[cPlayerIndex] + 1) as Input)
+                        );
+                      }}
+                    >
+                      <span>Off</span>
+                    </div>
+                  )}
+                  {inputArray[cPlayerIndex] === 1 && (
+                    <div
                       className="b-dark px-4"
                       onClick={() => {
                         onClickCycleInputArray(
@@ -678,11 +692,12 @@ function Play() {
                       }}
                     >
                       <span>{cPlayer.name}</span>
-                    </button>
+                      <span className="emoji">🎮</span>
+                    </div>
                   )}
-                  {inputArray[cPlayerIndex] === 0 && (
-                    <button
-                      className="px-4 b-black"
+                  {inputArray[cPlayerIndex] === 2 && (
+                    <div
+                      className="b-dark px-4"
                       onClick={() => {
                         onClickCycleInputArray(
                           cPlayerIndex,
@@ -692,8 +707,9 @@ function Play() {
                         );
                       }}
                     >
-                      <span>Off</span>
-                    </button>
+                      <span>{cPlayer.name}</span>
+                      <span className="emoji">⌨️​</span>
+                    </div>
                   )}
                 </div>
               );
