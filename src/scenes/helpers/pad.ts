@@ -747,7 +747,10 @@ export function updateControllerMovement(player: Player, game: Game): void {
       return;
     }
 
-    // CHECK INDIVIDUALS
+    if (player.emitterPlayer.on) {
+      return;
+    }
+
     if (player.padCurr.up) {
       player.char.sprite.body.setVelocityY(
         player.char.sprite.body.velocity.y +
@@ -765,7 +768,6 @@ export function updateControllerMovement(player: Player, game: Game): void {
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
-      // return;
     }
     if (player.padCurr.left) {
       player.char.sprite.body.setVelocityX(
@@ -777,7 +779,6 @@ export function updateControllerMovement(player: Player, game: Game): void {
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
-      // return;
     }
     if (player.padCurr.right) {
       player.char.sprite.body.setVelocityX(
@@ -789,50 +790,6 @@ export function updateControllerMovement(player: Player, game: Game): void {
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
-      // // CHECK INDIVIDUALS
-      // if (player.gamepad.up && !player.gamepad.Y) {
-      //   player.char.sprite.body.setVelocityY(
-      //     player.char.sprite.body.velocity.y +
-      //       -game.DEFAULT_SPEED_Y *
-      //         player.char.speed *
-      //         player.char.fast *
-      //         (1 - game.RATIO_ACCELERATION_VELOCITY)
-      //   );
-      //   // return;
-      // }
-      // if (player.gamepad.down) {
-      //   player.char.sprite.body.setVelocityY(
-      //     player.char.sprite.body.velocity.y +
-      //       game.DEFAULT_SPEED_Y *
-      //         player.char.speed *
-      //         player.char.fast *
-      //         (1 - game.RATIO_ACCELERATION_VELOCITY)
-      //   );
-      //   // return;
-      // }
-      // if (player.gamepad.left) {
-      //   player.char.sprite.body.setVelocityX(
-      //     player.char.sprite.body.velocity.x *
-      //       game.RATIO_ACCELERATION_VELOCITY *
-      //       Math.pow(player.char.friction_air, 3) +
-      //       -game.DEFAULT_SPEED_X *
-      //         player.char.speed *
-      //         player.char.fast *
-      //         (1 - game.RATIO_ACCELERATION_VELOCITY)
-      //   );
-      //   // return;
-      // }
-      // if (player.gamepad.right) {
-      //   player.char.sprite.body.setVelocityX(
-      //     player.char.sprite.body.velocity.x *
-      //       game.RATIO_ACCELERATION_VELOCITY *
-      //       Math.pow(player.char.friction_air, 4) +
-      //       game.DEFAULT_SPEED_X *
-      //         player.char.speed *
-      //         player.char.fast *
-      //         (1 - game.RATIO_ACCELERATION_VELOCITY)
-      //   );
-      // return;
     }
   }
 }

@@ -47,12 +47,12 @@ import {
 import { updateGlassesTransparency, updateText } from './helpers/text';
 import { updateGameStatePlay } from './gameStates.ts/gameStatePlay';
 import { Player } from './interfaces';
-import { printKeyboard } from './helpers/keyboard';
 
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
   setGameState(game, 'game-state-play');
   game.loaded = true;
+  console.log('players', game.players);
 }
 
 export function update(game: Game, time: number, delta: number): void {

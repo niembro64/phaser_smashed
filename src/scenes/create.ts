@@ -60,8 +60,6 @@ export function createPreCreate(game: Game): void {
     );
   }
 
-  console.log('PLAYERS CURRENT', game.players);
-
   game.players.forEach((player, playerIndex) => {
     player.gamepad = Phaser.Input.Gamepad.Gamepad;
   });
