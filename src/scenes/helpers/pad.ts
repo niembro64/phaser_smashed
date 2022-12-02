@@ -1,5 +1,5 @@
 import Game from '../Game';
-import { Player } from '../interfaces';
+import { InputType, Player } from '../interfaces';
 import {
   isAttackEnergyNearPlayer,
   getIsAttackEnergyOffscreen,
@@ -37,17 +37,29 @@ export function updateGamePadsConnected(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    if (player?.gamepad) {
-      if (player?.gamepad?.axes?.length === 4) {
-        console.log('CONTROLLER TYPE: PRO', player.gamepad);
-        updatePadCurrControllerTypePro(player, game);
-      } else if (player?.gamepad?.axes?.length) {
-        updatePadCurrControllerTypeHat(player, game);
-      } else {
-        updatePadCurrControllerTypeButtons(player, game);
-      }
+    let inputType: InputType = player.inputType;
+
+    switch (inputType) {
+      case 0:
+        break;
+      case 1:
+        if (player?.gamepad) {
+          if (player?.gamepad?.axes?.length === 4) {
+            console.log('CONTROLLER TYPE: PRO', player.gamepad);
+            updatePadCurrControllerTypePro(player, game);
+          } else if (player?.gamepad?.axes?.length) {
+            updatePadCurrControllerTypeHat(player, game);
+          } else {
+            updatePadCurrControllerTypeButtons(player, game);
+          }
+        }
+        break;
+      case 2:
+        updatePadCurrKeyboard(player, game);
+        break;
+      default:
+        break;
     }
-    updatePadCurrKeyboard(player, game);
 
     if (player?.emitterPlayer.on) {
       player.padCurr.up = false;
