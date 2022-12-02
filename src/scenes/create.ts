@@ -421,6 +421,10 @@ export function createPlayers(game: Game): void {
   setPlayersInitialPositions(game);
 
   game.players.forEach((player, playerIndex) => {
+    player.inputType = game.playerChoicesInputType[playerIndex];
+  });
+
+  game.players.forEach((player, playerIndex) => {
     player.char.sprite = game.physics.add.sprite(
       game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
       game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,

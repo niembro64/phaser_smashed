@@ -191,6 +191,7 @@ export default class Game extends Phaser.Scene {
   ////////////////////////////////
   playerChoicesCharacterType: CharacterType[] = [0, 1, 2, 3];
   playerChoicesInputType: InputType[] = [];
+  // playerSpawnOrder: number[] = [2, 0, 1, 3];
   playerSpawnOrder: number[] = [0, 1, 2, 3];
   playerSpawnLocationsX: number[] = [-165, -100, 100, 165];
   playerSpawnLocationsY: number[] = [400, 400, 400, 400];
@@ -675,7 +676,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -824,7 +825,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -972,7 +973,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1120,7 +1121,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1268,7 +1269,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1416,7 +1417,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1564,7 +1565,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {
@@ -1712,7 +1713,7 @@ export default class Game extends Phaser.Scene {
         },
         shield: null,
       },
-      inputType: null,
+      inputType: 0,
       keyboard: null,
       gamepad: null,
       padCurr: {

@@ -51,7 +51,7 @@ export interface Player {
   scoreBoardController: string | any;
   state: PlayerStateWithTime;
   char: Char;
-  inputType: InputType | any;
+  inputType: InputType;
   keyboard: keyboard | any;
   gamepad: Gamepad | any;
   padCurr: GamepadData;
