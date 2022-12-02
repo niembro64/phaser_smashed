@@ -421,8 +421,8 @@ body {
 }
 .button-input-emoji-left {
   position: absolute;
-  left: 10px; 
-  bottom: -30px;
+  left: 0px; 
+  bottom: -25px;
   height: 10vh;
   font-size: 10vh;
   padding: 0;
@@ -431,8 +431,8 @@ body {
 }
 .button-input-emoji-right {
   position: absolute;
-  right: 10px; 
-  bottom: -30px;
+  right: 0px; 
+  bottom: -25px;
   height: 10vh;
   font-size: 10vh;
   padding: 0;

@@ -381,7 +381,7 @@ function Play() {
     return argument;
   }
 
-  const onClickStartRotateSelection = (playerIndex: number): void => {
+  const onClickRotateSelection = (playerIndex: number): void => {
     blipSound();
     let choices = [...smashConfig.players];
     let choice = choices[playerIndex];
@@ -627,7 +627,7 @@ function Play() {
                   <div
                     className="playerChar"
                     onClick={() => {
-                      onClickStartRotateSelection(cPlayerIndex);
+                      onClickRotateSelection(cPlayerIndex);
                     }}
                   >
                     {(inputArray[cPlayerIndex] === 1 ||
