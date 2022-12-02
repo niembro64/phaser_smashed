@@ -4,7 +4,7 @@ import {
   updateAttackEnergy,
   getIsAllPlayersReady,
   getIsAnyPlayerPausing,
-  updateGamePadsConnected,
+  updateGamePadsMaster,
   debugUpdatePrintAllControllerButtonsWhenActive,
   debugUpdateControllersPrintConnected,
 } from './helpers/pad';
@@ -68,7 +68,7 @@ export function update(game: Game, time: number, delta: number): void {
   updateText(game);
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);
-  updateGamePadsConnected(game);
+  updateGamePadsMaster(game);
   debugUpdatePrintAllControllerButtonsWhenActive(game);
   debugUpdateControllersPrintConnected(game);
 

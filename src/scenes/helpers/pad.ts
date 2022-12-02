@@ -9,7 +9,7 @@ import {
 } from './attacks';
 import { updatePadCurrKeyboard } from './keyboard';
 
-export function updateGamePadsConnected(game: Game): void {
+export function updateGamePadsMaster(game: Game): void {
   let playerIndex = 0;
 
   // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
@@ -61,16 +61,7 @@ export function updateGamePadsConnected(game: Game): void {
         break;
     }
 
-    if (player?.emitterPlayer.on) {
-      player.padCurr.up = false;
-      player.padCurr.down = false;
-      player.padCurr.left = false;
-      player.padCurr.right = false;
-      // player.padCurr.A = false;
-      // player.padCurr.B = false;
-      // player.padCurr.X = false;
-      // player.padCurr.Y = false;
-    }
+    updateDisableDPadIfEmitterPlayerOn(player, game);
   });
 
   // for (let i = 0; i < game.input.gamepad.gamepads.length; i++) {
@@ -93,6 +84,22 @@ export function updateGamePadsConnected(game: Game): void {
   //     playerIndex++;
   //   }
   // }
+}
+
+export function updateDisableDPadIfEmitterPlayerOn(
+  player: Player,
+  game: Game
+): void {
+  if (player?.emitterPlayer.on) {
+    player.padCurr.up = false;
+    player.padCurr.down = false;
+    player.padCurr.left = false;
+    player.padCurr.right = false;
+    // player.padCurr.A = false;
+    // player.padCurr.B = false;
+    // player.padCurr.X = false;
+    // player.padCurr.Y = false;
+  }
 }
 
 export function updatePadCurrControllerTypePro(
