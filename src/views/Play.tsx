@@ -649,24 +649,9 @@ function Play() {
                       </div>
                     )}
                   </div>
-                  {/* {buttonsOnOff[cPlayerIndex].state && (
-                    <button
-                      className="b-dark d-flex flex-row justify-content-between align-items-center"
-                      onClick={() => {
-                        onClickRotateInput(cPlayerIndex);
-                      }}
-                    >
-                      <div className="center-my-children-small">
-                        <span id="button-input-emoji">{cPlayer.inputEmoji} </span>
-                      </div>
-                      <div className="center-my-children-big">
-                        <span id="button-input-name">&nbsp; {cPlayer.inputType}</span>
-                      </div>
-                    </button>
-                  )} */}
                   {inputArray[cPlayerIndex] === 0 && (
                     <div
-                      className="b-black px-4"
+                      className="b-oscuro b-black"
                       onClick={() => {
                         onClickCycleInputArray(
                           cPlayerIndex,
@@ -681,7 +666,7 @@ function Play() {
                   )}
                   {inputArray[cPlayerIndex] === 1 && (
                     <div
-                      className="b-dark px-4"
+                      className="b-oscuro b-dark"
                       onClick={() => {
                         onClickCycleInputArray(
                           cPlayerIndex,
@@ -692,12 +677,17 @@ function Play() {
                       }}
                     >
                       <span>{cPlayer.name}</span>
-                      <span className="emoji">🎮</span>
+                      {cPlayerIndex < 2 && (
+                        <div className="button-input-emoji-left">🎮</div>
+                      )}
+                      {!(cPlayerIndex < 2) && (
+                        <div className="button-input-emoji-right">🎮</div>
+                      )}
                     </div>
                   )}
                   {inputArray[cPlayerIndex] === 2 && (
                     <div
-                      className="b-dark px-4"
+                      className="b-oscuro b-dark"
                       onClick={() => {
                         onClickCycleInputArray(
                           cPlayerIndex,
@@ -708,7 +698,12 @@ function Play() {
                       }}
                     >
                       <span>{cPlayer.name}</span>
-                      <span className="emoji">⌨️​</span>
+                      {cPlayerIndex < 2 && (
+                        <div className="button-input-emoji-left">⌨️​</div>
+                      )}
+                      {!(cPlayerIndex < 2) && (
+                        <div className="button-input-emoji-right">⌨️​</div>
+                      )}
                     </div>
                   )}
                 </div>
