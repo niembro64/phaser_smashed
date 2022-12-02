@@ -10,31 +10,24 @@ import {
 import { updatePadCurrKeyboard } from './keyboard';
 
 export function updateGamePadsMaster(game: Game): void {
-  let playerIndex = 0;
+  // let playerIndex = 0;
+  // game.input.gamepad.gamepads.forEach((gamepad, gamepadIndex) => {
+  //   if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
+  //     game.players[playerIndex].gamepad =
+  //       game.input.gamepad.getPad(gamepadIndex);
+  //     playerIndex++;
+  //   }
+  // });
 
-  // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
-  // console.log("NUM GAMEPADS", game.input.gamepad.total);
-
-  game.input.gamepad.gamepads.forEach((gamepad, gamepadIndex) => {
-    gamepad?.axes.forEach((axis, axisIndex) => {
-      // console.log(
-      //   "#PADS",
-      //   game.input.gamepad.gamepads.length,
-      //   "PAD",
-      //   gamepadIndex,
-      //   "AXIS",
-      //   axisIndex,
-      //   Math.round(axis.getValue())
-      // );
-    });
-    // console.log(gamepadIndex, "ID", gamepad.id);
-
-    if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
-      game.players[playerIndex].gamepad =
-        game.input.gamepad.getPad(gamepadIndex);
-      playerIndex++;
+  let numPlayers = game.players.length;
+  let padIndex = 0;
+  let numPads = game.input.gamepad.gamepads.length;
+  for (let i = 0; i < numPlayers; i++) {
+    if (game.players[i].inputType === 1 && padIndex < numPads) {
+      game.players[i].gamepad = game.input.gamepad.getPad(padIndex);
+      padIndex++;
     }
-  });
+  }
 
   game.players.forEach((player, playerIndex) => {
     let inputType: InputType = player.inputType;
@@ -60,25 +53,7 @@ export function updateGamePadsMaster(game: Game): void {
       default:
         break;
     }
-
-    // updateDisableDPadIfEmitterPlayerOn(player, game);
   });
-}
-
-export function updateDisableDPadIfEmitterPlayerOn(
-  player: Player,
-  game: Game
-): void {
-  if (player?.emitterPlayer.on) {
-    player.padCurr.up = false;
-    player.padCurr.down = false;
-    player.padCurr.left = false;
-    player.padCurr.right = false;
-    // player.padCurr.A = false;
-    // player.padCurr.B = false;
-    // player.padCurr.X = false;
-    // player.padCurr.Y = false;
-  }
 }
 
 export function updatePadCurrControllerTypePro(
