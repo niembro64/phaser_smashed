@@ -324,13 +324,9 @@ export function getPlayerPauses(player: Player, game: Game): boolean {
   return (
     getPlayerPressedBothLR(player, game) || getPlayerPressedStart(player, game)
   );
-  // return playerAllRightButtonsPressed(player, game);
 }
 
 export function getPlayerPressedStart(player: Player, game: Game): boolean {
-  // if (player.gamepad.L1 && player.gamepad.R1) {
-  //   return true;
-  // }
   if (player.padCurr.start) {
     return true;
   }
@@ -338,9 +334,6 @@ export function getPlayerPressedStart(player: Player, game: Game): boolean {
   return false;
 }
 export function getPlayerPressedBothLR(player: Player, game: Game): boolean {
-  // if (player.gamepad.L1 && player.gamepad.R1) {
-  //   return true;
-  // }
   if (player.padCurr.L && player.padCurr.R) {
     return true;
   }
@@ -363,21 +356,6 @@ export function getIsPlayerReady(player: Player, game: Game): boolean {
   ) {
     return false;
   }
-  // if (
-  //   !player.gamepad.up &&
-  //   !player.gamepad.down &&
-  //   !player.gamepad.left &&
-  //   !player.gamepad.right &&
-  //   !player.gamepad.A &&
-  //   !player.gamepad.B &&
-  //   !player.gamepad.X &&
-  //   !player.gamepad.Y &&
-  //   !player.gamepad.R1 &&
-  //   !player.gamepad.L1
-  // ) {
-  //   return false;
-  // }
-
   return true;
 }
 
@@ -398,22 +376,6 @@ export function getIsAllPlayersReady(game: Game): boolean {
       return false;
     }
   }
-  // for (let i = 0; i < game.players.length; i++) {
-  //   if (
-  //     !game.players[i].gamepad.up &&
-  //     !game.players[i].gamepad.down &&
-  //     !game.players[i].gamepad.left &&
-  //     !game.players[i].gamepad.right &&
-  //     !game.players[i].gamepad.A &&
-  //     !game.players[i].gamepad.B &&
-  //     !game.players[i].gamepad.X &&
-  //     !game.players[i].gamepad.Y &&
-  //     !game.players[i].gamepad.R1 &&
-  //     !game.players[i].gamepad.L1
-  //   ) {
-  //     return false;
-  //   }
-  // }
   return true;
 }
 

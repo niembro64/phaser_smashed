@@ -343,20 +343,6 @@ export function createKeyboardsOld(game: Game): void {
       );
     }
   }
-
-  // for (let i = 0; i < Math.min(k, p); i++) {
-  //   game.players[p - 1 - i].keyboard = game.input.keyboard.addKeys(
-  //     game.keyboardHandPositions[k - 1 - i]
-  //   );
-  // }
-
-  // game.players.forEach((player, playerIndex) => {
-  //   if (game.keyboardHandPositions[playerIndex]) {
-  //     player.keyboard = game.input.keyboard.addKeys(
-  //       game.keyboardHandPositions[playerIndex]
-  //     );
-  //   }
-  // });
 }
 export function setPlayersInitialPositions(game: Game): void {
   game.players.forEach((player, playerIndex) => {
