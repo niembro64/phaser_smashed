@@ -285,14 +285,30 @@ function Play() {
   //   setSmashConfig({ players: [...newPlayers] });
   // };
 
-  const onClickCycleInputArray = (
+  const getNumKeyboardsInUse = (): number => {
+    let numKeyboardsInUse = 0;
+    inputArray.forEach((input) => {
+      if (input === 2) {
+        numKeyboardsInUse++;
+      }
+    });
+    return numKeyboardsInUse;
+  };
+
+  const onClickSetInputArrayElement = (
     playerIndex: number,
     newInput: Input
   ): void => {
     blipSound();
+    let i = newInput;
+    let k = getNumKeyboardsInUse();
+    if (i === 2 && k >= 2) {
+      i = 0;
+    }
     let newInputArray = [...inputArray];
-    newInputArray[playerIndex] = newInput;
+    newInputArray[playerIndex] = i;
     setInputArray([...newInputArray]);
+    console.log('newInputArray', newInputArray);
   };
 
   const bamPlay = (): void => {
@@ -327,17 +343,21 @@ function Play() {
     }
     if (charId === 4) {
       bamPlay();
-      onClickCycleInputArray(0, 2);
-      onClickCycleInputArray(1, 0);
-      onClickCycleInputArray(2, 0);
-      onClickCycleInputArray(3, 0);
+      // onClickSetInputArrayElement(0, 2);
+      // onClickSetInputArrayElement(1, 0);
+      // onClickSetInputArrayElement(2, 0);
+      // onClickSetInputArrayElement(3, 0);
+      // onClickSetChez();
+      setInputArray([2, 0, 0, 0]);
     }
     if (charId === 5) {
       woahPlay();
-      onClickCycleInputArray(0, 2);
-      onClickCycleInputArray(1, 0);
-      onClickCycleInputArray(2, 0);
-      onClickCycleInputArray(3, 0);
+      // onClickSetInputArrayElement(0, 2);
+      // onClickSetInputArrayElement(1, 0);
+      // onClickSetInputArrayElement(2, 0);
+      // onClickSetInputArrayElement(3, 0);
+      // onClickSetBlackChez();
+      setInputArray([2, 0, 0, 0]);
     }
 
     let choices = [...smashConfig.players];
@@ -653,7 +673,7 @@ function Play() {
                     <div
                       className="b-oscuro b-black"
                       onClick={() => {
-                        onClickCycleInputArray(
+                        onClickSetInputArrayElement(
                           cPlayerIndex,
                           inputArray[cPlayerIndex] + 1 > 2
                             ? (0 as Input)
@@ -668,7 +688,7 @@ function Play() {
                     <div
                       className="b-oscuro b-dark"
                       onClick={() => {
-                        onClickCycleInputArray(
+                        onClickSetInputArrayElement(
                           cPlayerIndex,
                           inputArray[cPlayerIndex] + 1 > 2
                             ? (0 as Input)
@@ -689,7 +709,7 @@ function Play() {
                     <div
                       className="b-oscuro b-dark"
                       onClick={() => {
-                        onClickCycleInputArray(
+                        onClickSetInputArrayElement(
                           cPlayerIndex,
                           inputArray[cPlayerIndex] + 1 > 2
                             ? (0 as Input)
