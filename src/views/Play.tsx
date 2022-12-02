@@ -37,6 +37,8 @@ import {
   PlayerConfig,
   Quote,
   WebState,
+  Input,
+  SmashConfig,
 } from '../scenes/interfaces';
 
 function Play() {
@@ -78,14 +80,14 @@ function Play() {
   const [bam] = useSound(importedBambalam, { volume: 0.2 });
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
-  const [numClicks, setNumClicks] = useState(0);
+  const [numClicks, setNumClicks] = useState<number>(0);
   const [webState, setWebState] = useState<WebState>('start');
-  const [showLoader, setShowLoader] = useState(false);
-  const [buttonsOnOff, setButtonsOnOff] = useState([
-    { state: false },
-    { state: true },
-    { state: true },
-    { state: false },
+  const [showLoader, setShowLoader] = useState<boolean>(false);
+  const [inputs, setInputs] = useState<Input[]>([
+    { state: 0 },
+    { state: 2 },
+    { state: 2 },
+    { state: 0 },
   ]);
 
   const inputTypeConfig: InputType[] = [
@@ -97,39 +99,27 @@ function Play() {
   ];
   const inputEmojiConfig: string[] = ['⌨️​', '⌨️​', '🎮', '🎮', '🎮'];
 
-  const [smashConfig, setSmashConfig] = useState({
+  const [smashConfig, setSmashConfig] = useState<SmashConfig>({
     players: [
       {
         characterId: 2,
         scale: 1,
         name: 'Pikachu',
-        inputIndex: 2,
-        inputType: 'snes',
-        inputEmoji: '🎮',
       },
       {
         characterId: 0,
         scale: 0.9,
         name: 'Mario',
-        inputIndex: 0,
-        inputType: 'wasd',
-        inputEmoji: '⌨️​',
       },
       {
         characterId: 1,
         scale: 0.9,
         name: 'Link',
-        inputIndex: 1,
-        inputType: 'arrows',
-        inputEmoji: '⌨️​',
       },
       {
         characterId: 3,
         scale: 0.7,
         name: 'Kirby',
-        inputIndex: 2,
-        inputType: 'snes',
-        inputEmoji: '🎮',
       },
     ],
   });
@@ -217,19 +207,32 @@ function Play() {
     setWebState('play');
 
     let players = [...smashConfig.players];
-    let newPlayers: {
-      name: CharacterName;
-      characterId: CharacterId;
-      scale: number;
-      inputType: InputType;
-    }[] = [];
-    buttonsOnOff.forEach((button, buttonIndex) => {
-      if (button.state) {
+    // let newPlayers: {
+    //   name: CharacterName;
+    //   characterId: CharacterId;
+    //   scale: number;
+    // }[] = [];
+    let newPlayers: PlayerConfig[] = [];
+    inputs.forEach((input, inputIndex) => {
+      switch (input.state) {
+        case 0:
+          break;
+        case 1:
+          newPlayers.push({
+            name: players[inputIndex].name,
+            characterId: players[inputIndex].characterId,
+            scale: players[inputIndex].scale,
+          });
+          break;
+        case 2:
+          break;
+        default:
+      }
+      if (input.state) {
         newPlayers.push({
-          name: players[buttonIndex].name as CharacterName,
-          characterId: players[buttonIndex].characterId as CharacterId,
-          scale: players[buttonIndex].scale,
-          inputType: players[buttonIndex].inputType as InputType,
+          name: players[inputIndex].name as CharacterName,
+          characterId: players[inputIndex].characterId as CharacterId,
+          scale: players[inputIndex].scale,
         });
       }
     });
@@ -284,10 +287,10 @@ function Play() {
     flipState: boolean
   ): void => {
     blipSound();
-    let buttons = [...buttonsOnOff];
+    let buttons = [...inputs];
     let button = buttons[playerIndex];
     button.state = flipState;
-    setButtonsOnOff([...buttons]);
+    setInputs([...buttons]);
   };
 
   const bamPlay = (): void => {
@@ -366,7 +369,7 @@ function Play() {
     if (newCharacterId > smashConfigScaleArray.length - 1) {
       newCharacterId = 0;
     }
-// 
+    //
     console.log('newCharacterId', newCharacterId);
 
     choice.characterId = newCharacterId;
@@ -595,7 +598,7 @@ function Play() {
                       onClickStartRotateSelection(cPlayerIndex);
                     }}
                   >
-                    {buttonsOnOff[cPlayerIndex].state && (
+                    {inputs[cPlayerIndex].state && (
                       <div className="startImageWrapper">
                         <img
                           className={
@@ -628,7 +631,7 @@ function Play() {
                       </div>
                     </button>
                   )} */}
-                  {buttonsOnOff[cPlayerIndex].state && (
+                  {inputs[cPlayerIndex].state && (
                     <button
                       className="b-dark px-4"
                       onClick={() => {
@@ -638,7 +641,7 @@ function Play() {
                       <span>{cPlayer.name}</span>
                     </button>
                   )}
-                  {!buttonsOnOff[cPlayerIndex].state && (
+                  {!inputs[cPlayerIndex].state && (
                     <button
                       className="px-4 b-black"
                       onClick={() => {

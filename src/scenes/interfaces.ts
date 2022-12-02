@@ -409,6 +409,6 @@ export interface Debug {
   setIsDevMode: boolean;
 }
 
-export interface ButtonOnOff {
-  state: boolean;
+export interface Input {
+  state: 0 | 1 | 2;
 }
