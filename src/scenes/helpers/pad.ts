@@ -12,23 +12,7 @@ import { updatePadCurrKeyboard } from './keyboard';
 export function updateGamePadsMaster(game: Game): void {
   let playerIndex = 0;
 
-  // console.log("NUM GAMEPADS", game.input.gamepad.gamepads.length);
-  // console.log("NUM GAMEPADS", game.input.gamepad.total);
-
   game.input.gamepad.gamepads.forEach((gamepad, gamepadIndex) => {
-    gamepad?.axes.forEach((axis, axisIndex) => {
-      // console.log(
-      //   "#PADS",
-      //   game.input.gamepad.gamepads.length,
-      //   "PAD",
-      //   gamepadIndex,
-      //   "AXIS",
-      //   axisIndex,
-      //   Math.round(axis.getValue())
-      // );
-    });
-    // console.log(gamepadIndex, "ID", gamepad.id);
-
     if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
       game.players[playerIndex].gamepad =
         game.input.gamepad.getPad(gamepadIndex);
@@ -63,27 +47,6 @@ export function updateGamePadsMaster(game: Game): void {
 
     updateDisableDPadIfEmitterPlayerOn(player, game);
   });
-
-  // for (let i = 0; i < game.input.gamepad.gamepads.length; i++) {
-  //   for (let j = 0; j < game.input.gamepad.gamepads[i].axes.length; j++) {
-  //     console.log(
-  //       "#PADS",
-  //       game.input.gamepad.gamepads.length,
-  //       "PAD",
-  //       i,
-  //       "AXIS",
-  //       j,
-  //       Math.round(game.input.gamepad.gamepads[i].axes[j].getValue())
-  //     );
-  //   }
-  //   if (
-  //     !game.input.gamepad.gamepads[i]?.id.includes("Jabra") &&
-  //     playerIndex < game.players.length
-  //   ) {
-  //     game.players[playerIndex].gamepad = game.input.gamepad.getPad(i);
-  //     playerIndex++;
-  //   }
-  // }
 }
 
 export function updateDisableDPadIfEmitterPlayerOn(
