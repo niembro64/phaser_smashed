@@ -22,6 +22,8 @@ export function printKeyboard(game: Game) {
 
 export function updatePadCurrKeyboard(player: Player, game: Game): void {
   if (player.keyboard) {
+    // player.padCurr.up = player.keyboard.up
+
     player.padCurr.up = player.keyboard.up.isDown;
     player.padCurr.down = player.keyboard.down.isDown;
     player.padCurr.left = player.keyboard.left.isDown;
