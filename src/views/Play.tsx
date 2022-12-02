@@ -39,6 +39,7 @@ import {
   WebState,
   Input,
   SmashConfig,
+  Char,
 } from '../scenes/interfaces';
 
 function Play() {
@@ -83,21 +84,16 @@ function Play() {
   const [numClicks, setNumClicks] = useState<number>(0);
   const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState<boolean>(false);
-  const [inputs, setInputs] = useState<Input[]>([
-    { state: 0 },
-    { state: 2 },
-    { state: 2 },
-    { state: 0 },
-  ]);
+  const [inputArray, setInputArray] = useState<Input[]>([0, 2, 2, 0]);
 
-  const inputTypeConfig: InputType[] = [
-    'wasd',
-    'arrows',
-    'snes',
-    's-wired',
-    's-pro',
-  ];
-  const inputEmojiConfig: string[] = ['⌨️​', '⌨️​', '🎮', '🎮', '🎮'];
+  // const inputTypeConfig: InputType[] = [
+  //   'wasd',
+  //   'arrows',
+  //   'snes',
+  //   's-wired',
+  //   's-pro',
+  // ];
+  // const inputEmojiConfig: string[] = ['⌨️​', '⌨️​', '🎮', '🎮', '🎮'];
 
   const [smashConfig, setSmashConfig] = useState<SmashConfig>({
     players: [
@@ -213,8 +209,8 @@ function Play() {
     //   scale: number;
     // }[] = [];
     let newPlayers: PlayerConfig[] = [];
-    inputs.forEach((input, inputIndex) => {
-      switch (input.state) {
+    inputArray.forEach((input, inputIndex) => {
+      switch (input) {
         case 0:
           break;
         case 1:
@@ -222,19 +218,26 @@ function Play() {
             name: players[inputIndex].name,
             characterId: players[inputIndex].characterId,
             scale: players[inputIndex].scale,
+            input: inputArray[inputIndex],
           });
           break;
         case 2:
+          newPlayers.push({
+            name: players[inputIndex].name,
+            characterId: players[inputIndex].characterId,
+            scale: players[inputIndex].scale,
+            input: inputArray[inputIndex],
+          });
           break;
         default:
       }
-      if (input.state) {
-        newPlayers.push({
-          name: players[inputIndex].name as CharacterName,
-          characterId: players[inputIndex].characterId as CharacterId,
-          scale: players[inputIndex].scale,
-        });
-      }
+      // if (input.state) {
+      //   newPlayers.push({
+      //     name: players[inputIndex].name as CharacterName,
+      //     characterId: players[inputIndex].characterId as CharacterId,
+      //     scale: players[inputIndex].scale,
+      //   });
+      // }
     });
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
@@ -271,26 +274,25 @@ function Play() {
     }, 1);
   };
 
-  const onClickRotateInput = (index: number): void => {
-    let newPlayers = [...smashConfig.players];
-    newPlayers[index].inputIndex + 1 > inputTypeConfig.length - 1
-      ? (newPlayers[index].inputIndex = 0)
-      : newPlayers[index].inputIndex++;
-    newPlayers[index].inputType = inputTypeConfig[newPlayers[index].inputIndex];
-    newPlayers[index].inputEmoji =
-      inputEmojiConfig[newPlayers[index].inputIndex];
-    setSmashConfig({ players: [...newPlayers] });
-  };
+  // const onClickRotateInput = (index: number): void => {
+  //   let newPlayers = [...smashConfig.players];
+  //   newPlayers[index].inputIndex + 1 > inputTypeConfig.length - 1
+  //     ? (newPlayers[index].inputIndex = 0)
+  //     : newPlayers[index].inputIndex++;
+  //   newPlayers[index].inputType = inputTypeConfig[newPlayers[index].inputIndex];
+  //   newPlayers[index].inputEmoji =
+  //     inputEmojiConfig[newPlayers[index].inputIndex];
+  //   setSmashConfig({ players: [...newPlayers] });
+  // };
 
-  const onClickStartOnOffButtons = (
+  const onClickCycleInputArray = (
     playerIndex: number,
-    flipState: boolean
+    newInput: Input
   ): void => {
     blipSound();
-    let buttons = [...inputs];
-    let button = buttons[playerIndex];
-    button.state = flipState;
-    setInputs([...buttons]);
+    let newInputArray = [...inputArray];
+    newInputArray[playerIndex] = newInput;
+    setInputArray([...newInputArray]);
   };
 
   const bamPlay = (): void => {
@@ -319,38 +321,65 @@ function Play() {
     trance.pause();
   };
 
-  const setFirstCharacterSlot = (charId: number): void => {
+  const setFirstCharacterSlot = (charId: CharacterId): void => {
     if (!debug.setChezSecret || webState === 'play') {
       return;
     }
     if (charId === 4) {
       bamPlay();
-      onClickStartOnOffButtons(0, true);
-      onClickStartOnOffButtons(1, false);
-      onClickStartOnOffButtons(2, false);
-      onClickStartOnOffButtons(3, false);
+      onClickCycleInputArray(0, 2);
+      onClickCycleInputArray(1, 0);
+      onClickCycleInputArray(2, 0);
+      onClickCycleInputArray(3, 0);
     }
     if (charId === 5) {
       woahPlay();
-      onClickStartOnOffButtons(0, true);
-      onClickStartOnOffButtons(1, false);
-      onClickStartOnOffButtons(2, false);
-      onClickStartOnOffButtons(3, false);
+      onClickCycleInputArray(0, 2);
+      onClickCycleInputArray(1, 0);
+      onClickCycleInputArray(2, 0);
+      onClickCycleInputArray(3, 0);
     }
 
     let choices = [...smashConfig.players];
     let choice = choices[0];
     choice.characterId = charId;
-    let tempScale = smashConfigScaleArray.find((s, sIndex) => {
-      return s.characterId === choice.characterId;
-    })?.scale;
-    let tempName = smashConfigScaleArray.find((s, sIndex) => {
-      return s.characterId === choice.characterId;
-    })?.name;
-    choice.scale = tempScale ? tempScale : 1;
-    choice.name = tempName ? tempName : '';
+    let tempScale = ensureTypeCharacterId(
+      smashConfigScaleArray.find((s, sIndex) => {
+        return s.characterId === choice.characterId;
+      })
+    ).scale;
+    let tempName = ensureTypeCharacterName(
+      smashConfigScaleArray.find((s) => {
+        return s.characterId === choice.characterId;
+      })
+    ).name;
+
+    choice.scale = tempScale;
+    choice.name = tempName;
     setSmashConfig({ players: [...choices] });
   };
+
+  function ensureTypeCharacterId<CharacterId>(
+    argument: CharacterId | undefined | null,
+    message: string = 'This value was promised to be there.'
+  ): CharacterId {
+    if (argument === undefined || argument === null) {
+      throw new TypeError(message);
+    }
+
+    return argument;
+  }
+
+  function ensureTypeCharacterName<CharacterName>(
+    argument: CharacterName | undefined | null,
+    message: string = 'This value was promised to be there.'
+  ): CharacterName {
+    if (argument === undefined || argument === null) {
+      throw new TypeError(message);
+    }
+
+    return argument;
+  }
 
   const onClickStartRotateSelection = (playerIndex: number): void => {
     blipSound();
@@ -372,16 +401,19 @@ function Play() {
     //
     console.log('newCharacterId', newCharacterId);
 
-    choice.characterId = newCharacterId;
+    choice.characterId = newCharacterId as CharacterId;
 
     let tempScale = smashConfigScaleArray.find((s, sIndex) => {
       return s.characterId === choice.characterId;
     })?.scale;
-    let tempName = smashConfigScaleArray.find((s, sIndex) => {
-      return s.characterId === choice.characterId;
-    })?.name;
+    let tempName = ensureTypeCharacterName(
+      smashConfigScaleArray.find((s, sIndex) => {
+        return s.characterId === choice.characterId;
+      })
+    ).name;
+
     choice.scale = tempScale ? tempScale : 1;
-    choice.name = tempName ? tempName : '';
+    choice.name = tempName;
     setSmashConfig({ players: [...choices] });
   };
 
@@ -598,7 +630,8 @@ function Play() {
                       onClickStartRotateSelection(cPlayerIndex);
                     }}
                   >
-                    {inputs[cPlayerIndex].state && (
+                    {(inputArray[cPlayerIndex] === 1 ||
+                      inputArray[cPlayerIndex] === 2) && (
                       <div className="startImageWrapper">
                         <img
                           className={
@@ -631,21 +664,32 @@ function Play() {
                       </div>
                     </button>
                   )} */}
-                  {inputs[cPlayerIndex].state && (
+                  {(inputArray[cPlayerIndex] === 1 ||
+                    inputArray[cPlayerIndex] === 2) && (
                     <button
                       className="b-dark px-4"
                       onClick={() => {
-                        onClickStartOnOffButtons(cPlayerIndex, false);
+                        onClickCycleInputArray(
+                          cPlayerIndex,
+                          inputArray[cPlayerIndex] + 1 > 2
+                            ? (0 as Input)
+                            : ((inputArray[cPlayerIndex] + 1) as Input)
+                        );
                       }}
                     >
                       <span>{cPlayer.name}</span>
                     </button>
                   )}
-                  {!inputs[cPlayerIndex].state && (
+                  {inputArray[cPlayerIndex] === 0 && (
                     <button
                       className="px-4 b-black"
                       onClick={() => {
-                        onClickStartOnOffButtons(cPlayerIndex, true);
+                        onClickCycleInputArray(
+                          cPlayerIndex,
+                          inputArray[cPlayerIndex] + 1 > 2
+                            ? (0 as Input)
+                            : ((inputArray[cPlayerIndex] + 1) as Input)
+                        );
                       }}
                     >
                       <span>Off</span>

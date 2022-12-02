@@ -351,6 +351,7 @@ export interface keyboard {
 //////////////////
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type Input = 0 | 1 | 2;
 
 export type CharacterName =
   | 'Mario'
@@ -370,6 +371,7 @@ export interface PlayerConfig {
   name: CharacterName;
   characterId: CharacterId;
   scale: number;
+  input?: Input;
 }
 
 export type WebState = 'start' | 'play';
@@ -407,8 +409,4 @@ export interface Debug {
   setLoadTimeExtra: boolean;
   setChezSecret: boolean;
   setIsDevMode: boolean;
-}
-
-export interface Input {
-  state: 0 | 1 | 2;
 }
