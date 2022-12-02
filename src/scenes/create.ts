@@ -5,6 +5,7 @@ import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
 } from './helpers/damage';
+import { playerShootAttackEnergy } from './helpers/pad';
 import {
   filterAttackEnergyColorStateNormal,
   setBlinkTrue,
@@ -314,7 +315,23 @@ export function createHitboxOverlap(game: Game): void {
     });
   });
 }
+
 export function createKeyboards(game: Game): void {
+  let kIndex = 0;
+
+  for (let i = 0; i < game.players.length; i++) {
+    if (game.players[i].inputType === 2) {
+      game.players[i].keyboard = game.input.keyboard.addKeys(
+        game.keyboardHandPositions[kIndex]
+      );
+      kIndex++;
+      if (kIndex >= game.keyboardHandPositions.length) {
+        return;
+      }
+    }
+  }
+}
+export function createKeyboardsOld(game: Game): void {
   const k = game.keyboardHandPositions.length;
   const p = game.players.length;
   const d = p - k > 0 ? p - k : 0;
