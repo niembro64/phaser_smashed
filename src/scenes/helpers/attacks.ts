@@ -196,22 +196,3 @@ export function updatePhysicalAttackFollowsPlayer(
     player.char.attackPhysical.sprite.flipX = false;
   }
 }
-
-// export function updatePhysicalAttackFollowPlayers(game: Game): void {
-//   game.players.forEach((player, playerIndex) => {
-//     player.char.attackPhysical.sprite.y =
-//       player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
-
-//     if (player.char.sprite.flipX) {
-//       player.char.attackPhysical.sprite.x =
-//         player.char.sprite.x - player.char.attackPhysical.posFromCenter.x;
-
-//       player.char.attackPhysical.sprite.flipX = true;
-//     } else {
-//       player.char.attackPhysical.sprite.x =
-//         player.char.sprite.x + player.char.attackPhysical.posFromCenter.x;
-
-//       player.char.attackPhysical.sprite.flipX = false;
-//     }
-//   });
-// }
