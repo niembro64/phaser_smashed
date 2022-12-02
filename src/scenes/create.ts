@@ -51,9 +51,11 @@ export function create(game: Game) {
 }
 
 export function createPreCreate(game: Game): void {
-  for (let i = 0; i < game.playerChoices.length; i++) {
+  for (let i = 0; i < game.playerChoicesCharacterType.length; i++) {
     game.players.push(
-      JSON.parse(JSON.stringify(game.playerOptions[game.playerChoices[i]]))
+      JSON.parse(
+        JSON.stringify(game.playerOptions[game.playerChoicesCharacterType[i]])
+      )
     );
   }
 

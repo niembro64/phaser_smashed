@@ -21,25 +21,15 @@ import importedTrance from '../sounds/trance.wav';
 import importedStartSound from '../sounds/start.wav';
 // @ts-ignore
 import importedBlipSound from '../sounds/game-start-liquid.wav';
-// import {
-//   CharacterId,
-//   CharacterName,
-//   Debug,
-//   PlayerConfig,
-//   Quote,
-//   WebState,
-// } from './ViewInterfaces';
+
 import {
-  InputType,
-  CharacterId,
-  CharacterName,
+  CharacterType,
   Debug,
   PlayerConfig,
   Quote,
   WebState,
-  Input,
+  InputType,
   SmashConfig,
-  Char,
 } from '../scenes/interfaces';
 
 function Play() {
@@ -84,7 +74,7 @@ function Play() {
   const [numClicks, setNumClicks] = useState<number>(0);
   const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState<boolean>(false);
-  const [inputArray, setInputArray] = useState<Input[]>([0, 2, 2, 0]);
+  const [inputArray, setInputArray] = useState<InputType[]>([0, 2, 2, 0]);
 
   // const inputTypeConfig: InputType[] = [
   //   'wasd',
@@ -297,7 +287,7 @@ function Play() {
 
   const onClickSetInputArrayElement = (
     playerIndex: number,
-    newInput: Input
+    newInput: InputType
   ): void => {
     blipSound();
     let i = newInput;
@@ -337,7 +327,7 @@ function Play() {
     trance.pause();
   };
 
-  const setFirstCharacterSlot = (charId: CharacterId): void => {
+  const setFirstCharacterSlot = (charId: CharacterType): void => {
     if (!debug.setChezSecret || webState === 'play') {
       return;
     }
@@ -421,7 +411,7 @@ function Play() {
     //
     console.log('newCharacterId', newCharacterId);
 
-    choice.characterId = newCharacterId as CharacterId;
+    choice.characterId = newCharacterId as CharacterType;
 
     let tempScale = smashConfigScaleArray.find((s, sIndex) => {
       return s.characterId === choice.characterId;
@@ -676,8 +666,8 @@ function Play() {
                         onClickSetInputArrayElement(
                           cPlayerIndex,
                           inputArray[cPlayerIndex] + 1 > 2
-                            ? (0 as Input)
-                            : ((inputArray[cPlayerIndex] + 1) as Input)
+                            ? (0 as InputType)
+                            : ((inputArray[cPlayerIndex] + 1) as InputType)
                         );
                       }}
                     >
@@ -691,8 +681,8 @@ function Play() {
                         onClickSetInputArrayElement(
                           cPlayerIndex,
                           inputArray[cPlayerIndex] + 1 > 2
-                            ? (0 as Input)
-                            : ((inputArray[cPlayerIndex] + 1) as Input)
+                            ? (0 as InputType)
+                            : ((inputArray[cPlayerIndex] + 1) as InputType)
                         );
                       }}
                     >
@@ -712,8 +702,8 @@ function Play() {
                         onClickSetInputArrayElement(
                           cPlayerIndex,
                           inputArray[cPlayerIndex] + 1 > 2
-                            ? (0 as Input)
-                            : ((inputArray[cPlayerIndex] + 1) as Input)
+                            ? (0 as InputType)
+                            : ((inputArray[cPlayerIndex] + 1) as InputType)
                         );
                       }}
                     >

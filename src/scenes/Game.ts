@@ -13,6 +13,8 @@ import {
   keyboard,
   Debug,
   SmashConfig,
+  InputType,
+  CharacterType,
 } from './interfaces';
 import { preload } from './preload';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
@@ -187,7 +189,8 @@ export default class Game extends Phaser.Scene {
   ////////////////////////////////
   ////////// PLAYER VARIRABLES
   ////////////////////////////////
-  playerChoices: number[] = [0, 1, 2, 3];
+  playerChoicesCharacterType: CharacterType[] = [0, 1, 2, 3];
+  playerChoicesInputType: InputType[] = [];
   playerSpawnOrder: number[] = [0, 1, 2, 3];
   playerSpawnLocationsX: number[] = [-165, -100, 100, 165];
   playerSpawnLocationsY: number[] = [400, 400, 400, 400];

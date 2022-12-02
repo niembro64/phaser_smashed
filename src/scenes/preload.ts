@@ -1,13 +1,26 @@
 import Game from './Game';
 
+export function ensureTypeInput<Input>(
+  argument: Input | undefined | null,
+  message: string = 'This value was promised to be there.'
+): Input {
+  if (argument === undefined || argument === null) {
+    throw new TypeError(message);
+  }
+
+  return argument;
+}
+
 export function preload(game: Game): void {
   game.smashConfig = game.game.registry.get('smashConfig');
   game.debug = game.game.registry.get('debug');
   console.log('this.smashConfig', game.smashConfig);
   if (game.smashConfig) {
-    game.playerChoices = [];
+    game.playerChoicesCharacterType = [];
+    game.playerChoicesInputType = [];
     game.smashConfig.players.forEach((player, playerIndex) => {
-      game.playerChoices.push(player.characterId);
+      game.playerChoicesCharacterType.push(player.characterId);
+      game.playerChoicesInputType.push(ensureTypeInput(player.input));
     });
   }
   game.gameSecondsClock = game.debug.setDurationMinutes * 60;
@@ -131,7 +144,7 @@ export function preload(game: Game): void {
   game.playerOptions.forEach((pOption, pOptionIndex) => {
     game.load.image(pOption.char.name, pOption.char.src);
   });
-  for (let i = 0; i < game.playerChoices.length; i++) {
+  for (let i = 0; i < game.playerChoicesCharacterType.length; i++) {
     game.load.image('tail_' + i, 'images/white_trans.png');
   }
 }

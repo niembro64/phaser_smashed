@@ -42,8 +42,6 @@ export interface CameraHelper {
   helperState: Loc | any;
 }
 
-export type InputType = 'wasd' | 'arrows' | 'snes' | 's-wired' | 's-pro';
-
 export interface Player {
   playerId: number;
   shotGlass: any | Phaser.GameObjects.Sprite;
@@ -350,8 +348,8 @@ export interface keyboard {
 // VIEW INTERFACES
 //////////////////
 
-export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
-export type Input = 0 | 1 | 2;
+export type CharacterType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type InputType = 0 | 1 | 2;
 
 export type CharacterName =
   | 'Mario'
@@ -369,9 +367,9 @@ export interface SmashConfig {
 
 export interface PlayerConfig {
   name: CharacterName;
-  characterId: CharacterId;
+  characterId: CharacterType;
   scale: number;
-  input?: Input;
+  input?: InputType;
 }
 
 export type WebState = 'start' | 'play';
