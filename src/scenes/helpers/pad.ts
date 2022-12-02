@@ -11,12 +11,19 @@ import { updatePadCurrKeyboard } from './keyboard';
 
 export function updateGamePadsMaster(game: Game): void {
   let playerIndex = 0;
+  let nPlayers = game.players.length;
 
   game.input.gamepad.gamepads.forEach((gamepad, gamepadIndex) => {
-    if (!gamepad?.id.includes('Jabra') && playerIndex < game.players.length) {
+    if (!gamepad?.id.includes('Jabra') && playerIndex < nPlayers) {
       game.players[playerIndex].gamepad =
         game.input.gamepad.getPad(gamepadIndex);
-      playerIndex++;
+      while (
+        (game?.players[playerIndex]?.inputType !== 1 ||
+          game?.players[playerIndex]?.gamepad !== null) &&
+        playerIndex < nPlayers
+      ) {
+        playerIndex++;
+      }
     }
   });
 
