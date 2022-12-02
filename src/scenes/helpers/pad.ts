@@ -641,68 +641,6 @@ export function isSpriteOffscreen(
 }
 
 export function updatePadPreviousAndDebounced(game: Game): void {
-  // game.players.forEach((player) => {
-  //   player.padPrev.up = player.gamepad.up;
-  //   player.padPrev.down = player.gamepad.down;
-  //   player.padPrev.left = player.gamepad.left;
-  //   player.padPrev.right = player.gamepad.right;
-  //   player.padPrev.A = player.gamepad.A;
-  //   player.padPrev.B = player.gamepad.B;
-  //   player.padPrev.X = player.gamepad.X;
-  //   player.padPrev.Y = player.gamepad.Y;
-
-  //   player.char.sprite.zoom = 1;
-
-  //   if (player.gamepad.up) {
-  //     player.padDebounced.up +=
-  //       player.padDebounced.up >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.up += player.padDebounced.up <= 0 ? 0 : -1;
-  //   }
-  //   if (player.gamepad.down) {
-  //     player.padDebounced.down +=
-  //       player.padDebounced.down >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.down += player.padDebounced.down <= 0 ? 0 : -1;
-  //   }
-  //   if (player.gamepad.left) {
-  //     player.padDebounced.left +=
-  //       player.padDebounced.left >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.left += player.padDebounced.left <= 0 ? 0 : -1;
-  //   }
-  //   if (player.gamepad.right) {
-  //     player.padDebounced.right +=
-  //       player.padDebounced.right >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.right += player.padDebounced.right <= 0 ? 0 : -1;
-  //   }
-
-  //   if (player.gamepad.A) {
-  //     player.padDebounced.A +=
-  //       player.padDebounced.A >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.A += player.padDebounced.A <= 0 ? 0 : -1;
-  //   }
-  //   if (player.gamepad.B) {
-  //     player.padDebounced.B +=
-  //       player.padDebounced.B >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.B += player.padDebounced.B <= 0 ? 0 : -1;
-  //   }
-  //   if (player.gamepad.X) {
-  //     player.padDebounced.X +=
-  //       player.padDebounced.X >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.X += player.padDebounced.X <= 0 ? 0 : -1;
-  //   }
-  //   if (player.gamepad.Y) {
-  //     player.padDebounced.Y +=
-  //       player.padDebounced.Y >= game.DEBOUNCE_NUMBER ? 0 : 1;
-  //   } else {
-  //     player.padDebounced.Y += player.padDebounced.Y <= 0 ? 0 : -1;
-  //   }
-  // });
   game.players.forEach((player) => {
     player.padPrev.up = player.padCurr.up;
     player.padPrev.down = player.padCurr.down;
@@ -793,8 +731,8 @@ export function debugUpdateControllersPrintConnected(game: Game): void {
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    // console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad);
-    // console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad.id);
+    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad);
+    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad.id);
   });
 }
 
@@ -808,85 +746,6 @@ export function updateControllerMovement(player: Player, game: Game): void {
     ) {
       return;
     }
-    // if (player.gamepad) {
-    //   if (
-    //     !player.gamepad.left &&
-    //     !player.gamepad.right &&
-    //     !player.gamepad.up &&
-    //     !player.gamepad.down
-    //   ) {
-    //     return;
-    //   }
-
-    // // CHECK ANGLED
-    // if (player.pad.left && player.pad.up) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       -game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       -game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
-    // if (player.pad.right && player.pad.up) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       -game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
-    // if (player.pad.left && player.pad.down) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       -game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
-    // if (player.pad.right && player.pad.down) {
-    //   player.char.sprite.body.setVelocityX(
-    //     player.char.sprite.body.velocity.x +
-    //       game.DEFAULT_SPEED_X *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   player.char.sprite.body.setVelocityY(
-    //     player.char.sprite.body.velocity.y +
-    //       game.DEFAULT_SPEED_Y *
-    //         player.char.speed *
-    //         player.char.fast *
-    //         game.RATIO_ANGLED_MOVEMENT
-    //   );
-    //   return;
-    // }
 
     // CHECK INDIVIDUALS
     if (player.padCurr.up) {
@@ -897,15 +756,6 @@ export function updateControllerMovement(player: Player, game: Game): void {
             player.char.fast *
             (1 - game.RATIO_ACCELERATION_VELOCITY)
       );
-      // if (player.padCurr.up && !player.padCurr.Y) {
-      //   player.char.sprite.body.setVelocityY(
-      //     player.char.sprite.body.velocity.y +
-      //       -game.BASE_PLAYER_SPEED.y *
-      //         player.char.speed *
-      //         player.char.fast *
-      //         (1 - game.RATIO_ACCELERATION_VELOCITY)
-      //   );
-      // return;
     }
     if (player.padCurr.down) {
       player.char.sprite.body.setVelocityY(
