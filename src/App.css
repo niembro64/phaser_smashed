@@ -421,7 +421,7 @@ body {
 }
 .button-input-emoji-left {
   position: absolute;
-  left: 0px; 
+  left: 0px;
   bottom: -25px;
   height: 10vh;
   font-size: 10vh;
@@ -431,7 +431,7 @@ body {
 }
 .button-input-emoji-right {
   position: absolute;
-  right: 0px; 
+  right: 0px;
   bottom: -25px;
   height: 10vh;
   font-size: 10vh;
@@ -451,23 +451,13 @@ body {
 
 .b-dark {
   background-color: hsl(200, 0%, 10%);
-
   color: rgba(255, 255, 255, 1);
 }
 .b-dark:hover {
   background-color: hsl(200, 0%, 20%);
-  border: 0px solid;
 }
 .b-dark:active {
-  background-color: hsl(200, 0%, 10%);
-
-  color: grey;
-
-  border: 0px solid;
-  /* border-bottom-color: hsl(200, 0%, 15%);
-  border-right-color: hsl(200, 0%, 15%);
-  border-top-color: hsl(200, 0%, 5%);
-  border-left-color: hsl(200, 0%, 5%); */
+  background-color: hsl(200, 0%, 30%);
 }
 
 .b-oscuro {
@@ -490,14 +480,14 @@ body {
   overflow: visible;
 }
 .b-black {
+  background-color: hsl(200, 0%, 2%);
   color: rgba(255, 255, 255, 0.3);
 }
 .b-black:hover {
-  background-color: rgba(255, 255, 255, 0.01);
+  background-color: hsl(200, 0%, 4%);
 }
 .b-black:active {
-  color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: hsl(200, 0%, 6%);
 }
 
 .startTitle {
