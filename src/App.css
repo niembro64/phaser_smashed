@@ -301,7 +301,7 @@ body {
   align-items: center;
   z-index: 1;
 }
-.playerChoices {
+.player-choices {
   flex: 1;
   /* height: 95%; */
   width: 80%;
@@ -316,11 +316,11 @@ body {
   overflow: visible;
 }
 
-.playerChoice {
+.player-choice {
   flex: 1;
   height: 100%;
   padding: 0% 0.5vh 0% 0.5vh;
-  margin-bottom: 2%;
+  margin-bottom: 15vh;
   font-size: 3vw;
 
   display: flex;
@@ -332,7 +332,7 @@ body {
 
   /* background-color: purple; */
 }
-.playerChoice > button {
+.player-choice > button {
   width: 100%;
   height: 8vh;
   max-height: 100px;
@@ -346,9 +346,9 @@ body {
 
   font-size: 1.4vw;
 }
-/* .playerChoiice > button > span {
-  font-size: 4vh;
-} */
+.player-choice > div > span {
+  font-size: 1.7vw;
+}
 
 .playLink {
   height: 15%;
@@ -567,9 +567,10 @@ body {
   }
 }
 .startTitle > img {
-  width: 50%;
-  max-width: 800px;
-  min-width: 400px;
+  /* width: 50%; */
+  width: 50vw;
+  max-width: 600px;
+  /* min-width: 400px; */
   margin-bottom: 0vh;
   transition: 1s ease;
   /* animation: titleInit 3s ease-out both; */

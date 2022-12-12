@@ -142,7 +142,7 @@ function Play() {
       default: 'arcade',
       arcade: {
         gravity: { y: 3000 },
-        debug: true,
+        debug: false,
       },
     },
     scene: [Game],
@@ -630,10 +630,10 @@ function Play() {
             </div>
           </div>
           {!debug.setIsDevMode && <div className="black-hiding-div"></div>}
-          <div className="playerChoices">
+          <div className="player-choices">
             {smashConfig.players.map((cPlayer, cPlayerIndex) => {
               return (
-                <div className="playerChoice" key={cPlayerIndex}>
+                <div className="player-choice" key={cPlayerIndex}>
                   <div
                     className="playerChar"
                     onClick={() => {
