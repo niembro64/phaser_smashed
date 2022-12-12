@@ -432,6 +432,8 @@ function Play() {
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
   // ⌨🎮
 
+  let emoji = { keyboardBlack: '⌨', keyboardWhite: '⌨️', gamepad: '🎮' };
+
   const [showRulesN64, setShowRulesN64] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [showControllers, setShowControllers] = useState(false);
@@ -688,10 +690,15 @@ function Play() {
                     >
                       <span>{cPlayer.name}</span>
                       {cPlayerIndex < 2 && (
-                        <div className="button-input-emoji">🎮</div>
+                        <div className="button-input-emoji">
+                          {emoji.gamepad}
+                        </div>
                       )}
                       {!(cPlayerIndex < 2) && (
-                        <div className="button-input-emoji">🎮</div>
+                        <div className="button-input-emoji">
+                          {' '}
+                          {emoji.gamepad}
+                        </div>
                       )}
                     </div>
                   )}
@@ -709,10 +716,14 @@ function Play() {
                     >
                       <span>{cPlayer.name}</span>
                       {cPlayerIndex < 2 && (
-                        <div className="button-input-emoji">⌨️​</div>
+                        <div className="button-input-emoji">
+                          {emoji.keyboardWhite}
+                        </div>
                       )}
                       {!(cPlayerIndex < 2) && (
-                        <div className="button-input-emoji">⌨️​</div>
+                        <div className="button-input-emoji">
+                          {emoji.keyboardWhite}​
+                        </div>
                       )}
                     </div>
                   )}
