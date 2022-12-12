@@ -142,7 +142,7 @@ function Play() {
       default: 'arcade',
       arcade: {
         gravity: { y: 3000 },
-        debug: false,
+        debug: true,
       },
     },
     scene: [Game],
@@ -688,10 +688,10 @@ function Play() {
                     >
                       <span>{cPlayer.name}</span>
                       {cPlayerIndex < 2 && (
-                        <div className="button-input-emoji-left">🎮</div>
+                        <div className="button-input-emoji">🎮</div>
                       )}
                       {!(cPlayerIndex < 2) && (
-                        <div className="button-input-emoji-right">🎮</div>
+                        <div className="button-input-emoji">🎮</div>
                       )}
                     </div>
                   )}
@@ -709,10 +709,10 @@ function Play() {
                     >
                       <span>{cPlayer.name}</span>
                       {cPlayerIndex < 2 && (
-                        <div className="button-input-emoji-left">⌨️​</div>
+                        <div className="button-input-emoji">⌨️​</div>
                       )}
                       {!(cPlayerIndex < 2) && (
-                        <div className="button-input-emoji-right">⌨️​</div>
+                        <div className="button-input-emoji">⌨️​</div>
                       )}
                     </div>
                   )}

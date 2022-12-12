@@ -439,6 +439,15 @@ body {
   margin: 0;
   overflow: visible;
 }
+.button-input-emoji {
+  position: absolute;
+  bottom: -35px;
+  height: 10vh;
+  font-size: 10vh;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+}
 
 .b-dark {
   background-color: hsl(200, 0%, 10%);
