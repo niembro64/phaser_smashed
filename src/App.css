@@ -490,6 +490,15 @@ body {
   background-color: hsl(200, 0%, 6%);
 }
 
+.b-black > div {
+  /* color: hsl(200, 100%, 0%); */
+  filter: brightness(0.1);
+}
+.b-black:hover > div {
+  /* color: hsl(200, 100%, 0%); */
+  filter: brightness(0.2);
+}
+
 .startTitle {
   /* height: 70%; */
   flex: 1;

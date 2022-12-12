@@ -76,15 +76,6 @@ function Play() {
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [inputArray, setInputArray] = useState<InputType[]>([0, 2, 2, 0]);
 
-  // const inputTypeConfig: InputType[] = [
-  //   'wasd',
-  //   'arrows',
-  //   'snes',
-  //   's-wired',
-  //   's-pro',
-  // ];
-  // const inputEmojiConfig: string[] = ['⌨️​', '⌨️​', '🎮', '🎮', '🎮'];
-
   const [smashConfig, setSmashConfig] = useState<SmashConfig>({
     players: [
       {
@@ -427,12 +418,22 @@ function Play() {
     setSmashConfig({ players: [...choices] });
   };
 
-  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥​➡️​⌨️​⌨
+  // ✔️🚧❌🚫🛑🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️👾💣🔥​➡️​⌨️​⌨🧊🌑🌒🌙⭐🌞☁☁☁
   // 🏴‍☠️🏳️🏁🏴
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
   // ⌨🎮
 
-  let emoji = { keyboardBlack: '⌨', keyboardWhite: '⌨️', gamepad: '🎮' };
+  const emoji = {
+    keyboardBlack: '⌨',
+    keyboardWhite: '⌨️',
+    gamepad: '🎮',
+    greenCheck: '✔️',
+    caution: '🚧',
+    redX: '❌',
+    settings: '⚙️',
+    cloud: '☁',
+    cloudWhite: '☁️',
+  };
 
   const [showRulesN64, setShowRulesN64] = useState(false);
   const [showControls, setShowControls] = useState(false);
@@ -441,17 +442,21 @@ function Play() {
   const [showHistory, setShowHistory] = useState(false);
 
   const characterMoves: CharacterMove[] = [
-    { button: 'D-Pad', move: 'Movement', status: '✔️' },
-    { button: 'Ground + X', move: 'Jump', status: '✔️' },
-    { button: 'Air + X', move: 'Jump-Air', status: '✔️' },
-    { button: 'Air + D-Pad + A', move: 'Jump-Fire', status: '🚧' },
-    { button: 'Y', move: 'Attack-Energy', status: '✔️' },
-    { button: 'B', move: 'Attack-Physical', status: '🚧' },
-    { button: 'Forward + B', move: 'Attack-Smash', status: '❌' },
-    { button: 'Air + Wall + Forward', move: 'Slide-Wall', status: '✔️' },
-    { button: 'L + R', move: 'Pause', status: '✔️' },
-    { button: 'Paused + Any Button', move: 'Ready', status: '✔️' },
-    { button: 'Paused + All Ready', move: 'UnPause', status: '✔️' },
+    { button: 'D-Pad', move: 'Movement', status: emoji.greenCheck },
+    { button: 'Ground + X', move: 'Jump', status: emoji.greenCheck },
+    { button: 'Air + X', move: 'Jump-Air', status: emoji.greenCheck },
+    { button: 'Air + D-Pad + A', move: 'Jump-Fire', status: emoji.caution },
+    { button: 'Y', move: 'Attack-Energy', status: emoji.greenCheck },
+    { button: 'B', move: 'Attack-Physical', status: emoji.caution },
+    { button: 'Forward + B', move: 'Attack-Smash', status: emoji.redX },
+    {
+      button: 'Air + Wall + Forward',
+      move: 'Slide-Wall',
+      status: emoji.greenCheck,
+    },
+    { button: 'L + R', move: 'Pause', status: emoji.greenCheck },
+    { button: 'Paused + Any Button', move: 'Ready', status: emoji.greenCheck },
+    { button: 'Paused + All Ready', move: 'UnPause', status: emoji.greenCheck },
   ];
 
   const clickPauseParent = () => {
@@ -674,6 +679,7 @@ function Play() {
                       }}
                     >
                       <span>Off</span>
+                      <div className="button-input-emoji">{emoji.cloudWhite}</div>
                     </div>
                   )}
                   {inputArray[cPlayerIndex] === 1 && (
@@ -696,7 +702,6 @@ function Play() {
                       )}
                       {!(cPlayerIndex < 2) && (
                         <div className="button-input-emoji">
-                          {' '}
                           {emoji.gamepad}
                         </div>
                       )}
@@ -972,7 +977,6 @@ function Play() {
               }}
             >
               <h1>Controllers</h1>
-              {/* <h1>🚧</h1> */}
               <p>USB controllers are recommended. </p>
               <a
                 className="linkTag btn btn-dark"
@@ -990,11 +994,11 @@ function Play() {
               <div>
                 <ul>
                   These work:
-                  <li>✔️ iNNEXT SNES Wired USB</li>
-                  <li>✔️ Nintendo Switch Pro</li>
-                  <li>✔️ Nintendo Switch Wired</li>
-                  <li>✔️ KIWITATA Wired N64 </li>
-                  <li>✔️ Mekela NGC Wired Gamecube</li>
+                  <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
+                  <li>{emoji.greenCheck} Nintendo Switch Pro</li>
+                  <li>{emoji.greenCheck} Nintendo Switch Wired</li>
+                  <li>{emoji.greenCheck} KIWITATA Wired N64 </li>
+                  <li>{emoji.greenCheck} Mekela NGC Wired Gamecube</li>
                 </ul>
               </div>
             </div>
@@ -1058,7 +1062,6 @@ function Play() {
                   Press Start 2P
                 </li>
               </ul>
-              {/* <h1>🚧</h1> */}
               <img
                 className="kirbyNiembro"
                 src="./images/character_3_cropped.png"
