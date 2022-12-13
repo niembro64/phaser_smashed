@@ -423,6 +423,7 @@ body {
 
   font-size: x-large;
   /* overflow: hidden; */
+  transition: 0.5s ease;
 }
 
 .b-oscuro > .button-input-emoji {
@@ -446,6 +447,7 @@ body {
   filter: grayscale(1) contrast(1) brightness(100) invert(1) contrast(0.1)
     brightness(0.5);
   z-index: 0;
+  transition: 0.5s ease;
 }
 
 @keyframes emoji-animation {
@@ -463,12 +465,15 @@ body {
 .b-oscuro:hover > .button-input-emoji {
   filter: contrast(0.5) brightness(0.2);
   animation: emoji-animation 0.3s ease-in-out both;
+  transition: 0.5s ease;
 }
 .b-oscuro:active > .button-input-emoji {
   filter: contrast(0.5) brightness(0.4);
+  transition: 0.5s ease;
 }
 .b-oscuro:active > span {
   color: rgba(255, 255, 255, 0);
+  transition: 0.5s ease;
 }
 .b-oscuro > span {
   position: relative;
