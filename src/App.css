@@ -396,12 +396,15 @@ body {
 .b-dark {
   background-color: hsl(200, 0%, 10%);
   color: rgba(255, 255, 255, 1);
+  transition: 0.5s ease;
 }
 .b-dark:hover {
-  background-color: hsl(200, 0%, 20%);
+  background-color: hsl(100, 20%, 10%);
+  transition: 0.5s ease;
 }
 .b-dark:active {
-  background-color: hsl(200, 0%, 30%);
+  background-color: hsl(100, 20%, 30%);
+  transition: 0.5s ease;
 }
 
 .b-oscuro {
@@ -493,19 +496,23 @@ body {
 }
 
 .b-black {
-  background-color: hsl(200, 0%, 4%);
+  background-color: hsl(200, 0%, 0%);
   color: rgba(255, 255, 255, 0.2);
+  transition: 0.5s ease;
 }
 .b-black:hover {
   background-color: hsl(200, 0%, 8%);
   color: rgba(255, 255, 255, 0.5);
+  transition: 0.5s ease;
 }
 .b-black:active {
   background-color: hsl(200, 0%, 12%);
   color: rgba(255, 255, 255, 1);
+  transition: 0.5s ease;
 }
 .b-black > .button-input-emoji {
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0);
+  transition: 0.5s ease;
 }
 
 .startTitle {
