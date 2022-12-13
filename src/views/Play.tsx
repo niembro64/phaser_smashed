@@ -622,7 +622,7 @@ function Play() {
       )}
       <div className="phaser-container" id="phaser-container"></div>
       {webState === 'start' && (
-        <div className="startClassDiv">
+        <div className="start-class-div">
           <div className="startTitleWrapper2">
             <div className="startTitleWrapper1">
               <div
@@ -630,7 +630,6 @@ function Play() {
                 onMouseDown={trancePlay}
                 onMouseUp={trancePause}
               >
-                {/* <img src="images/smashTitle.png" alt="smash title" /> */}
                 <img src="images/smashed-gif-cropped.gif" alt="smash title" />
                 <h1>SMASHED</h1>
               </div>
@@ -642,14 +641,14 @@ function Play() {
               return (
                 <div className="player-choice" key={cPlayerIndex}>
                   <div
-                    className="playerChar"
+                    className="player-char"
                     onClick={() => {
                       onClickRotateSelection(cPlayerIndex);
                     }}
                   >
-                    {(inputArray[cPlayerIndex] === 1 ||
-                      inputArray[cPlayerIndex] === 2) && (
-                      <div className="startImageWrapper">
+                    <div className="startImageWrapper">
+                      {(inputArray[cPlayerIndex] === 1 ||
+                        inputArray[cPlayerIndex] === 2) && (
                         <img
                           className={
                             'startImage' +
@@ -663,8 +662,8 @@ function Play() {
                           width={(55 * cPlayer.scale).toString() + '%'}
                           alt="char"
                         />
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                   {inputArray[cPlayerIndex] === 0 && (
                     <div
@@ -679,7 +678,9 @@ function Play() {
                       }}
                     >
                       <span>Off</span>
-                      <div className="button-input-emoji">{emoji.cloudWhite}</div>
+                      <div className="button-input-emoji">
+                        {emoji.cloudWhite}
+                      </div>
                     </div>
                   )}
                   {inputArray[cPlayerIndex] === 1 && (

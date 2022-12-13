@@ -155,7 +155,6 @@ body {
   align-items: center;
 
   flex-wrap: wrap;
-  /* border: 1px dashed lime; */
 }
 
 .popup {
@@ -173,8 +172,6 @@ body {
   align-items: center;
   padding: 5vh 1vw 1vh 1vw;
 
-  /* cursor: pointer; */
-  /* cursor: context-menu; */
   z-index: 2;
   overflow: hide;
 }
@@ -226,8 +223,6 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  /* border: 3px dashed lime; */
 }
 #keybaord-top,
 #keyboard-bottom {
@@ -244,7 +239,6 @@ body {
   justify-content: center;
   align-items: flex-end;
   margin-right: 1vw;
-  /* border: 3px dashed lime; */
 }
 #keyboard-right {
   width: 100%;
@@ -253,7 +247,6 @@ body {
   justify-content: center;
   align-items: flex-start;
   margin-left: 1vw;
-  /* border: 3px dashed lime; */
 }
 #keyboard-left > p,
 #keyboard-right > p {
@@ -289,7 +282,7 @@ body {
   /* width: 90%; */
   overflow: hide;
 }
-.startClassDiv {
+.start-class-div {
   position: absolute;
   top: 0;
   left: 0;
@@ -306,8 +299,6 @@ body {
   /* height: 95%; */
   width: 80%;
   max-width: 1100px;
-  /* background-color: magenta; */
-  margin-bottom: 1%;
 
   display: flex;
   flex-direction: row;
@@ -320,7 +311,7 @@ body {
   flex: 1;
   height: 100%;
   padding: 0% 0.5vh 0% 0.5vh;
-  margin-bottom: 15vh;
+  margin-bottom: 0vh;
   font-size: 3vw;
 
   display: flex;
@@ -329,25 +320,6 @@ body {
   align-items: center;
 
   overflow: visible;
-
-  /* background-color: purple; */
-}
-.player-choice > button {
-  width: 100%;
-  height: 8vh;
-  max-height: 100px;
-  min-height: 50px;
-  padding: 0;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 1.4vw;
-}
-.player-choice > div > span {
-  font-size: 1.7vw;
 }
 
 .playLink {
@@ -369,7 +341,7 @@ body {
   color: rgba(255, 255, 255, 1);
   font-size: 4vh;
   padding: 0.5vh 5vh 0vh 5vh;
-  margin: 0% 0% 1vh 0%;
+  margin: 1vh 0% 1vh 0%;
   transition: 0.5s ease;
   z-index: 0;
 }
@@ -419,35 +391,6 @@ body {
   padding: 0;
   margin: 0;
 }
-.button-input-emoji-left {
-  position: absolute;
-  left: 0px;
-  bottom: -25px;
-  height: 10vh;
-  font-size: 10vh;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-}
-.button-input-emoji-right {
-  position: absolute;
-  right: 0px;
-  bottom: -25px;
-  height: 10vh;
-  font-size: 10vh;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-}
-.button-input-emoji {
-  position: absolute;
-  bottom: -35px;
-  height: 10vh;
-  font-size: 10vh;
-  padding: 0;
-  margin: 0;
-  overflow: visible;
-}
 
 .b-dark {
   background-color: hsl(200, 0%, 10%);
@@ -461,42 +404,79 @@ body {
 }
 
 .b-oscuro {
+  /* flex: 1; */
   position: relative;
   width: 100%;
-  height: 10vh;
+  height: 18vh;
 
-  border: 0px solid;
   padding: 0;
   margin: 0;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
   cursor: pointer;
 
   font-size: x-large;
-  overflow: visible;
-}
-.b-black {
-  background-color: hsl(200, 0%, 2%);
-  color: rgba(255, 255, 255, 0.3);
-}
-.b-black:hover {
-  background-color: hsl(200, 0%, 4%);
-}
-.b-black:active {
-  background-color: hsl(200, 0%, 6%);
+  /* overflow: hidden; */
 }
 
-.b-black > div {
-  /* color: hsl(200, 100%, 0%); */
-  filter: brightness(0.1);
+.b-oscuro > .button-input-emoji {
+  position: absolute;
+  top: -120px;
+  left: -20px;
+  /* height: 10vh; */
+  width: 100%;
+  height: auto;
+  font-size: 25vh;
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  filter: contrast(0.5) brightness(0.2);
+  transform: rotate(-30deg);
+  z-index: 0;
 }
-.b-black:hover > div {
-  /* color: hsl(200, 100%, 0%); */
-  filter: brightness(0.2);
+.b-oscuro:hover > .button-input-emoji {
+  filter: grayscale(1) contrast(1) brightness(100) invert(1) contrast(0.1)
+    brightness(0.5);
+}
+.b-oscuro:active > .button-input-emoji {
+  filter: grayscale(1) contrast(1) brightness(100) invert(1) contrast(0.2);
+}
+.b-oscuro > span {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* margin-top: 2vh; */
+  font-size: 1.7vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1;
+}
+
+.b-black {
+  background-color: hsl(200, 0%, 4%);
+  /* color: rgba(255, 255, 255, 0.3); */
+}
+.b-black:hover {
+  background-color: hsl(200, 0%, 8%);
+}
+.b-black:active {
+  background-color: hsl(200, 0%, 12%);
 }
 
 .startTitle {
@@ -518,6 +498,7 @@ body {
 
   z-index: 1;
 }
+
 @keyframes titleInit {
   0% {
     transform: translateY(30vh);
@@ -544,6 +525,7 @@ body {
     transition: 0.2s ease;
   }
 }
+
 .black-hiding-div {
   position: absolute;
   bottom: 0px;
@@ -551,7 +533,7 @@ body {
   height: 50%;
   background-color: black;
   animation: revealAnimation 5s ease-out both;
-  z-index: 1;
+  z-index: 2;
 }
 
 @keyframes revealAnimation {
@@ -565,15 +547,12 @@ body {
     transform: translateY(100vh);
   }
 }
+
 .startTitle > img {
-  /* width: 50%; */
   width: 50vw;
   max-width: 600px;
-  /* min-width: 400px; */
   margin-bottom: 0vh;
   transition: 1s ease;
-  /* animation: titleInit 3s ease-out both; */
-  /* border: 1px dashed white; */
 }
 
 .startTitle > h1 {
@@ -581,8 +560,8 @@ body {
   padding: 0 0 0 0.6vw;
   font-size: 6vw;
   animation: titleGrow 3s linear both;
-  /* border: 1px dashed white; */
 }
+
 @keyframes titleGrow {
   0% {
     /* transform: scale(0.8); */
@@ -653,7 +632,7 @@ body {
   height: 100%;
   flex: 0.6;
   overflow: visible;
-  z-index: 2;
+  z-index: 3;
 }
 .startTitleWrapper2:active {
   transition: 0.1s ease;
@@ -692,23 +671,7 @@ body {
   }
 }
 
-/* .startButton {
-  flex: 0.7;
-  width: 20%;
-  padding: 0;
-  margin-bottom: 0.5%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.startButton > span {
-  margin: 0;
-  padding: 0;
-  font-size: 2vw;
-} */
-
-.playerChar {
+.player-char {
   width: 100%;
   height: 100%;
   margin: 0%;
