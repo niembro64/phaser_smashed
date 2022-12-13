@@ -337,6 +337,7 @@ body {
   flex: 0.2;
   background-color: hsl(200, 70%, 10%);
   border: 0px solid;
+  border-radius: 1vw;
 
   color: rgba(255, 255, 255, 1);
   font-size: 4vh;
@@ -411,6 +412,7 @@ body {
 
   padding: 0;
   margin: 0;
+  border-radius: 1vw;
 
   display: flex;
   flex-direction: column;
@@ -440,16 +442,33 @@ body {
   justify-content: center;
   align-items: center;
 
-  filter: contrast(0.5) brightness(0.2);
   transform: rotate(-30deg);
-  z-index: 0;
-}
-.b-oscuro:hover > .button-input-emoji {
   filter: grayscale(1) contrast(1) brightness(100) invert(1) contrast(0.1)
     brightness(0.5);
+  z-index: 0;
+}
+
+@keyframes emoji-animation {
+  0% {
+    transform: translateX(0px) rotate(-30deg);
+  }
+  50% {
+    transform: translateX(-3px) rotate(-20deg);
+  }
+  100% {
+    transform: translateX(0px) rotate(-30deg);
+  }
+}
+
+.b-oscuro:hover > .button-input-emoji {
+  filter: contrast(0.5) brightness(0.2);
+  animation: emoji-animation 0.3s ease-in-out both;
 }
 .b-oscuro:active > .button-input-emoji {
-  filter: grayscale(1) contrast(1) brightness(100) invert(1) contrast(0.2);
+  filter: contrast(0.5) brightness(0.4);
+}
+.b-oscuro:active > span {
+  color: rgba(255, 255, 255, 0);
 }
 .b-oscuro > span {
   position: relative;
@@ -470,13 +489,18 @@ body {
 
 .b-black {
   background-color: hsl(200, 0%, 4%);
-  /* color: rgba(255, 255, 255, 0.3); */
+  color: rgba(255, 255, 255, 0.2);
 }
 .b-black:hover {
   background-color: hsl(200, 0%, 8%);
+  color: rgba(255, 255, 255, 0.5);
 }
 .b-black:active {
   background-color: hsl(200, 0%, 12%);
+  color: rgba(255, 255, 255, 1);
+}
+.b-black > .button-input-emoji {
+  color: rgba(255, 255, 255, 0.1);
 }
 
 .startTitle {
