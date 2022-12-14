@@ -179,7 +179,7 @@ export default class Game extends Phaser.Scene {
   BASE_PLAYER_SPEED: Vector = { x: 900, y: 30 };
   // BASE_PLAYER_SPEED: Vector = { x: 600, y: 30 };
   BASE_PLAYER_JUMP_PHYSICAL: number = -1000;
-  BASE_PLAYER_JUMP_ENERGY: number = -1000;
+  BASE_PLAYER_JUMP_ENERGY: number = -600;
   BASE_PLAYER_JUMP_WALL: number = -1 * this.BASE_PLAYER_JUMP_PHYSICAL;
   BASE_PLAYER_INITIAL_POSITION = { POSITION: { PLAYER_Y: 250 } };
   BASE_PLAYER_GRAVITY: number = 0.1;
@@ -615,7 +615,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.8, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 1 },
         damage: 0,
         speed: 0.8,
         fast: 1,
@@ -765,7 +765,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.8, 0],
         jumpPower: 0.9,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 0.8 },
         damage: 0,
         speed: 0.7,
         fast: 1,
@@ -913,7 +913,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 1, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 2 },
         damage: 0,
         speed: 1,
         fast: 1,
@@ -1061,7 +1061,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 1 },
         damage: 0,
         speed: 0.9,
         fast: 1,
@@ -1209,7 +1209,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 1, 1, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 1 },
         damage: 0,
         speed: 0.9,
         fast: 1,
@@ -1357,7 +1357,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 1 },
         damage: 0,
         speed: 0.9,
         fast: 1,
@@ -1505,7 +1505,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 1 },
         damage: 0,
         speed: 0.9,
         fast: 1,
@@ -1653,7 +1653,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0.9, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 1 },
         damage: 0,
         speed: 0.9,
         fast: 1,
@@ -1800,7 +1800,7 @@ export default class Game extends Phaser.Scene {
         jumps: [1, 0],
         jumpPower: 1,
         jumpIndex: 0,
-        upB: { canUse: false, x: 0.5, y: -1 },
+        upB: { canUse: false, x: 0.5, y: -1, speedMultiplier: 1 },
         damage: 0,
         speed: 0.9,
         fast: 1,

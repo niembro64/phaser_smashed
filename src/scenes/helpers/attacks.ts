@@ -26,52 +26,38 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     !player.char.sprite.body.touching.right
   ) {
     game.SOUND_JUMP_ENERGY.play();
+    let base = game.BASE_PLAYER_JUMP_ENERGY;
+    let pBias = player.char.upB.speedMultiplier;
     if (player.padCurr.up && player.padCurr.left) {
-      player.char.sprite.body.setVelocityY(
-        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
-      player.char.sprite.body.setVelocityX(
-        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
+      player.char.sprite.body.setVelocityY((base * pBias) / Math.SQRT2);
+      player.char.sprite.body.setVelocityX((base * pBias) / Math.SQRT2);
     } else if (player.padCurr.up && player.padCurr.right) {
-      player.char.sprite.body.setVelocityY(
-        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
-      player.char.sprite.body.setVelocityX(
-        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
+      player.char.sprite.body.setVelocityY((base * pBias) / Math.SQRT2);
+      player.char.sprite.body.setVelocityX((-base * pBias) / Math.SQRT2);
     } else if (player.padCurr.down && player.padCurr.left) {
-      player.char.sprite.body.setVelocityY(
-        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
-      player.char.sprite.body.setVelocityX(
-        game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
+      player.char.sprite.body.setVelocityY((-base * pBias) / Math.SQRT2);
+      player.char.sprite.body.setVelocityX((base * pBias) / Math.SQRT2);
     } else if (player.padCurr.down && player.padCurr.right) {
-      player.char.sprite.body.setVelocityY(
-        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
-      player.char.sprite.body.setVelocityX(
-        -game.BASE_PLAYER_JUMP_ENERGY / Math.SQRT2
-      );
+      player.char.sprite.body.setVelocityY((-base * pBias) / Math.SQRT2);
+      player.char.sprite.body.setVelocityX((-base * pBias) / Math.SQRT2);
     } else if (player.padCurr.up) {
-      player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
+      player.char.sprite.body.setVelocityY(base * pBias);
       player.char.sprite.body.setVelocityX(0);
     } else if (player.padCurr.down) {
-      player.char.sprite.body.setVelocityY(-game.BASE_PLAYER_JUMP_ENERGY);
+      player.char.sprite.body.setVelocityY(-base * pBias);
       player.char.sprite.body.setVelocityX(0);
     } else if (player.padCurr.left) {
       player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(game.BASE_PLAYER_JUMP_ENERGY);
+      player.char.sprite.body.setVelocityX(base * pBias);
     } else if (player.padCurr.right) {
       player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(-game.BASE_PLAYER_JUMP_ENERGY);
+      player.char.sprite.body.setVelocityX(-base * pBias);
     } else if (player.char.sprite.flipX) {
       player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(game.BASE_PLAYER_JUMP_ENERGY);
+      player.char.sprite.body.setVelocityX(base * pBias);
     } else if (!player.char.sprite.flipX) {
       player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(-game.BASE_PLAYER_JUMP_ENERGY);
+      player.char.sprite.body.setVelocityX(-base * pBias);
     }
     // player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
     player.char.upB.canUse = false;

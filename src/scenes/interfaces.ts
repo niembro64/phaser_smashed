@@ -193,6 +193,7 @@ export interface AttackEnergyRotation {
 
 export interface UpB {
   canUse: boolean;
+  speedMultiplier: number;
   y: number;
   x: number;
 }
