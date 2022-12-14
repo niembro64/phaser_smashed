@@ -348,7 +348,7 @@ export interface keyboard {
 // VIEW INTERFACES
 //////////////////
 
-export type CharacterType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type CharacterType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export type InputType = 0 | 1 | 2;
 
 export type CharacterName =
@@ -359,7 +359,8 @@ export type CharacterName =
   | 'Chez'
   | 'BlackChez'
   | 'GreenKoopa'
-  | 'RedKoopa';
+  | 'RedKoopa'
+  | 'BlueKoopa';
 
 export interface SmashConfig {
   players: PlayerConfig[];
