@@ -173,8 +173,6 @@ export function updateJumpPhysical(player: Player, game: Game): void {
     player.char.jumpIndex +=
       player.char.jumpIndex === player.char.jumps.length - 1 ? 0 : 1;
 
-
-
     // // horizontal stuff WAS TOUCHING
     if (
       game.debug.setWallJumpsActive &&
@@ -316,6 +314,15 @@ export function updateAttackEnergyFollow(game: Game): void {
             100 *
             player.char.attackEnergy.findAndFollowAcceleration.x
       );
+      if (player.char.attackEnergy.findAndFollowAcceleration.y !== 0) {
+        let goHereY: number = getNearestPlayerY(player, playerIndex, game);
+        player.char.attackEnergy.sprite.body.setVelocityY(
+          player.char.attackEnergy.sprite.body.velocity.y * 0.98 +
+            (goHereY < player.char.attackEnergy.sprite.y ? -1 : 1) *
+              100 *
+              player.char.attackEnergy.findAndFollowAcceleration.y
+        );
+      }
     }
   });
 }
@@ -339,4 +346,25 @@ export function getNearestPlayerX(
     }
   });
   return goToX;
+}
+
+export function getNearestPlayerY(
+  player: Player,
+  pIndex: number,
+  game: Game
+): number {
+  let goToY = Infinity;
+  let myY = player.char.attackEnergy.sprite.y;
+  let diffY = Math.abs(goToY - myY);
+  game.players.forEach((player, playerIndex) => {
+    if (pIndex !== playerIndex) {
+      let otherPlayerY = player.char.sprite.y;
+      let newDiffY = Math.abs(otherPlayerY - myY);
+      if (newDiffY < diffY) {
+        goToY = otherPlayerY;
+        diffY = newDiffY;
+      }
+    }
+  });
+  return goToY;
 }
