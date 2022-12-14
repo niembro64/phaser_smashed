@@ -406,5 +406,6 @@ export interface Debug {
   setPrintControllerConnectedConsole: boolean;
   setLoadTimeExtra: boolean;
   setChezSecret: boolean;
+  setAllowExtraCharacters: boolean;
   setIsDevMode: boolean;
 }

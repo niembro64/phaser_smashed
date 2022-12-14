@@ -62,6 +62,7 @@ function Play() {
     setPrintControllerConnectedConsole: false,
     setLoadTimeExtra: false,
     setChezSecret: true,
+    setAllowExtraCharacters: true,
     setIsDevMode: false,
   };
 
@@ -390,7 +391,7 @@ function Play() {
     let newCharacterId = choice.characterId + 1;
 
     // player cannot directly select Chez or BlackChez
-    if (debug.setChezSecret) {
+    if (!debug.setIsDevMode && debug.setChezSecret) {
       while (newCharacterId === 4 || newCharacterId === 5) {
         newCharacterId++;
       }
@@ -399,7 +400,15 @@ function Play() {
     if (newCharacterId > smashConfigScaleArray.length - 1) {
       newCharacterId = 0;
     }
-    //
+
+    if (
+      !debug.setIsDevMode &&
+      !debug.setAllowExtraCharacters &&
+      newCharacterId > 5
+    ) {
+      newCharacterId = 0;
+    }
+
     console.log('newCharacterId', newCharacterId);
 
     choice.characterId = newCharacterId as CharacterType;
