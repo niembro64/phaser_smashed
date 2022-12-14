@@ -1,5 +1,6 @@
 import Game from '../Game';
 import { Player } from '../interfaces';
+import { getIsAttackEnergyOffscreen } from './attacks';
 
 export function updateCirclesLocations(game: Game): void {
   if (!game.debug.setPlayerIdVisible) {
@@ -306,22 +307,24 @@ export function updateKeepObjectsFromFallingLikeCrazy(game: Game): void {
 
 export function updateAttackEnergyFollow(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    if (player.char.attackEnergy.findAndFollowAcceleration.x !== 0) {
-      let goHereX: number = getNearestPlayerX(player, playerIndex, game);
-      player.char.attackEnergy.sprite.body.setVelocityX(
-        player.char.attackEnergy.sprite.body.velocity.x * 0.98 +
-          (goHereX < player.char.attackEnergy.sprite.x ? -1 : 1) *
-            100 *
-            player.char.attackEnergy.findAndFollowAcceleration.x
-      );
-      if (player.char.attackEnergy.findAndFollowAcceleration.y !== 0) {
-        let goHereY: number = getNearestPlayerY(player, playerIndex, game);
-        player.char.attackEnergy.sprite.body.setVelocityY(
-          player.char.attackEnergy.sprite.body.velocity.y * 0.98 +
-            (goHereY < player.char.attackEnergy.sprite.y ? -1 : 1) *
+    if (!getIsAttackEnergyOffscreen(player.char.attackEnergy, game)) {
+      if (player.char.attackEnergy.findAndFollowAcceleration.x !== 0) {
+        let goHereX: number = getNearestPlayerX(player, playerIndex, game);
+        player.char.attackEnergy.sprite.body.setVelocityX(
+          player.char.attackEnergy.sprite.body.velocity.x * 0.98 +
+            (goHereX < player.char.attackEnergy.sprite.x ? -1 : 1) *
               100 *
-              player.char.attackEnergy.findAndFollowAcceleration.y
+              player.char.attackEnergy.findAndFollowAcceleration.x
         );
+        if (player.char.attackEnergy.findAndFollowAcceleration.y !== 0) {
+          let goHereY: number = getNearestPlayerY(player, playerIndex, game);
+          player.char.attackEnergy.sprite.body.setVelocityY(
+            player.char.attackEnergy.sprite.body.velocity.y * 0.98 +
+              (goHereY < player.char.attackEnergy.sprite.y ? -1 : 1) *
+                100 *
+                player.char.attackEnergy.findAndFollowAcceleration.y
+          );
+        }
       }
     }
   });
