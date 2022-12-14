@@ -62,7 +62,7 @@ function Play() {
     setPrintControllerConnectedConsole: false,
     setLoadTimeExtra: false,
     setChezSecret: true,
-    setIsDevMode: true,
+    setIsDevMode: false,
   };
 
   const trance = new Audio(importedTrance);
@@ -112,7 +112,7 @@ function Play() {
     { characterId: 6, scale: 0.6, name: 'GreenKoopa' },
     { characterId: 7, scale: 0.6, name: 'RedKoopa' },
   ];
-  const config: Phaser.Types.Core.GameConfig = {
+  let config: Phaser.Types.Core.GameConfig = {
     transparent: true,
     title: 'Smashed',
     antialias: true,
@@ -133,7 +133,7 @@ function Play() {
       default: 'arcade',
       arcade: {
         gravity: { y: 3000 },
-        debug: false,
+        debug: debug.setIsDevMode,
       },
     },
     scene: [Game],
