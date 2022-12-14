@@ -56,13 +56,13 @@ function Play() {
     setDefaultDamage: false,
     setDefaultHitback: false,
     setPlayerColorFilterStateNormalActive: false,
-    setHealthInverted: false,
+    setHealthInverted: true,
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,
     setLoadTimeExtra: false,
     setChezSecret: true,
-    setIsDevMode: false,
+    setIsDevMode: true,
   };
 
   const trance = new Audio(importedTrance);
@@ -1125,6 +1125,7 @@ function Play() {
           </div>
         </div>
       )}
+      {debug.setIsDevMode && <div className="dev-mode-div">Dev Mode</div>}
     </div>
   );
 }
