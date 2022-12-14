@@ -1856,7 +1856,7 @@ export default class Game extends Phaser.Scene {
           followOnOffscreenOffset: { x: 15, y: -100 },
           offscreenCurr: false,
           offscreenPrev: false,
-          findAndFollowAcceleration: { x: 0.05, y: 0.02 },
+          findAndFollowAcceleration: { x: 0.03, y: 0.03 },
         },
         shield: null,
       },
