@@ -476,7 +476,10 @@ export function playerShootAttackEnergy(player: Player, game: Game): void {
     vY += player.char.sprite.body.velocity.y * 0.5;
   }
 
-  if (player.char.attackEnergy.allowVelocityY) {
+  if (
+    player.char.attackEnergy.allowVelocityY &&
+    player.char.attackEnergy.gravity
+  ) {
     player.char.attackEnergy.sprite.body.allowGravity = true;
   }
 

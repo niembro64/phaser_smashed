@@ -530,6 +530,7 @@ export function createAttackEnergies(game: Game): void {
         game.PLATFORMS
       );
     }
+
     filterAttackEnergyColorStateNormal(player, playerIndex, game);
   });
 }
