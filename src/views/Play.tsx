@@ -38,6 +38,7 @@ function Play() {
   const debug: Debug = {
     setLevel: 6, //0123456
     setDurationMinutes: 7, //01234567
+    setModeBabyInfinity: false,
     setUpdateLoopsNumSkip: 2, // 012
     setMusicNumber: 2, // 012
     setMusicActive: true,
