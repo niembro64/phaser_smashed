@@ -437,7 +437,7 @@ body {
 
   font-size: x-large;
   /* overflow: hidden; */
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 
 .b-oscuro > .button-input-emoji {
@@ -461,7 +461,7 @@ body {
   filter: grayscale(1) contrast(1) brightness(100) invert(1) contrast(0.1)
     brightness(0.5);
   z-index: 0;
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 
 @keyframes emoji-animation {
@@ -479,15 +479,15 @@ body {
 .b-oscuro:hover > .button-input-emoji {
   filter: contrast(0.5) brightness(0.2);
   animation: emoji-animation 0.3s ease-in-out both;
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 .b-oscuro:active > .button-input-emoji {
   filter: contrast(0.5) brightness(0.4);
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 .b-oscuro:active > span {
   color: rgba(255, 255, 255, 0);
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 .b-oscuro > span {
   position: relative;
@@ -509,21 +509,21 @@ body {
 .b-black {
   background-color: hsl(200, 0%, 0%);
   color: rgba(255, 255, 255, 0.2);
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 .b-black:hover {
   background-color: hsl(200, 0%, 8%);
   color: rgba(255, 255, 255, 0.5);
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 .b-black:active {
   background-color: hsl(200, 0%, 12%);
   color: rgba(255, 255, 255, 1);
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 .b-black > .button-input-emoji {
   color: rgba(255, 255, 255, 0);
-  transition: 0.5s ease;
+  transition: var(--duration-hover) ease;
 }
 
 .startTitle {
@@ -731,6 +731,22 @@ body {
   align-items: center;
 }
 
+.player-char-blank {
+  width: 100%;
+  height: 100%;
+  margin: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  cursor: pointer;
+  overflow: visible;
+
+  background-color: 'transparent';
+  border-radius: 30% 30% 0 0;
+  transition: var(--duration-hover) ease;
+  cursor: default;
+}
 .player-char {
   width: 100%;
   height: 100%;

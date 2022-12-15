@@ -650,32 +650,63 @@ function Play() {
             {smashConfig.players.map((cPlayer, cPlayerIndex) => {
               return (
                 <div className="player-choice" key={cPlayerIndex}>
-                  <div
-                    className="player-char"
-                    onClick={() => {
-                      onClickRotateSelection(cPlayerIndex);
-                    }}
-                  >
-                    <div className="startImageWrapper">
-                      {(inputArray[cPlayerIndex] === 1 ||
-                        inputArray[cPlayerIndex] === 2) && (
-                        <img
-                          className={
-                            'startImage' +
-                            (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
-                          }
-                          src={
-                            'images/character_' +
-                            cPlayer.characterId.toString() +
-                            '_cropped.png'
-                          }
-                          width={(55 * cPlayer.scale).toString() + '%'}
-                          alt="char"
-                        />
-                      )}
-                      <p className="player-char-image-name">{cPlayer.name}</p>
+                  {inputArray[cPlayerIndex] === 0 && (
+                    <div
+                      className="player-char-blank"
+                      onClick={() => {
+                        onClickRotateSelection(cPlayerIndex);
+                      }}
+                    >
+                      <div className="startImageWrapper">
+                        {(inputArray[cPlayerIndex] === 1 ||
+                          inputArray[cPlayerIndex] === 2) && (
+                          <img
+                            className={
+                              'startImage' +
+                              (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                            }
+                            src={
+                              'images/character_' +
+                              cPlayer.characterId.toString() +
+                              '_cropped.png'
+                            }
+                            width={(55 * cPlayer.scale).toString() + '%'}
+                            alt="char"
+                          />
+                        )}
+                        <p className="player-char-image-name">{cPlayer.name}</p>
+                      </div>
                     </div>
-                  </div>
+                  )}
+                  {(inputArray[cPlayerIndex] === 1 ||
+                    inputArray[cPlayerIndex] === 2) && (
+                    <div
+                      className="player-char"
+                      onClick={() => {
+                        onClickRotateSelection(cPlayerIndex);
+                      }}
+                    >
+                      <div className="startImageWrapper">
+                        {(inputArray[cPlayerIndex] === 1 ||
+                          inputArray[cPlayerIndex] === 2) && (
+                          <img
+                            className={
+                              'startImage' +
+                              (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                            }
+                            src={
+                              'images/character_' +
+                              cPlayer.characterId.toString() +
+                              '_cropped.png'
+                            }
+                            width={(55 * cPlayer.scale).toString() + '%'}
+                            alt="char"
+                          />
+                        )}
+                        <p className="player-char-image-name">{cPlayer.name}</p>
+                      </div>
+                    </div>
+                  )}
                   {inputArray[cPlayerIndex] === 0 && (
                     <div
                       className="b-oscuro b-black"
@@ -706,7 +737,7 @@ function Play() {
                         );
                       }}
                     >
-                      <span>{cPlayer.name}</span>
+                      <span>Gamepad</span>
                       {cPlayerIndex < 2 && (
                         <div className="button-input-emoji">
                           {emoji.gamepad}
@@ -731,7 +762,7 @@ function Play() {
                         );
                       }}
                     >
-                      <span>{cPlayer.name}</span>
+                      <span>Keyboard</span>
                       {cPlayerIndex < 2 && (
                         <div className="button-input-emoji">
                           {emoji.keyboardWhite}
