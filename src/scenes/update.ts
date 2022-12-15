@@ -111,11 +111,18 @@ export function update(game: Game, time: number, delta: number): void {
       }
 
       ////////////////////////////////
+      ///////// GAME ENDING CONDITIONS
+      ////////////////////////////////
+      ///////// done shots => finished
       ///////// time => finished
       ////////////////////////////////
-      if (game.gameSecondsClock < 1) {
+      if (game.debug.setModeInfinity && game.shotsLeft < 1) {
         setGameState(game, 'game-state-finished');
       }
+      if (!game.debug.setModeInfinity && game.gameSecondsClock < 1) {
+        setGameState(game, 'game-state-finished');
+      }
+
       break;
     case 'game-state-first-blood':
       ////////////////////////////////

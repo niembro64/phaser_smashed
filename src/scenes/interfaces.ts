@@ -384,7 +384,8 @@ export interface Quote {
 export interface Debug {
   setLevel: number;
   setDurationMinutes: number;
-  setModeBabyInfinity: boolean;
+  setModeInfinity: boolean;
+  setInfinityShots: number;
   setMusicNumber: number;
   setMusicActive: boolean;
   setUpdateLoopsNumSkip: number;

@@ -155,6 +155,9 @@ export default class Game extends Phaser.Scene {
   gameClock: Clock = { minutes: 0, seconds: 0 };
   timer: any;
 
+  // SHOTS
+  shotsLeft: number = 0;
+
   ////////////////////////////////
   ////////// GAMEPAD CONSTANTS
   ////////////////////////////////

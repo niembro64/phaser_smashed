@@ -16,10 +16,7 @@ import {
   updatePadPreviousAndDebounced,
 } from '../helpers/pad';
 import { updateAllSpriteFilters, updateSpritesFlipX } from '../helpers/sprites';
-import {
-  updateResetAllHitboxesAttackEnergy,
-  updateGameTime,
-} from '../helpers/state';
+import { updateResetAllHitboxesAttackEnergy } from '../helpers/state';
 import { updatePlayers } from '../update';
 
 export function updateGameStatePlay(

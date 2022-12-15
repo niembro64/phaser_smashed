@@ -1,7 +1,6 @@
 import Game from '../Game';
 import { Player } from '../interfaces';
 
-
 export function getIsScreenClear(game: Game): boolean {
   // is there three people currently dead
   let numPlayersDead: number = 0;
@@ -96,4 +95,12 @@ export function setAddToShotsMatrixScreenClear(
       }
     }
   }
+}
+
+export function updateNumShotsLeft(game: Game): void {
+  let shots = 0;
+  game.players.forEach((player) => {
+    shots += player.shotCount;
+  });
+  game.shotsLeft = game.debug.setInfinityShots - shots;
 }
