@@ -187,17 +187,18 @@ export function setPlayerState(
 }
 
 export function getHasNumDeadIncreased(game: Game): boolean {
-  if (game.numDead === game.numDeadPrev) {
+  // if (game.numDead === game.numDeadPrev) {
+  if (game.numDead <= game.numDeadPrev) {
     return false;
   }
   return true;
 }
-export function hasNumDead(game: Game): boolean {
-  if (game.numDead === game.numDeadPrev) {
-    return false;
-  }
-  return true;
-}
+// export function hasNumDead(game: Game): boolean {
+//   if (game.numDead === game.numDeadPrev) {
+//     return false;
+//   }
+//   return true;
+// }
 export function updateNumCurrentlyDead(game: Game): void {
   game.numDeadPrev = game.numDead;
   game.numDead = 0;
