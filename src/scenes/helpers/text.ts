@@ -1,3 +1,4 @@
+import { emoji } from '../../views/Play';
 import Game from '../Game';
 import { SplashName } from '../interfaces';
 import { updateNumShotsLeft } from './drinking';
@@ -70,8 +71,6 @@ export function updateText(game: Game): void {
   updateSplashRules(game, zoom, newSplashY);
   updateDeathsKillsText(game, zoom, newLowerY);
   updateEndDataMatrices(game, zoom, newDataY, newDataTitleY);
-
-
 }
 
 export function setSplashDataOn(game: Game): void {
@@ -134,7 +133,7 @@ export function updateClockTextUpper(
     game.scoreBoardTimeGame.setScale(1 / zoom, 1 / zoom);
     let shotsString: string = '';
     for (let i = 0; i < game.shotsLeft; i++) {
-      shotsString += '🍺';
+      shotsString += emoji.beer;
       //🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃​
     }
     // console.log(

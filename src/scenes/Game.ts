@@ -17,6 +17,7 @@ import {
   CharacterType,
 } from './interfaces';
 import { preload } from './preload';
+import { emoji } from '../views/Play';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
 
 export default class Game extends Phaser.Scene {
@@ -36,7 +37,12 @@ export default class Game extends Phaser.Scene {
   TEXT_TITLE: any;
   TEXT_SUBTITLE: any;
   TEXT_SUPERTITLE: any;
-  TEXT_GAMEBAR_CHARS = { kills: ' ⇧💀⇩ ', deaths: '', damage: '♡', shots: '☆' };
+  TEXT_GAMEBAR_CHARS = {
+    kills: ' ⇧💀⇩ ',
+    deaths: '',
+    damage: emoji.brokenHeart,
+    shots: emoji.beer,
+  };
   ASSET_BRICK_WIDTH: number = 33;
   ASSET_BRICK_HEIGHT: number = 34;
   SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
@@ -379,7 +385,7 @@ export default class Game extends Phaser.Scene {
       textCircles: null,
       textData: null,
       name: 'Hits',
-      emoji: '👊🏼',
+      emoji: emoji.punch,
       vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
@@ -395,7 +401,7 @@ export default class Game extends Phaser.Scene {
       textCircles: null,
       textData: null,
       name: 'Deaths',
-      emoji: '💀',
+      emoji: emoji.skull,
       vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,
@@ -411,7 +417,7 @@ export default class Game extends Phaser.Scene {
       textCircles: null,
       textData: null,
       name: 'Shots',
-      emoji: '⭐',
+      emoji: emoji.beer,
       vertical: 0,
       words: [],
       color: this.SplashEndDataInit.color,

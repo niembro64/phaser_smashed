@@ -32,6 +32,26 @@ import {
   SmashConfig,
 } from '../scenes/interfaces';
 
+export const emoji = {
+  keyboardBlack: '⌨',
+  keyboardWhite: '⌨️',
+  gamepad: '🎮',
+  greenCheck: '✔️',
+  caution: '🚧',
+  redX: '❌',
+  settings: '⚙️',
+  cloud: '☁',
+  cloudWhite: '☁️',
+  beer: '🍺',
+  star: '⭐',
+  skullAndCrossbones: '☠️',
+  skull: '💀',
+  punch: '👊',
+  brokenHeart: '💔',
+};
+
+//🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃
+
 function Play() {
   let myPhaser: any = useRef(null);
 
@@ -434,18 +454,6 @@ function Play() {
   // 🏴‍☠️🏳️🏁🏴
   // 🔴🟠🟡🟢🔵🟣🟤⚫⚪
   // ⌨🎮
-
-  const emoji = {
-    keyboardBlack: '⌨',
-    keyboardWhite: '⌨️',
-    gamepad: '🎮',
-    greenCheck: '✔️',
-    caution: '🚧',
-    redX: '❌',
-    settings: '⚙️',
-    cloud: '☁',
-    cloudWhite: '☁️',
-  };
 
   const [showRulesN64, setShowRulesN64] = useState(false);
   const [showControls, setShowControls] = useState(false);
