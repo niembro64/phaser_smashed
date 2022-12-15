@@ -1,3 +1,4 @@
+import { debug } from 'console';
 import Game from '../Game';
 import { Player } from '../interfaces';
 
@@ -98,9 +99,16 @@ export function setAddToShotsMatrixScreenClear(
 }
 
 export function updateNumShotsLeft(game: Game): void {
+  if (!game.debug.setModeInfinity) {
+    return;
+  }
+
   let shots = 0;
-  game.players.forEach((player) => {
-    shots += player.shotCount;
+  game.players.forEach((player, playerIndex) => {
+    for (let i = 0; i < game.players.length; i++) {
+      shots += game.numberShotsTakenByMeMatrix[playerIndex][i];
+      console.log(playerIndex, i, 'shots', shots);
+    }
   });
   game.shotsLeft = game.debug.setInfinityShots - shots;
 }

@@ -36,6 +36,8 @@ export function preload(game: Game): void {
     hatPos += hatAdder * 2;
   }
 
+  game.shotsLeft = game.debug.setInfinityShots;
+
   let pathSounds = 'sounds/';
   game.load.audio('intro', pathSounds + game.FILE_SOUNDS.INTRO);
   game.load.audio('gun', pathSounds + game.FILE_SOUNDS.GUN);

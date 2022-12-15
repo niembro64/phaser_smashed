@@ -37,7 +37,11 @@ import {
   updatePhysicalAttackFollowsPlayer,
   updateJumpEnergy,
 } from './helpers/attacks';
-import { getIsFirstBlood, getIsScreenClear } from './helpers/drinking';
+import {
+  getIsFirstBlood,
+  getIsScreenClear,
+  updateNumShotsLeft,
+} from './helpers/drinking';
 import {
   setMusicPlay,
   setPlayWiiMusicWaitShort,
@@ -66,6 +70,7 @@ export function update(game: Game, time: number, delta: number): void {
   updateTimeTime(game, time, delta);
   updateGameTime(game, time, delta);
   updateText(game);
+  updateNumShotsLeft(game);
   updateNumCurrentlyDead(game);
   updateGlassesTransparency(game);
   updateGamePadsMaster(game);

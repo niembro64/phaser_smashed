@@ -1277,10 +1277,12 @@ export function createScoreboard(game: Game): void {
     '',
     {
       // font: "Arial 100px",
-      fontSize: '85px',
+      fontSize: game.debug.setModeInfinity ? '50px' : '85px',
       // fontFamily: "'Courier New'",
       // fontFamily: game.FONT_DEFAULT_MONOSPACE,
-      fontFamily: game.FONT_DEFAULT_VIDEOGAME,
+      fontFamily: game.debug.setModeInfinity
+        ? game.FONT_DEFAULT_NICE
+        : game.FONT_DEFAULT_VIDEOGAME,
       // fontFamily: "'Press Start 2P'",
       stroke: 'black',
       strokeThickness: 1,
