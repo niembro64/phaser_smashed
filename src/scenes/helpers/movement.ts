@@ -307,24 +307,41 @@ export function updateKeepObjectsFromFallingLikeCrazy(game: Game): void {
 
 export function updateAttackEnergyFollow(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    if (!getIsAttackEnergyOffscreen(player.char.attackEnergy, game)) {
-      if (player.char.attackEnergy.findAndFollowAcceleration.x !== 0) {
+    let ae = player.char.attackEnergy;
+    if (!getIsAttackEnergyOffscreen(ae, game)) {
+      if (
+        ae.findAndFollowAcceleration.x !== 0 &&
+        ae.findAndFollowAcceleration.y === 0
+      ) {
         let goHereX: number = getNearestPlayerX(player, playerIndex, game);
-        player.char.attackEnergy.sprite.body.setVelocityX(
-          player.char.attackEnergy.sprite.body.velocity.x * 0.98 +
-            (goHereX < player.char.attackEnergy.sprite.x ? -1 : 1) *
+        ae.sprite.body.setVelocityX(
+          ae.sprite.body.velocity.x * 0.98 +
+            (goHereX < ae.sprite.x ? -1 : 1) *
               100 *
-              player.char.attackEnergy.findAndFollowAcceleration.x
+              ae.findAndFollowAcceleration.x
         );
-        if (player.char.attackEnergy.findAndFollowAcceleration.y !== 0) {
-          let goHereY: number = getNearestPlayerY(player, playerIndex, game);
-          player.char.attackEnergy.sprite.body.setVelocityY(
-            player.char.attackEnergy.sprite.body.velocity.y * 0.98 +
-              (goHereY < player.char.attackEnergy.sprite.y ? -1 : 1) *
-                100 *
-                player.char.attackEnergy.findAndFollowAcceleration.y
-          );
-        }
+      }
+      if (
+        ae.findAndFollowAcceleration.x !== 0 &&
+        ae.findAndFollowAcceleration.y !== 0
+      ) {
+        let goHere: { x: number; y: number } = getNearestPlayerXY(
+          player,
+          playerIndex,
+          game
+        );
+        ae.sprite.body.setVelocityX(
+          ae.sprite.body.velocity.x * 0.98 +
+            (goHere.x < ae.sprite.x ? -1 : 1) *
+              100 *
+              ae.findAndFollowAcceleration.x
+        );
+        ae.sprite.body.setVelocityY(
+          ae.sprite.body.velocity.y * 0.98 +
+            (goHere.y < ae.sprite.y ? -1 : 1) *
+              100 *
+              ae.findAndFollowAcceleration.y
+        );
       }
     }
   });
@@ -370,4 +387,41 @@ export function getNearestPlayerY(
     }
   });
   return goToY;
+}
+
+export function getNearestPlayerXY(
+  player: Player,
+  pIndex: number,
+  game: Game
+): { x: number; y: number } {
+  let goToX = Infinity;
+  let goToY = Infinity;
+  let ae = player.char.attackEnergy;
+
+  game.players.forEach((player, playerIndex) => {
+    if (pIndex !== playerIndex) {
+      let otherPlayerX = player.char.sprite.x;
+      let otherPlayerY = player.char.sprite.y;
+      let myX = ae.sprite.x;
+      let myY = ae.sprite.y;
+      if (
+        getDistance(myX, myY, otherPlayerX, otherPlayerY) <
+        getDistance(myX, myY, goToX, goToY)
+      ) {
+        goToX = otherPlayerX;
+        goToY = otherPlayerY;
+      }
+    }
+  });
+
+  return { x: goToX, y: goToY };
+}
+
+export function getDistance(
+  startX: number,
+  startY: number,
+  endX: number,
+  endY: number
+): number {
+  return Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
 }
