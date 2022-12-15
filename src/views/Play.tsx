@@ -673,6 +673,7 @@ function Play() {
                           alt="char"
                         />
                       )}
+                      <p className="player-char-image-name">{cPlayer.name}</p>
                     </div>
                   </div>
                   {inputArray[cPlayerIndex] === 0 && (

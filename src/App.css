@@ -1,3 +1,14 @@
+:root {
+  --gray-dark: #111111;
+  --gray-light: #888888;
+  --blue-start: hsl(200, 70%, 10%);
+  --blue-start-lighter: hsl(200, 70%, 20%);
+  --border-radius-big: 5vw;
+  --duration-hover: 0.2s;
+  --distance-hover-pos: 40px;
+  --distance-hover-neg: calc(-1 * var(--distance-hover-pos));
+}
+
 * {
   padding: 0px;
   margin: 0px;
@@ -335,7 +346,7 @@ body {
 }
 .b-start {
   flex: 0.2;
-  background-color: hsl(200, 70%, 10%);
+  background-color: var(--blue-start);
   border: 0px solid;
   border-radius: 1vw;
 
@@ -415,7 +426,7 @@ body {
 
   padding: 0;
   margin: 0;
-  border-radius: 1vw;
+  border-radius: 0 0 var(--border-radius-big) var(--border-radius-big);
 
   display: flex;
   flex-direction: column;
@@ -706,6 +717,19 @@ body {
     transform: translateY(5px);
   }
 }
+.player-char-image-name {
+  position: absolute;
+  bottom: calc(-50px);
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  font-size: 1.7vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
 
 .player-char {
   width: 100%;
@@ -717,9 +741,21 @@ body {
   align-items: center;
   cursor: pointer;
   overflow: visible;
-}
 
-.startImageWrapper {
+  background-color: 'transparent';
+  border-radius: 30% 30% 0 0;
+  transition: var(--duration-hover) ease;
+}
+.player-char:hover {
+  transition: var(--duration-hover) ease;
+  background-color: var(--gray-dark);
+}
+.player-char:active {
+  transition: var(--duration-hover) ease;
+  background-color: var(--gray-dark);
+  /* transform: translateY(-1%); */
+}
+.player-char > .startImageWrapper {
   width: 100%;
   height: auto;
   /* background-color: cyan; */
@@ -727,7 +763,19 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  transition: var(--duration-hover) ease;
+  transform: translateY(0px);
+  overflow: visible;
 }
+.player-char:hover > .startImageWrapper {
+  transition: var(--duration-hover) ease;
+  transform: translateY(var(--distance-hover-neg));
+}
+.player-char:active > .startImageWrapper {
+  transition: var(--duration-hover) ease;
+  transform: translateY(var(--distance-hover-neg));
+}
+
 .startCharacterId {
   align-self: center;
   z-index: 3;

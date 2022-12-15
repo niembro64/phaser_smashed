@@ -15,6 +15,13 @@ export function updateJumpEnergy(player: Player, game: Game): void {
   // ) {
   //   return;
   // }
+  let base = game.BASE_PLAYER_JUMP_ENERGY;
+  let pBias = player.char.upB.speedMultiplier;
+  let pCurr = player.padCurr;
+  let pPrev = player.padPrev;
+  let pBody = player.char.sprite.body;
+  let pSprite = player.char.sprite;
+  let pTouch = pBody.touching;
   if (
     player.padCurr.B &&
     !player.padPrev.B &&
@@ -26,38 +33,36 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     !player.char.sprite.body.touching.right
   ) {
     game.SOUND_JUMP_ENERGY.play();
-    let base = game.BASE_PLAYER_JUMP_ENERGY;
-    let pBias = player.char.upB.speedMultiplier;
-    if (player.padCurr.up && player.padCurr.left) {
-      player.char.sprite.body.setVelocityY((base * pBias) / Math.SQRT2);
-      player.char.sprite.body.setVelocityX((base * pBias) / Math.SQRT2);
-    } else if (player.padCurr.up && player.padCurr.right) {
-      player.char.sprite.body.setVelocityY((base * pBias) / Math.SQRT2);
-      player.char.sprite.body.setVelocityX((-base * pBias) / Math.SQRT2);
-    } else if (player.padCurr.down && player.padCurr.left) {
-      player.char.sprite.body.setVelocityY((-base * pBias) / Math.SQRT2);
-      player.char.sprite.body.setVelocityX((base * pBias) / Math.SQRT2);
-    } else if (player.padCurr.down && player.padCurr.right) {
-      player.char.sprite.body.setVelocityY((-base * pBias) / Math.SQRT2);
-      player.char.sprite.body.setVelocityX((-base * pBias) / Math.SQRT2);
-    } else if (player.padCurr.up) {
-      player.char.sprite.body.setVelocityY(base * pBias);
-      player.char.sprite.body.setVelocityX(0);
-    } else if (player.padCurr.down) {
-      player.char.sprite.body.setVelocityY(-base * pBias);
-      player.char.sprite.body.setVelocityX(0);
-    } else if (player.padCurr.left) {
-      player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(base * pBias);
-    } else if (player.padCurr.right) {
-      player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(-base * pBias);
+    if (pCurr.up && pCurr.left) {
+      pBody.setVelocityY((base * pBias) / Math.SQRT2);
+      pBody.setVelocityX((base * pBias) / Math.SQRT2);
+    } else if (pCurr.up && pCurr.right) {
+      pBody.setVelocityY((base * pBias) / Math.SQRT2);
+      pBody.setVelocityX((-base * pBias) / Math.SQRT2);
+    } else if (pCurr.down && pCurr.left) {
+      pBody.setVelocityY((-base * pBias) / Math.SQRT2);
+      pBody.setVelocityX((base * pBias) / Math.SQRT2);
+    } else if (pCurr.down && pCurr.right) {
+      pBody.setVelocityY((-base * pBias) / Math.SQRT2);
+      pBody.setVelocityX((-base * pBias) / Math.SQRT2);
+    } else if (pCurr.up) {
+      pBody.setVelocityY(base * pBias);
+      pBody.setVelocityX(0);
+    } else if (pCurr.down) {
+      pBody.setVelocityY(-base * pBias);
+      pBody.setVelocityX(0);
+    } else if (pCurr.left) {
+      pBody.setVelocityY(0);
+      pBody.setVelocityX(base * pBias);
+    } else if (pCurr.right) {
+      pBody.setVelocityY(0);
+      pBody.setVelocityX(-base * pBias);
     } else if (player.char.sprite.flipX) {
-      player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(base * pBias);
-    } else if (!player.char.sprite.flipX) {
-      player.char.sprite.body.setVelocityY(0);
-      player.char.sprite.body.setVelocityX(-base * pBias);
+      pBody.setVelocityY(0);
+      pBody.setVelocityX(base * pBias);
+    } else if (!pSprite.flipX) {
+      pBody.setVelocityY(0);
+      pBody.setVelocityX(-base * pBias);
     }
     // player.char.sprite.body.setVelocityY(game.BASE_PLAYER_JUMP_ENERGY);
     player.char.upB.canUse = false;
@@ -70,16 +75,15 @@ export function updateJumpEnergy(player: Player, game: Game): void {
     // }, 1000);
   }
 
-  if (!player.padCurr.B && !player.padPrev.B) {
+  if (!pCurr.B && !pPrev.B) {
     player.emitterPlayer.on = false;
   }
   // if (player.char.sprite.body.velocity.y > 0) {
   //   player.emitterPlayer.on = false;
   // }
+
   if (
-    (player.char.sprite.body.touching.down ||
-      player.char.sprite.body.touching.left ||
-      player.char.sprite.body.touching.right) &&
+    (pTouch.down || pTouch.left || pTouch.right) &&
     !player.emitterPlayer.on
   ) {
     player.char.upB.canUse = true;
