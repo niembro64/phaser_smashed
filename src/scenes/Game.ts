@@ -140,7 +140,7 @@ export default class Game extends Phaser.Scene {
   glassLocationLROffset: number = 0;
   upperTextLocationLROffset: number = 0;
   lowerTextLocationLROffset: number = 0;
-  textLocations: number[] = [-700, -350, 350, 700];
+  textLocations: number[] = [-700, -400, 400, 700];
   numDead: number = 0;
   numDeadPrev: number = 0;
 

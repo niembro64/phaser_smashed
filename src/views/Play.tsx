@@ -78,7 +78,7 @@ function Play() {
     setDefaultDamage: false,
     setDefaultHitback: false,
     setPlayerColorFilterStateNormalActive: false,
-    setHealthInverted: true,
+    setHealthInverted: false,
     setMatricesAlwaysVisible: false,
     setPrintControllerButtonsConsole: false,
     setPrintControllerConnectedConsole: false,

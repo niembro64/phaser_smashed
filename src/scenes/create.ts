@@ -1277,7 +1277,7 @@ export function createScoreboard(game: Game): void {
     '',
     {
       // font: "Arial 100px",
-      fontSize: game.debug.setModeInfinity ? '50px' : '85px',
+      fontSize: game.debug.setModeInfinity ? '45px' : '85px',
       // fontFamily: "'Courier New'",
       // fontFamily: game.FONT_DEFAULT_MONOSPACE,
       fontFamily: game.debug.setModeInfinity
@@ -1340,7 +1340,7 @@ export function createScoreboard(game: Game): void {
         'XXX',
         {
           // font: "Arial 100px",
-          fontSize: '65px',
+          fontSize: '45px',
           fontFamily: game.FONT_DEFAULT_NICE,
           // fontFamily: game.FONT_DEFAULT_MONOSPACE,
           // fontFamily: "'Courier New'",
