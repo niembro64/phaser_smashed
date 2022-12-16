@@ -99,7 +99,7 @@ export function setAddToShotsMatrixScreenClear(
 }
 
 export function updateNumShotsLeft(game: Game): void {
-  if (!game.debug.setModeInfinity) {
+  if (!game.debug.ModeInfinity) {
     return;
   }
 
@@ -109,5 +109,5 @@ export function updateNumShotsLeft(game: Game): void {
       shots += game.numberShotsTakenByMeMatrix[playerIndex][i];
     }
   });
-  game.shotsLeft = game.debug.setInfinityShots - shots;
+  game.shotsLeft = game.debug.ModeInfinityShots - shots;
 }

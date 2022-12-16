@@ -136,7 +136,7 @@ export function filterPlayerSpriteColorStateNormal(
   playerIndex: number,
   game: Game
 ): void {
-  if (game.debug.setCharacterTinted) {
+  if (game.debug.CharacterTinted) {
     filterPlayerColorCircle(player, game.colorCircles[playerIndex].colorNumber);
     player.char.sprite.setAlpha(1);
   } else {
@@ -157,7 +157,7 @@ export function filterAttackEnergyColorStateNormal(
   playerIndex: number,
   game: Game
 ): void {
-  if (game.debug.setCharacterTinted) {
+  if (game.debug.CharacterTinted) {
     filterAttacksColorCircle(
       player,
       game.colorCircles[playerIndex].colorNumber

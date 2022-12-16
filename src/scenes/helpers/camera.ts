@@ -1,8 +1,8 @@
-import Game from "../Game";
-import { Loc } from "../interfaces";
+import Game from '../Game';
+import { Loc } from '../interfaces';
 
 export function updateCamera(game: Game): void {
-  if (!game.debug.setCamerasActive) {
+  if (!game.debug.Camera) {
     return;
   }
   var cPlayer = getCameraPlayerStatus(game);
@@ -162,10 +162,22 @@ export function getCameraPlayerStatus(game: Game): Loc {
     y_high = player.char.sprite.y < y_high ? y_high : player.char.sprite.y;
   });
 
-   x_low = game.cameraCenter.char.sprite.x > x_low ? x_low : game.cameraCenter.char.sprite.x;
-   x_high = game.cameraCenter.char.sprite.x < x_high ? x_high : game.cameraCenter.char.sprite.x;
-   y_low = game.cameraCenter.char.sprite.y > y_low ? y_low : game.cameraCenter.char.sprite.y;
-   y_high = game.cameraCenter.char.sprite.y < y_high ? y_high : game.cameraCenter.char.sprite.y;
+  x_low =
+    game.cameraCenter.char.sprite.x > x_low
+      ? x_low
+      : game.cameraCenter.char.sprite.x;
+  x_high =
+    game.cameraCenter.char.sprite.x < x_high
+      ? x_high
+      : game.cameraCenter.char.sprite.x;
+  y_low =
+    game.cameraCenter.char.sprite.y > y_low
+      ? y_low
+      : game.cameraCenter.char.sprite.y;
+  y_high =
+    game.cameraCenter.char.sprite.y < y_high
+      ? y_high
+      : game.cameraCenter.char.sprite.y;
 
   return {
     x: (x_low + x_high) / 2,

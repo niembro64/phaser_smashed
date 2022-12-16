@@ -23,8 +23,8 @@ export function preload(game: Game): void {
       game.playerChoicesInputType.push(ensureTypeInput(player.input));
     });
   }
-  game.gameSecondsClock = game.debug.setDurationMinutes * 60;
-  if (!game.debug.setFrictionAirActive) {
+  game.gameSecondsClock = game.debug.ModeTimeMinutes * 60;
+  if (!game.debug.FrictionAirActive) {
     game.players.forEach((iPlayer, i) => {
       iPlayer.char.friction_air = 0;
     });
@@ -36,7 +36,7 @@ export function preload(game: Game): void {
     hatPos += hatAdder * 2;
   }
 
-  game.shotsLeft = game.debug.setInfinityShots;
+  game.shotsLeft = game.debug.ModeInfinityShots;
 
   let pathSounds = 'sounds/';
   game.load.audio('intro', pathSounds + game.FILE_SOUNDS.INTRO);
@@ -96,13 +96,13 @@ export function preload(game: Game): void {
 
   game.load.audio('mii', pathSounds + game.FILE_SOUNDS.BGM_MII);
 
-  if (game.debug.setMusicNumber === 0) {
+  if (game.debug.MusicNumber === 0) {
     game.load.audio('bgm', pathSounds + game.FILE_SOUNDS.BGM_DREAM);
   }
-  if (game.debug.setMusicNumber === 1) {
+  if (game.debug.MusicNumber === 1) {
     game.load.audio('bgm', pathSounds + game.FILE_SOUNDS.BGM_MONKEY);
   }
-  if (game.debug.setMusicNumber === 2) {
+  if (game.debug.MusicNumber === 2) {
     game.load.audio('bgm', pathSounds + game.FILE_SOUNDS.BGM_ROYKSOP);
   }
   game.load.image('fist-gray', 'images/fist-gray.png');

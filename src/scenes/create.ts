@@ -156,7 +156,7 @@ export function createDataMatrices(game: Game): void {
 }
 
 export function createPlatforms(game: Game): void {
-  switch (game.debug.setLevel) {
+  switch (game.debug.Level) {
     case 0:
       createPlatforms0(game);
       break;
@@ -206,7 +206,7 @@ export function createSoundsGame(game: Game): void {
       'readyRepeat' + playerIndex.toString(),
       { volume: 0.3, loop: true }
     );
-    if (!game.debug.setReadySoundActive) {
+    if (!game.debug.ReadySoundActive) {
       player.playerReadySound.volume = 0;
     }
   });
@@ -224,11 +224,11 @@ export function createSoundsGame(game: Game): void {
   game.SOUND_PAUSED = game.sound.add('mii', { volume: 0.1, loop: true });
   game.SOUND_BGM = game.sound.add('bgm', { volume: 0.2, loop: true });
 
-  if (!game.debug.setMusicActive) {
+  if (!game.debug.MusicActive) {
     game.SOUND_BGM.volume = 0;
   }
 
-  if (!game.debug.setReadySoundActive) {
+  if (!game.debug.ReadySoundActive) {
     game.SOUND_READY_REPEAT.volume = 0;
   }
 }
@@ -239,7 +239,7 @@ export function createShields(game: Game): void {
   });
 }
 export function createPlayerIdCircles(game: Game): void {
-  if (!game.debug.setPlayerIdVisible) {
+  if (!game.debug.PlayerIdVisible) {
     return;
   }
 
@@ -263,7 +263,7 @@ export function createHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.attackPhysical.sprite,
           function () {
-            if (game.debug.setDefaultDamage) {
+            if (game.debug.DefaultDamage) {
               onHitHandlerAttackPhysical(
                 player,
                 playerIndex,
@@ -288,7 +288,7 @@ export function createHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.attackEnergy.sprite,
           function () {
-            if (game.debug.setDefaultDamage) {
+            if (game.debug.DefaultDamage) {
               onHitHandlerAttackEnergy(
                 player,
                 playerIndex,
@@ -536,7 +536,7 @@ export function createAttackEnergies(game: Game): void {
 }
 
 export function createCollidersPvP(game: Game): void {
-  if (!game.debug.setCollidersPvP) {
+  if (!game.debug.CollidersPvP) {
     return;
   }
 
@@ -555,7 +555,7 @@ export function createCollidersPvP(game: Game): void {
 }
 
 export function createCollidersPvAP(game: Game): void {
-  if (!game.debug.setCollidersPvAP) {
+  if (!game.debug.CollidersPvAP) {
     return;
   }
 
@@ -576,7 +576,7 @@ export function createCollidersPvAP(game: Game): void {
   });
 }
 export function createCollidersPvAE(game: Game): void {
-  if (!game.debug.setCollidersPvAE) {
+  if (!game.debug.CollidersPvAE) {
     return;
   }
 
@@ -599,7 +599,7 @@ export function createCollidersPvAE(game: Game): void {
   console.log('game.colliderPvAE', game.colliderPvAE);
 }
 export function createCollidersAEvAE(game: Game): void {
-  if (!game.debug.setCollidersAEvAE) {
+  if (!game.debug.CollidersAEvAE) {
     return;
   }
 
@@ -620,7 +620,7 @@ export function createCollidersAEvAE(game: Game): void {
   });
 }
 export function createCollidersAEvAP(game: Game): void {
-  if (!game.debug.setCollidersAEvAP) {
+  if (!game.debug.CollidersAEvAP) {
     return;
   }
 
@@ -1277,10 +1277,10 @@ export function createScoreboard(game: Game): void {
     '',
     {
       // font: "Arial 100px",
-      fontSize: game.debug.setModeInfinity ? '45px' : '85px',
+      fontSize: game.debug.ModeInfinity ? '45px' : '85px',
       // fontFamily: "'Courier New'",
       // fontFamily: game.FONT_DEFAULT_MONOSPACE,
-      fontFamily: game.debug.setModeInfinity
+      fontFamily: game.debug.ModeInfinity
         ? game.FONT_DEFAULT_NICE
         : game.FONT_DEFAULT_VIDEOGAME,
       // fontFamily: "'Press Start 2P'",
@@ -1399,7 +1399,7 @@ export function createScoreboard(game: Game): void {
 
 export function createCameras(game: Game): void {
   var debugAlpha = 1;
-  if (!game.debug.setCamerasVisible) {
+  if (!game.debug.CamerasVisible) {
     debugAlpha = 0;
   }
   game.cameraBox.char.sprite = game.physics.add

@@ -3,7 +3,7 @@ import { Player } from '../interfaces';
 import { getIsAttackEnergyOffscreen } from './attacks';
 
 export function updateCirclesLocations(game: Game): void {
-  if (!game.debug.setPlayerIdVisible) {
+  if (!game.debug.PlayerIdVisible) {
     return;
   }
 
@@ -32,7 +32,7 @@ export function updateTable(game: Game): void {
 }
 
 export function updateEnergyAttacksWrapScreen(game: Game): void {
-  if (!game.debug.setAEWrapScreen) {
+  if (!game.debug.AEWrapScreen) {
     return;
   }
   game.players.forEach((player) => {
@@ -176,7 +176,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
 
     // // horizontal stuff WAS TOUCHING
     if (
-      game.debug.setWallJumpsActive &&
+      game.debug.WallJumpsActive &&
       player.char.lastDirectionTouched === 'left' &&
       hasPlayerTouchedWallRecently(player)
     ) {
@@ -189,7 +189,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
     }
 
     if (
-      game.debug.setWallJumpsActive &&
+      game.debug.WallJumpsActive &&
       player.char.lastDirectionTouched === 'right' &&
       hasPlayerTouchedWallRecently(player)
     ) {
@@ -216,7 +216,7 @@ export function updateJumpFloat(player: Player, game: Game): void {
 }
 
 export function updateFrictionWallY(player: Player, game: Game): void {
-  if (!game.debug.setWallJumpsActive) {
+  if (!game.debug.WallJumpsActive) {
     return;
   }
 
@@ -232,7 +232,7 @@ export function updateFrictionWallY(player: Player, game: Game): void {
 }
 
 export function updateFrictionAirY(player: Player, game: Game): void {
-  if (!game.debug.setFrictionAirActive) {
+  if (!game.debug.FrictionAirActive) {
     return;
   }
 
@@ -244,7 +244,7 @@ export function updateFrictionAirY(player: Player, game: Game): void {
 }
 
 export function updateFrictionAirX(player: Player, game: Game): void {
-  if (!game.debug.setFrictionAirActive) {
+  if (!game.debug.FrictionAirActive) {
     return;
   }
 

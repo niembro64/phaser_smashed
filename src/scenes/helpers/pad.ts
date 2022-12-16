@@ -697,7 +697,7 @@ export function updatePadPreviousAndDebounced(game: Game): void {
 }
 
 export function debugUpdateControllersPrintConnected(game: Game): void {
-  if (!game.debug.setConsoleConnected) {
+  if (!game.debug.ConsoleLogConnected) {
     return;
   }
   game.players.forEach((player, playerIndex) => {
@@ -767,7 +767,7 @@ export function updateControllerMovement(player: Player, game: Game): void {
 export function debugUpdatePrintAllControllerButtonsWhenActive(
   game: Game
 ): void {
-  if (!game.debug.setConsoleButtons) {
+  if (!game.debug.ConsoleLogButtons) {
     return;
   }
   // Buttons

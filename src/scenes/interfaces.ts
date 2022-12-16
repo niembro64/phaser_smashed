@@ -307,41 +307,6 @@ export interface Hitback {
   x: number;
   y: number;
 }
-// export interface Keyboard_Static {
-//     up: typeof Phaser.Input.Keyboard.Key | any;
-//     down: typeof Phaser.Input.Keyboard.Key | any;
-//     left: typeof Phaser.Input.Keyboard.Key | any;
-//     right: typeof Phaser.Input.Keyboard.Key | any;
-//     fast: typeof Phaser.Input.Keyboard.Key | any;
-//     jump: typeof Phaser.Input.Keyboard.Key | any;
-// }
-
-// export interface Debug {
-//   setLevel: number;
-//   setDurationMinutes: number;
-//   setMusicNumber: number;
-//   setMusicActive: boolean;
-//   setUpdateLoopsNumSkip: number;
-//   setFrictionAirActive: boolean;
-//   setCamerasActive: boolean;
-//   setCamerasVisible: boolean;
-//   setCollidersPvP: boolean;
-//   setCollidersPvAttackPhysical: boolean;
-//   setCollidersPvAttackEnergy: boolean;
-//   setCollidersAEvAE: boolean;
-//   setCollidersAEvAP: boolean;
-//   setAEWrapScreen: boolean;
-//   setPlayerIdVisible: boolean;
-//   setPlayerIdFiltersActive: boolean;
-//   setWallJumpsActive: boolean;
-//   setDefaultDamage: boolean;
-//   setDefaultHitback: boolean;
-//   setReadySoundActive: boolean;
-//   setHealthInverted: boolean;
-//   setMatricesAlwaysVisible: boolean;
-//   setPrintControllerButtonsConsole: boolean;
-//   setPrintControllerConnectedConsole: boolean;
-// }
 
 export interface Vector {
   x: number;
@@ -362,10 +327,6 @@ export interface keyboard {
   start: any;
   select: any;
 }
-
-//////////////////
-// VIEW INTERFACES
-//////////////////
 
 export type CharacterType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export type InputType = 0 | 1 | 2;
@@ -400,34 +361,34 @@ export interface Quote {
 }
 
 export interface Debug {
-  setLevel: number;
-  setDurationMinutes: number;
-  setModeInfinity: boolean;
-  setInfinityShots: number;
-  setMusicNumber: number;
-  setMusicActive: boolean;
-  setUpdateLoopsNumSkip: number;
-  setFrictionAirActive: boolean;
-  setCamerasActive: boolean;
-  setCamerasVisible: boolean;
-  setCollidersPvP: boolean;
-  setCollidersPvAP: boolean;
-  setCollidersPvAE: boolean;
-  setCollidersAEvAE: boolean;
-  setCollidersAEvAP: boolean;
-  setAEWrapScreen: boolean;
-  setPlayerIdVisible: boolean;
-  setCharacterTinted: boolean;
-  setWallJumpsActive: boolean;
-  setDefaultDamage: boolean;
-  setDefaultHitback: boolean;
-  setReadySoundActive: boolean;
-  setHealthInverted: boolean;
-  setMatricesAlways: boolean;
-  setConsoleButtons: boolean;
-  setConsoleConnected: boolean;
-  setLoadTimeExtra: boolean;
-  setChezSecret: boolean;
-  setAllowSecretChars: boolean;
-  setIsDevMode: boolean;
+  Level: number;
+  ModeInfinity: boolean;
+  ModeTimeMinutes: number;
+  ModeInfinityShots: number;
+  MusicNumber: number;
+  MusicActive: boolean;
+  UpdateLoopsNumSkip: number;
+  FrictionAirActive: boolean;
+  Camera: boolean;
+  CamerasVisible: boolean;
+  CollidersPvP: boolean;
+  CollidersPvAP: boolean;
+  CollidersPvAE: boolean;
+  CollidersAEvAE: boolean;
+  CollidersAEvAP: boolean;
+  AEWrapScreen: boolean;
+  PlayerIdVisible: boolean;
+  CharacterTinted: boolean;
+  WallJumpsActive: boolean;
+  DefaultDamage: boolean;
+  DefaultHitback: boolean;
+  ReadySoundActive: boolean;
+  HealthInverted: boolean;
+  MatricesAlways: boolean;
+  ConsoleLogButtons: boolean;
+  ConsoleLogConnected: boolean;
+  LoadTimeExtra: boolean;
+  ChezSecret: boolean;
+  AllowSecretChars: boolean;
+  DevMode: boolean;
 }

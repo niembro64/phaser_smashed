@@ -42,7 +42,7 @@ export function onHitHandlerAttackPhysical(
 
   player.char.damage += damage;
 
-  if (game.debug.setDefaultHitback) {
+  if (game.debug.DefaultHitback) {
     hitbackFly(
       player,
       game,
@@ -86,7 +86,7 @@ export function onHitHandlerAttackEnergy(
 
   player.char.damage += damage;
 
-  if (game.debug.setDefaultHitback) {
+  if (game.debug.DefaultHitback) {
     hitbackFly(
       player,
       game,

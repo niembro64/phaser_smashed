@@ -41,7 +41,7 @@ export const emoji = {
   greenCheck: '✔️',
   caution: '🚧',
   redX: '❌',
-  settings: '⚙️',
+  gear: '⚙️',
   cloud: '☁',
   cloudWhite: '☁️',
   beer: '🍺',
@@ -58,36 +58,36 @@ function Play() {
   let myPhaser: any = useRef(null);
 
   const [debug, setDebug] = useState<Debug>({
-    setLevel: 6, //0123456
-    setDurationMinutes: 7, //01234567
-    setModeInfinity: true,
-    setInfinityShots: 7,
-    setUpdateLoopsNumSkip: 2, // 012
-    setMusicNumber: 2, // 012
-    setMusicActive: true,
-    setReadySoundActive: false,
-    setFrictionAirActive: true,
-    setCamerasActive: true,
-    setCamerasVisible: false,
-    setCollidersPvP: false,
-    setCollidersPvAP: false,
-    setCollidersPvAE: false,
-    setCollidersAEvAE: true,
-    setCollidersAEvAP: true,
-    setAEWrapScreen: false,
-    setPlayerIdVisible: true,
-    setWallJumpsActive: true,
-    setDefaultDamage: false,
-    setDefaultHitback: false,
-    setCharacterTinted: true,
-    setHealthInverted: false,
-    setMatricesAlways: false,
-    setConsoleButtons: false,
-    setConsoleConnected: false,
-    setLoadTimeExtra: false,
-    setChezSecret: true,
-    setAllowSecretChars: false,
-    setIsDevMode: false,
+    Level: 6, //0123456
+    ModeInfinity: true,
+    ModeInfinityShots: 7,
+    ModeTimeMinutes: 7, //01234567
+    MusicActive: true,
+    MusicNumber: 2, // 012
+    ReadySoundActive: true,
+    Camera: true,
+    CamerasVisible: false,
+    CollidersPvP: false,
+    CollidersPvAP: false,
+    CollidersPvAE: false,
+    CollidersAEvAE: true,
+    CollidersAEvAP: true,
+    FrictionAirActive: true,
+    AEWrapScreen: false,
+    WallJumpsActive: true,
+    DefaultDamage: false,
+    DefaultHitback: false,
+    PlayerIdVisible: true,
+    CharacterTinted: false,
+    HealthInverted: false,
+    MatricesAlways: false,
+    ConsoleLogButtons: false,
+    ConsoleLogConnected: false,
+    UpdateLoopsNumSkip: 2, // 012
+    LoadTimeExtra: true,
+    ChezSecret: true,
+    AllowSecretChars: false,
+    DevMode: false,
   });
 
   const trance = new Audio(importedTrance);
@@ -159,7 +159,7 @@ function Play() {
       default: 'arcade',
       arcade: {
         gravity: { y: 3000 },
-        debug: debug.setIsDevMode,
+        debug: debug.DevMode,
       },
     },
     scene: [Game],
@@ -249,7 +249,7 @@ function Play() {
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
-    if (!debug.setLoadTimeExtra || debug.setIsDevMode) {
+    if (!debug.LoadTimeExtra || debug.DevMode) {
       setTimeoutQuotesLengthStart = 0;
     }
     setTimeout(() => {
@@ -274,7 +274,7 @@ function Play() {
           () => {
             setShowLoader(false);
           },
-          debug.setIsDevMode ? 0 : 1
+          debug.DevMode ? 0 : 1
         );
         clearInterval(myInterval);
       }
@@ -345,7 +345,7 @@ function Play() {
   };
 
   const setFirstCharacterSlot = (charId: CharacterType): void => {
-    if (!debug.setChezSecret || webState === 'play') {
+    if (!debug.ChezSecret || webState === 'play') {
       return;
     }
     if (charId === 4) {
@@ -416,7 +416,7 @@ function Play() {
     let newCharacterId = choice.characterId + 1;
 
     // player cannot directly select Chez or BlackChez
-    if (!debug.setIsDevMode && debug.setChezSecret) {
+    if (!debug.DevMode && debug.ChezSecret) {
       while (newCharacterId === 4 || newCharacterId === 5) {
         newCharacterId++;
       }
@@ -426,11 +426,7 @@ function Play() {
       newCharacterId = 0;
     }
 
-    if (
-      !debug.setIsDevMode &&
-      !debug.setAllowSecretChars &&
-      newCharacterId > 5
-    ) {
+    if (!debug.DevMode && !debug.AllowSecretChars && newCharacterId > 5) {
       newCharacterId = 0;
     }
 
@@ -666,7 +662,7 @@ function Play() {
               </div>
             </div>
           </div>
-          {!debug.setIsDevMode && <div className="black-hiding-div"></div>}
+          {!debug.DevMode && <div className="black-hiding-div"></div>}
           <div className="player-choices">
             {smashConfig.players.map((cPlayer, cPlayerIndex) => {
               return (
@@ -870,7 +866,7 @@ function Play() {
                   componentPseudoLoad.current = true;
                   myPhaser.current.destroy(true);
 
-                  if (!debug.setLoadTimeExtra) {
+                  if (!debug.LoadTimeExtra || debug.DevMode) {
                     setTimeoutQuotesLengthReStart = 0;
                   }
                   setTimeout(() => {
@@ -924,8 +920,8 @@ function Play() {
                 onClickPlayNavButtons('Options');
               }}
             >
-              {showOptions && <span className="dark-span">Options</span>}
-              {!showOptions && <span>Options</span>}
+              {showOptions && <span className="dark-span">{emoji.gear}</span>}
+              {!showOptions && <span>{emoji.gear}</span>}
             </div>
           )}
         </div>
@@ -1056,7 +1052,7 @@ function Play() {
                 onClickPlayNavBody('Options');
               }}
             >
-              <h1>Options</h1>
+              <h1>{emoji.gear}</h1>
               <div id="debug-col">
                 {Object.entries(debug).map(([key, value], index) => {
                   return (
@@ -1064,6 +1060,7 @@ function Play() {
                       id="option"
                       key={index}
                       onClick={(e) => {
+                        blipSound();
                         e.stopPropagation();
                         if (typeof value === 'number') {
                           setDebug((prevState) => ({
@@ -1164,7 +1161,7 @@ function Play() {
           </div>
         )}
       </div>
-      {debug.setIsDevMode && <div className="dev-mode-div">Dev Mode</div>}
+      {debug.DevMode && <div className="dev-mode-div">Dev Mode</div>}
     </div>
   );
 }

@@ -74,7 +74,7 @@ export function updateText(game: Game): void {
 }
 
 export function setSplashDataOn(game: Game): void {
-  if (game.debug.setMatricesAlways) {
+  if (game.debug.MatricesAlways) {
     return;
   }
   game.splashesEndData.forEach((splash, splashIndex) => {
@@ -84,7 +84,7 @@ export function setSplashDataOn(game: Game): void {
 }
 
 export function setSplashDataOff(game: Game): void {
-  if (game.debug.setMatricesAlways) {
+  if (game.debug.MatricesAlways) {
     return;
   }
   game.splashesEndData.forEach((splash, splashIndex) => {
@@ -129,7 +129,7 @@ export function updateClockTextUpper(
   // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
   game.scoreBoardTimeGame.y = newUpperY;
 
-  if (game.debug.setModeInfinity) {
+  if (game.debug.ModeInfinity) {
     game.scoreBoardTimeGame.setScale(1 / zoom, 1 / zoom);
     let shotsString: string = '';
     for (let i = 0; i < game.shotsLeft; i++) {
@@ -217,7 +217,7 @@ export function updateDamageShotsText(
       .setScale(1 / zoom, 1 / zoom)
       .setText(
         Math.round(
-          game.debug.setHealthInverted
+          game.debug.HealthInverted
             ? (100 / (100 + player.char.damage)) * 100
             : player.char.damage
         ).toString() +

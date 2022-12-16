@@ -60,8 +60,8 @@ export function setPreUpdate(game: Game): void {
 }
 
 export function update(game: Game, time: number, delta: number): void {
-  if (game.debug.setUpdateLoopsNumSkip > 0) {
-    game.debug.setUpdateLoopsNumSkip--;
+  if (game.debug.UpdateLoopsNumSkip > 0) {
+    game.debug.UpdateLoopsNumSkip--;
     return;
   }
 
@@ -121,10 +121,10 @@ export function update(game: Game, time: number, delta: number): void {
       ///////// done shots => finished
       ///////// time => finished
       ////////////////////////////////
-      if (game.debug.setModeInfinity && game.shotsLeft < 1) {
+      if (game.debug.ModeInfinity && game.shotsLeft < 1) {
         setGameState(game, 'game-state-finished');
       }
-      if (!game.debug.setModeInfinity && game.gameSecondsClock < 1) {
+      if (!game.debug.ModeInfinity && game.gameSecondsClock < 1) {
         setGameState(game, 'game-state-finished');
       }
 
