@@ -58,7 +58,7 @@ function Play() {
   let myPhaser: any = useRef(null);
 
   const [debug, setDebug] = useState<Debug>({
-    setLevel: 1, //0123456
+    setLevel: 6, //0123456
     setDurationMinutes: 7, //01234567
     setModeInfinity: true,
     setInfinityShots: 7,
@@ -1049,7 +1049,7 @@ function Play() {
           </div>
         )}
         {showOptions && (
-          <div>
+          <div className="overDiv">
             <div
               className="popup"
               onClick={() => {
@@ -1057,31 +1057,43 @@ function Play() {
               }}
             >
               <h1>Options</h1>
-              {Object.entries(debug).map(([key, value], index) => {
-                return (
-                  <div
-                    id="option"
-                    key={index}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setDebug((prevState) => ({
-                        ...prevState,
-                        [key]: !value,
-                      }));
-                      console.log('CLICKED');
-                    }}
-                  >
-                    <p>
-                      {typeof value !== 'boolean'
-                        ? value
-                        : value
-                        ? emoji.greenCheck
-                        : emoji.redX}
-                    </p>
-                    <p>{key}</p>
-                  </div>
-                );
-              })}
+              <div id="debug-col">
+                {Object.entries(debug).map(([key, value], index) => {
+                  return (
+                    <div
+                      id="option"
+                      key={index}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (typeof value === 'number') {
+                          setDebug((prevState) => ({
+                            ...prevState,
+                            [key]: value - 1 < 0 ? 0 : value - 1,
+                          }));
+                          console.log('Clicked Number');
+                        }
+
+                        if (typeof value === 'boolean') {
+                          setDebug((prevState) => ({
+                            ...prevState,
+                            [key]: !value,
+                          }));
+                          console.log('Clicked Boolean');
+                        }
+                      }}
+                    >
+                      <p>
+                        {typeof value !== 'boolean'
+                          ? value
+                          : value
+                          ? emoji.greenCheck
+                          : emoji.redX}
+                      </p>
+                      <p>{key}</p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}
