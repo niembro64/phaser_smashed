@@ -313,10 +313,14 @@ export function updateAttackEnergyFollow(game: Game): void {
         ae.findAndFollowAcceleration.x !== 0 &&
         ae.findAndFollowAcceleration.y === 0
       ) {
-        let goHereX: number = getNearestPlayerX(player, playerIndex, game);
+        let goHere: { x: number; y: number } = getNearestPlayerXY(
+          player,
+          playerIndex,
+          game
+        );
         ae.sprite.body.setVelocityX(
           ae.sprite.body.velocity.x * 0.98 +
-            (goHereX < ae.sprite.x ? -1 : 1) *
+            (goHere.x < ae.sprite.x ? -1 : 1) *
               100 *
               ae.findAndFollowAcceleration.x
         );
