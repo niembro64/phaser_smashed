@@ -38,7 +38,7 @@ export function onHitHandlerAttackPhysical(
     }
   }
 
-  let vector = getNormalizedVector(attackPhysical, player);
+  let vector = getNormalizedVectorAP(attackPhysical, player);
 
   player.char.damage += damage;
 
@@ -82,7 +82,7 @@ export function onHitHandlerAttackEnergy(
     }
   }
 
-  let vector = getNormalizedVector(attackEnergy, player);
+  let vector = getNormalizedVectorAP(attackEnergy, player);
 
   player.char.damage += damage;
 
@@ -194,12 +194,25 @@ export function setResetDamage(player: Player): void {
 // export function addHit(player: Player, game: Game): void {
 // }
 
-export function getNormalizedVector(
+export function getNormalizedVectorAP(
   attack: AttackEnergy | AttackPhysical,
   player: Player
 ): Vector {
   let newX = player.char.sprite.x - attack.sprite.x;
   let newY = player.char.sprite.y - attack.sprite.y;
+  let newRatio = Math.sqrt(newX * newX + newY * newY);
+
+  return { x: newX / newRatio, y: newY / newRatio };
+}
+
+export function getNormalizedVector(
+  startX: number,
+  startY: number,
+  endX: number,
+  endY: number
+): Vector {
+  let newX = endX - startX;
+  let newY = endY - startY;
   let newRatio = Math.sqrt(newX * newX + newY * newY);
 
   return { x: newX / newRatio, y: newY / newRatio };

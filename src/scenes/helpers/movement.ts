@@ -1,6 +1,7 @@
 import Game from '../Game';
 import { Player } from '../interfaces';
 import { getIsAttackEnergyOffscreen } from './attacks';
+import { getNormalizedVector } from './damage';
 
 export function updateCirclesLocations(game: Game): void {
   if (!game.debug.PlayerIdVisible) {
@@ -334,17 +335,20 @@ export function updateAttackEnergyFollow(game: Game): void {
           playerIndex,
           game
         );
+
+        let goHereMultiplier: { x: number; y: number } = getNormalizedVector(
+          ae.sprite.x,
+          ae.sprite.y,
+          goHere.x,
+          goHere.y
+        );
         ae.sprite.body.setVelocityX(
           ae.sprite.body.velocity.x * 0.98 +
-            (goHere.x < ae.sprite.x ? -1 : 1) *
-              100 *
-              ae.findAndFollowAcceleration.x
+            goHereMultiplier.x * 100 * ae.findAndFollowAcceleration.x
         );
         ae.sprite.body.setVelocityY(
           ae.sprite.body.velocity.y * 0.98 +
-            (goHere.y < ae.sprite.y ? -1 : 1) *
-              100 *
-              ae.findAndFollowAcceleration.y
+            goHereMultiplier.y * 100 * ae.findAndFollowAcceleration.y
         );
       }
     }
