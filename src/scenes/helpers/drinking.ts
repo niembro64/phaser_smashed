@@ -107,7 +107,6 @@ export function updateNumShotsLeft(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < game.players.length; i++) {
       shots += game.numberShotsTakenByMeMatrix[playerIndex][i];
-      console.log(playerIndex, i, 'shots', shots);
     }
   });
   game.shotsLeft = game.debug.setInfinityShots - shots;
