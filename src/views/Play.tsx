@@ -88,8 +88,8 @@ function Play() {
     ConsoleLogConnected: false,
     UpdateLoopsNumSkip: 2, // 012
     LoadTimeExtra: true,
-    ChezSecret: true,
-    AllowSecretChars: false,
+    AllowCharsExtended: true,
+    AllowCharsChez: false,
     DevMode: false,
   });
 
@@ -348,7 +348,7 @@ function Play() {
   };
 
   const setFirstCharacterSlot = (charId: CharacterType): void => {
-    if (!debug.ChezSecret || webState === 'play') {
+    if (debug.AllowCharsChez || webState === 'play') {
       return;
     }
     if (charId === 4) {
@@ -419,7 +419,7 @@ function Play() {
     let newCharacterId = choice.characterId + 1;
 
     // player cannot directly select Chez or BlackChez
-    if (!debug.DevMode && debug.ChezSecret) {
+    if (!debug.DevMode && !debug.AllowCharsChez) {
       while (newCharacterId === 4 || newCharacterId === 5) {
         newCharacterId++;
       }
@@ -429,7 +429,7 @@ function Play() {
       newCharacterId = 0;
     }
 
-    if (!debug.DevMode && !debug.AllowSecretChars && newCharacterId > 5) {
+    if (!debug.DevMode && !debug.AllowCharsExtended && newCharacterId > 5) {
       newCharacterId = 0;
     }
 

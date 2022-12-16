@@ -388,7 +388,7 @@ export interface Debug {
   ConsoleLogButtons: boolean;
   ConsoleLogConnected: boolean;
   LoadTimeExtra: boolean;
-  ChezSecret: boolean;
-  AllowSecretChars: boolean;
+  AllowCharsChez: boolean;
+  AllowCharsExtended: boolean;
   DevMode: boolean;
 }
