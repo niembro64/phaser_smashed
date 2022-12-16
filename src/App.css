@@ -227,22 +227,36 @@ body {
   flex-wrap: wrap;
 }
 #option {
-  width: 45vw;
+  width: 50%;
   background-color: rgba(128, 128, 128, 0.1);
-  padding: 0vw 0vw 0vw 0vw;
+  padding: 0vw 0vw 0.2vw 0vw;
   margin: 0vw 0vw 0vw 0vw;
-  border-radius: 3px;
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   cursor: pointer;
+  border: 2px solid black;
+}
+.debug-value {
+  width: 3vw;
   /* border: 1px dashed lime; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.debug-value > p {
+  margin: 0;
+  padding: 0;
+  font-size: 2.5vh;
+  padding: 0vw 1vw 0vw 1vw;
 }
 #option > p {
   margin: 0;
   padding: 0;
-  font-size: 1.8vh;
+  font-size: 2.5vh;
   padding: 0vw 1vw 0vw 1vw;
 }
 #move {

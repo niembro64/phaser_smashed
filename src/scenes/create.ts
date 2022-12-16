@@ -555,7 +555,7 @@ export function createCollidersPvP(game: Game): void {
 }
 
 export function createCollidersPvAP(game: Game): void {
-  if (!game.debug.setCollidersPvAttackPhysical) {
+  if (!game.debug.setCollidersPvAP) {
     return;
   }
 
@@ -576,7 +576,7 @@ export function createCollidersPvAP(game: Game): void {
   });
 }
 export function createCollidersPvAE(game: Game): void {
-  if (!game.debug.setCollidersPvAttackEnergy) {
+  if (!game.debug.setCollidersPvAE) {
     return;
   }
 

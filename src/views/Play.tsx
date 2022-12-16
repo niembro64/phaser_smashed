@@ -70,8 +70,8 @@ function Play() {
     setCamerasActive: true,
     setCamerasVisible: false,
     setCollidersPvP: false,
-    setCollidersPvAttackPhysical: false,
-    setCollidersPvAttackEnergy: false,
+    setCollidersPvAP: false,
+    setCollidersPvAE: false,
     setCollidersAEvAE: true,
     setCollidersAEvAP: true,
     setAEWrapScreen: false,
@@ -79,14 +79,14 @@ function Play() {
     setWallJumpsActive: true,
     setDefaultDamage: false,
     setDefaultHitback: false,
-    setPlayerColorFilterStateNormalActive: false,
+    setCharacterTinted: true,
     setHealthInverted: false,
-    setMatricesAlwaysVisible: false,
-    setPrintControllerButtonsConsole: false,
-    setPrintControllerConnectedConsole: false,
+    setMatricesAlways: false,
+    setConsoleButtons: false,
+    setConsoleConnected: false,
     setLoadTimeExtra: false,
     setChezSecret: true,
-    setAllowExtraCharacters: true,
+    setAllowSecretChars: false,
     setIsDevMode: false,
   });
 
@@ -428,7 +428,7 @@ function Play() {
 
     if (
       !debug.setIsDevMode &&
-      !debug.setAllowExtraCharacters &&
+      !debug.setAllowSecretChars &&
       newCharacterId > 5
     ) {
       newCharacterId = 0;
@@ -1082,13 +1082,15 @@ function Play() {
                         }
                       }}
                     >
-                      <p>
-                        {typeof value !== 'boolean'
-                          ? value
-                          : value
-                          ? emoji.greenCheck
-                          : emoji.redX}
-                      </p>
+                      <div className="debug-value">
+                        <p>
+                          {typeof value !== 'boolean'
+                            ? value
+                            : value
+                            ? emoji.greenCheck
+                            : emoji.redX}
+                        </p>
+                      </div>
                       <p>{key}</p>
                     </div>
                   );

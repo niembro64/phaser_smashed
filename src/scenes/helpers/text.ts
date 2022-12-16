@@ -74,7 +74,7 @@ export function updateText(game: Game): void {
 }
 
 export function setSplashDataOn(game: Game): void {
-  if (game.debug.setMatricesAlwaysVisible) {
+  if (game.debug.setMatricesAlways) {
     return;
   }
   game.splashesEndData.forEach((splash, splashIndex) => {
@@ -84,7 +84,7 @@ export function setSplashDataOn(game: Game): void {
 }
 
 export function setSplashDataOff(game: Game): void {
-  if (game.debug.setMatricesAlwaysVisible) {
+  if (game.debug.setMatricesAlways) {
     return;
   }
   game.splashesEndData.forEach((splash, splashIndex) => {
