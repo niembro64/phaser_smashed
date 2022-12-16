@@ -1,27 +1,10 @@
 // import { useState } from "react";
-import "./App.css";
+import './App.css';
 // import "@fontsource/press-start-2p";
 
-import { Switch, Route } from "react-router-dom";
-import Start from "./views/Start";
-import Play from "./views/Play";
-
-export interface CharacterMove {
-  button: string;
-  move: string;
-  status: string;
-}
-
-export type ButtonName =
-  | "See Other Projects"
-  | "Back"
-  | "ReStart"
-  | "Controls"
-  | "Controllers"
-  | "Rules"
-  | "Rules-N64"
-  | "About"
-  | "History";
+import { Switch, Route } from 'react-router-dom';
+import Start from './views/Start';
+import Play from './views/Play';
 
 function App() {
   // The debounce function receives our function as a parameter
@@ -51,7 +34,7 @@ function App() {
   };
 
   // Listen for new scroll events, here we debounce our `storeScroll` function
-  document.addEventListener("scroll", debounce(storeScroll), {
+  document.addEventListener('scroll', debounce(storeScroll), {
     passive: true,
   });
 

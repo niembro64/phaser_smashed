@@ -213,6 +213,23 @@ body {
 .kirbyNiembro {
   margin: 1%;
 }
+#option {
+  width: 45vw;
+  background-color: rgba(128, 128, 128, 0.1);
+  padding: 1.1vw 1vw 0.3vw 1vw;
+  margin: 0vw 0vw 0.5vw 0vw;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+#option > p {
+  margin: 0;
+  padding: 0;
+  font-size: 1vh;
+}
 #move {
   width: 45vw;
   background-color: rgba(128, 128, 128, 0.1);

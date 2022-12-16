@@ -1,3 +1,21 @@
+export interface CharacterMove {
+  button: string;
+  move: string;
+  status: string;
+}
+
+export type ButtonName =
+  | 'See Other Projects'
+  | 'Back'
+  | 'ReStart'
+  | 'Controls'
+  | 'Controllers'
+  | 'Rules'
+  | 'Rules-N64'
+  | 'About'
+  | 'History'
+  | 'Options';
+
 export type GameState =
   | 'game-state-start'
   | 'game-state-play'

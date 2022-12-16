@@ -3,7 +3,7 @@ import Phaser from 'phaser';
 import Game from '../scenes/Game';
 import '../App.css';
 import '@fontsource/press-start-2p';
-import { ButtonName, CharacterMove } from '../App';
+
 import { setGameState } from '../scenes/helpers/state';
 import useSound from 'use-sound';
 // import { Howl } from "howler";
@@ -30,6 +30,8 @@ import {
   WebState,
   InputType,
   SmashConfig,
+  ButtonName,
+  CharacterMove,
 } from '../scenes/interfaces';
 
 export const emoji = {
@@ -55,8 +57,8 @@ export const emoji = {
 function Play() {
   let myPhaser: any = useRef(null);
 
-  const debug: Debug = {
-    setLevel: 6, //0123456
+  const [debug, setDebug] = useState<Debug>({
+    setLevel: 1, //0123456
     setDurationMinutes: 7, //01234567
     setModeInfinity: true,
     setInfinityShots: 7,
@@ -86,7 +88,7 @@ function Play() {
     setChezSecret: true,
     setAllowExtraCharacters: true,
     setIsDevMode: false,
-  };
+  });
 
   const trance = new Audio(importedTrance);
   trance.volume = 0.3;
@@ -460,6 +462,7 @@ function Play() {
   const [showControllers, setShowControllers] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
 
   const characterMoves: CharacterMove[] = [
     { button: 'D-Pad', move: 'Movement', status: emoji.greenCheck },
@@ -504,6 +507,7 @@ function Play() {
     setShowRulesN64(false);
     setShowAbout(false);
     setShowHistory(false);
+    setShowOptions(false);
   };
 
   const onClickPlayNavButtons = (buttonName: ButtonName) => {
@@ -517,6 +521,7 @@ function Play() {
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
+        setShowOptions(false);
         break;
       case 'ReStart':
         setShowControls(false);
@@ -524,6 +529,7 @@ function Play() {
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
+        setShowOptions(false);
         break;
       case 'Controls':
         setShowControls(!showControls);
@@ -531,6 +537,7 @@ function Play() {
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
+        setShowOptions(false);
         break;
       case 'Controllers':
         setShowControls(false);
@@ -538,6 +545,7 @@ function Play() {
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
+        setShowOptions(false);
         break;
       case 'Rules-N64':
         setShowControls(false);
@@ -545,6 +553,7 @@ function Play() {
         setShowRulesN64(!showRulesN64);
         setShowAbout(false);
         setShowHistory(false);
+        setShowOptions(false);
         break;
       case 'About':
         setShowControls(false);
@@ -552,6 +561,7 @@ function Play() {
         setShowRulesN64(false);
         setShowAbout(!showAbout);
         setShowHistory(false);
+        setShowOptions(false);
         break;
       case 'History':
         setShowControls(false);
@@ -559,6 +569,15 @@ function Play() {
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(!showHistory);
+        setShowOptions(false);
+        break;
+      case 'Options':
+        setShowControls(false);
+        setShowControllers(false);
+        setShowRulesN64(false);
+        setShowAbout(false);
+        setShowHistory(false);
+        setShowOptions(!showOptions);
         break;
       default:
         setShowControls(false);
@@ -566,17 +585,9 @@ function Play() {
         setShowRulesN64(false);
         setShowAbout(false);
         setShowHistory(false);
+        setShowOptions(false);
     }
   };
-
-  const [clockTime, setClockTime] = useState({
-    minutes: 0,
-    seconds: 0,
-  });
-  const [clockGame, setClockGame] = useState({
-    minutes: 0,
-    seconds: 0,
-  });
 
   const componentPseudoLoad = useRef(true);
   const intervalClock: any = useRef(null);
@@ -895,17 +906,6 @@ function Play() {
             {showRulesN64 && <span className="dark-span">Rules</span>}
             {!showRulesN64 && <span>Rules</span>}
           </div>
-          {/* {webState === 'start' && (
-            <div
-              className="linkTag b-top"
-              onClick={() => {
-                onClickPlayNavButtons('History');
-              }}
-            >
-              {showHistory && <span className="dark-span">History</span>}
-              {!showHistory && <span>History</span>}
-            </div>
-          )} */}
           {webState === 'start' && (
             <div
               className="linkTag b-top"
@@ -915,6 +915,17 @@ function Play() {
             >
               {showAbout && <span className="dark-span">About</span>}
               {!showAbout && <span>About</span>}
+            </div>
+          )}
+          {webState === 'start' && (
+            <div
+              className="linkTag b-top"
+              onClick={() => {
+                onClickPlayNavButtons('Options');
+              }}
+            >
+              {showOptions && <span className="dark-span">Options</span>}
+              {!showOptions && <span>Options</span>}
             </div>
           )}
         </div>
@@ -932,19 +943,7 @@ function Play() {
                   <div id="keyboard-top">
                     <h3>Controllers</h3>
                   </div>
-                  <div id="keyboard-top">
-                    Use As Described
-                    {/* <div id="keyboard-left">
-                      <p>W-A-S-D</p>
-                      <p>F-G-H-SPACE</p>
-                      <p>R-T-Y-U</p>
-                    </div>
-                    <div id="keyboard-right">
-                      <p>D-Pad</p>
-                      <p>A-X-B-Y</p>
-                      <p>L-Select-Start-R</p>
-                    </div> */}
-                  </div>
+                  <div id="keyboard-top">Use As Described</div>
                 </div>
                 <div id="keyboard">
                   <div id="keyboard-top">
@@ -990,14 +989,7 @@ function Play() {
                     </div>
                   );
                 })}
-                {/* <p> fyi, button mapping is insane</p> */}
-
-                {/* <div id="keyboard">
-                  <h3>Second Keyboard</h3>
-                  <p>ArrowKeys : D-Pad</p>
-                  <p>4-5-6-Enter : A-X-B-Y</p>
-                  <p>7-8-9-Plus : L-Select-Start-R</p>
-                </div> */}
+                <p> fyi, button mapping is insane</p>
               </div>
             </div>
           </div>
@@ -1035,7 +1027,6 @@ function Play() {
                 className="linkTag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
-                {/* <h4>See Other Projects</h4> */}
                 <span>Amazon: (2) SNES Controllers $12</span>
               </a>
               <a
@@ -1054,6 +1045,43 @@ function Play() {
                   <li>{emoji.greenCheck} Mekela NGC Wired Gamecube</li>
                 </ul>
               </div>
+            </div>
+          </div>
+        )}
+        {showOptions && (
+          <div>
+            <div
+              className="popup"
+              onClick={() => {
+                onClickPlayNavBody('Options');
+              }}
+            >
+              <h1>Options</h1>
+              {Object.entries(debug).map(([key, value], index) => {
+                return (
+                  <div
+                    id="option"
+                    key={index}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDebug((prevState) => ({
+                        ...prevState,
+                        [key]: !value,
+                      }));
+                      console.log('CLICKED');
+                    }}
+                  >
+                    <p>
+                      {typeof value !== 'boolean'
+                        ? value
+                        : value
+                        ? emoji.greenCheck
+                        : emoji.redX}
+                    </p>
+                    <p>{key}</p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -1087,16 +1115,6 @@ function Play() {
                 of logic, and such that one day it could be realized as a fully
                 functional, independent game.
               </p>
-              {/* <p>
-                The rules are described - and this is the start of that game -
-                on github - such that it may live on and be expanded upon.
-              </p> */}
-              {/* <p>
-                IMO, the primary rule "Screen Clear" is what makes these rules
-                stand out from other smash drinking games; this rule pushes a
-                player to actively time their own death rather than just try to
-                not die.
-              </p> */}
               <p>
                 Assets & sounds that you don't immediately recognize are
                 probably OC.
@@ -1131,52 +1149,7 @@ function Play() {
             </div>
           </div>
         )}
-        {/* {showHistory && (
-          <div>
-            <div
-              className="popup"
-              onClick={() => {
-                onClickPlayNavBody('History');
-              }}
-            >
-              <h1>History</h1>
-              <p>
-                As referenced on the Rules-N64 sheet, (Chemon) Smashed was
-                invented in Glen Carbon, Illinois (near St. Louis) some time in
-                late 2009 by a group of college kids at the "Chemon" House.
-                Since 2013, "The Young Boys" have been keeping it alive &
-                thriving in St. Louis.
-              </p>
-              <p>
-                It's normally played with the N64 Smash Bros game on the N64,
-                Wii, or Emulation, but this is my attempt at recreating it with
-                the RulesN64 baked in.
-              </p>
-              <p>
-                Smashed has been played in at least 4 states and 3 countries.
-              </p>
-            </div>
-          </div>
-        )} */}
       </div>
-      {webState === 'play' && myPhaser.current?.scene?.keys?.game?.loaded && (
-        <div className="game-bar">
-          <div className="game-bar-time">
-            <p>
-              {clockTime.minutes}:
-              {clockTime.seconds < 10
-                ? '0' + clockTime.seconds.toString()
-                : clockTime.seconds}
-            </p>
-            <h1>
-              {clockGame.minutes}:
-              {clockGame.seconds < 10
-                ? '0' + clockGame.seconds.toString()
-                : clockGame.seconds}
-            </h1>
-          </div>
-        </div>
-      )}
       {debug.setIsDevMode && <div className="dev-mode-div">Dev Mode</div>}
     </div>
   );
