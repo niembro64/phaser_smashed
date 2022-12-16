@@ -50,6 +50,9 @@ export const emoji = {
   skull: '💀',
   punch: '👊',
   brokenHeart: '💔',
+  back: '🔙',
+  forward: '🔜',
+  restart: '🔄',
 };
 
 //🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃
@@ -812,6 +815,17 @@ function Play() {
             <div
               className="linkTag b-top"
               onClick={() => {
+                onClickPlayNavButtons('Options');
+              }}
+            >
+              {showOptions && <span className="dark-span">Options</span>}
+              {!showOptions && <span>Options</span>}
+            </div>
+          )}
+          {webState === 'start' && (
+            <div
+              className="linkTag b-top"
+              onClick={() => {
                 onClickPlayNavButtons('Controllers');
               }}
             >
@@ -884,6 +898,7 @@ function Play() {
               <span>ReStart</span>
             </div>
           )}
+
           <div
             className="linkTag b-top"
             onClick={() => {
@@ -913,18 +928,60 @@ function Play() {
               {!showAbout && <span>About</span>}
             </div>
           )}
-          {webState === 'start' && (
+        </div>
+        {showOptions && (
+          <div className="overDiv">
             <div
-              className="linkTag b-top"
+              className="popup"
               onClick={() => {
-                onClickPlayNavButtons('Options');
+                onClickPlayNavBody('Options');
               }}
             >
-              {showOptions && <span className="dark-span">{emoji.gear}</span>}
-              {!showOptions && <span>{emoji.gear}</span>}
+              <h1>Options</h1>
+              <div id="debug-col">
+                {Object.entries(debug).map(([key, value], index) => {
+                  return (
+                    <div
+                      id="option"
+                      key={index}
+                      onClick={(e) => {
+                        blipSound();
+                        e.stopPropagation();
+                        if (typeof value === 'number') {
+                          setDebug((prevState) => ({
+                            ...prevState,
+                            [key]: value - 1 < 0 ? 0 : value - 1,
+                          }));
+                          console.log('Clicked Number');
+                        }
+
+                        if (typeof value === 'boolean') {
+                          setDebug((prevState) => ({
+                            ...prevState,
+                            [key]: !value,
+                          }));
+                          console.log('Clicked Boolean');
+                        }
+                      }}
+                    >
+                      <div className="debug-value">
+                        <p>
+                          {typeof value !== 'boolean'
+                            ? value
+                            : value
+                            ? emoji.greenCheck
+                            : emoji.redX}
+                        </p>
+                      </div>
+                      <p>{key}</p>
+                    </div>
+                  );
+                })}
+                <p>Refresh Page to Reset</p>
+              </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
         {showControls && (
           <div className="overDiv">
             <div
@@ -1044,58 +1101,7 @@ function Play() {
             </div>
           </div>
         )}
-        {showOptions && (
-          <div className="overDiv">
-            <div
-              className="popup"
-              onClick={() => {
-                onClickPlayNavBody('Options');
-              }}
-            >
-              <h1>{emoji.gear}</h1>
-              <div id="debug-col">
-                {Object.entries(debug).map(([key, value], index) => {
-                  return (
-                    <div
-                      id="option"
-                      key={index}
-                      onClick={(e) => {
-                        blipSound();
-                        e.stopPropagation();
-                        if (typeof value === 'number') {
-                          setDebug((prevState) => ({
-                            ...prevState,
-                            [key]: value - 1 < 0 ? 0 : value - 1,
-                          }));
-                          console.log('Clicked Number');
-                        }
 
-                        if (typeof value === 'boolean') {
-                          setDebug((prevState) => ({
-                            ...prevState,
-                            [key]: !value,
-                          }));
-                          console.log('Clicked Boolean');
-                        }
-                      }}
-                    >
-                      <div className="debug-value">
-                        <p>
-                          {typeof value !== 'boolean'
-                            ? value
-                            : value
-                            ? emoji.greenCheck
-                            : emoji.redX}
-                        </p>
-                      </div>
-                      <p>{key}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        )}
         {showAbout && (
           <div>
             <div
