@@ -33,6 +33,7 @@ export function create(game: Game) {
   createScoreboardShotGlass(game);
   createSplashRuleFinished(game);
   createPlayers(game);
+  createChomp(game);
   createColliderTablePlayers(game);
   createKeyboards(game);
   createPlayerIdCircles(game);
@@ -49,6 +50,42 @@ export function create(game: Game) {
 
   // INIT UPDATE
   setPreUpdate(game);
+}
+
+export function createChomp(game: Game): void {
+  var config = {
+    key: 'chompanimation',
+    frames: game.anims.generateFrameNumbers('chomp', {
+      start: 0,
+      end: 3,
+      first: 0,
+    }),
+    frameRate: 20,
+    repeat: -1,
+  };
+
+  game.anims.create(config);
+
+  game.chomp.sprite = game.physics.add
+    .sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      'chomp'
+    )
+    .play('chompanimation');
+  game.chomp.sprite.setScale(1);
+  game.chomp.sprite.allowGravity = true;
+  game.chomp.sprite.setBounce(0.5);
+  game.chomp.sprite.setOrigin(0.5, 1);
+
+  game.physics.add.collider(game.chomp.sprite, game.PLATFORMS);
+  game.players.forEach((player, playerIndex) => {
+    game.physics.add.collider(game.chomp.sprite, player.char.sprite);
+    game.physics.add.collider(
+      game.chomp.sprite,
+      player.char.attackEnergy.sprite
+    );
+  });
 }
 
 export function createPreCreate(game: Game): void {

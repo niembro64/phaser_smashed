@@ -392,3 +392,10 @@ export interface Debug {
   AllowCharsExtended: boolean;
   DevMode: boolean;
 }
+
+export interface Chomp {
+  sprite: any | Phaser.GameObjects.Sprite;
+  state: ChompState;
+}
+
+export type ChompState = 'idle' | 'chomping' | 'dead';

@@ -144,6 +144,17 @@ export function preload(game: Game): void {
   game.load.image('glass_full', 'images/niemo_shot_full.png');
   game.load.image('glass_empty', 'images/niemo_shot_empty.png');
 
+  game.load.spritesheet({
+    key: 'chomp',
+    url: 'images/chompsheet3.png',
+    frameConfig: {
+      frameWidth: 32,
+      frameHeight: 32,
+      startFrame: 0,
+      endFrame: 3,
+    },
+  });
+
   game.playerOptions.forEach((pOption, pOptionIndex) => {
     game.load.image(pOption.char.name, pOption.char.src);
   });

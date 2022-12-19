@@ -15,6 +15,7 @@ import {
   SmashConfig,
   InputType,
   CharacterType,
+  Chomp,
 } from './interfaces';
 import { preload } from './preload';
 import { emoji } from '../views/Play';
@@ -579,6 +580,11 @@ export default class Game extends Phaser.Scene {
     //   Y: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
     // },
   ];
+
+  chomp: Chomp = {
+    sprite: null,
+    state: 'idle',
+  };
 
   players: Player[] = [];
   playerOptions: Player[] = [
