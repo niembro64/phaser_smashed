@@ -4,6 +4,7 @@
   --blue-start: hsl(200, 70%, 10%);
   --blue-start-lighter: hsl(200, 70%, 20%);
   --border-radius-big: 5vw;
+  --border-radius-small: 1vw;
   --duration-hover: 0.2s;
   --distance-hover-pos: 50px;
   --distance-hover-neg: calc(-1 * var(--distance-hover-pos));
@@ -231,7 +232,7 @@ body {
   background-color: rgba(128, 128, 128, 0.1);
   padding: 0vw 0vw 0.2vw 0vw;
   margin: 0vw 0vw 0vw 0vw;
-  border-radius: 10px;
+  border-radius: var(--border-radius-small);
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -264,7 +265,7 @@ body {
   background-color: rgba(128, 128, 128, 0.1);
   padding: 1.1vw 1vw 0.3vw 1vw;
   margin: 0vw 0vw 0.5vw 0vw;
-  border-radius: 3px;
+  border-radius: var(--border-radius-small);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -275,7 +276,7 @@ body {
   background-color: rgba(128, 128, 128, 0.1);
   padding: 1.5vw 1vw 1vw 1vw;
   margin: 0vw 0vw 0.5vw 0vw;
-  border-radius: 3px;
+  border-radius: var(--border-radius-small);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -394,7 +395,7 @@ body {
   flex: 0.2;
   background-color: var(--blue-start);
   border: 0px solid;
-  border-radius: 1vw;
+  border-radius: var(--border-radius-small);
 
   color: rgba(255, 255, 255, 1);
   font-size: 4vh;
@@ -791,7 +792,7 @@ body {
   overflow: visible;
 
   background-color: 'transparent';
-  border-radius: 30% 30% 0 0;
+  border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
   transition: var(--duration-hover) ease;
   cursor: default;
 }
@@ -807,7 +808,7 @@ body {
   overflow: hidden;
 
   background-color: 'transparent';
-  border-radius: 30% 30% 0 0;
+  border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
   transition: var(--duration-hover) ease;
 }
 .player-char:hover {
@@ -1244,5 +1245,5 @@ body {
   text-align: center;
   padding: 1rem 2rem 1rem 2rem;
 
-  border-radius: 1rem;
+  border-radius: var(--border-radius-small);
 }
