@@ -60,7 +60,7 @@ export function createChomp(game: Game): void {
       end: 3,
       first: 0,
     }),
-    frameRate: 20,
+    frameRate: 10,
     repeat: -1,
   };
 

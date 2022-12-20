@@ -62,6 +62,7 @@ function Play() {
   let myPhaser: any = useRef(null);
 
   const [debug, setDebug] = useState<Debug>({
+    DevMode: true,
     Level: 6, //0123456
     ModeInfinity: true,
     ModeInfinityShots: 7,
@@ -91,7 +92,6 @@ function Play() {
     LoadTimeExtra: true,
     AllowCharsExtended: true,
     AllowCharsChez: false,
-    DevMode: false,
   });
 
   const trance = new Audio(importedTrance);
