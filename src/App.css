@@ -1272,11 +1272,38 @@ body {
   background-position: center;
 
   overflow: visible;
+  z-index: 1;
+}
+.keyboard-explainer-single {
+  position: absolute;
+  top: 20%;
+  left: 5%;
+  width: 50%;
+  height: 25%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  
+  border-radius: var(--border-radius-small);
+  background-image: url(../public/images/keyboard_color.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  
+  overflow: visible;
+  z-index: 1;
 }
 
 .keyboard-left-checkmark {
   position: absolute;
-  top: -30%;
+  top: -40%;
   left: 2%;
   width: 47%;
   height: 20%;
@@ -1297,7 +1324,7 @@ body {
 
 .keyboard-right-checkmark {
   position: absolute;
-  top: -30%;
+  top: -40%;
   right: 2%;
   width: 47%;
   height: 20%;

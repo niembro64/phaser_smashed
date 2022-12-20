@@ -610,6 +610,18 @@ function Play() {
     }
   });
 
+  const [numKeyboards, setNumKeyboards] = useState<number>(0);
+
+  useEffect(() => {
+    let numK = 0;
+    inputArray.forEach((input) => {
+      if (input === 2) {
+        numK++;
+      }
+    });
+    setNumKeyboards(numK);
+  }, [inputArray]);
+
   useEffect(() => {
     if (p1KeysTouched && p2KeysTouched) {
       setBothKeysTouched(true);
@@ -618,24 +630,41 @@ function Play() {
 
   return (
     <div className="overDiv">
-      {!debug.DevMode && webState !== 'start' && !bothKeysTouched && (
-        <div className="keyboard-explainer">
-          {!p1KeysTouched && (
-            <div className="keyboard-left-checkmark">
-              <span>Awaiting</span>
-              <div className="small-spinner ss-red"></div>
-              <span>WASD</span>
-            </div>
-          )}
-          {!p2KeysTouched && (
-            <div className="keyboard-right-checkmark">
-              <span>Awaiting</span>
-              <div className="small-spinner ss-blue"></div>
-              <span>Arrows</span>
-            </div>
-          )}
-        </div>
-      )}
+      {!debug.DevMode &&
+        webState !== 'start' &&
+        numKeyboards === 2 &&
+        !bothKeysTouched && (
+          <div className="keyboard-explainer">
+            {!p1KeysTouched && (
+              <div className="keyboard-left-checkmark">
+                <span>Awaiting</span>
+                <div className="small-spinner ss-red"></div>
+                <span>WASD</span>
+              </div>
+            )}
+            {!p2KeysTouched && (
+              <div className="keyboard-right-checkmark">
+                <span>Awaiting</span>
+                <div className="small-spinner ss-blue"></div>
+                <span>Arrows</span>
+              </div>
+            )}
+          </div>
+        )}
+      {!debug.DevMode &&
+        webState !== 'start' &&
+        numKeyboards === 1 &&
+        !p1KeysTouched && (
+          <div className="keyboard-explainer-single">
+            {!p1KeysTouched && (
+              <div className="keyboard-left-checkmark">
+                <span>Awaiting</span>
+                <div className="small-spinner ss-red"></div>
+                <span>WASD</span>
+              </div>
+            )}
+          </div>
+        )}
       {webState !== 'start' && showLoader && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
@@ -892,6 +921,9 @@ function Play() {
                 intervalClock.current = null;
                 componentPseudoLoad.current = true;
                 myPhaser.current.destroy(true);
+
+                setP1KeysTouched(false);
+                setP2KeysTouched(false);
               }}
             >
               <span>Back</span>
