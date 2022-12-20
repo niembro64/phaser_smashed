@@ -401,6 +401,7 @@ export interface Chomp {
   radius: number;
   percentFramesJump: number;
   NUM_LINKS: number;
+  MASS: number;
   links: ChompLink[];
   block: ChompBlock;
 }

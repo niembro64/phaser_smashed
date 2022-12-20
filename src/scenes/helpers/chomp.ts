@@ -51,7 +51,7 @@ export function updateChompVelocity(game: Game): void {
   if (isChompInsideCircle(game)) {
     if (b.touching.down) {
       b.setVelocityX(xNew * 500);
-      b.setVelocityY(-1 * Math.abs(yNew) * 1000);
+      b.setVelocityY(-1 * Math.abs(yNew + 0.3) * 1000);
     }
   }
 }

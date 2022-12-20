@@ -93,9 +93,11 @@ export function createChomp(game: Game): void {
     .play('chompanimation');
   c.sprite.setScale(1.3);
   c.sprite.allowGravity = true;
-  c.sprite.setBounce(0.5);
+  c.sprite.setBounceX(0.7);
+  c.sprite.setBounceY(0.5);
   c.sprite.setOrigin(0.5, 1);
   c.sprite.setVelocityX(30);
+  c.sprite.setMass(c.MASS);
 
   game.physics.add.collider(c.sprite, game.PLATFORMS);
   game.players.forEach((player, playerIndex) => {
