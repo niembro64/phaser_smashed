@@ -625,6 +625,8 @@ function Play() {
   useEffect(() => {
     if (p1KeysTouched && p2KeysTouched) {
       setBothKeysTouched(true);
+    } else {
+      setBothKeysTouched(false);
     }
   }, [p1KeysTouched, p2KeysTouched]);
 
