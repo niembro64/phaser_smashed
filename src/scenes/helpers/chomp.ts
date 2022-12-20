@@ -49,8 +49,8 @@ export function updateChompVelocity(game: Game): void {
   console.log('xNew: ', xNew, 'yNew: ', yNew, '');
 
   if (isChompInsideCircle(game)) {
-    b.setVelocityX(xNew * 200);
     if (b.touching.down) {
+      b.setVelocityX(xNew * 200);
       b.setVelocityY(-1 * Math.abs(yNew) * 1000);
     }
   }
@@ -103,7 +103,7 @@ export function updateChompLinkPositions(game: Game): void {
   let { x, y } = getVector(startX, startY, endX, endY);
 
   links.forEach((link, i) => {
-    let percent = (i + 1) / numLinks;
+    let percent = i / numLinks;
     let newX = startX + x * percent;
     let newY = startY + y * percent;
 

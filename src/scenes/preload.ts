@@ -145,7 +145,7 @@ export function preload(game: Game): void {
   game.load.image('glass_empty', 'images/niemo_shot_empty.png');
 
   game.load.image('chomp_block', 'images/chomp_block.png');
-  game.load.image('chomp_chain', 'images/chomp_chain.png');
+  game.load.image('chomp_link', 'images/chomp_chain.png');
   game.load.spritesheet({
     key: 'chomp',
     url: 'images/chompsheet3.png',
