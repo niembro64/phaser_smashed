@@ -399,6 +399,7 @@ export interface Chomp {
   originX: number;
   originY: number;
   radius: number;
+  percentFramesJump: number;
   block: ChompBlock;
 }
 export interface ChompBlock {

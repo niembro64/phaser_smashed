@@ -30,7 +30,7 @@ export function updateChompVelocity(game: Game): void {
     return;
   }
 
-  if (Math.random() * 100 > 1) {
+  if (Math.random() > c.percentFramesJump) {
     return;
   }
 
