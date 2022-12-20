@@ -60,31 +60,23 @@ export function createChomp(game: Game): void {
       end: 3,
       first: 0,
     }),
-    frameRate: 10,
+    frameRate: 20,
     repeat: -1,
   };
+  let c = game.chomp;
 
   game.anims.create(config);
 
-  game.chomp.sprite = game.physics.add
-    .sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
-      'chomp'
-    )
-    .play('chompanimation');
-  game.chomp.sprite.setScale(1);
-  game.chomp.sprite.allowGravity = true;
-  game.chomp.sprite.setBounce(0.5);
-  game.chomp.sprite.setOrigin(0.5, 1);
+  c.sprite = game.physics.add.sprite(c.x, c.y, 'chomp').play('chompanimation');
+  c.sprite.setScale(1);
+  c.sprite.allowGravity = true;
+  c.sprite.setBounce(0.5);
+  c.sprite.setOrigin(0.5, 1);
 
-  game.physics.add.collider(game.chomp.sprite, game.PLATFORMS);
+  game.physics.add.collider(c.sprite, game.PLATFORMS);
   game.players.forEach((player, playerIndex) => {
-    game.physics.add.collider(game.chomp.sprite, player.char.sprite);
-    game.physics.add.collider(
-      game.chomp.sprite,
-      player.char.attackEnergy.sprite
-    );
+    game.physics.add.collider(c.sprite, player.char.sprite);
+    game.physics.add.collider(c.sprite, player.char.attackEnergy.sprite);
   });
 }
 

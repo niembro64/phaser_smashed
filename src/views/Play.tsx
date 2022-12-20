@@ -70,7 +70,7 @@ function Play() {
     MusicActive: true,
     MusicNumber: 2, // 012
     ReadySoundActive: true,
-    Camera: true,
+    Camera: false,
     CamerasVisible: false,
     CollidersPvP: false,
     CollidersPvAP: false,

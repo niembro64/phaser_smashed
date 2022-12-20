@@ -396,6 +396,12 @@ export interface Debug {
 export interface Chomp {
   sprite: any | Phaser.GameObjects.Sprite;
   state: ChompState;
+  x: number;
+  y: number;
 }
 
 export type ChompState = 'idle' | 'chomping' | 'dead';
+
+export interface ChompData {
+
+}

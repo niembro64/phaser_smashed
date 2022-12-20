@@ -584,6 +584,8 @@ export default class Game extends Phaser.Scene {
   chomp: Chomp = {
     sprite: null,
     state: 'idle',
+    x: 500,
+    y: 800,
   };
 
   players: Player[] = [];
