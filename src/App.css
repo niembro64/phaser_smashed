@@ -313,6 +313,20 @@ body {
   padding: 0;
   font-size: small;
 }
+.keyboard-buttons {
+  width: 40%;
+  height: 140px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  background-image: url(../public/images/keyboard_colors.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: hue-rotate(180deg) invert(1);
+}
 #move > h5 {
   font-size: 1.1vw;
 }
@@ -1290,13 +1304,13 @@ body {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  
+
   border-radius: var(--border-radius-small);
   background-image: url(../public/images/keyboard_color.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  
+
   overflow: visible;
   z-index: 1;
 }

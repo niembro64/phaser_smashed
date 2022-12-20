@@ -1075,6 +1075,18 @@ function Play() {
                   </div>
                   <div id="keyboard-top">Use As Described</div>
                 </div>
+
+                {characterMoves.map((charMove, charMoveIndex) => {
+                  return (
+                    <div id="move" key={charMoveIndex}>
+                      <h5>{charMove.move}</h5>
+                      <h5>
+                        {charMove.button} {charMove.status}
+                      </h5>
+                    </div>
+                  );
+                })}
+                {/* <p> fyi, button mapping is insane</p> */}
                 <div id="keyboard">
                   <div id="keyboard-top">
                     <h3>First Keyboard</h3>
@@ -1109,17 +1121,7 @@ function Play() {
                     </div>
                   </div>
                 </div>
-                {characterMoves.map((charMove, charMoveIndex) => {
-                  return (
-                    <div id="move" key={charMoveIndex}>
-                      <h5>{charMove.move}</h5>
-                      <h5>
-                        {charMove.button} {charMove.status}
-                      </h5>
-                    </div>
-                  );
-                })}
-                <p> fyi, button mapping is insane</p>
+                <div className="keyboard-buttons"></div>
               </div>
             </div>
           </div>
