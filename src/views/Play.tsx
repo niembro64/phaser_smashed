@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Phaser from 'phaser';
 import Game from '../scenes/Game';
 import '../App.css';
@@ -53,6 +53,7 @@ export const emoji = {
   back: '🔙',
   forward: '🔜',
   restart: '🔄',
+  waiting: '⏳',
 };
 
 //🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃
@@ -591,8 +592,50 @@ function Play() {
   const componentPseudoLoad = useRef(true);
   const intervalClock: any = useRef(null);
 
+  const p1Keys: string[] = ['w', 'a', 's', 'd'];
+  const p2Keys: string[] = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
+
+  const [p1KeysTouched, setP1KeysTouched] = useState<boolean>(false);
+  const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
+  const [bothKeysTouched, setBothKeysTouched] = useState<boolean>(false);
+
+  window.addEventListener('keydown', (event) => {
+    console.log('event.key', event.key);
+
+    if (p1Keys.includes(event.key)) {
+      setP1KeysTouched(true);
+    }
+    if (p2Keys.includes(event.key)) {
+      setP2KeysTouched(true);
+    }
+  });
+
+  useEffect(() => {
+    if (p1KeysTouched && p2KeysTouched) {
+      setBothKeysTouched(true);
+    }
+  }, [p1KeysTouched, p2KeysTouched]);
+
   return (
     <div className="overDiv">
+      {!debug.DevMode && webState !== 'start' && !bothKeysTouched && (
+        <div className="keyboard-explainer">
+          {!p1KeysTouched && (
+            <div className="keyboard-left-checkmark">
+              <span>Awaiting Movement</span>
+              <p>{emoji.waiting}</p>
+              <span>WASD</span>
+            </div>
+          )}
+          {!p2KeysTouched && (
+            <div className="keyboard-right-checkmark">
+              <span>Awaiting Movement</span>
+              <p>{emoji.waiting}</p>
+              <span>ArrowKeys</span>
+            </div>
+          )}
+        </div>
+      )}
       {webState !== 'start' && showLoader && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
