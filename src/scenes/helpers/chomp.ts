@@ -25,7 +25,7 @@ export function updateChompVelocity(game: Game): void {
   if (!isChompInsideCircle(game)) {
     let { x: xNew, y: yNew } = getNormalizedVector(spriteX, spriteY, x, y);
 
-    b.setVelocityX(xNew * 200);
+    b.setVelocityX(xNew * 100);
     b.setVelocityY(yNew * 200);
     return;
   }
@@ -50,7 +50,7 @@ export function updateChompVelocity(game: Game): void {
 
   if (isChompInsideCircle(game)) {
     if (b.touching.down) {
-      b.setVelocityX(xNew * 200);
+      b.setVelocityX(xNew * 500);
       b.setVelocityY(-1 * Math.abs(yNew) * 1000);
     }
   }

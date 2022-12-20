@@ -588,8 +588,8 @@ export default class Game extends Phaser.Scene {
     state: 'idle',
     originX: this.chompX,
     originY: this.chompY,
-    radius: 100,
-    percentFramesJump: 0.008,
+    radius: 150,
+    percentFramesJump: 0.025,
     NUM_LINKS: 8,
     links: [],
     block: {
