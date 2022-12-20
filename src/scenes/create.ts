@@ -53,6 +53,15 @@ export function create(game: Game) {
 }
 
 export function createChomp(game: Game): void {
+  let c = game.chomp;
+  let b = c.block;
+  b.sprite = game.physics.add.sprite(b.x, b.y, 'chomp_block');
+  b.sprite.setScale(1);
+  b.sprite.body.allowGravity = false;
+  b.sprite.setBounce(0);
+  b.sprite.setOrigin(0.5, 1);
+  b.sprite.setImmovable(true);
+  game.physics.add.collider(c.block.sprite, game.PLATFORMS);
   var config = {
     key: 'chompanimation',
     frames: game.anims.generateFrameNumbers('chomp', {
@@ -63,15 +72,17 @@ export function createChomp(game: Game): void {
     frameRate: 20,
     repeat: -1,
   };
-  let c = game.chomp;
 
   game.anims.create(config);
 
-  c.sprite = game.physics.add.sprite(c.x, c.y, 'chomp').play('chompanimation');
+  c.sprite = game.physics.add
+    .sprite(c.originX, c.originY, 'chomp')
+    .play('chompanimation');
   c.sprite.setScale(1);
   c.sprite.allowGravity = true;
   c.sprite.setBounce(0.5);
   c.sprite.setOrigin(0.5, 1);
+  c.sprite.setVelocityX(30);
 
   game.physics.add.collider(c.sprite, game.PLATFORMS);
   game.players.forEach((player, playerIndex) => {

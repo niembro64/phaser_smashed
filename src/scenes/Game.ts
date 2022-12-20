@@ -9,7 +9,7 @@ import {
   SplashRules,
   SplashEndData,
   GameStateWithTime,
-  Vector,
+  xyVector,
   keyboard,
   Debug,
   SmashConfig,
@@ -186,15 +186,15 @@ export default class Game extends Phaser.Scene {
   DEFAULT_PLAYER_HITBACK: any = { x: 0.03, y: -0.03 };
   DEFAULT_ATTACK_HITBACK: any = { x: 0.1, y: -0.1 };
   DEFAULT_ATTACK_DAMAGE: number = 50;
-  BASE_PLAYER_SPEED: Vector = { x: 900, y: 30 };
+  BASE_PLAYER_SPEED: xyVector = { x: 900, y: 30 };
   // BASE_PLAYER_SPEED: Vector = { x: 600, y: 30 };
   BASE_PLAYER_JUMP_PHYSICAL: number = -1000;
   BASE_PLAYER_JUMP_ENERGY: number = -600;
   BASE_PLAYER_JUMP_WALL: number = -1 * this.BASE_PLAYER_JUMP_PHYSICAL;
   BASE_PLAYER_INITIAL_POSITION = { POSITION: { PLAYER_Y: 250 } };
   BASE_PLAYER_GRAVITY: number = 0.1;
-  BASE_PLAYER_HITBACK: Vector = { x: 120, y: 90 };
-  BASE_PLAYER_ATTACKENERGY: Vector = { x: 600, y: 600 };
+  BASE_PLAYER_HITBACK: xyVector = { x: 120, y: 90 };
+  BASE_PLAYER_ATTACKENERGY: xyVector = { x: 600, y: 600 };
 
   ////////////////////////////////
   ////////// PLAYER VARIRABLES
@@ -581,11 +581,19 @@ export default class Game extends Phaser.Scene {
     // },
   ];
 
+  chompX: number = 512;
+  chompY: number = 964;
   chomp: Chomp = {
     sprite: null,
     state: 'idle',
-    x: 500,
-    y: 800,
+    originX: this.chompX,
+    originY: this.chompY,
+    radius: 100,
+    block: {
+      sprite: null,
+      x: this.chompX,
+      y: this.chompY,
+    },
   };
 
   players: Player[] = [];

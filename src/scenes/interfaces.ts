@@ -308,7 +308,7 @@ export interface Hitback {
   y: number;
 }
 
-export interface Vector {
+export interface xyVector {
   x: number;
   y: number;
 }
@@ -396,12 +396,17 @@ export interface Debug {
 export interface Chomp {
   sprite: any | Phaser.GameObjects.Sprite;
   state: ChompState;
+  originX: number;
+  originY: number;
+  radius: number;
+  block: ChompBlock;
+}
+export interface ChompBlock {
+  sprite: any | Phaser.GameObjects.Sprite;
   x: number;
   y: number;
 }
 
 export type ChompState = 'idle' | 'chomping' | 'dead';
 
-export interface ChompData {
-
-}
+export interface ChompData {}

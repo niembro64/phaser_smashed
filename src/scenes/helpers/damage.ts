@@ -1,5 +1,5 @@
 import Game from '../Game';
-import { AttackEnergy, AttackPhysical, Vector, Player } from '../interfaces';
+import { AttackEnergy, AttackPhysical, xyVector, Player } from '../interfaces';
 import { hitbackFly } from './movement';
 import {
   getHasGameDurationPassedAttack,
@@ -197,7 +197,7 @@ export function setResetDamage(player: Player): void {
 export function getNormalizedVectorAP(
   attack: AttackEnergy | AttackPhysical,
   player: Player
-): Vector {
+): xyVector {
   let newX = player.char.sprite.x - attack.sprite.x;
   let newY = player.char.sprite.y - attack.sprite.y;
   let newRatio = Math.sqrt(newX * newX + newY * newY);
@@ -210,7 +210,7 @@ export function getNormalizedVector(
   startY: number,
   endX: number,
   endY: number
-): Vector {
+): xyVector {
   let newX = endX - startX;
   let newY = endY - startY;
   let newRatio = Math.sqrt(newX * newX + newY * newY);

@@ -1,5 +1,6 @@
 import Game from '../Game';
 import { updateCamera } from '../helpers/camera';
+import { updateChomp } from '../helpers/chomp';
 import { updateDeathsAndKillsMatrices } from '../helpers/damage';
 import {
   updateKeepObjectsFromFallingLikeCrazy,
@@ -37,6 +38,7 @@ export function updateGameStatePlay(
   updateDeathsAndKillsMatrices(game);
   updateKeepObjectsFromFallingLikeCrazy(game);
   updateCirclesLocations(game);
+  updateChomp(game);
   updateTable(game);
 
   // UPDATE PLAYERS
