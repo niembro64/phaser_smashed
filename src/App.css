@@ -1250,7 +1250,7 @@ body {
 
 .keyboard-explainer {
   position: absolute;
-  top: 10%;
+  top: 20%;
   left: 5%;
   width: 50%;
   height: 25%;
@@ -1271,50 +1271,49 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+  overflow: visible;
 }
 
 .keyboard-left-checkmark {
   position: absolute;
-  top: 10%;
-  left: 5%;
-  width: 40%;
-  height: 70%;
+  top: -30%;
+  left: 2%;
+  width: 47%;
+  height: 20%;
+  padding: 5%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   color: white;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
 
-  border-radius: var(--border-radius-small);
+  border-radius: var(--border-radius-big);
 }
 
 .keyboard-right-checkmark {
   position: absolute;
-  top: 10%;
-  right: 5%;
-  width: 40%;
-  height: 70%;
+  top: -30%;
+  right: 2%;
+  width: 47%;
+  height: 20%;
+  padding: 5%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   color: white;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
 
-  border-radius: var(--border-radius-small);
+  border-radius: var(--border-radius-big);
 }
 
 .keyboard-right-checkmark > span,
@@ -1323,9 +1322,46 @@ body {
   font-weight: normal;
 }
 
-/* .keyboard-image {
+.small-spinner {
   position: relative;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-} */
+  width: 20%;
+  height: 20%;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 10px solid white;
+  border-radius: 50%;
+  width: 10%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  margin: 0 3% 0 3%;
+
+  animation: spinnerAnimation 1s infinite linear;
+}
+
+.ss-blue {
+  border: 10px solid #0078d7;
+  background-color: #0078d7;
+  animation-delay: 0.5s;
+}
+.ss-red {
+  border: 10px solid #e81224;
+  background-color: #e81224;
+}
+
+@keyframes spinnerAnimation {
+  0% {
+    transform: rotate(0deg) rotateX(-205deg) rotateY(25deg);
+  }
+  33% {
+    transform: rotate(20deg) rotateX(-50deg) rotateY(250deg);
+  }
+  66% {
+    transform: rotate(5deg) rotateX(-10deg) rotateY(25deg);
+  }
+  100% {
+    transform: rotate(0deg) rotateX(-205deg) rotateY(25deg);
+  }
+}

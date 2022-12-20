@@ -622,16 +622,16 @@ function Play() {
         <div className="keyboard-explainer">
           {!p1KeysTouched && (
             <div className="keyboard-left-checkmark">
-              <span>Awaiting Movement</span>
-              <p>{emoji.waiting}</p>
+              <span>Awaiting</span>
+              <div className="small-spinner ss-red"></div>
               <span>WASD</span>
             </div>
           )}
           {!p2KeysTouched && (
             <div className="keyboard-right-checkmark">
-              <span>Awaiting Movement</span>
-              <p>{emoji.waiting}</p>
-              <span>ArrowKeys</span>
+              <span>Awaiting</span>
+              <div className="small-spinner ss-blue"></div>
+              <span>Arrows</span>
             </div>
           )}
         </div>
