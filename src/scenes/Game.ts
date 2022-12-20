@@ -590,6 +590,8 @@ export default class Game extends Phaser.Scene {
     originY: this.chompY,
     radius: 100,
     percentFramesJump: 0.008,
+    NUM_LINKS: 8,
+    links: [],
     block: {
       sprite: null,
       x: this.chompX,

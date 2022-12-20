@@ -217,3 +217,15 @@ export function getNormalizedVector(
 
   return { x: newX / newRatio, y: newY / newRatio };
 }
+
+export function getVector(
+  startX: number,
+  startY: number,
+  endX: number,
+  endY: number
+): xyVector {
+  let newX = endX - startX;
+  let newY = endY - startY;
+
+  return { x: newX, y: newY };
+}

@@ -62,6 +62,18 @@ export function createChomp(game: Game): void {
   b.sprite.setOrigin(0.5, 1);
   b.sprite.setImmovable(true);
   game.physics.add.collider(c.block.sprite, game.PLATFORMS);
+
+  for (let i = 0; i < c.NUM_LINKS; i++) {
+    c.links.push({ sprite: null });
+    c.links[i].sprite = game.physics.add.sprite(b.x, b.y, 'chomp_link');
+    c.links[i].sprite.setScale(1);
+    c.links[i].sprite.body.allowGravity = false;
+    c.links[i].sprite.setBounce(0);
+    c.links[i].sprite.setOrigin(0.5, 1);
+    c.links[i].sprite.setImmovable(true);
+    game.physics.add.collider(c.links[i].sprite, game.PLATFORMS);
+  }
+
   var config = {
     key: 'chompanimation',
     frames: game.anims.generateFrameNumbers('chomp', {

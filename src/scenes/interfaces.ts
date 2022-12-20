@@ -400,12 +400,18 @@ export interface Chomp {
   originY: number;
   radius: number;
   percentFramesJump: number;
+  NUM_LINKS: number;
+  links: ChompLink[];
   block: ChompBlock;
 }
 export interface ChompBlock {
   sprite: any | Phaser.GameObjects.Sprite;
   x: number;
   y: number;
+}
+
+export interface ChompLink {
+  sprite: any | Phaser.GameObjects.Sprite;
 }
 
 export type ChompState = 'idle' | 'chomping' | 'dead';

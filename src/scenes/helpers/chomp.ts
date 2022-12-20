@@ -1,6 +1,6 @@
 import { Vector } from 'matter';
 import Game from '../Game';
-import { getNormalizedVector } from './damage';
+import { getNormalizedVector, getVector } from './damage';
 
 export function updateChompSpriteDirection(game: Game): void {
   let c = game.chomp;
@@ -87,4 +87,27 @@ export function getCircleYfromX(x: number, game: Game): number {
 export function updateChomp(game: Game): void {
   updateChompSpriteDirection(game);
   updateChompVelocity(game);
+  updateChompLinkPositions(game);
+}
+
+export function updateChompLinkPositions(game: Game): void {
+  let c = game.chomp;
+  let endX = c.sprite.x;
+  let endY = c.sprite.y;
+  let b = c.sprite.body;
+  let startX = c.block.x;
+  let startY = c.block.y;
+  let links = c.links;
+  let numLinks = links.length;
+
+  let { x, y } = getVector(startX, startY, endX, endY);
+
+  links.forEach((link, i) => {
+    let percent = (i + 1) / numLinks;
+    let newX = startX + x * percent;
+    let newY = startY + y * percent;
+
+    link.sprite.x = newX;
+    link.sprite.y = newY;
+  });
 }
