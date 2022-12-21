@@ -596,6 +596,10 @@ function Play() {
       setP2KeysTouched(true);
     }
 
+    if (webState !== 'start') {
+      return;
+    }
+
     switch (k) {
       case 'Enter':
         onClickStartStartButton();
@@ -627,7 +631,7 @@ function Play() {
       window.addEventListener<'keydown'>('keydown', onEventKeyDown);
     }
     if (webState === 'start') {
-      window.removeEventListener<'keydown'>('keydown', (event) => {});
+      window.removeEventListener<'keydown'>('keydown', onEventKeyDown);
     }
   }, [webState]);
 
