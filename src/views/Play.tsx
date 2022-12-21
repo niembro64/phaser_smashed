@@ -35,8 +35,6 @@ import {
   emoji,
 } from '../scenes/interfaces';
 
-
-
 function Play() {
   let myPhaser: any = useRef(null);
 
@@ -578,16 +576,60 @@ function Play() {
   const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
   const [bothKeysTouched, setBothKeysTouched] = useState<boolean>(false);
 
-  window.addEventListener('keydown', (event) => {
-    console.log('event.key', event.key);
+  const onClickOscura = (index: number) => {
+    onClickSetInputArrayElement(
+      index,
+      inputArray[index] + 1 > 2
+        ? (0 as InputType)
+        : ((inputArray[index] + 1) as InputType)
+    );
+  };
 
-    if (p1Keys.includes(event.key)) {
+  const onEventKeyDown = (event: any) => {
+    let k = event.key;
+    console.log('event.key', k);
+
+    if (p1Keys.includes(k)) {
       setP1KeysTouched(true);
     }
-    if (p2Keys.includes(event.key)) {
+    if (p2Keys.includes(k)) {
       setP2KeysTouched(true);
     }
-  });
+
+    switch (k) {
+      case 'Enter':
+        onClickStartStartButton();
+        break;
+      case 'a':
+        onClickOscura(0);
+        break;
+      case 's':
+        onClickOscura(1);
+        break;
+      case 'd':
+        onClickOscura(2);
+        break;
+      case 'f':
+        onClickOscura(3);
+        break;
+      case 'j':
+        break;
+      case 'k':
+        break;
+      case 'l':
+        break;
+      case ';':
+    }
+  };
+
+  useEffect(() => {
+    if (webState === 'play') {
+      window.addEventListener<'keydown'>('keydown', onEventKeyDown);
+    }
+    if (webState === 'start') {
+      window.removeEventListener<'keydown'>('keydown', (event) => {});
+    }
+  }, [webState]);
 
   const [numKeyboards, setNumKeyboards] = useState<number>(0);
 
@@ -794,12 +836,13 @@ function Play() {
                     <div
                       className="b-oscuro b-black"
                       onClick={() => {
-                        onClickSetInputArrayElement(
-                          cPlayerIndex,
-                          inputArray[cPlayerIndex] + 1 > 2
-                            ? (0 as InputType)
-                            : ((inputArray[cPlayerIndex] + 1) as InputType)
-                        );
+                        onClickOscura(cPlayerIndex);
+                        // onClickSetInputArrayElement(
+                        //   cPlayerIndex,
+                        //   inputArray[cPlayerIndex] + 1 > 2
+                        //     ? (0 as InputType)
+                        //     : ((inputArray[cPlayerIndex] + 1) as InputType)
+                        // );
                       }}
                     >
                       <span>Off</span>
@@ -812,12 +855,13 @@ function Play() {
                     <div
                       className="b-oscuro b-dark"
                       onClick={() => {
-                        onClickSetInputArrayElement(
-                          cPlayerIndex,
-                          inputArray[cPlayerIndex] + 1 > 2
-                            ? (0 as InputType)
-                            : ((inputArray[cPlayerIndex] + 1) as InputType)
-                        );
+                        onClickOscura(cPlayerIndex);
+                        // onClickSetInputArrayElement(
+                        //   cPlayerIndex,
+                        //   inputArray[cPlayerIndex] + 1 > 2
+                        //     ? (0 as InputType)
+                        //     : ((inputArray[cPlayerIndex] + 1) as InputType)
+                        // );
                       }}
                     >
                       <span>Gamepad</span>
@@ -837,12 +881,13 @@ function Play() {
                     <div
                       className="b-oscuro b-dark"
                       onClick={() => {
-                        onClickSetInputArrayElement(
-                          cPlayerIndex,
-                          inputArray[cPlayerIndex] + 1 > 2
-                            ? (0 as InputType)
-                            : ((inputArray[cPlayerIndex] + 1) as InputType)
-                        );
+                        onClickOscura(cPlayerIndex);
+                        // onClickSetInputArrayElement(
+                        //   cPlayerIndex,
+                        //   inputArray[cPlayerIndex] + 1 > 2
+                        //     ? (0 as InputType)
+                        //     : ((inputArray[cPlayerIndex] + 1) as InputType)
+                        // );
                       }}
                     >
                       <span>Keyboard</span>

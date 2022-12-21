@@ -52,7 +52,7 @@ export function updateChompVelocity(game: Game): void {
     randomY
   );
 
-  console.log('xNew: ', xNew, 'yNew: ', yNew, '');
+  // console.log('xNew: ', xNew, 'yNew: ', yNew, '');
 
   if (isChompInsideCircle(game)) {
     if (b.touching.down) {
