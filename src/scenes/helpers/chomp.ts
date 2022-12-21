@@ -34,7 +34,7 @@ export function updateChompVelocity(game: Game): void {
     (1 - getClosestDistance(game) / game.SCREEN_DIMENSIONS.WIDTH) * 0.9,
     15
   );
-  console.log('c.percentFramesJump', c.percentFramesJump);
+  // console.log('c.percentFramesJump', c.percentFramesJump);
 
   if (Math.random() > c.percentFramesJump) {
     return;

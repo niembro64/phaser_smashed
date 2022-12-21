@@ -41,7 +41,7 @@ function Play() {
   let myPhaser: any = useRef(null);
 
   const [debug, setDebug] = useState<Debug>({
-    DevMode: true,
+    DevMode: false,
     Level: 6, //0123456
     ModeInfinity: true,
     ModeInfinityShots: 7,

@@ -2,7 +2,7 @@ import Game from '../Game';
 import { Loc } from '../interfaces';
 
 export function updateCamera(game: Game): void {
-  if (!game.debug.Camera) {
+  if (game.debug.DevMode || !game.debug.Camera) {
     return;
   }
   var cPlayer = getCameraPlayerStatus(game);
