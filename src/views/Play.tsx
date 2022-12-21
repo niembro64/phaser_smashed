@@ -595,7 +595,7 @@ function Play() {
         : ((inputArray[index] + 1) as InputType)
     );
 
-    // console.log('index', index, 'inputArray', inputArray);
+    console.log('index', index, 'inputArray', inputArray);
   };
 
   // const onEventKeyUp = (event: any) => {
