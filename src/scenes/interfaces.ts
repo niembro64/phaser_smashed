@@ -404,6 +404,7 @@ export interface Chomp {
   MASS: number;
   links: ChompLink[];
   block: ChompBlock;
+  soundAttack: any;
 }
 export interface ChompBlock {
   sprite: any | Phaser.GameObjects.Sprite;
@@ -418,3 +419,27 @@ export interface ChompLink {
 export type ChompState = 'idle' | 'chomping' | 'dead';
 
 export interface ChompData {}
+
+export const emoji = {
+  keyboardBlack: '⌨',
+  keyboardWhite: '⌨️',
+  gamepad: '🎮',
+  greenCheck: '✔️',
+  caution: '🚧',
+  redX: '❌',
+  gear: '⚙️',
+  cloud: '☁',
+  cloudWhite: '☁️',
+  beer: '🍺',
+  star: '⭐',
+  skullAndCrossbones: '☠️',
+  skull: '💀',
+  punch: '👊',
+  brokenHeart: '💔',
+  back: '🔙',
+  forward: '🔜',
+  restart: '🔄',
+  waiting: '⏳',
+};
+
+//🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃

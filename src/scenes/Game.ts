@@ -16,9 +16,9 @@ import {
   InputType,
   CharacterType,
   Chomp,
+  emoji,
 } from './interfaces';
 import { preload } from './preload';
-import { emoji } from '../views/Play';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
 
 export default class Game extends Phaser.Scene {
@@ -98,6 +98,7 @@ export default class Game extends Phaser.Scene {
     BGM_DREAM: 'kirbyloop.wav',
     BGM_MONKEY: '/na/monkeys2.wav',
     BGM_ROYKSOP: '/na/royksop_macumba_05loop.wav',
+    CHAIN_CHOMP_ATTACK: '/chain_chomp_sound.wav',
   };
 
   SOUND_INTRO: any;
@@ -598,6 +599,7 @@ export default class Game extends Phaser.Scene {
       x: this.chompX,
       y: this.chompY,
     },
+    soundAttack: null,
   };
 
   players: Player[] = [];

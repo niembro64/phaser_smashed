@@ -32,37 +32,16 @@ import {
   SmashConfig,
   ButtonName,
   CharacterMove,
+  emoji,
 } from '../scenes/interfaces';
 
-export const emoji = {
-  keyboardBlack: '⌨',
-  keyboardWhite: '⌨️',
-  gamepad: '🎮',
-  greenCheck: '✔️',
-  caution: '🚧',
-  redX: '❌',
-  gear: '⚙️',
-  cloud: '☁',
-  cloudWhite: '☁️',
-  beer: '🍺',
-  star: '⭐',
-  skullAndCrossbones: '☠️',
-  skull: '💀',
-  punch: '👊',
-  brokenHeart: '💔',
-  back: '🔙',
-  forward: '🔜',
-  restart: '🔄',
-  waiting: '⏳',
-};
 
-//🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃
 
 function Play() {
   let myPhaser: any = useRef(null);
 
   const [debug, setDebug] = useState<Debug>({
-    DevMode: false,
+    DevMode: true,
     Level: 6, //0123456
     ModeInfinity: true,
     ModeInfinityShots: 7,
@@ -636,7 +615,12 @@ function Play() {
         webState !== 'start' &&
         numKeyboards === 2 &&
         !bothKeysTouched && (
-          <div className="keyboard-explainer">
+          <div
+            className="keyboard-explainer-double"
+            onClick={() => {
+              onClickPlayNavButtons('Controls');
+            }}
+          >
             {!p1KeysTouched && (
               <div className="keyboard-left-checkmark">
                 <span>Awaiting</span>
@@ -657,7 +641,12 @@ function Play() {
         webState !== 'start' &&
         numKeyboards === 1 &&
         !p1KeysTouched && (
-          <div className="keyboard-explainer-single">
+          <div
+            className="keyboard-explainer-single"
+            onClick={() => {
+              onClickPlayNavButtons('Controls');
+            }}
+          >
             {!p1KeysTouched && (
               <div className="keyboard-left-checkmark">
                 <span>Awaiting</span>

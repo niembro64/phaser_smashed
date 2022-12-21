@@ -55,6 +55,10 @@ export function preload(game: Game): void {
   game.load.audio('readyRepeat1', pathSounds + game.FILE_SOUNDS.W1);
   game.load.audio('readyRepeat2', pathSounds + game.FILE_SOUNDS.W2);
   game.load.audio('readyRepeat3', pathSounds + game.FILE_SOUNDS.W3);
+  game.load.audio(
+    'chainChompAttack',
+    pathSounds + game.FILE_SOUNDS.CHAIN_CHOMP_ATTACK
+  );
   // this.load.audio(
   //   "readyRepeat0",
   //   pathSounds + this.FILE_SOUNDS.READY_REPEAT0

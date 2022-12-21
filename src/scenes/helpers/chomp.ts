@@ -1,6 +1,6 @@
 import { Vector } from 'matter';
 import Game from '../Game';
-import { getNormalizedVector, getVector } from './damage';
+import { getDistance, getNormalizedVector, getVector } from './damage';
 
 export function updateChompSpriteDirection(game: Game): void {
   let c = game.chomp;
@@ -30,6 +30,12 @@ export function updateChompVelocity(game: Game): void {
     return;
   }
 
+  c.percentFramesJump = Math.pow(
+    (1 - getClosestDistance(game) / game.SCREEN_DIMENSIONS.WIDTH) * 0.9,
+    15
+  );
+  console.log('c.percentFramesJump', c.percentFramesJump);
+
   if (Math.random() > c.percentFramesJump) {
     return;
   }
@@ -50,6 +56,7 @@ export function updateChompVelocity(game: Game): void {
 
   if (isChompInsideCircle(game)) {
     if (b.touching.down) {
+      c.soundAttack.play();
       b.setVelocityX(xNew * 500);
       b.setVelocityY(-1 * Math.abs(yNew + 0.3) * 1000);
     }
@@ -111,3 +118,50 @@ export function updateChompLinkPositions(game: Game): void {
     link.sprite.y = newY;
   });
 }
+
+export function getClosestDistance(game: Game): number {
+  let c = game.chomp;
+  let b = c.sprite.body;
+  let shortestDistance = Infinity;
+
+  // find closest player
+  game.players.forEach((player, playerIndex) => {
+    let playerX = player.char.sprite.body.x;
+    let playerY = player.char.sprite.body.y;
+
+    let distance = getDistance(b.x, b.y, playerX, playerY);
+
+    if (distance < shortestDistance) {
+      shortestDistance = distance;
+    }
+  });
+
+  return shortestDistance;
+}
+
+// export function getVolumeOfChainChomp(game: Game): number {
+//   let c = game.chomp;
+//   let b = c.sprite.body;
+//   let volume = 0;
+
+//   let chompX = b.x;
+//   let chompY = b.y;
+
+//   let shortestDistance = Infinity;
+
+//   // find closest player
+//   game.players.forEach((player, playerIndex) => {
+//     let playerX = player.char.sprite.body.x;
+//     let playerY = player.char.sprite.body.Y;
+
+//     let distance = getDistance(chompX, chompY, playerX, playerY);
+
+//     if (distance < shortestDistance) {
+//       shortestDistance = distance;
+//     }
+//   });
+
+//   volume = game.SCREEN_DIMENSIONS.WIDTH - shortestDistance;
+
+//   return volume;
+// }

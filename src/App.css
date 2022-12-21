@@ -1262,7 +1262,7 @@ body {
   border-radius: var(--border-radius-small);
 }
 
-.keyboard-explainer {
+.keyboard-explainer-double {
   position: absolute;
   top: 20%;
   left: 5%;
@@ -1287,6 +1287,8 @@ body {
 
   overflow: visible;
   z-index: 1;
+
+  cursor: pointer;
 }
 .keyboard-explainer-single {
   position: absolute;
@@ -1313,6 +1315,8 @@ body {
 
   overflow: visible;
   z-index: 1;
+
+  cursor: pointer;
 }
 
 .keyboard-left-checkmark {

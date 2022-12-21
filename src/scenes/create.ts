@@ -56,6 +56,8 @@ export function createChomp(game: Game): void {
   let c = game.chomp;
   let b = c.block;
 
+  c.soundAttack = game.sound.add('chainChompAttack', { volume: 0.2 });
+
   // b.sprite = game.physics.add.sprite(b.x, b.y, 'chomp_block');
   // b.sprite.setScale(1);
   // b.sprite.body.allowGravity = false;

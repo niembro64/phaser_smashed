@@ -1,6 +1,5 @@
-import { emoji } from '../../views/Play';
 import Game from '../Game';
-import { SplashName } from '../interfaces';
+import { emoji, SplashName } from '../interfaces';
 import { updateNumShotsLeft } from './drinking';
 import { getIsPlayerReady } from './pad';
 import { pauseReadySoundPlayer, playReadySoundPlayer } from './sound';
