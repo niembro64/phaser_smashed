@@ -1382,18 +1382,19 @@ body {
   align-items: center;
   z-index: 100;
   margin: 0 3% 0 3%;
-
-  animation: spinnerAnimation 1s infinite linear;
 }
 
 .ss-blue {
   border: 10px solid #0078d7;
   background-color: #0078d7;
   animation-delay: 0.5s;
+  animation: spinnerAnimation 3s infinite linear;
+  animation-delay: 1.5s;
 }
 .ss-red {
   border: 10px solid #e81224;
   background-color: #e81224;
+  animation: spinnerAnimation 3s infinite linear;
 }
 
 @keyframes spinnerAnimation {
