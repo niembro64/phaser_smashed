@@ -649,9 +649,13 @@ function Play() {
     }
   };
 
+  // try adding an event listner after every keypress and deleting it after
+
   useEffect(() => {
     if (webState === 'start') {
-      window.addEventListener<'keyup'>('keyup', onEventKeyUp);
+      window.addEventListener<'keyup'>('keyup', (event) => {
+        onEventKeyUp(event);
+      });
       // window.addEventListener<'keyup'>('keyup', onEventKeyUp);
     }
     if (webState === 'play') {
