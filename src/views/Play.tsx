@@ -33,6 +33,7 @@ import {
   ButtonName,
   CharacterMove,
   emoji,
+  Keydown,
 } from '../scenes/interfaces';
 
 function Play() {
@@ -296,7 +297,7 @@ function Play() {
     let newInputArray = [...inputArray];
     newInputArray[playerIndex] = i;
     setInputArray([...newInputArray]);
-    console.log('newInputArray', newInputArray);
+    // console.log('newInputArray', newInputArray);
   };
 
   const bamPlay = (): void => {
@@ -571,6 +572,16 @@ function Play() {
 
   const p1Keys: string[] = ['w', 'a', 's', 'd'];
   const p2Keys: string[] = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
+  // const [keydown, setKeydown] = useState<Keydown>('x');
+  let kPrev = 'x';
+  let kCurr = 'x';
+  // const [keydownS, setKeydownS] = useState<boolean>(false);
+  // const [keydownD, setKeydownD] = useState<boolean>(false);
+  // const [keydownF, setKeydownF] = useState<boolean>(false);
+  // const [keydownJ, setKeydownJ] = useState<boolean>(false);
+  // const [keydownK, setKeydownK] = useState<boolean>(false);
+  // const [keydownL, setKeydownL] = useState<boolean>(false);
+  // const [keydownSemi, setKeydownSemi] = useState<boolean>(false);
 
   const [p1KeysTouched, setP1KeysTouched] = useState<boolean>(false);
   const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
@@ -583,24 +594,36 @@ function Play() {
         ? (0 as InputType)
         : ((inputArray[index] + 1) as InputType)
     );
+
+    // console.log('index', index, 'inputArray', inputArray);
   };
 
-  const onEventKeyDown = (event: any) => {
-    let k = event.key;
-    console.log('event.key', k);
+  // const onEventKeyUp = (event: any) => {
+  //   kPrev = 'x';
+  //   console.log('kPrev', kPrev, 'kCurr', kCurr);
+  // };
 
-    if (p1Keys.includes(k)) {
-      setP1KeysTouched(true);
-    }
-    if (p2Keys.includes(k)) {
-      setP2KeysTouched(true);
-    }
-
+  const onEventKeyUp = (event: any) => {
     if (webState !== 'start') {
       return;
     }
+    kCurr = event.key;
 
-    switch (k) {
+    // kPrev = kCurr;
+    // if (kCurr === kPrev) {
+    //   return;
+    // }
+
+    console.log('kPrev', kPrev, 'kCurr', kCurr);
+
+    if (p1Keys.includes(kCurr)) {
+      setP1KeysTouched(true);
+    }
+    if (p2Keys.includes(kCurr)) {
+      setP2KeysTouched(true);
+    }
+
+    switch (kCurr) {
       case 'Enter':
         onClickStartStartButton();
         break;
@@ -627,11 +650,13 @@ function Play() {
   };
 
   useEffect(() => {
-    if (webState === 'play') {
-      window.addEventListener<'keydown'>('keydown', onEventKeyDown);
-    }
     if (webState === 'start') {
-      window.removeEventListener<'keydown'>('keydown', onEventKeyDown);
+      window.addEventListener<'keyup'>('keyup', onEventKeyUp);
+      // window.addEventListener<'keyup'>('keyup', onEventKeyUp);
+    }
+    if (webState === 'play') {
+      window.removeEventListener<'keyup'>('keyup', onEventKeyUp);
+      // window.removeEventListener<'keyup'>('keyup', onEventKeyUp);
     }
   }, [webState]);
 

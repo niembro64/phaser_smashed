@@ -443,3 +443,5 @@ export const emoji = {
 };
 
 //🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃
+
+export type Keydown = 'a' | 's' | 'd' | 'f' | 'j' | 'k' | 'l' | ';' | 'x';
