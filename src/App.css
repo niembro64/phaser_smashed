@@ -241,6 +241,12 @@ body {
   cursor: pointer;
   border: 2px solid black;
 }
+#option:hover {
+  background-color: rgba(128, 128, 128, 0.3);
+}
+#option:active {
+  background-color: rgba(128, 128, 128, 0.4);
+}
 .debug-value {
   width: 3vw;
   display: flex;
