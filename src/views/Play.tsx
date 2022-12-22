@@ -1,26 +1,26 @@
-import { useEffect, useRef, useState } from 'react';
-import Phaser from 'phaser';
-import Game from '../scenes/Game';
-import '../App.css';
-import '@fontsource/press-start-2p';
+import { useEffect, useRef, useState } from "react";
+import Phaser from "phaser";
+import Game from "../scenes/Game";
+import "../App.css";
+import "@fontsource/press-start-2p";
 
-import { setGameState } from '../scenes/helpers/state';
-import useSound from 'use-sound';
+import { setGameState } from "../scenes/helpers/state";
+import useSound from "use-sound";
 // import { Howl } from "howler";
 // import { Howl, HowlOptions, HowlCallback, HowlErrorCallback } from "howler";
 
 // import ReactHowler from 'react-howler';
 
 // @ts-ignore
-import importedWoah from '../sounds/BlackBetty_Woah.mp3';
+import importedWoah from "../sounds/BlackBetty_Woah.mp3";
 // @ts-ignore
-import importedBambalam from '../sounds/BlackBetty_Bambalam.mp3';
+import importedBambalam from "../sounds/BlackBetty_Bambalam.mp3";
 // @ts-ignore
-import importedTrance from '../sounds/trance.wav';
+import importedTrance from "../sounds/trance.wav";
 // @ts-ignore
-import importedStartSound from '../sounds/start.wav';
+import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
-import importedBlipSound from '../sounds/game-start-liquid.wav';
+import importedBlipSound from "../sounds/game-start-liquid.wav";
 
 import {
   CharacterType,
@@ -34,7 +34,7 @@ import {
   CharacterMove,
   emoji,
   Keydown,
-} from '../scenes/interfaces';
+} from "../scenes/interfaces";
 
 function Play() {
   let myPhaser: any = useRef(null);
@@ -79,7 +79,7 @@ function Play() {
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
   const [numClicks, setNumClicks] = useState<number>(0);
-  const [webState, setWebState] = useState<WebState>('start');
+  const [webState, setWebState] = useState<WebState>("start");
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [inputArray, setInputArray] = useState<InputType[]>([0, 2, 2, 0]);
 
@@ -88,41 +88,41 @@ function Play() {
       {
         characterId: 2,
         scale: 1,
-        name: 'Pikachu',
+        name: "Pikachu",
       },
       {
         characterId: 0,
         scale: 0.9,
-        name: 'Mario',
+        name: "Mario",
       },
       {
         characterId: 1,
         scale: 0.9,
-        name: 'Link',
+        name: "Link",
       },
       {
         characterId: 3,
         scale: 0.7,
-        name: 'Kirby',
+        name: "Kirby",
       },
     ],
   });
 
   // always keep Chez and BlackChez at positions 4 and 5
   const smashConfigScaleArray: PlayerConfig[] = [
-    { characterId: 0, scale: 0.9, name: 'Mario' },
-    { characterId: 1, scale: 0.9, name: 'Link' },
-    { characterId: 2, scale: 1, name: 'Pikachu' },
-    { characterId: 3, scale: 0.7, name: 'Kirby' },
-    { characterId: 4, scale: 1.2, name: 'Chez' },
-    { characterId: 5, scale: 1.2, name: 'BlackChez' },
-    { characterId: 6, scale: 0.6, name: 'GreenKoopa' },
-    { characterId: 7, scale: 0.6, name: 'RedKoopa' },
-    { characterId: 8, scale: 0.6, name: 'BlueKoopa' },
+    { characterId: 0, scale: 0.9, name: "Mario" },
+    { characterId: 1, scale: 0.9, name: "Link" },
+    { characterId: 2, scale: 1, name: "Pikachu" },
+    { characterId: 3, scale: 0.7, name: "Kirby" },
+    { characterId: 4, scale: 1.2, name: "Chez" },
+    { characterId: 5, scale: 1.2, name: "BlackChez" },
+    { characterId: 6, scale: 0.6, name: "GreenKoopa" },
+    { characterId: 7, scale: 0.6, name: "RedKoopa" },
+    { characterId: 8, scale: 0.6, name: "BlueKoopa" },
   ];
   let config: Phaser.Types.Core.GameConfig = {
     transparent: true,
-    title: 'Smashed',
+    title: "Smashed",
     antialias: true,
     pixelArt: false,
     scale: {
@@ -132,13 +132,13 @@ function Play() {
       height: 1080,
     },
     type: Phaser.AUTO,
-    parent: 'phaser-container',
-    backgroundColor: '#00000055',
+    parent: "phaser-container",
+    backgroundColor: "#00000055",
     input: {
       gamepad: true,
     },
     physics: {
-      default: 'arcade',
+      default: "arcade",
       arcade: {
         gravity: { y: 3000 },
         debug: debug.DevMode,
@@ -150,21 +150,21 @@ function Play() {
   let setTimeoutQuotesLengthReStart: number = 1500;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
-    { name: 'Breezy', text: 'The turtle will die.' },
-    { name: 'TR3', text: 'Smashed.' },
-    { name: 'Chadams', text: 'Two shots... two shots.' },
-    { name: 'Eddie-Z', text: "He'll do it again, yeah!" },
+    { name: "Breezy", text: "The turtle will die." },
+    { name: "TR3", text: "Smashed." },
+    { name: "Chadams", text: "Two shots... two shots." },
+    { name: "Eddie-Z", text: "He'll do it again, yeah!" },
     {
-      name: 'TR3',
-      text: 'How am I supposed to make more than that... shit... happen?',
+      name: "TR3",
+      text: "How am I supposed to make more than that... shit... happen?",
     },
     {
-      name: 'DDj',
+      name: "DDj",
       text: "It's safe to say we're not going to the bars tonite.",
     },
     {
-      name: 'DDj',
-      text: '...yes you are.',
+      name: "DDj",
+      text: "...yes you are.",
     },
     // { name: 'Chadams', text: 'AAAYYYUUUGGGGHHHH!!' },
     // { name: 'Chadams', text: 'Spike Enerjeaoah.' },
@@ -188,9 +188,9 @@ function Play() {
   const componentPseudoLoad = useRef(true);
   const intervalClock: any = useRef(null);
 
-  const p1Keys: string[] = ['w', 'a', 's', 'd'];
-  const p2Keys: string[] = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
-  let k = 'x';
+  const p1Keys: string[] = ["w", "a", "s", "d"];
+  const p2Keys: string[] = ["ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
+  let k = "x";
 
   const [p1KeysTouched, setP1KeysTouched] = useState<boolean>(false);
   const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
@@ -201,7 +201,7 @@ function Play() {
   const onClickStartStartButton = () => {
     trance.pause();
     startSound();
-    setWebState('play');
+    setWebState("play");
 
     let players = [...smashConfig.players];
     // let newPlayers: {
@@ -248,9 +248,9 @@ function Play() {
     }
     setTimeout(() => {
       myPhaser.current = new Phaser.Game(config);
-      myPhaser.current.registry.set('parentContext', Play);
-      myPhaser.current.registry.set('smashConfig', newSmashConfig);
-      myPhaser.current.registry.set('debug', debug);
+      myPhaser.current.registry.set("parentContext", Play);
+      myPhaser.current.registry.set("smashConfig", newSmashConfig);
+      myPhaser.current.registry.set("debug", debug);
     }, setTimeoutQuotesLengthStart);
 
     setShowLoaderIntervalFunction();
@@ -260,7 +260,7 @@ function Play() {
     setShowLoader(true);
     const myInterval = setInterval(() => {
       console.log(
-        'myPhaser.current?.scene?.keys?.game?.loaded',
+        "myPhaser.current?.scene?.keys?.game?.loaded",
         myPhaser?.current?.scene?.keys?.game?.loaded
       );
       if (myPhaser?.current?.scene?.keys?.game?.loaded) {
@@ -326,7 +326,7 @@ function Play() {
       playNumber.current += 1;
       trance.play();
       trance.addEventListener(
-        'ended',
+        "ended",
         () => {
           setFirstCharacterSlot(4);
         },
@@ -339,7 +339,7 @@ function Play() {
   };
 
   const setFirstCharacterSlot = (charId: CharacterType): void => {
-    if (debug.AllowCharsChez || webState === 'play') {
+    if (debug.AllowCharsChez || webState === "play") {
       return;
     }
     if (charId === 4) {
@@ -382,7 +382,7 @@ function Play() {
 
   function ensureTypeCharacterId<CharacterId>(
     argument: CharacterId | undefined | null,
-    message: string = 'This value was promised to be there.'
+    message: string = "This value was promised to be there."
   ): CharacterId {
     if (argument === undefined || argument === null) {
       throw new TypeError(message);
@@ -393,7 +393,7 @@ function Play() {
 
   function ensureTypeCharacterName<CharacterName>(
     argument: CharacterName | undefined | null,
-    message: string = 'This value was promised to be there.'
+    message: string = "This value was promised to be there."
   ): CharacterName {
     if (argument === undefined || argument === null) {
       throw new TypeError(message);
@@ -453,36 +453,36 @@ function Play() {
   const [showOptions, setShowOptions] = useState(false);
 
   const characterMoves: CharacterMove[] = [
-    { button: 'D-Pad', move: 'Movement', status: emoji.greenCheck },
-    { button: 'Ground + X', move: 'Jump', status: emoji.greenCheck },
-    { button: 'Air + X', move: 'Jump-Air', status: emoji.greenCheck },
-    { button: 'Air + D-Pad + A', move: 'Jump-Fire', status: emoji.caution },
-    { button: 'Y', move: 'Attack-Energy', status: emoji.greenCheck },
-    { button: 'B', move: 'Attack-Physical', status: emoji.caution },
-    { button: 'Forward + B', move: 'Attack-Smash', status: emoji.redX },
+    { button: "D-Pad", move: "Movement", status: emoji.greenCheck },
+    { button: "Ground + X", move: "Jump", status: emoji.greenCheck },
+    { button: "Air + X", move: "Jump-Air", status: emoji.greenCheck },
+    { button: "Air + D-Pad + A", move: "Jump-Fire", status: emoji.caution },
+    { button: "Y", move: "Attack-Energy", status: emoji.greenCheck },
+    { button: "B", move: "Attack-Physical", status: emoji.caution },
+    { button: "Forward + B", move: "Attack-Smash", status: emoji.redX },
     {
-      button: 'Air + Wall + Forward',
-      move: 'Slide-Wall',
+      button: "Air + Wall + Forward",
+      move: "Slide-Wall",
       status: emoji.greenCheck,
     },
-    { button: 'L + R', move: 'Pause', status: emoji.greenCheck },
-    { button: 'Paused + Any Button', move: 'Ready', status: emoji.greenCheck },
-    { button: 'Paused + All Ready', move: 'UnPause', status: emoji.greenCheck },
+    { button: "L + R", move: "Pause", status: emoji.greenCheck },
+    { button: "Paused + Any Button", move: "Ready", status: emoji.greenCheck },
+    { button: "Paused + All Ready", move: "UnPause", status: emoji.greenCheck },
   ];
 
   const clickPauseParent = () => {
-    if (webState === 'play') {
+    if (webState === "play") {
       if (
         !(
           myPhaser.current.scene.keys.game.gameState.name ===
-            'game-state-paused' ||
+            "game-state-paused" ||
           myPhaser.current?.scene?.keys?.game.gameState.name ===
-            'game-state-first-blood' ||
+            "game-state-first-blood" ||
           myPhaser.current?.scene?.keys?.game.gameState.name ===
-            'game-state-screen-clear'
+            "game-state-screen-clear"
         )
       ) {
-        setGameState(myPhaser.current?.scene?.keys?.game, 'game-state-paused');
+        setGameState(myPhaser.current?.scene?.keys?.game, "game-state-paused");
       }
     }
   };
@@ -503,7 +503,7 @@ function Play() {
     clickPauseParent();
 
     switch (buttonName) {
-      case 'Back':
+      case "Back":
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -511,7 +511,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case 'ReStart':
+      case "ReStart":
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -519,7 +519,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case 'Controls':
+      case "Controls":
         setShowControls(!showControls);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -527,7 +527,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case 'Controllers':
+      case "Controllers":
         setShowControls(false);
         setShowControllers(!showControllers);
         setShowRulesN64(false);
@@ -535,7 +535,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case 'Rules-N64':
+      case "Rules-N64":
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(!showRulesN64);
@@ -543,7 +543,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case 'About':
+      case "About":
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -551,7 +551,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case 'History':
+      case "History":
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -559,7 +559,7 @@ function Play() {
         setShowHistory(!showHistory);
         setShowOptions(false);
         break;
-      case 'Options':
+      case "Options":
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -589,7 +589,54 @@ function Play() {
   const onEventKeyboard = (event: any) => {
     k = event.key;
     switch (webState) {
-      case 'start':
+      case "start":
+        switch (k) {
+          case "Enter":
+            onClickStartStartButton();
+            break;
+          case " ":
+            onClickStartStartButton();
+            break;
+          case "a":
+            onClickRotateSelection(0);
+            break;
+          case "s":
+            onClickRotateSelection(1);
+            break;
+          case "d":
+            onClickRotateSelection(2);
+            break;
+          case "f":
+            onClickRotateSelection(3);
+            break;
+          case "j":
+            onClickOscura(0);
+            break;
+          case "k":
+            onClickOscura(1);
+            break;
+          case "l":
+            onClickOscura(2);
+            break;
+          case ";":
+            onClickOscura(3);
+            break;
+          case "u":
+            onClickRotateSelection(0);
+            break;
+          case "i":
+            onClickRotateSelection(1);
+            break;
+          case "o":
+            onClickRotateSelection(2);
+            break;
+          case "p":
+            onClickRotateSelection(3);
+            break;
+        }
+
+        break;
+      case "play":
         if (p1Keys.includes(k)) {
           setP1KeysTouched(true);
         }
@@ -598,66 +645,21 @@ function Play() {
         }
 
         switch (k) {
-          case 'Enter':
-            onClickStartStartButton();
-            break;
-          case ' ':
-            onClickStartStartButton();
-            break;
-          case 'a':
-            onClickRotateSelection(0);
-            break;
-          case 's':
-            onClickRotateSelection(1);
-            break;
-          case 'd':
-            onClickRotateSelection(2);
-            break;
-          case 'f':
-            onClickRotateSelection(3);
-            break;
-          case 'j':
-            onClickOscura(0);
-            break;
-          case 'k':
-            onClickOscura(1);
-            break;
-          case 'l':
-            onClickOscura(2);
-            break;
-          case ';':
-            onClickOscura(3);
-            break;
-          case 'u':
-            onClickRotateSelection(0);
-            break;
-          case 'i':
-            onClickRotateSelection(1);
-            break;
-          case 'o':
-            onClickRotateSelection(2);
-            break;
-          case 'p':
-            onClickRotateSelection(3);
-            break;
-        }
-        break;
-      case 'play':
-        switch (k) {
-          case 'Backspace':
+          case "Backspace":
             onClickReStartEventHandler();
             break;
-          case 'Escape':
+          case "Escape":
             onClickBackEventHandler();
             break;
         }
+
         break;
     }
   };
 
   useEffect(() => {
-    window.addEventListener<'keydown'>(
-      'keydown',
+    window.addEventListener<"keydown">(
+      "keydown",
       (event) => {
         onEventKeyboard(event);
         setAnyKeyWasPressed(!anyKeyWasPressed);
@@ -671,7 +673,7 @@ function Play() {
       startSound();
       myPhaser.current.scene.keys.game.loaded = false;
       setShowLoaderIntervalFunction();
-      onClickPlayNavButtons('ReStart');
+      onClickPlayNavButtons("ReStart");
       setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
       let newSmashConfig = JSON.parse(
@@ -690,9 +692,9 @@ function Play() {
       }
       setTimeout(() => {
         myPhaser.current = new Phaser.Game(config);
-        myPhaser.current.registry.set('parentContext', Play);
-        myPhaser.current.registry.set('smashConfig', newSmashConfig);
-        myPhaser.current.registry.set('debug', newDebug);
+        myPhaser.current.registry.set("parentContext", Play);
+        myPhaser.current.registry.set("smashConfig", newSmashConfig);
+        myPhaser.current.registry.set("debug", newDebug);
       }, setTimeoutQuotesLengthReStart);
     }
   };
@@ -701,8 +703,8 @@ function Play() {
     if (myPhaser?.current?.scene?.keys?.game) {
       myPhaser.current.scene.keys.game.loaded = false;
     }
-    onClickPlayNavButtons('Back');
-    setWebState('start');
+    onClickPlayNavButtons("Back");
+    setWebState("start");
     setNumClicks(numClicks + 1);
     clearInterval(intervalClock.current);
     intervalClock.current = null;
@@ -734,13 +736,13 @@ function Play() {
   return (
     <div className="overDiv">
       {!debug.DevMode &&
-        webState !== 'start' &&
+        webState !== "start" &&
         numKeyboards === 2 &&
         !bothKeysTouched && (
           <div
             className="keyboard-explainer-double"
             onClick={() => {
-              onClickPlayNavButtons('Controls');
+              onClickPlayNavButtons("Controls");
             }}
           >
             {!p1KeysTouched && (
@@ -760,13 +762,13 @@ function Play() {
           </div>
         )}
       {!debug.DevMode &&
-        webState !== 'start' &&
+        webState !== "start" &&
         numKeyboards === 1 &&
         !p1KeysTouched && (
           <div
             className="keyboard-explainer-single"
             onClick={() => {
-              onClickPlayNavButtons('Controls');
+              onClickPlayNavButtons("Controls");
             }}
           >
             {!p1KeysTouched && (
@@ -778,7 +780,7 @@ function Play() {
             )}
           </div>
         )}
-      {webState !== 'start' && showLoader && (
+      {webState !== "start" && showLoader && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
             <div className="loader-inner">
@@ -836,7 +838,7 @@ function Play() {
         </div>
       )}
       <div className="phaser-container" id="phaser-container"></div>
-      {webState === 'start' && (
+      {webState === "start" && (
         <div className="start-class-div">
           <div className="startTitleWrapper2">
             <div className="startTitleWrapper1">
@@ -867,15 +869,15 @@ function Play() {
                           inputArray[cPlayerIndex] === 2) && (
                           <img
                             className={
-                              'startImage' +
-                              (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                              "startImage" +
+                              (cPlayerIndex > 1 ? "Inverse" : "Normal")
                             }
                             src={
-                              'images/character_' +
+                              "images/character_" +
                               cPlayer.characterId.toString() +
-                              '_cropped.png'
+                              "_cropped.png"
                             }
-                            width={(55 * cPlayer.scale).toString() + '%'}
+                            width={(55 * cPlayer.scale).toString() + "%"}
                             alt="char"
                           />
                         )}
@@ -896,15 +898,15 @@ function Play() {
                           inputArray[cPlayerIndex] === 2) && (
                           <img
                             className={
-                              'startImage' +
-                              (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                              "startImage" +
+                              (cPlayerIndex > 1 ? "Inverse" : "Normal")
                             }
                             src={
-                              'images/character_' +
+                              "images/character_" +
                               cPlayer.characterId.toString() +
-                              '_cropped.png'
+                              "_cropped.png"
                             }
-                            width={(55 * cPlayer.scale).toString() + '%'}
+                            width={(55 * cPlayer.scale).toString() + "%"}
                             alt="char"
                           />
                         )}
@@ -999,22 +1001,22 @@ function Play() {
             src="/images/qblack_trans.png"
             alt="question mark"
           />
-          {webState === 'start' && (
+          {webState === "start" && (
             <div
               className="linkTag b-top"
               onClick={() => {
-                onClickPlayNavButtons('Options');
+                onClickPlayNavButtons("Options");
               }}
             >
               {showOptions && <span className="dark-span">Options</span>}
               {!showOptions && <span>Options</span>}
             </div>
           )}
-          {webState === 'start' && (
+          {webState === "start" && (
             <div
               className="linkTag b-top"
               onClick={() => {
-                onClickPlayNavButtons('Controllers');
+                onClickPlayNavButtons("Controllers");
               }}
             >
               {showControllers && (
@@ -1023,12 +1025,12 @@ function Play() {
               {!showControllers && <span>Controllers</span>}
             </div>
           )}
-          {webState !== 'start' && (
+          {webState !== "start" && (
             <div className="linkTag b-top" onClick={onClickBackEventHandler}>
               <span>Back</span>
             </div>
           )}
-          {webState !== 'start' && (
+          {webState !== "start" && (
             <div className="linkTag b-top" onClick={onClickReStartEventHandler}>
               <span>ReStart</span>
             </div>
@@ -1037,7 +1039,7 @@ function Play() {
           <div
             className="linkTag b-top"
             onClick={() => {
-              onClickPlayNavButtons('Controls');
+              onClickPlayNavButtons("Controls");
             }}
           >
             {showControls && <span className="dark-span">Buttons</span>}
@@ -1046,17 +1048,17 @@ function Play() {
           <div
             className="linkTag b-top"
             onClick={() => {
-              onClickPlayNavButtons('Rules-N64');
+              onClickPlayNavButtons("Rules-N64");
             }}
           >
             {showRulesN64 && <span className="dark-span">Rules</span>}
             {!showRulesN64 && <span>Rules</span>}
           </div>
-          {webState === 'start' && (
+          {webState === "start" && (
             <div
               className="linkTag b-top"
               onClick={() => {
-                onClickPlayNavButtons('About');
+                onClickPlayNavButtons("About");
               }}
             >
               {showAbout && <span className="dark-span">About</span>}
@@ -1069,7 +1071,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody('Options');
+                onClickPlayNavBody("Options");
               }}
             >
               <h1>Options</h1>
@@ -1082,26 +1084,26 @@ function Play() {
                       onClick={(e) => {
                         blipSound();
                         e.stopPropagation();
-                        if (typeof value === 'number') {
+                        if (typeof value === "number") {
                           setDebug((prevState) => ({
                             ...prevState,
                             [key]: value - 1 < 0 ? 0 : value - 1,
                           }));
-                          console.log('Clicked Number');
+                          console.log("Clicked Number");
                         }
 
-                        if (typeof value === 'boolean') {
+                        if (typeof value === "boolean") {
                           setDebug((prevState) => ({
                             ...prevState,
                             [key]: !value,
                           }));
-                          console.log('Clicked Boolean');
+                          console.log("Clicked Boolean");
                         }
                       }}
                     >
                       <div className="debug-value">
                         <p>
-                          {typeof value !== 'boolean'
+                          {typeof value !== "boolean"
                             ? value
                             : value
                             ? emoji.greenCheck
@@ -1122,7 +1124,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody('Controls');
+                onClickPlayNavBody("Controls");
               }}
             >
               <h1>Buttons</h1>
@@ -1189,7 +1191,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody('Rules-N64');
+                onClickPlayNavBody("Rules-N64");
               }}
             >
               <h1>Rules-N64</h1>
@@ -1208,7 +1210,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody('Controllers');
+                onClickPlayNavBody("Controllers");
               }}
             >
               <h1>Controllers</h1>
@@ -1244,7 +1246,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody('About');
+                onClickPlayNavBody("About");
               }}
             >
               <h1>About</h1>
@@ -1280,7 +1282,7 @@ function Play() {
                 <li>Bootstrap 5</li>
                 <li
                   onMouseDown={() => {
-                    console.log('MOUSE ENTER');
+                    console.log("MOUSE ENTER");
                     setFirstCharacterSlot(5);
                   }}
                 >
@@ -1292,7 +1294,7 @@ function Play() {
                 src="./images/character_3_cropped.png"
                 alt="kirby"
                 onMouseDown={() => {
-                  console.log('MOUSE DOWN');
+                  console.log("MOUSE DOWN");
                   setFirstCharacterSlot(5);
                 }}
               />
