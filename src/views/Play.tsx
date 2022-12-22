@@ -574,7 +574,7 @@ function Play() {
   const p2Keys: string[] = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
   // const [keydown, setKeydown] = useState<Keydown>('x');
   let kPrev = 'x';
-  let kCurr = 'x';
+  let k = 'x';
   // const [keydownS, setKeydownS] = useState<boolean>(false);
   // const [keydownD, setKeydownD] = useState<boolean>(false);
   // const [keydownF, setKeydownF] = useState<boolean>(false);
@@ -598,57 +598,70 @@ function Play() {
     console.log('index', index, 'inputArray', inputArray);
   };
 
-  // const onEventKeyUp = (event: any) => {
-  //   kPrev = 'x';
-  //   console.log('kPrev', kPrev, 'kCurr', kCurr);
-  // };
-
   const onEventKeyUp = (event: any) => {
-    if (webState !== 'start') {
-      return;
-    }
-    kCurr = event.key;
+    k = event.key;
+    console.log('k', k);
+    switch (webState) {
+      case 'start':
+        if (p1Keys.includes(k)) {
+          setP1KeysTouched(true);
+        }
+        if (p2Keys.includes(k)) {
+          setP2KeysTouched(true);
+        }
 
-    // kPrev = kCurr;
-    // if (kCurr === kPrev) {
-    //   return;
-    // }
-
-    console.log('kPrev', kPrev, 'kCurr', kCurr);
-
-    if (p1Keys.includes(kCurr)) {
-      setP1KeysTouched(true);
-    }
-    if (p2Keys.includes(kCurr)) {
-      setP2KeysTouched(true);
-    }
-
-    switch (kCurr) {
-      case 'Enter':
-        onClickStartStartButton();
+        switch (k) {
+          case 'Enter':
+            onClickStartStartButton();
+            break;
+          case ' ':
+            onClickStartStartButton();
+            break;
+          case 'a':
+            onClickRotateSelection(0);
+            break;
+          case 's':
+            onClickRotateSelection(1);
+            break;
+          case 'd':
+            onClickRotateSelection(2);
+            break;
+          case 'f':
+            onClickRotateSelection(3);
+            break;
+          case 'j':
+            onClickOscura(0);
+            break;
+          case 'k':
+            onClickOscura(1);
+            break;
+          case 'l':
+            onClickOscura(2);
+            break;
+          case ';':
+            onClickOscura(3);
+            break;
+          case 'u':
+            onClickRotateSelection(0);
+            break;
+          case 'i':
+            onClickRotateSelection(1);
+            break;
+          case 'o':
+            onClickRotateSelection(2);
+            break;
+          case 'p':
+            onClickRotateSelection(3);
+            break;
+        }
         break;
-      case ' ':
-        onClickStartStartButton();
+      case 'play':
+        switch (k) {
+          case 'Backspace':
+            onClickBackEventHandler();
+            break;
+        }
         break;
-      case 'a':
-        onClickOscura(0);
-        break;
-      case 's':
-        onClickOscura(1);
-        break;
-      case 'd':
-        onClickOscura(2);
-        break;
-      case 'f':
-        onClickOscura(3);
-        break;
-      case 'j':
-        break;
-      case 'k':
-        break;
-      case 'l':
-        break;
-      case ';':
     }
   };
 
@@ -657,22 +670,33 @@ function Play() {
   const [anyKeyWasPressed, setAnyKeyWasPressed] = useState<boolean>(false);
 
   useEffect(() => {
-    if (webState === 'start') {
-      window.addEventListener<'keyup'>(
-        'keyup',
-        (event) => {
-          onEventKeyUp(event);
-          setAnyKeyWasPressed(!anyKeyWasPressed);
-        },
-        { once: true }
-      );
-    }
-    if (webState === 'play') {
-      window.removeEventListener<'keyup'>('keyup', onEventKeyUp);
-    }
-  }, [webState, anyKeyWasPressed]);
+    window.addEventListener<'keyup'>(
+      'keyup',
+      (event) => {
+        onEventKeyUp(event);
+        setAnyKeyWasPressed(!anyKeyWasPressed);
+      },
+      { once: true }
+    );
+  }, [anyKeyWasPressed]);
 
   const [numKeyboards, setNumKeyboards] = useState<number>(0);
+
+  const onClickBackEventHandler = () => {
+    if (myPhaser?.current?.scene?.keys?.game) {
+      myPhaser.current.scene.keys.game.loaded = false;
+    }
+    onClickPlayNavButtons('Back');
+    setWebState('start');
+    setNumClicks(numClicks + 1);
+    clearInterval(intervalClock.current);
+    intervalClock.current = null;
+    componentPseudoLoad.current = true;
+    myPhaser.current.destroy(true);
+
+    setP1KeysTouched(false);
+    setP2KeysTouched(false);
+  };
 
   useEffect(() => {
     let numK = 0;
@@ -985,24 +1009,7 @@ function Play() {
             </div>
           )}
           {webState !== 'start' && (
-            <div
-              className="linkTag b-top"
-              onClick={() => {
-                if (myPhaser?.current?.scene?.keys?.game) {
-                  myPhaser.current.scene.keys.game.loaded = false;
-                }
-                onClickPlayNavButtons('Back');
-                setWebState('start');
-                setNumClicks(numClicks + 1);
-                clearInterval(intervalClock.current);
-                intervalClock.current = null;
-                componentPseudoLoad.current = true;
-                myPhaser.current.destroy(true);
-
-                setP1KeysTouched(false);
-                setP2KeysTouched(false);
-              }}
-            >
+            <div className="linkTag b-top" onClick={onClickBackEventHandler}>
               <span>Back</span>
             </div>
           )}
