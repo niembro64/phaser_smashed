@@ -151,20 +151,13 @@ function Play() {
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
     { name: 'Breezy', text: 'The turtle will die.' },
-    // { name: 'Breezy', text: 'Oh, is it? Oh cool. Ur soo cool.' },
-    // { name: 'Lau', text: "I'm sorry, I didn't know it was gonna happen." },
     { name: 'TR3', text: 'Smashed.' },
+    { name: 'Chadams', text: 'Two shots... two shots.' },
+    { name: 'Eddie-Z', text: "He'll do it again, yeah!" },
     {
       name: 'TR3',
       text: 'How am I supposed to make more than that... shit... happen?',
     },
-    // { name: 'Chadams', text: 'AAAYYYUUUGGGGHHHH!!' },
-    { name: 'Chadams', text: 'Two shots... two shots.' },
-    // { name: 'Chadams', text: 'Spike Enerjeaoah.' },
-    // { name: 'Chadams', text: "Stop breakin' shit." },
-    // { name: 'Chadams', text: 'Is there no one else?' },
-    { name: 'Eddie-Z', text: "He'll do it again, yeah!" },
-    // { name: 'Deen Davis Jr.', text: 'VIDEOTAPE MA-SELF FUCKIN YOU UP!' },
     {
       name: 'DDj',
       text: "It's safe to say we're not going to the bars tonite.",
@@ -173,6 +166,16 @@ function Play() {
       name: 'DDj',
       text: '...yes you are.',
     },
+    // { name: 'Chadams', text: 'AAAYYYUUUGGGGHHHH!!' },
+    // { name: 'Chadams', text: 'Spike Enerjeaoah.' },
+    // { name: 'Chadams', text: "Stop breakin' shit." },
+    // { name: 'Chadams', text: 'Is there no one else?' },
+    // { name: 'Deen Davis Jr.', text: 'VIDEOTAPE MA-SELF FUCKIN YOU UP!' },
+    // { name: 'Breezy', text: 'Oh, is it? Oh cool. Ur soo cool.' },
+    // { name: 'Lau', text: "I'm sorry, I didn't know it was gonna happen." },
+    // { name: "Gin", text: "Clean it up, and we'll do it again." },
+    // { name: 'Ginman', text: "Set it up... and we'll do it... again." },
+    // { name: 'Gin', text: 'Shitty, shitty-fuckin-ass.' },
     // {
     //   name: 'DDj',
     //   text: 'I can fight you one-handed.',
@@ -181,10 +184,19 @@ function Play() {
     //   name: 'DDj',
     //   text: 'I thought you put Spike in there.',
     // },
-    // { name: "Gin", text: "Clean it up, and we'll do it again." },
-    // { name: 'Ginman', text: "Set it up... and we'll do it... again." },
-    // { name: 'Gin', text: 'Shitty, shitty-fuckin-ass.' },
   ];
+  const componentPseudoLoad = useRef(true);
+  const intervalClock: any = useRef(null);
+
+  const p1Keys: string[] = ['w', 'a', 's', 'd'];
+  const p2Keys: string[] = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
+  let k = 'x';
+
+  const [p1KeysTouched, setP1KeysTouched] = useState<boolean>(false);
+  const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
+  const [bothKeysTouched, setBothKeysTouched] = useState<boolean>(false);
+  const [anyKeyWasPressed, setAnyKeyWasPressed] = useState<boolean>(false);
+  const [numKeyboards, setNumKeyboards] = useState<number>(0);
 
   const onClickStartStartButton = () => {
     trance.pause();
@@ -412,8 +424,6 @@ function Play() {
       newCharacterId = 0;
     }
 
-    console.log('newCharacterId', newCharacterId);
-
     choice.characterId = newCharacterId as CharacterType;
 
     let tempScale = smashConfigScaleArray.find((s, sIndex) => {
@@ -567,26 +577,6 @@ function Play() {
     }
   };
 
-  const componentPseudoLoad = useRef(true);
-  const intervalClock: any = useRef(null);
-
-  const p1Keys: string[] = ['w', 'a', 's', 'd'];
-  const p2Keys: string[] = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
-  // const [keydown, setKeydown] = useState<Keydown>('x');
-  let kPrev = 'x';
-  let k = 'x';
-  // const [keydownS, setKeydownS] = useState<boolean>(false);
-  // const [keydownD, setKeydownD] = useState<boolean>(false);
-  // const [keydownF, setKeydownF] = useState<boolean>(false);
-  // const [keydownJ, setKeydownJ] = useState<boolean>(false);
-  // const [keydownK, setKeydownK] = useState<boolean>(false);
-  // const [keydownL, setKeydownL] = useState<boolean>(false);
-  // const [keydownSemi, setKeydownSemi] = useState<boolean>(false);
-
-  const [p1KeysTouched, setP1KeysTouched] = useState<boolean>(false);
-  const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
-  const [bothKeysTouched, setBothKeysTouched] = useState<boolean>(false);
-
   const onClickOscura = (index: number) => {
     onClickSetInputArrayElement(
       index,
@@ -594,13 +584,10 @@ function Play() {
         ? (0 as InputType)
         : ((inputArray[index] + 1) as InputType)
     );
-
-    // console.log('index', index, 'inputArray', inputArray);
   };
 
   const onEventKeyUp = (event: any) => {
     k = event.key;
-    // console.log('k', k);
     switch (webState) {
       case 'start':
         if (p1Keys.includes(k)) {
@@ -668,10 +655,6 @@ function Play() {
     }
   };
 
-  // try adding an event listner after every keypress and deleting it after
-
-  const [anyKeyWasPressed, setAnyKeyWasPressed] = useState<boolean>(false);
-
   useEffect(() => {
     window.addEventListener<'keyup'>(
       'keyup',
@@ -682,8 +665,6 @@ function Play() {
       { once: true }
     );
   }, [anyKeyWasPressed]);
-
-  const [numKeyboards, setNumKeyboards] = useState<number>(0);
 
   const onClickReStartEventHandler = () => {
     if (myPhaser?.current?.scene?.keys?.game?.loaded) {
