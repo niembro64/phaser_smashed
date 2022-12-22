@@ -595,12 +595,12 @@ function Play() {
         : ((inputArray[index] + 1) as InputType)
     );
 
-    console.log('index', index, 'inputArray', inputArray);
+    // console.log('index', index, 'inputArray', inputArray);
   };
 
   const onEventKeyUp = (event: any) => {
     k = event.key;
-    console.log('k', k);
+    // console.log('k', k);
     switch (webState) {
       case 'start':
         if (p1Keys.includes(k)) {
@@ -658,6 +658,9 @@ function Play() {
       case 'play':
         switch (k) {
           case 'Backspace':
+            onClickReStartEventHandler();
+            break;
+          case 'Escape':
             onClickBackEventHandler();
             break;
         }
@@ -681,6 +684,37 @@ function Play() {
   }, [anyKeyWasPressed]);
 
   const [numKeyboards, setNumKeyboards] = useState<number>(0);
+
+  const onClickReStartEventHandler = () => {
+    if (myPhaser?.current?.scene?.keys?.game?.loaded) {
+      startSound();
+      myPhaser.current.scene.keys.game.loaded = false;
+      setShowLoaderIntervalFunction();
+      onClickPlayNavButtons('ReStart');
+      setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
+
+      let newSmashConfig = JSON.parse(
+        JSON.stringify(myPhaser.current?.scene?.keys?.game.smashConfig)
+      );
+      let newDebug = JSON.parse(
+        JSON.stringify(myPhaser.current?.scene?.keys?.game.debug)
+      );
+      clearInterval(intervalClock.current);
+      intervalClock.current = null;
+      componentPseudoLoad.current = true;
+      myPhaser.current.destroy(true);
+
+      if (!debug.LoadTimeExtra || debug.DevMode) {
+        setTimeoutQuotesLengthReStart = 0;
+      }
+      setTimeout(() => {
+        myPhaser.current = new Phaser.Game(config);
+        myPhaser.current.registry.set('parentContext', Play);
+        myPhaser.current.registry.set('smashConfig', newSmashConfig);
+        myPhaser.current.registry.set('debug', newDebug);
+      }, setTimeoutQuotesLengthReStart);
+    }
+  };
 
   const onClickBackEventHandler = () => {
     if (myPhaser?.current?.scene?.keys?.game) {
@@ -1014,46 +1048,7 @@ function Play() {
             </div>
           )}
           {webState !== 'start' && (
-            <div
-              className="linkTag b-top"
-              onClick={() => {
-                if (myPhaser?.current?.scene?.keys?.game?.loaded) {
-                  startSound();
-                  myPhaser.current.scene.keys.game.loaded = false;
-                  setShowLoaderIntervalFunction();
-                  onClickPlayNavButtons('ReStart');
-                  setQuotesRandomNumber(
-                    Math.floor(Math.random() * quotes.length)
-                  );
-
-                  let newSmashConfig = JSON.parse(
-                    JSON.stringify(
-                      myPhaser.current?.scene?.keys?.game.smashConfig
-                    )
-                  );
-                  let newDebug = JSON.parse(
-                    JSON.stringify(myPhaser.current?.scene?.keys?.game.debug)
-                  );
-                  clearInterval(intervalClock.current);
-                  intervalClock.current = null;
-                  componentPseudoLoad.current = true;
-                  myPhaser.current.destroy(true);
-
-                  if (!debug.LoadTimeExtra || debug.DevMode) {
-                    setTimeoutQuotesLengthReStart = 0;
-                  }
-                  setTimeout(() => {
-                    myPhaser.current = new Phaser.Game(config);
-                    myPhaser.current.registry.set('parentContext', Play);
-                    myPhaser.current.registry.set(
-                      'smashConfig',
-                      newSmashConfig
-                    );
-                    myPhaser.current.registry.set('debug', newDebug);
-                  }, setTimeoutQuotesLengthReStart);
-                }
-              }}
-            >
+            <div className="linkTag b-top" onClick={onClickReStartEventHandler}>
               <span>ReStart</span>
             </div>
           )}
