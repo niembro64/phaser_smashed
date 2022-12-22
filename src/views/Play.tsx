@@ -586,7 +586,7 @@ function Play() {
     );
   };
 
-  const onEventKeyUp = (event: any) => {
+  const onEventKeyboard = (event: any) => {
     k = event.key;
     switch (webState) {
       case 'start':
@@ -656,10 +656,10 @@ function Play() {
   };
 
   useEffect(() => {
-    window.addEventListener<'keyup'>(
-      'keyup',
+    window.addEventListener<'keydown'>(
+      'keydown',
       (event) => {
-        onEventKeyUp(event);
+        onEventKeyboard(event);
         setAnyKeyWasPressed(!anyKeyWasPressed);
       },
       { once: true }
