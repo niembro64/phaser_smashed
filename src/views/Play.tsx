@@ -734,7 +734,7 @@ function Play() {
   }, [p1KeysTouched, p2KeysTouched]);
 
   return (
-    <div className="overDiv">
+    <div className="over-div">
       {!debug.DevMode &&
         webState !== "start" &&
         numKeyboards === 2 &&
@@ -994,7 +994,7 @@ function Play() {
           </button>
         </div>
       )}
-      <div className="overDiv">
+      <div className="over-div">
         <div className="top-bar">
           <img
             className="question-mark"
@@ -1003,7 +1003,7 @@ function Play() {
           />
           {webState === "start" && (
             <div
-              className="linkTag b-top"
+              className="link-tag"
               onClick={() => {
                 onClickPlayNavButtons("Options");
               }}
@@ -1014,7 +1014,7 @@ function Play() {
           )}
           {webState === "start" && (
             <div
-              className="linkTag b-top"
+              className="link-tag"
               onClick={() => {
                 onClickPlayNavButtons("Controllers");
               }}
@@ -1026,18 +1026,18 @@ function Play() {
             </div>
           )}
           {webState !== "start" && (
-            <div className="linkTag b-top" onClick={onClickBackEventHandler}>
+            <div className="link-tag" onClick={onClickBackEventHandler}>
               <span>Back</span>
             </div>
           )}
           {webState !== "start" && (
-            <div className="linkTag b-top" onClick={onClickReStartEventHandler}>
+            <div className="link-tag" onClick={onClickReStartEventHandler}>
               <span>ReStart</span>
             </div>
           )}
 
           <div
-            className="linkTag b-top"
+            className="link-tag"
             onClick={() => {
               onClickPlayNavButtons("Controls");
             }}
@@ -1046,7 +1046,7 @@ function Play() {
             {!showControls && <span>Buttons</span>}
           </div>
           <div
-            className="linkTag b-top"
+            className="link-tag"
             onClick={() => {
               onClickPlayNavButtons("Rules-N64");
             }}
@@ -1056,7 +1056,7 @@ function Play() {
           </div>
           {webState === "start" && (
             <div
-              className="linkTag b-top"
+              className="link-tag"
               onClick={() => {
                 onClickPlayNavButtons("About");
               }}
@@ -1067,7 +1067,7 @@ function Play() {
           )}
         </div>
         {showOptions && (
-          <div className="overDiv">
+          <div className="over-div">
             <div
               className="popup"
               onClick={() => {
@@ -1120,7 +1120,7 @@ function Play() {
           </div>
         )}
         {showControls && (
-          <div className="overDiv">
+          <div className="over-div">
             <div
               className="popup"
               onClick={() => {
@@ -1216,13 +1216,13 @@ function Play() {
               <h1>Controllers</h1>
               <p>USB controllers are recommended. </p>
               <a
-                className="linkTag btn btn-dark"
+                className="link-tag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 <span>Amazon: (2) SNES Controllers $12</span>
               </a>
               <a
-                className="linkTag btn btn-dark"
+                className="link-tag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 <span>Amazon: USB Hub/Extension $13</span>
@@ -1299,7 +1299,7 @@ function Play() {
                 }}
               />
               <p>by NIEMBRO64</p>
-              <a className="linkTag btn btn-dark" href="http://niembro64.com/">
+              <a className="link-tag btn btn-dark" href="http://niembro64.com/">
                 <span>See Other Projects</span>
               </a>
             </div>

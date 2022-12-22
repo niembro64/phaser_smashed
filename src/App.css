@@ -49,9 +49,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+
+  width: 100%;
+  height: 100%;
 }
 
-.overDiv {
+.over-div {
   width: 100%;
   height: 100%;
   /* 
@@ -99,12 +102,12 @@ body {
   top: 0%;
   border: 0%;
 
-  height: 6%;
+  height: auto;
   width: 100%;
 
   background-color: rgba(0, 0, 0, 0);
 
-  padding: 0.5% 5.5% 0.5% 0.5%;
+  padding: 0vh 3vw 0vh 3vw;
 
   display: flex;
   flex-direction: row;
@@ -120,7 +123,7 @@ body {
   transition: 0.1s ease;
 }
 
-.top-bar:hover > .linkTag,
+.top-bar:hover > .link-tag,
 .top-bar:hover > .question-mark {
   /* display: block; */
   border: 0;
@@ -131,7 +134,7 @@ body {
 }
 
 .question-mark {
-  height: 100%;
+  height: 5vh;
   justify-self: flex-start;
   filter: opacity(0.3);
   transition: 2s ease;
@@ -143,15 +146,16 @@ body {
   padding: 0;
 }
 
-.linkTag {
+.link-tag {
   background-color: transparent;
   transition: 0s ease;
   /* display: none; */
   border: 0;
-  padding: 0% 1%;
+  padding: 0vh 2vw;
+  margin: 0;
   color: rgba(255, 255, 255, 0);
 
-  font-size: 1.3vw;
+  font-size: 3vh;
   transition: 2s ease;
 
   cursor: pointer;
@@ -183,7 +187,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 5vh 1vw 1vh 1vw;
+  padding: 6vh 1vw 1vh 1vw;
 
   z-index: 2;
   overflow: hide;
@@ -218,13 +222,10 @@ body {
 #debug-col {
   width: 100%;
   height: 100%;
-  /* margin-top: 2vh; */
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-
   flex-wrap: wrap;
 }
 #option {
@@ -242,7 +243,6 @@ body {
 }
 .debug-value {
   width: 3vw;
-  /* border: 1px dashed lime; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -641,7 +641,6 @@ body {
   height: 100%;
   background-color: black;
   animation: revealAnimation 5s ease-out both;
-  /* border: 1px dashed lime; */
   z-index: 2;
   box-shadow: 0vh 0vh 20vh 20vh rgba(0, 0, 0, 1);
 }
@@ -805,7 +804,7 @@ body {
   cursor: pointer;
   overflow: visible;
 
-  background-color: 'transparent';
+  background-color: "transparent";
   border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
   transition: var(--duration-hover) ease;
   cursor: default;
@@ -821,7 +820,7 @@ body {
   cursor: pointer;
   overflow: hidden;
 
-  background-color: 'transparent';
+  background-color: "transparent";
   border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
   transition: var(--duration-hover) ease;
 }
