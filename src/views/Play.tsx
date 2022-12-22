@@ -627,6 +627,9 @@ function Play() {
       case 'Enter':
         onClickStartStartButton();
         break;
+      case ' ':
+        onClickStartStartButton();
+        break;
       case 'a':
         onClickOscura(0);
         break;
@@ -651,18 +654,23 @@ function Play() {
 
   // try adding an event listner after every keypress and deleting it after
 
+  const [anyKeyWasPressed, setAnyKeyWasPressed] = useState<boolean>(false);
+
   useEffect(() => {
     if (webState === 'start') {
-      window.addEventListener<'keyup'>('keyup', (event) => {
-        onEventKeyUp(event);
-      });
-      // window.addEventListener<'keyup'>('keyup', onEventKeyUp);
+      window.addEventListener<'keyup'>(
+        'keyup',
+        (event) => {
+          onEventKeyUp(event);
+          setAnyKeyWasPressed(!anyKeyWasPressed);
+        },
+        { once: true }
+      );
     }
     if (webState === 'play') {
       window.removeEventListener<'keyup'>('keyup', onEventKeyUp);
-      // window.removeEventListener<'keyup'>('keyup', onEventKeyUp);
     }
-  }, [webState]);
+  }, [webState, anyKeyWasPressed]);
 
   const [numKeyboards, setNumKeyboards] = useState<number>(0);
 

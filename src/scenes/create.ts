@@ -5,7 +5,6 @@ import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
 } from './helpers/damage';
-import { playerShootAttackEnergy } from './helpers/pad';
 import {
   filterAttackEnergyColorStateNormal,
   setBlinkTrue,
