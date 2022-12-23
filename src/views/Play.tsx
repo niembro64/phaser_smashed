@@ -661,6 +661,7 @@ function Play() {
     onEventKeyboard(event);
     setAnyKeyWasPressed(!anyKeyWasPressed);
   };
+
   useEffect(() => {
     window.removeEventListener<"keydown">("keydown", cb);
     window.addEventListener<"keydown">("keydown", cb, { once: true });

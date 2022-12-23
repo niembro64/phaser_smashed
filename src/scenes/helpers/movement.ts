@@ -1,3 +1,4 @@
+import { V4MAPPED } from "dns";
 import Game from "../Game";
 import { Acceleration, Player, Velocity } from "../interfaces";
 import { getIsAttackEnergyOffscreen } from "./attacks";
@@ -449,6 +450,13 @@ export function updateAttackEnergyFlipX(game: Game): void {
 
 export function updateVelPrev(game: Game): void {
   for (let i = 0; i < game.players.length; i++) {
-    console.log(game.players[i].char.attackEnergy.sprite.body.velocity.x);
+    game.players[i].char.attackEnergy.accX =
+      game.players[i].char.attackEnergy.sprite.body.velocity.x -
+      game.players[i].char.attackEnergy.velPrevX;
+
+    game.players[i].char.attackEnergy.velPrevX =
+      game.players[i].char.attackEnergy.sprite.body.velocity.x;
+
+    console.log(game.players[0].char.attackEnergy.accX);
   }
 }
