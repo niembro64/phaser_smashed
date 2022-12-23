@@ -412,7 +412,7 @@ export function getNearestPlayerAliveXY(
   let ae = player.char.attackEnergy;
 
   game.players.forEach((player, playerIndex) => {
-    if (pIndex !== playerIndex) {
+    if (pIndex !== playerIndex && player.state.name === "player-state-alive") {
       let otherPlayerX = player.char.sprite.x;
       let otherPlayerY = player.char.sprite.y;
       let myX = ae.sprite.x;

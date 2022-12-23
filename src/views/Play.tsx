@@ -600,9 +600,6 @@ function Play() {
         case "Enter":
           onClickStartStartButton();
           break;
-        case " ":
-          onClickStartStartButton();
-          break;
         case "a":
           pIndex = 0;
           if (inputArray[pIndex] !== 0) {
