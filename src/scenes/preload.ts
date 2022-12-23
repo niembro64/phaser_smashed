@@ -119,7 +119,7 @@ export function preload(game: Game): void {
   game.load.image('fireball', 'images/fireball.png');
   game.load.image('flagpole', 'images/flagpole.png');
   game.load.image('greenshell', 'images/greenshell.png');
-  game.load.image('redshell', 'images/redshell_spike.png');
+  game.load.image('redshell', 'images/redshell.png');
   game.load.image('blueshell', 'images/blueshell_wing.png');
   game.load.image('bottle', 'images/bottle.png');
   game.load.image('hammer', 'images/ham.png');
