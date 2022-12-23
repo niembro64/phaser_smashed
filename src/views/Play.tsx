@@ -595,7 +595,7 @@ function Play() {
       if (p2Keys.includes(k)) {
         setP2KeysTouched(true);
       }
-
+      let pIndex;
       switch (k) {
         case "Enter":
           onClickStartStartButton();
@@ -604,16 +604,28 @@ function Play() {
           onClickStartStartButton();
           break;
         case "a":
-          onClickRotateSelection(0);
+          pIndex = 0;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
         case "s":
-          onClickRotateSelection(1);
+          pIndex = 1;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
         case "d":
-          onClickRotateSelection(2);
+          pIndex = 2;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
         case "f":
-          onClickRotateSelection(3);
+          pIndex = 3;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
         case "j":
           onClickOscura(0);
@@ -628,16 +640,28 @@ function Play() {
           onClickOscura(3);
           break;
         case "u":
-          onClickRotateSelection(0);
+          pIndex = 0;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
         case "i":
-          onClickRotateSelection(1);
+          pIndex = 1;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
         case "o":
-          onClickRotateSelection(2);
+          pIndex = 2;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
         case "p":
-          onClickRotateSelection(3);
+          pIndex = 3;
+          if (inputArray[pIndex] !== 0) {
+            onClickRotateSelection(pIndex);
+          }
           break;
       }
     }
