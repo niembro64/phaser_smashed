@@ -1029,6 +1029,10 @@ body {
   margin: 0% 0% 0% 12%;
   font-size: 1.5vw;
 }
+.thirdLoaderP {
+  margin: 10% 0% 0% 0%;
+  font-size: 0.7vw;
+}
 
 /* /////////////////////////////
 //// SPINNER
