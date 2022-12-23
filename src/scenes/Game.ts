@@ -1914,7 +1914,7 @@ export default class Game extends Phaser.Scene {
           accX: 0,
           accY: 0,
           srcImage: "blueshell",
-          bounceY: 3,
+          bounceY: 2,
           bounceX: 2,
           gravity: false,
           bouncePlatforms: true,
