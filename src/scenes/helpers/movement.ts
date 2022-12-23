@@ -1,7 +1,7 @@
-import Game from '../Game';
-import { Player } from '../interfaces';
-import { getIsAttackEnergyOffscreen } from './attacks';
-import { getNormalizedVector } from './damage';
+import Game from "../Game";
+import { Player } from "../interfaces";
+import { getIsAttackEnergyOffscreen } from "./attacks";
+import { getNormalizedVector } from "./damage";
 
 export function updateCirclesLocations(game: Game): void {
   if (!game.debug.PlayerIdVisible) {
@@ -32,7 +32,7 @@ export function updateTable(game: Game): void {
   // game.TABLE.velocityY = 0;
 }
 
-export function updateEnergyAttacksWrapScreen(game: Game): void {
+export function updateAttackEnergyWrapScreen(game: Game): void {
   if (!game.debug.AEWrapScreen) {
     return;
   }
@@ -105,13 +105,13 @@ export function setRespawn(player: Player, game: Game): void {
 
 export function updateLastDirectionTouched(player: Player): void {
   if (player.char.sprite.body.touching.up) {
-    player.char.lastDirectionTouched = 'up';
+    player.char.lastDirectionTouched = "up";
   } else if (player.char.sprite.body.touching.down) {
-    player.char.lastDirectionTouched = 'down';
+    player.char.lastDirectionTouched = "down";
   } else if (player.char.sprite.body.touching.left) {
-    player.char.lastDirectionTouched = 'left';
+    player.char.lastDirectionTouched = "left";
   } else if (player.char.sprite.body.touching.right) {
-    player.char.lastDirectionTouched = 'right';
+    player.char.lastDirectionTouched = "right";
   }
 }
 
@@ -178,7 +178,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
     // // horizontal stuff WAS TOUCHING
     if (
       game.debug.WallJumpsActive &&
-      player.char.lastDirectionTouched === 'left' &&
+      player.char.lastDirectionTouched === "left" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
@@ -191,7 +191,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
 
     if (
       game.debug.WallJumpsActive &&
-      player.char.lastDirectionTouched === 'right' &&
+      player.char.lastDirectionTouched === "right" &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
@@ -432,4 +432,17 @@ export function getDistance(
   endY: number
 ): number {
   return Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+}
+
+export function updateAttackEnergyFlipX(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    let ae = player.char.attackEnergy.sprite;
+
+    if (ae.body.velocity.x > 0) {
+      ae.flipX = false;
+    }
+    if (ae.body.velocity.x < 0) {
+      ae.flipX = true;
+    }
+  });
 }
