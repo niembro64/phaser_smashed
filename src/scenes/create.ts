@@ -1,6 +1,6 @@
 import { matchPath } from "react-router-dom";
 import Game from "./Game";
-import { setPhysicalAttackOffscreen } from "./helpers/attacks";
+import { setAttackPhysicalOffscreen } from "./helpers/attacks";
 import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
@@ -563,7 +563,7 @@ export function createAttackPhysicals(game: Game): void {
 
     player.char.attackPhysical.sprite.body.allowGravity = false;
 
-    setPhysicalAttackOffscreen(player, game);
+    setAttackPhysicalOffscreen(player, game);
   });
 }
 export function createAttackEnergies(game: Game): void {

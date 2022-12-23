@@ -1,9 +1,9 @@
-import Game from '../Game';
-import { AttackEnergy, Player } from '../interfaces';
-import { setEmitterPlayerOnFalse } from './damage';
+import Game from "../Game";
+import { AttackEnergy, Player } from "../interfaces";
+import { setEmitterPlayerOnFalse } from "./damage";
 
 export function updateJumpEnergy(player: Player, game: Game): void {
-  if (player.state.name === 'player-state-dead') {
+  if (player.state.name === "player-state-dead") {
     setEmitterPlayerOnFalse(player);
     return;
   }
@@ -163,7 +163,7 @@ export function isAttackEnergyNearPlayer(player: Player): boolean {
   return false;
 }
 
-export function setPhysicalAttackOffscreen(player: Player, game: Game): void {
+export function setAttackPhysicalOffscreen(player: Player, game: Game): void {
   player.char.attackPhysical.sprite.y = -1000;
   player.char.attackPhysical.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
 }
@@ -171,6 +171,13 @@ export function updatePhysicalAttackFollowsPlayer(
   player: Player,
   game: Game
 ): void {
+  if (
+    player.char.attackEnergy.ON_SCREEN_PREVENT_ATTACK_PHYSICAL &&
+    !getIsAttackEnergyOffscreen(player.char.attackEnergy, game)
+  ) {
+    return;
+  }
+
   player.char.attackPhysical.sprite.y =
     player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
 

@@ -7,7 +7,7 @@ import {
   PlayerState,
 } from '../interfaces';
 import {
-  setPhysicalAttackOffscreen,
+  setAttackPhysicalOffscreen,
   setPhysicsAttackEnergyOn,
 } from './attacks';
 import {
@@ -123,11 +123,11 @@ export function setAttackPhysicalState(
       attackPhysical.audio.play();
       break;
     case 'attackphysical-state-cooldown':
-      setPhysicalAttackOffscreen(player, game);
+      setAttackPhysicalOffscreen(player, game);
       // attackPhysical.sprite.setActive(false).setVisible(false);
       break;
     case 'attackphysical-state-off':
-      setPhysicalAttackOffscreen(player, game);
+      setAttackPhysicalOffscreen(player, game);
       // attackPhysical.sprite.setActive(false).setVisible(false);
       break;
   }
