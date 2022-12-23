@@ -1,4 +1,5 @@
 import Game from "../Game";
+import { updateAttackEnergyOffscreen } from "../helpers/attacks";
 import { updateCamera } from "../helpers/camera";
 import { updateChomp } from "../helpers/chomp";
 import { updateDeathsAndKillsMatrices } from "../helpers/damage";
@@ -10,8 +11,10 @@ import {
   updateTable,
   updateAttackEnergyFollow,
   updateAttackEnergyFlipX,
+  updateAttackEnergyVelPrev,
 } from "../helpers/movement";
 import {
+  updateAttackEnergy,
   updateAttackEnergyFrictionGroundMovement,
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
@@ -37,6 +40,8 @@ export function updateGameStatePlay(
   updateAttackEnergyFrictionWall(game);
   updateAttackEnergyWrapScreen(game);
   updateAttackEnergyFlipX(game);
+  updateAttackEnergyOffscreen(game);
+  updateAttackEnergyVelPrev(game);
   updateDeathsAndKillsMatrices(game);
   updateKeepObjectsFromFallingLikeCrazy(game);
   updateCirclesLocations(game);

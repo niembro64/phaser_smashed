@@ -8,7 +8,7 @@ import {
   updateAttackEnergyOffscreen,
 } from "./attacks";
 import { updatePadCurrKeyboard } from "./keyboard";
-import { updateVelPrev } from "./movement";
+import { updateAttackEnergyVelPrev } from "./movement";
 
 export function updateGamePadsMaster(game: Game): void {
   let numPlayers = game.players.length;
@@ -432,40 +432,40 @@ export function playerHoldAttackEnergy(player: Player): void {
   }
 }
 
-export function playerReturnedAttackEnergy(player: Player): void {
-  if (!player.char.attackEnergy.followOnOffscreen) {
-    return;
-  }
+// export function playerReturnedAttackEnergy(player: Player): void {
+//   if (!player.char.attackEnergy.followOnOffscreen) {
+//     return;
+//   }
 
-  player.char.attackEnergy.sprite.body.allowGravity = false;
+//   player.char.attackEnergy.sprite.body.allowGravity = false;
 
-  // player.char.attackEnergy.sprite.body.setVelocityX(0);
-  // player.char.attackEnergy.sprite.body.setVelocityY(0);
+//   // player.char.attackEnergy.sprite.body.setVelocityX(0);
+//   // player.char.attackEnergy.sprite.body.setVelocityY(0);
 
-  if (player.char.sprite.flipX) {
-    player.char.attackEnergy.sprite.x =
-      player.char.sprite.x - player.char.attackEnergy.followOnOffscreenOffset.x;
-    player.char.attackEnergy.sprite.y =
-      player.char.sprite.y + player.char.attackEnergy.followOnOffscreenOffset.y;
+//   if (player.char.sprite.flipX) {
+//     player.char.attackEnergy.sprite.x =
+//       player.char.sprite.x - player.char.attackEnergy.followOnOffscreenOffset.x;
+//     player.char.attackEnergy.sprite.y =
+//       player.char.sprite.y + player.char.attackEnergy.followOnOffscreenOffset.y;
 
-    player.char.attackEnergy.sprite.flipX = true;
-    player.char.attackEnergy.sprite.setRotation(
-      (player.char.attackEnergy.rotation.initial * Math.PI) / 2
-    );
-    player.char.attackEnergy.sprite.setAngularVelocity(0);
-  } else {
-    player.char.attackEnergy.sprite.x =
-      player.char.sprite.x + player.char.attackEnergy.followOnOffscreenOffset.x;
-    player.char.attackEnergy.sprite.y =
-      player.char.sprite.y + player.char.attackEnergy.followOnOffscreenOffset.y;
+//     player.char.attackEnergy.sprite.flipX = true;
+//     player.char.attackEnergy.sprite.setRotation(
+//       (player.char.attackEnergy.rotation.initial * Math.PI) / 2
+//     );
+//     player.char.attackEnergy.sprite.setAngularVelocity(0);
+//   } else {
+//     player.char.attackEnergy.sprite.x =
+//       player.char.sprite.x + player.char.attackEnergy.followOnOffscreenOffset.x;
+//     player.char.attackEnergy.sprite.y =
+//       player.char.sprite.y + player.char.attackEnergy.followOnOffscreenOffset.y;
 
-    player.char.attackEnergy.sprite.flipX = false;
-    player.char.attackEnergy.sprite.setRotation(
-      player.char.attackEnergy.rotation.initial
-    );
-    player.char.attackEnergy.sprite.setAngularVelocity(0);
-  }
-}
+//     player.char.attackEnergy.sprite.flipX = false;
+//     player.char.attackEnergy.sprite.setRotation(
+//       player.char.attackEnergy.rotation.initial
+//     );
+//     player.char.attackEnergy.sprite.setAngularVelocity(0);
+//   }
+// }
 
 export function playerShootAttackEnergy(player: Player, game: Game): void {
   var vX =
@@ -532,8 +532,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   //   return;
   // }
 
-  updateAttackEnergyOffscreen(player.char.attackEnergy, game);
-  updateVelPrev(game);
+
 
   if (
     !getIsAttackEnergyOffscreen(player.char.attackEnergy, game) &&

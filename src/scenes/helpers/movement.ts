@@ -452,7 +452,7 @@ export function updateAttackEnergyFlipX(game: Game): void {
   }
 }
 
-export function updateVelPrev(game: Game): void {
+export function updateAttackEnergyVelPrev(game: Game): void {
   for (let i = 0; i < game.players.length; i++) {
     game.players[i].char.attackEnergy.accX =
       game.players[i].char.attackEnergy.sprite.body.velocity.x -

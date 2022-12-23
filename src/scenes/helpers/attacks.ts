@@ -109,17 +109,17 @@ export function setPhysicsAttackEnergyOn(player: Player): void {
   player.char.attackEnergy.sprite.body.allowGravity =
     player.char.attackEnergy.gravity;
 }
-export function updateAttackEnergyOffscreen(
-  attackEnergy: AttackEnergy,
-  game: Game
-): void {
-  if (getIsAttackEnergyOffscreen(attackEnergy, game)) {
-    attackEnergy.offscreenCurr = true;
-  } else {
-    attackEnergy.offscreenCurr = false;
-  }
+export function updateAttackEnergyOffscreen(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    let ae = player.char.attackEnergy;
+    if (getIsAttackEnergyOffscreen(ae, game)) {
+      ae.offscreenCurr = true;
+    } else {
+      ae.offscreenCurr = false;
+    }
 
-  attackEnergy.offscreenPrev = attackEnergy.offscreenCurr;
+    ae.offscreenPrev = ae.offscreenCurr;
+  });
 }
 
 export function getIsAttackEnergyOffscreen(
