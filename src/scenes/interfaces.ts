@@ -244,6 +244,11 @@ export interface SplashEndData {
   src: string;
 }
 
+export interface Acceleration {
+  x: number;
+  y: number;
+}
+
 export interface Velocity {
   x: number;
   y: number;
@@ -274,7 +279,11 @@ export interface AttackEnergy {
   durationCooldown: number;
   posFromCenter: PosFromCenter;
   friction: AttackEnergyFriction;
-  vel: Velocity;
+  VEL: Velocity;
+  velPrevX: number;
+  velPrevY: number;
+  accX: number;
+  accY: number;
   srcImage: string;
   bounceY: number;
   bounceX: number;

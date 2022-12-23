@@ -1,6 +1,6 @@
-import { Vector } from 'matter';
-import Game from '../Game';
-import { getDistance, getNormalizedVector, getVector } from './damage';
+import { Vector } from "matter";
+import Game from "../Game";
+import { getDistance, getNormalizedVector, getVector } from "./damage";
 
 export function updateChompSpriteDirection(game: Game): void {
   let c = game.chomp;
@@ -138,30 +138,3 @@ export function getClosestDistance(game: Game): number {
 
   return shortestDistance;
 }
-
-// export function getVolumeOfChainChomp(game: Game): number {
-//   let c = game.chomp;
-//   let b = c.sprite.body;
-//   let volume = 0;
-
-//   let chompX = b.x;
-//   let chompY = b.y;
-
-//   let shortestDistance = Infinity;
-
-//   // find closest player
-//   game.players.forEach((player, playerIndex) => {
-//     let playerX = player.char.sprite.body.x;
-//     let playerY = player.char.sprite.body.Y;
-
-//     let distance = getDistance(chompX, chompY, playerX, playerY);
-
-//     if (distance < shortestDistance) {
-//       shortestDistance = distance;
-//     }
-//   });
-
-//   volume = game.SCREEN_DIMENSIONS.WIDTH - shortestDistance;
-
-//   return volume;
-// }

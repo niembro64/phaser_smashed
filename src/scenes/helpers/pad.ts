@@ -1,13 +1,14 @@
-import Game from '../Game';
-import { InputType, Player } from '../interfaces';
+import Game from "../Game";
+import { InputType, Player } from "../interfaces";
 import {
   isAttackEnergyNearPlayer,
   getIsAttackEnergyOffscreen,
   setPhysicsAttackEnergyOff,
   setPhysicsAttackEnergyOn,
   updateAttackEnergyOffscreen,
-} from './attacks';
-import { updatePadCurrKeyboard } from './keyboard';
+} from "./attacks";
+import { updatePadCurrKeyboard } from "./keyboard";
+import { updateVelPrev } from "./movement";
 
 export function updateGamePadsMaster(game: Game): void {
   let numPlayers = game.players.length;
@@ -30,7 +31,7 @@ export function updateGamePadsMaster(game: Game): void {
       case 1:
         if (player?.gamepad) {
           if (player?.gamepad?.axes?.length === 4) {
-            console.log('CONTROLLER TYPE: PRO', player.gamepad);
+            console.log("CONTROLLER TYPE: PRO", player.gamepad);
             updatePadCurrControllerTypePro(player, game);
           } else if (player?.gamepad?.axes?.length) {
             updatePadCurrControllerTypeHat(player, game);
@@ -77,8 +78,8 @@ export function updatePadCurrControllerTypePro(
       player.padCurr.up = false;
       player.padCurr.down = false;
     }
-    console.log('stickX', stickX);
-    console.log('stickY', stickY);
+    console.log("stickX", stickX);
+    console.log("stickY", stickY);
     // if (stickX === -1 && stickY === -1) {
     //   player.padCurr.left = true;
     //   player.padCurr.right = !player.padCurr.left;
@@ -272,7 +273,7 @@ export function updatePadCurrControllerTypeButtons(
 }
 
 export function getControllerIsRealController(gamepad: Gamepad): boolean {
-  if (gamepad.id.includes('Jabra')) {
+  if (gamepad.id.includes("Jabra")) {
     return false;
   }
   return true;
@@ -351,7 +352,7 @@ export function resetMyHitByMatrix(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.state.name === 'player-state-hurt') {
+  if (player.state.name === "player-state-hurt") {
     return;
   }
   for (let j = 0; j < game.players.length; j++) {
@@ -468,11 +469,11 @@ export function playerReturnedAttackEnergy(player: Player): void {
 
 export function playerShootAttackEnergy(player: Player, game: Game): void {
   var vX =
-    player.char.sprite.body.velocity.x * player.char.attackEnergy.vel.x * 0.5;
+    player.char.sprite.body.velocity.x * player.char.attackEnergy.VEL.x * 0.5;
 
   var vY = 0;
   if (player.char.attackEnergy.allowVelocityY) {
-    vY = 300 * player.char.attackEnergy.vel.y;
+    vY = 300 * player.char.attackEnergy.VEL.y;
     vY += player.char.sprite.body.velocity.y * 0.5;
   }
 
@@ -532,6 +533,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   // }
 
   updateAttackEnergyOffscreen(player.char.attackEnergy, game);
+  updateVelPrev(game);
 
   if (
     !getIsAttackEnergyOffscreen(player.char.attackEnergy, game) &&
@@ -560,12 +562,12 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationCooldown &&
-    (player.char.attackEnergy.state === 'held' ||
-      player.char.attackEnergy.state === 'returned')
+    (player.char.attackEnergy.state === "held" ||
+      player.char.attackEnergy.state === "returned")
   ) {
     game.SOUND_GUN.play();
     player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-    player.char.attackEnergy.state = 'released';
+    player.char.attackEnergy.state = "released";
     setPhysicsAttackEnergyOn(player);
     playerShootAttackEnergy(player, game);
     return;
@@ -577,7 +579,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationCooldown
   ) {
-    player.char.attackEnergy.state = 'held';
+    player.char.attackEnergy.state = "held";
     setPhysicsAttackEnergyOff(player);
     playerHoldAttackEnergy(player);
   }
@@ -590,7 +592,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationCooldown
   ) {
-    player.char.attackEnergy.state = 'returned';
+    player.char.attackEnergy.state = "returned";
     setPhysicsAttackEnergyOff(player);
     playerReturnedAttackEnergy(player);
   }
@@ -701,8 +703,8 @@ export function debugUpdateControllersPrintConnected(game: Game): void {
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad);
-    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad.id);
+    console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad);
+    console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad.id);
   });
 }
 
@@ -860,39 +862,39 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
         // );
       }
       if (player.padCurr.B) {
-        console.log(player.playerId, 'B');
+        console.log(player.playerId, "B");
       }
       if (player.padCurr.A) {
-        console.log(player.playerId, 'A');
+        console.log(player.playerId, "A");
       }
       if (player.padCurr.X) {
-        console.log(player.playerId, 'X');
+        console.log(player.playerId, "X");
       }
       if (player.padCurr.Y) {
-        console.log(player.playerId, 'Y');
+        console.log(player.playerId, "Y");
         // player.char.fast = 2;
       }
 
       //  D Pad
       if (player.padCurr.down) {
-        console.log(player.playerId, 'down');
+        console.log(player.playerId, "down");
       }
       if (player.padCurr.up) {
-        console.log(player.playerId, 'up');
+        console.log(player.playerId, "up");
       }
       if (player.padCurr.left) {
-        console.log(player.playerId, 'left');
+        console.log(player.playerId, "left");
       }
       if (player.padCurr.right) {
-        console.log(player.playerId, 'right');
+        console.log(player.playerId, "right");
       }
 
       // L R Buttons
       if (player.padCurr.L) {
-        console.log(player.playerId, 'L');
+        console.log(player.playerId, "L");
       }
       if (player.padCurr.R) {
-        console.log(player.playerId, 'R');
+        console.log(player.playerId, "R");
       }
 
       // if (player.gamepad.B) {

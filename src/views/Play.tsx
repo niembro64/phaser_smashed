@@ -657,16 +657,14 @@ function Play() {
     }
   };
 
+  const cb = (event: any) => {
+    onEventKeyboard(event);
+    setAnyKeyWasPressed(!anyKeyWasPressed);
+  };
   useEffect(() => {
-    window.addEventListener<"keydown">(
-      "keydown",
-      (event) => {
-        onEventKeyboard(event);
-        setAnyKeyWasPressed(!anyKeyWasPressed);
-      },
-      { once: true }
-    );
-  }, [anyKeyWasPressed]);
+    window.removeEventListener<"keydown">("keydown", cb);
+    window.addEventListener<"keydown">("keydown", cb, { once: true });
+  }, [anyKeyWasPressed, webState]);
 
   const onClickReStartEventHandler = () => {
     if (myPhaser?.current?.scene?.keys?.game?.loaded) {

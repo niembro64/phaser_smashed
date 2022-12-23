@@ -1,5 +1,5 @@
 import Game from "../Game";
-import { Player } from "../interfaces";
+import { Acceleration, Player, Velocity } from "../interfaces";
 import { getIsAttackEnergyOffscreen } from "./attacks";
 import { getNormalizedVector } from "./damage";
 
@@ -436,13 +436,19 @@ export function getDistance(
 
 export function updateAttackEnergyFlipX(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    let ae = player.char.attackEnergy.sprite;
-
-    if (ae.body.velocity.x > 0) {
-      ae.flipX = false;
+    let ae = player.char.attackEnergy;
+    // console.log(ae.acc, ae.velPrev);
+    if (ae.accX > 0) {
+      ae.sprite.flipX = false;
     }
-    if (ae.body.velocity.x < 0) {
-      ae.flipX = true;
+    if (ae.accX < 0) {
+      ae.sprite.flipX = true;
     }
   });
+}
+
+export function updateVelPrev(game: Game): void {
+  for (let i = 0; i < game.players.length; i++) {
+    console.log(game.players[i].char.attackEnergy.sprite.body.velocity.x);
+  }
 }
