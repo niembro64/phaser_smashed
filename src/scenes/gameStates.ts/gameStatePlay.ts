@@ -10,8 +10,9 @@ import {
   updateWallTouchArray,
   updateTable,
   updateAttackEnergyFollow,
-  updateAttackEnergyFlipX,
+  updateAttackEnergyFlipXAcc,
   updateAttackEnergyVelPrev,
+  updateAttackEnergyFlipXVel,
 } from "../helpers/movement";
 import {
   updateAttackEnergy,
@@ -39,7 +40,7 @@ export function updateGameStatePlay(
   updateAttackEnergyFrictionGroundMovement(game);
   updateAttackEnergyFrictionWall(game);
   updateAttackEnergyWrapScreen(game);
-  updateAttackEnergyFlipX(game);
+  updateAttackEnergyFlipXVel(game);
   updateAttackEnergyOffscreen(game);
   updateAttackEnergyVelPrev(game);
   updateDeathsAndKillsMatrices(game);

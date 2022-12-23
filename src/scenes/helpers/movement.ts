@@ -439,7 +439,19 @@ export function getDistance(
   return Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
 }
 
-export function updateAttackEnergyFlipX(game: Game): void {
+export function updateAttackEnergyFlipXVel(game: Game): void {
+  for (let i = 0; i < game.players.length; i++) {
+    let ae = game.players[i].char.attackEnergy;
+    console.log(ae.accX);
+    if (ae.sprite.body.velocity.x > 0) {
+      ae.sprite.flipX = false;
+    }
+    if (ae.sprite.body.velocity.x < 0) {
+      ae.sprite.flipX = true;
+    }
+  }
+}
+export function updateAttackEnergyFlipXAcc(game: Game): void {
   for (let i = 0; i < game.players.length; i++) {
     let ae = game.players[i].char.attackEnergy;
     console.log(ae.accX);
