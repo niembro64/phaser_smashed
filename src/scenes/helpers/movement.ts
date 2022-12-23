@@ -329,8 +329,7 @@ export function updateAttackEnergyFollow(game: Game): void {
                 ae.findAndFollowAcceleration.x
           );
         }
-      }
-      if (
+      } else if (
         ae.findAndFollowAcceleration.x !== 0 &&
         ae.findAndFollowAcceleration.y !== 0
       ) {
@@ -413,7 +412,7 @@ export function getNearestPlayerAliveXY(
   let ae = player.char.attackEnergy;
 
   game.players.forEach((player, playerIndex) => {
-    if (pIndex !== playerIndex && player.state.name === "player-state-alive") {
+    if (pIndex !== playerIndex) {
       let otherPlayerX = player.char.sprite.x;
       let otherPlayerY = player.char.sprite.y;
       let myX = ae.sprite.x;
@@ -458,9 +457,14 @@ export function updateVelPrev(game: Game): void {
     game.players[i].char.attackEnergy.accX =
       game.players[i].char.attackEnergy.sprite.body.velocity.x -
       game.players[i].char.attackEnergy.velPrevX;
+    game.players[i].char.attackEnergy.accY =
+      game.players[i].char.attackEnergy.sprite.body.velocity.y -
+      game.players[i].char.attackEnergy.velPrevY;
 
     game.players[i].char.attackEnergy.velPrevX =
       game.players[i].char.attackEnergy.sprite.body.velocity.x;
+    game.players[i].char.attackEnergy.velPrevY =
+      game.players[i].char.attackEnergy.sprite.body.velocity.y;
   }
   // console.log(game.players[0].char.attackEnergy.accX);
 }

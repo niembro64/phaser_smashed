@@ -19,7 +19,6 @@ import {
   getIsPlayerOffscreen,
   updateJumpPhysicalOnWall,
   updateJumpFloat,
-  updateVelPrev,
 } from "./helpers/movement";
 import {
   setPlayerState,
