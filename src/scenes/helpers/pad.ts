@@ -594,7 +594,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   ) {
     player.char.attackEnergy.state = "returned";
     setPhysicsAttackEnergyOff(player);
-    playerReturnedAttackEnergy(player);
+    // playerReturnedAttackEnergy(player);
   }
 }
 export function isSpriteOffscreen(

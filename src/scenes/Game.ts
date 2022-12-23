@@ -1905,7 +1905,7 @@ export default class Game extends Phaser.Scene {
           friction: {
             ground: 1,
             wallInvertRotation: false,
-            wallInvertSprite: true,
+            wallInvertSprite: false,
             air: 1,
           },
           VEL: { x: 1, y: -1 },
