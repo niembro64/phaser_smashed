@@ -1248,7 +1248,7 @@ body {
 
 .dev-mode-div {
   position: absolute;
-  top: 10%;
+  top: 15%;
   right: 5%;
   width: auto;
   height: auto;
@@ -1259,10 +1259,10 @@ body {
   justify-content: center;
   align-items: center;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5vw;
   font-weight: bold;
   text-align: center;
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 2vw 3vw;
 
   border-radius: var(--border-radius-small);
 }
