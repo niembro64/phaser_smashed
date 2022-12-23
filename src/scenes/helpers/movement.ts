@@ -443,7 +443,7 @@ export function getDistance(
 export function updateAttackEnergyFlipX(game: Game): void {
   for (let i = 0; i < game.players.length; i++) {
     let ae = game.players[i].char.attackEnergy;
-    // console.log(ae.acc, ae.velPrev);
+    console.log(ae.accX);
     if (ae.accX > 0) {
       ae.sprite.flipX = false;
     }
@@ -462,5 +462,5 @@ export function updateVelPrev(game: Game): void {
     game.players[i].char.attackEnergy.velPrevX =
       game.players[i].char.attackEnergy.sprite.body.velocity.x;
   }
-  console.log(game.players[0].char.attackEnergy.accX);
+  // console.log(game.players[0].char.attackEnergy.accX);
 }
