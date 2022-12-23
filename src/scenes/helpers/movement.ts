@@ -315,42 +315,47 @@ export function updateAttackEnergyFollow(game: Game): void {
         ae.findAndFollowAcceleration.x !== 0 &&
         ae.findAndFollowAcceleration.y === 0
       ) {
-        let goHere: { x: number; y: number } = getNearestPlayerXY(
-          player,
-          playerIndex,
-          game
-        );
-        ae.sprite.body.setVelocityX(
-          ae.sprite.body.velocity.x * 0.98 +
-            (goHere.x < ae.sprite.x ? -1 : 1) *
-              100 *
-              ae.findAndFollowAcceleration.x
-        );
-      }
-      if (
-        ae.findAndFollowAcceleration.x !== 0 &&
-        ae.findAndFollowAcceleration.y !== 0
-      ) {
-        let goHere: { x: number; y: number } = getNearestPlayerXY(
+        let goHere: { x: number; y: number } = getNearestPlayerAliveXY(
           player,
           playerIndex,
           game
         );
 
-        let goHereMultiplier: { x: number; y: number } = getNormalizedVector(
-          ae.sprite.x,
-          ae.sprite.y,
-          goHere.x,
-          goHere.y
+        if (goHere.x !== Infinity) {
+          ae.sprite.body.setVelocityX(
+            ae.sprite.body.velocity.x * 0.98 +
+              (goHere.x < ae.sprite.x ? -1 : 1) *
+                100 *
+                ae.findAndFollowAcceleration.x
+          );
+        }
+      }
+      if (
+        ae.findAndFollowAcceleration.x !== 0 &&
+        ae.findAndFollowAcceleration.y !== 0
+      ) {
+        let goHere: { x: number; y: number } = getNearestPlayerAliveXY(
+          player,
+          playerIndex,
+          game
         );
-        ae.sprite.body.setVelocityX(
-          ae.sprite.body.velocity.x * 0.98 +
-            goHereMultiplier.x * 100 * ae.findAndFollowAcceleration.x
-        );
-        ae.sprite.body.setVelocityY(
-          ae.sprite.body.velocity.y * 0.98 +
-            goHereMultiplier.y * 100 * ae.findAndFollowAcceleration.y
-        );
+
+        if (goHere.x !== Infinity && goHere.y !== Infinity) {
+          let goHereMultiplier: { x: number; y: number } = getNormalizedVector(
+            ae.sprite.x,
+            ae.sprite.y,
+            goHere.x,
+            goHere.y
+          );
+          ae.sprite.body.setVelocityX(
+            ae.sprite.body.velocity.x * 0.98 +
+              goHereMultiplier.x * 100 * ae.findAndFollowAcceleration.x
+          );
+          ae.sprite.body.setVelocityY(
+            ae.sprite.body.velocity.y * 0.98 +
+              goHereMultiplier.y * 100 * ae.findAndFollowAcceleration.y
+          );
+        }
       }
     }
   });
@@ -398,7 +403,7 @@ export function getNearestPlayerY(
   return goToY;
 }
 
-export function getNearestPlayerXY(
+export function getNearestPlayerAliveXY(
   player: Player,
   pIndex: number,
   game: Game
@@ -408,7 +413,7 @@ export function getNearestPlayerXY(
   let ae = player.char.attackEnergy;
 
   game.players.forEach((player, playerIndex) => {
-    if (pIndex !== playerIndex) {
+    if (pIndex !== playerIndex && player.state.name === "player-state-alive") {
       let otherPlayerX = player.char.sprite.x;
       let otherPlayerY = player.char.sprite.y;
       let myX = ae.sprite.x;
