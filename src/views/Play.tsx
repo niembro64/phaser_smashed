@@ -190,7 +190,6 @@ function Play() {
 
   const p1Keys: string[] = ["w", "a", "s", "d"];
   const p2Keys: string[] = ["ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
-  let k = "x";
 
   const [p1KeysTouched, setP1KeysTouched] = useState<boolean>(false);
   const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
@@ -587,73 +586,71 @@ function Play() {
   };
 
   const onEventKeyboard = (event: any) => {
-    k = event.key;
-    switch (webState) {
-      case "start":
-        switch (k) {
-          case "Enter":
-            onClickStartStartButton();
-            break;
-          case " ":
-            onClickStartStartButton();
-            break;
-          case "a":
-            onClickRotateSelection(0);
-            break;
-          case "s":
-            onClickRotateSelection(1);
-            break;
-          case "d":
-            onClickRotateSelection(2);
-            break;
-          case "f":
-            onClickRotateSelection(3);
-            break;
-          case "j":
-            onClickOscura(0);
-            break;
-          case "k":
-            onClickOscura(1);
-            break;
-          case "l":
-            onClickOscura(2);
-            break;
-          case ";":
-            onClickOscura(3);
-            break;
-          case "u":
-            onClickRotateSelection(0);
-            break;
-          case "i":
-            onClickRotateSelection(1);
-            break;
-          case "o":
-            onClickRotateSelection(2);
-            break;
-          case "p":
-            onClickRotateSelection(3);
-            break;
-        }
+    let k = event.key;
 
-        break;
-      case "play":
-        if (p1Keys.includes(k)) {
-          setP1KeysTouched(true);
-        }
-        if (p2Keys.includes(k)) {
-          setP2KeysTouched(true);
-        }
+    if (webState === "start") {
+      if (p1Keys.includes(k)) {
+        setP1KeysTouched(true);
+      }
+      if (p2Keys.includes(k)) {
+        setP2KeysTouched(true);
+      }
 
-        switch (k) {
-          case "Backspace":
-            onClickReStartEventHandler();
-            break;
-          case "Escape":
-            onClickBackEventHandler();
-            break;
-        }
+      switch (k) {
+        case "Enter":
+          onClickStartStartButton();
+          break;
+        case " ":
+          onClickStartStartButton();
+          break;
+        case "a":
+          onClickRotateSelection(0);
+          break;
+        case "s":
+          onClickRotateSelection(1);
+          break;
+        case "d":
+          onClickRotateSelection(2);
+          break;
+        case "f":
+          onClickRotateSelection(3);
+          break;
+        case "j":
+          onClickOscura(0);
+          break;
+        case "k":
+          onClickOscura(1);
+          break;
+        case "l":
+          onClickOscura(2);
+          break;
+        case ";":
+          onClickOscura(3);
+          break;
+        case "u":
+          onClickRotateSelection(0);
+          break;
+        case "i":
+          onClickRotateSelection(1);
+          break;
+        case "o":
+          onClickRotateSelection(2);
+          break;
+        case "p":
+          onClickRotateSelection(3);
+          break;
+      }
+    }
 
-        break;
+    if (webState === "play") {
+      switch (k) {
+        case "Backspace":
+          onClickReStartEventHandler();
+          break;
+        case "Escape":
+          onClickBackEventHandler();
+          break;
+      }
     }
   };
 
@@ -663,9 +660,8 @@ function Play() {
   };
 
   useEffect(() => {
-    window.removeEventListener<"keydown">("keydown", cb);
     window.addEventListener<"keydown">("keydown", cb, { once: true });
-  }, [anyKeyWasPressed, webState]);
+  }, [anyKeyWasPressed]);
 
   const onClickReStartEventHandler = () => {
     if (myPhaser?.current?.scene?.keys?.game?.loaded) {
