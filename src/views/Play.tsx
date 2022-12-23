@@ -589,12 +589,6 @@ function Play() {
     let k = event.key;
 
     if (webState === "start") {
-      if (p1Keys.includes(k)) {
-        setP1KeysTouched(true);
-      }
-      if (p2Keys.includes(k)) {
-        setP2KeysTouched(true);
-      }
       let pIndex;
       switch (k) {
         case "Enter":
@@ -664,6 +658,12 @@ function Play() {
     }
 
     if (webState === "play") {
+      if (p1Keys.includes(k)) {
+        setP1KeysTouched(true);
+      }
+      if (p2Keys.includes(k)) {
+        setP2KeysTouched(true);
+      }
       switch (k) {
         case "Backspace":
           onClickReStartEventHandler();
