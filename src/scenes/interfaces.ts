@@ -373,8 +373,8 @@ export interface Quote {
 export interface Debug {
   Level: number;
   ModeInfinity: boolean;
-  ModeTimeMinutes: number;
-  ModeInfinityShots: number;
+  TimeMinutes: number;
+  InfinityShots: number;
   MusicNumber: number;
   MusicActive: boolean;
   UpdateLoopsNumSkip: number;

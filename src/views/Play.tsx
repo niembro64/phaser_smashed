@@ -43,8 +43,8 @@ function Play() {
     DevMode: true,
     Level: 6, //0123456
     ModeInfinity: true,
-    ModeInfinityShots: 7,
-    ModeTimeMinutes: 7, //01234567
+    InfinityShots: 7,
+    TimeMinutes: 7, //01234567
     MusicActive: true,
     MusicNumber: 2, // 012
     ReadySoundActive: true,

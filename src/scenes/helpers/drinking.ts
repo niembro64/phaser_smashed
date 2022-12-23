@@ -109,5 +109,5 @@ export function updateNumShotsLeft(game: Game): void {
       shots += game.numberShotsTakenByMeMatrix[playerIndex][i];
     }
   });
-  game.shotsLeft = game.debug.ModeInfinityShots - shots;
+  game.shotsLeft = game.debug.InfinityShots - shots;
 }
