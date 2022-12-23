@@ -423,6 +423,8 @@ body {
   margin: 1vh 0% 1vh 0%;
   transition: 0.5s ease;
   z-index: 0;
+
+  cursor: pointer;
 }
 .b-start:hover {
   transition: 0s ease;
