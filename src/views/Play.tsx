@@ -21,6 +21,7 @@ import importedTrance from "../sounds/trance.wav";
 import importedStartSound from "../sounds/start.wav";
 // @ts-ignore
 import importedBlipSound from "../sounds/game-start-liquid.wav";
+import html2canvas from "html2canvas";
 
 import {
   CharacterType,
@@ -38,6 +39,30 @@ import {
 
 function Play() {
   let myPhaser: any = useRef(null);
+
+  function captureScreenshot() {
+    console.log("captureScreenshot");
+    // Select the element that you want to capture a screenshot of
+    const element = document.querySelector("#top-level");
+
+    // Use html2canvas to capture a screenshot of the element
+    html2canvas(element as HTMLElement).then((canvas) => {
+      // Get a data URL representing the image
+      const dataUrl = canvas.toDataURL();
+
+      // Create an anchor element
+      const link = document.createElement("a");
+
+      // Set the href of the anchor element to the data URL
+      link.href = dataUrl;
+
+      // Set the download attribute of the anchor element
+      link.download = "screenshot.png";
+
+      // Click the anchor element to trigger the download
+      link.click();
+    });
+  }
 
   const [debug, setDebug] = useState<Debug>({
     DevMode: false,
@@ -750,7 +775,10 @@ function Play() {
   }, [p1KeysTouched, p2KeysTouched]);
 
   return (
-    <div className="over-div">
+    <div id="top-level" className="over-div">
+      <div className="download-screenshot" onClick={captureScreenshot}>
+        Download Screenshot
+      </div>
       {!debug.DevMode &&
         webState !== "start" &&
         numKeyboards === 2 &&
