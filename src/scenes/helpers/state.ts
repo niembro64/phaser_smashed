@@ -42,8 +42,6 @@ import {
   setSoundStartPlay,
 } from "./sound";
 import {
-  setAnimationsOff,
-  setAnimationsOn,
   setBlinkFalse,
   setBlinkTrue,
 } from "./sprites";
