@@ -1,6 +1,6 @@
-import Game from '../Game';
-import { Player } from '../interfaces';
-import { hasPlayerTouchedWallRecently } from './movement';
+import Game from "../Game";
+import { Player } from "../interfaces";
+import { hasPlayerTouchedWallRecently } from "./movement";
 
 export function updateSpritesFlipX(game: Game): void {
   game.players.forEach((player) => {
@@ -38,7 +38,7 @@ export function updateSpriteFilter(
   }
 
   if (player.char.colorFilter) {
-    if (player.state.name === 'player-state-hurt') {
+    if (player.state.name === "player-state-hurt") {
       // HURT
       if (
         Math.floor(
@@ -113,7 +113,7 @@ export function filterPlayerColorCircleFill(
   // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
-  player.char.sprite.setTint('transparent');
+  player.char.sprite.setTint("transparent");
   player.char.sprite.setTintFill(circleColor);
   player.char.sprite.setAlpha(1);
   // player.char.sprite.brighten(0.3);
@@ -169,5 +169,27 @@ export function filterAttackEnergyColorStateNormal(
     player.char.attackEnergy.sprite.setTint(0xffffff);
     player.char.attackPhysical.sprite.setAlpha(1);
     player.char.attackPhysical.sprite.setTint(0xffffff);
+  }
+}
+
+export function setAnimationsOff(game: Game): void {
+  game.players.forEach((player) => {
+    if (player.char.sprite?.anims) {
+      player.char.sprite.anims.pause();
+    }
+  });
+  if (game.chomp.sprite?.anims) {
+    game.chomp.sprite.anims.pause();
+  }
+}
+
+export function setAnimationsOn(game: Game): void {
+  game.players.forEach((player) => {
+    if (player.char.sprite?.anims) {
+      player.char.sprite.anims.resume();
+    }
+  });
+  if (game.chomp.sprite?.anims) {
+    game.chomp.sprite.anims.resume();
   }
 }

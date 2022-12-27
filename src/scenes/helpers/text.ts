@@ -1,8 +1,8 @@
-import Game from '../Game';
-import { emoji, SplashName } from '../interfaces';
-import { updateNumShotsLeft } from './drinking';
-import { getIsPlayerReady } from './pad';
-import { pauseReadySoundPlayer, playReadySoundPlayer } from './sound';
+import Game from "../Game";
+import { emoji, SplashName } from "../interfaces";
+import { updateNumShotsLeft } from "./drinking";
+import { getIsPlayerReady } from "./pad";
+import { pauseReadySoundPlayer, playReadySoundPlayer } from "./sound";
 
 export function updateText(game: Game): void {
   const dataTitleY = 65;
@@ -112,7 +112,7 @@ export function setRuleSplashOn(game: Game, splashName: SplashName): void {
     }
   });
 
-  if (splashName !== 'splash-none') {
+  if (splashName !== "splash-none") {
     game.splashRules[0].text.setAlpha(1);
   } else {
     game.splashRules[0].text.setAlpha(0);
@@ -130,10 +130,14 @@ export function updateClockTextUpper(
 
   if (game.debug.ModeInfinity) {
     game.scoreBoardTimeGame.setScale(1 / zoom, 1 / zoom);
-    let shotsString: string = '';
+    let shotsString: string = "";
+
+    for (let i = 0; i < game.debug.InfinityShots - game.shotsLeft; i++) {
+      shotsString += emoji.redX;
+    }
+
     for (let i = 0; i < game.shotsLeft; i++) {
       shotsString += emoji.beer;
-      //🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃​
     }
     // console.log(
     //   'shotsLeft: ' + game.shotsLeft + ' shotsString: ' + shotsString + ''
@@ -143,8 +147,8 @@ export function updateClockTextUpper(
     game.scoreBoardTimeGame.setScale(1 / zoom, 1 / zoom);
     game.scoreBoardTimeGame.setText(
       game.gameClock.minutes.toString() +
-        ':' +
-        (game.gameClock.seconds < 10 ? '0' : '') +
+        ":" +
+        (game.gameClock.seconds < 10 ? "0" : "") +
         game.gameClock.seconds.toString()
     );
   }
@@ -162,8 +166,8 @@ export function updateClockTextLower(
 
   game.scoreBoardTimeTime.setText(
     game.timeClock.minutes.toString() +
-      ':' +
-      (game.timeClock.seconds < 10 ? '0' : '') +
+      ":" +
+      (game.timeClock.seconds < 10 ? "0" : "") +
       game.timeClock.seconds.toString()
   );
 }
@@ -182,8 +186,8 @@ export function updateGlassesTransparency(game: Game): void {
     player.shotGlass.setAlpha(0);
 
     if (
-      player.state.name === 'player-state-dead' &&
-      game.gameState.name !== 'game-state-play'
+      player.state.name === "player-state-dead" &&
+      game.gameState.name !== "game-state-play"
     ) {
       player.shotGlass.setAlpha(1);
     }
@@ -221,7 +225,7 @@ export function updateDamageShotsText(
             : player.char.damage
         ).toString() +
           game.TEXT_GAMEBAR_CHARS.damage +
-          '  ' +
+          "  " +
           player.shotCount.toString() +
           game.TEXT_GAMEBAR_CHARS.shots
       );
@@ -239,8 +243,8 @@ export function updateDamageShotsText(
 export function updateReadyText(game: Game, zoom: number, newY: number): void {
   game.players.forEach((player, playerIndex) => {
     if (
-      game.gameState.name === 'game-state-play' ||
-      game.gameState.name === 'game-state-finished'
+      game.gameState.name === "game-state-play" ||
+      game.gameState.name === "game-state-finished"
     ) {
       player.scoreBoardReady.setAlpha(0);
     } else {
@@ -274,8 +278,8 @@ export function updateControllerText(
 ): void {
   game.players.forEach((player, playerIndex) => {
     if (
-      game.gameState.name === 'game-state-play' ||
-      game.gameState.name === 'game-state-finished'
+      game.gameState.name === "game-state-play" ||
+      game.gameState.name === "game-state-finished"
     ) {
       player.scoreBoardController.setAlpha(0);
     } else {
@@ -314,7 +318,7 @@ export function updateDeathsKillsText(
       .setText(
         player.killCount.toString() +
           game.TEXT_GAMEBAR_CHARS.kills +
-          '' +
+          "" +
           player.deathCount.toString() +
           game.TEXT_GAMEBAR_CHARS.deaths
       );
@@ -343,49 +347,49 @@ export function updateEndDataMatrices(
       switch (splashIndex) {
         case 0:
           splash.words[i] = game.colorCircles[i].text;
-          splash.words[i] += '[';
+          splash.words[i] += "[";
           break;
         case 1:
           splash.words[i] = game.colorCircles[i].text;
-          splash.words[i] += '[';
+          splash.words[i] += "[";
           break;
         case 2:
           splash.words[i] = game.colorCircles[i].text;
-          splash.words[i] += '[';
+          splash.words[i] += "[";
           break;
         default:
           if (splashIndex !== game.splashesEndData.length - 1) {
-            splash.words[i] = '[';
+            splash.words[i] = "[";
           }
       }
       for (let j = 0; j < game.players.length; j++) {
         switch (splashIndex) {
           case 0:
             if (game.numberHitByMatrix[i][j] < 10) {
-              splash.words[i] += ' ';
+              splash.words[i] += " ";
             }
             if (game.numberHitByMatrix[i][j] === 0) {
-              splash.words[i] += ' ';
+              splash.words[i] += " ";
             } else {
               splash.words[i] += game.numberHitByMatrix[i][j].toString();
             }
             break;
           case 1:
             if (game.numberKilledByMatrix[i][j] < 10) {
-              splash.words[i] += ' ';
+              splash.words[i] += " ";
             }
             if (game.numberKilledByMatrix[i][j] === 0) {
-              splash.words[i] += ' ';
+              splash.words[i] += " ";
             } else {
               splash.words[i] += game.numberKilledByMatrix[i][j].toString();
             }
             break;
           case 2:
             if (game.numberShotsTakenByMeMatrix[i][j] < 10) {
-              splash.words[i] += ' ';
+              splash.words[i] += " ";
             }
             if (game.numberShotsTakenByMeMatrix[i][j] === 0) {
-              splash.words[i] += ' ';
+              splash.words[i] += " ";
             } else {
               splash.words[i] +=
                 game.numberShotsTakenByMeMatrix[i][j].toString();
@@ -393,15 +397,15 @@ export function updateEndDataMatrices(
             break;
           default:
             if (splashIndex !== game.splashesEndData.length - 1) {
-              splash.words[i] += 'XXX';
+              splash.words[i] += "XXX";
             }
         }
         if (splashIndex !== game.splashesEndData.length - 1) {
-          splash.words[i] += j === game.players.length - 1 ? '' : ',';
+          splash.words[i] += j === game.players.length - 1 ? "" : ",";
         }
       }
       if (splashIndex !== game.splashesEndData.length - 1) {
-        splash.words[i] += ']';
+        splash.words[i] += "]";
       }
     }
     splash.textTitle.x =
