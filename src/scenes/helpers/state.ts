@@ -57,8 +57,6 @@ export function setGameState(game: Game, state: GameState): void {
 
   switch (game.gameState.name) {
     case "game-state-start":
-      setAnimationsOn(game);
-      //
       break;
     case "game-state-play":
       setRuleSplashOn(game, "splash-none");
@@ -68,7 +66,6 @@ export function setGameState(game: Game, state: GameState): void {
       setSoundStartPlay(game);
       setPhysicsResume(game);
       setSplashDataOff(game);
-      setAnimationsOn(game);
       break;
     case "game-state-paused":
       setRuleSplashOn(game, "splash-paused");
@@ -76,7 +73,6 @@ export function setGameState(game: Game, state: GameState): void {
       setSoundStartPlay(game);
       setPhysicsPause(game);
       setSplashDataOn(game);
-      setAnimationsOff(game);
       break;
     case "game-state-first-blood":
       setRuleSplashOn(game, "splash-first-blood");
@@ -86,7 +82,6 @@ export function setGameState(game: Game, state: GameState): void {
       setSoundSquishPlay(game);
       setPhysicsPause(game);
       setSplashDataOn(game);
-      setAnimationsOff(game);
       break;
     case "game-state-screen-clear":
       setRuleSplashOn(game, "splash-screen-clear");
@@ -95,7 +90,6 @@ export function setGameState(game: Game, state: GameState): void {
       setSoundSquishPlay(game);
       setPhysicsPause(game);
       setSplashDataOn(game);
-      setAnimationsOff(game);
       break;
     case "game-state-finished":
       setPhysicsPause(game);
@@ -103,7 +97,6 @@ export function setGameState(game: Game, state: GameState): void {
       setMusicPause(game);
       setSoundFinishPlay(game);
       setSplashDataOn(game);
-      setAnimationsOff(game);
       break;
     default:
       console.log("BROKEN_____________________");
