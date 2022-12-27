@@ -776,9 +776,7 @@ function Play() {
 
   return (
     <div id="top-level" className="over-div">
-      <div className="download-screenshot" onClick={captureScreenshot}>
-        Download Screenshot
-      </div>
+      {/* <div className="download-screenshot">Download Screenshot</div> */}
       {!debug.DevMode &&
         webState !== "start" &&
         numKeyboards === 2 &&
@@ -1045,6 +1043,7 @@ function Play() {
             className="question-mark"
             src="/images/qblack_trans.png"
             alt="question mark"
+            onClick={captureScreenshot}
           />
           {webState === "start" && (
             <div
