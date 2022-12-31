@@ -17,6 +17,7 @@ import {
   CharacterType,
   Chomp,
   emoji,
+  Flag,
 } from "./interfaces";
 import { preload } from "./preload";
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
@@ -600,6 +601,11 @@ export default class Game extends Phaser.Scene {
       y: this.chompY,
     },
     soundAttack: null,
+    powerState: { name: "normal", gameStamp: 0 },
+  };
+
+  flag: Flag = {
+    powerState: { name: "normal", gameStamp: 0 },
   };
 
   players: Player[] = [];
@@ -712,6 +718,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -867,6 +874,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: true,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -1021,6 +1029,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -1175,6 +1184,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -1329,6 +1339,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -1483,6 +1494,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -1637,6 +1649,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -1791,6 +1804,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
@@ -1944,6 +1958,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
         },
         shield: null,
+        powerState: { name: "normal", gameStamp: 0 },
       },
       inputType: 0,
       keyboard: null,
