@@ -605,7 +605,7 @@ export default class Game extends Phaser.Scene {
   };
 
   flag: Flag = {
-    powerState: { name: "normal", gameStamp: 0 },
+    powerState: { name: "normal", gameStamp: 0 }, 
   };
 
   players: Player[] = [];

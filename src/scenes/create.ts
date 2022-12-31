@@ -32,6 +32,7 @@ export function create(game: Game) {
   createScoreboardShotGlass(game);
   createSplashRuleFinished(game);
   createPlayers(game);
+  createPlayerEmitters(game);
   createChomp(game);
   createColliderTablePlayers(game);
   createKeyboards(game);
@@ -476,25 +477,7 @@ export function createColliderTableAttackEnergies(game: Game): void {
   });
 }
 
-export function createPlayers(game: Game): void {
-  setPlayersInitialPositions(game);
-
-  game.players.forEach((player, playerIndex) => {
-    player.inputType = game.playerChoicesInputType[playerIndex];
-  });
-
-  game.players.forEach((player, playerIndex) => {
-    player.char.sprite = game.physics.add.sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
-      game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
-      player.char.name
-    );
-  });
-
-  game.players.forEach((player, playerIndex) => {
-    player.char.attackPhysical.audio = game.sound.add("gun", { volume: 0.6 });
-  });
-
+export function createPlayerEmitters(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     // player.emitterLight.setScale(player.char.scaleCharSpriteReality);
     // player.emitterDark.setScale(player.char.scaleCharSpriteReality);
@@ -519,14 +502,34 @@ export function createPlayers(game: Game): void {
 
     // EMN ACTIVE
     player.emitterLight.active = false;
-    player.emitterDark.active = false;
+    player.emitterDark.active = true;
     player.emitterPlayer.active = false;
     player.emitterHurt.active = false;
 
     player.emitterLight.on = false;
-    player.emitterDark.on = false;
+    player.emitterDark.on = true;
     player.emitterPlayer.on = false;
     player.emitterHurt.on = true; // always on
+  });
+}
+
+export function createPlayers(game: Game): void {
+  setPlayersInitialPositions(game);
+
+  game.players.forEach((player, playerIndex) => {
+    player.inputType = game.playerChoicesInputType[playerIndex];
+  });
+
+  game.players.forEach((player, playerIndex) => {
+    player.char.sprite = game.physics.add.sprite(
+      game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
+      game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
+      player.char.name
+    );
+  });
+
+  game.players.forEach((player, playerIndex) => {
+    player.char.attackPhysical.audio = game.sound.add("gun", { volume: 0.6 });
   });
 
   game.players.forEach((player, playerIndex) => {
@@ -549,6 +552,7 @@ export function createPlayers(game: Game): void {
     setBlinkTrue(player);
   });
 }
+
 export function createAttackPhysicals(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.char.attackPhysical.sprite = game.physics.add
