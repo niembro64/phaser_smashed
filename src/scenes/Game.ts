@@ -609,6 +609,7 @@ export default class Game extends Phaser.Scene {
     darknessMoments: {
       chomp: 0,
       passed: 0,
+      PERCENT_DARKNESS_JUMP: 0.01,
     },
   };
 

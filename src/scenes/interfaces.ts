@@ -491,4 +491,5 @@ export interface PowerStateFlag {
 export interface DarknessMoments {
   chomp: number;
   passed: number;
+  PERCENT_DARKNESS_JUMP: number;
 }

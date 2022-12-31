@@ -132,14 +132,14 @@ export function getHasBeenGameDurationSinceMoment(
   moment: number,
   game: Game
 ): boolean {
-  console.log(
-    "duration",
-    durationNano,
-    "moment",
-    moment,
-    "gameTime",
-    game.gameNanoseconds
-  );
+  // console.log(
+  //   "duration",
+  //   durationNano,
+  //   "moment",
+  //   moment,
+  //   "gameTime",
+  //   game.gameNanoseconds
+  // );
   if (game.gameNanoseconds > moment + durationNano) {
     return true;
   }
@@ -149,11 +149,22 @@ export function getHasBeenGameDurationSinceMoment(
 export function updatePlayerDarknessEvents(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.powerStateCurr.name === "dark") {
-      let amount = game.gameNanoseconds - game.chomp.darknessMoments.chomp;
-      let { x, y } = getRandomUnitVector();
+      let b = player.char.sprite.body;
+      let pj = game.chomp.darknessMoments.PERCENT_DARKNESS_JUMP;
 
-      player.char.sprite.body.setVelocityX(x * amount);
-      player.char.sprite.body.setVelocityY(y * amount);
+      if (Math.random() > 1 - pj) {
+        let amount =
+          Math.pow(
+            game.gameNanoseconds - game.chomp.darknessMoments.chomp,
+            0.8
+          ) * Math.random();
+
+        console.log("amount", amount);
+        let { x, y } = getRandomUnitVector();
+
+        b.setVelocityX(b.velocity.x + x * amount);
+        b.setVelocityY(b.velocity.y + y * amount);
+      }
     }
   });
 }
