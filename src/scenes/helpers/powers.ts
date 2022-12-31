@@ -152,6 +152,8 @@ export function updatePlayerDarknessEvents(game: Game): void {
       let b = player.char.sprite.body;
       let pj = game.chomp.darknessMoments.PERCENT_DARKNESS_JUMP;
 
+      player.char.damage += 1 / 120;
+
       if (Math.random() > 1 - pj) {
         let amount =
           400 +
@@ -164,7 +166,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
         console.log("amount", amount);
         let { x, y } = getRandomUnitVector();
 
-        player.char.damage += amount / 100;
+        // player.char.damage += amount / 200;
         b.setVelocityX(b.velocity.x + x * amount);
         b.setVelocityY(b.velocity.y + y * amount);
       }
