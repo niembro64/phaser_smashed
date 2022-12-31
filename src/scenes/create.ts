@@ -22,20 +22,20 @@ export function create(game: Game) {
   createSplashes(game);
   createFlag(game);
   createEmitterChomp(game);
+  createEmittersPlayers(game);
   createPlatforms(game);
   createTable(game);
   createColliderTablePlatforms(game);
-  createEmittersPlayers(game);
   createAttackPhysicals(game);
   createColliderTableAttackPhysicals(game);
   createAttackEnergies(game);
   createColliderTableAttackEnergies(game);
   createScoreboardShotGlass(game);
   createSplashRuleFinished(game);
-  createPlayers(game);
-  createEmittersFollowPlayers(game);
   createChomp(game);
   createEmitterChompFollowChomp(game);
+  createPlayers(game);
+  createEmittersFollowPlayers(game);
   createColliderTablePlayers(game);
   createKeyboards(game);
   createPlayerIdCircles(game);
@@ -106,10 +106,10 @@ export function createChomp(game: Game): void {
   c.sprite.setMass(c.MASS);
 
   game.physics.add.collider(c.sprite, game.PLATFORMS);
-  game.players.forEach((player, playerIndex) => {
-    game.physics.add.collider(c.sprite, player.char.sprite);
-    game.physics.add.collider(c.sprite, player.char.attackEnergy.sprite);
-  });
+  // game.players.forEach((player, playerIndex) => {
+  //   game.physics.add.collider(c.sprite, player.char.sprite);
+  //   game.physics.add.collider(c.sprite, player.char.attackEnergy.sprite);
+  // });
 }
 
 export function createPreCreate(game: Game): void {
