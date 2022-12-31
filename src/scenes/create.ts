@@ -332,13 +332,13 @@ export function createHitboxOverlap(game: Game): void {
           setPlayerPowerState("dark", player, game);
           setChompPowerState("none", game);
         }
-        console.log(
-          "OVERLAP",
-          "CHOMP",
-          game.chomp.powerStateCurr.name,
-          "PLAYER",
-          player.char.powerStateCurr.name
-        );
+        // console.log(
+        //   "OVERLAP",
+        //   "CHOMP",
+        //   game.chomp.powerStateCurr.name,
+        //   "PLAYER",
+        //   player.char.powerStateCurr.name
+        // );
       }
     );
 
@@ -358,13 +358,13 @@ export function createHitboxOverlap(game: Game): void {
               setPlayerPowerState("dark", pj, game);
               setPlayerPowerState("none", player, game);
             }
-            console.log(
-              "OVERLAP",
-              "PLAYER",
-              player.char.powerStateCurr.name,
-              "PJ",
-              pj.char.powerStateCurr.name
-            );
+            // console.log(
+            //   "OVERLAP",
+            //   "PLAYER",
+            //   player.char.powerStateCurr.name,
+            //   "PJ",
+            //   pj.char.powerStateCurr.name
+            // );
           }
         );
         game.physics.add.overlap(
