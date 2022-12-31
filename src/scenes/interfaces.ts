@@ -420,6 +420,7 @@ export interface Chomp {
   originY: number;
   radius: number;
   percentFramesJump: number;
+  PERCENT_FRAMES_WALK: number;
   NUM_LINKS: number;
   MASS: number;
   links: ChompLink[];

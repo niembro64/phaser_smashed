@@ -587,8 +587,8 @@ export function createEmittersFollowPlayers(game: Game): void {
 
     player.emitterLight.visible = false;
     player.emitterDark.visible = false;
-    player.emitterPlayer.visible = false;
-    player.emitterHurt.visible = false;
+    // player.emitterPlayer.visible = false;
+    // player.emitterHurt.visible = false;
   });
 }
 

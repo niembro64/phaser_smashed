@@ -36,7 +36,12 @@ export function updateChompVelocity(game: Game): void {
   );
   // console.log('c.percentFramesJump', c.percentFramesJump);
 
-  if (Math.random() > c.percentFramesJump) {
+  if (
+    Math.random() >
+    (game.chomp.powerStateCurr.name === "none"
+      ? c.PERCENT_FRAMES_WALK
+      : c.percentFramesJump)
+  ) {
     return;
   }
 
@@ -56,9 +61,13 @@ export function updateChompVelocity(game: Game): void {
 
   if (isChompInsideCircle(game)) {
     if (b.touching.down) {
-      c.soundAttack.play();
-      b.setVelocityX(xNew * 500);
-      b.setVelocityY(-1 * Math.abs(yNew + 0.3) * 1000);
+      if (c.powerStateCurr.name === "dark") {
+        c.soundAttack.play();
+        b.setVelocityY(-1 * Math.abs(yNew + 0.3) * 1000);
+        b.setVelocityX(xNew * 500);
+      } else {
+        b.setVelocityX(xNew * 100);
+      }
     }
   }
 }
