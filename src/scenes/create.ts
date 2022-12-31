@@ -21,10 +21,11 @@ export function create(game: Game) {
   createBackgroundOutline(game);
   createSplashes(game);
   createFlag(game);
+  createEmitterChomp(game);
   createPlatforms(game);
   createTable(game);
   createColliderTablePlatforms(game);
-  createEmitters(game);
+  createEmittersPlayers(game);
   createAttackPhysicals(game);
   createColliderTableAttackPhysicals(game);
   createAttackEnergies(game);
@@ -32,8 +33,9 @@ export function create(game: Game) {
   createScoreboardShotGlass(game);
   createSplashRuleFinished(game);
   createPlayers(game);
-  createPlayerEmitters(game);
+  createEmittersFollowPlayers(game);
   createChomp(game);
+  createEmitterChompFollowChomp(game);
   createColliderTablePlayers(game);
   createKeyboards(game);
   createPlayerIdCircles(game);
@@ -93,10 +95,10 @@ export function createChomp(game: Game): void {
   game.anims.create(config);
 
   c.sprite = game.physics.add
-    .sprite(c.originX, c.originY, "chomp")
+    .sprite(c.originX, c.originY - 10, "chomp")
     .play("chompanimation");
   c.sprite.setScale(1.3);
-  c.sprite.allowGravity = true;
+  c.sprite.body.allowGravity = true;
   c.sprite.setBounceX(0.7);
   c.sprite.setBounceY(0.5);
   c.sprite.setOrigin(0.5, 1);
@@ -411,7 +413,22 @@ export function setPlayersInitialPositions(game: Game): void {
   });
 }
 
-export function createEmitters(game: Game): void {
+export function createEmitterChomp(game: Game): void {
+  let c = game.chomp;
+  c.particles = game.add.particles("tail_0");
+  c.emitterDark = c.particles.createEmitter({
+    speed: 1500,
+    // scale: { start: 0.05, end: 0 },
+    scale: { start: 1 * 2.5, end: 1.5 },
+    blendMode: "SUBTRACT",
+    // bounce: 1,
+    // length: 100,
+    lifespan: 40,
+    // gravityY: 1000,
+  });
+}
+
+export function createEmittersPlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.particles = game.add.particles("tail_" + playerIndex);
 
@@ -477,7 +494,17 @@ export function createColliderTableAttackEnergies(game: Game): void {
   });
 }
 
-export function createPlayerEmitters(game: Game): void {
+export function createEmitterChompFollowChomp(game: Game): void {
+  game.chomp.emitterDark
+    .startFollow(game.chomp.block)
+    .setAlpha(1)
+    .setTint(0x000000);
+
+  game.chomp.emitterDark.active = true;
+  game.chomp.emitterDark.on = true;
+}
+
+export function createEmittersFollowPlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     // player.emitterLight.setScale(player.char.scaleCharSpriteReality);
     // player.emitterDark.setScale(player.char.scaleCharSpriteReality);

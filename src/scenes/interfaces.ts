@@ -407,6 +407,8 @@ export interface Debug {
 
 export interface Flag {
   powerState: PowerStateFlag;
+  emitterLight: any;
+  particles: any;
 }
 
 export interface Chomp {
@@ -422,6 +424,8 @@ export interface Chomp {
   block: ChompBlock;
   soundAttack: any;
   powerState: PowerStateChomp;
+  particles: any;
+  emitterDark: any;
 }
 export interface ChompBlock {
   sprite: any | Phaser.GameObjects.Sprite;
