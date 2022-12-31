@@ -42,6 +42,7 @@ export function create(game: Game) {
   createEmitterChompFollowChomp(game);
   createPlayers(game);
   createEmittersFollowPlayers(game);
+  createChompExplosions(game);
   createColliderTablePlayers(game);
   createKeyboards(game);
   createPlayerIdCircles(game);
@@ -58,6 +59,21 @@ export function create(game: Game) {
 
   // INIT UPDATE
   setPreUpdate(game);
+}
+export function createChompExplosions(game: Game): void {
+  game.chomp.darknessMoments.explosions.forEach((e, eIndex) => {
+    e.sprite = game.physics.add.sprite(
+      100 * eIndex + 1,
+      100 * eIndex + 1,
+      "flame"
+    );
+    e.sprite.setScale(1);
+    e.sprite.body.allowGravity = false;
+    e.sprite.setBounce(0);
+    e.sprite.setOrigin(0.5, 0.5);
+    e.sprite.setImmovable(true);
+    // game.physics.add.collider(e.sprite, game.PLATFORMS);
+  });
 }
 
 export function createChomp(game: Game): void {

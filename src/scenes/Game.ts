@@ -610,6 +610,13 @@ export default class Game extends Phaser.Scene {
       chomp: 0,
       passed: 0,
       PERCENT_DARKNESS_JUMP: 0.01,
+      explosionsIndex: 0,
+      explosions: [
+        { sprite: null, sound: null },
+        { sprite: null, sound: null },
+        { sprite: null, sound: null },
+        { sprite: null, sound: null },
+      ],
     },
   };
 

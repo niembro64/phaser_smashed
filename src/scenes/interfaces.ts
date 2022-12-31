@@ -492,4 +492,11 @@ export interface DarknessMoments {
   chomp: number;
   passed: number;
   PERCENT_DARKNESS_JUMP: number;
+  explosionsIndex: number;
+  explosions: Explosion[];
+}
+
+export interface Explosion {
+  sprite: any;
+  sound: any;
 }
