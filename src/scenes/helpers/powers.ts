@@ -187,7 +187,7 @@ export function setNextExplosionLocation(
   let eIndex = c.darknessMoments.explosionsIndex;
   let eArr = c.darknessMoments.explosions;
 
-  eIndex = (eIndex + 1) % eArr.length;
+  game.chomp.darknessMoments.explosionsIndex = (eIndex + 1) % eArr.length;
 
   eArr[eIndex].sprite.x = x;
   eArr[eIndex].sprite.y = y;
