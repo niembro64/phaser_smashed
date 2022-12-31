@@ -32,6 +32,7 @@ export function create(game: Game) {
   createPlatforms(game);
   createTable(game);
   createColliderTablePlatforms(game);
+  createChompExplosions(game);
   createAttackPhysicals(game);
   createColliderTableAttackPhysicals(game);
   createAttackEnergies(game);
@@ -42,7 +43,6 @@ export function create(game: Game) {
   createEmitterChompFollowChomp(game);
   createPlayers(game);
   createEmittersFollowPlayers(game);
-  createChompExplosions(game);
   createColliderTablePlayers(game);
   createKeyboards(game);
   createPlayerIdCircles(game);
@@ -65,7 +65,7 @@ export function createChompExplosions(game: Game): void {
     e.sprite = game.physics.add.sprite(
       100 * eIndex + 1,
       100 * eIndex + 1,
-      "flame"
+      "centerWhite"
     );
     e.sprite.setScale(1);
     e.sprite.body.allowGravity = false;
