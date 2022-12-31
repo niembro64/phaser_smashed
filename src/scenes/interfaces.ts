@@ -114,7 +114,8 @@ export interface Char {
   attackPhysical: AttackPhysical;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
-  powerState: PowerStateCharacter;
+  powerStateCurr: PowerStateCharacter;
+  powerStatePrev: PowerStateCharacter;
 }
 
 export interface Shield {
@@ -406,7 +407,8 @@ export interface Debug {
 }
 
 export interface Flag {
-  powerState: PowerStateFlag;
+  powerStateCurr: PowerStateFlag;
+  powerStatePrev: PowerStateFlag;
   emitterLight: any;
   particles: any;
 }
@@ -423,7 +425,8 @@ export interface Chomp {
   links: ChompLink[];
   block: ChompBlock;
   soundAttack: any;
-  powerState: PowerStateChomp;
+  powerStateCurr: PowerStateChomp;
+  powerStatePrev: PowerStateChomp;
   particles: any;
   emitterDark: any;
 }
@@ -465,15 +468,20 @@ export const emoji = {
 
 export type Keydown = "a" | "s" | "d" | "f" | "j" | "k" | "l" | ";" | "x";
 
+export type PowerStateCharacterName = "dark" | "light" | "normal" | "init";
+
+export type PowerStateChompName = "dark" | "normal" | "init";
+export type PowerStateFlagName = "light" | "normal" | "init";
 export interface PowerStateCharacter {
-  name: "dark" | "light" | "normal";
+  name: PowerStateCharacterName;
   gameStamp: number;
 }
+
 export interface PowerStateChomp {
-  name: "dark" | "normal";
+  name: PowerStateChompName;
   gameStamp: number;
 }
 export interface PowerStateFlag {
-  name: "light" | "normal";
+  name: PowerStateFlagName;
   gameStamp: number;
 }

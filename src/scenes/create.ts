@@ -1,3 +1,4 @@
+import { CSSImageType } from "html2canvas/dist/types/css/types/image";
 import { matchPath } from "react-router-dom";
 import Game from "./Game";
 import { setAttackPhysicalOffscreen } from "./helpers/attacks";
@@ -5,6 +6,7 @@ import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
 } from "./helpers/damage";
+import { setChompPowerState, setPlayerPowerState } from "./helpers/powers";
 import {
   filterAttackEnergyColorStateNormal,
   setBlinkTrue,
@@ -318,8 +320,37 @@ export function createPlayerIdCircles(game: Game): void {
 
 export function createHitboxOverlap(game: Game): void {
   game.players.forEach((player, playerIndex) => {
+    game.physics.add.overlap(
+      player.char.sprite,
+      game.chomp.sprite,
+      function () {
+        console.log("CHOMP PLAYER OVERLAP");
+        if (
+          game.chomp.powerStateCurr.name === "dark" &&
+          player.char.powerStatePrev.name !== "dark"
+        ) {
+          setPlayerPowerState("dark", player, game);
+          setChompPowerState("normal", game);
+        }
+      }
+    );
+
     game.players.forEach((pj, j) => {
       if (player !== pj) {
+        game.physics.add.overlap(
+          player.char.sprite,
+          pj.char.sprite,
+          function () {
+            console.log("PLAYER PLAYER OVERLAP");
+            if (
+              player.char.powerStateCurr.name === "dark" &&
+              pj.char.powerStatePrev.name !== "dark"
+            ) {
+              setPlayerPowerState("dark", pj, game);
+              setPlayerPowerState("normal", player, game);
+            }
+          }
+        );
         game.physics.add.overlap(
           player.char.sprite,
           pj.char.attackPhysical.sprite,
@@ -529,7 +560,7 @@ export function createEmittersFollowPlayers(game: Game): void {
 
     // EMN ACTIVE
     player.emitterLight.active = false;
-    player.emitterDark.active = true;
+    player.emitterDark.active = false;
     player.emitterPlayer.active = false;
     player.emitterHurt.active = false;
 
