@@ -165,7 +165,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
 
         console.log("amount", amount);
         let { x, y } = getRandomUnitVector();
-
+        game.SOUND_HIT.play();
         // player.char.damage += amount / 200;
         b.setVelocityX(b.velocity.x + x * amount);
         b.setVelocityY(b.velocity.y + y * amount);
