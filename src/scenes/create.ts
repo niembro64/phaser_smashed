@@ -63,8 +63,8 @@ export function create(game: Game) {
 export function createChompExplosions(game: Game): void {
   game.chomp.darknessMoments.explosions.forEach((e, eIndex) => {
     e.sprite = game.physics.add.sprite(
-      100 * eIndex + 1,
-      100 * eIndex + 1,
+      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      -500,
       "centerWhite"
     );
     e.sprite.setScale(1);
