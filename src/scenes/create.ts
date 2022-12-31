@@ -6,7 +6,11 @@ import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
 } from "./helpers/damage";
-import { setChompPowerState, setPlayerPowerState } from "./helpers/powers";
+import {
+  getHasBeenGameDurationSinceMoment,
+  setChompPowerState,
+  setPlayerPowerState,
+} from "./helpers/powers";
 import {
   filterAttackEnergyColorStateNormal,
   setBlinkTrue,
@@ -344,10 +348,13 @@ export function createHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.sprite,
           function () {
-            if (
-              player.char.powerStateCurr.name === "dark" &&
-              pj.char.powerStatePrev.name !== "dark"
-            ) {
+            let hasBeen = getHasBeenGameDurationSinceMoment(
+              2000,
+              game.chomp.darknessMoments.passed,
+              game
+            );
+            // console.log("hasBeen", hasBeen);
+            if (player.char.powerStateCurr.name === "dark" && hasBeen) {
               setPlayerPowerState("dark", pj, game);
               setPlayerPowerState("none", player, game);
             }

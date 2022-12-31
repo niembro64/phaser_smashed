@@ -126,12 +126,20 @@ export function getDoesAPlayerHaveDark(game: Game): boolean {
   return found;
 }
 
-export function hasBeenGameDurationSinceMoment(
+export function getHasBeenGameDurationSinceMoment(
   durationNano: number,
   moment: number,
   game: Game
 ): boolean {
-  if (moment + durationNano > game.gameNanoseconds) {
+  console.log(
+    "duration",
+    durationNano,
+    "moment",
+    moment,
+    "gameTime",
+    game.gameNanoseconds
+  );
+  if (game.gameNanoseconds > moment + durationNano) {
     return true;
   }
   return false;
