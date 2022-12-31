@@ -154,12 +154,12 @@ export function updatePlayerDarknessEvents(game: Game): void {
 
       if (Math.random() > 1 - pj) {
         let amount =
-          500 +
+          400 +
           Math.pow(
             game.gameNanoseconds - game.chomp.darknessMoments.chomp,
-            0.5
+            0.7
           ) *
-            Math.pow(Math.random(), 0.2);
+            Math.pow(Math.random(), 0.4);
 
         console.log("amount", amount);
         let { x, y } = getRandomUnitVector();
