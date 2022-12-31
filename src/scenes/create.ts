@@ -324,14 +324,17 @@ export function createHitboxOverlap(game: Game): void {
       player.char.sprite,
       game.chomp.sprite,
       function () {
-        console.log("CHOMP PLAYER OVERLAP");
-        if (
-          game.chomp.powerStateCurr.name === "dark" &&
-          player.char.powerStatePrev.name !== "dark"
-        ) {
+        if (game.chomp.powerStateCurr.name === "dark") {
           setPlayerPowerState("dark", player, game);
-          setChompPowerState("normal", game);
+          setChompPowerState("none", game);
         }
+        console.log(
+          "OVERLAP",
+          "CHOMP",
+          game.chomp.powerStateCurr.name,
+          "PLAYER",
+          player.char.powerStateCurr.name
+        );
       }
     );
 
@@ -341,14 +344,20 @@ export function createHitboxOverlap(game: Game): void {
           player.char.sprite,
           pj.char.sprite,
           function () {
-            console.log("PLAYER PLAYER OVERLAP");
             if (
               player.char.powerStateCurr.name === "dark" &&
               pj.char.powerStatePrev.name !== "dark"
             ) {
               setPlayerPowerState("dark", pj, game);
-              setPlayerPowerState("normal", player, game);
+              setPlayerPowerState("none", player, game);
             }
+            console.log(
+              "OVERLAP",
+              "PLAYER",
+              player.char.powerStateCurr.name,
+              "PJ",
+              pj.char.powerStateCurr.name
+            );
           }
         );
         game.physics.add.overlap(
@@ -560,7 +569,7 @@ export function createEmittersFollowPlayers(game: Game): void {
 
     // EMN ACTIVE
     player.emitterLight.active = false;
-    player.emitterDark.active = false;
+    player.emitterDark.active = true;
     player.emitterPlayer.active = false;
     player.emitterHurt.active = false;
 
@@ -568,6 +577,11 @@ export function createEmittersFollowPlayers(game: Game): void {
     player.emitterDark.on = true;
     player.emitterPlayer.on = false;
     player.emitterHurt.on = true; // always on
+
+    player.emitterLight.visible = false;
+    player.emitterDark.visible = false;
+    player.emitterPlayer.visible = false;
+    player.emitterHurt.visible = false;
   });
 }
 

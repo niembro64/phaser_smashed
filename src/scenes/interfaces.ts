@@ -429,6 +429,7 @@ export interface Chomp {
   powerStatePrev: PowerStateChomp;
   particles: any;
   emitterDark: any;
+  darknessMoments: DarknessMoments;
 }
 export interface ChompBlock {
   sprite: any | Phaser.GameObjects.Sprite;
@@ -468,10 +469,10 @@ export const emoji = {
 
 export type Keydown = "a" | "s" | "d" | "f" | "j" | "k" | "l" | ";" | "x";
 
-export type PowerStateCharacterName = "dark" | "light" | "normal" | "init";
+export type PowerStateCharacterName = "dark" | "light" | "none";
 
-export type PowerStateChompName = "dark" | "normal" | "init";
-export type PowerStateFlagName = "light" | "normal" | "init";
+export type PowerStateChompName = "dark" | "none";
+export type PowerStateFlagName = "light" | "none";
 export interface PowerStateCharacter {
   name: PowerStateCharacterName;
   gameStamp: number;
@@ -484,4 +485,9 @@ export interface PowerStateChomp {
 export interface PowerStateFlag {
   name: PowerStateFlagName;
   gameStamp: number;
+}
+
+export interface DarknessMoments {
+  chomp: number;
+  passed: number;
 }

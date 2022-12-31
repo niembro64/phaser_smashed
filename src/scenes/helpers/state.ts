@@ -28,6 +28,7 @@ import {
 } from "./drinking";
 import { setGravityFalse, setGravityTrue, setRespawn } from "./movement";
 import { setPhysicsPause, setPhysicsResume } from "./physics";
+import { setPlayerPowerState } from "./powers";
 import {
   setMusicPause,
   setMusicResume,
@@ -41,10 +42,7 @@ import {
   setSoundSquishPlay,
   setSoundStartPlay,
 } from "./sound";
-import {
-  setBlinkFalse,
-  setBlinkTrue,
-} from "./sprites";
+import { setBlinkFalse, setBlinkTrue } from "./sprites";
 import { setRuleSplashOn, setSplashDataOff, setSplashDataOn } from "./text";
 
 export function setGameState(game: Game, state: GameState): void {
@@ -167,6 +165,7 @@ export function setPlayerState(
       setEmitterHurtActiveFalse(player);
       setEmitterHurtVisibleTrue(player);
       setOnDeadUpdateMatrix(playerIndex, game);
+      setPlayerPowerState("none", player, game);
       if (getIsFirstBlood(game)) {
         setAddShotToMatrixFirstBlood(player, playerIndex, game);
       }
@@ -321,3 +320,4 @@ export function getHasGameDurationPassedAttack(
   }
   return false;
 }
+

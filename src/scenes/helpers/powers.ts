@@ -44,7 +44,7 @@ export function setPlayerPowerState(
   let curr = p.char.powerStateCurr;
   let prev = p.char.powerStatePrev;
 
-  if (curr.name === prev.name) {
+  if (stateName === curr.name) {
     return;
   }
 
@@ -57,20 +57,22 @@ export function setPlayerPowerState(
   curr.gameStamp = game.gameNanoseconds;
 
   switch (curr.name) {
-    case "init":
-      break;
-    case "normal":
-      p.emitterDark.active = false;
+    case "none":
+      if (!getDoesAPlayerHaveDark(game)) {
+        setChompPowerState("dark", game);
+      }
+      // p.emitterDark.active = false;
       // p.emitterDark.on = false;
       p.emitterDark.visible = false;
       break;
     case "dark":
-      p.emitterDark.active = true;
+      // p.emitterDark.active = true;
       // p.emitterDark.on = true;
       p.emitterDark.visible = true;
+      game.chomp.darknessMoments.passed = game.gameNanoseconds;
       break;
     case "light":
-      p.emitterDark.active = false;
+      // p.emitterDark.active = false;
       // p.emitterDark.on = false;
       p.emitterDark.visible = false;
       break;
@@ -84,7 +86,7 @@ export function setChompPowerState(
   let curr = c.powerStateCurr;
   let prev = c.powerStatePrev;
 
-  if (curr.name === prev.name) {
+  if (stateName === curr.name) {
     return;
   }
 
@@ -95,17 +97,42 @@ export function setChompPowerState(
   curr.gameStamp = game.gameNanoseconds;
 
   switch (curr.name) {
-    case "init":
-      break;
-    case "normal":
-      c.emitterDark.active = false;
+    case "none":
+      // c.emitterDark.active = false;
       // c.emitterDark.on = false;
       c.emitterDark.visible = false;
+
+      c.darknessMoments.chomp = game.gameNanoseconds;
       break;
     case "dark":
-      c.emitterDark.active = true;
+      // c.emitterDark.active = true;
       // c.emitterDark.on = true;
       c.emitterDark.visible = true;
+
+      c.darknessMoments.chomp = game.gameNanoseconds;
       break;
   }
+}
+
+export function getDoesAPlayerHaveDark(game: Game): boolean {
+  let found = false;
+
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.powerStateCurr.name === "dark") {
+      found = true;
+    }
+  });
+
+  return found;
+}
+
+export function hasBeenGameDurationSinceMoment(
+  durationNano: number,
+  moment: number,
+  game: Game
+): boolean {
+  if (moment + durationNano > game.gameNanoseconds) {
+    return true;
+  }
+  return false;
 }
