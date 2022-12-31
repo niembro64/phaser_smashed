@@ -149,12 +149,15 @@ export function getHasBeenGameDurationSinceMoment(
 export function updatePlayerDarknessEvents(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.powerStateCurr.name === "dark") {
+      let s = player.char.sprite;
       let b = player.char.sprite.body;
       let pj = game.chomp.darknessMoments.PERCENT_DARKNESS_JUMP;
 
       player.char.damage += 1 / 120;
 
       if (Math.random() > 1 - pj) {
+        setNextExplosionLocation(s.x, s.y, game);
+
         let amount =
           400 +
           Math.pow(
@@ -166,12 +169,28 @@ export function updatePlayerDarknessEvents(game: Game): void {
         console.log("amount", amount);
         let { x, y } = getRandomUnitVector();
         game.SOUND_HIT.play();
+
         // player.char.damage += amount / 200;
         b.setVelocityX(b.velocity.x + x * amount);
         b.setVelocityY(b.velocity.y + y * amount);
       }
     }
   });
+}
+
+export function setNextExplosionLocation(
+  x: number,
+  y: number,
+  game: Game
+): void {
+  let c = game.chomp;
+  let eIndex = c.darknessMoments.explosionsIndex;
+  let eArr = c.darknessMoments.explosions;
+
+  eIndex = (eIndex + 1) % eArr.length;
+
+  eArr[eIndex].sprite.x = x;
+  eArr[eIndex].sprite.y = y;
 }
 
 export function getRandomUnitVector(): xyVector {
