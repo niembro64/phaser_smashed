@@ -4,6 +4,7 @@ import {
   PowerStateCharacter,
   PowerStateCharacterName,
   PowerStateChompName,
+  xyVector,
 } from "../interfaces";
 
 // export function setPowerDarkToPlayer(
@@ -143,4 +144,27 @@ export function getHasBeenGameDurationSinceMoment(
     return true;
   }
   return false;
+}
+
+export function updatePlayerDarknessEvents(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.powerStateCurr.name === "dark") {
+      let amount = game.gameNanoseconds - game.chomp.darknessMoments.chomp;
+      let { x, y } = getRandomUnitVector();
+
+      player.char.sprite.body.setVelocityX(x * amount);
+      player.char.sprite.body.setVelocityY(y * amount);
+    }
+  });
+}
+
+export function getRandomUnitVector(): xyVector {
+  let xPositive = Math.random() > 0.5 ? 1 : -1;
+  let yPositive = Math.random() > 0.5 ? 1 : -1;
+
+  let randX = xPositive * Math.random();
+
+  let randY = Math.sqrt(1 - randX * randX) * yPositive;
+
+  return { x: randX, y: randY };
 }

@@ -51,6 +51,7 @@ import {
 import { updateGlassesTransparency, updateText } from "./helpers/text";
 import { updateGameStatePlay } from "./gameStates.ts/gameStatePlay";
 import { Player } from "./interfaces";
+import { updatePlayerDarknessEvents } from "./helpers/powers";
 
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
@@ -223,7 +224,7 @@ export function updatePlayers(game: Game): void {
         updateJumpFloat(player, game);
         updateControllerMovement(player, game);
         updateJumpEnergy(player, game);
-      
+        updatePlayerDarknessEvents(game);
 
         // UPDATE ATTACK PHYSICAL
         updateAttackPhysicals(player, playerIndex, game);
