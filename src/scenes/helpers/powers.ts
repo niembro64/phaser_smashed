@@ -1,11 +1,10 @@
-import Game from "../Game";
+import Game from '../Game';
 import {
   Player,
-  PowerStateCharacter,
   PowerStateCharacterName,
   PowerStateChompName,
   xyVector,
-} from "../interfaces";
+} from '../interfaces';
 
 // export function setPowerDarkToPlayer(
 //   player: Player,
@@ -49,7 +48,7 @@ export function setPlayerPowerState(
     return;
   }
 
-  console.log(player.char.name, "curr.name", curr.name, "prev.name", prev.name);
+  console.log(player.char.name, 'curr.name', curr.name, 'prev.name', prev.name);
 
   prev.name = curr.name;
   prev.gameStamp = curr.gameStamp;
@@ -58,21 +57,21 @@ export function setPlayerPowerState(
   curr.gameStamp = game.gameNanoseconds;
 
   switch (curr.name) {
-    case "none":
+    case 'none':
       if (!getDoesAPlayerHaveDark(game)) {
-        setChompPowerState("dark", game);
+        setChompPowerState('dark', game);
       }
       // p.emitterDark.active = false;
       // p.emitterDark.on = false;
       p.emitterDark.visible = false;
       break;
-    case "dark":
+    case 'dark':
       // p.emitterDark.active = true;
       // p.emitterDark.on = true;
       p.emitterDark.visible = true;
       game.chomp.darknessMoments.passed = game.gameNanoseconds;
       break;
-    case "light":
+    case 'light':
       // p.emitterDark.active = false;
       // p.emitterDark.on = false;
       p.emitterDark.visible = false;
@@ -98,14 +97,14 @@ export function setChompPowerState(
   curr.gameStamp = game.gameNanoseconds;
 
   switch (curr.name) {
-    case "none":
+    case 'none':
       // c.emitterDark.active = false;
       // c.emitterDark.on = false;
       c.emitterDark.visible = false;
 
       c.darknessMoments.chomp = game.gameNanoseconds;
       break;
-    case "dark":
+    case 'dark':
       // c.emitterDark.active = true;
       // c.emitterDark.on = true;
       c.emitterDark.visible = true;
@@ -119,7 +118,7 @@ export function getDoesAPlayerHaveDark(game: Game): boolean {
   let found = false;
 
   game.players.forEach((player, playerIndex) => {
-    if (player.char.powerStateCurr.name === "dark") {
+    if (player.char.powerStateCurr.name === 'dark') {
       found = true;
     }
   });
@@ -148,7 +147,7 @@ export function getHasBeenGameDurationSinceMoment(
 
 export function updatePlayerDarknessEvents(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    if (player.char.powerStateCurr.name === "dark") {
+    if (player.char.powerStateCurr.name === 'dark') {
       let s = player.char.sprite;
       let b = player.char.sprite.body;
       let pj = game.chomp.darknessMoments.PERCENT_DARKNESS_JUMP;
@@ -166,7 +165,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
           ) *
             Math.pow(Math.random(), 0.4);
 
-        console.log("amount", amount);
+        console.log('amount', amount);
         let { x, y } = getRandomUnitVector();
         game.SOUND_HIT.play();
 
@@ -191,6 +190,9 @@ export function setNextExplosionLocation(
 
   eArr[eIndex].sprite.x = x;
   eArr[eIndex].sprite.y = y;
+
+  // eArr[eIndex].sprite.anims.stop();
+  eArr[eIndex].sprite.anims.play('explsionanimation');
 }
 
 export function getRandomUnitVector(): xyVector {
