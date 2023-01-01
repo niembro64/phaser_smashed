@@ -12,6 +12,10 @@ export function ensureTypeInput<Input>(
 }
 
 export function preload(game: Game): void {
+  //////////////////////////////
+  // Pull Configs
+  //////////////////////////////
+
   game.smashConfig = game.game.registry.get('smashConfig');
   game.debug = game.game.registry.get('debug');
   console.log('this.smashConfig', game.smashConfig);
@@ -37,6 +41,10 @@ export function preload(game: Game): void {
   }
 
   game.shotsLeft = game.debug.InfinityShots;
+
+  //////////////////////////////
+  // Load Audio
+  //////////////////////////////
 
   let pathSounds = 'sounds/';
   game.load.audio('intro', pathSounds + game.FILE_SOUNDS.INTRO);
@@ -109,6 +117,14 @@ export function preload(game: Game): void {
   if (game.debug.MusicNumber === 2) {
     game.load.audio('bgm', pathSounds + game.FILE_SOUNDS.BGM_ROYKSOP);
   }
+
+  game.load.audio('boom_short_01', pathSounds + game.FILE_SOUNDS.BOOM_SHORT_01);
+  game.load.audio('boom_short_02', pathSounds + game.FILE_SOUNDS.BOOM_SHORT_02);
+
+  //////////////////////////////
+  // Load Images
+  //////////////////////////////
+
   game.load.image('fist-gray', 'images/fist-gray.png');
   game.load.image('fist-black', 'images/fist-black.png');
   game.load.image('fist-white', 'images/fist.png');

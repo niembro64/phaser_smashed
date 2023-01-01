@@ -100,17 +100,26 @@ export function createExplosions(game: Game): void {
       -500,
       'explosion256'
     );
-    e.sprite.setScale(1);
+    e.sprite.setScale(1.2);
     e.sprite.body.allowGravity = false;
     e.sprite.setBounce(0);
     e.sprite.setOrigin(0.5, 0.5);
     e.sprite.setImmovable(true);
+    e.sprite.setRotation((Math.PI / 4) * eIndex);
     // e.sprite.on('animationcomplete', () => {
     //   e.sprite.setVisible(false);
     //   e.sprite.setVelocity(0, 0);
     //   e.sprite.setActive(false);
     //   e.sprite.setImmovable(true);
     // });
+
+    // add sounds to explosions
+    e.sound = game.sound.add(
+      eIndex % 2 === 0 ? 'boom_short_01' : 'boom_short_02',
+      {
+        volume: game.debug.DevMode ? 0 : 0.2,
+      }
+    );
   });
 }
 
