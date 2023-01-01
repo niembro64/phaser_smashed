@@ -48,7 +48,7 @@ export function setPlayerPowerState(
     return;
   }
 
-  console.log(player.char.name, 'curr.name', curr.name, 'prev.name', prev.name);
+  // console.log(player.char.name, 'curr.name', curr.name, 'prev.name', prev.name);
 
   prev.name = curr.name;
   prev.gameStamp = curr.gameStamp;
@@ -152,7 +152,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
       let b = player.char.sprite.body;
       let pj = game.chomp.darknessMoments.PERCENT_DARKNESS_JUMP;
 
-      player.char.damage += 1 / 120;
+      // player.char.damage += 1 / 120;
 
       if (Math.random() > 1 - pj) {
         playNextExplosion(s.x, s.y, game);
@@ -165,11 +165,11 @@ export function updatePlayerDarknessEvents(game: Game): void {
           ) *
             Math.pow(Math.random(), 0.4);
 
-        console.log('amount', amount);
+        // console.log('amount', amount);
         let { x, y } = getRandomUnitVector();
         // game.SOUND_HIT.play();
 
-        // player.char.damage += amount / 200;
+        player.char.damage += amount / 200;
         b.setVelocityX(b.velocity.x + x * amount);
         b.setVelocityY(b.velocity.y + y * amount);
       }
