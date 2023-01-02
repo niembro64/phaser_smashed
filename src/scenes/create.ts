@@ -174,20 +174,19 @@ export function createChomp(game: Game): void {
   var config_walking = {
     key: 'chompanimation_walking',
     frames: game.anims.generateFrameNumbers('chomp', {
-      start: 3,
+      start: 2,
       end: 3,
-      first: 3,
+      first: 2,
     }),
-    frameRate: 20,
+    frameRate: 10,
     repeat: -1,
+    yoyo: true,
   };
 
   game.anims.create(config_chomping);
   game.anims.create(config_walking);
 
-  c.sprite = game.physics.add
-    .sprite(c.originX, c.originY - 10, 'chomp')
-    .play('chompanimation_chomping');
+  c.sprite = game.physics.add.sprite(c.originX, c.originY - 10, 'chomp');
   c.sprite.setScale(1.3);
   c.sprite.body.allowGravity = true;
   c.sprite.setBounceX(0.7);
@@ -195,6 +194,7 @@ export function createChomp(game: Game): void {
   c.sprite.setOrigin(0.5, 1);
   c.sprite.setVelocityX(30);
   c.sprite.setMass(c.MASS);
+  c.sprite.play('chompanimation_chomping');
 
   game.physics.add.collider(c.sprite, game.PLATFORMS);
   // game.players.forEach((player, playerIndex) => {

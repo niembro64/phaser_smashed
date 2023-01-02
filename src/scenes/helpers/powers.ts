@@ -103,6 +103,7 @@ export function setChompPowerState(
       c.emitterDark.visible = false;
 
       c.darknessMoments.chomp = game.gameNanoseconds;
+      c.sprite.play('chompanimation_walking');
 
       break;
     case 'dark':
@@ -111,6 +112,7 @@ export function setChompPowerState(
       c.emitterDark.visible = true;
 
       c.darknessMoments.chomp = game.gameNanoseconds;
+      c.sprite.play('chompanimation_chomping');
       break;
   }
 }
