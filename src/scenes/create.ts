@@ -736,14 +736,28 @@ export function createPlayers(game: Game): void {
         repeat: -1,
       };
 
-      var config_jump = {
-        key: player.char.name + '_jump',
+      var config_jumpUp = {
+        key: player.char.name + '_jumpUp',
         frames: game.anims.generateFrameNumbers(
           player.char.name + '_spritesheet',
           {
             start: 4,
             end: 4,
             first: 4,
+          }
+        ),
+        frameRate: 1,
+        repeat: -1,
+      };
+
+      var config_jumpDown = {
+        key: player.char.name + '_jumpDown',
+        frames: game.anims.generateFrameNumbers(
+          player.char.name + '_spritesheet',
+          {
+            start: 7,
+            end: 7,
+            first: 7,
           }
         ),
         frameRate: 1,
@@ -766,7 +780,8 @@ export function createPlayers(game: Game): void {
 
       game.anims.create(config_idle);
       game.anims.create(config_walk);
-      game.anims.create(config_jump);
+      game.anims.create(config_jumpUp);
+      game.anims.create(config_jumpDown);
       game.anims.create(config_climb);
     }
   });

@@ -127,7 +127,7 @@ export interface SpriteState {
   timeStamp: number;
 }
 
-export type SpriteStateName = 'idle' | 'walk' | 'jump' | 'climb';
+export type SpriteStateName = 'idle' | 'walk' | 'jumpUp' | 'jumpDown' | 'climb';
 
 export interface Shield {
   circle: ColorCircle;

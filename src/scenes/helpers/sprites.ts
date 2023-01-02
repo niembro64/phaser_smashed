@@ -219,20 +219,10 @@ export function updateSpritesheets(game: Game): void {
 
       if (tWall && !tDown && !movingUp) {
         newSpriteStateName = 'climb';
+      } else if (tDown) {
+        newSpriteStateName = movingHoriz ? 'walk' : 'idle';
       } else {
-        if (tDown) {
-          if (movingHoriz) {
-            newSpriteStateName = 'walk';
-          } else {
-            newSpriteStateName = 'idle';
-          }
-        } else {
-          if (movingUp) {
-            newSpriteStateName = 'jump';
-          } else {
-            newSpriteStateName = 'idle';
-          }
-        }
+        newSpriteStateName = movingUp ? 'jumpUp' : 'jumpDown';
       }
 
       updateSpriteState(newSpriteStateName, player, game);
@@ -278,8 +268,11 @@ export function updateSpriteState(
       case 'walk':
         s.anims.play(n + '_walk', true);
         break;
-      case 'jump':
-        s.anims.play(n + '_jump', true);
+      case 'jumpUp':
+        s.anims.play(n + '_jumpUp', true);
+        break;
+      case 'jumpDown':
+        s.anims.play(n + '_jumpDown', true);
         break;
       case 'climb':
         s.anims.play(n + '_climb', true);

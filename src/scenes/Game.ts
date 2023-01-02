@@ -675,7 +675,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_mario_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.0_mario_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
@@ -846,7 +846,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_link_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.0_link_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
@@ -1016,7 +1016,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_pikachu_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.0_pikachu_4x.png',
         spriteSize: {
           width: 16,
           height: 14,
@@ -1185,7 +1185,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_kirby_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.0_kirby_4x.png',
         spriteSize: {
           width: 13,
           height: 13,
