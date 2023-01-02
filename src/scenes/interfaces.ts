@@ -96,6 +96,7 @@ export interface Char {
   scaleCharSpriteImage: number;
   scaleCharSpriteReality: number;
   sprite: any | Phaser.GameObjects.Sprite;
+  srcSpriteSheet: string;
   shield: Shield | null;
   zoom: number;
   vel: { x: number; y: number };

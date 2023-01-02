@@ -203,7 +203,25 @@ export function preload(game: Game): void {
   game.playerOptions.forEach((pOption, pOptionIndex) => {
     game.load.image(pOption.char.name, pOption.char.src);
   });
+
   for (let i = 0; i < game.playerChoicesCharacterType.length; i++) {
     game.load.image('tail_' + i, 'images/white_trans.png');
   }
+
+  game.playerOptions.forEach((pOption, pOptionIndex) => {
+    if (pOption.char.srcSpriteSheet !== '') {
+      game.load.spritesheet({
+        key: pOption.char.name + '_spritesheet',
+        url: pOption.char.srcSpriteSheet,
+        frameConfig: {
+          frameWidth: 16 * 4,
+          frameHeight: 16 * 4,
+          startFrame: 0,
+          endFrame: 7,
+          margin: 0,
+          spacing: 0,
+        },
+      });
+    }
+  });
 }

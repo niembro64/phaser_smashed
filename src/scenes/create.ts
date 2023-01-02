@@ -171,6 +171,7 @@ export function createChomp(game: Game): void {
     repeat: -1,
     yoyo: true,
   };
+
   var config_walking = {
     key: 'chompanimation_walking',
     frames: game.anims.generateFrameNumbers('chomp', {
@@ -694,11 +695,80 @@ export function createPlayers(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    player.char.sprite = game.physics.add.sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
-      game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
-      player.char.name
-    );
+    if (player.char.srcSpriteSheet === '') {
+      player.char.sprite = game.physics.add.sprite(
+        game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
+        game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
+        player.char.name
+      );
+    } else {
+      player.char.sprite = game.physics.add.sprite(
+        game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
+        game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
+        player.char.name + '_spritesheet'
+      );
+
+      var config_idle = {
+        key: player.char.name + '_idle',
+        frames: game.anims.generateFrameNumbers(
+          player.char.name + '_spritesheet',
+          {
+            start: 0,
+            end: 0,
+            first: 0,
+          }
+        ),
+        frameRate: 1,
+        repeat: -1,
+      };
+
+      var config_walk = {
+        key: player.char.name + '_walk',
+        frames: game.anims.generateFrameNumbers(
+          player.char.name + '_spritesheet',
+          {
+            start: 1,
+            end: 3,
+            first: 1,
+          }
+        ),
+        frameRate: 10,
+        repeat: -1,
+      };
+
+      var config_jump = {
+        key: player.char.name + '_jump',
+        frames: game.anims.generateFrameNumbers(
+          player.char.name + '_spritesheet',
+          {
+            start: 4,
+            end: 4,
+            first: 4,
+          }
+        ),
+        frameRate: 1,
+        repeat: -1,
+      };
+
+      var config_climb = {
+        key: player.char.name + '_climb',
+        frames: game.anims.generateFrameNumbers(
+          player.char.name + '_spritesheet',
+          {
+            start: 5,
+            end: 6,
+            first: 5,
+          }
+        ),
+        frameRate: 3,
+        repeat: -1,
+      };
+
+      game.anims.create(config_idle);
+      game.anims.create(config_walk);
+      game.anims.create(config_jump);
+      game.anims.create(config_climb);
+    }
   });
 
   game.players.forEach((player, playerIndex) => {
