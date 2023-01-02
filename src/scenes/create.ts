@@ -27,13 +27,13 @@ export function create(game: Game) {
   createSplashBlack(game);
   createBackgroundOutline(game);
   createSplashes(game);
+  createExplosions(game);
   createFlag(game);
   createEmitterChomp(game);
   createEmittersPlayers(game);
   createPlatforms(game);
   createTable(game);
   createColliderTablePlatforms(game);
-  createExplosions(game);
   // createChompExplosions(game);
   createAttackPhysicals(game);
   createColliderTableAttackPhysicals(game);
@@ -86,7 +86,7 @@ export function createExplosions(game: Game): void {
       end: 47,
       first: 0,
     }),
-    frameRate: 100,
+    frameRate: 60,
     repeat: 0,
   };
 
@@ -101,12 +101,13 @@ export function createExplosions(game: Game): void {
       -500,
       'explosion256'
     );
-    e.sprite.setScale(1.2);
+    e.sprite.setScale(2);
     e.sprite.body.allowGravity = false;
     e.sprite.setBounce(0);
     e.sprite.setOrigin(0.5, 0.5);
     e.sprite.setImmovable(true);
     e.sprite.setRotation((Math.PI / 4) * eIndex);
+    e.sprite.setTint(0x000000);
     // e.sprite.on('animationcomplete', () => {
     //   e.sprite.setVisible(false);
     //   e.sprite.setVelocity(0, 0);
