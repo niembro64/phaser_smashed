@@ -176,7 +176,7 @@ export function preload(game: Game): void {
 
   game.load.spritesheet({
     key: 'chomp',
-    url: 'images/chompsheet3.png',
+    url: 'images/chompsheet4.png',
     frameConfig: {
       frameWidth: 32,
       frameHeight: 32,
