@@ -842,7 +842,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: '',
+        srcSpriteSheet: 'images/sprite_sheet_link_4x.png',
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
