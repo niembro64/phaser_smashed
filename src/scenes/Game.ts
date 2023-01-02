@@ -1019,7 +1019,7 @@ export default class Game extends Phaser.Scene {
         srcSpriteSheet: 'images/sprite_sheet_pikachu_4x.png',
         spriteSize: {
           width: 16,
-          height: 16,
+          height: 14,
         },
         ssCurr: {
           name: 'idle',
