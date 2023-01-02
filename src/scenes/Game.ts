@@ -1016,7 +1016,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: '',
+        srcSpriteSheet: 'images/sprite_sheet_pikachu_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
