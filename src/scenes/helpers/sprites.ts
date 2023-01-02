@@ -1,6 +1,6 @@
-import Game from "../Game";
-import { Player } from "../interfaces";
-import { hasPlayerTouchedWallRecently } from "./movement";
+import Game from '../Game';
+import { Player } from '../interfaces';
+import { hasPlayerTouchedWallRecently } from './movement';
 
 export function updateSpritesFlipX(game: Game): void {
   game.players.forEach((player) => {
@@ -38,7 +38,7 @@ export function updateSpriteFilter(
   }
 
   if (player.char.colorFilter) {
-    if (player.state.name === "player-state-hurt") {
+    if (player.state.name === 'player-state-hurt') {
       // HURT
       if (
         Math.floor(
@@ -113,7 +113,7 @@ export function filterPlayerColorCircleFill(
   // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
   // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
-  player.char.sprite.setTint("transparent");
+  player.char.sprite.setTint('transparent');
   player.char.sprite.setTintFill(circleColor);
   player.char.sprite.setAlpha(1);
   // player.char.sprite.brighten(0.3);
@@ -192,4 +192,41 @@ export function setAnimationsOn(game: Game): void {
   if (game.chomp.sprite?.anims) {
     game.chomp.sprite.anims.resume();
   }
+}
+
+/////////////////////
+// spritesheets
+/////////////////////
+
+export function updateSpritesheets(game: Game): void {
+  // update player spritesheets
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.srcSpriteSheet !== '') {
+      let s = player.char.sprite;
+      let n = player.char.name;
+
+      let tDown = s.body.touching.down;
+      let tWall = s.body.touching.left || s.body.touching.right;
+      let movingUp = s.body.velocity.y < 0;
+      let movingHoriz = s.body.velocity.x !== 0;
+
+      if (tWall) {
+        s.anims.play(n + '_climb', true);
+      } else {
+        if (tDown) {
+          if (movingHoriz) {
+            s.anims.play(n + '_walk', true);
+          } else {
+            s.anims.play(n + '_idle', true);
+          }
+        } else {
+          if (movingUp) {
+            s.anims.play(n + '_jump', true);
+          } else {
+            s.anims.play(n + '_idle', true);
+          }
+        }
+      }
+    }
+  });
 }

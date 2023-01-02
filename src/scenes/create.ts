@@ -760,7 +760,7 @@ export function createPlayers(game: Game): void {
             first: 5,
           }
         ),
-        frameRate: 3,
+        frameRate: 10,
         repeat: -1,
       };
 

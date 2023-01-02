@@ -1,29 +1,31 @@
-import Game from "../Game";
-import { updateAttackEnergyOffscreen } from "../helpers/attacks";
-import { updateCamera } from "../helpers/camera";
-import { updateChomp } from "../helpers/chomp";
-import { updateDeathsAndKillsMatrices } from "../helpers/damage";
+import Game from '../Game';
+import { updateAttackEnergyOffscreen } from '../helpers/attacks';
+import { updateCamera } from '../helpers/camera';
+import { updateChomp } from '../helpers/chomp';
+import { updateDeathsAndKillsMatrices } from '../helpers/damage';
 import {
-  updateKeepObjectsFromFallingLikeCrazy,
-  updateCirclesLocations,
-  updateAttackEnergyWrapScreen,
-  updateWallTouchArray,
-  updateTable,
-  updateAttackEnergyFollow,
-  updateAttackEnergyFlipXAcc,
-  updateAttackEnergyVelPrev,
   updateAttackEnergyFlipXVel,
-} from "../helpers/movement";
+  updateAttackEnergyFollow,
+  updateAttackEnergyVelPrev,
+  updateAttackEnergyWrapScreen,
+  updateCirclesLocations,
+  updateKeepObjectsFromFallingLikeCrazy,
+  updateTable,
+  updateWallTouchArray,
+} from '../helpers/movement';
 import {
-  updateAttackEnergy,
   updateAttackEnergyFrictionGroundMovement,
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
   updatePadPreviousAndDebounced,
-} from "../helpers/pad";
-import { updateAllSpriteFilters, updateSpritesFlipX } from "../helpers/sprites";
-import { updateResetAllHitboxesAttackEnergy } from "../helpers/state";
-import { updatePlayers } from "../update";
+} from '../helpers/pad';
+import {
+  updateAllSpriteFilters,
+  updateSpritesFlipX,
+  updateSpritesheets,
+} from '../helpers/sprites';
+import { updateResetAllHitboxesAttackEnergy } from '../helpers/state';
+import { updatePlayers } from '../update';
 
 export function updateGameStatePlay(
   game: Game,
@@ -48,6 +50,7 @@ export function updateGameStatePlay(
   updateCirclesLocations(game);
   updateChomp(game);
   updateTable(game);
+  updateSpritesheets(game);
 
   // UPDATE PLAYERS
   updatePlayers(game);
