@@ -103,6 +103,7 @@ export function setChompPowerState(
       c.emitterDark.visible = false;
 
       c.darknessMoments.chomp = game.gameNanoseconds;
+
       break;
     case 'dark':
       // c.emitterDark.active = true;

@@ -2,6 +2,7 @@ import { CSSImageType } from 'html2canvas/dist/types/css/types/image';
 import { matchPath } from 'react-router-dom';
 import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
+import { isChompInsideCircle } from './helpers/chomp';
 import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
@@ -129,6 +130,14 @@ export function createChomp(game: Game): void {
 
   c.soundAttack = game.sound.add('chainChompAttack', {
     volume: game.debug.DevMode ? 0 : 0.2,
+  });
+
+  c.soundBBBambalam = game.sound.add('bb_bam', {
+    volume: game.debug.DevMode ? 0 : 0.4,
+  });
+
+  c.soundBBWoah = game.sound.add('bb_woah', {
+    volume: game.debug.DevMode ? 0 : 0.25,
   });
 
   // b.sprite = game.physics.add.sprite(b.x, b.y, 'chomp_block');
@@ -386,6 +395,7 @@ export function createPlayerIdCircles(game: Game): void {
 }
 
 export function createHitboxOverlap(game: Game): void {
+  // PLAYER CHOMP OVERLAP
   game.players.forEach((player, playerIndex) => {
     game.physics.add.overlap(
       player.char.sprite,
@@ -394,6 +404,7 @@ export function createHitboxOverlap(game: Game): void {
         if (game.chomp.powerStateCurr.name === 'dark') {
           setPlayerPowerState('dark', player, game);
           setChompPowerState('none', game);
+          game.chomp.soundBBBambalam.play();
         }
         // console.log(
         //   "OVERLAP",
@@ -405,6 +416,7 @@ export function createHitboxOverlap(game: Game): void {
       }
     );
 
+    // PLAYER PLAYER OVERLAP
     game.players.forEach((pj, j) => {
       if (player !== pj) {
         game.physics.add.overlap(
@@ -420,6 +432,10 @@ export function createHitboxOverlap(game: Game): void {
             if (player.char.powerStateCurr.name === 'dark' && hasBeen) {
               setPlayerPowerState('dark', pj, game);
               setPlayerPowerState('none', player, game);
+              game.chomp.soundBBWoah.setRate(
+                (game.chomp.soundAttack.rate += 0.05)
+              );
+              game.chomp.soundBBWoah.play();
             }
             // console.log(
             //   "OVERLAP",
@@ -430,6 +446,8 @@ export function createHitboxOverlap(game: Game): void {
             // );
           }
         );
+
+        // PLAYER ATTACK PHYSICAL OVERLAP
         game.physics.add.overlap(
           player.char.sprite,
           pj.char.attackPhysical.sprite,
@@ -455,6 +473,8 @@ export function createHitboxOverlap(game: Game): void {
             );
           }
         );
+
+        // PLAYER ATTACK ENERGY OVERLAP
         game.physics.add.overlap(
           player.char.sprite,
           pj.char.attackEnergy.sprite,
