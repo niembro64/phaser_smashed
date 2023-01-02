@@ -96,6 +96,8 @@ export interface Char {
   scaleCharSpriteImage: number;
   scaleCharSpriteReality: number;
   sprite: any | Phaser.GameObjects.Sprite;
+  ssCurr: SpriteState;
+  ssPrev: SpriteState;
   srcSpriteSheet: string;
   shield: Shield | null;
   zoom: number;
@@ -118,6 +120,13 @@ export interface Char {
   powerStateCurr: PowerStateCharacter;
   powerStatePrev: PowerStateCharacter;
 }
+
+export interface SpriteState {
+  name: SpriteStateName;
+  timeStamp: number;
+}
+
+export type SpriteStateName = 'idle' | 'walk' | 'jump' | 'climb';
 
 export interface Shield {
   circle: ColorCircle;

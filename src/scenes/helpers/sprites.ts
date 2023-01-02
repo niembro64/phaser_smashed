@@ -1,6 +1,8 @@
+import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 import Game from '../Game';
-import { Player } from '../interfaces';
+import { Player, SpriteStateName } from '../interfaces';
 import { hasPlayerTouchedWallRecently } from './movement';
+import { getHasBeenGameDurationSinceMoment } from './powers';
 
 export function updateSpritesFlipX(game: Game): void {
   game.players.forEach((player) => {
@@ -199,6 +201,7 @@ export function setAnimationsOn(game: Game): void {
 /////////////////////
 
 export function updateSpritesheets(game: Game): void {
+  const movingXThreshold = 10;
   // update player spritesheets
   game.players.forEach((player, playerIndex) => {
     if (player.char.srcSpriteSheet !== '') {
@@ -207,26 +210,80 @@ export function updateSpritesheets(game: Game): void {
 
       let tDown = s.body.touching.down;
       let tWall = s.body.touching.left || s.body.touching.right;
-      let movingUp = s.body.velocity.y < 0;
-      let movingHoriz = s.body.velocity.x !== 0;
+      let movingUp = s.body.velocity.y <= 0;
+      let movingHoriz =
+        s.body.velocity.x > movingXThreshold ||
+        s.body.velocity.x < -movingXThreshold;
 
-      if (tWall) {
-        s.anims.play(n + '_climb', true);
+      let newSpriteStateName: SpriteStateName;
+
+      if (tWall && !tDown && !movingUp) {
+        newSpriteStateName = 'climb';
       } else {
         if (tDown) {
           if (movingHoriz) {
-            s.anims.play(n + '_walk', true);
+            newSpriteStateName = 'walk';
           } else {
-            s.anims.play(n + '_idle', true);
+            newSpriteStateName = 'idle';
           }
         } else {
           if (movingUp) {
-            s.anims.play(n + '_jump', true);
+            newSpriteStateName = 'jump';
           } else {
-            s.anims.play(n + '_idle', true);
+            newSpriteStateName = 'idle';
           }
         }
       }
+
+      updateSpriteState(newSpriteStateName, player, game);
     }
   });
+}
+
+export function updateSpriteState(
+  newState: SpriteStateName,
+  player: Player,
+  game: Game
+): void {
+  if (player.char.srcSpriteSheet !== '') {
+    if (newState === player.char.ssCurr.name) {
+      return;
+    }
+
+    if (
+      !getHasBeenGameDurationSinceMoment(
+        100,
+        player.char.ssCurr.timeStamp,
+        game
+      )
+    ) {
+      return;
+    }
+
+    console.log('TOUCHING', player.char.sprite.body.touching.down);
+
+    player.char.ssPrev.name = player.char.ssCurr.name;
+    player.char.ssPrev.timeStamp = player.char.ssCurr.timeStamp;
+    player.char.ssCurr.name = newState;
+    player.char.ssCurr.timeStamp = game.gameNanoseconds;
+
+    let curr = player.char.ssCurr.name;
+    let n = player.char.name;
+    let s = player.char.sprite;
+
+    switch (curr) {
+      case 'idle':
+        s.anims.play(n + '_idle', true);
+        break;
+      case 'walk':
+        s.anims.play(n + '_walk', true);
+        break;
+      case 'jump':
+        s.anims.play(n + '_jump', true);
+        break;
+      case 'climb':
+        s.anims.play(n + '_climb', true);
+        break;
+    }
+  }
 }

@@ -732,7 +732,7 @@ export function createPlayers(game: Game): void {
             first: 1,
           }
         ),
-        frameRate: 10,
+        frameRate: 20,
         repeat: -1,
       };
 
@@ -776,7 +776,8 @@ export function createPlayers(game: Game): void {
   });
 
   game.players.forEach((player, playerIndex) => {
-    for (let i = 0; i < 15; i++) {
+    // for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 10; i++) {
       player.char.wallTouchArray.push(false);
     }
 
