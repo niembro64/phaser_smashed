@@ -676,6 +676,10 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 1,
         sprite: null,
         srcSpriteSheet: 'images/sprite_sheet_mario_4x.png',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -843,6 +847,10 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 1,
         sprite: null,
         srcSpriteSheet: 'images/sprite_sheet_link_4x.png',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -1009,6 +1017,10 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 1,
         sprite: null,
         srcSpriteSheet: '',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -1173,7 +1185,11 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: '',
+        srcSpriteSheet: 'images/sprite_sheet_kirby_4x.png',
+        spriteSize: {
+          width: 13,
+          height: 13,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -1339,6 +1355,10 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 0.1,
         sprite: null,
         srcSpriteSheet: '',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -1504,6 +1524,10 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 0.2,
         sprite: null,
         srcSpriteSheet: '',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -1669,6 +1693,10 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 0.7,
         sprite: null,
         srcSpriteSheet: '',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -1834,6 +1862,10 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 0.7,
         sprite: null,
         srcSpriteSheet: '',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,
@@ -1999,6 +2031,10 @@ export default class Game extends Phaser.Scene {
         sprite: null,
         zoom: 0.7,
         srcSpriteSheet: '',
+        spriteSize: {
+          width: 16,
+          height: 16,
+        },
         ssCurr: {
           name: 'idle',
           timeStamp: 0,

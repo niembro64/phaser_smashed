@@ -96,6 +96,7 @@ export interface Char {
   scaleCharSpriteImage: number;
   scaleCharSpriteReality: number;
   sprite: any | Phaser.GameObjects.Sprite;
+  spriteSize: SpriteSize;
   ssCurr: SpriteState;
   ssPrev: SpriteState;
   srcSpriteSheet: string;
@@ -511,4 +512,9 @@ export interface DarknessMoments {
 export interface Explosion {
   sprite: any;
   sound: any;
+}
+
+export interface SpriteSize {
+  width: number;
+  height: number;
 }
