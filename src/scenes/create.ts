@@ -445,9 +445,7 @@ export function createHitboxOverlap(game: Game): void {
             if (player.char.powerStateCurr.name === 'dark' && hasBeen) {
               setPlayerPowerState('dark', pj, game);
               setPlayerPowerState('none', player, game);
-              game.chomp.soundBBWoah.setRate(
-                (game.chomp.soundAttack.rate += 0.05)
-              );
+              game.chomp.soundBBWoah.setRate(game.chomp.soundBBWoah.rate + 0.1);
               game.chomp.soundBBWoah.play();
             }
             // console.log(

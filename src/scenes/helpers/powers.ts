@@ -113,6 +113,7 @@ export function setChompPowerState(
 
       c.darknessMoments.chomp = game.gameNanoseconds;
       c.sprite.play('chompanimation_chomping');
+      game.chomp.soundBBWoah.setRate(1);
       break;
   }
 }
