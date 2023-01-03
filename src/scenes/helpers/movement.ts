@@ -1,8 +1,8 @@
-import { V4MAPPED } from "dns";
-import Game from "../Game";
-import { Acceleration, Player, Velocity } from "../interfaces";
-import { getIsAttackEnergyOffscreen } from "./attacks";
-import { getNormalizedVector } from "./damage";
+import { V4MAPPED } from 'dns';
+import Game from '../Game';
+import { Acceleration, Player, Velocity } from '../interfaces';
+import { getIsAttackEnergyOffscreen } from './attacks';
+import { getNormalizedVector } from './damage';
 
 export function updateCirclesLocations(game: Game): void {
   if (!game.debug.PlayerIdVisible) {
@@ -106,13 +106,13 @@ export function setRespawn(player: Player, game: Game): void {
 
 export function updateLastDirectionTouched(player: Player): void {
   if (player.char.sprite.body.touching.up) {
-    player.char.lastDirectionTouched = "up";
+    player.char.lastDirectionTouched = 'up';
   } else if (player.char.sprite.body.touching.down) {
-    player.char.lastDirectionTouched = "down";
+    player.char.lastDirectionTouched = 'down';
   } else if (player.char.sprite.body.touching.left) {
-    player.char.lastDirectionTouched = "left";
+    player.char.lastDirectionTouched = 'left';
   } else if (player.char.sprite.body.touching.right) {
-    player.char.lastDirectionTouched = "right";
+    player.char.lastDirectionTouched = 'right';
   }
 }
 
@@ -179,7 +179,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
     // // horizontal stuff WAS TOUCHING
     if (
       game.debug.WallJumpsActive &&
-      player.char.lastDirectionTouched === "left" &&
+      player.char.lastDirectionTouched === 'left' &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
@@ -192,7 +192,7 @@ export function updateJumpPhysical(player: Player, game: Game): void {
 
     if (
       game.debug.WallJumpsActive &&
-      player.char.lastDirectionTouched === "right" &&
+      player.char.lastDirectionTouched === 'right' &&
       hasPlayerTouchedWallRecently(player)
     ) {
       player.char.sprite.body.setVelocityX(
@@ -212,7 +212,10 @@ export function updateJumpFloat(player: Player, game: Game): void {
   if (player.padCurr.Y && player.padPrev.Y) {
     player.char.sprite.body.setVelocityY(
       player.char.sprite.body.velocity.y +
-        -game.BASE_PLAYER_SPEED.y * player.char.speed * player.char.fast
+        -game.BASE_PLAYER_SPEED.y *
+          player.char.speed *
+          player.char.fast *
+          player.char.jumpFloat
     );
   }
 }
@@ -412,7 +415,7 @@ export function getNearestPlayerAliveXY(
   let ae = player.char.attackEnergy;
 
   game.players.forEach((player, playerIndex) => {
-    if (pIndex !== playerIndex && player.state.name === "player-state-alive") {
+    if (pIndex !== playerIndex && player.state.name === 'player-state-alive') {
       let otherPlayerX = player.char.sprite.x;
       let otherPlayerY = player.char.sprite.y;
       let myX = ae.sprite.x;

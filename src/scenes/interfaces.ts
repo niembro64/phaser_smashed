@@ -107,6 +107,7 @@ export interface Char {
   jumps: number[];
   jumpPower: number;
   jumpIndex: number;
+  jumpFloat: number;
   upB: UpB;
   damage: number;
   speed: number;
