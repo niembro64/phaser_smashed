@@ -1692,7 +1692,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 0.7,
         scaleCharSpriteImage: 0.7,
         sprite: null,
-        srcSpriteSheet: '',
+        srcSpriteSheet: 'images/sprite_sheet_8.0_greenkoopa_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
@@ -1861,7 +1861,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 0.7,
         scaleCharSpriteImage: 0.7,
         sprite: null,
-        srcSpriteSheet: '',
+        srcSpriteSheet: 'images/sprite_sheet_8.0_redkoopa_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
@@ -2030,7 +2030,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 0.7,
         sprite: null,
         zoom: 0.7,
-        srcSpriteSheet: '',
+        srcSpriteSheet: 'images/sprite_sheet_8.0_bluekoopa_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
