@@ -3,16 +3,16 @@ import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
-  onHitHandlerAttackPhysical
+  onHitHandlerAttackPhysical,
 } from './helpers/damage';
 import {
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
-  setPlayerPowerState
+  setPlayerPowerState,
 } from './helpers/powers';
 import {
   filterAttackEnergyColorStateNormal,
-  setBlinkTrue
+  setBlinkTrue,
 } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
@@ -324,27 +324,40 @@ export function createPlatforms(game: Game): void {
   switch (game.debug.Level) {
     case 0:
       createPlatforms0(game);
+      console.log('createPlatforms', 0, 'game.debug.Level', game.debug.Level);
       break;
     case 1:
       createPlatforms1(game);
+      console.log('createPlatforms', 1, 'game.debug.Level', game.debug.Level);
       break;
     case 2:
       createPlatforms2(game);
+      console.log('createPlatforms', 2, 'game.debug.Level', game.debug.Level);
       break;
     case 3:
       createPlatforms3(game);
+      console.log('createPlatforms', 3, 'game.debug.Level', game.debug.Level);
       break;
     case 4:
       createPlatforms4(game);
+      console.log('createPlatforms', 4, 'game.debug.Level', game.debug.Level);
       break;
     case 5:
       createPlatforms5(game);
+      console.log('createPlatforms', 5, 'game.debug.Level', game.debug.Level);
       break;
     case 6:
       createPlatforms6(game);
+      console.log('createPlatforms', 6, 'game.debug.Level', game.debug.Level);
       break;
     default:
       createPlatforms0(game);
+      console.log(
+        'createPlatforms',
+        'DEFAULT',
+        'game.debug.Level',
+        game.debug.Level
+      );
       break;
   }
 }

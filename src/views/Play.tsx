@@ -233,6 +233,13 @@ function Play() {
   const [numKeyboards, setNumKeyboards] = useState<number>(0);
 
   const onClickStartStartButton = () => {
+    setShowControls(false);
+    setShowControllers(false);
+    setShowRulesN64(false);
+    setShowAbout(false);
+    setShowHistory(false);
+    setShowOptions(false);
+    
     trance.pause();
     startSound();
     setWebState('play');
