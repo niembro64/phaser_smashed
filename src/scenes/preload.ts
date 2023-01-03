@@ -108,13 +108,13 @@ export function preload(game: Game): void {
 
   game.load.audio('mii', pathSounds + game.FILE_SOUNDS.BGM_MII);
 
-  if (game.debug.MusicNumber === 0) {
+  if (game.debug.MusicTrack === 0) {
     game.load.audio('bgm', pathSounds + game.FILE_SOUNDS.BGM_DREAM);
   }
-  if (game.debug.MusicNumber === 1) {
+  if (game.debug.MusicTrack === 1) {
     game.load.audio('bgm', pathSounds + game.FILE_SOUNDS.BGM_MONKEY);
   }
-  if (game.debug.MusicNumber === 2) {
+  if (game.debug.MusicTrack === 2) {
     game.load.audio('bgm', pathSounds + game.FILE_SOUNDS.BGM_ROYKSOP);
   }
 

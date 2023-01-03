@@ -72,7 +72,7 @@ function Play() {
     InfinityShots: 7,
     TimeMinutes: 7, //01234567
     MusicActive: true,
-    MusicNumber: 2, // 012
+    MusicTrack: 2, // 012
     ReadySoundActive: true,
     Camera: true,
     CamerasVisible: false,

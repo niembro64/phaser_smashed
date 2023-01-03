@@ -390,7 +390,7 @@ export interface Debug {
   ModeInfinity: boolean;
   TimeMinutes: number;
   InfinityShots: number;
-  MusicNumber: number;
+  MusicTrack: number;
   MusicActive: boolean;
   UpdateLoopsNumSkip: number;
   FrictionAirActive: boolean;

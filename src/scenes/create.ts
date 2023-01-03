@@ -1,21 +1,18 @@
-import { CSSImageType } from 'html2canvas/dist/types/css/types/image';
 import ShakePosition from 'phaser3-rex-plugins/plugins/behaviors/shake/ShakePosition';
-import { matchPath } from 'react-router-dom';
 import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
-import { isChompInsideCircle } from './helpers/chomp';
 import {
   onHitHandlerAttackEnergy,
-  onHitHandlerAttackPhysical,
+  onHitHandlerAttackPhysical
 } from './helpers/damage';
 import {
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
-  setPlayerPowerState,
+  setPlayerPowerState
 } from './helpers/powers';
 import {
   filterAttackEnergyColorStateNormal,
-  setBlinkTrue,
+  setBlinkTrue
 } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
