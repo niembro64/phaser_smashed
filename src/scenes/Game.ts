@@ -20,6 +20,7 @@ import {
   Flag,
 } from './interfaces';
 import { preload } from './preload';
+import Shake from 'phaser3-rex-plugins/plugins/shakeposition';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
 
 export default class Game extends Phaser.Scene {
@@ -216,6 +217,8 @@ export default class Game extends Phaser.Scene {
   ////////////////////////////////
   ////////// OTHER
   ////////////////////////////////
+
+  shake: Shake | undefined;
   //▲▼⬆⬇↑↓↑↿⇂⋆★✰☆⚡❤v♡♥
   // 💔👊🏼⭐💀
   // ✔️🚧❌🚫🛑🍻🔜📄📋⚙️🚪⛔⌚🕹️🎮☠️
@@ -2054,9 +2057,9 @@ export default class Game extends Phaser.Scene {
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
         jumps: [
-          1, 1, 0.95, 0.9, 0.85, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
+          1, 1, 0.95, 0.9, 0.85, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
           0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
-          0.8, 0.8, 0.8, 0.8, 0.8, 0.7, 0.6, 0.5, 0.3, 0,
+          0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.7, 0.6, 0.5, 0.3, 0,
         ],
         jumpPower: 1,
         jumpIndex: 0,

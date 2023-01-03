@@ -1,4 +1,5 @@
 import { CSSImageType } from 'html2canvas/dist/types/css/types/image';
+import ShakePosition from 'phaser3-rex-plugins/plugins/behaviors/shake/ShakePosition';
 import { matchPath } from 'react-router-dom';
 import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
@@ -58,6 +59,7 @@ export function create(game: Game) {
   createCollidersAEvAP(game);
   createHitboxOverlap(game);
   createEndDataMatrices(game);
+  createShake(game);
 
   // INIT UPDATE
   setPreUpdate(game);
@@ -77,6 +79,19 @@ export function create(game: Game) {
 //     // game.physics.add.collider(e.sprite, game.PLATFORMS);
 //   });
 // }
+
+export function createShake(game: Game): void {
+  const shakeConfig: ShakePosition.IConfig = {
+    duration: 400,
+    magnitude: 100,
+    magnitudeMode: 'decay',
+  };
+
+  game.shake = new ShakePosition(game.cameraPlayers.char.sprite, shakeConfig);
+  game.shake.setEnable(true);
+
+  // game.shake.start();
+}
 
 export function createExplosions(game: Game): void {
   var config = {

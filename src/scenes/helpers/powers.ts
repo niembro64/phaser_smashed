@@ -176,6 +176,9 @@ export function updatePlayerDarknessEvents(game: Game): void {
         player.char.damage += amount / 200;
         b.setVelocityX(b.velocity.x + x * amount);
         b.setVelocityY(b.velocity.y + y * amount);
+
+        // game.cameras.main.shake(100, 0.01);
+        game.shake?.shake();
       }
     }
   });
@@ -194,8 +197,6 @@ export function playNextExplosion(x: number, y: number, game: Game): void {
   // eArr[eIndex].sprite.anims.stop();
   eArr[eIndex].sprite.anims.play('explsionanimation');
   eArr[eIndex].sound.play();
-
-  game.cameras.main.shake(100, 0.01);
 }
 
 export function getRandomUnitVector(): xyVector {
