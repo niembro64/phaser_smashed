@@ -159,8 +159,6 @@ export function updatePlayerDarknessEvents(game: Game): void {
       // player.char.damage += 1 / 120;
 
       if (Math.random() > 1 - pj) {
-        playNextExplosion(s.x, s.y, game);
-
         let amount =
           400 +
           Math.pow(
@@ -170,6 +168,8 @@ export function updatePlayerDarknessEvents(game: Game): void {
             Math.pow(Math.random(), 0.4);
 
         console.log('amount', amount);
+
+        playNextExplosion(s.x, s.y, game, amount);
         let { x, y } = getRandomUnitVector();
         // game.SOUND_HIT.play();
 
@@ -184,7 +184,12 @@ export function updatePlayerDarknessEvents(game: Game): void {
   });
 }
 
-export function playNextExplosion(x: number, y: number, game: Game): void {
+export function playNextExplosion(
+  x: number,
+  y: number,
+  game: Game,
+  amount: number
+): void {
   let c = game.chomp;
   let eIndex = c.darknessMoments.explosionsIndex;
   let eArr = c.darknessMoments.explosions;
@@ -195,7 +200,10 @@ export function playNextExplosion(x: number, y: number, game: Game): void {
   eArr[eIndex].sprite.y = y;
 
   // eArr[eIndex].sprite.anims.stop();
+  eArr[eIndex].sprite.setScale(amount / 500);
   eArr[eIndex].sprite.anims.play('explsionanimation');
+  eArr[eIndex].sound.volume = amount / 3000;
+  eArr[eIndex].sound.rate = Math.pow(500, 0.3) / Math.pow(amount, 0.3);
   eArr[eIndex].sound.play();
 }
 
