@@ -13,7 +13,7 @@
     "@types/react-dom": "^17.0.9",
     "html2canvas": "^1.4.1",
     "phaser": "^3.55.2",
-    "phaser3-rex-plugins": "^1.1.72",
+    "phaser3-rex-plugins": "^1.1.79",
     "react": "17.0.2",
     "react-dom": "^17.0.2",
     "react-howler": "^5.2.0",

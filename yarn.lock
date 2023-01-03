@@ -6648,10 +6648,10 @@
     "eventemitter3" "^4.0.7"
     "path" "^0.12.7"
 
-"phaser3-rex-plugins@^1.1.72":
-  "integrity" "sha512-eMXzdflypPN3aW9/ZIAgVFb1WOSgOQ29ee69RUbNZOgHuJpMI78CXLEQ9Op3gtdQ3ITALd/i47W2WWGaSK5z6Q=="
-  "resolved" "https://registry.npmjs.org/phaser3-rex-plugins/-/phaser3-rex-plugins-1.1.73.tgz"
-  "version" "1.1.73"
+"phaser3-rex-plugins@^1.1.79":
+  "integrity" "sha512-eYTX1HJiFRuqiF4j79ZnfIJIBN2LtB0XbdYaEKiBiRh7GG7quUPmCeOBUwXq7BnV61ovt+uNgVrl2JBMfgRH2A=="
+  "resolved" "https://registry.npmjs.org/phaser3-rex-plugins/-/phaser3-rex-plugins-1.1.79.tgz"
+  "version" "1.1.79"
   dependencies:
     "eventemitter3" "^3.1.2"
     "handlebars" "^4.7.7"

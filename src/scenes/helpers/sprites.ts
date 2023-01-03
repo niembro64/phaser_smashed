@@ -250,7 +250,7 @@ export function updateSpriteState(
       return;
     }
 
-    console.log('TOUCHING', player.char.sprite.body.touching.down);
+    // console.log('TOUCHING', player.char.sprite.body.touching.down);
 
     player.char.ssPrev.name = player.char.ssCurr.name;
     player.char.ssPrev.timeStamp = player.char.ssCurr.timeStamp;

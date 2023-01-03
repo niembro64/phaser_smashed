@@ -194,6 +194,8 @@ export function playNextExplosion(x: number, y: number, game: Game): void {
   // eArr[eIndex].sprite.anims.stop();
   eArr[eIndex].sprite.anims.play('explsionanimation');
   eArr[eIndex].sound.play();
+
+  game.cameras.main.shake(100, 0.01);
 }
 
 export function getRandomUnitVector(): xyVector {
