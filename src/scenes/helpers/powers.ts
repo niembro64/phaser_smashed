@@ -169,7 +169,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
           ) *
             Math.pow(Math.random(), 0.4);
 
-        // console.log('amount', amount);
+        console.log('amount', amount);
         let { x, y } = getRandomUnitVector();
         // game.SOUND_HIT.play();
 
@@ -178,7 +178,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
         b.setVelocityY(b.velocity.y + y * amount);
 
         // game.cameras.main.shake(100, 0.01);
-        game.shake?.shake();
+        game.shake?.shake(amount / 2, amount / 10);
       }
     }
   });
