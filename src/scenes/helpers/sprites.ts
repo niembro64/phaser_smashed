@@ -38,7 +38,7 @@ export function updateSpriteFilter(
             2 ===
           0
         ) {
-          filterPlayerTRed(player);
+          filterPlayerRed(player, playerIndex, game);
         } else {
           filterPlayerDark(player, playerIndex, game);
         }
@@ -51,7 +51,7 @@ export function updateSpriteFilter(
             2 ===
           0
         ) {
-          filterPlayerTRed(player);
+          filterPlayerRed(player, playerIndex, game);
         } else {
           filterPlayerNormal(player, playerIndex, game);
         }
@@ -66,7 +66,7 @@ export function updateSpriteFilter(
           2 ===
         0
       ) {
-        filterPlayerTDark(player);
+        filterPlayerDark(player, playerIndex, game);
       } else {
         filterPlayerNormal(player, playerIndex, game);
       }
@@ -80,67 +80,38 @@ export function updateSpriteFilter(
   }
 
   if (player.emitterPlayer.on) {
-    filterPlayerColorCircle(player, game.colorCircles[playerIndex].colorNumber);
+    filterPlayerID(player, playerIndex, game);
     return;
   }
 
   filterPlayerNormal(player, playerIndex, game);
 }
 
-export function filterAttacksColorCircle(
-  player: Player,
-  circleColor: number
-): void {
-  player.char.attackEnergy.sprite.setTint(circleColor);
-  player.char.attackEnergy.sprite.setAlpha(1);
-  player.char.attackPhysical.sprite.setTint(circleColor);
-  player.char.attackPhysical.sprite.setAlpha(1);
-}
-export function filterPlayerColorCircle(
-  player: Player,
-  circleColor: number
-): void {
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
-  player.char.sprite.setTint(circleColor);
-  // player.char.sprite.setTintFill(circleColor);
-  player.char.sprite.setAlpha(1);
-  // player.char.sprite.brighten(0.3);
-}
-export function filterPlayerIDColor(player: Player, circleColor: number): void {
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
-  // player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
-  player.char.sprite.setTint('transparent');
-  player.char.sprite.setTintFill(circleColor);
-  player.char.sprite.setAlpha(1);
-  // player.char.sprite.brighten(0.3);
-}
-export function filterPlayerTRed(player: Player): void {
-  player.char.sprite.setTint(0xaa3333);
-  player.char.sprite.setAlpha(0.8);
-}
-export function filterPlayerTDark(player: Player): void {
-  player.char.sprite.setTint(0x555555);
-  player.char.sprite.setAlpha(0.8);
-}
-export function filterPlayerTLight(player: Player): void {
-  player.char.sprite.setTint(0x888888);
-  player.char.sprite.setAlpha(0.8);
-}
+////////////////////////
+// FILTER PLAYERS
+////////////////////////
 
+export function filterPlayerTDark(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  if (game.debug.CharacterTinted) {
+    setFillPlayerTDark(player, game);
+  } else {
+    setTintPlayerTDark(player, game);
+  }
+}
 export function filterPlayerDark(
   player: Player,
   playerIndex: number,
   game: Game
 ): void {
-  player.char.sprite.setAlpha(1);
-  player.char.sprite.setTint(0x666666);
+  if (game.debug.CharacterTinted) {
+    setFillPlayerDark(player, game);
+  } else {
+    setTintPlayerDark(player, game);
+  }
 }
 
 export function filterPlayerNormal(
@@ -149,14 +120,109 @@ export function filterPlayerNormal(
   game: Game
 ): void {
   if (game.debug.CharacterTinted) {
-    filterPlayerColorCircle(player, game.colorCircles[playerIndex].colorNumber);
-    player.char.sprite.setAlpha(1);
+    setFillPlayerID(player, game.colorCircles[playerIndex].colorNumber);
   } else {
-    player.char.sprite.setAlpha(1);
-    player.char.sprite.setTint(0xffffff);
+    setTintPlayerNormal(player, game);
   }
 }
 
+export function filterPlayerTRed(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  if (game.debug.CharacterTinted) {
+    setFillPlayerTRed(player, game);
+  } else {
+    setTintPlayerTRed(player, game);
+  }
+}
+export function filterPlayerRed(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  if (game.debug.CharacterTinted) {
+    setFillPlayerRed(player, game);
+  } else {
+    setTintPlayerRed(player, game);
+  }
+}
+
+export function filterPlayerID(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  if (game.debug.CharacterTinted) {
+    setFillPlayerID(player, game.colorCircles[playerIndex].colorNumber);
+  } else {
+    setTintPlayerID(player, game.colorCircles[playerIndex].colorNumber);
+  }
+}
+
+export function setTintPlayerNormal(player: Player, game: Game): void {
+  player.char.sprite.setTint(0xffffff);
+  player.char.sprite.setAlpha(1);
+}
+export function setTintPlayerID(player: Player, circleColor: number): void {
+  player.char.sprite.setTint(circleColor);
+  player.char.sprite.setAlpha(1);
+}
+export function setTintPlayerRed(player: Player, game: Game): void {
+  player.char.sprite.setTint(0xaa3333);
+  player.char.sprite.setAlpha(1);
+}
+export function setTintPlayerTRed(player: Player, game: Game): void {
+  player.char.sprite.setTint(0xaa3333);
+  player.char.sprite.setAlpha(0.8);
+}
+export function setTintPlayerDark(player: Player, game: Game): void {
+  player.char.sprite.setTint(0x444444);
+  player.char.sprite.setAlpha(1);
+}
+export function setTintPlayerTDark(player: Player, game: Game): void {
+  player.char.sprite.setTint(0x444444);
+  player.char.sprite.setAlpha(0.8);
+}
+export function setTintPlayerLight(player: Player, game: Game): void {
+  player.char.sprite.setTint(0xaaaaaa);
+  player.char.sprite.setAlpha(1);
+}
+export function setTintPlayerTLight(player: Player, game: Game): void {
+  player.char.sprite.setTint(0xaaaaaa);
+  player.char.sprite.setAlpha(0.8);
+}
+
+// FILL
+export function setFillPlayerID(player: Player, circleColor: number): void {
+  player.char.sprite.setTint('transparent');
+  player.char.sprite.setTintFill(circleColor);
+  player.char.sprite.setAlpha(1);
+}
+export function setFillPlayerTDark(player: Player, game: Game): void {
+  player.char.sprite.setTint('transparent');
+  player.char.sprite.setTintFill(0x444444);
+  player.char.sprite.setAlpha(0.8);
+}
+export function setFillPlayerDark(player: Player, game: Game): void {
+  player.char.sprite.setTint('transparent');
+  player.char.sprite.setTintFill(0x444444);
+  player.char.sprite.setAlpha(1);
+}
+export function setFillPlayerRed(player: Player, game: Game): void {
+  player.char.sprite.setTint('transparent');
+  player.char.sprite.setTintFill(0xaa3333);
+  player.char.sprite.setAlpha(1);
+}
+export function setFillPlayerTRed(player: Player, game: Game): void {
+  player.char.sprite.setTint('transparent');
+  player.char.sprite.setTintFill(0xaa3333);
+  player.char.sprite.setAlpha(0.8);
+}
+
+
+// BLINK
 export function setBlinkTrue(player: Player): void {
   player.char.colorFilter = true;
 }
@@ -164,25 +230,45 @@ export function setBlinkFalse(player: Player): void {
   player.char.colorFilter = false;
 }
 
+////////////////
+// FILTER ATTACKS
+////////////////
+
 export function filterAttackEnergyNormal(
   player: Player,
   playerIndex: number,
   game: Game
 ): void {
   if (game.debug.CharacterTinted) {
-    filterAttacksColorCircle(
-      player,
-      game.colorCircles[playerIndex].colorNumber
-    );
-    player.char.attackEnergy.sprite.setAlpha(1);
-    player.char.attackPhysical.sprite.setAlpha(1);
+    setTintAttacksID(player, game.colorCircles[playerIndex].colorNumber);
   } else {
-    player.char.attackEnergy.sprite.setAlpha(1);
-    player.char.attackEnergy.sprite.setTint(0xffffff);
-    player.char.attackPhysical.sprite.setAlpha(1);
-    player.char.attackPhysical.sprite.setTint(0xffffff);
+    setTintAttacksNormal(player);
   }
 }
+
+export function setTintAttacksID(player: Player, circleColor: number): void {
+  player.char.attackEnergy.sprite.setTint(circleColor);
+  player.char.attackEnergy.sprite.setAlpha(1);
+  player.char.attackPhysical.sprite.setTint(circleColor);
+  player.char.attackPhysical.sprite.setAlpha(1);
+}
+export function setTintAttacksNormal(player: Player): void {
+  player.char.attackEnergy.sprite.setTint(0xffffff);
+  player.char.attackEnergy.sprite.setAlpha(1);
+  player.char.attackPhysical.sprite.setTint(0xffffff);
+  player.char.attackPhysical.sprite.setAlpha(1);
+}
+
+// player.char.sprite.setBlendMode(Phaser.BlendModes.MULTIPLY);
+// player.char.sprite.setBlendMode(Phaser.BlendModes.SCREEN);
+// player.char.sprite.setBlendMode(Phaser.BlendModes.COLOR);
+// player.char.sprite.setBlendMode(Phaser.BlendModes.ADD);
+// player.char.sprite.setBlendMode(Phaser.BlendModes.LUMINOSITY);
+// player.char.sprite.brighten(0.3);
+
+/////////////////////
+// SPRITSHEETS
+/////////////////////
 
 export function setAnimationsOff(game: Game): void {
   game.players.forEach((player) => {
@@ -205,10 +291,6 @@ export function setAnimationsOn(game: Game): void {
     game.chomp.sprite.anims.resume();
   }
 }
-
-/////////////////////
-// spritesheets
-/////////////////////
 
 export function updateSpritesheets(game: Game): void {
   const movingXThreshold = 10;
@@ -259,8 +341,6 @@ export function updateSpriteState(
     ) {
       return;
     }
-
-    // console.log('TOUCHING', player.char.sprite.body.touching.down);
 
     player.char.ssPrev.name = player.char.ssCurr.name;
     player.char.ssPrev.timeStamp = player.char.ssCurr.timeStamp;
