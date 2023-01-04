@@ -1,4 +1,3 @@
-import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 import Game from '../Game';
 import { Player, SpriteStateName } from '../interfaces';
 import { hasPlayerTouchedWallRecently } from './movement';
@@ -10,10 +9,8 @@ export function updateSpritesFlipX(game: Game): void {
       if (player.char.sprite.body.velocity.x === 0) {
       } else if (player.char.sprite.body.velocity.x > 0) {
         player.char.sprite.flipX = false;
-        // player.char.sprite.scaleX = 1;
       } else {
         player.char.sprite.flipX = true;
-        // player.char.sprite.scaleX = -1;
       }
     }
   });
@@ -30,36 +27,37 @@ export function updateSpriteFilter(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.emitterPlayer.on) {
-    // filterPlayerColorCircleFill(
-    //   player,
-    //   game.colorCircles[playerIndex].colorNumber
-    // );
-    filterPlayerColorCircle(player, game.colorCircles[playerIndex].colorNumber);
-    return;
-  }
-
   if (player.char.colorFilter) {
     if (player.state.name === 'player-state-hurt') {
-      // HURT
-      if (
-        Math.floor(
-          (game.gameNanoseconds - player.state.gameStamp) /
-            game.DURATION_PLAYER_FILTER_FLICKER
-        ) %
-          2 ===
-        0
-      ) {
-        filterPlayerColorRed(player);
+      if (player.char.powerStateCurr.name === 'dark') {
+        if (
+          Math.floor(
+            (game.gameNanoseconds - player.state.gameStamp) /
+              game.DURATION_PLAYER_FILTER_FLICKER
+          ) %
+            2 ===
+          0
+        ) {
+          filterPlayerColorRed(player);
+        } else {
+          filterPlayerSpriteColorStateDark(player, playerIndex, game);
+        }
       } else {
-        filterPlayerSpriteColorStateNormal(player, playerIndex, game);
-        // filterPlayerColorCircleFill(
-        //   player,
-        //   game.colorCircles[playerIndex].colorNumber
-        // );
+        if (
+          Math.floor(
+            (game.gameNanoseconds - player.state.gameStamp) /
+              game.DURATION_PLAYER_FILTER_FLICKER
+          ) %
+            2 ===
+          0
+        ) {
+          filterPlayerColorRed(player);
+        } else {
+          filterPlayerSpriteColorStateNormal(player, playerIndex, game);
+        }
       }
-    } else {
-      // NOT HURT
+    }
+    if (player.state.name !== 'player-state-hurt') {
       if (
         Math.floor(
           (game.gameNanoseconds - player.state.gameStamp) /
@@ -70,17 +68,23 @@ export function updateSpriteFilter(
       ) {
         filterPlayerColorDark(player);
       } else {
-        // filterLight(player);
         filterPlayerSpriteColorStateNormal(player, playerIndex, game);
-        // filterPlayerColorCircleFill(
-        //   player,
-        //   game.colorCircles[playerIndex].colorNumber
-        // );
       }
     }
-  } else {
-    filterPlayerSpriteColorStateNormal(player, playerIndex, game);
+    return;
   }
+
+  if (player.char.powerStateCurr.name === 'dark') {
+    filterPlayerSpriteColorStateDark(player, playerIndex, game);
+    return;
+  }
+
+  if (player.emitterPlayer.on) {
+    filterPlayerColorCircle(player, game.colorCircles[playerIndex].colorNumber);
+    return;
+  }
+
+  filterPlayerSpriteColorStateNormal(player, playerIndex, game);
 }
 
 export function filterAttacksColorCircle(
@@ -131,6 +135,15 @@ export function filterPlayerColorDark(player: Player): void {
 export function filterPlayerColorLight(player: Player): void {
   player.char.sprite.setTint(0x888888);
   player.char.sprite.setAlpha(0.8);
+}
+
+export function filterPlayerSpriteColorStateDark(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  player.char.sprite.setAlpha(1);
+  player.char.sprite.setTint(0x888888);
 }
 
 export function filterPlayerSpriteColorStateNormal(
