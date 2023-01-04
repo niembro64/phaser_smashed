@@ -5,6 +5,7 @@ import {
   PowerStateChompName,
   xyVector,
 } from '../interfaces';
+import { setPlayerState } from './state';
 
 // export function setPowerDarkToPlayer(
 //   player: Player,
@@ -174,6 +175,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
         // game.SOUND_HIT.play();
 
         player.char.damage += amount / 200;
+        setPlayerState(player, playerIndex, 'player-state-hurt', game);
         b.setVelocityX(b.velocity.x + x * amount);
         b.setVelocityY(b.velocity.y + y * amount);
 
