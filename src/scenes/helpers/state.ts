@@ -1,16 +1,16 @@
-import Game from "../Game";
+import Game from '../Game';
 import {
   AttackPhysical,
   AttackState,
   GameState,
   Player,
   PlayerState,
-} from "../interfaces";
+} from '../interfaces';
 import {
   getIsAttackEnergyOffscreen,
   setAttackPhysicalOffscreen,
   setPhysicsAttackEnergyOn,
-} from "./attacks";
+} from './attacks';
 import {
   setEmitterHurtActiveFalse,
   setEmitterHurtActiveTrue,
@@ -19,16 +19,16 @@ import {
   setEmitterHurtVisibleFalse,
   setEmitterHurtVisibleTrue,
   setEmitterPlayerOnFalse,
-} from "./damage";
+} from './damage';
 import {
   getIsFirstBlood,
   getIsScreenClear,
   setAddShotToMatrixFirstBlood,
   setAddToShotsMatrixScreenClear,
-} from "./drinking";
-import { setGravityFalse, setGravityTrue, setRespawn } from "./movement";
-import { setPhysicsPause, setPhysicsResume } from "./physics";
-import { setPlayerPowerState } from "./powers";
+} from './drinking';
+import { setGravityFalse, setGravityTrue, setRespawn } from './movement';
+import { setPhysicsPause, setPhysicsResume } from './physics';
+import { setPlayerPowerState } from './powers';
 import {
   setMusicPause,
   setMusicResume,
@@ -41,21 +41,21 @@ import {
   setSoundProfoundPlay,
   setSoundSquishPlay,
   setSoundStartPlay,
-} from "./sound";
-import { setBlinkFalse, setBlinkTrue } from "./sprites";
-import { setRuleSplashOn, setSplashDataOff, setSplashDataOn } from "./text";
+} from './sound';
+import { setBlinkFalse, setBlinkTrue } from './sprites';
+import { setRuleSplashOn, setSplashDataOff, setSplashDataOn } from './text';
 
 export function setGameState(game: Game, state: GameState): void {
   game.gameState.name = state;
   game.gameState.gameStamp = game.gameNanoseconds;
   game.gameState.timeStamp = game.timeNanoseconds;
-  console.log("GAME STATE", game.gameState.name);
+  console.log('GAME STATE', game.gameState.name);
 
   switch (game.gameState.name) {
-    case "game-state-start":
+    case 'game-state-start':
       break;
-    case "game-state-play":
-      setRuleSplashOn(game, "splash-none");
+    case 'game-state-play':
+      setRuleSplashOn(game, 'splash-none');
       setPauseWiiMusic(game);
       setPauseAllReadySounds(game);
       setMusicResume(game);
@@ -63,15 +63,15 @@ export function setGameState(game: Game, state: GameState): void {
       setPhysicsResume(game);
       setSplashDataOff(game);
       break;
-    case "game-state-paused":
-      setRuleSplashOn(game, "splash-paused");
+    case 'game-state-paused':
+      setRuleSplashOn(game, 'splash-paused');
       setMusicPause(game);
       setSoundStartPlay(game);
       setPhysicsPause(game);
       setSplashDataOn(game);
       break;
-    case "game-state-first-blood":
-      setRuleSplashOn(game, "splash-first-blood");
+    case 'game-state-first-blood':
+      setRuleSplashOn(game, 'splash-first-blood');
       setMusicPause(game);
       setSoundProfoundPlay(game);
       setSoundFirstBloodPlay(game);
@@ -79,23 +79,23 @@ export function setGameState(game: Game, state: GameState): void {
       setPhysicsPause(game);
       setSplashDataOn(game);
       break;
-    case "game-state-screen-clear":
-      setRuleSplashOn(game, "splash-screen-clear");
+    case 'game-state-screen-clear':
+      setRuleSplashOn(game, 'splash-screen-clear');
       setMusicPause(game);
       setSoundEnerjaPlay(game);
       setSoundSquishPlay(game);
       setPhysicsPause(game);
       setSplashDataOn(game);
       break;
-    case "game-state-finished":
+    case 'game-state-finished':
       setPhysicsPause(game);
-      setRuleSplashOn(game, "splash-finished");
+      setRuleSplashOn(game, 'splash-finished');
       setMusicPause(game);
       setSoundFinishPlay(game);
       setSplashDataOn(game);
       break;
     default:
-      console.log("BROKEN_____________________");
+      console.log('BROKEN_____________________');
   }
 }
 
@@ -118,7 +118,7 @@ export function setAttackPhysicalState(
   // );
 
   switch (attackPhysical.state.name) {
-    case "attackphysical-state-on":
+    case 'attackphysical-state-on':
       // attackPhysical.sprite.setActive(true).setVisible(true);
 
       if (
@@ -129,11 +129,11 @@ export function setAttackPhysicalState(
       }
       attackPhysical.audio.play();
       break;
-    case "attackphysical-state-cooldown":
+    case 'attackphysical-state-cooldown':
       setAttackPhysicalOffscreen(player, game);
       // attackPhysical.sprite.setActive(false).setVisible(false);
       break;
-    case "attackphysical-state-off":
+    case 'attackphysical-state-off':
       setAttackPhysicalOffscreen(player, game);
       // attackPhysical.sprite.setActive(false).setVisible(false);
       break;
@@ -149,23 +149,23 @@ export function setPlayerState(
   player.state.name = state;
   player.state.gameStamp = game.gameNanoseconds;
   player.state.timeStamp = game.timeNanoseconds;
-  console.log("PLAYER STATE", player.char.name, player.state);
+  // console.log('PLAYER STATE', player.char.name, player.state);
 
   switch (player.state.name) {
-    case "player-state-start":
+    case 'player-state-start':
       break;
-    case "player-state-alive":
+    case 'player-state-alive':
       setEmitterHurtActiveTrue(player);
       setEmitterHurtVisibleFalse(player);
       setGravityTrue(player);
       setBlinkFalse(player);
       break;
-    case "player-state-dead":
+    case 'player-state-dead':
       setEmitterPlayerOnFalse(player);
       setEmitterHurtActiveFalse(player);
       setEmitterHurtVisibleTrue(player);
       setOnDeadUpdateMatrix(playerIndex, game);
-      setPlayerPowerState("none", player, game);
+      setPlayerPowerState('none', player, game);
       if (getIsFirstBlood(game)) {
         setAddShotToMatrixFirstBlood(player, playerIndex, game);
       }
@@ -174,18 +174,18 @@ export function setPlayerState(
       }
       setSoundDiePlay(game);
       player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-      player.char.attackEnergy.state = "released";
+      player.char.attackEnergy.state = 'released';
       setPhysicsAttackEnergyOn(player);
       setBlinkTrue(player);
       setGravityFalse(player);
       setResetDamage(player);
       setRespawn(player, game);
       break;
-    case "player-state-hurt":
+    case 'player-state-hurt':
       setEmitterHurtActiveTrue(player);
       setEmitterHurtVisibleTrue(player);
       player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-      player.char.attackEnergy.state = "released";
+      player.char.attackEnergy.state = 'released';
       setPhysicsAttackEnergyOn(player);
       setBlinkTrue(player);
       setGravityTrue(player);
@@ -211,7 +211,7 @@ export function updateNumCurrentlyDead(game: Game): void {
   game.numDeadPrev = game.numDead;
   game.numDead = 0;
   for (let i = 0; i < game.players.length; i++) {
-    game.numDead += game.players[i].state.name === "player-state-dead" ? 1 : 0;
+    game.numDead += game.players[i].state.name === 'player-state-dead' ? 1 : 0;
   }
 }
 
@@ -274,7 +274,7 @@ export function getLongEnoughTimeDuration(
 }
 
 export function updateGameTime(game: Game, time: number, delta: number): void {
-  if (game.gameState.name !== "game-state-play") {
+  if (game.gameState.name !== 'game-state-play') {
     return;
   }
   game.gameNanoseconds += delta;
@@ -320,4 +320,3 @@ export function getHasGameDurationPassedAttack(
   }
   return false;
 }
-
