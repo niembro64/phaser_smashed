@@ -103,8 +103,8 @@ export default class Game extends Phaser.Scene {
     CHAIN_CHOMP_ATTACK: '/chain_chomp_sound.wav',
     BOOM_SHORT_01: '/boom_short_01.wav',
     BOOM_SHORT_02: '/boom_short_02.wav',
-    BLACK_BETTY_BAMBALAM: '/BlackBetty_Bambalam.mp3',
-    BLACK_BETTY_WOAH: '/BlackBetty_Woah.mp3',
+    BLACK_BETTY_BAMBALAM: '/BlackBetty_Bambalam_Reverb01.mp3',
+    BLACK_BETTY_WOAH: '/BlackBetty_Woah_Reverb01.mp3',
   };
 
   SOUND_INTRO: any;
