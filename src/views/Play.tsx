@@ -62,7 +62,7 @@ function Play() {
     Level: 6, //0123456
     ModeInfinity: true,
     InfinityShots: 15,
-    TimeMinutes: 7, //01234567
+    TimeMinutes: 15, //01234567
     MusicActive: true,
     MusicTrack: 2, // 012
     ReadySoundActive: true,
@@ -818,10 +818,10 @@ function Play() {
     }
   }, [p1KeysTouched, p2KeysTouched]);
 
-  const getInitFromKey = (key: string) => {
+  const getMaxFromKey = (key: string) => {
     console.log('getInitFromKey', key);
 
-    let newVal = debugInit[key as keyof Debug];
+    let newVal = debugMax[key as keyof Debug];
     return newVal;
   };
 
@@ -1184,7 +1184,7 @@ function Play() {
                             ...prevState,
                             [key]:
                               value - 1 < 0
-                                ? getInitFromKey(key as keyof Debug)
+                                ? getMaxFromKey(key as keyof Debug)
                                 : value - 1,
                           }));
                           console.log(index, key, value);
