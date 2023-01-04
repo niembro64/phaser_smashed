@@ -1115,9 +1115,9 @@ function Play() {
               }}
             >
               {showControllers && (
-                <span className="dark-span">Controllers</span>
+                <span className="dark-span">Pads</span>
               )}
-              {!showControllers && <span>Controllers</span>}
+              {!showControllers && <span>Pads</span>}
             </div>
           )}
           {webState !== 'start' && (
@@ -1230,7 +1230,7 @@ function Play() {
               <div id="controls-col">
                 <div id="keyboard">
                   <div id="keyboard-top">
-                    <h3>Controllers</h3>
+                    <h3>GamePads</h3>
                   </div>
                   <div id="keyboard-top">Use As Described</div>
                 </div>
@@ -1312,7 +1312,7 @@ function Play() {
                 onClickPlayNavBody('Controllers');
               }}
             >
-              <h1>Controllers</h1>
+              <h1>GamePads</h1>
               <p>USB controllers are recommended. </p>
               <a
                 className="link-tag btn btn-dark"
