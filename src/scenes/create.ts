@@ -10,10 +10,7 @@ import {
   setChompPowerState,
   setPlayerPowerState,
 } from './helpers/powers';
-import {
-  filterAttackEnergyColorStateNormal,
-  setBlinkTrue,
-} from './helpers/sprites';
+import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
 export function create(game: Game) {
@@ -879,7 +876,7 @@ export function createAttackEnergies(game: Game): void {
       );
     }
 
-    filterAttackEnergyColorStateNormal(player, playerIndex, game);
+    filterAttackEnergyNormal(player, playerIndex, game);
   });
 }
 
