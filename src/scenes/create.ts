@@ -714,32 +714,32 @@ export function createEmittersFollowPlayers(game: Game): void {
 
 export function createLavas(game: Game): void {
   for (let i = 0; i < 10; i++) {
-    createLava(game, i * game.lava.width);
+    createLava(i, game, i * game.lavas[i].width);
   }
 }
 
-export function createLava(game: Game, posX: number): void {
+export function createLava(i: number, game: Game, posX: number): void {
   const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 28;
 
-  game.lava.sprite = game.physics.add.sprite(posX, bottomOfMap, 'lava');
+  game.lavas[i].sprite = game.physics.add.sprite(posX, bottomOfMap, 'lava');
 
   var config_lava = {
     key: 'lava_moving',
     frames: game.anims.generateFrameNumbers('lava', {
       start: 0,
-      end: game.lava.numFrames - 1,
+      end: game.lavas[i].numFrames - 1,
       first: 0,
     }),
-    frameRate: game.lava.rate,
+    frameRate: game.lavas[i].rate,
     repeat: -1,
     yoyo: false,
   };
 
   game.anims.create(config_lava);
-  game.lava.sprite.setScale(3);
-  game.lava.sprite.setImmovable(true);
-  game.lava.sprite.body.allowGravity = false;
-  game.lava.sprite.play('lava_moving');
+  game.lavas[i].sprite.setScale(3);
+  game.lavas[i].sprite.setImmovable(true);
+  game.lavas[i].sprite.body.allowGravity = false;
+  game.lavas[i].sprite.play('lava_moving');
 }
 
 export function createPlayers(game: Game): void {

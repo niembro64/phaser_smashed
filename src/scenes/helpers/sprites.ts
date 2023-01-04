@@ -286,6 +286,9 @@ export function setAnimationsOff(game: Game): void {
   if (game.chomp.sprite?.anims) {
     game.chomp.sprite.anims.pause();
   }
+  for (let i = 0; i < game.lavas.length; i++) {
+    game.lavas[i].sprite.anims.pause();
+  }
 }
 
 export function setAnimationsOn(game: Game): void {
@@ -296,6 +299,9 @@ export function setAnimationsOn(game: Game): void {
   });
   if (game.chomp.sprite?.anims) {
     game.chomp.sprite.anims.resume();
+  }
+  for (let i = 0; i < game.lavas.length; i++) {
+    game.lavas[i].sprite.anims.resume();
   }
 }
 

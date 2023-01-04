@@ -178,10 +178,10 @@ export function preload(game: Game): void {
     key: 'lava',
     url: 'images/lava_oddVert_noPadding_256x39.png',
     frameConfig: {
-      frameWidth: game.lava.width,
-      frameHeight: game.lava.height,
+      frameWidth: game.lavas[0].width,
+      frameHeight: game.lavas[0].height,
       startFrame: 0,
-      endFrame: game.lava.numFrames - 1,
+      endFrame: game.lavas[0].numFrames - 1,
       margin: 0,
       spacing: 0,
     },
