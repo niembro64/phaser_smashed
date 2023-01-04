@@ -21,12 +21,12 @@ export function create(game: Game) {
   createBackgroundTitles(game);
   createSplashBlack(game);
   createBackgroundOutline(game);
+  createLavas(game);
   createSplashes(game);
   createExplosions(game);
   createFlag(game);
   createEmitterChomp(game);
   createEmittersPlayers(game);
-  createLavas(game);
   createPlatforms(game);
   createTable(game);
   createColliderTablePlatforms(game);
