@@ -3,14 +3,10 @@ import Phaser from 'phaser';
 import Game from '../scenes/Game';
 import '../App.css';
 import '@fontsource/press-start-2p';
-
 import { setGameState } from '../scenes/helpers/state';
 import useSound from 'use-sound';
-// import { Howl } from "howler";
-// import { Howl, HowlOptions, HowlCallback, HowlErrorCallback } from "howler";
-
-// import ReactHowler from 'react-howler';
-
+import html2canvas from 'html2canvas';
+import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
 // @ts-ignore
 import importedWoah from '../sounds/BlackBetty_Woah.mp3';
 // @ts-ignore
@@ -21,9 +17,6 @@ import importedTrance from '../sounds/trance.wav';
 import importedStartSound from '../sounds/start.wav';
 // @ts-ignore
 import importedBlipSound from '../sounds/game-start-liquid.wav';
-import html2canvas from 'html2canvas';
-import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
-
 import {
   CharacterType,
   Debug,
@@ -35,7 +28,6 @@ import {
   ButtonName,
   CharacterMove,
   emoji,
-  Keydown,
 } from '../scenes/interfaces';
 
 function Play() {
@@ -239,7 +231,7 @@ function Play() {
     setShowAbout(false);
     setShowHistory(false);
     setShowOptions(false);
-    
+
     trance.pause();
     startSound();
     setWebState('play');
