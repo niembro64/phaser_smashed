@@ -175,6 +175,19 @@ export function preload(game: Game): void {
   //////////////////////////////
 
   game.load.spritesheet({
+    key: 'lava',
+    url: 'images/lava_oddVert_noPadding_256x39.png',
+    frameConfig: {
+      frameWidth: game.lava.width,
+      frameHeight: game.lava.height,
+      startFrame: 0,
+      endFrame: game.lava.numFrames - 1,
+      margin: 0,
+      spacing: 0,
+    },
+  });
+
+  game.load.spritesheet({
     key: 'chomp',
     url: 'images/chompsheet4.png',
     frameConfig: {

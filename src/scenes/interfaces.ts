@@ -519,3 +519,13 @@ export interface SpriteSize {
   width: number;
   height: number;
 }
+
+export interface Lava {
+  sprite: any;
+  sound: any;
+  particles: any;
+  width: number;
+  height: number;
+  rate: number;
+  numFrames: number;
+}

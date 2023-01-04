@@ -57,12 +57,12 @@ function Play() {
     });
   }
 
-  const debugMax: Debug = {
+  const debugInit: Debug = {
     DevMode: false,
     Level: 6, //0123456
     ModeInfinity: true,
-    InfinityShots: 15,
-    TimeMinutes: 15, //01234567
+    InfinityShots: 7,
+    TimeMinutes: 7, //01234567
     MusicActive: true,
     MusicTrack: 2, // 012
     ReadySoundActive: true,
@@ -90,12 +90,12 @@ function Play() {
     AllowCharsChez: false,
   };
 
-  const debugInit: Debug = {
+  const debugMax: Debug = {
     DevMode: false,
     Level: 6, //0123456
     ModeInfinity: true,
-    InfinityShots: 7,
-    TimeMinutes: 7, //01234567
+    InfinityShots: 15,
+    TimeMinutes: 15, //01234567
     MusicActive: true,
     MusicTrack: 2, // 012
     ReadySoundActive: true,
@@ -1114,9 +1114,7 @@ function Play() {
                 onClickPlayNavButtons('Controllers');
               }}
             >
-              {showControllers && (
-                <span className="dark-span">Pads</span>
-              )}
+              {showControllers && <span className="dark-span">Pads</span>}
               {!showControllers && <span>Pads</span>}
             </div>
           )}

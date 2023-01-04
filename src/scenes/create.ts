@@ -26,6 +26,7 @@ export function create(game: Game) {
   createFlag(game);
   createEmitterChomp(game);
   createEmittersPlayers(game);
+  createLavas(game);
   createPlatforms(game);
   createTable(game);
   createColliderTablePlatforms(game);
@@ -709,6 +710,36 @@ export function createEmittersFollowPlayers(game: Game): void {
     // player.emitterPlayer.visible = false;
     // player.emitterHurt.visible = false;
   });
+}
+
+export function createLavas(game: Game): void {
+  for (let i = 0; i < 10; i++) {
+    createLava(game, i * game.lava.width);
+  }
+}
+
+export function createLava(game: Game, posX: number): void {
+  const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 28;
+
+  game.lava.sprite = game.physics.add.sprite(posX, bottomOfMap, 'lava');
+
+  var config_lava = {
+    key: 'lava_moving',
+    frames: game.anims.generateFrameNumbers('lava', {
+      start: 0,
+      end: game.lava.numFrames - 1,
+      first: 0,
+    }),
+    frameRate: game.lava.rate,
+    repeat: -1,
+    yoyo: false,
+  };
+
+  game.anims.create(config_lava);
+  game.lava.sprite.setScale(3);
+  game.lava.sprite.setImmovable(true);
+  game.lava.sprite.body.allowGravity = false;
+  game.lava.sprite.play('lava_moving');
 }
 
 export function createPlayers(game: Game): void {

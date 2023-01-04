@@ -18,6 +18,7 @@ import {
   Chomp,
   emoji,
   Flag,
+  Lava,
 } from './interfaces';
 import { preload } from './preload';
 import Shake from 'phaser3-rex-plugins/plugins/shakeposition';
@@ -589,6 +590,16 @@ export default class Game extends Phaser.Scene {
     //   Y: Phaser.Input.Keyboard.KeyCodes.PAGE_DOWN,
     // },
   ];
+
+  lava: Lava = {
+    sprite: null,
+    sound: null,
+    particles: null,
+    width: 256,
+    height: 39,
+    rate: 5,
+    numFrames: 16,
+  };
 
   chompX: number = 512;
   chompY: number = 964;

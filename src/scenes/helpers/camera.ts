@@ -3,6 +3,7 @@ import { Loc } from '../interfaces';
 
 export function updateCamera(game: Game): void {
   if (game.debug.DevMode || !game.debug.Camera) {
+    game.cameras.main.zoom = 0.8;
     return;
   }
   var cPlayer = getCameraPlayerStatus(game);
