@@ -276,14 +276,18 @@ function Play() {
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
+    console.log('debug', JSON.stringify(debug, null, 2));
+    let newDebug = { ...debug };
+    console.log('newDebug', JSON.stringify(newDebug, null, 2));
+
     if (!debug.LoadTimeExtra || debug.DevMode) {
       setTimeoutQuotesLengthStart = 0;
     }
     setTimeout(() => {
       myPhaser.current = new Phaser.Game(config);
+      myPhaser.current.registry.set('debug', newDebug);
       myPhaser.current.registry.set('parentContext', Play);
-      myPhaser.current.registry.set('smashConfig', newSmashConfig);
-      myPhaser.current.registry.set('debug', debug);
+      myPhaser.current.registry.set('newSmashConfig', newSmashConfig);
     }, setTimeoutQuotesLengthStart);
 
     setShowLoaderIntervalFunction();
@@ -1138,19 +1142,29 @@ function Play() {
                         blipSound();
                         e.stopPropagation();
                         if (typeof value === 'number') {
-                          setDebug((prevState) => ({
-                            ...prevState,
-                            [key]: value - 1 < 0 ? 0 : value - 1,
-                          }));
-                          console.log('Clicked Number');
+                          setDebug((prevState) => {
+                            console.log('Clicked Number');
+                            let newState = {
+                              ...prevState,
+                              [key]: value + 1 > 2 ? 0 : value + 1,
+                            };
+                            console.log('PrevState: ', prevState);
+                            console.log('NewState: ', newState);
+                            return newState;
+                          });
                         }
 
                         if (typeof value === 'boolean') {
-                          setDebug((prevState) => ({
-                            ...prevState,
-                            [key]: !value,
-                          }));
-                          console.log('Clicked Boolean');
+                          setDebug((prevState) => {
+                            console.log('Clicked Boolean');
+                            let newState = {
+                              ...prevState,
+                              [key]: !value,
+                            };
+                            console.log('PrevState: ', prevState);
+                            console.log('NewState: ', newState);
+                            return newState;
+                          });
                         }
                       }}
                     >
