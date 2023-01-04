@@ -57,7 +57,40 @@ function Play() {
     });
   }
 
-  const [debug, setDebug] = useState<Debug>({
+  const debugMax: Debug = {
+    DevMode: false,
+    Level: 6, //0123456
+    ModeInfinity: true,
+    InfinityShots: 15,
+    TimeMinutes: 7, //01234567
+    MusicActive: true,
+    MusicTrack: 2, // 012
+    ReadySoundActive: true,
+    Camera: true,
+    CamerasVisible: false,
+    CollidersPvP: false,
+    CollidersPvAP: false,
+    CollidersPvAE: false,
+    CollidersAEvAE: true,
+    CollidersAEvAP: true,
+    FrictionAirActive: true,
+    AEWrapScreen: false,
+    WallJumpsActive: true,
+    DefaultDamage: false,
+    DefaultHitback: false,
+    PlayerIdVisible: true,
+    CharacterTinted: false,
+    HealthInverted: false,
+    MatricesAlways: false,
+    ConsoleLogButtons: false,
+    ConsoleLogConnected: false,
+    UpdateLoopsNumSkip: 2, // 012
+    LoadTimeExtra: true,
+    AllowCharsExtended: true,
+    AllowCharsChez: false,
+  };
+
+  const debugInit: Debug = {
     DevMode: false,
     Level: 6, //0123456
     ModeInfinity: true,
@@ -88,7 +121,9 @@ function Play() {
     LoadTimeExtra: true,
     AllowCharsExtended: true,
     AllowCharsChez: false,
-  });
+  };
+
+  const [debug, setDebug] = useState<Debug>(debugInit);
 
   const trance = new Audio(importedTrance);
   trance.volume = 0.3;
@@ -783,6 +818,13 @@ function Play() {
     }
   }, [p1KeysTouched, p2KeysTouched]);
 
+  const getInitFromKey = (key: string) => {
+    console.log('getInitFromKey', key);
+
+    let newVal = debugInit[key as keyof Debug];
+    return newVal;
+  };
+
   return (
     <div id="top-level" className="over-div">
       {/* <div className="download-screenshot">Download Screenshot</div> */}
@@ -1129,7 +1171,7 @@ function Play() {
             >
               <h1>Options</h1>
               <div id="debug-col">
-                {Object.entries(debug).map(([key, value], index) => {
+                {Object.entries(debug).map(([key, value], index: number) => {
                   return (
                     <div
                       id="option"
@@ -1140,9 +1182,12 @@ function Play() {
                         if (typeof value === 'number') {
                           setDebug((prevState) => ({
                             ...prevState,
-                            [key]: value - 1 < 0 ? 0 : value - 1,
+                            [key]:
+                              value - 1 < 0
+                                ? getInitFromKey(key as keyof Debug)
+                                : value - 1,
                           }));
-                          console.log('Clicked Number');
+                          console.log(index, key, value);
                         }
 
                         if (typeof value === 'boolean') {
@@ -1150,7 +1195,7 @@ function Play() {
                             ...prevState,
                             [key]: !value,
                           }));
-                          console.log('Clicked Boolean');
+                          console.log(index, key, value);
                         }
                       }}
                     >
@@ -1167,7 +1212,8 @@ function Play() {
                     </div>
                   );
                 })}
-                <p>Refresh Page to Reset</p>
+                <p>-</p>
+                <p>If No Changes, Hit Back & Restart</p>
               </div>
             </div>
           </div>
