@@ -214,8 +214,8 @@ export function preload(game: Game): void {
         key: pOption.char.name + '_spritesheet',
         url: pOption.char.srcSpriteSheet,
         frameConfig: {
-          frameWidth: pOption.char.spriteSize.width * 4,
-          frameHeight: pOption.char.spriteSize.height * 4,
+          frameWidth: pOption.char.spriteSize.width * 4 + 2,
+          frameHeight: pOption.char.spriteSize.height * 4 + 2,
           startFrame: 0,
           endFrame: 7,
           margin: 0,

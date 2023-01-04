@@ -850,7 +850,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_8.0_link_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.1_link_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
@@ -1021,7 +1021,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_8.0_pikachu_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.1_pikachu_4x.png',
         spriteSize: {
           width: 16,
           height: 14,
@@ -1191,7 +1191,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 1,
         scaleCharSpriteImage: 1,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_8.0_kirby_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.1_kirby_4x.png',
         spriteSize: {
           width: 13,
           height: 13,
@@ -1701,7 +1701,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 0.7,
         scaleCharSpriteImage: 0.7,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_8.0_greenkoopa_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.1_greenkoopa_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
@@ -1871,7 +1871,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteReality: 0.7,
         scaleCharSpriteImage: 0.7,
         sprite: null,
-        srcSpriteSheet: 'images/sprite_sheet_8.0_redkoopa_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.1_redkoopa_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
@@ -2041,7 +2041,7 @@ export default class Game extends Phaser.Scene {
         scaleCharSpriteImage: 0.7,
         sprite: null,
         zoom: 0.7,
-        srcSpriteSheet: 'images/sprite_sheet_8.0_bluekoopa_4x.png',
+        srcSpriteSheet: 'images/sprite_sheet_8.1_bluekoopa_4x.png',
         spriteSize: {
           width: 16,
           height: 16,
