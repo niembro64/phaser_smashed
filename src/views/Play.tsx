@@ -34,7 +34,7 @@ function Play() {
   let myPhaser: any = useRef(null);
 
   function captureScreenshot() {
-    console.log('captureScreenshot');
+    console.log('Capturing Screenshot');
     // Select the element that you want to capture a screenshot of
     const element = document.querySelector('#top-level');
 
