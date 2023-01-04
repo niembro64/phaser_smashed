@@ -221,7 +221,6 @@ export function setFillPlayerTRed(player: Player, game: Game): void {
   player.char.sprite.setAlpha(0.8);
 }
 
-
 // BLINK
 export function setBlinkTrue(player: Player): void {
   player.char.colorFilter = true;
@@ -240,7 +239,7 @@ export function filterAttackEnergyNormal(
   game: Game
 ): void {
   if (game.debug.CharacterTinted) {
-    setTintAttacksID(player, game.colorCircles[playerIndex].colorNumber);
+    setFillAttacksID(player, game.colorCircles[playerIndex].colorNumber);
   } else {
     setTintAttacksNormal(player);
   }
@@ -256,6 +255,14 @@ export function setTintAttacksNormal(player: Player): void {
   player.char.attackEnergy.sprite.setTint(0xffffff);
   player.char.attackEnergy.sprite.setAlpha(1);
   player.char.attackPhysical.sprite.setTint(0xffffff);
+  player.char.attackPhysical.sprite.setAlpha(1);
+}
+export function setFillAttacksID(player: Player, circleColor: number): void {
+  player.char.attackEnergy.sprite.setTint('transparent');
+  player.char.attackEnergy.sprite.setTintFill(circleColor);
+  player.char.attackEnergy.sprite.setAlpha(1);
+  player.char.attackPhysical.sprite.setTint('transparent');
+  player.char.attackPhysical.sprite.setTintFill(circleColor);
   player.char.attackPhysical.sprite.setAlpha(1);
 }
 
