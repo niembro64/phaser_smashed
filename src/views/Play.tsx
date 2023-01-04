@@ -90,6 +90,50 @@ function Play() {
     AllowCharsChez: false,
   });
 
+  let debugData: Debug = {
+    DevMode: false,
+    Level: 6, //0123456
+    ModeInfinity: true,
+    InfinityShots: 7,
+    TimeMinutes: 7, //01234567
+    MusicActive: true,
+    MusicTrack: 2, // 012
+    ReadySoundActive: true,
+    Camera: true,
+    CamerasVisible: false,
+    CollidersPvP: false,
+    CollidersPvAP: false,
+    CollidersPvAE: false,
+    CollidersAEvAE: true,
+    CollidersAEvAP: true,
+    FrictionAirActive: true,
+    AEWrapScreen: false,
+    WallJumpsActive: true,
+    DefaultDamage: false,
+    DefaultHitback: false,
+    PlayerIdVisible: true,
+    CharacterTinted: false,
+    HealthInverted: false,
+    MatricesAlways: false,
+    ConsoleLogButtons: false,
+    ConsoleLogConnected: false,
+    UpdateLoopsNumSkip: 2, // 012
+    LoadTimeExtra: true,
+    AllowCharsExtended: true,
+    AllowCharsChez: false,
+  };
+
+  const debugRef = useRef(debug);
+
+  useEffect(() => {
+    console.log('debug.CharacterTinted: ', debug.CharacterTinted);
+    debugRef.current = debug;
+    console.log(
+      'debugRef.current.CharacterTinted: ',
+      debugRef.current.CharacterTinted
+    );
+  }, [debug]);
+
   const trance = new Audio(importedTrance);
   trance.volume = 0.3;
   const [woah] = useSound(importedWoah, { volume: 0.2 });
@@ -224,7 +268,11 @@ function Play() {
   const [anyKeyWasPressed, setAnyKeyWasPressed] = useState<boolean>(false);
   const [numKeyboards, setNumKeyboards] = useState<number>(0);
 
-  const onClickStartStartButton = () => {
+  function onClickStartStartButton(): any {
+    console.log('CLICK | smashConfig', JSON.stringify(smashConfig, null, 2));
+    console.log('CLICK | debug', JSON.stringify(debug, null, 2));
+    console.log('CLICK | debugREF', JSON.stringify(debugRef.current, null, 2));
+
     setShowControls(false);
     setShowControllers(false);
     setShowRulesN64(false);
@@ -276,22 +324,33 @@ function Play() {
     let newSmashConfig = { players: [...newPlayers] };
     setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
-    console.log('debug', JSON.stringify(debug, null, 2));
     let newDebug = { ...debug };
-    console.log('newDebug', JSON.stringify(newDebug, null, 2));
+    // console.log('REACT | debug', JSON.stringify(debug, null, 2));
+    // console.log('REACT | newDebug', JSON.stringify(newDebug, null, 2));
+    // console.log('REACT | debugData', JSON.stringify(debugData, null, 2));
 
     if (!debug.LoadTimeExtra || debug.DevMode) {
       setTimeoutQuotesLengthStart = 0;
     }
     setTimeout(() => {
+      // console.log('REACT | TIMEOUT | debug', JSON.stringify(debug, null, 2));
+      // console.log(
+      //   'REACT | TIMEOUT | newDebug',
+      //   JSON.stringify(newDebug, null, 2)
+      // );
+      // console.log(
+      //   'REACT | TIMEOUT |debugData',
+      //   JSON.stringify(debugData, null, 2)
+      // );
+
       myPhaser.current = new Phaser.Game(config);
       myPhaser.current.registry.set('debug', newDebug);
       myPhaser.current.registry.set('parentContext', Play);
-      myPhaser.current.registry.set('newSmashConfig', newSmashConfig);
+      myPhaser.current.registry.set('smashConfig', newSmashConfig);
     }, setTimeoutQuotesLengthStart);
 
     setShowLoaderIntervalFunction();
-  };
+  }
 
   const setShowLoaderIntervalFunction = () => {
     setShowLoader(true);
@@ -1150,6 +1209,7 @@ function Play() {
                             };
                             console.log('PrevState: ', prevState);
                             console.log('NewState: ', newState);
+                            debugData = newState;
                             return newState;
                           });
                         }
@@ -1163,6 +1223,7 @@ function Play() {
                             };
                             console.log('PrevState: ', prevState);
                             console.log('NewState: ', newState);
+                            debugData = newState;
                             return newState;
                           });
                         }

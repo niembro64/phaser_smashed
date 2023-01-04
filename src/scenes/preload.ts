@@ -18,7 +18,6 @@ export function preload(game: Game): void {
 
   game.smashConfig = game.game.registry.get('smashConfig');
   game.debug = game.game.registry.get('debug');
-  console.log('this.smashConfig', game.smashConfig);
   if (game.smashConfig) {
     game.playerChoicesCharacterType = [];
     game.playerChoicesInputType = [];
@@ -33,6 +32,8 @@ export function preload(game: Game): void {
       iPlayer.char.friction_air = 0;
     });
   }
+
+  // seting values for controller hat
   let hatAdder = 0.142857;
   let hatPos = -1 + hatAdder;
   for (let i = 0; i < 8; i++) {
@@ -41,6 +42,11 @@ export function preload(game: Game): void {
   }
 
   game.shotsLeft = game.debug.InfinityShots;
+  console.log('PHASER | debug', JSON.stringify(game.debug, null, 2));
+  console.log(
+    'PHASER | smashConfig',
+    JSON.stringify(game.smashConfig, null, 2)
+  );
 
   //////////////////////////////
   // Load Audio
