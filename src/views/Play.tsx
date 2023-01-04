@@ -1201,31 +1201,18 @@ function Play() {
                         blipSound();
                         e.stopPropagation();
                         if (typeof value === 'number') {
-                          setDebug((prevState) => {
-                            console.log('Clicked Number');
-                            let newState = {
-                              ...prevState,
-                              [key]: value + 1 > 2 ? 0 : value + 1,
-                            };
-                            console.log('PrevState: ', prevState);
-                            console.log('NewState: ', newState);
-                            debugData = newState;
-                            return newState;
-                          });
+                          setDebug((prevState) => ({
+                            ...prevState,
+                            [key]: value + 1 > 2 ? 0 : value + 1,
+                          }));
                         }
 
                         if (typeof value === 'boolean') {
-                          setDebug((prevState) => {
-                            console.log('Clicked Boolean');
-                            let newState = {
-                              ...prevState,
-                              [key]: !value,
-                            };
-                            console.log('PrevState: ', prevState);
-                            console.log('NewState: ', newState);
-                            debugData = newState;
-                            return newState;
-                          });
+                          setDebug((prevState) => ({
+                            ...prevState,
+                            [key]: !value,
+                          }));
+                          console.log('Clicked Boolean');
                         }
                       }}
                     >
