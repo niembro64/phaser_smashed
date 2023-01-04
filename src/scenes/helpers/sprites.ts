@@ -143,7 +143,7 @@ export function filterPlayerSpriteColorStateDark(
   game: Game
 ): void {
   player.char.sprite.setAlpha(1);
-  player.char.sprite.setTint(0x888888);
+  player.char.sprite.setTint(0x666666);
 }
 
 export function filterPlayerSpriteColorStateNormal(
