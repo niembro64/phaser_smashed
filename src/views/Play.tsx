@@ -88,6 +88,7 @@ function Play() {
     LoadTimeExtra: true,
     AllowCharsExtended: true,
     AllowCharsChez: false,
+    SlowMoExplosions: false,
   };
 
   const debugMax: Debug = {
@@ -122,6 +123,7 @@ function Play() {
     LoadTimeExtra: true,
     AllowCharsExtended: true,
     AllowCharsChez: false,
+    SlowMoExplosions: true,
   };
 
   const [debug, setDebug] = useState<Debug>(debugInit);

@@ -1,12 +1,24 @@
 import Game from '../Game';
 
 export function updateTimeSlowdown(game: Game): void {
-  game.tweens.timeScale = game.motionSlowdown;
-  game.physics.world.timeScale = game.motionSlowdown;
-  game.time.timeScale = game.motionSlowdown;
+  if (!game.debug.SlowMoExplosions) {
+    return;
+  }
 
-  game.motionSlowdown = game.motionSlowdown * 0.9 + 0.1;
+  let actualSlowdown: number;
+  if (game.motionSlowdown > 3) {
+    actualSlowdown = 3;
+  } else {
+    actualSlowdown = game.motionSlowdown;
+  }
+
+  game.tweens.timeScale = actualSlowdown;
+  game.physics.world.timeScale = actualSlowdown;
+  game.time.timeScale = actualSlowdown;
+
+  game.motionSlowdown = game.motionSlowdown * 0.95 + 0.05;
   // console.log('game.motionSlowdown', game.motionSlowdown);
+  console.log('actualSlowdown', actualSlowdown);
 }
 
 export function isAnyExplosionActive(game: Game): boolean {

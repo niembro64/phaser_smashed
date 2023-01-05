@@ -417,6 +417,7 @@ export interface Debug {
   LoadTimeExtra: boolean;
   AllowCharsChez: boolean;
   AllowCharsExtended: boolean;
+  SlowMoExplosions: boolean;
 }
 
 export interface Flag {
