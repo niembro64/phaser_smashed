@@ -30,7 +30,6 @@ export function create(game: Game) {
   createPlatforms(game);
   createTable(game);
   createColliderTablePlatforms(game);
-  // createChompExplosions(game);
   createAttackPhysicals(game);
   createColliderTableAttackPhysicals(game);
   createAttackEnergies(game);
@@ -59,21 +58,6 @@ export function create(game: Game) {
   // INIT UPDATE
   setPreUpdate(game);
 }
-// export function createChompExplosions(game: Game): void {
-//   game.chomp.darknessMoments.explosions.forEach((e, eIndex) => {
-//     e.sprite = game.physics.add.sprite(
-//       game.SCREEN_DIMENSIONS.WIDTH / 2,
-//       -500,
-//       'centerWhite'
-//     );
-//     e.sprite.setScale(1);
-//     e.sprite.body.allowGravity = false;
-//     e.sprite.setBounce(0);
-//     e.sprite.setOrigin(0.5, 0.5);
-//     e.sprite.setImmovable(true);
-//     // game.physics.add.collider(e.sprite, game.PLATFORMS);
-//   });
-// }
 
 export function createShake(game: Game): void {
   const shakeConfig: ShakePosition.IConfig = {
@@ -84,8 +68,6 @@ export function createShake(game: Game): void {
 
   game.shake = new ShakePosition(game.cameraPlayers.char.sprite, shakeConfig);
   game.shake.setEnable(true);
-
-  // game.shake.start();
 }
 
 export function createExplosions(game: Game): void {
