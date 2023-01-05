@@ -701,7 +701,7 @@ export function createLavas(game: Game): void {
 }
 
 export function createLava(i: number, game: Game, posX: number): void {
-  const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT - 10;
+  const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 10;
   // const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 28;
 
   game.lavas[i].sprite = game.physics.add.sprite(posX, bottomOfMap, 'lava');

@@ -151,7 +151,7 @@ export function preload(game: Game): void {
   game.load.image('background', 'images/darkxp.jpg');
   game.load.image(
     'background_outline',
-    'images/outline-blocks-transparent.png'
+    'images/outline_blocks_04.png'
   );
   game.load.image('centerWhite', 'images/wx.png');
   game.load.image('centerBlack', 'images/bx.png');

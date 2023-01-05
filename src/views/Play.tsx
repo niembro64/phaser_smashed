@@ -56,9 +56,9 @@ function Play() {
       link.click();
     });
   }
-
   const debugInit: Debug = {
-    DevMode: true,
+    DevMode: false,
+    DevZoom: 8,
     Level: 6, //0123456
     ModeInfinity: true,
     InfinityShots: 7,
@@ -91,7 +91,8 @@ function Play() {
   };
 
   const debugMax: Debug = {
-    DevMode: false,
+    DevMode: true,
+    DevZoom: 10,
     Level: 6, //0123456
     ModeInfinity: true,
     InfinityShots: 15,

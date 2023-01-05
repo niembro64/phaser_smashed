@@ -386,6 +386,8 @@ export interface Quote {
 }
 
 export interface Debug {
+  DevMode: boolean;
+  DevZoom: number;
   Level: number;
   ModeInfinity: boolean;
   TimeMinutes: number;
@@ -415,7 +417,6 @@ export interface Debug {
   LoadTimeExtra: boolean;
   AllowCharsChez: boolean;
   AllowCharsExtended: boolean;
-  DevMode: boolean;
 }
 
 export interface Flag {
