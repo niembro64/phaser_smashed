@@ -152,8 +152,8 @@ export default class Game extends Phaser.Scene {
   textLocations: number[] = [-700, -400, 400, 700];
   numDead: number = 0;
   numDeadPrev: number = 0;
-
   cameraMoverZoomStatusKeeper: number = 1;
+  motionSlowdown: number = 1;
 
   // TIME
   // timeScale: any = this.time.timeScale;

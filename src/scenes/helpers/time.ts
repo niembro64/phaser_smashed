@@ -1,23 +1,12 @@
 import Game from '../Game';
 
-export function setMotionSlow(game: Game, speed: number = 2): void {
-  game.tweens.timeScale = speed;
-  game.physics.world.timeScale = speed;
-  game.time.timeScale = speed;
-}
+export function updateTimeSlowdown(game: Game): void {
+  game.tweens.timeScale = game.motionSlowdown;
+  game.physics.world.timeScale = game.motionSlowdown;
+  game.time.timeScale = game.motionSlowdown;
 
-export function setMotionNormal(game: Game): void {
-  game.tweens.timeScale = 1;
-  game.physics.world.timeScale = 1;
-  game.time.timeScale = 1;
-}
-
-export function updateMotionSpeed(game: Game): void {
-  if (isAnyExplosionActive(game)) {
-    setMotionSlow(game);
-  } else {
-    setMotionNormal(game);
-  }
+  game.motionSlowdown = game.motionSlowdown * 0.9 + 0.1;
+  console.log('game.motionSlowdown', game.motionSlowdown);
 }
 
 export function isAnyExplosionActive(game: Game): boolean {
@@ -28,4 +17,8 @@ export function isAnyExplosionActive(game: Game): boolean {
     }
   });
   return found;
+}
+
+export function addToMotionSlowdown(amount: number, game: Game): void {
+  game.motionSlowdown *= amount;
 }

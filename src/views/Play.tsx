@@ -58,7 +58,7 @@ function Play() {
   }
 
   const debugInit: Debug = {
-    DevMode: false,
+    DevMode: true,
     Level: 6, //0123456
     ModeInfinity: true,
     InfinityShots: 7,

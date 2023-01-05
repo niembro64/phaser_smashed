@@ -25,7 +25,7 @@ import {
   updateSpritesheets,
 } from '../helpers/sprites';
 import { updateResetAllHitboxesAttackEnergy } from '../helpers/state';
-import { updateMotionSpeed } from '../helpers/time';
+import { updateTimeSlowdown } from '../helpers/time';
 import { updatePlayers } from '../update';
 
 export function updateGameStatePlay(
@@ -52,7 +52,7 @@ export function updateGameStatePlay(
   updateChomp(game);
   updateTable(game);
   updateSpritesheets(game);
-  updateMotionSpeed(game);
+  updateTimeSlowdown(game);
 
   // UPDATE PLAYERS
   updatePlayers(game);

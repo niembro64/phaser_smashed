@@ -6,6 +6,7 @@ import {
   xyVector,
 } from '../interfaces';
 import { setPlayerState } from './state';
+import { addToMotionSlowdown } from './time';
 
 // export function setPowerDarkToPlayer(
 //   player: Player,
@@ -160,8 +161,9 @@ export function updatePlayerDarknessEvents(game: Game): void {
       // player.char.damage += 1 / 120;
 
       if (Math.random() > 1 - pj) {
+        let baseAmount = 400;
         let amount =
-          400 +
+          baseAmount +
           Math.pow(
             game.gameNanoseconds - game.chomp.darknessMoments.chomp,
             0.7
@@ -170,7 +172,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
 
         // console.log('amount', amount);
 
-
+        addToMotionSlowdown(amount / baseAmount, game);
         playNextExplosion(s.x, s.y, game, amount);
         let { x, y } = getRandomUnitVector();
         // game.SOUND_HIT.play();
