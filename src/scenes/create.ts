@@ -100,11 +100,9 @@ export function createExplosions(game: Game): void {
     e.sprite.setImmovable(true);
     e.sprite.setRotation((Math.PI / 4) * eIndex);
     e.sprite.setTint(0x000000);
+    
     // e.sprite.on('animationcomplete', () => {
-    //   e.sprite.setVisible(false);
-    //   e.sprite.setVelocity(0, 0);
-    //   e.sprite.setActive(false);
-    //   e.sprite.setImmovable(true);
+    //   console.log('animationcomplete');
     // });
 
     // add sounds to explosions

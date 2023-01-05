@@ -156,6 +156,7 @@ export default class Game extends Phaser.Scene {
   cameraMoverZoomStatusKeeper: number = 1;
 
   // TIME
+  // timeScale: any = this.time.timeScale;
   scoreBoardTimeGame: any;
   scoreBoardTimeTime: any;
   timeNanoseconds: number = 0;

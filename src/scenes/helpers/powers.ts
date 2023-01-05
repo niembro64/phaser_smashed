@@ -170,6 +170,7 @@ export function updatePlayerDarknessEvents(game: Game): void {
 
         // console.log('amount', amount);
 
+
         playNextExplosion(s.x, s.y, game, amount);
         let { x, y } = getRandomUnitVector();
         // game.SOUND_HIT.play();
