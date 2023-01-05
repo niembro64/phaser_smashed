@@ -1,6 +1,7 @@
-import { Vector } from "matter";
-import Game from "../Game";
-import { getDistance, getNormalizedVector, getVector } from "./damage";
+import { Vector } from 'matter';
+import Game from '../Game';
+import { getDistance, getNormalizedVector, getVector } from './damage';
+import { setChompPowerState } from './powers';
 
 export function updateChompSpriteDirection(game: Game): void {
   let c = game.chomp;
@@ -38,7 +39,7 @@ export function updateChompVelocity(game: Game): void {
 
   if (
     Math.random() >
-    (game.chomp.powerStateCurr.name === "none"
+    (game.chomp.powerStateCurr.name === 'none'
       ? c.PERCENT_FRAMES_WALK
       : c.percentFramesJump)
   ) {
@@ -61,7 +62,7 @@ export function updateChompVelocity(game: Game): void {
 
   if (isChompInsideCircle(game)) {
     if (b.touching.down) {
-      if (c.powerStateCurr.name === "dark") {
+      if (c.powerStateCurr.name === 'dark') {
         c.soundAttack.play();
         b.setVelocityY(-1 * Math.abs(yNew + 0.3) * 1000);
         b.setVelocityX(xNew * 500);
@@ -104,6 +105,20 @@ export function updateChomp(game: Game): void {
   updateChompSpriteDirection(game);
   updateChompVelocity(game);
   updateChompLinkPositions(game);
+
+}
+
+export function updateAtThreeShots(game: Game): void {
+  let c = game.chomp;
+
+  if (game.shotsLeftCurr === game.shotsLeftPrev) {
+    return;
+  }
+
+  if (game.shotsLeftCurr === 3) {
+    // c.emitterDark.visible = true;
+    // setChompPowerState('dark', game);
+  }
 }
 
 export function updateChompLinkPositions(game: Game): void {

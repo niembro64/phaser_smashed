@@ -6,7 +6,7 @@ export function updateTimeSlowdown(game: Game): void {
   game.time.timeScale = game.motionSlowdown;
 
   game.motionSlowdown = game.motionSlowdown * 0.9 + 0.1;
-  console.log('game.motionSlowdown', game.motionSlowdown);
+  // console.log('game.motionSlowdown', game.motionSlowdown);
 }
 
 export function isAnyExplosionActive(game: Game): boolean {

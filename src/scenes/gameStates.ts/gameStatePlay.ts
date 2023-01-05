@@ -1,7 +1,7 @@
 import Game from '../Game';
 import { updateAttackEnergyOffscreen } from '../helpers/attacks';
 import { updateCamera } from '../helpers/camera';
-import { updateChomp } from '../helpers/chomp';
+import { updateAtThreeShots, updateChomp } from '../helpers/chomp';
 import { updateDeathsAndKillsMatrices } from '../helpers/damage';
 import {
   updateAttackEnergyFlipXVel,
@@ -53,6 +53,7 @@ export function updateGameStatePlay(
   updateTable(game);
   updateSpritesheets(game);
   updateTimeSlowdown(game);
+  updateAtThreeShots(game);
 
   // UPDATE PLAYERS
   updatePlayers(game);

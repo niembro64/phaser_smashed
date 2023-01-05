@@ -172,8 +172,8 @@ export default class Game extends Phaser.Scene {
   timer: any;
 
   // SHOTS
-  shotsLeft: number = 0;
-
+  shotsLeftCurr: number = 0;
+  shotsLeftPrev: number = 0;
   ////////////////////////////////
   ////////// GAMEPAD CONSTANTS
   ////////////////////////////////
@@ -733,7 +733,7 @@ export default class Game extends Phaser.Scene {
     soundAttack: null,
     soundBBWoah: null,
     soundBBBambalam: null,
-    powerStateCurr: { name: 'dark', gameStamp: 0 },
+    powerStateCurr: { name: 'none', gameStamp: 0 },
     powerStatePrev: { name: 'none', gameStamp: 0 },
     particles: null,
     emitterDark: null,

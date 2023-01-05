@@ -103,11 +103,14 @@ export function updateNumShotsLeft(game: Game): void {
     return;
   }
 
+  game.shotsLeftPrev = game.shotsLeftCurr;
+
   let shots = 0;
   game.players.forEach((player, playerIndex) => {
     for (let i = 0; i < game.players.length; i++) {
       shots += game.numberShotsTakenByMeMatrix[playerIndex][i];
     }
   });
-  game.shotsLeft = game.debug.InfinityShots - shots;
+  game.shotsLeftCurr = game.debug.InfinityShots - shots;
 }
+

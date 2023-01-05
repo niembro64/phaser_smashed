@@ -6,6 +6,8 @@ import {
   onHitHandlerAttackPhysical,
 } from './helpers/damage';
 import {
+  getDoesAnyPlayerHaveDark,
+  getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
@@ -185,7 +187,7 @@ export function createChomp(game: Game): void {
   c.sprite.setOrigin(0.5, 1);
   c.sprite.setVelocityX(30);
   c.sprite.setMass(c.MASS);
-  c.sprite.play('chompanimation_chomping');
+  c.sprite.play('chompanimation_walking');
 
   game.physics.add.collider(c.sprite, game.PLATFORMS);
   // game.players.forEach((player, playerIndex) => {
@@ -412,6 +414,29 @@ export function createPlayerIdCircles(game: Game): void {
 }
 
 export function createHitboxOverlap(game: Game): void {
+  // ATTACK ENERGY CHOMP OVERLAP
+  game.players.forEach((player, playerIndex) => {
+    game.physics.add.overlap(
+      player.char.attackEnergy.sprite,
+      game.chomp.sprite,
+      function () {
+        if (!getDoesAnythingHaveDark(game)) {
+          game.chomp.emitterDark.visible = true;
+          setChompPowerState('dark', game);
+          game.chomp.soundAttack.play();
+          game.SOUND_HIT.play();
+        }
+        // console.log(
+        //   "OVERLAP",
+        //   "CHOMP",
+        //   game.chomp.powerStateCurr.name,
+        //   "PLAYER",
+        //   player.char.powerStateCurr.name
+        // );
+      }
+    );
+  });
+
   // PLAYER CHOMP OVERLAP
   game.players.forEach((player, playerIndex) => {
     game.physics.add.overlap(
@@ -649,6 +674,7 @@ export function createEmitterChompFollowChomp(game: Game): void {
 
   game.chomp.emitterDark.active = true;
   game.chomp.emitterDark.on = true;
+  game.chomp.emitterDark.visible = false;
 }
 
 export function createEmittersFollowPlayers(game: Game): void {

@@ -40,7 +40,7 @@ export function preload(game: Game): void {
     hatPos += hatAdder * 2;
   }
 
-  game.shotsLeft = game.debug.InfinityShots;
+  game.shotsLeftCurr = game.debug.InfinityShots;
 
   //////////////////////////////
   // Load Audio
@@ -149,10 +149,7 @@ export function preload(game: Game): void {
   game.load.image('flag', 'images/flagpole_JK2.png');
 
   game.load.image('background', 'images/darkxp.jpg');
-  game.load.image(
-    'background_outline',
-    'images/outline_blocks_04.png'
-  );
+  game.load.image('background_outline', 'images/outline_blocks_04.png');
   game.load.image('centerWhite', 'images/wx.png');
   game.load.image('centerBlack', 'images/bx.png');
   game.load.image('centerMagenta', 'images/mx.png');

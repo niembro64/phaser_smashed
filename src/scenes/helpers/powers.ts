@@ -60,7 +60,7 @@ export function setPlayerPowerState(
 
   switch (curr.name) {
     case 'none':
-      if (!getDoesAPlayerHaveDark(game)) {
+      if (!getDoesAnyPlayerHaveDark(game)) {
         setChompPowerState('dark', game);
       }
       // p.emitterDark.active = false;
@@ -120,7 +120,7 @@ export function setChompPowerState(
   }
 }
 
-export function getDoesAPlayerHaveDark(game: Game): boolean {
+export function getDoesAnyPlayerHaveDark(game: Game): boolean {
   let found = false;
 
   game.players.forEach((player, playerIndex) => {
@@ -128,6 +128,19 @@ export function getDoesAPlayerHaveDark(game: Game): boolean {
       found = true;
     }
   });
+
+  return found;
+}
+
+export function getDoesAnythingHaveDark(game: Game): boolean {
+  let found = false;
+
+  if (
+    game.chomp.powerStateCurr.name === 'dark' ||
+    getDoesAnyPlayerHaveDark(game)
+  ) {
+    found = true;
+  }
 
   return found;
 }
