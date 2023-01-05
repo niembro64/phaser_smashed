@@ -100,7 +100,7 @@ export function createExplosions(game: Game): void {
     e.sprite.setImmovable(true);
     e.sprite.setRotation((Math.PI / 4) * eIndex);
     e.sprite.setTint(0x000000);
-    
+
     // e.sprite.on('animationcomplete', () => {
     //   console.log('animationcomplete');
     // });
@@ -693,13 +693,16 @@ export function createEmittersFollowPlayers(game: Game): void {
 }
 
 export function createLavas(game: Game): void {
-  for (let i = 0; i < 10; i++) {
-    createLava(i, game, i * game.lavas[i].width);
+  const initialLeftMostLava = (-1 * game.SCREEN_DIMENSIONS.WIDTH) / 2;
+
+  for (let i = 0; i < game.lavas.length; i++) {
+    createLava(i, game, initialLeftMostLava + i * game.lavas[i].width);
   }
 }
 
 export function createLava(i: number, game: Game, posX: number): void {
-  const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 28;
+  const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT - 10;
+  // const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 28;
 
   game.lavas[i].sprite = game.physics.add.sprite(posX, bottomOfMap, 'lava');
 
@@ -720,6 +723,7 @@ export function createLava(i: number, game: Game, posX: number): void {
   game.lavas[i].sprite.setImmovable(true);
   game.lavas[i].sprite.body.allowGravity = false;
   game.lavas[i].sprite.play('lava_moving');
+  game.lavas[i].sprite.setOrigin(0, 0);
 }
 
 export function createPlayers(game: Game): void {

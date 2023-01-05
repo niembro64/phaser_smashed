@@ -683,6 +683,33 @@ export default class Game extends Phaser.Scene {
       rate: 5,
       numFrames: 16,
     },
+    {
+      sprite: null,
+      sound: null,
+      particles: null,
+      width: 256,
+      height: 39,
+      rate: 5,
+      numFrames: 16,
+    },
+    {
+      sprite: null,
+      sound: null,
+      particles: null,
+      width: 256,
+      height: 39,
+      rate: 5,
+      numFrames: 16,
+    },
+    {
+      sprite: null,
+      sound: null,
+      particles: null,
+      width: 256,
+      height: 39,
+      rate: 5,
+      numFrames: 16,
+    },
   ];
 
   chompX: number = 512;
