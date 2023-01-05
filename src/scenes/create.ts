@@ -414,6 +414,29 @@ export function createPlayerIdCircles(game: Game): void {
 }
 
 export function createHitboxOverlap(game: Game): void {
+  // ATTACK PHYSICAL CHOMP OVERLAP
+  game.players.forEach((player, playerIndex) => {
+    game.physics.add.overlap(
+      player.char.attackPhysical.sprite,
+      game.chomp.sprite,
+      function () {
+        if (!getDoesAnythingHaveDark(game)) {
+          game.chomp.emitterDark.visible = true;
+          setChompPowerState('dark', game);
+          game.chomp.soundAttack.play();
+          game.SOUND_HIT.play();
+        }
+        // console.log(
+        //   "OVERLAP",
+        //   "CHOMP",
+        //   game.chomp.powerStateCurr.name,
+        //   "PLAYER",
+        //   player.char.powerStateCurr.name
+        // );
+      }
+    );
+  });
+
   // ATTACK ENERGY CHOMP OVERLAP
   game.players.forEach((player, playerIndex) => {
     game.physics.add.overlap(
