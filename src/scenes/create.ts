@@ -6,11 +6,11 @@ import {
   onHitHandlerAttackPhysical,
 } from './helpers/damage';
 import {
-  getDoesAnyPlayerHaveDark,
   getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
+  updateChompFilterState,
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
@@ -182,12 +182,14 @@ export function createChomp(game: Game): void {
   c.sprite = game.physics.add.sprite(c.originX, c.originY - 10, 'chomp');
   c.sprite.setScale(1.3);
   c.sprite.body.allowGravity = true;
-  c.sprite.setBounceX(0.7);
+  c.sprite.setBounceX(1);
   c.sprite.setBounceY(0.5);
   c.sprite.setOrigin(0.5, 1);
   c.sprite.setVelocityX(30);
   c.sprite.setMass(c.MASS);
   c.sprite.play('chompanimation_walking');
+
+  // setChompFilterState('none', game);
 
   game.physics.add.collider(c.sprite, game.PLATFORMS);
   // game.players.forEach((player, playerIndex) => {
@@ -420,6 +422,8 @@ export function createHitboxOverlap(game: Game): void {
       player.char.attackPhysical.sprite,
       game.chomp.sprite,
       function () {
+        updateChompFilterState(player, player.char.attackPhysical.damage, game);
+        // setChompFilterState('hurt', game);
         if (!getDoesAnythingHaveDark(game)) {
           game.chomp.emitterDark.visible = true;
           setChompPowerState('dark', game);
@@ -443,6 +447,7 @@ export function createHitboxOverlap(game: Game): void {
       player.char.attackEnergy.sprite,
       game.chomp.sprite,
       function () {
+        updateChompFilterState(player, player.char.attackEnergy.damage, game);
         if (!getDoesAnythingHaveDark(game)) {
           game.chomp.emitterDark.visible = true;
           setChompPowerState('dark', game);

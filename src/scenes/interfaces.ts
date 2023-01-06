@@ -429,7 +429,9 @@ export interface Flag {
 
 export interface Chomp {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: ChompState;
+  filterStateCurr: ChompFilterState;
+  filterStatePrev: ChompFilterState;
+  damage: number;
   originX: number;
   originY: number;
   radius: number;
@@ -458,7 +460,12 @@ export interface ChompLink {
   sprite: any | Phaser.GameObjects.Sprite;
 }
 
-export type ChompState = 'idle' | 'chomping' | 'dead';
+export type ChompFilterStateName = 'none' | 'hurt' | 'cooldown';
+
+export interface ChompFilterState {
+  name: ChompFilterStateName;
+  gameStamp: number;
+}
 
 export const emoji = {
   keyboardBlack: '⌨',

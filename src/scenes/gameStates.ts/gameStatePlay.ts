@@ -19,6 +19,7 @@ import {
   updateAttackEnergyFrictionWall,
   updatePadPreviousAndDebounced,
 } from '../helpers/pad';
+import { updateChompFilterState } from '../helpers/powers';
 import {
   updateAllSpriteFilters,
   updateSpritesFlipX,
@@ -54,6 +55,9 @@ export function updateGameStatePlay(
   updateSpritesheets(game);
   updateTimeSlowdown(game);
   updateAtThreeShots(game);
+  game.players.forEach((player, playerIndex) => {
+    updateChompFilterState(player, 0, game);
+  });
 
   // UPDATE PLAYERS
   updatePlayers(game);

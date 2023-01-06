@@ -712,11 +712,16 @@ export default class Game extends Phaser.Scene {
     },
   ];
 
+  flashActiveMs: number = 50;
+  flashCooldownMs: number = 1000;
+
   chompX: number = 512;
   chompY: number = 964;
   chomp: Chomp = {
     sprite: null,
-    state: 'idle',
+    filterStateCurr: { name: 'none', gameStamp: 0 },
+    filterStatePrev: { name: 'none', gameStamp: 0 },
+    damage: 0,
     originX: this.chompX,
     originY: this.chompY,
     radius: 150,

@@ -1,10 +1,12 @@
 import Game from '../Game';
 import {
+  ChompFilterStateName,
   Player,
   PowerStateCharacterName,
   PowerStateChompName,
   xyVector,
 } from '../interfaces';
+import { getNormalizedVector, getVector } from './damage';
 import { setPlayerState } from './state';
 import { addToMotionSlowdown } from './time';
 
@@ -80,6 +82,125 @@ export function setPlayerPowerState(
       break;
   }
 }
+
+// export function updateHurtChomp(damage: number, game: Game): void {
+//   let c = game.chomp;
+
+//   // if (
+//   //   c.filterStateCurr.name === 'hurt' &&
+//   //   !getHasBeenGameDurationSinceMoment(
+//   //     game.flashCooldownMs,
+//   //     c.filterStateCurr.gameStamp,
+//   //     game
+//   //   )
+//   // ) {
+//   //   return;
+//   // }
+//   setChompFilterState('hurt', game);
+// }
+
+export function setChompFilterState(
+  stateName: ChompFilterStateName,
+  game: Game
+): void {
+  let curr = game.chomp.filterStateCurr;
+  let prev = game.chomp.filterStatePrev;
+
+  // if (stateName === curr.name) {
+  //   return;
+  // }
+
+  // if (
+  //   stateName === 'hurt' &&
+  //   !getHasBeenGameDurationSinceMoment(
+  //     game.flashCooldownMs,
+  //     curr.gameStamp,
+  //     game
+  //   )
+  // ) {
+  //   return;
+  // }
+
+  prev.name = curr.name;
+  prev.gameStamp = curr.gameStamp;
+
+  curr.name = stateName;
+  curr.gameStamp = game.gameNanoseconds;
+
+  switch (curr.name) {
+    case 'none':
+      console.log('setChompFilterState none');
+      game.chomp.sprite.clearTint();
+      break;
+    case 'cooldown':
+      console.log('setChompFilterState cooldown');
+      game.chomp.sprite.clearTint();
+      break;
+    case 'hurt':
+      console.log('setChompFilterState hurt');
+      game.chomp.sprite.setTintFill(0xffffff);
+
+      break;
+  }
+}
+
+export function updateChompFilterState(
+  player: Player,
+  damage: number,
+  game: Game
+): void {
+  let c = game.chomp;
+  let curr = c.filterStateCurr;
+
+  if (damage > 0 && curr.name === 'none') {
+    setChompFilterState('hurt', game);
+    c.damage += damage;
+    console.log('c.damage', c.damage);
+
+    let { x, y }: xyVector = getNormalizedVector(
+      player.char.attackEnergy.sprite.x,
+      player.char.attackEnergy.sprite.y,
+      c.sprite.x,
+      c.sprite.y
+    );
+
+    let b = c.sprite.body;
+
+    b.setVelocityX(b.velocity.x + x * 500);
+    b.setVelocityY(b.velocity.y + y * 500);
+  }
+
+  switch (curr.name) {
+    case 'none':
+      // console.log('updateChompFilterState none');
+      break;
+    case 'cooldown':
+      // console.log('updateChompFilterState cooldown');
+      if (
+        getHasBeenGameDurationSinceMoment(
+          game.flashCooldownMs,
+          curr.gameStamp,
+          game
+        )
+      ) {
+        setChompFilterState('none', game);
+      }
+      break;
+    case 'hurt':
+      // console.log('updateChompFilterState hurt');
+      if (
+        getHasBeenGameDurationSinceMoment(
+          game.flashActiveMs,
+          curr.gameStamp,
+          game
+        )
+      ) {
+        setChompFilterState('cooldown', game);
+      }
+      break;
+  }
+}
+
 export function setChompPowerState(
   stateName: PowerStateChompName,
   game: Game
