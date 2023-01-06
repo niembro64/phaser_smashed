@@ -85,8 +85,8 @@ export function setChompPowerState(
   game: Game
 ): void {
   let c = game.chomp;
-  let curr = c.powerStateCurr;
-  let prev = c.powerStatePrev;
+  let curr = c.powerStateCurrChomp;
+  let prev = c.powerStatePrevChomp;
 
   if (stateName === curr.name) {
     return;
@@ -117,6 +117,13 @@ export function setChompPowerState(
       c.sprite.play('chompanimation_chomping');
       game.chomp.soundBBWoah.setRate(1);
       break;
+    case 'dead':
+      // c.emitterDark.active = false;
+      // c.emitterDark.on = false;
+      c.emitterDark.visible = false;
+
+      c.sprite.play('chompanimation_dead');
+      break;
   }
 }
 
@@ -136,7 +143,7 @@ export function getDoesAnythingHaveDark(game: Game): boolean {
   let found = false;
 
   if (
-    game.chomp.powerStateCurr.name === 'dark' ||
+    game.chomp.powerStateCurrChomp.name === 'dark' ||
     getDoesAnyPlayerHaveDark(game)
   ) {
     found = true;

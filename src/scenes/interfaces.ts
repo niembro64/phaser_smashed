@@ -429,7 +429,9 @@ export interface Flag {
 
 export interface Chomp {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: ChompState;
+  // stateCurr: ChompState;
+  // statePrev: ChompState;
+  damage: number;
   originX: number;
   originY: number;
   radius: number;
@@ -442,8 +444,8 @@ export interface Chomp {
   soundAttack: any;
   soundBBWoah: any;
   soundBBBambalam: any;
-  powerStateCurr: PowerStateChomp;
-  powerStatePrev: PowerStateChomp;
+  powerStateCurrChomp: PowerStateChomp;
+  powerStatePrevChomp: PowerStateChomp;
   particles: any;
   emitterDark: any;
   darknessMoments: DarknessMoments;
@@ -457,8 +459,6 @@ export interface ChompBlock {
 export interface ChompLink {
   sprite: any | Phaser.GameObjects.Sprite;
 }
-
-export type ChompState = 'idle' | 'chomping' | 'dead';
 
 export const emoji = {
   keyboardBlack: '⌨',
@@ -488,7 +488,7 @@ export type Keydown = 'a' | 's' | 'd' | 'f' | 'j' | 'k' | 'l' | ';' | 'x';
 
 export type PowerStateCharacterName = 'dark' | 'light' | 'none';
 
-export type PowerStateChompName = 'dark' | 'none';
+export type PowerStateChompName = 'dark' | 'none' | 'hurt' | 'dead';
 export type PowerStateFlagName = 'light' | 'none';
 export interface PowerStateCharacter {
   name: PowerStateCharacterName;
@@ -499,6 +499,7 @@ export interface PowerStateChomp {
   name: PowerStateChompName;
   gameStamp: number;
 }
+
 export interface PowerStateFlag {
   name: PowerStateFlagName;
   gameStamp: number;

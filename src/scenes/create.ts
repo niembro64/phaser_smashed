@@ -176,8 +176,33 @@ export function createChomp(game: Game): void {
     yoyo: true,
   };
 
+  var config_hurt = {
+    key: 'chompanimation_walking',
+    frames: game.anims.generateFrameNumbers('chomp', {
+      start: 0,
+      end: 1,
+      first: 0,
+    }),
+    frameRate: 20,
+    repeat: -1,
+    yoyo: true,
+  };
+  var config_dead = {
+    key: 'chompanimation_walking',
+    frames: game.anims.generateFrameNumbers('chomp', {
+      start: 0,
+      end: 0,
+      first: 0,
+    }),
+    frameRate: 5,
+    repeat: -1,
+    yoyo: true,
+  };
+
   game.anims.create(config_chomping);
   game.anims.create(config_walking);
+  game.anims.create(config_hurt);
+  game.anims.create(config_dead);
 
   c.sprite = game.physics.add.sprite(c.originX, c.originY - 10, 'chomp');
   c.sprite.setScale(1.3);
@@ -420,9 +445,9 @@ export function createHitboxOverlap(game: Game): void {
       player.char.attackPhysical.sprite,
       game.chomp.sprite,
       function () {
-        if (!getDoesAnythingHaveDark(game)) {
+        if (game.chomp.powerStateCurrChomp.name === 'none') {
           game.chomp.emitterDark.visible = true;
-          setChompPowerState('dark', game);
+          setChompPowerState('hurt', game);
           game.chomp.soundAttack.play();
           game.SOUND_HIT.play();
         }
@@ -466,7 +491,7 @@ export function createHitboxOverlap(game: Game): void {
       player.char.sprite,
       game.chomp.sprite,
       function () {
-        if (game.chomp.powerStateCurr.name === 'dark') {
+        if (game.chomp.powerStateCurrChomp.name === 'dark') {
           setPlayerPowerState('dark', player, game);
           setChompPowerState('none', game);
           game.chomp.soundBBBambalam.play();

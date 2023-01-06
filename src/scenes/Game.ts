@@ -716,7 +716,7 @@ export default class Game extends Phaser.Scene {
   chompY: number = 964;
   chomp: Chomp = {
     sprite: null,
-    state: 'idle',
+    damage: 0,
     originX: this.chompX,
     originY: this.chompY,
     radius: 150,
@@ -733,8 +733,8 @@ export default class Game extends Phaser.Scene {
     soundAttack: null,
     soundBBWoah: null,
     soundBBBambalam: null,
-    powerStateCurr: { name: 'none', gameStamp: 0 },
-    powerStatePrev: { name: 'none', gameStamp: 0 },
+    powerStateCurrChomp: { name: 'none', gameStamp: 0 },
+    powerStatePrevChomp: { name: 'none', gameStamp: 0 },
     particles: null,
     emitterDark: null,
     darknessMoments: {

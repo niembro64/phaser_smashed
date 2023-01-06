@@ -1,7 +1,10 @@
 import { Vector } from 'matter';
 import Game from '../Game';
 import { getDistance, getNormalizedVector, getVector } from './damage';
-import { setChompPowerState } from './powers';
+import {
+  getHasBeenGameDurationSinceMoment,
+  setChompPowerState,
+} from './powers';
 
 export function updateChompSpriteDirection(game: Game): void {
   let c = game.chomp;
@@ -39,7 +42,7 @@ export function updateChompVelocity(game: Game): void {
 
   if (
     Math.random() >
-    (game.chomp.powerStateCurr.name === 'none'
+    (game.chomp.powerStateCurrChomp.name === 'none'
       ? c.PERCENT_FRAMES_WALK
       : c.percentFramesJump)
   ) {
@@ -62,7 +65,7 @@ export function updateChompVelocity(game: Game): void {
 
   if (isChompInsideCircle(game)) {
     if (b.touching.down) {
-      if (c.powerStateCurr.name === 'dark') {
+      if (c.powerStateCurrChomp.name === 'dark') {
         c.soundAttack.play();
         b.setVelocityY(-1 * Math.abs(yNew + 0.3) * 1000);
         b.setVelocityX(xNew * 500);
@@ -105,7 +108,6 @@ export function updateChomp(game: Game): void {
   updateChompSpriteDirection(game);
   updateChompVelocity(game);
   updateChompLinkPositions(game);
-
 }
 
 export function updateAtThreeShots(game: Game): void {
@@ -161,4 +163,31 @@ export function getClosestDistance(game: Game): number {
   });
 
   return shortestDistance;
+}
+
+export function updateChompState(game: Game): void {
+  let c = game.chomp;
+  let curr = c.powerStateCurrChomp;
+  let prev = c.powerStatePrevChomp;
+
+  if (curr.name === 'dead' && prev.name !== 'dead') {
+    c.sprite.x = c.originX;
+    c.sprite.y = c.originY;
+    return;
+  }
+
+  if (curr.name === 'dead' && prev.name !== 'dead') {
+    c.soundAttack.play();
+    c.emitterDark.visible = false;
+    c.emitterDark.active = false;
+    c.emitterDark.stop();
+  }
+
+  if (
+    (prev.name === 'none' || prev.name === 'dark') &&
+    curr.name === 'hurt' &&
+    getHasBeenGameDurationSinceMoment(2000, curr.gameStamp, game)
+  ) {
+    setChompPowerState('dark', game);
+  }
 }
