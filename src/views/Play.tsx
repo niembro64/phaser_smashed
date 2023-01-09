@@ -861,8 +861,6 @@ function Play() {
     [quotesRandomNumber, webState]
   );
 
-  const loadingTwenty = 'Loading' + `&nbsp;` + 'can take 20 seconds.';
-
   return (
     <div id="top-level" className="over-div">
       {/* <div className="download-screenshot">Download Screenshot</div> */}
@@ -1260,7 +1258,7 @@ function Play() {
                             : emoji.redX}
                         </p>
                       </div>
-                      <p className='key'>{key}</p>
+                      <p className="key">{key}</p>
                     </div>
                   );
                 })}
