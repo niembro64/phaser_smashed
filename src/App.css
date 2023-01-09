@@ -1023,6 +1023,16 @@ body {
   margin-right: -100%;
   text-align: center;
   font-size: 1.5vw;
+  color: white;
+}
+.first-loader-p-trans {
+  width: 30%;
+  margin: 3% 0% 0% 0%;
+  margin-left: -100%;
+  margin-right: -100%;
+  text-align: center;
+  font-size: 1.5vw;
+  color: transparent;
 }
 
 .second-loader-p {

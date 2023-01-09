@@ -828,6 +828,36 @@ function Play() {
     return newVal;
   };
 
+  const [text, setText] = useState('');
+  // const [index, setIndex] = useState(0);
+  let interval: any = useRef(null);
+
+  useEffect(
+    function () {
+      if (interval.current !== null) {
+        clearInterval(interval.current);
+      }
+
+      let tempIndex = 0;
+      let tempText = '';
+      interval.current = setInterval(function () {
+        tempText = quotes[quotesRandomNumber].text.substring(0, tempIndex + 1);
+        setText(tempText);
+
+        tempIndex = tempIndex + (1 % quotes[quotesRandomNumber].text.length);
+
+        // setText(quotes[quotesRandomNumber].text.substring(0, index + 1));
+        // setIndex(index + (1 % quotes[quotesRandomNumber].text.length));
+        // if (index + 1 === message.length) {
+        //   clearInterval(interval.current);
+        // }
+      }, 20);
+
+      return () => clearInterval(interval);
+    },
+    [quotesRandomNumber, webState]
+  );
+
   return (
     <div id="top-level" className="over-div">
       {/* <div className="download-screenshot">Download Screenshot</div> */}
@@ -876,8 +906,8 @@ function Play() {
             )}
           </div>
         )}
-      {/* {webState !== 'start' && showLoader && ( */}
-      {true && (
+      {webState !== 'start' && showLoader && (
+        // {true && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
             <div className="loader-inner">
@@ -930,7 +960,16 @@ function Play() {
               alt="table"
             />
           </div>
-          <p className="first-loader-p">{quotes[quotesRandomNumber].text}</p>
+          {/* <p className="first-loader-p">{quotes[quotesRandomNumber].text}</p> */}
+          <p
+            className={
+              webState === 'play'
+                ? '.first-loader-p-white'
+                : '.first-loader-p-trans'
+            }
+          >
+            {text}
+          </p>
           <p className="second-loader-p">- {quotes[quotesRandomNumber].name}</p>
           <p className="third-loader-p">Loading Can Take 20 Seconds.</p>
         </div>
