@@ -812,7 +812,7 @@ body {
   cursor: pointer;
   overflow: visible;
 
-  background-color: "transparent";
+  background-color: 'transparent';
   border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
   transition: var(--duration-hover) ease;
   cursor: default;
@@ -828,7 +828,7 @@ body {
   cursor: pointer;
   overflow: hidden;
 
-  background-color: "transparent";
+  background-color: 'transparent';
   border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
   transition: var(--duration-hover) ease;
 }
@@ -1016,7 +1016,7 @@ body {
   }
 }
 
-.firstLoaderP {
+.first-loader-p {
   width: 30%;
   margin: 3% 0% 0% 0%;
   margin-left: -100%;
@@ -1025,14 +1025,34 @@ body {
   font-size: 1.5vw;
 }
 
-.secondLoaderP {
+.second-loader-p {
   margin: 0% 0% 0% 12%;
   font-size: 1.5vw;
 }
-.thirdLoaderP {
+.third-loader-p {
+  position: absolute;
+  bottom: 5%;
+  left: calc(50% - (28ch / 2));
   margin: 10% 0% 0% 0%;
+  width: 28ch;
   font-size: 0.7vw;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid white;
+  animation: typing 2s steps(28), effect 0.5s step-end infinite alternate;
 }
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+@keyframes effect {
+  50% {
+    border-color: #0000;
+  }
+}
+
 .download-screenshot {
   position: absolute;
   top: 20vh;
@@ -1239,7 +1259,7 @@ body {
 #top-leve-download {
   width: 200px;
   height: 200px;
-  background-color: "green";
+  background-color: 'green';
   border-radius: 50%;
   position: absolute;
   top: 50%;

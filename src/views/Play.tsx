@@ -876,7 +876,8 @@ function Play() {
             )}
           </div>
         )}
-      {webState !== 'start' && showLoader && (
+      {/* {webState !== 'start' && showLoader && ( */}
+      {true && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
             <div className="loader-inner">
@@ -929,9 +930,9 @@ function Play() {
               alt="table"
             />
           </div>
-          <p className="firstLoaderP">{quotes[quotesRandomNumber].text}</p>
-          <p className="secondLoaderP">- {quotes[quotesRandomNumber].name}</p>
-          <p className="thirdLoaderP">Loading Can Take 20 Seconds</p>
+          <p className="first-loader-p">{quotes[quotesRandomNumber].text}</p>
+          <p className="second-loader-p">- {quotes[quotesRandomNumber].name}</p>
+          <p className="third-loader-p">Loading Can Take 20 Seconds.</p>
         </div>
       )}
       <div className="phaser-container" id="phaser-container"></div>
