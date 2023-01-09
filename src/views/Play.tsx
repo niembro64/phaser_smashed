@@ -89,6 +89,7 @@ function Play() {
     AllowCharsExtended: true,
     AllowCharsChez: false,
     SlowMoExplosions: false,
+    TypedLoadingText: false,
   };
 
   const debugMax: Debug = {
@@ -124,6 +125,7 @@ function Play() {
     AllowCharsExtended: true,
     AllowCharsChez: false,
     SlowMoExplosions: true,
+    TypedLoadingText: false,
   };
 
   const [debug, setDebug] = useState<Debug>(debugInit);
@@ -211,7 +213,7 @@ function Play() {
     },
     scene: [Game],
   };
-  let setTimeoutQuotesLengthStart: number = 2000;
+  let setTimeoutQuotesLengthStart: number = 3000;
   let setTimeoutQuotesLengthReStart: number = 1500;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
@@ -829,11 +831,15 @@ function Play() {
   };
 
   const [text, setText] = useState('');
-  // const [index, setIndex] = useState(0);
-  let interval: any = useRef(null);
+  const interval: any = useRef(null);
+  const [quoteCss, setQuoteCss] = useState<boolean>(false);
 
   useEffect(
     function () {
+      if (!debug.TypedLoadingText) {
+        return;
+      }
+
       if (interval.current !== null) {
         clearInterval(interval.current);
       }
@@ -844,19 +850,18 @@ function Play() {
         tempText = quotes[quotesRandomNumber].text.substring(0, tempIndex + 1);
         setText(tempText);
 
-        tempIndex = tempIndex + (1 % quotes[quotesRandomNumber].text.length);
+        if (tempIndex === quotes[quotesRandomNumber].text.length - 1) {
+          clearInterval(interval.current);
+          interval.current = null;
+        }
 
-        // setText(quotes[quotesRandomNumber].text.substring(0, index + 1));
-        // setIndex(index + (1 % quotes[quotesRandomNumber].text.length));
-        // if (index + 1 === message.length) {
-        //   clearInterval(interval.current);
-        // }
-      }, 20);
-
-      return () => clearInterval(interval);
+        tempIndex++;
+      }, 1700 / quotes[quotesRandomNumber].text.length);
     },
     [quotesRandomNumber, webState]
   );
+
+  const loadingTwenty = 'Loading' + `&nbsp;` + 'can take 20 seconds.';
 
   return (
     <div id="top-level" className="over-div">
@@ -960,18 +965,24 @@ function Play() {
               alt="table"
             />
           </div>
-          {/* <p className="first-loader-p">{quotes[quotesRandomNumber].text}</p> */}
-          <p
-            className={
-              webState === 'play'
-                ? '.first-loader-p-white'
-                : '.first-loader-p-trans'
-            }
-          >
-            {text}
-          </p>
+          {debug.TypedLoadingText && (
+            <p className={'.first-loader-p'}>{text}</p>
+          )}
+          {!debug.TypedLoadingText && (
+            <p className="first-loader-p">{quotes[quotesRandomNumber].text}</p>
+          )}
           <p className="second-loader-p">- {quotes[quotesRandomNumber].name}</p>
-          <p className="third-loader-p">Loading Can Take 20 Seconds.</p>
+          {debug.TypedLoadingText && (
+            <p className="third-loader-p">
+              Loading&nbsp;can&nbsp;take&nbsp;a&nbsp;few&nbsp;seconds.&nbsp;
+            </p>
+          )}
+          {/* {!debug.TypedText && (
+            <p className="fourth-loader-p">
+              Loading&nbsp;can&nbsp;take&nbsp;a&nbsp;few&nbsp;seconds.&nbsp;
+            </p>
+          )} */}
+          {/* <p className="third-loader-p">{loadingTwenty}</p> */}
         </div>
       )}
       <div className="phaser-container" id="phaser-container"></div>

@@ -1025,6 +1025,15 @@ body {
   font-size: 1.5vw;
   color: white;
 }
+.first-loader-p-white {
+  width: 30%;
+  margin: 3% 0% 0% 0%;
+  margin-left: -100%;
+  margin-right: -100%;
+  text-align: center;
+  font-size: 1.5vw;
+  color: white;
+}
 .first-loader-p-trans {
   width: 30%;
   margin: 3% 0% 0% 0%;
@@ -1039,17 +1048,29 @@ body {
   margin: 0% 0% 0% 12%;
   font-size: 1.5vw;
 }
-.third-loader-p {
+.fourth-loader-p {
   position: absolute;
-  bottom: 5%;
+  top: 0%;
   left: calc(50% - (28ch / 2));
   margin: 10% 0% 0% 0%;
-  width: 28ch;
-  font-size: 0.7vw;
+  width: 33ch;
+  font-size: 1.5vw;
+  /* font-size: 0.7vw; */
   overflow: hidden;
   white-space: nowrap;
-  border-right: 3px solid white;
-  animation: typing 2s steps(28), effect 0.5s step-end infinite alternate;
+}
+.third-loader-p {
+  position: absolute;
+  top: 0%;
+  left: calc(50% - (28ch / 2));
+  margin: 10% 0% 0% 0%;
+  width: 33ch;
+  font-size: 1.5vw;
+  /* font-size: 0.7vw; */
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 1ch solid white;
+  animation: typing 2s steps(33), effect 0.5s step-end infinite alternate;
 }
 
 @keyframes typing {

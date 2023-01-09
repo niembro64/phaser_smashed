@@ -418,6 +418,7 @@ export interface Debug {
   AllowCharsChez: boolean;
   AllowCharsExtended: boolean;
   SlowMoExplosions: boolean;
+  TypedLoadingText: boolean;
 }
 
 export interface Flag {
