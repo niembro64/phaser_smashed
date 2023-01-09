@@ -229,9 +229,10 @@ body {
   flex-wrap: wrap;
 }
 #option {
-  width: 50%;
+  width: 32%;
   background-color: rgba(128, 128, 128, 0.1);
-  padding: 0vw 0vw 0.2vw 0vw;
+  padding: 0.7vw 0vw 0.5vw 0vw;
+  /* padding: 0vw 0vw 0.2vw 0vw; */
   margin: 0vw 0vw 0vw 0vw;
   border-radius: var(--border-radius-small);
   display: flex;
@@ -260,7 +261,7 @@ body {
   font-size: 2.5vh;
   padding: 0vw 1vw 0vw 1vw;
 }
-#option > p {
+.key {
   margin: 0;
   padding: 0;
   font-size: 2.5vh;
@@ -1062,10 +1063,10 @@ body {
 .third-loader-p {
   position: absolute;
   top: 0%;
-  left: calc(50% - (28ch / 2));
+  left: calc(50% - (33ch / 2));
   margin: 10% 0% 0% 0%;
   width: 33ch;
-  font-size: 1.5vw;
+  /* font-size: 1.5vw; */
   /* font-size: 0.7vw; */
   overflow: hidden;
   white-space: nowrap;
@@ -1368,10 +1369,11 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
+  
   overflow: visible;
   z-index: 1;
-
+  opacity: 0.5;
+  
   cursor: pointer;
 }
 .keyboard-explainer-single {
@@ -1390,15 +1392,16 @@ body {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-
+  
   border-radius: var(--border-radius-small);
   background-image: url(../public/images/keyboard_color.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-
+  
   overflow: visible;
   z-index: 1;
+  opacity: 0.5;
 
   cursor: pointer;
 }

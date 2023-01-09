@@ -1221,7 +1221,7 @@ function Play() {
                 onClickPlayNavBody('Options');
               }}
             >
-              <h1>Options</h1>
+              <h1>Debug Options</h1>
               <div id="debug-col">
                 {Object.entries(debug).map(([key, value], index: number) => {
                   return (
@@ -1260,12 +1260,13 @@ function Play() {
                             : emoji.redX}
                         </p>
                       </div>
-                      <p>{key}</p>
+                      <p className='key'>{key}</p>
                     </div>
                   );
                 })}
-                <p>-</p>
-                <p>If No Changes, Hit Back & Restart</p>
+                {/* <p>-</p>
+                <p>If No Changes</p>
+                <p>Hit Back & Restart</p> */}
               </div>
             </div>
           </div>
