@@ -28,7 +28,8 @@ import {
   ButtonName,
   CharacterMove,
   emoji,
-  KeyGroups,
+  KeyboardGroup,
+  WorkingController,
 } from '../scenes/interfaces';
 
 function Play() {
@@ -144,7 +145,7 @@ function Play() {
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [inputArray, setInputArray] = useState<InputType[]>([0, 2, 2, 0]);
 
-  const [twoKeybaords, setTwoKeyboards] = useState<KeyGroups[][]>([
+  const keyboardGroups: KeyboardGroup[][] = [
     [
       { left: 'D-Pad', right: 'W A S D' },
       { left: 'A X B Y', right: 'F G H Space' },
@@ -155,7 +156,48 @@ function Play() {
       { left: 'A X B Y', right: '4 5 6 Enter' },
       { left: 'L Select Start R', right: '7 8 9 +' },
     ],
+  ];
+
+  // <li>
+  //   <a
+  //     className="link-tag btn btn-dark"
+  //     href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
+  //   >
+  //     {/* <li>Amazon: (2) SNES Controllers $12</li> */}
+  //     <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
+  //   </a>
+  // </li>
+  // <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
+  // <li>{emoji.greenCheck} Nintendo Switch Pro</li>
+  // <li>{emoji.greenCheck} Nintendo Switch Wired</li>
+  // <li>{emoji.greenCheck} KIWITATA Wired N64 </li>
+  // <li>{emoji.greenCheck} Mekela NGC Wired Gamecube</li>
+
+  const [workingControllers, setWorkingControllers] = useState<
+    WorkingController[]
+  >([
+    {
+      name: 'iNNEXT SNES Wired USB',
+      url: 'https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+    },
+    {
+      name: 'Nintendo Switch Pro',
+      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+    },
+    {
+      name: 'Nintendo Switch Wired',
+      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+    },
+    {
+      name: 'KIWITATA Wired N64',
+      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+    },
+    {
+      name: 'Mekela NGC Wired Gamecube',
+      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+    },
   ]);
+
   const [smashConfig, setSmashConfig] = useState<SmashConfig>({
     players: [
       {
@@ -1317,9 +1359,6 @@ function Play() {
                     </div>
                   );
                 })}
-                {/* <p>-</p>
-                <p>If No Changes</p>
-                <p>Hit Back & Restart</p> */}
               </div>
             </div>
           </div>
@@ -1334,17 +1373,6 @@ function Play() {
             >
               <h1>Buttons</h1>
               <div id="controls-col">
-                {/* <div id="keyboard">
-                  <div id="keyboard-top">
-                    <h3>GamePads</h3>
-                  </div>
-                  <div id="keyboard-top">Use As Described</div>
-                </div> */}
-
-                {/* <div id="move">
-                  <h5>Move</h5>
-                  <h5>Buttons Status</h5>
-                </div> */}
                 {characterMoves.map((charMove, charMoveIndex) => {
                   return (
                     <div id="move" key={charMoveIndex}>
@@ -1355,47 +1383,23 @@ function Play() {
                     </div>
                   );
                 })}
-
-                <div id="keyboard">
-
-                {twoKeybaords.map((twoKeybaord, twoKeybaordIndex) => {
-
-
-
+                {keyboardGroups.map((kGroup: KeyboardGroup[]) => {
+                  return (
+                    <div id="keyboard">
+                      <div id="keyboard-top">
+                        <h3>Keyboard {kGroup[0].right}</h3>
+                      </div>
+                      {kGroup.map((kItem) => {
+                        return (
+                          <div id="keyboard-bottom">
+                            <div id="keyboard-left">{kItem.left}</div>
+                            <div id="keyboard-right">{kItem.right}</div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
                 })}
-                  <div id="keyboard-top">
-                    <h3>Keyboard WASD</h3>
-                  </div>
-                  <div id="keyboard-bottom">
-                    <div id="keyboard-left">
-                      {/* <p>{twoKeybaords[0].first.left}</p>
-                      <p>{twoKeybaords[0].second.left}</p>
-                      <p>{twoKeybaords[0].third.left}</p> */}
-                    </div>
-                    <div id="keyboard-right">
-                      {/* <p>{twoKeybaords[0].first.right}</p>
-                      <p>{twoKeybaords[0].second.right}</p>
-                      <p>{twoKeybaords[0].third.right}</p> */}
-                    </div>
-                  </div>
-                </div>
-                <div id="keyboard">
-                  <div id="keyboard-top">
-                    <h3>Keyboard Arrows</h3>
-                  </div>
-                  <div id="keyboard-bottom">
-                    <div id="keyboard-left">
-                      <p>ArrowKeys</p>
-                      <p>4&nbsp;5&nbsp;6&nbsp;Enter</p>
-                      <p>7&nbsp;8&nbsp;9&nbsp;Plus</p>
-                    </div>
-                    <div id="keyboard-right">
-                      <p>D-Pad</p>
-                      <p>A&nbsp;X&nbsp;B&nbsp;Y</p>
-                      <p>L&nbsp;Select&nbsp;Start&nbsp;R</p>
-                    </div>
-                  </div>
-                </div>
                 <div className="keyboard-buttons"></div>
               </div>
             </div>
@@ -1430,7 +1434,7 @@ function Play() {
             >
               <h1>GamePads</h1>
               <p>USB controllers are recommended. </p>
-              <a
+              {/* <a
                 className="link-tag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
@@ -1441,15 +1445,35 @@ function Play() {
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 <span>Amazon: USB Hub/Extension $13</span>
-              </a>
+              </a> */}
               <div>
                 <ul>
                   These work:
+                  {workingControllers.map((controller) => {
+                    return (
+                      <li>
+                        <a className="working-controller" href={controller.url}>
+                          <span>
+                            {emoji.greenCheck} &nbsp;
+                            {controller.name}
+                          </span>
+                        </a>
+                      </li>
+                    );
+                  })}
+                  {/* <li>
+                    <a
+                      className="link-tag btn btn-dark"
+                      href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
+                    >
+                      <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
+                    </a>
+                  </li>
                   <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
                   <li>{emoji.greenCheck} Nintendo Switch Pro</li>
                   <li>{emoji.greenCheck} Nintendo Switch Wired</li>
                   <li>{emoji.greenCheck} KIWITATA Wired N64 </li>
-                  <li>{emoji.greenCheck} Mekela NGC Wired Gamecube</li>
+                  <li>{emoji.greenCheck} Mekela NGC Wired Gamecube</li> */}
                 </ul>
               </div>
             </div>

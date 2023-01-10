@@ -540,13 +540,12 @@ export interface Lava {
   numFrames: number;
 }
 
-// export interface Keyboard {
-//   first: { left: string; right: string };
-//   second: { left: string; right: string };
-//   third: { left: string; right: string };
-// }
-
-export interface KeyGroups {
+export interface KeyboardGroup {
   left: string;
   right: string;
+}
+
+export interface WorkingController {
+  name: string;
+  url: string;
 }
