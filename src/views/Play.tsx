@@ -791,7 +791,19 @@ function Play() {
     }
   };
 
-  const priorKeyboardExists = (myI: number): boolean => {
+  const getNumControllersExistLower = (myI: number): number => {
+    let num: number = 0;
+
+    inputArray.forEach((ia: number, iaIndex: number) => {
+      if (ia === 1 && iaIndex < myI) {
+        num++;
+      }
+    });
+
+    return num;
+  };
+
+  const getDoesKeyboardExistLower = (myI: number): boolean => {
     let exists: boolean = false;
 
     inputArray.forEach((ia: number, iaIndex: number) => {
@@ -1104,6 +1116,18 @@ function Play() {
                       }}
                     >
                       <span>Gamepad</span>
+                      {getNumControllersExistLower(pIndex) === 0 && (
+                        <span id="input-sub">1</span>
+                      )}
+                      {getNumControllersExistLower(pIndex) === 1 && (
+                        <span id="input-sub">2</span>
+                      )}
+                      {getNumControllersExistLower(pIndex) === 2 && (
+                        <span id="input-sub">3</span>
+                      )}
+                      {getNumControllersExistLower(pIndex) === 3 && (
+                        <span id="input-sub">4</span>
+                      )}
                       {pIndex < 2 && (
                         <div className="button-input-emoji">
                           {emoji.gamepad}
@@ -1130,8 +1154,12 @@ function Play() {
                       }}
                     >
                       <span>Keyboard</span>
-                      {priorKeyboardExists(pIndex) && <span>Arrows</span>}
-                      {!priorKeyboardExists(pIndex) && <span>WASD</span>}
+                      {getDoesKeyboardExistLower(pIndex) && (
+                        <span id="input-sub">Arrows</span>
+                      )}
+                      {!getDoesKeyboardExistLower(pIndex) && (
+                        <span id="input-sub">WASD</span>
+                      )}
                       {pIndex < 2 && (
                         <div className="button-input-emoji">
                           {emoji.keyboardWhite}
