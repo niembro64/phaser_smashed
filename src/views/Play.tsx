@@ -158,43 +158,28 @@ function Play() {
     ],
   ];
 
-  // <li>
-  //   <a
-  //     className="link-tag btn btn-dark"
-  //     href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
-  //   >
-  //     {/* <li>Amazon: (2) SNES Controllers $12</li> */}
-  //     <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
-  //   </a>
-  // </li>
-  // <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
-  // <li>{emoji.greenCheck} Nintendo Switch Pro</li>
-  // <li>{emoji.greenCheck} Nintendo Switch Wired</li>
-  // <li>{emoji.greenCheck} KIWITATA Wired N64 </li>
-  // <li>{emoji.greenCheck} Mekela NGC Wired Gamecube</li>
-
   const [workingControllers, setWorkingControllers] = useState<
     WorkingController[]
   >([
     {
-      name: 'iNNEXT SNES Wired USB',
+      name: 'Wired | SNES | iNNEXT',
       url: 'https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/',
     },
     {
-      name: 'Nintendo Switch Pro',
-      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+      name: 'Wired | N64 | KIWITATA',
+      url: 'https://www.amazon.com/gp/product/B08X677HR4/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',
     },
     {
-      name: 'Nintendo Switch Wired',
-      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+      name: 'Wired | GameCube | Mekela NGC',
+      url: 'https://www.amazon.com/Mekela-5-8-foot-classic-controller-Windows/dp/B07GSSXS84/ref=sr_1_5?crid=3N3MSRPF8INFK&keywords=Mekela+5.8+feet+Classic+USB+wired+NGC+Controller&qid=1673335159&sprefix=mekela+5.8+feet+classic+usb+wired+ngc+controller%2Caps%2C68&sr=8-5',
     },
     {
-      name: 'KIWITATA Wired N64',
-      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+      name: 'Wired | Switch | PowerA | Nintendo',
+      url: 'https://www.amazon.com/gp/product/B07PDJ45BT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',
     },
     {
-      name: 'Mekela NGC Wired Gamecube',
-      url: 'https://www.amazon.com/dp/B07VGRJDFY?ref=ppx_yo2ov_dt_b_product_details&th=1/',
+      name: 'Wireless | Switch | Pro | Nintendo',
+      url: 'https://www.amazon.com/gp/product/B01NAWKYZ0/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',
     },
   ]);
 
@@ -1433,22 +1418,17 @@ function Play() {
               }}
             >
               <h1>GamePads</h1>
-              <p>USB controllers are recommended. </p>
-              {/* <a
-                className="link-tag btn btn-dark"
-                href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
-              >
-                <span>Amazon: (2) SNES Controllers $12</span>
-              </a>
+
               <a
                 className="link-tag btn btn-dark"
                 href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
               >
                 <span>Amazon: USB Hub/Extension $13</span>
-              </a> */}
+              </a>
+              <p>USB controllers are recommended: </p>
               <div>
                 <ul>
-                  These work:
+                  {/* These work: */}
                   {workingControllers.map((controller) => {
                     return (
                       <li>
@@ -1461,19 +1441,6 @@ function Play() {
                       </li>
                     );
                   })}
-                  {/* <li>
-                    <a
-                      className="link-tag btn btn-dark"
-                      href="https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/"
-                    >
-                      <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
-                    </a>
-                  </li>
-                  <li>{emoji.greenCheck} iNNEXT SNES Wired USB</li>
-                  <li>{emoji.greenCheck} Nintendo Switch Pro</li>
-                  <li>{emoji.greenCheck} Nintendo Switch Wired</li>
-                  <li>{emoji.greenCheck} KIWITATA Wired N64 </li>
-                  <li>{emoji.greenCheck} Mekela NGC Wired Gamecube</li> */}
                 </ul>
               </div>
             </div>
