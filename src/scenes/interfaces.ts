@@ -539,3 +539,14 @@ export interface Lava {
   rate: number;
   numFrames: number;
 }
+
+// export interface Keyboard {
+//   first: { left: string; right: string };
+//   second: { left: string; right: string };
+//   third: { left: string; right: string };
+// }
+
+export interface KeyGroups {
+  left: string;
+  right: string;
+}

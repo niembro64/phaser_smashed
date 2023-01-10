@@ -28,12 +28,13 @@ import {
   ButtonName,
   CharacterMove,
   emoji,
-  Player,
+  KeyGroups,
 } from '../scenes/interfaces';
-import { IndexKind } from 'typescript';
 
 function Play() {
   let myPhaser: any = useRef(null);
+
+  const space: string = '&nbsp';
 
   function captureScreenshot() {
     console.log('captureScreenshot');
@@ -143,6 +144,18 @@ function Play() {
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [inputArray, setInputArray] = useState<InputType[]>([0, 2, 2, 0]);
 
+  const [twoKeybaords, setTwoKeyboards] = useState<KeyGroups[][]>([
+    [
+      { left: 'D-Pad', right: 'W A S D' },
+      { left: 'A X B Y', right: 'F G H Space' },
+      { left: 'L Select Start R', right: 'R T Y U' },
+    ],
+    [
+      { left: 'ArrowKeys', right: 'D-Pad' },
+      { left: 'A X B Y', right: '4 5 6 Enter' },
+      { left: 'L Select Start R', right: '7 8 9 +' },
+    ],
+  ]);
   const [smashConfig, setSmashConfig] = useState<SmashConfig>({
     players: [
       {
@@ -528,12 +541,12 @@ function Play() {
   const [showOptions, setShowOptions] = useState(false);
 
   const characterMoves: CharacterMove[] = [
-    { button: 'D-Pad', move: 'Movement', status: emoji.greenCheck },
+    { button: 'D-Pad', move: 'Move', status: emoji.greenCheck },
     { button: 'Ground + X', move: 'Jump', status: emoji.greenCheck },
-    { button: 'Air + X', move: 'Jump-Air', status: emoji.greenCheck },
-    { button: 'Air + D-Pad + A', move: 'Jump-Fire', status: emoji.caution },
-    { button: 'Y', move: 'Attack-Energy', status: emoji.greenCheck },
+    { button: 'Air + X', move: 'Jump-Double', status: emoji.greenCheck },
+    { button: 'Air + D-Pad + A', move: 'Jump-Energy', status: emoji.caution },
     { button: 'B', move: 'Attack-Physical', status: emoji.caution },
+    { button: 'Y', move: 'Attack-Energy', status: emoji.greenCheck },
     { button: 'Forward + B', move: 'Attack-Smash', status: emoji.redX },
     {
       button: 'Air + Wall + Forward',
@@ -998,7 +1011,8 @@ function Play() {
           <p className="second-loader-p">- {quotes[quotesRandomNumber].name}</p>
           {debug.TypedLoadingText && (
             <p className="third-loader-p">
-              Loading&nbsp;can&nbsp;take&nbsp;a&nbsp;few&nbsp;seconds.&nbsp;
+              Loading{space};can{space};take{space};a{space};few{space};seconds.
+              {space};
             </p>
           )}
           {/* {!debug.TypedText && (
@@ -1320,13 +1334,17 @@ function Play() {
             >
               <h1>Buttons</h1>
               <div id="controls-col">
-                <div id="keyboard">
+                {/* <div id="keyboard">
                   <div id="keyboard-top">
                     <h3>GamePads</h3>
                   </div>
                   <div id="keyboard-top">Use As Described</div>
-                </div>
+                </div> */}
 
+                {/* <div id="move">
+                  <h5>Move</h5>
+                  <h5>Buttons Status</h5>
+                </div> */}
                 {characterMoves.map((charMove, charMoveIndex) => {
                   return (
                     <div id="move" key={charMoveIndex}>
@@ -1337,38 +1355,44 @@ function Play() {
                     </div>
                   );
                 })}
-                {/* <p> fyi, button mapping is insane</p> */}
+
                 <div id="keyboard">
+
+                {twoKeybaords.map((twoKeybaord, twoKeybaordIndex) => {
+
+
+
+                })}
                   <div id="keyboard-top">
-                    <h3>First Keyboard</h3>
+                    <h3>Keyboard WASD</h3>
                   </div>
                   <div id="keyboard-bottom">
                     <div id="keyboard-left">
-                      <p>W-A-S-D</p>
-                      <p>F-G-H-SPACE</p>
-                      <p>R-T-Y-U</p>
+                      {/* <p>{twoKeybaords[0].first.left}</p>
+                      <p>{twoKeybaords[0].second.left}</p>
+                      <p>{twoKeybaords[0].third.left}</p> */}
                     </div>
                     <div id="keyboard-right">
-                      <p>D-Pad</p>
-                      <p>A-X-B-Y</p>
-                      <p>L-Select-Start-R</p>
+                      {/* <p>{twoKeybaords[0].first.right}</p>
+                      <p>{twoKeybaords[0].second.right}</p>
+                      <p>{twoKeybaords[0].third.right}</p> */}
                     </div>
                   </div>
                 </div>
                 <div id="keyboard">
                   <div id="keyboard-top">
-                    <h3>Second Keyboard</h3>
+                    <h3>Keyboard Arrows</h3>
                   </div>
                   <div id="keyboard-bottom">
                     <div id="keyboard-left">
                       <p>ArrowKeys</p>
-                      <p>4-5-6-Enter</p>
-                      <p>7-8-9-Plus</p>
+                      <p>4&nbsp;5&nbsp;6&nbsp;Enter</p>
+                      <p>7&nbsp;8&nbsp;9&nbsp;Plus</p>
                     </div>
                     <div id="keyboard-right">
                       <p>D-Pad</p>
-                      <p>A-X-B-Y</p>
-                      <p>L-Select-Start-R</p>
+                      <p>A&nbsp;X&nbsp;B&nbsp;Y</p>
+                      <p>L&nbsp;Select&nbsp;Start&nbsp;R</p>
                     </div>
                   </div>
                 </div>
