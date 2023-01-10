@@ -1,9 +1,11 @@
 :root {
-  --gray-dark: #111111;
-  --gray-light: #888888;
+  --gray-dark: #080808;
+  --gray-medium: #111111;
+  --gray-light: #222222;
+  --green-active: hsl(100, 20%, 30%);
   --blue-start: hsl(200, 70%, 10%);
   --blue-start-lighter: hsl(200, 70%, 20%);
-  --border-radius-big: 5vw;
+  --border-radius-big: 7vw;
   --border-radius-small: 1vw;
   --duration-hover: 0.2s;
   --distance-hover-pos: 50px;
@@ -230,9 +232,8 @@ body {
 }
 #option {
   width: 32%;
-  background-color: rgba(128, 128, 128, 0.1);
+  background-color: var(--gray-dark);
   padding: 0.7vw 0vw 0.5vw 0vw;
-  /* padding: 0vw 0vw 0.2vw 0vw; */
   margin: 0vw 0vw 0vw 0vw;
   border-radius: var(--border-radius-small);
   display: flex;
@@ -243,10 +244,10 @@ body {
   border: 2px solid black;
 }
 #option:hover {
-  background-color: rgba(128, 128, 128, 0.3);
+  background-color: var(--gray-medium);
 }
 #option:active {
-  background-color: rgba(128, 128, 128, 0.4);
+  background-color: var(--gray-light);
 }
 .debug-value {
   width: 3vw;
@@ -475,16 +476,16 @@ body {
 }
 
 .b-dark {
-  background-color: hsl(200, 0%, 10%);
+  background-color: var(--gray-dark);
   color: rgba(255, 255, 255, 1);
   transition: 0.5s ease;
 }
 .b-dark:hover {
-  background-color: hsl(100, 20%, 10%);
+  background-color: var(--gray-light);
   transition: 0.5s ease;
 }
 .b-dark:active {
-  background-color: hsl(100, 20%, 30%);
+  background-color: var(--green-active);
   transition: 0.5s ease;
 }
 
@@ -496,7 +497,7 @@ body {
 
   padding: 0;
   margin: 0;
-  border-radius: 0 0 var(--border-radius-big) var(--border-radius-big);
+  border-radius: 0 0 var(--border-radius-small) var(--border-radius-small);
 
   display: flex;
   flex-direction: column;
@@ -800,6 +801,12 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  transition: var(--duration-hover) ease;
+  color: transparent;
+}
+.player-choice:hover .player-char-image-name {
+  color: white;
+  transition: var(--duration-hover) ease;
 }
 
 .player-char-blank {
@@ -818,6 +825,7 @@ body {
   transition: var(--duration-hover) ease;
   cursor: default;
 }
+
 .player-char {
   width: 100%;
   height: 100%;
@@ -829,17 +837,17 @@ body {
   cursor: pointer;
   overflow: hidden;
 
-  background-color: 'transparent';
+  background-color: var(--gray-dark);
   border-radius: var(--border-radius-big) var(--border-radius-big) 0 0;
   transition: var(--duration-hover) ease;
 }
 .player-char:hover {
   transition: var(--duration-hover) ease;
-  background-color: var(--gray-dark);
+  background-color: var(--gray-medium);
 }
 .player-char:active {
   transition: var(--duration-hover) ease;
-  background-color: var(--gray-dark);
+  background-color: var(--gray-light);
   /* transform: translateY(-1%); */
 }
 .player-char > .startImageWrapper {
@@ -1369,11 +1377,11 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  
+
   overflow: visible;
   z-index: 1;
   opacity: 0.5;
-  
+
   cursor: pointer;
 }
 .keyboard-explainer-single {
@@ -1392,13 +1400,13 @@ body {
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  
+
   border-radius: var(--border-radius-small);
   background-image: url(../public/images/keyboard_color.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  
+
   overflow: visible;
   z-index: 1;
   opacity: 0.5;

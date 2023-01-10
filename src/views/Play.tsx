@@ -28,7 +28,9 @@ import {
   ButtonName,
   CharacterMove,
   emoji,
+  Player,
 } from '../scenes/interfaces';
+import { IndexKind } from 'typescript';
 
 function Play() {
   let myPhaser: any = useRef(null);
@@ -789,6 +791,18 @@ function Play() {
     }
   };
 
+  const priorKeyboardExists = (myI: number): boolean => {
+    let exists: boolean = false;
+
+    inputArray.forEach((ia: number, iaIndex: number) => {
+      if (ia === 2 && iaIndex < myI) {
+        exists = true;
+      }
+    });
+
+    return exists;
+  };
+
   const onClickBackEventHandler = () => {
     if (myPhaser?.current?.scene?.keys?.game) {
       myPhaser.current.scene.keys.game.loaded = false;
@@ -832,7 +846,7 @@ function Play() {
 
   const [text, setText] = useState('');
   const interval: any = useRef(null);
-  const [quoteCss, setQuoteCss] = useState<boolean>(false);
+  // const [quoteCss, setQuoteCss] = useState<boolean>(false);
 
   useEffect(
     function () {
@@ -1000,71 +1014,68 @@ function Play() {
           </div>
           {!debug.DevMode && <div className="black-hiding-div"></div>}
           <div className="player-choices">
-            {smashConfig.players.map((cPlayer, cPlayerIndex) => {
+            {smashConfig.players.map((p, pIndex) => {
               return (
-                <div className="player-choice" key={cPlayerIndex}>
-                  {inputArray[cPlayerIndex] === 0 && (
+                <div className="player-choice" key={pIndex}>
+                  {inputArray[pIndex] === 0 && (
                     <div
                       className="player-char-blank"
                       onClick={() => {
-                        onClickRotateSelection(cPlayerIndex);
+                        onClickRotateSelection(pIndex);
                       }}
                     >
                       <div className="startImageWrapper">
-                        {(inputArray[cPlayerIndex] === 1 ||
-                          inputArray[cPlayerIndex] === 2) && (
+                        {(inputArray[pIndex] === 1 ||
+                          inputArray[pIndex] === 2) && (
                           <img
                             className={
-                              'startImage' +
-                              (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                              'startImage' + (pIndex > 1 ? 'Inverse' : 'Normal')
                             }
                             src={
                               'images/character_' +
-                              cPlayer.characterId.toString() +
+                              p.characterId.toString() +
                               '_cropped.png'
                             }
-                            width={(55 * cPlayer.scale).toString() + '%'}
+                            width={(55 * p.scale).toString() + '%'}
                             alt="char"
                           />
                         )}
-                        <p className="player-char-image-name">{cPlayer.name}</p>
+                        <p className="player-char-image-name">{p.name}</p>
                       </div>
                     </div>
                   )}
-                  {(inputArray[cPlayerIndex] === 1 ||
-                    inputArray[cPlayerIndex] === 2) && (
+                  {(inputArray[pIndex] === 1 || inputArray[pIndex] === 2) && (
                     <div
                       className="player-char"
                       onClick={() => {
-                        onClickRotateSelection(cPlayerIndex);
+                        onClickRotateSelection(pIndex);
                       }}
                     >
                       <div className="startImageWrapper">
-                        {(inputArray[cPlayerIndex] === 1 ||
-                          inputArray[cPlayerIndex] === 2) && (
+                        {(inputArray[pIndex] === 1 ||
+                          inputArray[pIndex] === 2) && (
                           <img
                             className={
-                              'startImage' +
-                              (cPlayerIndex > 1 ? 'Inverse' : 'Normal')
+                              'startImage' + (pIndex > 1 ? 'Inverse' : 'Normal')
                             }
                             src={
                               'images/character_' +
-                              cPlayer.characterId.toString() +
+                              p.characterId.toString() +
                               '_cropped.png'
                             }
-                            width={(55 * cPlayer.scale).toString() + '%'}
+                            width={(55 * p.scale).toString() + '%'}
                             alt="char"
                           />
                         )}
-                        <p className="player-char-image-name">{cPlayer.name}</p>
+                        <p className="player-char-image-name">{p.name}</p>
                       </div>
                     </div>
                   )}
-                  {inputArray[cPlayerIndex] === 0 && (
+                  {inputArray[pIndex] === 0 && (
                     <div
                       className="b-oscuro b-black"
                       onClick={() => {
-                        onClickOscura(cPlayerIndex);
+                        onClickOscura(pIndex);
                         // onClickSetInputArrayElement(
                         //   cPlayerIndex,
                         //   inputArray[cPlayerIndex] + 1 > 2
@@ -1079,11 +1090,11 @@ function Play() {
                       </div>
                     </div>
                   )}
-                  {inputArray[cPlayerIndex] === 1 && (
+                  {inputArray[pIndex] === 1 && (
                     <div
                       className="b-oscuro b-dark"
                       onClick={() => {
-                        onClickOscura(cPlayerIndex);
+                        onClickOscura(pIndex);
                         // onClickSetInputArrayElement(
                         //   cPlayerIndex,
                         //   inputArray[cPlayerIndex] + 1 > 2
@@ -1093,23 +1104,23 @@ function Play() {
                       }}
                     >
                       <span>Gamepad</span>
-                      {cPlayerIndex < 2 && (
+                      {pIndex < 2 && (
                         <div className="button-input-emoji">
                           {emoji.gamepad}
                         </div>
                       )}
-                      {!(cPlayerIndex < 2) && (
+                      {!(pIndex < 2) && (
                         <div className="button-input-emoji">
                           {emoji.gamepad}
                         </div>
                       )}
                     </div>
                   )}
-                  {inputArray[cPlayerIndex] === 2 && (
+                  {inputArray[pIndex] === 2 && (
                     <div
                       className="b-oscuro b-dark"
                       onClick={() => {
-                        onClickOscura(cPlayerIndex);
+                        onClickOscura(pIndex);
                         // onClickSetInputArrayElement(
                         //   cPlayerIndex,
                         //   inputArray[cPlayerIndex] + 1 > 2
@@ -1119,12 +1130,14 @@ function Play() {
                       }}
                     >
                       <span>Keyboard</span>
-                      {cPlayerIndex < 2 && (
+                      {priorKeyboardExists(pIndex) && <span>Arrows</span>}
+                      {!priorKeyboardExists(pIndex) && <span>WASD</span>}
+                      {pIndex < 2 && (
                         <div className="button-input-emoji">
                           {emoji.keyboardWhite}
                         </div>
                       )}
-                      {!(cPlayerIndex < 2) && (
+                      {!(pIndex < 2) && (
                         <div className="button-input-emoji">
                           {emoji.keyboardWhite}​
                         </div>
