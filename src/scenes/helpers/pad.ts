@@ -553,7 +553,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
 
   // STATE SHOOT
   if (
-    !player.padCurr?.X &&
+    !player.padCurr.X &&
     player.padPrev.X &&
     getHasBeenGameDurationSinceMoment(
       player.char.attackEnergy.durationCooldown,
@@ -570,7 +570,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   }
   // STATE HOLD
   if (
-    (player.padCurr?.X || player.padPrev.X || player.padDebounced.X) &&
+    (player.padCurr.X || player.padPrev.X || player.padDebounced.X) &&
     game.gameNanoseconds >
       player.char.attackEnergy.timestampThrow +
         player.char.attackEnergy.durationCooldown
