@@ -167,6 +167,7 @@ export function setAttackPhysicalOffscreen(player: Player, game: Game): void {
   player.char.attackPhysical.sprite.y = -1000;
   player.char.attackPhysical.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
 }
+
 export function updatePhysicalAttackFollowsPlayer(
   player: Player,
   game: Game
