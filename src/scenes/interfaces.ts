@@ -90,7 +90,7 @@ export interface Player {
 
 export interface Char {
   name: string;
-  color: Color;
+  // color: Color;
   colorFilter: boolean;
   src: string;
   scaleCharSpriteImage: number;
