@@ -319,9 +319,9 @@ export function updateAttackPhysicals(
   playerIndex: number,
   game: Game
 ): void {
-  let attackPhysical = player.char.attackPhysical;
+  let ap = player.char.attackPhysical;
 
-  switch (attackPhysical.state.name) {
+  switch (ap.state.name) {
     case 'attackphysical-state-on':
       ////////////////////////////////
       ///////// WHILE IN LOOP
@@ -333,13 +333,13 @@ export function updateAttackPhysicals(
       ////////////////////////////////
       if (
         getHasGameDurationPassedAttack(
-          attackPhysical,
-          attackPhysical.durationAttack,
+          ap,
+          ap.durationAttack,
           game
         )
       ) {
         setAttackPhysicalState(
-          attackPhysical,
+          ap,
           player,
           playerIndex,
           'attackphysical-state-cooldown',
@@ -357,13 +357,13 @@ export function updateAttackPhysicals(
       ////////////////////////////////
       if (
         getHasGameDurationPassedAttack(
-          attackPhysical,
-          attackPhysical.durationCooldown,
+          ap,
+          ap.durationCooldown,
           game
         )
       ) {
         setAttackPhysicalState(
-          attackPhysical,
+          ap,
           player,
           playerIndex,
           'attackphysical-state-off',
@@ -390,7 +390,7 @@ export function updateAttackPhysicals(
       // }
       if (player.padCurr.A && !player.padPrev.A) {
         setAttackPhysicalState(
-          attackPhysical,
+          ap,
           player,
           playerIndex,
           'attackphysical-state-on',

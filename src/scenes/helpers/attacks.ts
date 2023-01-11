@@ -1,9 +1,9 @@
-import Game from "../Game";
-import { AttackEnergy, Player } from "../interfaces";
-import { setEmitterPlayerOnFalse } from "./damage";
+import Game from '../Game';
+import { AttackEnergy, Player } from '../interfaces';
+import { setEmitterPlayerOnFalse } from './damage';
 
 export function updateJumpEnergy(player: Player, game: Game): void {
-  if (player.state.name === "player-state-dead") {
+  if (player.state.name === 'player-state-dead') {
     setEmitterPlayerOnFalse(player);
     return;
   }
@@ -172,25 +172,33 @@ export function updatePhysicalAttackFollowsPlayer(
   player: Player,
   game: Game
 ): void {
+  let ap = player.char.attackPhysical;
+  let ae = player.char.attackEnergy;
+  let s = player.char.sprite;
+
+  // for link sword
   if (
-    player.char.attackEnergy.ON_SCREEN_PREVENT_ATTACK_PHYSICAL &&
-    !getIsAttackEnergyOffscreen(player.char.attackEnergy, game)
+    ae.ON_SCREEN_PREVENT_ATTACK_PHYSICAL &&
+    !getIsAttackEnergyOffscreen(ae, game)
   ) {
     return;
   }
 
-  player.char.attackPhysical.sprite.y =
-    player.char.sprite.y + player.char.attackPhysical.posFromCenter.y;
+  let pCooldown =
+    (game.gameNanoseconds - ap.state.gameStamp) / ap.durationAttack;
 
-  if (player.char.sprite.flipX) {
-    player.char.attackPhysical.sprite.x =
-      player.char.sprite.x - player.char.attackPhysical.posFromCenter.x;
+  pCooldown = Math.pow(pCooldown, 0.5);
+  console.log(pCooldown);
 
-    player.char.attackPhysical.sprite.flipX = true;
+  ap.sprite.y = s.y + ap.posFromCenter.y;
+
+  if (s.flipX) {
+    ap.sprite.x = s.x - ap.posFromCenter.x * pCooldown;
+
+    ap.sprite.flipX = true;
   } else {
-    player.char.attackPhysical.sprite.x =
-      player.char.sprite.x + player.char.attackPhysical.posFromCenter.x;
+    ap.sprite.x = s.x + ap.posFromCenter.x * pCooldown;
 
-    player.char.attackPhysical.sprite.flipX = false;
+    ap.sprite.flipX = false;
   }
 }
