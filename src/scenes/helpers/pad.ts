@@ -550,9 +550,22 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   //   turnOffPhysicsAttackEnergy(player);
   //   playerGrabAttackEnergy(player);
   // }
+  // console.log('state', player.char.attackEnergy.state);
 
-  // STATE SHOOT
+  // STATE HOLD
   if (
+    player.padCurr.X &&
+    getHasBeenGameDurationSinceMoment(
+      player.char.attackEnergy.durationCooldown,
+      player.char.attackEnergy.timestampThrow,
+      game
+    )
+  ) {
+    // console.log('holding');
+    player.char.attackEnergy.state = 'holding';
+    setPhysicsAttackEnergyOff(player);
+    updatePlayerHoldAttackEnergy(player);
+  } else if (
     !player.padCurr.X &&
     player.padPrev.X &&
     getHasBeenGameDurationSinceMoment(
@@ -561,26 +574,13 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       game
     )
   ) {
+    // console.log('released');
     game.SOUND_GUN.play();
     player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
     player.char.attackEnergy.state = 'released';
     setPhysicsAttackEnergyOn(player);
     playerShootAttackEnergy(player, game);
-    return;
   }
-  // STATE HOLD
-  if (
-    (player.padCurr.X || player.padPrev.X || player.padDebounced.X) &&
-    game.gameNanoseconds >
-      player.char.attackEnergy.timestampThrow +
-        player.char.attackEnergy.durationCooldown
-  ) {
-    player.char.attackEnergy.state = 'holding';
-    setPhysicsAttackEnergyOff(player);
-    updatePlayerHoldAttackEnergy(player);
-  }
-
-  console.log('state', player.char.attackEnergy.state);
 
   // STATE RETURNED
   // if (

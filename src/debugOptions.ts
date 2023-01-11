@@ -1,7 +1,7 @@
 import { Debug } from './scenes/interfaces';
 
 export const debugInit: Debug = {
-  DevMode: true,
+  DevMode: false,
   DevZoom: 8,
   Level: 6, //0123456
   ModeInfinity: true,
