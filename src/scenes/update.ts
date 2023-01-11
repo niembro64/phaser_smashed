@@ -52,6 +52,7 @@ import { updateGlassesTransparency, updateText } from './helpers/text';
 import { updateGameStatePlay } from './gameStates.ts/gameStatePlay';
 import { Player } from './interfaces';
 import { updatePlayerDarknessEvents } from './helpers/powers';
+import { printKeyboard } from './helpers/keyboard';
 
 export function setPreUpdate(game: Game): void {
   setMusicPlay(game);
@@ -66,7 +67,7 @@ export function update(game: Game, time: number, delta: number): void {
     return;
   }
 
-  // printKeyboard(game);
+  printKeyboard(game);
 
   updateTimeTime(game, time, delta);
   updateGameTime(game, time, delta);

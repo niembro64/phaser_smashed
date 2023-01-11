@@ -149,7 +149,7 @@ export function isAttackEnergyMoving(attackEnergy: AttackEnergy): boolean {
   return false;
 }
 export function isAttackEnergyNearPlayer(player: Player): boolean {
-  let distance = 100;
+  let distance = 120;
   let a = player.char.attackEnergy.sprite;
   let p = player.char.sprite;
   if (

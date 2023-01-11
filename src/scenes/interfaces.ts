@@ -289,7 +289,7 @@ export interface AttackPhysical {
 
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: 'held' | 'released' | 'returned';
+  state: 'holding' | 'released';
   timestampThrow: number;
   durationCooldown: number;
   posFromCenter: PosFromCenter;
