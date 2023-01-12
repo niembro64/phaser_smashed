@@ -2,7 +2,7 @@ import Game from '../Game';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
-    super(game, x, y, 'bullet');
+    super(game, x, y, 'greenshell');
   }
 
   fire(x: number, y: number) {
@@ -11,13 +11,14 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.setActive(true);
     this.setVisible(true);
 
-    this.setVelocityY(-1000);
+    this.setVelocityY(-2000);
+    this.setVelocityX(200);
   }
 
   preUpdate(time: number, delta: number) {
     super.preUpdate(time, delta);
 
-    if (this.y < 0) {
+    if (this.y <= 0 || this.y >= 1080 || this.x <= 0 || this.x >= 1920) {
       this.setActive(false);
       this.setVisible(false);
     }
