@@ -321,6 +321,8 @@ export interface AttackEnergy {
 
 export interface AttackBullets {
   sprite: any | Phaser.GameObjects.Sprite;
+  NUMBER_BULLETS: number;
+  soundBullets: any;
 }
 
 export interface FindAndFollowAcceleration {

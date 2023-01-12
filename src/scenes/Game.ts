@@ -70,6 +70,7 @@ export default class Game extends Phaser.Scene {
   FILE_SOUNDS: any = {
     INTRO: 'deep.mp3',
     GUN: 'throw.wav',
+    SHOT: 'shot.wav',
     HIT: 'punch.wav',
     JUMP: 'woosh_quiet.mp3',
     JUMP_POWER: 'quick-swhooshing-noise-80898.mp3',
@@ -1404,7 +1405,11 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: { sprite: null },
+          bullets: {
+            sprite: null,
+            NUMBER_BULLETS: 100,
+            soundBullets: null,
+          },
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },

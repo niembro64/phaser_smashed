@@ -61,12 +61,21 @@ export function create(game: Game) {
   createEndDataMatrices(game);
   createShake(game);
 
-  game.flag.bullets = new Bullets(game);
+  // game.flag.bullets = new Bullets(game);
 
-  game.input.on('pointerdown', (pointer: any) => {
-    console.log('pointerdown');
-    game.flag.bullets.fireBullet(game.chomp.sprite.x, game.chomp.sprite.y);
-  });
+  // game.input.on('pointerdown', (pointer: any) => {
+  //   console.log('pointerdown');
+  //   game.flag.bullets.fireBullet(
+  //     {
+  //       x: game.chomp.sprite.x,
+  //       y: game.chomp.sprite.y,
+  //     },
+  //     {
+  //       x: 2000,
+  //       y: 2000,
+  //     }
+  //   );
+  // });
 
   // INIT UPDATE
   setPreUpdate(game);
@@ -956,14 +965,17 @@ export function createAttackEnergies(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     let ae = player.char.attackEnergy;
     if (ae.bullets) {
-      ae.bullets.sprite = new Bullets(game);
+      ae.bullets.sprite = new Bullets(game, player);
+      ae.bullets.soundBullets = game.sound.add('shot', { volume: 0.6 });
     }
 
-    game.input.on('pointerup', (pointer: any) => {
-      console.log('pointerup');
+    game.input.on('pointerdown', (pointer: any) => {
+      console.log('pointerdown');
       if (ae.bullets) {
         // x: pointer.worldX,
         // y: pointer.worldY,
+        ae.bullets.soundBullets.rate = Math.random() * 0.2 + 1.5;
+        ae.bullets.soundBullets.play();
 
         let posStart: Position = {
           x: player.char.sprite.x,
@@ -982,12 +994,12 @@ export function createAttackEnergies(game: Game): void {
           posEnd.y
         );
 
-        ae.bullets.sprite.fireBullet(
-          posStart.x,
-          posStart.y,
-          vector.x * 1000,
-          vector.y * 1000
-        );
+        let vectorMult = {
+          x: vector.x * 2000,
+          y: vector.y * 2000,
+        };
+
+        ae.bullets.sprite.fireBullet(posStart, vectorMult);
       }
     });
   });
