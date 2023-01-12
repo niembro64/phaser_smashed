@@ -316,6 +316,11 @@ export interface AttackEnergy {
   offscreenPrev: boolean;
   findAndFollowAcceleration: FindAndFollowAcceleration;
   ON_SCREEN_PREVENT_ATTACK_PHYSICAL: boolean;
+  bullets: AttackBullets | null;
+}
+
+export interface AttackBullets {
+  sprite: any | Phaser.GameObjects.Sprite;
 }
 
 export interface FindAndFollowAcceleration {

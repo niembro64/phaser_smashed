@@ -932,28 +932,38 @@ export function createAttackPhysicals(game: Game): void {
 }
 export function createAttackEnergies(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    player.char.attackEnergy.sprite = game.physics.add
-      .sprite(-300, -300, player.char.attackEnergy.srcImage)
-      .setMass(player.char.attackEnergy.mass)
-      .setScale(player.char.attackEnergy.scale)
-      .setRotation(player.char.attackEnergy.rotation.initial * Math.PI)
-      .setAngularVelocity(player.char.attackEnergy.rotation.speed * Math.PI);
+    let ae = player.char.attackEnergy;
+    ae.sprite = game.physics.add
+      .sprite(-300, -300, ae.srcImage)
+      .setMass(ae.mass)
+      .setScale(ae.scale)
+      .setRotation(ae.rotation.initial * Math.PI)
+      .setAngularVelocity(ae.rotation.speed * Math.PI);
 
-    player.char.attackEnergy.sprite.body.allowGravity =
-      player.char.attackEnergy.gravity;
-    player.char.attackEnergy.sprite.body.bounce.set(
-      player.char.attackEnergy.bounceX,
-      player.char.attackEnergy.bounceY
-    );
-    // player.char.attackEnergy.sprite.body.gravity.set(0, 0);
-    if (player.char.attackEnergy.bouncePlatforms) {
-      game.physics.add.collider(
-        player.char.attackEnergy.sprite,
-        game.PLATFORMS
-      );
+    ae.sprite.body.allowGravity = ae.gravity;
+    ae.sprite.body.bounce.set(ae.bounceX, ae.bounceY);
+    // ae.sprite.body.gravity.set(0, 0);
+    if (ae.bouncePlatforms) {
+      game.physics.add.collider(ae.sprite, game.PLATFORMS);
     }
 
     filterAttackEnergyNormal(player, playerIndex, game);
+  });
+
+  game.players.forEach((player, playerIndex) => {
+    let ae = player.char.attackEnergy;
+    if (ae.bullets) {
+      ae.bullets.sprite = new Bullets(game);
+    }
+
+    game.input.on('pointerup', (pointer: any) => {
+      if (ae.bullets) {
+        ae.bullets.sprite.fireBullet(
+          player.char.sprite.x,
+          player.char.sprite.y
+        );
+      }
+    });
   });
 }
 
