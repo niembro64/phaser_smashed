@@ -426,6 +426,7 @@ export interface Flag {
   powerStatePrev: PowerStateFlag;
   emitterLight: any;
   particles: any;
+  bullets: any;
 }
 
 export interface Chomp {

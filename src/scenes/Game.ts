@@ -765,6 +765,7 @@ export default class Game extends Phaser.Scene {
     powerStatePrev: { name: 'none', gameStamp: 0 },
     emitterLight: null,
     particles: null,
+    bullets: null,
   };
 
   players: Player[] = [];

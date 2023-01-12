@@ -15,6 +15,8 @@ import {
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
+import { Bullets } from './helpers/bullets';
+
 export function create(game: Game) {
   createPreCreate(game);
   createDataMatrices(game);
@@ -56,6 +58,12 @@ export function create(game: Game) {
   createHitboxOverlap(game);
   createEndDataMatrices(game);
   createShake(game);
+
+  game.flag.bullets = new Bullets(game);
+
+  game.input.on('pointerdown', (pointer: any) => {
+    game.flag.bullets.fireBullet(game.chomp.sprite.x, game.chomp.sprite.y);
+  });
 
   // INIT UPDATE
   setPreUpdate(game);
