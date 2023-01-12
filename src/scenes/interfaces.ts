@@ -360,7 +360,7 @@ export interface keyboard {
   select: any;
 }
 
-export type CharacterType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 export type InputType = 0 | 1 | 2;
 
 export type CharacterName =
@@ -380,7 +380,7 @@ export interface SmashConfig {
 
 export interface PlayerConfig {
   name: CharacterName;
-  characterId: CharacterType;
+  characterId: CharacterId;
   scale: number;
   input?: InputType;
 }
@@ -426,8 +426,8 @@ export interface Debug {
   AllowCharsExtended: boolean;
   SlowMoExplosions: boolean;
   TypedLoadingText: boolean;
-  OverrideCharInit: boolean;
-  OverrideCharId: number;
+  OverrideChar: boolean;
+  OverrideCharId: CharacterId;
 }
 
 export interface Flag {

@@ -18,7 +18,7 @@ import importedStartSound from '../sounds/start.wav';
 // @ts-ignore
 import importedBlipSound from '../sounds/game-start-liquid.wav';
 import {
-  CharacterType,
+  CharacterId,
   Debug,
   PlayerConfig,
   Quote,
@@ -383,7 +383,7 @@ function Play() {
     trance.pause();
   };
 
-  const setFirstCharacterSlot = (charId: CharacterType): void => {
+  const setFirstCharacterSlot = (charId: CharacterId): void => {
     if (debug.AllowCharsChez || webState === 'play') {
       return;
     }
@@ -469,7 +469,7 @@ function Play() {
       newCharacterId = 0;
     }
 
-    choice.characterId = newCharacterId as CharacterType;
+    choice.characterId = newCharacterId as CharacterId;
 
     let tempScale = smashConfigScaleArray.find((s, sIndex) => {
       return s.characterId === choice.characterId;

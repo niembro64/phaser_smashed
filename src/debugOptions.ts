@@ -1,8 +1,6 @@
 import { Debug } from './scenes/interfaces';
 
 export const debugInit: Debug = {
-  DevMode: false,
-  DevZoom: 8,
   Level: 6, //0123456
   ModeInfinity: true,
   InfinityShots: 7,
@@ -34,13 +32,13 @@ export const debugInit: Debug = {
   AllowCharsChez: false,
   SlowMoExplosions: false,
   TypedLoadingText: false,
-  OverrideCharInit: true,
+  DevMode: false,
+  DevZoom: 8,
+  OverrideChar: false,
   OverrideCharId: 3,
 };
 
 export const debugMax: Debug = {
-  DevMode: true,
-  DevZoom: 10,
   Level: 6, //0123456
   ModeInfinity: true,
   InfinityShots: 15,
@@ -72,6 +70,8 @@ export const debugMax: Debug = {
   AllowCharsChez: false,
   SlowMoExplosions: true,
   TypedLoadingText: false,
-  OverrideCharInit: true,
+  DevMode: true,
+  DevZoom: 10,
+  OverrideChar: true,
   OverrideCharId: 8,
 };
