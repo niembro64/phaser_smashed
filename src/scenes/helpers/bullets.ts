@@ -1,18 +1,19 @@
 import Game from '../Game';
+import { Position, Velocity } from '../interfaces';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
     super(game, x, y, 'greenshell');
   }
 
-  fire(x: number, y: number) {
-    this.body.reset(x, y);
+  fire(pos: Position, vel: Velocity) {
+    this.body.reset(pos.x, pos.y);
 
     this.setActive(true);
     this.setVisible(true);
 
-    this.setVelocityY(-2000);
-    this.setVelocityX(200);
+    this.setVelocityY(vel.y);
+    this.setVelocityX(vel.x);
   }
 
   preUpdate(time: number, delta: number) {
@@ -38,11 +39,11 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  fireBullet(x: number, y: number) {
+  fireBullet(pos: Position, vel: Velocity) {
     let bullet = this.getFirstDead(false);
 
     if (bullet) {
-      bullet.fire(x, y);
+      bullet.fire(pos, vel);
     }
   }
 }

@@ -2,6 +2,7 @@ import ShakePosition from 'phaser3-rex-plugins/plugins/behaviors/shake/ShakePosi
 import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
+  getNormalizedVector,
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
 } from './helpers/damage';
@@ -16,6 +17,7 @@ import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
 import { Bullets } from './helpers/bullets';
+import { Position } from './interfaces';
 
 export function create(game: Game) {
   createPreCreate(game);
@@ -62,6 +64,7 @@ export function create(game: Game) {
   game.flag.bullets = new Bullets(game);
 
   game.input.on('pointerdown', (pointer: any) => {
+    console.log('pointerdown');
     game.flag.bullets.fireBullet(game.chomp.sprite.x, game.chomp.sprite.y);
   });
 
@@ -957,10 +960,33 @@ export function createAttackEnergies(game: Game): void {
     }
 
     game.input.on('pointerup', (pointer: any) => {
+      console.log('pointerup');
       if (ae.bullets) {
+        // x: pointer.worldX,
+        // y: pointer.worldY,
+
+        let posStart: Position = {
+          x: player.char.sprite.x,
+          y: player.char.sprite.y,
+        };
+
+        let posEnd: Position = {
+          x: pointer.worldX,
+          y: pointer.worldY,
+        };
+
+        let vector = getNormalizedVector(
+          posStart.x,
+          posStart.y,
+          posEnd.x,
+          posEnd.y
+        );
+
         ae.bullets.sprite.fireBullet(
-          player.char.sprite.x,
-          player.char.sprite.y
+          posStart.x,
+          posStart.y,
+          vector.x * 1000,
+          vector.y * 1000
         );
       }
     });

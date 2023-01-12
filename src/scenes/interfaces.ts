@@ -268,7 +268,7 @@ export interface Velocity {
   x: number;
   y: number;
 }
-export interface PosFromCenter {
+export interface Position {
   x: number;
   y: number;
 }
@@ -278,7 +278,7 @@ export interface AttackPhysical {
   state: AttackStateWithTime;
   durationAttack: number;
   durationCooldown: number;
-  posFromCenter: PosFromCenter;
+  posFromCenter: Position;
   damage: number;
   hitback: Hitback;
   srcImage: string;
@@ -292,7 +292,7 @@ export interface AttackEnergy {
   state: 'holding' | 'released';
   timestampThrow: number;
   durationCooldown: number;
-  posFromCenter: PosFromCenter;
+  posFromCenter: Position;
   friction: AttackEnergyFriction;
   VEL: Velocity;
   velPrevX: number;
@@ -424,6 +424,8 @@ export interface Debug {
   AllowCharsExtended: boolean;
   SlowMoExplosions: boolean;
   TypedLoadingText: boolean;
+  OverrideCharInit: boolean;
+  OverrideCharId: number;
 }
 
 export interface Flag {

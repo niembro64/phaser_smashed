@@ -34,6 +34,8 @@ export const debugInit: Debug = {
   AllowCharsChez: false,
   SlowMoExplosions: false,
   TypedLoadingText: false,
+  OverrideCharInit: true,
+  OverrideCharId: 3,
 };
 
 export const debugMax: Debug = {
@@ -70,4 +72,6 @@ export const debugMax: Debug = {
   AllowCharsChez: false,
   SlowMoExplosions: true,
   TypedLoadingText: false,
+  OverrideCharInit: true,
+  OverrideCharId: 8,
 };
