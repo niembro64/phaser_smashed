@@ -528,12 +528,34 @@ export function playerGrabAttackEnergy(player: Player): void {
 }
 export function updateAttackEnergy(player: Player, game: Game): void {
   let ae = player.char.attackEnergy;
+  let b = player.char.sprite.body;
   if (ae.bullets) {
-    let ps = player.char.sprite;
-    let pos = { x: ps.x, y: ps.y };
-    let vel = ae.VEL;
+    if (player.padCurr.X && !player.padPrev.X) {
+      let ps = player.char.sprite;
+      let pos = { x: ps.x, y: ps.y };
 
-    ae.bullets.sprite.fireBullet(pos, vel);
+      let vX = b.velocity.x * ae.VEL.x * 0.5;
+
+      let vY = 0;
+      if (ae.allowVelocityY) {
+        vY = 300 * player.char.attackEnergy.VEL.y;
+        vY += b.velocity.y * 0.5;
+      }
+
+      let velX: number = 0;
+      let velY: number = 0;
+
+      if (player.char.sprite.flipX) {
+        velX = -1 * game.BASE_PLAYER_ATTACKENERGY.x + vX;
+        velY = vY;
+      } else {
+        velX = game.BASE_PLAYER_ATTACKENERGY.x + vX;
+        velY = vY;
+      }
+      let vel: { x: number; y: number } = { x: velX, y: velY };
+      ae.bullets.sprite.fireBullet(pos, vel);
+      ae.bullets.soundBullets.play();
+    }
     return;
   }
 
