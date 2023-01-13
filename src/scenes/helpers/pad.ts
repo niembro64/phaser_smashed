@@ -535,7 +535,9 @@ export function updateBulletsFloat(game: Game): void {
           // @ts-ignore
           // child.body.setVelocityY(child.body.velocity.y - 50);
 
-          child.body.velocity.y = child.body.velocity.y - 100 * Math.random();
+          child.body.velocity.y =
+            child.body.velocity.y - Math.random() * 200 + 60;
+          // child.body.velocity.y = child.body.velocity.y + child.floatVelocityY - Math.random() * 200 + 100;
         }
       );
     }
@@ -546,7 +548,8 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   let b = player.char.sprite.body;
   let s = player.char.sprite;
   if (ae.bullets) {
-    if (player.padCurr.X && !player.padPrev.X) {
+    // if (player.padCurr.X && !player.padPrev.X) {
+    if (player.padCurr.X) {
       let ps = player.char.sprite;
 
       let pos: { x: number; y: number };
@@ -559,11 +562,9 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       let vX = b.velocity.x * ae.VEL.x * 0.5;
 
       let vY = 0;
-      let vYRandom = Math.random() * 500;
+      let vYRandom = Math.random() * 1000 - 500;
       vY = 300 * player.char.attackEnergy.VEL.y + vYRandom;
       vY += b.velocity.y * 0.5;
-      if (ae.allowVelocityY) {
-      }
 
       let velX: number = 0;
       let velY: number = 0;

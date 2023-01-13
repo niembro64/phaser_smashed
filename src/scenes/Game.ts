@@ -1412,7 +1412,7 @@ export default class Game extends Phaser.Scene {
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
           bullets: {
             sprite: null,
-            NUMBER_BULLETS: 100,
+            NUMBER_BULLETS: 1000,
             soundBullets: null,
           },
         },

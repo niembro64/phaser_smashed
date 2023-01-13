@@ -1,5 +1,6 @@
 import Game, { sd } from '../Game';
 import { Player, Position, Velocity } from '../interfaces';
+import { normalRandom } from './math';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
@@ -8,11 +9,15 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     game.physics.add.collider(this, game.PLATFORMS);
   }
 
-  floatVelocityY: number = -100;
+  Y_RANDOM: number = -50;
+  Y_ADDER: number = -10;
+  floatVelocityY: number = 0;
 
   fire(pos: Position, vel: Velocity): void {
     this.body.bounce.set(1);
     this.body.reset(pos.x, pos.y);
+    this.floatVelocityY = this.Y_ADDER + this.Y_RANDOM * Math.random();
+    // this.floatVelocityY = this.FLOAT_VELOCITY_Y * normalRandom(0.5, 0.2);
 
     this.setActive(true);
     this.setVisible(true);
