@@ -323,8 +323,6 @@ export function updateSpritesheets(game: Game): void {
 
       let newSpriteStateName: SpriteStateName | null = null;
 
-      console.log(s.body.velocity.y);
-
       if (tWall && !tDown && movingDown) {
         newSpriteStateName = 'climb';
       } else if (tDown) {
