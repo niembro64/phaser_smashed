@@ -18,6 +18,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     // game.physics.add.collider(this, game.chomp.sprite);
     // game.physics.add.collider(this, game.TABLE);
+    // this.body.allowGravity = false;
   }
 
   Y_RANDOM: number = -50;

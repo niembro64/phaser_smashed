@@ -548,6 +548,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   let b = player.char.sprite.body;
   let s = player.char.sprite;
   if (ae.bullets) {
+    console.log(ae.bullets.sprite.children);
     // if (player.padCurr.X && !player.padPrev.X) {
     if (player.padCurr.X) {
       let ps = player.char.sprite;

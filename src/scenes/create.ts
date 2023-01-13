@@ -3,14 +3,14 @@ import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
-  onHitHandlerAttackPhysical
+  onHitHandlerAttackPhysical,
 } from './helpers/damage';
 import {
   getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
-  updateChompFilterState
+  updateChompFilterState,
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
@@ -964,7 +964,34 @@ export function createAttackEnergies(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     let ae = player.char.attackEnergy;
     if (ae.bullets) {
-      ae.bullets.sprite = new Bullets(game, player);
+      let aebs = ae.bullets.sprite;
+      aebs = new Bullets(game, player);
+
+      aebs.children.iterate((child: any) => {
+        child.body.allowGravity = ae.gravity;
+        child.body.bounce.set(ae.bounceX, ae.bounceY);
+        // child.body.gravity.set(0, 0);
+        if (ae.bouncePlatforms) {
+          game.physics.add.collider(child, game.PLATFORMS);
+        }
+        for (let i = 0; i < game.players.length; i++) {
+          game.physics.add.collider(child, game.players[i].char.sprite);
+          game.physics.add.collider(
+            child,
+            game.players[i].char.attackEnergy.sprite
+          );
+          game.physics.add.collider(
+            child,
+            game.players[i].char.attackPhysical.sprite
+          );
+        }
+
+        game.physics.add.collider(child, game.chomp.sprite);
+        game.physics.add.collider(child, game.TABLE);
+
+        filterAttackEnergyNormal(player, playerIndex, game);
+      });
+
       ae.bullets.soundBullets = game.sound.add('shot', { volume: 0.6 });
     }
 
