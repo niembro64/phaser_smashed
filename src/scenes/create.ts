@@ -2,22 +2,20 @@ import ShakePosition from 'phaser3-rex-plugins/plugins/behaviors/shake/ShakePosi
 import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
-  getNormalizedVector,
   onHitHandlerAttackEnergy,
-  onHitHandlerAttackPhysical,
+  onHitHandlerAttackPhysical
 } from './helpers/damage';
 import {
   getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
-  updateChompFilterState,
+  updateChompFilterState
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
 import { Bullets } from './helpers/bullets';
-import { Position } from './interfaces';
 
 export function create(game: Game) {
   createPreCreate(game);

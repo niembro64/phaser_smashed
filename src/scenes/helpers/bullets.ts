@@ -8,6 +8,8 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     game.physics.add.collider(this, game.PLATFORMS);
   }
 
+  floatVelocityY: number = -100;
+
   fire(pos: Position, vel: Velocity): void {
     this.body.bounce.set(1);
     this.body.reset(pos.x, pos.y);

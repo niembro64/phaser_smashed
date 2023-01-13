@@ -526,13 +526,36 @@ export function playerGrabAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.setVelocityX(0);
   player.char.attackEnergy.sprite.body.setVelocityY(0);
 }
+
+export function updateBulletsFloat(game: Game): void {
+  game.players.forEach((player, playerIndex) => {
+    if (player.char.attackEnergy.bullets) {
+      player.char.attackEnergy.bullets.sprite.children.iterate(
+        (child: Phaser.Physics.Arcade.Sprite) => {
+          if (child.body.velocity.y > 0) {
+            // @ts-ignore
+            child.body.setVelocityY(0);
+            console.log('set vel to 0');
+          }
+        }
+      );
+    }
+  });
+}
 export function updateAttackEnergy(player: Player, game: Game): void {
   let ae = player.char.attackEnergy;
   let b = player.char.sprite.body;
+  let s = player.char.sprite;
   if (ae.bullets) {
     if (player.padCurr.X && !player.padPrev.X) {
       let ps = player.char.sprite;
-      let pos = { x: ps.x, y: ps.y };
+
+      let pos: { x: number; y: number };
+      if (s.flipX) {
+        pos = { x: ps.x - ae.posFromCenter.x, y: ps.y + ae.posFromCenter.y };
+      } else {
+        pos = { x: ps.x + ae.posFromCenter.x, y: ps.y + ae.posFromCenter.y };
+      }
 
       let vX = b.velocity.x * ae.VEL.x * 0.5;
 
