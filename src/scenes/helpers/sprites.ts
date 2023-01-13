@@ -315,21 +315,21 @@ export function updateSpritesheets(game: Game): void {
 
       let tDown = s.body.touching.down;
       let tWall = s.body.touching.left || s.body.touching.right;
-      let movingUp = s.body.velocity.y < -movingYThreshold;
-      let movingDown = s.body.velocity.y > movingYThreshold;
-      let movingHoriz =
+      let mUp = s.body.velocity.y < -movingYThreshold;
+      let mDown = s.body.velocity.y > movingYThreshold;
+      let mHoriz =
         s.body.velocity.x > movingXThreshold ||
         s.body.velocity.x < -movingXThreshold;
 
       let newSpriteStateName: SpriteStateName | null = null;
 
-      if (tWall && !tDown && movingDown) {
+      if (tWall && !tDown && mDown) {
         newSpriteStateName = 'climb';
       } else if (tDown) {
-        newSpriteStateName = movingHoriz ? 'walk' : 'idle';
-      } else if (movingUp) {
+        newSpriteStateName = mHoriz ? 'walk' : 'idle';
+      } else if (mUp) {
         newSpriteStateName = 'jumpUp';
-      } else if (movingDown) {
+      } else if (mDown) {
         newSpriteStateName = 'jumpDown';
       }
 
