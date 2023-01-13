@@ -532,11 +532,10 @@ export function updateBulletsFloat(game: Game): void {
     if (player.char.attackEnergy.bullets) {
       player.char.attackEnergy.bullets.sprite.children.iterate(
         (child: Phaser.Physics.Arcade.Sprite) => {
-          if (child.body.velocity.y > 0) {
-            // @ts-ignore
-            child.body.setVelocityY(0);
-            console.log('set vel to 0');
-          }
+          // @ts-ignore
+          // child.body.setVelocityY(child.body.velocity.y - 50);
+
+          child.body.velocity.y = child.body.velocity.y - 100 * Math.random();
         }
       );
     }
@@ -560,9 +559,10 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       let vX = b.velocity.x * ae.VEL.x * 0.5;
 
       let vY = 0;
+      let vYRandom = Math.random() * 500;
+      vY = 300 * player.char.attackEnergy.VEL.y + vYRandom;
+      vY += b.velocity.y * 0.5;
       if (ae.allowVelocityY) {
-        vY = 300 * player.char.attackEnergy.VEL.y;
-        vY += b.velocity.y * 0.5;
       }
 
       let velX: number = 0;
