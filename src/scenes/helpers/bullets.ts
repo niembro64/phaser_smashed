@@ -1,12 +1,29 @@
 import Game, { sd } from '../Game';
 import { Player, Position, Velocity } from '../interfaces';
-import { normalRandom } from './math';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
     super(game, x, y, 'laser');
 
     game.physics.add.collider(this, game.PLATFORMS);
+
+    for (let i = 0; i < game.players.length; i++) {
+      // game.physics.add.collider(this, game.players[i].char.sprite);
+      game.physics.add.collider(this, game.players[i].char.attackEnergy.sprite);
+      game.physics.add.collider(
+        this,
+        game.players[i].char.attackPhysical.sprite
+      );
+    }
+
+    // game.players.forEach((p, pIndex) => {
+    //   game.physics.add.collider(this, p.char.sprite);
+    //   game.physics.add.collider(this, p.char.attackEnergy.sprite);
+    //   game.physics.add.collider(this, p.char.attackPhysical.sprite);
+    // });
+
+    game.physics.add.collider(this, game.chomp.sprite);
+    game.physics.add.collider(this, game.TABLE);
   }
 
   Y_RANDOM: number = -50;
