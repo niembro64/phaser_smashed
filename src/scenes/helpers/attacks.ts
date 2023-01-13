@@ -190,7 +190,7 @@ export function updatePhysicalAttackFollowsPlayer(
     (game.gameNanoseconds - ap.state.gameStamp) / ap.durationAttack;
 
   pCooldown = Math.pow(pCooldown, 0.5);
-  console.log(pCooldown);
+  // console.log(pCooldown);
 
   ap.sprite.y = s.y + ap.posFromCenter.y;
 

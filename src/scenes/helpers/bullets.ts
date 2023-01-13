@@ -5,19 +5,19 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
     super(game, x, y, 'laser');
 
-    game.physics.add.collider(this, game.PLATFORMS);
+    // game.physics.add.collider(this, game.PLATFORMS);
 
-    for (let i = 0; i < game.players.length; i++) {
-      // game.physics.add.collider(this, game.players[i].char.sprite);
-      game.physics.add.collider(this, game.players[i].char.attackEnergy.sprite);
-      game.physics.add.collider(
-        this,
-        game.players[i].char.attackPhysical.sprite
-      );
-    }
+    // for (let i = 0; i < game.players.length; i++) {
+    //   game.physics.add.collider(this, game.players[i].char.sprite);
+    //   game.physics.add.collider(this, game.players[i].char.attackEnergy.sprite);
+    //   game.physics.add.collider(
+    //     this,
+    //     game.players[i].char.attackPhysical.sprite
+    //   );
+    // }
 
-    game.physics.add.collider(this, game.chomp.sprite);
-    game.physics.add.collider(this, game.TABLE);
+    // game.physics.add.collider(this, game.chomp.sprite);
+    // game.physics.add.collider(this, game.TABLE);
   }
 
   Y_RANDOM: number = -50;
@@ -64,6 +64,20 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
       visible: false,
       classType: Bullet,
     });
+
+    game.physics.add.collider(this, game.PLATFORMS);
+
+    for (let i = 0; i < game.players.length; i++) {
+      game.physics.add.collider(this, game.players[i].char.sprite);
+      game.physics.add.collider(this, game.players[i].char.attackEnergy.sprite);
+      game.physics.add.collider(
+        this,
+        game.players[i].char.attackPhysical.sprite
+      );
+    }
+
+    game.physics.add.collider(this, game.chomp.sprite);
+    game.physics.add.collider(this, game.TABLE);
   }
 
   fireBullet(pos: Position, vel: Velocity): void {
