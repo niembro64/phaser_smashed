@@ -4,9 +4,12 @@ import { Player, Position, Velocity } from '../interfaces';
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
     super(game, x, y, 'laser');
+
+    game.physics.add.collider(this, game.PLATFORMS);
   }
 
-  fire(pos: Position, vel: Velocity) {
+  fire(pos: Position, vel: Velocity): void {
+    this.body.bounce.set(1);
     this.body.reset(pos.x, pos.y);
 
     this.setActive(true);
@@ -16,7 +19,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     this.setVelocityX(vel.x);
   }
 
-  preUpdate(time: number, delta: number) {
+  preUpdate(time: number, delta: number): void {
     super.preUpdate(time, delta);
 
     if (this.y <= 0 || this.y >= 1080 || this.x <= 0 || this.x >= 1920) {
@@ -39,10 +42,14 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
     });
   }
 
-  fireBullet(pos: Position, vel: Velocity) {
+  fireBullet(pos: Position, vel: Velocity): void {
     let bullet = this.getFirstDead(false);
-
     if (bullet) {
+      // bullet.bouncePlatforms = true;
+      // bullet.bounceWorldBounds = false;
+      // bullet.bounceX = 1;
+      // bullet.bounceY = 1;
+
       bullet.fire(pos, vel);
     }
   }

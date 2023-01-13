@@ -34,7 +34,7 @@ export const debugInit: Debug = {
   TypedLoadingText: false,
   DevMode: false,
   DevZoom: 8,
-  OverrideChar: false,
+  OverrideChar: true,
   OverrideCharId: 3,
 };
 

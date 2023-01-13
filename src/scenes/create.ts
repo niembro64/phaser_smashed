@@ -206,6 +206,7 @@ export function createChomp(game: Game): void {
   c.sprite.setBounceY(0.5);
   c.sprite.setOrigin(0.5, 1);
   c.sprite.setVelocityX(30);
+  c.sprite.setVelocityY(-100);
   c.sprite.setMass(c.MASS);
   c.sprite.play('chompanimation_walking');
 
@@ -969,39 +970,39 @@ export function createAttackEnergies(game: Game): void {
       ae.bullets.soundBullets = game.sound.add('shot', { volume: 0.6 });
     }
 
-    game.input.on('pointerdown', (pointer: any) => {
-      console.log('pointerdown');
-      if (ae.bullets) {
-        // x: pointer.worldX,
-        // y: pointer.worldY,
-        ae.bullets.soundBullets.rate = Math.random() * 0.2 + 1.5;
-        ae.bullets.soundBullets.play();
+    // game.input.on('pointerdown', (pointer: any) => {
+    //   console.log('pointerdown');
+    //   if (ae.bullets) {
+    //     // x: pointer.worldX,
+    //     // y: pointer.worldY,
+    //     ae.bullets.soundBullets.rate = Math.random() * 0.2 + 1.5;
+    //     ae.bullets.soundBullets.play();
 
-        let posStart: Position = {
-          x: player.char.sprite.x,
-          y: player.char.sprite.y,
-        };
+    //     let posStart: Position = {
+    //       x: player.char.sprite.x,
+    //       y: player.char.sprite.y,
+    //     };
 
-        let posEnd: Position = {
-          x: pointer.worldX,
-          y: pointer.worldY,
-        };
+    //     let posEnd: Position = {
+    //       x: pointer.worldX,
+    //       y: pointer.worldY,
+    //     };
 
-        let vector = getNormalizedVector(
-          posStart.x,
-          posStart.y,
-          posEnd.x,
-          posEnd.y
-        );
+    //     let vector = getNormalizedVector(
+    //       posStart.x,
+    //       posStart.y,
+    //       posEnd.x,
+    //       posEnd.y
+    //     );
 
-        let vectorMult = {
-          x: vector.x * 2000,
-          y: vector.y * 2000,
-        };
+    //     let vectorMult = {
+    //       x: vector.x * 2000,
+    //       y: vector.y * 2000,
+    //     };
 
-        ae.bullets.sprite.fireBullet(posStart, vectorMult);
-      }
-    });
+    //     ae.bullets.sprite.fireBullet(posStart, vectorMult);
+    //   }
+    // });
   });
 }
 

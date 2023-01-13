@@ -527,9 +527,19 @@ export function playerGrabAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.setVelocityY(0);
 }
 export function updateAttackEnergy(player: Player, game: Game): void {
-  // if (player.pad?.up && !(player.pad.left || player.pad.right)) {
-  //   return;
-  // }
+  let ae = player.char.attackEnergy;
+  if (ae.bullets) {
+    let ps = player.char.sprite;
+    let pos = { x: ps.x, y: ps.y };
+    let vel = ae.VEL;
+
+    ae.bullets.sprite.fireBullet(pos, vel);
+    return;
+  }
+
+  ////////////////////////////////////////////////
+  //////////// NORMAL ATTACK ENERGY
+  ////////////////////////////////////////////////
 
   if (
     !getIsAttackEnergyOffscreen(player.char.attackEnergy, game) &&

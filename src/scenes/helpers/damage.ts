@@ -71,6 +71,7 @@ export function onHitHandlerAttackEnergy(
   if (player.state.name !== 'player-state-alive') {
     return;
   }
+
   game.overlappingPlayerIAttackEnergyJ[playerIndex][j] = true;
 
   for (var bj = 0; bj < game.players.length; bj++) {
