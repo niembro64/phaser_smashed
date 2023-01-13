@@ -1,9 +1,11 @@
-import Game, { sd } from '../Game';
+import Game, { gameNanoseconds, sd } from '../Game';
 import { Player, Position, Velocity } from '../interfaces';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
-    super(game, x, y, 'laser');
+    super(game, x, y, 'mirror');
+
+    // this.setScale(0.3);
 
     // game.physics.add.collider(this, game.PLATFORMS);
 
@@ -20,11 +22,15 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     // game.physics.add.collider(this, game.TABLE);
   }
 
+  shootGameStamp: number = 0;
+
   Y_RANDOM: number = -50;
   Y_ADDER: number = -10;
   floatVelocityY: number = 0;
 
   fire(pos: Position, vel: Velocity): void {
+    this.shootGameStamp = gameNanoseconds;
+
     this.body.bounce.set(1);
     this.body.reset(pos.x, pos.y);
     this.floatVelocityY = this.Y_ADDER + this.Y_RANDOM * Math.random();
@@ -65,19 +71,19 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
       classType: Bullet,
     });
 
-    game.physics.add.collider(this, game.PLATFORMS);
+    // game.physics.add.collider(this, game.PLATFORMS);
 
-    for (let i = 0; i < game.players.length; i++) {
-      game.physics.add.collider(this, game.players[i].char.sprite);
-      game.physics.add.collider(this, game.players[i].char.attackEnergy.sprite);
-      game.physics.add.collider(
-        this,
-        game.players[i].char.attackPhysical.sprite
-      );
-    }
+    // for (let i = 0; i < game.players.length; i++) {
+    //   game.physics.add.collider(this, game.players[i].char.sprite);
+    //   game.physics.add.collider(this, game.players[i].char.attackEnergy.sprite);
+    //   game.physics.add.collider(
+    //     this,
+    //     game.players[i].char.attackPhysical.sprite
+    //   );
+    // }
 
-    game.physics.add.collider(this, game.chomp.sprite);
-    game.physics.add.collider(this, game.TABLE);
+    // game.physics.add.collider(this, game.chomp.sprite);
+    // game.physics.add.collider(this, game.TABLE);
   }
 
   fireBullet(pos: Position, vel: Velocity): void {

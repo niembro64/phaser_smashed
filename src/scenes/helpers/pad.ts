@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { gameNanoseconds } from '../Game';
 import { InputType, Player } from '../interfaces';
 import {
   getIsAttackEnergyOffscreen,
@@ -562,7 +562,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       let vX = b.velocity.x * ae.VEL.x * 0.5;
 
       let vY = 0;
-      let vYRandom = Math.random() * 1000 - 500;
+      let vYRandom = Math.random() * 1000 - 250;
       vY = 300 * player.char.attackEnergy.VEL.y + vYRandom;
       vY += b.velocity.y * 0.5;
 
@@ -632,7 +632,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   ) {
     // console.log('released');
     game.SOUND_GUN.play();
-    player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
+    player.char.attackEnergy.timestampThrow = gameNanoseconds;
     player.char.attackEnergy.state = 'released';
     setPhysicsAttackEnergyOn(player);
     playerShootAttackEnergy(player, game);
@@ -642,7 +642,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   // if (
   //   !player.char.attackEnergy.offscreenCurr &&
   //   player.char.attackEnergy.offscreenPrev &&
-  //   game.gameNanoseconds >
+  //   gameNanoseconds >
   //     player.char.attackEnergy.timestampThrow +
   //       player.char.attackEnergy.durationCooldown
   // ) {

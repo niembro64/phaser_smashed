@@ -59,7 +59,7 @@ export function updateGameStatePlay(
   game.players.forEach((player, playerIndex) => {
     updateChompFilterState(player, 0, game);
   });
-  updateBulletsFloat(game);
+  // updateBulletsFloat(game);
 
   // UPDATE PLAYERS
   updatePlayers(game);

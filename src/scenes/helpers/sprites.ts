@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { gameNanoseconds } from '../Game';
 import { Player, SpriteStateName } from '../interfaces';
 import { hasPlayerTouchedWallRecently } from './movement';
 import { getHasBeenGameDurationSinceMoment } from './powers';
@@ -32,7 +32,7 @@ export function updateSpriteFilter(
       if (player.char.powerStateCurr.name === 'dark') {
         if (
           Math.floor(
-            (game.gameNanoseconds - player.state.gameStamp) /
+            (gameNanoseconds - player.state.gameStamp) /
               game.DURATION_PLAYER_FILTER_FLICKER
           ) %
             2 ===
@@ -45,7 +45,7 @@ export function updateSpriteFilter(
       } else {
         if (
           Math.floor(
-            (game.gameNanoseconds - player.state.gameStamp) /
+            (gameNanoseconds - player.state.gameStamp) /
               game.DURATION_PLAYER_FILTER_FLICKER
           ) %
             2 ===
@@ -60,7 +60,7 @@ export function updateSpriteFilter(
     if (player.state.name !== 'player-state-hurt') {
       if (
         Math.floor(
-          (game.gameNanoseconds - player.state.gameStamp) /
+          (gameNanoseconds - player.state.gameStamp) /
             game.DURATION_PLAYER_FILTER_FLICKER
         ) %
           2 ===
@@ -363,7 +363,7 @@ export function updateSpriteState(
     player.char.ssPrev.name = player.char.ssCurr.name;
     player.char.ssPrev.timeStamp = player.char.ssCurr.timeStamp;
     player.char.ssCurr.name = newState;
-    player.char.ssCurr.timeStamp = game.gameNanoseconds;
+    player.char.ssCurr.timeStamp = gameNanoseconds;
 
     let curr = player.char.ssCurr.name;
     let n = player.char.name;

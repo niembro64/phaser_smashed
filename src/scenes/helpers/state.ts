@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { gameNanoseconds } from '../Game';
 import {
   AttackPhysical,
   AttackState,
@@ -47,7 +47,7 @@ import { setRuleSplashOn, setSplashDataOff, setSplashDataOn } from './text';
 
 export function setGameState(game: Game, state: GameState): void {
   game.gameState.name = state;
-  game.gameState.gameStamp = game.gameNanoseconds;
+  game.gameState.gameStamp = gameNanoseconds;
   game.gameState.timeStamp = game.timeNanoseconds;
   console.log('GAME STATE', game.gameState.name);
 
@@ -107,7 +107,7 @@ export function setAttackPhysicalState(
   game: Game
 ): void {
   attackPhysical.state.name = state;
-  attackPhysical.state.gameStamp = game.gameNanoseconds;
+  attackPhysical.state.gameStamp = gameNanoseconds;
   attackPhysical.state.timeStamp = game.timeNanoseconds;
 
   // console.log(
@@ -147,7 +147,7 @@ export function setPlayerState(
   game: Game
 ): void {
   player.state.name = state;
-  player.state.gameStamp = game.gameNanoseconds;
+  player.state.gameStamp = gameNanoseconds;
   player.state.timeStamp = game.timeNanoseconds;
   // console.log('PLAYER STATE', player.char.name, player.state);
 
@@ -173,7 +173,7 @@ export function setPlayerState(
         setAddToShotsMatrixScreenClear(player, playerIndex, game);
       }
       setSoundDiePlay(game);
-      player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
+      player.char.attackEnergy.timestampThrow = gameNanoseconds;
       player.char.attackEnergy.state = 'released';
       setPhysicsAttackEnergyOn(player);
       setBlinkTrue(player);
@@ -184,7 +184,7 @@ export function setPlayerState(
     case 'player-state-hurt':
       setEmitterHurtActiveTrue(player);
       setEmitterHurtVisibleTrue(player);
-      player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
+      player.char.attackEnergy.timestampThrow = gameNanoseconds;
       player.char.attackEnergy.state = 'released';
       setPhysicsAttackEnergyOn(player);
       setBlinkTrue(player);
@@ -258,7 +258,7 @@ export function getLongEnoughGameDuration(
   duration: number,
   game: Game
 ): boolean {
-  if (game.gameNanoseconds > game.gameState.gameStamp + duration + 20) {
+  if (gameNanoseconds > game.gameState.gameStamp + duration + 20) {
     return true;
   }
   return false;
@@ -277,9 +277,9 @@ export function updateGameTime(game: Game, time: number, delta: number): void {
   if (game.gameState.name !== 'game-state-play') {
     return;
   }
-  game.gameNanoseconds += delta;
+  gameNanoseconds += delta;
   game.gameSecondsPrev = game.gameSeconds;
-  game.gameSeconds = Math.floor(game.gameNanoseconds / 1000);
+  game.gameSeconds = Math.floor(gameNanoseconds / 1000);
   if (game.gameSeconds !== game.gameSecondsPrev) {
     game.gameSecondsClock--;
   }
@@ -305,7 +305,7 @@ export function getHasGameDurationPassedPlayer(
   duration: number,
   game: Game
 ): boolean {
-  if (game.gameNanoseconds > player.state.gameStamp + duration) {
+  if (gameNanoseconds > player.state.gameStamp + duration) {
     return true;
   }
   return false;
@@ -315,7 +315,7 @@ export function getHasGameDurationPassedAttack(
   duration: number,
   game: Game
 ): boolean {
-  if (game.gameNanoseconds > attack.state.gameStamp + duration) {
+  if (gameNanoseconds > attack.state.gameStamp + duration) {
     return true;
   }
   return false;

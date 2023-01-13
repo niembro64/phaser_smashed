@@ -138,6 +138,7 @@ export function preload(game: Game): void {
   game.load.image('fist-white', 'images/fist.png');
   game.load.image('flame', 'images/flame_small.png');
   game.load.image('laser', 'images/laser.png');
+  game.load.image('mirror', 'images/mirror.png');
 
   game.load.image('blockcracked', 'images/blockcracked.png');
   game.load.image('fireball', 'images/fireball.png');
