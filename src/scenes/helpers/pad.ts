@@ -547,7 +547,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   let ae = player.char.attackEnergy;
   let b = player.char.sprite.body;
   let s = player.char.sprite;
-  if (ae.bullets) {
+  if (game.debug.AllowBulletGroups && ae.bullets) {
     // if (player.padCurr.X && !player.padPrev.X) {
     if (player.padCurr.X) {
       let ps = player.char.sprite;
@@ -559,21 +559,24 @@ export function updateAttackEnergy(player: Player, game: Game): void {
         pos = { x: ps.x + ae.posFromCenter.x, y: ps.y + ae.posFromCenter.y };
       }
 
-      let vX = b.velocity.x * ae.VEL.x * 0.5;
+      let vX = b.velocity.x * ae.VEL.x;
 
       let vY = 0;
       let vYRandom = Math.random() * 1000 - 250;
       vY = 300 * player.char.attackEnergy.VEL.y + vYRandom;
       vY += b.velocity.y * 0.5;
 
+      // vX = vX * 0.2;
+      vY = vY * 0.8;
+
       let velX: number = 0;
       let velY: number = 0;
 
       if (player.char.sprite.flipX) {
-        velX = -1 * game.BASE_PLAYER_ATTACKENERGY.x + vX;
+        velX = -1 * game.BASE_PLAYER_ATTACKENERGY.x * 0.7 + vX;
         velY = vY;
       } else {
-        velX = game.BASE_PLAYER_ATTACKENERGY.x + vX;
+        velX = game.BASE_PLAYER_ATTACKENERGY.x * 0.7 + vX;
         velY = vY;
       }
       let vel: { x: number; y: number } = { x: velX, y: velY };

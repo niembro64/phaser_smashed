@@ -34,8 +34,9 @@ export const debugInit: Debug = {
   TypedLoadingText: false,
   DevMode: false,
   DevZoom: 8,
-  OverrideChar: true,
+  OverrideChar: false,
   OverrideCharId: 3,
+  AllowBulletGroups: true,
 };
 
 export const debugMax: Debug = {
@@ -74,4 +75,5 @@ export const debugMax: Debug = {
   DevZoom: 10,
   OverrideChar: true,
   OverrideCharId: 8,
+  AllowBulletGroups: true,
 };

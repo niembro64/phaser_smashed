@@ -1,3 +1,42 @@
+export interface Debug {
+  DevMode: boolean;
+  DevZoom: number;
+  Level: number;
+  ModeInfinity: boolean;
+  TimeMinutes: number;
+  InfinityShots: number;
+  MusicTrack: number;
+  MusicActive: boolean;
+  UpdateLoopsNumSkip: number;
+  FrictionAirActive: boolean;
+  Camera: boolean;
+  CamerasVisible: boolean;
+  CollidersPvP: boolean;
+  CollidersPvAP: boolean;
+  CollidersPvAE: boolean;
+  CollidersAEvAE: boolean;
+  CollidersAEvAP: boolean;
+  AEWrapScreen: boolean;
+  PlayerIdVisible: boolean;
+  CharacterTinted: boolean;
+  WallJumpsActive: boolean;
+  DefaultDamage: boolean;
+  DefaultHitback: boolean;
+  ReadySoundActive: boolean;
+  HealthInverted: boolean;
+  MatricesAlways: boolean;
+  ConsoleLogButtons: boolean;
+  ConsoleLogConnected: boolean;
+  LoadTimeExtra: boolean;
+  AllowCharsChez: boolean;
+  AllowCharsExtended: boolean;
+  SlowMoExplosions: boolean;
+  TypedLoadingText: boolean;
+  OverrideChar: boolean;
+  OverrideCharId: CharacterId;
+  AllowBulletGroups: boolean;
+}
+
 export interface CharacterMove {
   button: string;
   move: string;
@@ -390,44 +429,6 @@ export type WebState = 'start' | 'play';
 export interface Quote {
   name: string;
   text: string;
-}
-
-export interface Debug {
-  DevMode: boolean;
-  DevZoom: number;
-  Level: number;
-  ModeInfinity: boolean;
-  TimeMinutes: number;
-  InfinityShots: number;
-  MusicTrack: number;
-  MusicActive: boolean;
-  UpdateLoopsNumSkip: number;
-  FrictionAirActive: boolean;
-  Camera: boolean;
-  CamerasVisible: boolean;
-  CollidersPvP: boolean;
-  CollidersPvAP: boolean;
-  CollidersPvAE: boolean;
-  CollidersAEvAE: boolean;
-  CollidersAEvAP: boolean;
-  AEWrapScreen: boolean;
-  PlayerIdVisible: boolean;
-  CharacterTinted: boolean;
-  WallJumpsActive: boolean;
-  DefaultDamage: boolean;
-  DefaultHitback: boolean;
-  ReadySoundActive: boolean;
-  HealthInverted: boolean;
-  MatricesAlways: boolean;
-  ConsoleLogButtons: boolean;
-  ConsoleLogConnected: boolean;
-  LoadTimeExtra: boolean;
-  AllowCharsChez: boolean;
-  AllowCharsExtended: boolean;
-  SlowMoExplosions: boolean;
-  TypedLoadingText: boolean;
-  OverrideChar: boolean;
-  OverrideCharId: CharacterId;
 }
 
 export interface Flag {

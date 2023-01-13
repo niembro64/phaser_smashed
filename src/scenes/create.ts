@@ -3,14 +3,14 @@ import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
-  onHitHandlerAttackPhysical,
+  onHitHandlerAttackPhysical
 } from './helpers/damage';
 import {
   getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
-  updateChompFilterState,
+  updateChompFilterState
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
@@ -963,7 +963,7 @@ export function createAttackEnergies(game: Game): void {
 
   game.players.forEach((player, playerIndex) => {
     let ae = player.char.attackEnergy;
-    if (ae.bullets) {
+    if (game.debug.AllowBulletGroups && ae.bullets) {
       ae.bullets.sprite = new Bullets(game, player);
       let aebs = ae.bullets.sprite;
       ae.bullets.soundBullets = game.sound.add('shot', { volume: 0.6 });

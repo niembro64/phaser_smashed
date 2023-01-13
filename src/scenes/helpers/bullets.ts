@@ -1,5 +1,6 @@
 import Game, { sd } from '../Game';
 import { Player, Position, Velocity } from '../interfaces';
+import { getDistance } from './movement';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
@@ -27,13 +28,17 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   Y_RANDOM: number = -50;
   Y_ADDER: number = -10;
   floatVelocityY: number = 0;
+  timeAlive: number = 0;
+  initialPosition: Position = { x: 0, y: 0 };
 
   fire(pos: Position, vel: Velocity): void {
-    this.body.bounce.set(1);
+    this.initialPosition = { x: pos.x, y: pos.y };
+    this.timeAlive = 0;
     this.body.reset(pos.x, pos.y);
     this.floatVelocityY = this.Y_ADDER + this.Y_RANDOM * Math.random();
     // this.floatVelocityY = this.FLOAT_VELOCITY_Y * normalRandom(0.5, 0.2);
 
+    this.body.bounce.set(1);
     this.setActive(true);
     this.setVisible(true);
 
@@ -44,17 +49,46 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   preUpdate(time: number, delta: number): void {
     super.preUpdate(time, delta);
 
-    if (
-      this.y <= 0 ||
-      this.y >= sd.HEIGHT ||
-      this.x <= 0 ||
-      this.x >= sd.WIDTH
-    ) {
+    // this.timeAlive += delta;
+    // this.setScale((500 - this.timeAlive) / 500);
+
+    // if (
+    //   this.y <= 0 ||
+    //   this.y >= sd.HEIGHT ||
+    //   this.x <= 0 ||
+    //   this.x >= sd.WIDTH
+    // ) {
+    //   this.body.bounce.set(0);
+    //   this.setActive(false);
+    //   this.setVisible(false);
+    //   this.x = -100;
+    //   this.y = -100;
+    //   this.setVelocityX(0);
+    //   this.setVelocityY(0);
+    // }
+
+    let distance = getDistanceFromOrigin(
+      { x: this.x, y: this.y },
+      this.initialPosition
+    );
+
+    // console.log('distance', distance);
+
+    // if (this.timeAlive > 500 || distance > 200) {
+    if (distance > 200) {
       this.body.bounce.set(0);
       this.setActive(false);
       this.setVisible(false);
+      this.x = -100;
+      this.y = -100;
+      this.setVelocityX(0);
+      this.setVelocityY(0);
     }
   }
+}
+
+export function getDistanceFromOrigin(end: Position, start: Position): number {
+  return Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2));
 }
 
 export class Bullets extends Phaser.Physics.Arcade.Group {
@@ -84,7 +118,16 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
     // game.physics.add.collider(this, game.TABLE);
   }
 
+  // numSkip = 3;
+
   fireBullet(pos: Position, vel: Velocity): void {
+    // if (this.numSkip !== 0) {
+    //   this.numSkip--;
+    //   return;
+    // }
+
+    // this.numSkip = 10;
+
     let bullet = this.getFirstDead(false);
     if (bullet) {
       // bullet.bouncePlatforms = true;
