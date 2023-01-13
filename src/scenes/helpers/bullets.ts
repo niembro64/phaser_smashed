@@ -1,4 +1,4 @@
-import Game, { gameNanoseconds, sd } from '../Game';
+import Game, { sd } from '../Game';
 import { Player, Position, Velocity } from '../interfaces';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
@@ -29,8 +29,6 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   floatVelocityY: number = 0;
 
   fire(pos: Position, vel: Velocity): void {
-    this.shootGameStamp = gameNanoseconds;
-
     this.body.bounce.set(1);
     this.body.reset(pos.x, pos.y);
     this.floatVelocityY = this.Y_ADDER + this.Y_RANDOM * Math.random();

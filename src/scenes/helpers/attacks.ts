@@ -1,4 +1,4 @@
-import Game, { gameNanoseconds } from '../Game';
+import Game from '../Game';
 import { AttackEnergy, Player } from '../interfaces';
 import { setEmitterPlayerOnFalse } from './damage';
 
@@ -186,7 +186,8 @@ export function updatePhysicalAttackFollowsPlayer(
     return;
   }
 
-  let pCooldown = (gameNanoseconds - ap.state.gameStamp) / ap.durationAttack;
+  let pCooldown =
+    (game.gameNanoseconds - ap.state.gameStamp) / ap.durationAttack;
 
   pCooldown = Math.pow(pCooldown, 0.5);
   // console.log(pCooldown);

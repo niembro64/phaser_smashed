@@ -25,7 +25,6 @@ import Shake from 'phaser3-rex-plugins/plugins/shakeposition';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
 
 export const sd = { WIDTH: 1920, HEIGHT: 1080 };
-export let gameNanoseconds: number = 0;
 
 export default class Game extends Phaser.Scene {
   ////////////////////////////////
@@ -171,7 +170,7 @@ export default class Game extends Phaser.Scene {
   timeSecondsPrev: number = 0;
   timeSecondsClock: number = 0;
   timeClock: Clock = { minutes: 0, seconds: 0 };
-  // gameNanoseconds: number = 0;
+  gameNanoseconds: number = 0;
   gameSeconds: number = 0;
   gameSecondsPrev: number = 0;
   gameSecondsClock: number = 10;

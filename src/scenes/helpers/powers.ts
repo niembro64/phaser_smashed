@@ -1,12 +1,12 @@
-import Game, { gameNanoseconds } from '../Game';
+import Game from '../Game';
 import {
   ChompFilterStateName,
   Player,
   PowerStateCharacterName,
   PowerStateChompName,
-  xyVector,
+  xyVector
 } from '../interfaces';
-import { getNormalizedVector, getVector } from './damage';
+import { getNormalizedVector } from './damage';
 import { setPlayerState } from './state';
 import { addToMotionSlowdown } from './time';
 
@@ -58,7 +58,7 @@ export function setPlayerPowerState(
   prev.gameStamp = curr.gameStamp;
 
   curr.name = stateName;
-  curr.gameStamp = gameNanoseconds;
+  curr.gameStamp = game.gameNanoseconds;
 
   switch (curr.name) {
     case 'none':
@@ -73,7 +73,7 @@ export function setPlayerPowerState(
       // p.emitterDark.active = true;
       // p.emitterDark.on = true;
       p.emitterDark.visible = true;
-      game.chomp.darknessMoments.passed = gameNanoseconds;
+      game.chomp.darknessMoments.passed = game.gameNanoseconds;
       break;
     case 'light':
       // p.emitterDark.active = false;
@@ -125,7 +125,7 @@ export function setChompFilterState(
   prev.gameStamp = curr.gameStamp;
 
   curr.name = stateName;
-  curr.gameStamp = gameNanoseconds;
+  curr.gameStamp = game.gameNanoseconds;
 
   switch (curr.name) {
     case 'none':
@@ -217,7 +217,7 @@ export function setChompPowerState(
   prev.gameStamp = curr.gameStamp;
 
   curr.name = stateName;
-  curr.gameStamp = gameNanoseconds;
+  curr.gameStamp = game.gameNanoseconds;
 
   switch (curr.name) {
     case 'none':
@@ -225,7 +225,7 @@ export function setChompPowerState(
       // c.emitterDark.on = false;
       c.emitterDark.visible = false;
 
-      c.darknessMoments.chomp = gameNanoseconds;
+      c.darknessMoments.chomp = game.gameNanoseconds;
       c.sprite.play('chompanimation_walking');
 
       break;
@@ -234,7 +234,7 @@ export function setChompPowerState(
       // c.emitterDark.on = true;
       c.emitterDark.visible = true;
 
-      c.darknessMoments.chomp = gameNanoseconds;
+      c.darknessMoments.chomp = game.gameNanoseconds;
       c.sprite.play('chompanimation_chomping');
       game.chomp.soundBBWoah.setRate(1);
       break;
@@ -277,9 +277,9 @@ export function getHasBeenGameDurationSinceMoment(
   //   "moment",
   //   moment,
   //   "gameTime",
-  //   gameNanoseconds
+  //   game.gameNanoseconds
   // );
-  if (gameNanoseconds > moment + durationNano) {
+  if (game.gameNanoseconds > moment + durationNano) {
     return true;
   }
   return false;
@@ -298,7 +298,10 @@ export function updatePlayerDarknessEvents(game: Game): void {
         let baseAmount = 400;
         let amount =
           baseAmount +
-          Math.pow(gameNanoseconds - game.chomp.darknessMoments.chomp, 0.7) *
+          Math.pow(
+            game.gameNanoseconds - game.chomp.darknessMoments.chomp,
+            0.7
+          ) *
             Math.pow(Math.random(), 0.4);
 
         // console.log('amount', amount);
