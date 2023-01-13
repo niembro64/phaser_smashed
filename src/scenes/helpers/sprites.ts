@@ -307,30 +307,37 @@ export function setAnimationsOn(game: Game): void {
 
 export function updateSpritesheets(game: Game): void {
   const movingXThreshold = 10;
+  const movingYThreshold = 40;
   // update player spritesheets
   game.players.forEach((player, playerIndex) => {
     if (player.char.srcSpriteSheet !== '') {
       let s = player.char.sprite;
-      let n = player.char.name;
 
       let tDown = s.body.touching.down;
       let tWall = s.body.touching.left || s.body.touching.right;
-      let movingUp = s.body.velocity.y <= 0;
+      let movingUp = s.body.velocity.y < -movingYThreshold;
+      let movingDown = s.body.velocity.y > movingYThreshold;
       let movingHoriz =
         s.body.velocity.x > movingXThreshold ||
         s.body.velocity.x < -movingXThreshold;
 
-      let newSpriteStateName: SpriteStateName;
+      let newSpriteStateName: SpriteStateName | null = null;
 
-      if (tWall && !tDown && !movingUp) {
+      console.log(s.body.velocity.y);
+
+      if (tWall && !tDown && movingDown) {
         newSpriteStateName = 'climb';
       } else if (tDown) {
         newSpriteStateName = movingHoriz ? 'walk' : 'idle';
-      } else {
-        newSpriteStateName = movingUp ? 'jumpUp' : 'jumpDown';
+      } else if (movingUp) {
+        newSpriteStateName = 'jumpUp';
+      } else if (movingDown) {
+        newSpriteStateName = 'jumpDown';
       }
 
-      updateSpriteState(newSpriteStateName, player, game);
+      if (newSpriteStateName !== null) {
+        updateSpriteState(newSpriteStateName, player, game);
+      }
     }
   });
 }
