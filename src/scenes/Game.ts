@@ -24,6 +24,8 @@ import { preload } from './preload';
 import Shake from 'phaser3-rex-plugins/plugins/shakeposition';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
 
+export const sd = { WIDTH: 1920, HEIGHT: 1080 };
+
 export default class Game extends Phaser.Scene {
   ////////////////////////////////
   ////////// GAME DEBUG
@@ -49,7 +51,10 @@ export default class Game extends Phaser.Scene {
   };
   ASSET_BRICK_WIDTH: number = 33;
   ASSET_BRICK_HEIGHT: number = 34;
-  SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
+  SCREEN_DIMENSIONS = {
+    WIDTH: sd.WIDTH,
+    HEIGHT: sd.HEIGHT,
+  };
   SCREEN_SCALE = {
     WIDTH: this.SCREEN_DIMENSIONS.WIDTH / 1920,
     HEIGHT: this.SCREEN_DIMENSIONS.HEIGHT / 1080,

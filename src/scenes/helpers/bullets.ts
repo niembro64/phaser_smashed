@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { sd } from '../Game';
 import { Player, Position, Velocity } from '../interfaces';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
@@ -22,7 +22,13 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   preUpdate(time: number, delta: number): void {
     super.preUpdate(time, delta);
 
-    if (this.y <= 0 || this.y >= 1080 || this.x <= 0 || this.x >= 1920) {
+    if (
+      this.y <= 0 ||
+      this.y >= sd.HEIGHT ||
+      this.x <= 0 ||
+      this.x >= sd.WIDTH
+    ) {
+      this.body.bounce.set(0);
       this.setActive(false);
       this.setVisible(false);
     }
