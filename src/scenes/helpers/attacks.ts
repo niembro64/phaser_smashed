@@ -166,6 +166,8 @@ export function isAttackEnergyNearPlayer(player: Player): boolean {
 export function setAttackPhysicalOffscreen(player: Player, game: Game): void {
   player.char.attackPhysical.sprite.y = -1000;
   player.char.attackPhysical.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
+  player.char.attackPhysical.sprite.body.velocity.x = 0;
+  player.char.attackPhysical.sprite.body.velocity.y = 0;
 }
 
 export function updatePhysicalAttackFollowsPlayer(

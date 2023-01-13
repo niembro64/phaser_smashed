@@ -16,12 +16,6 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       );
     }
 
-    // game.players.forEach((p, pIndex) => {
-    //   game.physics.add.collider(this, p.char.sprite);
-    //   game.physics.add.collider(this, p.char.attackEnergy.sprite);
-    //   game.physics.add.collider(this, p.char.attackPhysical.sprite);
-    // });
-
     game.physics.add.collider(this, game.chomp.sprite);
     game.physics.add.collider(this, game.TABLE);
   }
