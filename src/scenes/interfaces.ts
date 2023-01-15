@@ -70,6 +70,7 @@ export type PlayerState =
   | 'player-state-alive'
   | 'player-state-dead'
   | 'player-state-hurt';
+  
 export type AttackState =
   | 'attackphysical-state-on'
   | 'attackphysical-state-cooldown'

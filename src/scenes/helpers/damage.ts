@@ -6,7 +6,7 @@ import {
   Player,
   xyVector,
 } from '../interfaces';
-import { Bullets } from './bullets';
+import { Bullet, Bullets } from './bullets';
 import { hitbackFly } from './movement';
 import { setPlayerState } from './state';
 
@@ -111,21 +111,25 @@ export function onHitHandlerAttackEnergy(
 export function onHitHandlerBullets(
   player: Player,
   playerIndex: number,
+  pj: Player,
   attackEnergy: AttackEnergy,
-  bullets: AttackBullets | null,
+  bullet: Phaser.GameObjects.GameObject,
   j: number,
   damage: number,
   game: Game
 ): void {
-  if (bullets === null) {
+  if (bullet === null) {
     return;
   }
 
-  if (player.state.name !== 'player-state-alive') {
+  if (
+    player.state.name === 'player-state-start' ||
+    player.state.name === 'player-state-dead'
+  ) {
     return;
   }
 
-  game.overlappingPlayerIAttackEnergyJ[playerIndex][j] = true;
+  // game.overlappingPlayerIAttackEnergyJ[playerIndex][j] = true;
 
   for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {
@@ -136,26 +140,22 @@ export function onHitHandlerBullets(
     }
   }
 
-  let vector = getNormalizedVectorAP(attackEnergy, player);
-
-  player.char.damage += damage;
-
-  if (game.debug.DefaultHitback) {
-    hitbackFly(
-      player,
-      game,
-      game.DEFAULT_ATTACK_HITBACK.x * vector.x,
-      game.DEFAULT_ATTACK_HITBACK.y * vector.y
-    );
-    return;
-  }
-
-  hitbackFly(
-    player,
-    game,
-    attackEnergy.hitback.x * vector.x,
-    attackEnergy.hitback.y * vector.y
+  // let vector = getNormalizedVectorAP(bullet, player);
+  let vector = getNormalizedVector(
+    // bullet.body.gameObject.x,
+    // bullet.body.gameObject.y,
+    player.char.sprite.x,
+    player.char.sprite.y,
+    pj.char.sprite.x,
+    pj.char.sprite.y
   );
+
+  // player.char.damage += damage;
+
+  let ps = player.char.sprite;
+
+  ps.setVelocityX(ps.body.velocity.x + vector.x * 10);
+  ps.setVelocityY(ps.body.velocity.y + vector.y * 10);
 }
 
 export function setEmitterPlayerOnFalse(player: Player): void {

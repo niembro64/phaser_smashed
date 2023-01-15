@@ -628,24 +628,24 @@ export function createHitboxOverlap(game: Game): void {
           }
         );
 
-        // PLAYER ATTACK ENERGY BULLETS OVERLAP
-
         if (
           pj.char.attackEnergy.bullets !== null &&
           pj.char.attackEnergy.bullets.sprite !== null
         ) {
           pj.char.attackEnergy.bullets.sprite
             .getChildren()
-            .forEach((bullet) => {
+            .forEach((bullet, bi) => {
+              // PLAYER ATTACK ENERGY BULLETS OVERLAP
               game.physics.add.overlap(player.char.sprite, bullet, function () {
-                console.log('BULLET OVERLAP', playerIndex, j);
+                console.log('BULLET OVERLAP', bi);
 
                 if (game.debug.DefaultDamage) {
                   onHitHandlerBullets(
                     player,
                     playerIndex,
+                    pj,
                     pj.char.attackEnergy,
-                    pj.char.attackEnergy.bullets,
+                    bullet,
                     j,
                     game.DEFAULT_ATTACK_DAMAGE,
                     game
@@ -655,8 +655,9 @@ export function createHitboxOverlap(game: Game): void {
                 onHitHandlerBullets(
                   player,
                   playerIndex,
+                  pj,
                   pj.char.attackEnergy,
-                  pj.char.attackEnergy.bullets,
+                  bullet,
                   j,
                   pj.char.attackEnergy.damage,
                   game
