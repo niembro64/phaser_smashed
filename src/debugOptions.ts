@@ -39,7 +39,7 @@ export const debugInit: Debug = {
   CharOverride: false,
   CharOverrideId: 3,
   BulletsAllowGroups: true,
-  BulletsFullScreen: true,
+  BulletsFullScreen: false,
 };
 
 export const debugMax: Debug = {
