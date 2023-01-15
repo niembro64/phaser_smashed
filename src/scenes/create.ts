@@ -4,19 +4,19 @@ import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
-  onHitHandlerBullets,
+  onHitHandlerBullets
 } from './helpers/damage';
 import {
   getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
-  updateChompFilterState,
+  updateChompFilterState
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
-import { Bullet, Bullets } from './helpers/bullets';
+import { Bullets } from './helpers/bullets';
 
 export function create(game: Game) {
   createPreCreate(game);
@@ -42,6 +42,7 @@ export function create(game: Game) {
   createScoreboardShotGlass(game);
   createSplashRuleFinished(game);
   createChomp(game);
+  createGun(game);
   createEmitterChompFollowChomp(game);
   createPlayers(game);
   createEmittersFollowPlayers(game);
@@ -79,6 +80,8 @@ export function create(game: Game) {
   // INIT UPDATE
   setPreUpdate(game);
 }
+
+export function createGun(game: Game): void {}
 
 export function createShake(game: Game): void {
   const shakeConfig: ShakePosition.IConfig = {
@@ -629,10 +632,10 @@ export function createHitboxOverlap(game: Game): void {
         );
 
         if (
-          pj.char.attackEnergy.bullets !== null &&
-          pj.char.attackEnergy.bullets.sprite !== null
+          pj.char.attackEnergy.attackBullets !== null &&
+          pj.char.attackEnergy.attackBullets.bullets !== null
         ) {
-          pj.char.attackEnergy.bullets.sprite
+          pj.char.attackEnergy.attackBullets.bullets
             .getChildren()
             .forEach((bullet, bi) => {
               // PLAYER ATTACK ENERGY BULLETS OVERLAP
@@ -1067,13 +1070,13 @@ export function createAttackEnergies(game: Game): void {
 
   game.players.forEach((player, playerIndex) => {
     let ae = player.char.attackEnergy;
-    if (game.debug.AllowBulletGroups && ae.bullets) {
-      ae.bullets.sprite = new Bullets(game, player);
-      let aebs = ae.bullets.sprite;
-      ae.bullets.soundB1 = game.sound.add('ping', { volume: 0.01 });
-      ae.bullets.soundB2 = game.sound.add('ping2', { volume: 0.01 });
-      ae.bullets.soundP1 = game.sound.add('pop', { volume: 0.03 });
-      ae.bullets.soundP2 = game.sound.add('pop2', { volume: 0.03 });
+    if (game.debug.AllowBulletGroups && ae.attackBullets) {
+      ae.attackBullets.bullets = new Bullets(game, player);
+      let aebs = ae.attackBullets.bullets;
+      ae.attackBullets.soundB1 = game.sound.add('ping', { volume: 0.01 });
+      ae.attackBullets.soundB2 = game.sound.add('ping2', { volume: 0.01 });
+      ae.attackBullets.soundP1 = game.sound.add('pop', { volume: 0.03 });
+      ae.attackBullets.soundP2 = game.sound.add('pop2', { volume: 0.03 });
       // ae.bullets.sprite.children.iterate((child: any) => {});
 
       game.physics.add.collider(aebs, game.PLATFORMS);

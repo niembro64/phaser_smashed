@@ -19,9 +19,11 @@ import {
   emoji,
   Flag,
   Lava,
+  Gun,
 } from './interfaces';
 import { preload } from './preload';
 import Shake from 'phaser3-rex-plugins/plugins/shakeposition';
+import { Bullets } from './helpers/bullets';
 // import { Debug, SmashConfig } from '../views/ViewInterfaces';
 
 export const sd = { WIDTH: 1920, HEIGHT: 1080 };
@@ -770,6 +772,12 @@ export default class Game extends Phaser.Scene {
     },
   };
 
+  gun: Gun = {
+    sprite: null,
+    attackBullets: null,
+    posInit: { x: 0, y: 0 },
+  };
+
   flag: Flag = {
     powerStateCurr: { name: 'light', gameStamp: 0 },
     powerStatePrev: { name: 'none', gameStamp: 0 },
@@ -900,7 +908,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },
@@ -1072,7 +1080,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: true,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },
@@ -1243,7 +1251,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },
@@ -1415,8 +1423,8 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: {
-            sprite: null,
+          attackBullets: {
+            bullets: null,
             NUMBER_BULLETS: 30,
             soundB1: null,
             soundB2: null,
@@ -1593,7 +1601,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },
@@ -1764,7 +1772,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },
@@ -1935,7 +1943,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },
@@ -2106,7 +2114,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0.12, y: 0 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },
@@ -2280,7 +2288,7 @@ export default class Game extends Phaser.Scene {
           offscreenPrev: false,
           findAndFollowAcceleration: { x: 0.04, y: 0.04 },
           ON_SCREEN_PREVENT_ATTACK_PHYSICAL: false,
-          bullets: null,
+          attackBullets: null,
         },
         shield: null,
         powerStateCurr: { name: 'none', gameStamp: 0 },

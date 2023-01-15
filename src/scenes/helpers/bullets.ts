@@ -96,7 +96,8 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
     super(game.physics.world, game);
 
     this.createMultiple({
-      frameQuantity: player.char.attackEnergy.bullets?.NUMBER_BULLETS || 10,
+      frameQuantity:
+        player.char.attackEnergy.attackBullets?.NUMBER_BULLETS || 10,
       key: 'bullet',
       active: false,
       visible: false,
@@ -134,7 +135,7 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
       return;
     }
 
-    let pbs = player.char.attackEnergy.bullets;
+    let pbs = player.char.attackEnergy.attackBullets;
 
     this.numSkip = 3;
 

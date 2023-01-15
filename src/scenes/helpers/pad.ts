@@ -553,8 +553,8 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   let s = player.char.sprite;
   if (
     game.debug.AllowBulletGroups &&
-    ae.bullets !== null &&
-    ae.bullets.sprite !== null
+    ae.attackBullets !== null &&
+    ae.attackBullets.bullets !== null
   ) {
     // if (player.padCurr.X && !player.padPrev.X) {
     if (player.padCurr.X) {
@@ -591,7 +591,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       }
       let vel: { x: number; y: number } = { x: velX, y: velY };
       let firstFire = !player.padPrev.X;
-      ae.bullets.sprite.fireBullet(pos, vel, player, firstFire);
+      ae.attackBullets.bullets.fireBullet(pos, vel, player, firstFire);
       // ae.bullets.soundBullets.play();
     }
     return;

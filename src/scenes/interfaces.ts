@@ -358,11 +358,11 @@ export interface AttackEnergy {
   offscreenPrev: boolean;
   findAndFollowAcceleration: FindAndFollowAcceleration;
   ON_SCREEN_PREVENT_ATTACK_PHYSICAL: boolean;
-  bullets: AttackBullets | null;
+  attackBullets: AttackBullets | null;
 }
 
 export interface AttackBullets {
-  sprite: Bullets | null;
+  bullets: Bullets | null;
   NUMBER_BULLETS: number;
   soundB1: any;
   soundB2: any;
@@ -435,6 +435,12 @@ export type WebState = 'start' | 'play';
 export interface Quote {
   name: string;
   text: string;
+}
+
+export interface Gun {
+  sprite: any | Phaser.GameObjects.Sprite;
+  attackBullets: any | AttackBullets;
+  posInit: Position;
 }
 
 export interface Flag {
