@@ -244,7 +244,7 @@ body {
   flex-wrap: wrap;
 }
 #option {
-  width: 32%;
+  width: 24%;
   background-color: var(--gray-dark);
   padding: 0.7vw 0vw 0.5vw 0vw;
   margin: 0vw 0vw 0vw 0vw;
@@ -272,13 +272,14 @@ body {
 .debug-value > p {
   margin: 0;
   padding: 0;
-  font-size: 2.5vh;
-  padding: 0vw 1vw 0vw 1vw;
+  font-size: 2vh;
+  padding: 0vw 0vw 0.5vw 1vw;
+  margin: 0vw 0vw 0vw 0vw;
 }
 .key {
   margin: 0;
   padding: 0;
-  font-size: 2.5vh;
+  font-size: 1.7vh;
   padding: 0vw 1vw 0vw 1vw;
 }
 #move {
