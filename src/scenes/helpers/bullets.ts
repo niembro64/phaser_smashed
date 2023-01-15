@@ -78,7 +78,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     // console.log('distance', distance);
 
-    if (this.debug?.BulletsNoTime) {
+    if (this.debug?.BulletsFullScreen) {
       if (
         this.x > this.screen.WIDTH ||
         this.x < 0 ||

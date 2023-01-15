@@ -1063,7 +1063,7 @@ export function createAttackEnergies(game: Game): void {
 
   game.players.forEach((player, playerIndex) => {
     let ae = player.char.attackEnergy;
-    if (game.debug.AllowBulletGroups && ae.attackBullets) {
+    if (game.debug.BulletsAllowGroups && ae.attackBullets) {
       ae.attackBullets.bullets = new Bullets(game, player);
       let aebs = ae.attackBullets.bullets;
       ae.attackBullets.soundB1 = game.sound.add('ping', { volume: 0.01 });

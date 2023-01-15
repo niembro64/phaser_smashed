@@ -34,10 +34,10 @@ export interface Debug {
   AllowCharsExtended: boolean;
   SlowMoExplosions: boolean;
   TypedLoadingText: boolean;
-  OverrideChar: boolean;
-  OverrideCharId: CharacterId;
-  AllowBulletGroups: boolean;
-  BulletsNoTime: boolean;
+  CharOverride: boolean;
+  CharOverrideId: CharacterId;
+  BulletsAllowGroups: boolean;
+  BulletsFullScreen: boolean;
 }
 
 export interface CharacterMove {

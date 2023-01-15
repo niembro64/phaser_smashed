@@ -23,8 +23,8 @@ export function preload(game: Game): void {
     game.playerChoicesCharacterType = [];
     game.playerChoicesInputType = [];
     game.smashConfig.players.forEach((player, playerIndex) => {
-      if (game.debug.OverrideChar) {
-        game.playerChoicesCharacterType.push(game.debug.OverrideCharId);
+      if (game.debug.CharOverride) {
+        game.playerChoicesCharacterType.push(game.debug.CharOverrideId);
       } else {
         game.playerChoicesCharacterType.push(player.characterId);
       }

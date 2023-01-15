@@ -552,7 +552,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
   let b = player.char.sprite.body;
   let s = player.char.sprite;
   if (
-    game.debug.AllowBulletGroups &&
+    game.debug.BulletsAllowGroups &&
     ae.attackBullets !== null &&
     ae.attackBullets.bullets !== null
   ) {

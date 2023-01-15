@@ -153,8 +153,8 @@ export function onHitHandlerBullets(
 
   let ps = player.char.sprite;
 
-  ps.setVelocityX(ps.body.velocity.x + vector.x * 10);
-  ps.setVelocityY(ps.body.velocity.y + vector.y * 10 - 10);
+  ps.setVelocityX(ps.body.velocity.x + vector.x * 20);
+  ps.setVelocityY(ps.body.velocity.y + vector.y * 20 - 25);
 }
 
 export function setEmitterPlayerOnFalse(player: Player): void {
