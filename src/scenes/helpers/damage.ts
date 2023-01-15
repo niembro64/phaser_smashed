@@ -134,7 +134,6 @@ export function onHitHandlerBullets(
   for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {
       game.wasLastHitByMatrix[playerIndex][bj] = true;
-      game.numberHitByMatrix[playerIndex][j]++;
     } else {
       game.wasLastHitByMatrix[playerIndex][bj] = false;
     }
@@ -155,7 +154,7 @@ export function onHitHandlerBullets(
   let ps = player.char.sprite;
 
   ps.setVelocityX(ps.body.velocity.x + vector.x * 10);
-  ps.setVelocityY(ps.body.velocity.y + vector.y * 10);
+  ps.setVelocityY(ps.body.velocity.y + vector.y * 10 - 10);
 }
 
 export function setEmitterPlayerOnFalse(player: Player): void {

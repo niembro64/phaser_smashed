@@ -637,7 +637,7 @@ export function createHitboxOverlap(game: Game): void {
             .forEach((bullet, bi) => {
               // PLAYER ATTACK ENERGY BULLETS OVERLAP
               game.physics.add.overlap(player.char.sprite, bullet, function () {
-                console.log('BULLET OVERLAP', bi);
+                // console.log('BULLET OVERLAP', bi);
 
                 if (game.debug.DefaultDamage) {
                   onHitHandlerBullets(
