@@ -4,14 +4,14 @@ import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
   onHitHandlerAttackPhysical,
-  onHitHandlerBullets
+  onHitHandlerBullets,
 } from './helpers/damage';
 import {
   getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
-  updateChompFilterState
+  updateChompFilterState,
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
@@ -61,27 +61,20 @@ export function create(game: Game) {
   createEndDataMatrices(game);
   createShake(game);
 
-  // game.flag.bullets = new Bullets(game);
-
-  // game.input.on('pointerdown', (pointer: any) => {
-  //   console.log('pointerdown');
-  //   game.flag.bullets.fireBullet(
-  //     {
-  //       x: game.chomp.sprite.x,
-  //       y: game.chomp.sprite.y,
-  //     },
-  //     {
-  //       x: 2000,
-  //       y: 2000,
-  //     }
-  //   );
-  // });
-
   // INIT UPDATE
   setPreUpdate(game);
 }
 
-export function createGun(game: Game): void {}
+export function createGun(game: Game): void {
+  let ggs = game.gun.sprite;
+  ggs = game.physics.add.sprite(
+    game.SCREEN_DIMENSIONS.WIDTH * 0.8,
+    game.SCREEN_DIMENSIONS.HEIGHT * 0.3,
+    'centerWhite'
+  );
+  ggs.setImmovable(true).setBounce(0).setOrigin(0.5, 1).setScale(0.1);
+  ggs.allowGravity = false;
+}
 
 export function createShake(game: Game): void {
   const shakeConfig: ShakePosition.IConfig = {

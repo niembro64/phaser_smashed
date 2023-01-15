@@ -1,5 +1,5 @@
 import Game from '../Game';
-import { Player, Position, Velocity } from '../interfaces';
+import { Debug, Player, Position, Velocity } from '../interfaces';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
@@ -20,7 +20,12 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     // game.physics.add.collider(this, game.chomp.sprite);
     // game.physics.add.collider(this, game.TABLE);
+    this.screen = game.SCREEN_DIMENSIONS;
+    this.debug = game.debug;
   }
+
+  screen: any = null;
+  debug: Debug | null = null;
 
   shootGameStamp: number = 0;
 
@@ -30,7 +35,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
   timeAlive: number = 0;
   initialPosition: Position = { x: 0, y: 0 };
 
-  fire(pos: Position, vel: Velocity): void {
+  fire(pos: Position, vel: Velocity, game: Game): void {
     this.initialPosition = { x: pos.x, y: pos.y };
     this.timeAlive = 0;
     this.body.reset(pos.x, pos.y);
@@ -72,6 +77,24 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
     );
 
     // console.log('distance', distance);
+
+    if (this.debug?.BulletsNoTime) {
+      if (
+        this.x > this.screen.WIDTH ||
+        this.x < 0 ||
+        this.y > this.screen.HEIGHT ||
+        this.y < 0
+      ) {
+        this.body.bounce.set(0);
+        this.setActive(false);
+        this.setVisible(false);
+        this.x = -100;
+        this.y = -100;
+        this.setVelocityX(0);
+        this.setVelocityY(0);
+      }
+      return;
+    }
 
     if (this.timeAlive > 500) {
       // if (this.timeAlive > 1000 || distance > 200) {
@@ -125,7 +148,8 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
     pos: Position,
     vel: Velocity,
     player: Player,
-    firstFire: boolean
+    firstFire: boolean,
+    game: Game
   ): void {
     if (firstFire) {
       this.numSkip = 0;
@@ -146,7 +170,7 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
       // bullet.bounceX = 1;
       // bullet.bounceY = 1;
 
-      bullet.fire(pos, vel);
+      bullet.fire(pos, vel, game);
       if (pbs?.soundB1) {
         if (Math.random() > 0.5) {
           pbs.soundB1.rate = 1 + 0.03 * Math.random();

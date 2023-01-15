@@ -68,10 +68,10 @@ export default class Game extends Phaser.Scene {
   FLAG: any | Phaser.GameObjects.Sprite;
   ZOOM_MULTIPLIER_X = 0.95;
   ZOOM_MULTIPLIER_Y = 0.7;
-  ZOOM_RATIO_SLOW = 0.9995;
+  ZOOM_RATIO_SLOW = 0.999;
   ZOOM_RATIO_FAST = 0.9;
-  BORDER_PADDING_X: number = 200;
-  BORDER_PADDING_Y: number = 100;
+  BORDER_PADDING_X: number = 300; // 200
+  BORDER_PADDING_Y: number = 200; // 100
   CAMERA_OFFSET_Y: number = -50;
 
   FILE_SOUNDS: any = {

@@ -37,6 +37,7 @@ export const debugInit: Debug = {
   OverrideChar: false,
   OverrideCharId: 3,
   AllowBulletGroups: true,
+  BulletsNoTime: true,
 };
 
 export const debugMax: Debug = {
@@ -76,4 +77,5 @@ export const debugMax: Debug = {
   OverrideChar: true,
   OverrideCharId: 8,
   AllowBulletGroups: true,
+  BulletsNoTime: true,
 };

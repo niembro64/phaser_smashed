@@ -591,7 +591,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       }
       let vel: { x: number; y: number } = { x: velX, y: velY };
       let firstFire = !player.padPrev.X;
-      ae.attackBullets.bullets.fireBullet(pos, vel, player, firstFire);
+      ae.attackBullets.bullets.fireBullet(pos, vel, player, firstFire, game);
       // ae.bullets.soundBullets.play();
     }
     return;

@@ -37,6 +37,7 @@ export interface Debug {
   OverrideChar: boolean;
   OverrideCharId: CharacterId;
   AllowBulletGroups: boolean;
+  BulletsNoTime: boolean;
 }
 
 export interface CharacterMove {

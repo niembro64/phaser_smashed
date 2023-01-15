@@ -224,6 +224,8 @@ export function preload(game: Game): void {
     game.load.image(pOption.char.name, pOption.char.src);
   });
 
+  game.load.image('gun', 'images/white_trans.png');
+
   for (let i = 0; i < game.playerChoicesCharacterType.length; i++) {
     game.load.image('tail_' + i, 'images/white_trans.png');
   }
