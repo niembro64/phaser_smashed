@@ -18,6 +18,8 @@ export interface Debug {
   CollidersPvAE: boolean;
   CollidersAEvAE: boolean;
   CollidersAEvAP: boolean;
+  CollidersABvAE: boolean;
+  CollidersABvAP: boolean;
   AEWrapScreen: boolean;
   PlayerIdVisible: boolean;
   CharacterTinted: boolean;

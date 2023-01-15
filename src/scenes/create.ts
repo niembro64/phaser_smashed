@@ -17,6 +17,7 @@ import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
 import { Bullets } from './helpers/bullets';
+import { debug } from 'console';
 
 export function create(game: Game) {
   createPreCreate(game);
@@ -631,7 +632,7 @@ export function createHitboxOverlap(game: Game): void {
           pj.char.attackEnergy.attackBullets.bullets
             .getChildren()
             .forEach((bullet, bi) => {
-              // PLAYER ATTACK ENERGY BULLETS OVERLAP
+              // PLAYER BULLETS OVERLAP
               game.physics.add.overlap(player.char.sprite, bullet, function () {
                 // console.log('BULLET OVERLAP', bi);
 
@@ -1077,14 +1078,19 @@ export function createAttackEnergies(game: Game): void {
 
       for (let i = 0; i < game.players.length; i++) {
         game.physics.add.collider(aebs, game.players[i].char.sprite);
-        game.physics.add.collider(
-          aebs,
-          game.players[i].char.attackEnergy.sprite
-        );
-        game.physics.add.collider(
-          aebs,
-          game.players[i].char.attackPhysical.sprite
-        );
+
+        if (game.debug.CollidersABvAE) {
+          game.physics.add.collider(
+            aebs,
+            game.players[i].char.attackEnergy.sprite
+          );
+        }
+        if (game.debug.CollidersABvAP) {
+          game.physics.add.collider(
+            aebs,
+            game.players[i].char.attackPhysical.sprite
+          );
+        }
       }
 
       game.physics.add.collider(aebs, game.chomp.sprite);
