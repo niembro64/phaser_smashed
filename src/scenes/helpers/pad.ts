@@ -573,18 +573,20 @@ export function updateAttackEnergy(player: Player, game: Game): void {
       let vYRandom = Math.random() * 1000 - 250;
       vY = 300 * player.char.attackEnergy.VEL.y + vYRandom;
       vY += b.velocity.y * 0.5;
-
-      // vX = vX * 0.2;
       vY = vY * 0.8;
 
       let velX: number = 0;
       let velY: number = 0;
 
+      // y^2 == r^2 - x^2
+      // y == sqrt(r^2 - x^2)
+      vX = Math.sqrt(Math.pow(750, 2) - Math.pow(vY, 2));
+
       if (player.char.sprite.flipX) {
-        velX = -1 * game.BASE_PLAYER_ATTACKENERGY.x * 0.7 + vX;
+        velX = -1 * vX;
         velY = vY;
       } else {
-        velX = game.BASE_PLAYER_ATTACKENERGY.x * 0.7 + vX;
+        velX = vX;
         velY = vY;
       }
       let vel: { x: number; y: number } = { x: velX, y: velY };
