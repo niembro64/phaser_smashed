@@ -118,15 +118,25 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
     // game.physics.add.collider(this, game.TABLE);
   }
 
-  // numSkip = 3;
+  numSkip = 0;
 
-  fireBullet(pos: Position, vel: Velocity): void {
-    // if (this.numSkip !== 0) {
-    //   this.numSkip--;
-    //   return;
-    // }
+  fireBullet(
+    pos: Position,
+    vel: Velocity,
+    player: Player,
+    firstFire: boolean
+  ): void {
+    if (firstFire) {
+      this.numSkip = 0;
+    }
+    if (this.numSkip !== 0) {
+      this.numSkip--;
+      return;
+    }
 
-    // this.numSkip = 10;
+    let pbs = player.char.attackEnergy.bullets;
+
+    this.numSkip = 3;
 
     let bullet = this.getFirstDead(false);
     if (bullet) {
@@ -136,6 +146,23 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
       // bullet.bounceY = 1;
 
       bullet.fire(pos, vel);
+      if (pbs?.soundB1) {
+        if (Math.random() > 0.5) {
+          pbs.soundB1.rate = 1 + 0.03 * Math.random();
+          pbs.soundB1.play();
+        } else {
+          pbs.soundB2.rate = 1 + 0.03 * Math.random();
+          pbs.soundB2.play();
+        }
+
+        if (Math.random() > 0.5) {
+          pbs.soundP1.rate = 1 + 0.03 * Math.random();
+          pbs.soundP1.play();
+        } else {
+          pbs.soundP2.rate = 1 + 0.03 * Math.random();
+          pbs.soundP2.play();
+        }
+      }
     }
   }
 }

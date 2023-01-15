@@ -70,7 +70,7 @@ export type PlayerState =
   | 'player-state-alive'
   | 'player-state-dead'
   | 'player-state-hurt';
-  
+
 export type AttackState =
   | 'attackphysical-state-on'
   | 'attackphysical-state-cooldown'
@@ -364,7 +364,10 @@ export interface AttackEnergy {
 export interface AttackBullets {
   sprite: Bullets | null;
   NUMBER_BULLETS: number;
-  soundBullets: any;
+  soundB1: any;
+  soundB2: any;
+  soundP1: any;
+  soundP2: any;
 }
 
 export interface FindAndFollowAcceleration {

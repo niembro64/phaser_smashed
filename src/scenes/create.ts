@@ -1070,8 +1070,10 @@ export function createAttackEnergies(game: Game): void {
     if (game.debug.AllowBulletGroups && ae.bullets) {
       ae.bullets.sprite = new Bullets(game, player);
       let aebs = ae.bullets.sprite;
-      ae.bullets.soundBullets = game.sound.add('shot', { volume: 0.6 });
-
+      ae.bullets.soundB1 = game.sound.add('ping', { volume: 0.01 });
+      ae.bullets.soundB2 = game.sound.add('ping2', { volume: 0.01 });
+      ae.bullets.soundP1 = game.sound.add('pop', { volume: 0.03 });
+      ae.bullets.soundP2 = game.sound.add('pop2', { volume: 0.03 });
       // ae.bullets.sprite.children.iterate((child: any) => {});
 
       game.physics.add.collider(aebs, game.PLATFORMS);

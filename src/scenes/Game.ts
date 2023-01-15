@@ -112,6 +112,10 @@ export default class Game extends Phaser.Scene {
     BOOM_SHORT_02: '/boom_short_02.wav',
     BLACK_BETTY_BAMBALAM: '/BlackBetty_Bambalam_Reverb01.mp3',
     BLACK_BETTY_WOAH: '/BlackBetty_Woah_Reverb01.mp3',
+    PING: '/ping.wav',
+    PING2: '/ping2.wav',
+    POP: '/pop.wav',
+    POP2: '/pop2.wav',
   };
 
   SOUND_INTRO: any;
@@ -1414,7 +1418,10 @@ export default class Game extends Phaser.Scene {
           bullets: {
             sprite: null,
             NUMBER_BULLETS: 30,
-            soundBullets: null,
+            soundB1: null,
+            soundB2: null,
+            soundP1: null,
+            soundP2: null,
           },
         },
         shield: null,
