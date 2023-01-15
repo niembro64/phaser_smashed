@@ -1,11 +1,14 @@
 import Game from '../Game';
-import { AttackEnergy, AttackPhysical, xyVector, Player } from '../interfaces';
-import { hitbackFly } from './movement';
 import {
-  getHasGameDurationPassedAttack,
-  setAttackPhysicalState,
-  setPlayerState,
-} from './state';
+  AttackBullets,
+  AttackEnergy,
+  AttackPhysical,
+  Player,
+  xyVector,
+} from '../interfaces';
+import { Bullets } from './bullets';
+import { hitbackFly } from './movement';
+import { setPlayerState } from './state';
 
 export function onHitHandlerAttackPhysical(
   player: Player,
@@ -68,6 +71,56 @@ export function onHitHandlerAttackEnergy(
   damage: number,
   game: Game
 ): void {
+  if (player.state.name !== 'player-state-alive') {
+    return;
+  }
+
+  game.overlappingPlayerIAttackEnergyJ[playerIndex][j] = true;
+
+  for (var bj = 0; bj < game.players.length; bj++) {
+    if (bj === j) {
+      game.wasLastHitByMatrix[playerIndex][bj] = true;
+      game.numberHitByMatrix[playerIndex][j]++;
+    } else {
+      game.wasLastHitByMatrix[playerIndex][bj] = false;
+    }
+  }
+
+  let vector = getNormalizedVectorAP(attackEnergy, player);
+
+  player.char.damage += damage;
+
+  if (game.debug.DefaultHitback) {
+    hitbackFly(
+      player,
+      game,
+      game.DEFAULT_ATTACK_HITBACK.x * vector.x,
+      game.DEFAULT_ATTACK_HITBACK.y * vector.y
+    );
+    return;
+  }
+
+  hitbackFly(
+    player,
+    game,
+    attackEnergy.hitback.x * vector.x,
+    attackEnergy.hitback.y * vector.y
+  );
+}
+
+export function onHitHandlerBullets(
+  player: Player,
+  playerIndex: number,
+  attackEnergy: AttackEnergy,
+  bullets: AttackBullets | null,
+  j: number,
+  damage: number,
+  game: Game
+): void {
+  if (bullets === null) {
+    return;
+  }
+
   if (player.state.name !== 'player-state-alive') {
     return;
   }

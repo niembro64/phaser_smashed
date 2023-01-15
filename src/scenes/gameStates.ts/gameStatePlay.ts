@@ -17,7 +17,6 @@ import {
   updateAttackEnergyFrictionGroundMovement,
   updateAttackEnergyFrictionGroundRotation,
   updateAttackEnergyFrictionWall,
-  updateBulletsFloat,
   updatePadPreviousAndDebounced,
 } from '../helpers/pad';
 import { updateChompFilterState } from '../helpers/powers';

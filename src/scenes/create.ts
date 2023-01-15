@@ -3,19 +3,20 @@ import Game from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
-  onHitHandlerAttackPhysical
+  onHitHandlerAttackPhysical,
+  onHitHandlerBullets,
 } from './helpers/damage';
 import {
   getDoesAnythingHaveDark,
   getHasBeenGameDurationSinceMoment,
   setChompPowerState,
   setPlayerPowerState,
-  updateChompFilterState
+  updateChompFilterState,
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
 
-import { Bullets } from './helpers/bullets';
+import { Bullet, Bullets } from './helpers/bullets';
 
 export function create(game: Game) {
   createPreCreate(game);
@@ -435,6 +436,43 @@ export function createPlayerIdCircles(game: Game): void {
 }
 
 export function createHitboxOverlap(game: Game): void {
+  // // PLAYER BULLETS OVERLAP
+  // game.players.forEach((pi, i) => {
+  //   if (pi.char.attackEnergy.bullets !== null) {
+  //     game.players.forEach((pj, j) => {
+  //       if (i !== j) {
+  //         if (pj.char.attackEnergy.bullets !== null) {
+  //           game.physics.add.overlap(
+  //             pj.char.attackEnergy.bullets.sprite,
+  //             pi.char.sprite,
+  //             function () {
+  //               if (game.debug.DefaultDamage) {
+  //                 onHitHandlerAttackEnergy(
+  //                   pi,
+  //                   i,
+  //                   pj.char.attackEnergy,
+  //                   j,
+  //                   game.DEFAULT_ATTACK_DAMAGE,
+  //                   game
+  //                 );
+  //                 return;
+  //               }
+  //               onHitHandlerAttackEnergy(
+  //                 pi,
+  //                 i,
+  //                 pj.char.attackEnergy,
+  //                 j,
+  //                 pj.char.attackEnergy.damage,
+  //                 game
+  //               );
+  //             }
+  //           );
+  //         }
+  //       }
+  //     });
+  //   }
+  // });
+
   // ATTACK PHYSICAL CHOMP OVERLAP
   game.players.forEach((player, playerIndex) => {
     game.physics.add.overlap(
@@ -589,6 +627,71 @@ export function createHitboxOverlap(game: Game): void {
             );
           }
         );
+
+        // PLAYER ATTACK ENERGY BULLETS OVERLAP
+
+        if (
+          pj.char.attackEnergy.bullets !== null &&
+          pj.char.attackEnergy.bullets.sprite !== null
+        ) {
+          pj.char.attackEnergy.bullets.sprite
+            .getChildren()
+            .forEach((bullet) => {
+              game.physics.add.overlap(player.char.sprite, bullet, function () {
+                console.log('BULLET OVERLAP', playerIndex, j);
+
+                if (game.debug.DefaultDamage) {
+                  onHitHandlerBullets(
+                    player,
+                    playerIndex,
+                    pj.char.attackEnergy,
+                    pj.char.attackEnergy.bullets,
+                    j,
+                    game.DEFAULT_ATTACK_DAMAGE,
+                    game
+                  );
+                  return;
+                }
+                onHitHandlerBullets(
+                  player,
+                  playerIndex,
+                  pj.char.attackEnergy,
+                  pj.char.attackEnergy.bullets,
+                  j,
+                  pj.char.attackEnergy.damage,
+                  game
+                );
+              });
+            });
+
+          // game.physics.add.overlap(
+          //   player.char.sprite,
+          //   pj.char.attackEnergy.bullets.sprite,
+          //   function () {
+          //     if (game.debug.DefaultDamage) {
+          //       onHitHandlerBullets(
+          //         player,
+          //         playerIndex,
+          //         pj.char.attackEnergy,
+          //         pj.char.attackEnergy.bullets,
+          //         j,
+          //         game.DEFAULT_ATTACK_DAMAGE,
+          //         game
+          //       );
+          //       return;
+          //     }
+          //     onHitHandlerBullets(
+          //       player,
+          //       playerIndex,
+          //       pj.char.attackEnergy,
+          //       pj.char.attackEnergy.bullets,
+          //       j,
+          //       pj.char.attackEnergy.damage,
+          //       game
+          //     );
+          //   }
+          // );
+        }
       }
     });
   });

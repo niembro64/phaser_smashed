@@ -1,3 +1,5 @@
+import { Bullets } from './helpers/bullets';
+
 export interface Debug {
   DevMode: boolean;
   DevZoom: number;
@@ -359,7 +361,7 @@ export interface AttackEnergy {
 }
 
 export interface AttackBullets {
-  sprite: any | Phaser.GameObjects.Sprite;
+  sprite: Bullets | null;
   NUMBER_BULLETS: number;
   soundBullets: any;
 }

@@ -1,6 +1,5 @@
-import Game, { sd } from '../Game';
+import Game from '../Game';
 import { Player, Position, Velocity } from '../interfaces';
-import { getDistance } from './movement';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {

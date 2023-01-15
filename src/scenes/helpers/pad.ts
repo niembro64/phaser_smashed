@@ -527,27 +527,35 @@ export function playerGrabAttackEnergy(player: Player): void {
   player.char.attackEnergy.sprite.body.setVelocityY(0);
 }
 
-export function updateBulletsFloat(game: Game): void {
-  game.players.forEach((player, playerIndex) => {
-    if (player.char.attackEnergy.bullets) {
-      player.char.attackEnergy.bullets.sprite.children.iterate(
-        (child: Phaser.Physics.Arcade.Sprite) => {
-          // @ts-ignore
-          // child.body.setVelocityY(child.body.velocity.y - 50);
+// export function updateBulletsFloat(game: Game): void {
+//   game.players.forEach((player, playerIndex) => {
+//     if (
+//       player.char.attackEnergy.bullets !== null &&
+//       player.char.attackEnergy.bullets.sprite !== null
+//     ) {
+//       player.char.attackEnergy.bullets.sprite.children.iterate(
+//         (child: Phaser.Physics.Arcade.Sprite) => {
+//           // @ts-ignore
+//           // child.body.setVelocityY(child.body.velocity.y - 50);
 
-          child.body.velocity.y =
-            child.body.velocity.y - Math.random() * 200 + 60;
-          // child.body.velocity.y = child.body.velocity.y + child.floatVelocityY - Math.random() * 200 + 100;
-        }
-      );
-    }
-  });
-}
+//           child.body.velocity.y =
+//             child.body.velocity.y - Math.random() * 200 + 60;
+//           // child.body.velocity.y = child.body.velocity.y + child.floatVelocityY - Math.random() * 200 + 100;
+//         }
+//       );
+//     }
+//   });
+// }
+
 export function updateAttackEnergy(player: Player, game: Game): void {
   let ae = player.char.attackEnergy;
   let b = player.char.sprite.body;
   let s = player.char.sprite;
-  if (game.debug.AllowBulletGroups && ae.bullets) {
+  if (
+    game.debug.AllowBulletGroups &&
+    ae.bullets !== null &&
+    ae.bullets.sprite !== null
+  ) {
     // if (player.padCurr.X && !player.padPrev.X) {
     if (player.padCurr.X) {
       let ps = player.char.sprite;
