@@ -1,3 +1,5 @@
+import { Position } from '../interfaces';
+
 export function normalRandom(mean: number = 0, stdev: number = 1) {
   let u, v, s;
   do {
