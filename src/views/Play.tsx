@@ -640,30 +640,30 @@ function Play() {
         case 'Enter':
           onClickStartStartButton();
           break;
-        case 'a':
-          pIndex = 0;
-          if (inputArray[pIndex] !== 0) {
-            onClickRotateSelection(pIndex);
-          }
-          break;
-        case 's':
-          pIndex = 1;
-          if (inputArray[pIndex] !== 0) {
-            onClickRotateSelection(pIndex);
-          }
-          break;
-        case 'd':
-          pIndex = 2;
-          if (inputArray[pIndex] !== 0) {
-            onClickRotateSelection(pIndex);
-          }
-          break;
-        case 'f':
-          pIndex = 3;
-          if (inputArray[pIndex] !== 0) {
-            onClickRotateSelection(pIndex);
-          }
-          break;
+        // case 'a':
+        //   pIndex = 0;
+        //   if (inputArray[pIndex] !== 0) {
+        //     onClickRotateSelection(pIndex);
+        //   }
+        //   break;
+        // case 's':
+        //   pIndex = 1;
+        //   if (inputArray[pIndex] !== 0) {
+        //     onClickRotateSelection(pIndex);
+        //   }
+        //   break;
+        // case 'd':
+        //   pIndex = 2;
+        //   if (inputArray[pIndex] !== 0) {
+        //     onClickRotateSelection(pIndex);
+        //   }
+        //   break;
+        // case 'f':
+        //   pIndex = 3;
+        //   if (inputArray[pIndex] !== 0) {
+        //     onClickRotateSelection(pIndex);
+        //   }
+        //   break;
         case 'j':
           onClickOscura(0);
           break;

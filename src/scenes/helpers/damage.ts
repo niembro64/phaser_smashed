@@ -122,6 +122,12 @@ export function onHitHandlerBullets(
   damage: number,
   game: Game
 ): void {
+  let b = attackEnergy.attackBullets?.bullets?.getChildren()[bulletIndex];
+
+  if (!b) {
+    return;
+  }
+
   if (bullet === null) {
     return;
   }
@@ -147,18 +153,24 @@ export function onHitHandlerBullets(
   let vector = getNormalizedVector(
     // bullet.body.gameObject.x,
     // bullet.body.gameObject.y,
+    b.body.gameObject.x,
+    b.body.gameObject.y,
     playerHit.char.sprite.x,
-    playerHit.char.sprite.y,
-    pj.char.sprite.x,
-    pj.char.sprite.y
+    playerHit.char.sprite.y
   );
 
   // player.char.damage += damage;
 
   let ps = playerHit.char.sprite;
 
-  ps.setVelocityX(ps.body.velocity.x + vector.x * 20);
-  ps.setVelocityY(ps.body.velocity.y + vector.y * 20 - 25);
+  ps.setVelocityX(
+    ps.body.velocity.x + vector.x * 2000 * playerHit.char.attackEnergy.hitback.x
+  );
+  ps.setVelocityY(
+    ps.body.velocity.y +
+      vector.y * 3000 * playerHit.char.attackEnergy.hitback.y -
+      25
+  );
 
   if (attackEnergy.diesOnHitbox) {
     setBulletOffscreen(bulletIndex, pj, j, game);

@@ -1,6 +1,5 @@
 import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { AttackEnergy, Player } from '../interfaces';
-import { Bullet } from './bullets';
 import { setEmitterPlayerOnFalse } from './damage';
 
 export function updateJumpEnergy(player: Player, game: Game): void {
