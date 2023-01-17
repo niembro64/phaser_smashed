@@ -149,28 +149,25 @@ export function onHitHandlerBullets(
     }
   }
 
-  // let vector = getNormalizedVectorAP(bullet, player);
-  let vector = getNormalizedVector(
-    // bullet.body.gameObject.x,
-    // bullet.body.gameObject.y,
-    b.body.gameObject.x,
-    b.body.gameObject.y,
-    playerHit.char.sprite.x,
-    playerHit.char.sprite.y
-  );
+  // let vector = getNormalizedVector(
+  //   b.body.gameObject.x,
+  //   b.body.gameObject.y,
+  //   playerHit.char.sprite.x,
+  //   playerHit.char.sprite.y
+  // );
+
+  let vector = {
+    x: b.body.gameObject.body.velocity.x,
+    y: b.body.gameObject.body.velocity.y,
+  };
 
   // player.char.damage += damage;
 
-  let ps = playerHit.char.sprite;
+  let pHit = playerHit.char.sprite;
+  let ae = pj.char.attackEnergy;
 
-  ps.setVelocityX(
-    ps.body.velocity.x + vector.x * 2000 * playerHit.char.attackEnergy.hitback.x
-  );
-  ps.setVelocityY(
-    ps.body.velocity.y +
-      vector.y * 3000 * playerHit.char.attackEnergy.hitback.y -
-      25
-  );
+  pHit.setVelocityX(pHit.body.velocity.x + vector.x * 3 * ae.hitback.x);
+  pHit.setVelocityY(pHit.body.velocity.y + vector.y * 2 * ae.hitback.y - 25);
 
   if (attackEnergy.diesOnHitbox) {
     setBulletOffscreen(bulletIndex, pj, j, game);
