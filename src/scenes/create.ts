@@ -1032,10 +1032,8 @@ export function createAttackEnergies(game: Game): void {
       ae.attackBullets.soundB2 = game.sound.add('ping2', { volume: 0.01 });
       ae.attackBullets.soundP1 = game.sound.add('pop', { volume: 0.03 });
       ae.attackBullets.soundP2 = game.sound.add('pop2', { volume: 0.03 });
-      // ae.bullets.sprite.children.iterate((child: any) => {});
 
       game.physics.add.collider(aebs, game.PLATFORMS);
-      // aebs.scale = 0.3;
 
       for (let i = 0; i < game.players.length; i++) {
         game.physics.add.collider(aebs, game.players[i].char.sprite);
@@ -1059,8 +1057,11 @@ export function createAttackEnergies(game: Game): void {
 
       // turn off gravity for bullets
       aebs.children.iterate((child: any) => {
-        child.body.allowGravity = false;
-        // child.body.setScale(0.3);
+        if (player.char.attackEnergy.gravity) {
+          child.body.allowGravity = true;
+        } else {
+          child.body.allowGravity = false;
+        }
       });
     }
 

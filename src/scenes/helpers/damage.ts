@@ -108,8 +108,8 @@ export function onHitHandlerAttackEnergy(
 }
 
 export function onHitHandlerBullets(
-  player: Player,
-  playerIndex: number,
+  playerHit: Player,
+  playerHitIndex: number,
   pj: Player,
   attackEnergy: AttackEnergy,
   bullet: Phaser.GameObjects.GameObject,
@@ -122,8 +122,8 @@ export function onHitHandlerBullets(
   }
 
   if (
-    player.state.name === 'player-state-start' ||
-    player.state.name === 'player-state-dead'
+    playerHit.state.name === 'player-state-start' ||
+    playerHit.state.name === 'player-state-dead'
   ) {
     return;
   }
@@ -132,9 +132,9 @@ export function onHitHandlerBullets(
 
   for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {
-      game.wasLastHitByMatrix[playerIndex][bj] = true;
+      game.wasLastHitByMatrix[playerHitIndex][bj] = true;
     } else {
-      game.wasLastHitByMatrix[playerIndex][bj] = false;
+      game.wasLastHitByMatrix[playerHitIndex][bj] = false;
     }
   }
 
@@ -142,18 +142,23 @@ export function onHitHandlerBullets(
   let vector = getNormalizedVector(
     // bullet.body.gameObject.x,
     // bullet.body.gameObject.y,
-    player.char.sprite.x,
-    player.char.sprite.y,
+    playerHit.char.sprite.x,
+    playerHit.char.sprite.y,
     pj.char.sprite.x,
     pj.char.sprite.y
   );
 
   // player.char.damage += damage;
 
-  let ps = player.char.sprite;
+  let ps = playerHit.char.sprite;
 
   ps.setVelocityX(ps.body.velocity.x + vector.x * 20);
   ps.setVelocityY(ps.body.velocity.y + vector.y * 20 - 25);
+
+  if (attackEnergy.diesOnHitbox) {
+    // setAttackEnergyOffscreen(game.players[j], j, game);
+    // setPhysicsAttackEnergyOff(game.players[j]);
+  }
 }
 
 export function setEmitterPlayerOnFalse(player: Player): void {
