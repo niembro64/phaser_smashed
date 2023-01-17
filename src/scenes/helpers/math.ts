@@ -8,3 +8,7 @@ export function normalRandom(mean: number = 0, stdev: number = 1) {
   s = Math.sqrt((-2 * Math.log(s)) / s);
   return mean + stdev * u * s;
 }
+
+export function getDistanceFromOrigin(end: Position, start: Position): number {
+  return Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2));
+}

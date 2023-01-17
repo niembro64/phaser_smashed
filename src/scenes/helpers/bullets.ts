@@ -1,5 +1,6 @@
 import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { Debug, Player, Position, Velocity } from '../interfaces';
+import { getDistanceFromOrigin } from './math';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
   constructor(game: Game, x: number, y: number) {
@@ -108,10 +109,6 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
       this.setVelocityY(0);
     }
   }
-}
-
-export function getDistanceFromOrigin(end: Position, start: Position): number {
-  return Math.sqrt(Math.pow(end.x - start.x, 2) + Math.pow(end.y - start.y, 2));
 }
 
 export class Bullets extends Phaser.Physics.Arcade.Group {
