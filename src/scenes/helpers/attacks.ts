@@ -1,5 +1,6 @@
 import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { AttackEnergy, Player } from '../interfaces';
+import { Bullet } from './bullets';
 import { setEmitterPlayerOnFalse } from './damage';
 
 export function updateJumpEnergy(player: Player, game: Game): void {
@@ -104,11 +105,43 @@ export function setPhysicsAttackEnergyOff(player: Player): void {
   player.char.attackEnergy.sprite.body.enable = false;
   player.char.attackEnergy.sprite.body.allowGravity = false;
 }
+
 export function setPhysicsAttackEnergyOn(player: Player): void {
   player.char.attackEnergy.sprite.body.enable = true;
   player.char.attackEnergy.sprite.body.allowGravity =
     player.char.attackEnergy.gravity;
 }
+export function setPhysicsBulletOff(player: Player, bulletIndex: number): void {
+  let b =
+    player.char.attackEnergy.attackBullets?.bullets?.getChildren()[bulletIndex];
+
+  if (!b) {
+    return;
+  }
+
+  b.body.gameObject.body.enable = false;
+  b.body.gameObject.body.allowGravity = false;
+
+  // player.char.attackEnergy.sprite.body.enable = false;
+  // player.char.attackEnergy.sprite.body.allowGravity = false;
+}
+
+export function setPhysicsBulletOn(player: Player, bulletIndex: number): void {
+  let b =
+    player.char.attackEnergy.attackBullets?.bullets?.getChildren()[bulletIndex];
+
+  if (!b) {
+    return;
+  }
+
+  b.body.gameObject.body.enable = true;
+  b.body.gameObject.body.allowGravity = player.char.attackEnergy.gravity;
+
+  // player.char.attackEnergy.sprite.body.enable = true;
+  // player.char.attackEnergy.sprite.body.allowGravity =
+  //   player.char.attackEnergy.gravity;
+}
+
 export function updateAttackEnergyOffscreen(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     let ae = player.char.attackEnergy;
@@ -181,6 +214,25 @@ export function setAttackEnergyOffscreen(
   ae.sprite.x = SCREEN_DIMENSIONS.WIDTH / 2 + playerIndex * 500;
   ae.sprite.body.velocity.x = 0;
   ae.sprite.body.velocity.y = 0;
+}
+
+export function setBulletOffscreen(
+  bulletIndex: number,
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  let b =
+    player.char.attackEnergy.attackBullets?.bullets?.getChildren()[bulletIndex];
+
+  if (!b) {
+    return;
+  }
+
+  b.body.position.y = -1000 - playerIndex * 500;
+  b.body.position.x = SCREEN_DIMENSIONS.WIDTH / 2 + playerIndex * 500;
+  b.body.velocity.x = 0;
+  b.body.velocity.y = 0;
 }
 
 export function updatePhysicalAttackFollowsPlayer(

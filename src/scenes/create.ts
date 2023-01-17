@@ -604,6 +604,7 @@ export function createHitboxOverlap(game: Game): void {
                     pj,
                     pj.char.attackEnergy,
                     bullet,
+                    bi,
                     j,
                     game.DEFAULT_ATTACK_DAMAGE,
                     game
@@ -616,6 +617,7 @@ export function createHitboxOverlap(game: Game): void {
                   pj,
                   pj.char.attackEnergy,
                   bullet,
+                  bi,
                   j,
                   pj.char.attackEnergy.damage,
                   game

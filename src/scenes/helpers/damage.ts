@@ -1,6 +1,10 @@
 import Game from '../Game';
 import { AttackEnergy, AttackPhysical, Player, xyVector } from '../interfaces';
-import { setAttackEnergyOffscreen, setPhysicsAttackEnergyOff } from './attacks';
+import {
+  setAttackEnergyOffscreen,
+  setBulletOffscreen,
+  setPhysicsAttackEnergyOff,
+} from './attacks';
 import { hitbackFly } from './movement';
 import { setPlayerState } from './state';
 
@@ -113,6 +117,7 @@ export function onHitHandlerBullets(
   pj: Player,
   attackEnergy: AttackEnergy,
   bullet: Phaser.GameObjects.GameObject,
+  bulletIndex: number,
   j: number,
   damage: number,
   game: Game
@@ -156,7 +161,7 @@ export function onHitHandlerBullets(
   ps.setVelocityY(ps.body.velocity.y + vector.y * 20 - 25);
 
   if (attackEnergy.diesOnHitbox) {
-    // setAttackEnergyOffscreen(game.players[j], j, game);
+    setBulletOffscreen(bulletIndex, pj, j, game);
     // setPhysicsAttackEnergyOff(game.players[j]);
   }
 }
