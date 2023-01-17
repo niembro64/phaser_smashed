@@ -1030,10 +1030,13 @@ export function createAttackEnergies(game: Game): void {
     if (game.debug.BulletsAllowGroups && ae.attackBullets) {
       ae.attackBullets.bullets = new Bullets(game, player);
       let aebs = ae.attackBullets.bullets;
-      ae.attackBullets.soundB1 = game.sound.add('ping', { volume: 0.01 });
-      ae.attackBullets.soundB2 = game.sound.add('ping2', { volume: 0.01 });
-      ae.attackBullets.soundP1 = game.sound.add('pop', { volume: 0.03 });
-      ae.attackBullets.soundP2 = game.sound.add('pop2', { volume: 0.03 });
+      let x = ae.attackBullets;
+      ae.attackBullets.soundB1 = game.sound.add(x.sB1, {
+        volume: x.vB1,
+      });
+      ae.attackBullets.soundB2 = game.sound.add(x.sB2, { volume: x.vB2 });
+      ae.attackBullets.soundP1 = game.sound.add(x.sP1, { volume: x.vP1 });
+      ae.attackBullets.soundP2 = game.sound.add(x.sP2, { volume: x.vP2 });
 
       game.physics.add.collider(aebs, game.PLATFORMS);
 

@@ -372,6 +372,14 @@ export interface AttackBullets {
   soundB2: any;
   soundP1: any;
   soundP2: any;
+  sB1: string;
+  vB1: number;
+  sB2: string;
+  vB2: number;
+  sP1: string;
+  vP1: number;
+  sP2: string;
+  vP2: number;
 }
 
 export interface FindAndFollowAcceleration {

@@ -3,10 +3,13 @@ import { Debug, Player, Position, Velocity } from '../interfaces';
 import { getDistanceFromOrigin } from './math';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
-  constructor(game: Game, x: number, y: number) {
-    super(game, x, y, 'mirror');
+  constructor(game: Game, x: number, y: number, key: string, rotation: number) {
+    super(game, x, y, key);
 
+    // let ae = player.char.attackEnergy;
     // this.setScale(0.3);
+    // this.setScale(ae.scale);
+    this.setRotation(rotation);
 
     // game.physics.add.collider(this, game.PLATFORMS);
 
@@ -115,13 +118,15 @@ export class Bullets extends Phaser.Physics.Arcade.Group {
   constructor(game: Game, player: Player) {
     super(game.physics.world, game);
 
+    let ae = player.char.attackEnergy;
+
     this.createMultiple({
-      frameQuantity:
-        player.char.attackEnergy.attackBullets?.NUMBER_BULLETS || 10,
-      key: 'bullet',
+      frameQuantity: ae.attackBullets?.NUMBER_BULLETS || 10,
+      key: ae.srcImage,
       active: false,
       visible: false,
       classType: Bullet,
+      setRotation: ae.rotation,
     });
 
     // game.physics.add.collider(this, game.PLATFORMS);
