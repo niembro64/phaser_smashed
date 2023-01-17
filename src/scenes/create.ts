@@ -431,43 +431,6 @@ export function createPlayerIdCircles(game: Game): void {
 }
 
 export function createHitboxOverlap(game: Game): void {
-  // // PLAYER BULLETS OVERLAP
-  // game.players.forEach((pi, i) => {
-  //   if (pi.char.attackEnergy.bullets !== null) {
-  //     game.players.forEach((pj, j) => {
-  //       if (i !== j) {
-  //         if (pj.char.attackEnergy.bullets !== null) {
-  //           game.physics.add.overlap(
-  //             pj.char.attackEnergy.bullets.sprite,
-  //             pi.char.sprite,
-  //             function () {
-  //               if (game.debug.DefaultDamage) {
-  //                 onHitHandlerAttackEnergy(
-  //                   pi,
-  //                   i,
-  //                   pj.char.attackEnergy,
-  //                   j,
-  //                   game.DEFAULT_ATTACK_DAMAGE,
-  //                   game
-  //                 );
-  //                 return;
-  //               }
-  //               onHitHandlerAttackEnergy(
-  //                 pi,
-  //                 i,
-  //                 pj.char.attackEnergy,
-  //                 j,
-  //                 pj.char.attackEnergy.damage,
-  //                 game
-  //               );
-  //             }
-  //           );
-  //         }
-  //       }
-  //     });
-  //   }
-  // });
-
   // ATTACK PHYSICAL CHOMP OVERLAP
   game.players.forEach((player, playerIndex) => {
     game.physics.add.overlap(
@@ -538,9 +501,9 @@ export function createHitboxOverlap(game: Game): void {
       }
     );
 
-    // PLAYER PLAYER OVERLAP
     game.players.forEach((pj, j) => {
       if (player !== pj) {
+        // PLAYER PLAYER OVERLAP
         game.physics.add.overlap(
           player.char.sprite,
           pj.char.sprite,

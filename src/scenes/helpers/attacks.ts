@@ -170,6 +170,19 @@ export function setAttackPhysicalOffscreen(player: Player, game: Game): void {
   player.char.attackPhysical.sprite.body.velocity.y = 0;
 }
 
+export function setAttackEnergyOffscreen(
+  player: Player,
+  playerIndex: number,
+  game: Game
+): void {
+  let ae = player.char.attackEnergy;
+
+  ae.sprite.y = -1000 - playerIndex * 500;
+  ae.sprite.x = SCREEN_DIMENSIONS.WIDTH / 2 + playerIndex * 500;
+  ae.sprite.body.velocity.x = 0;
+  ae.sprite.body.velocity.y = 0;
+}
+
 export function updatePhysicalAttackFollowsPlayer(
   player: Player,
   game: Game
@@ -178,7 +191,8 @@ export function updatePhysicalAttackFollowsPlayer(
   let ae = player.char.attackEnergy;
   let s = player.char.sprite;
 
-  // for link sword
+  // FOR LINK SWORD
+  // DON"T ALLOW AP IF AE
   if (
     ae.ON_SCREEN_PREVENT_ATTACK_PHYSICAL &&
     !getIsAttackEnergyOffscreen(ae, game)

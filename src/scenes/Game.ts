@@ -1040,7 +1040,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
-          diesOnHitbox: true,
+          diesOnHitbox: false,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1212,7 +1212,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
-          diesOnHitbox: true,
+          diesOnHitbox: false,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1564,7 +1564,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
-          diesOnHitbox: true,
+          diesOnHitbox: false,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1736,7 +1736,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
-          diesOnHitbox: true,
+          diesOnHitbox: false,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1908,7 +1908,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
-          diesOnHitbox: true,
+          diesOnHitbox: false,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -2224,7 +2224,7 @@ export default class Game extends Phaser.Scene {
         jumps: [
           1, 1, 0.95, 0.9, 0.85, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
           0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8,
-          0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.7, 0.6, 0.5, 0.3, 0,
+          0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.7, 0.6, 0.5, 0.3, 0.2, 0.1, 0,
         ],
         jumpPower: 1,
         jumpIndex: 0,

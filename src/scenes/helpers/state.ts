@@ -173,9 +173,11 @@ export function setPlayerState(
         setAddToShotsMatrixScreenClear(player, playerIndex, game);
       }
       setSoundDiePlay(game);
-      player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-      player.char.attackEnergy.state = 'released';
-      setPhysicsAttackEnergyOn(player);
+      if (!getIsAttackEnergyOffscreen(player.char.attackEnergy, game)) {
+        player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
+        player.char.attackEnergy.state = 'released';
+        setPhysicsAttackEnergyOn(player);
+      }
       setBlinkTrue(player);
       setGravityFalse(player);
       setResetDamage(player);
@@ -184,9 +186,11 @@ export function setPlayerState(
     case 'player-state-hurt':
       setEmitterHurtActiveTrue(player);
       setEmitterHurtVisibleTrue(player);
-      player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-      player.char.attackEnergy.state = 'released';
-      setPhysicsAttackEnergyOn(player);
+      if (!getIsAttackEnergyOffscreen(player.char.attackEnergy, game)) {
+        player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
+        player.char.attackEnergy.state = 'released';
+        setPhysicsAttackEnergyOn(player);
+      }
       setBlinkTrue(player);
       setGravityTrue(player);
       game.SOUND_HIT.play();

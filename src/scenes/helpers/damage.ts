@@ -1,12 +1,6 @@
 import Game from '../Game';
-import {
-  AttackBullets,
-  AttackEnergy,
-  AttackPhysical,
-  Player,
-  xyVector,
-} from '../interfaces';
-import { Bullet, Bullets } from './bullets';
+import { AttackEnergy, AttackPhysical, Player, xyVector } from '../interfaces';
+import { setAttackEnergyOffscreen, setPhysicsAttackEnergyOff } from './attacks';
 import { hitbackFly } from './movement';
 import { setPlayerState } from './state';
 
@@ -64,35 +58,35 @@ export function onHitHandlerAttackPhysical(
 }
 
 export function onHitHandlerAttackEnergy(
-  player: Player,
-  playerIndex: number,
+  playerHit: Player,
+  playerHitIndex: number,
   attackEnergy: AttackEnergy,
   j: number,
   damage: number,
   game: Game
 ): void {
-  if (player.state.name !== 'player-state-alive') {
+  if (playerHit.state.name !== 'player-state-alive') {
     return;
   }
 
-  game.overlappingPlayerIAttackEnergyJ[playerIndex][j] = true;
+  game.overlappingPlayerIAttackEnergyJ[playerHitIndex][j] = true;
 
   for (var bj = 0; bj < game.players.length; bj++) {
     if (bj === j) {
-      game.wasLastHitByMatrix[playerIndex][bj] = true;
-      game.numberHitByMatrix[playerIndex][j]++;
+      game.wasLastHitByMatrix[playerHitIndex][bj] = true;
+      game.numberHitByMatrix[playerHitIndex][j]++;
     } else {
-      game.wasLastHitByMatrix[playerIndex][bj] = false;
+      game.wasLastHitByMatrix[playerHitIndex][bj] = false;
     }
   }
 
-  let vector = getNormalizedVectorAP(attackEnergy, player);
+  let vector = getNormalizedVectorAP(attackEnergy, playerHit);
 
-  player.char.damage += damage;
+  playerHit.char.damage += damage;
 
   if (game.debug.DefaultHitback) {
     hitbackFly(
-      player,
+      playerHit,
       game,
       game.DEFAULT_ATTACK_HITBACK.x * vector.x,
       game.DEFAULT_ATTACK_HITBACK.y * vector.y
@@ -101,11 +95,16 @@ export function onHitHandlerAttackEnergy(
   }
 
   hitbackFly(
-    player,
+    playerHit,
     game,
     attackEnergy.hitback.x * vector.x,
     attackEnergy.hitback.y * vector.y
   );
+
+  if (attackEnergy.diesOnHitbox) {
+    setAttackEnergyOffscreen(game.players[j], j, game);
+    setPhysicsAttackEnergyOff(game.players[j]);
+  }
 }
 
 export function onHitHandlerBullets(
