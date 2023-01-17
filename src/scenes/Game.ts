@@ -1,32 +1,30 @@
 import 'phaser';
+import Shake from 'phaser3-rex-plugins/plugins/shakeposition';
 import { create } from './create';
-import { update } from './update';
 import {
   Camera,
-  ColorCircle,
-  Clock,
-  Player,
-  SplashRules,
-  SplashEndData,
-  GameStateWithTime,
-  xyVector,
-  keyboard,
-  Debug,
-  SmashConfig,
-  InputType,
   CharacterId,
   Chomp,
+  Clock,
+  ColorCircle,
+  Debug,
   emoji,
   Flag,
-  Lava,
+  GameStateWithTime,
   Gun,
+  InputType,
+  keyboard,
+  Lava,
+  Player,
+  SmashConfig,
+  SplashEndData,
+  SplashRules,
+  xyVector,
 } from './interfaces';
 import { preload } from './preload';
-import Shake from 'phaser3-rex-plugins/plugins/shakeposition';
-import { Bullets } from './helpers/bullets';
-// import { Debug, SmashConfig } from '../views/ViewInterfaces';
+import { update } from './update';
 
-export const sd = { WIDTH: 1920, HEIGHT: 1080 };
+export const SCREEN_DIMENSIONS = { WIDTH: 1920, HEIGHT: 1080 };
 
 export default class Game extends Phaser.Scene {
   ////////////////////////////////
@@ -53,13 +51,10 @@ export default class Game extends Phaser.Scene {
   };
   ASSET_BRICK_WIDTH: number = 33;
   ASSET_BRICK_HEIGHT: number = 34;
-  SCREEN_DIMENSIONS = {
-    WIDTH: sd.WIDTH,
-    HEIGHT: sd.HEIGHT,
-  };
+
   SCREEN_SCALE = {
-    WIDTH: this.SCREEN_DIMENSIONS.WIDTH / 1920,
-    HEIGHT: this.SCREEN_DIMENSIONS.HEIGHT / 1080,
+    WIDTH: SCREEN_DIMENSIONS.WIDTH / 1920,
+    HEIGHT: SCREEN_DIMENSIONS.HEIGHT / 1080,
   };
   PLATFORMS: any | Phaser.GameObjects.Sprite;
   BACKGROUND: any | Phaser.GameObjects.Sprite;
@@ -315,7 +310,7 @@ export default class Game extends Phaser.Scene {
       shadowColor: '#11111100',
       size: '300px',
       src: 'glass.png',
-      strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
+      strokeThickness: SCREEN_DIMENSIONS.WIDTH,
     },
     {
       text: null,
@@ -370,7 +365,7 @@ export default class Game extends Phaser.Scene {
       shadowColor: 'black',
       size: '200px',
       src: 'glass.png',
-      strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
+      strokeThickness: SCREEN_DIMENSIONS.WIDTH,
     },
     {
       text: null,
@@ -381,7 +376,7 @@ export default class Game extends Phaser.Scene {
       shadowColor: 'black',
       size: '500px',
       src: 'glass.png',
-      strokeThickness: this.SCREEN_DIMENSIONS.WIDTH,
+      strokeThickness: SCREEN_DIMENSIONS.WIDTH,
     },
   ];
 
@@ -872,6 +867,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1044,6 +1040,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1215,6 +1212,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1386,6 +1384,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1565,6 +1564,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1736,6 +1736,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -1907,6 +1908,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -2078,6 +2080,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,
@@ -2252,6 +2255,7 @@ export default class Game extends Phaser.Scene {
           audio: null,
         },
         attackEnergy: {
+          diesOnHitbox: true,
           sprite: null,
           state: 'released',
           timestampThrow: 0,

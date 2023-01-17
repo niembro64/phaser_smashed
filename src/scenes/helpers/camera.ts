@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { Loc } from '../interfaces';
 
 export function updateCamera(game: Game): void {
@@ -62,26 +62,26 @@ export function getBorderZoom(game: Game): number {
   var curr_x: number = 0;
   var curr_y: number = 0;
 
-  if (game.cameraPlayers.char.sprite.x < game.SCREEN_DIMENSIONS.WIDTH / 2) {
+  if (game.cameraPlayers.char.sprite.x < SCREEN_DIMENSIONS.WIDTH / 2) {
     curr_x = game.BORDER_PADDING_X + game.cameraPlayers.char.sprite.x;
   } else {
     curr_x =
       game.BORDER_PADDING_X +
-      game.SCREEN_DIMENSIONS.WIDTH -
+      SCREEN_DIMENSIONS.WIDTH -
       game.cameraPlayers.char.sprite.x;
   }
 
-  if (game.cameraPlayers.char.sprite.y < game.SCREEN_DIMENSIONS.HEIGHT / 2) {
+  if (game.cameraPlayers.char.sprite.y < SCREEN_DIMENSIONS.HEIGHT / 2) {
     curr_y = game.BORDER_PADDING_Y + game.cameraPlayers.char.sprite.y;
   } else {
     curr_y =
       game.BORDER_PADDING_Y +
-      game.SCREEN_DIMENSIONS.HEIGHT -
+      SCREEN_DIMENSIONS.HEIGHT -
       game.cameraPlayers.char.sprite.y;
   }
 
-  let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
-  let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
+  let return_x = 1 / ((curr_x * 2) / SCREEN_DIMENSIONS.WIDTH);
+  let return_y = 1 / ((curr_y * 2) / SCREEN_DIMENSIONS.HEIGHT);
 
   return Math.max(return_x, return_y);
 }
@@ -121,8 +121,8 @@ export function getPlayerZoom(game: Game): number {
     }
   });
 
-  let return_x = 1 / ((curr_x * 2) / game.SCREEN_DIMENSIONS.WIDTH);
-  let return_y = 1 / ((curr_y * 2) / game.SCREEN_DIMENSIONS.HEIGHT);
+  let return_x = 1 / ((curr_x * 2) / SCREEN_DIMENSIONS.WIDTH);
+  let return_y = 1 / ((curr_y * 2) / SCREEN_DIMENSIONS.HEIGHT);
 
   return Math.min(
     return_x * game.ZOOM_MULTIPLIER_X,
@@ -144,8 +144,8 @@ export function getCameraBorderStatus(game: Game): Loc {
   });
 
   return {
-    x: ((x_low + x_high) / 2 + game.SCREEN_DIMENSIONS.WIDTH / 2) / 2,
-    y: ((y_low + y_high) / 2 + game.SCREEN_DIMENSIONS.HEIGHT / 2) / 2,
+    x: ((x_low + x_high) / 2 + SCREEN_DIMENSIONS.WIDTH / 2) / 2,
+    y: ((y_low + y_high) / 2 + SCREEN_DIMENSIONS.HEIGHT / 2) / 2,
     zoom: getBorderZoom(game),
   };
 }
@@ -230,11 +230,11 @@ export function getCameraBoxStatus(game: Game): Loc {
     y_high = player.char.sprite.y < y_high ? y_high : player.char.sprite.y;
   });
 
-  var x = Math.max(game.SCREEN_DIMENSIONS.WIDTH / 4, (x_low + x_high) / 2);
-  var y = Math.max(game.SCREEN_DIMENSIONS.HEIGHT / 4, (y_low + y_high) / 2);
+  var x = Math.max(SCREEN_DIMENSIONS.WIDTH / 4, (x_low + x_high) / 2);
+  var y = Math.max(SCREEN_DIMENSIONS.HEIGHT / 4, (y_low + y_high) / 2);
 
-  x = Math.min((game.SCREEN_DIMENSIONS.WIDTH / 4) * 3, x);
-  y = Math.min((game.SCREEN_DIMENSIONS.HEIGHT / 4) * 3, y);
+  x = Math.min((SCREEN_DIMENSIONS.WIDTH / 4) * 3, x);
+  y = Math.min((SCREEN_DIMENSIONS.HEIGHT / 4) * 3, y);
 
   return {
     x: x,

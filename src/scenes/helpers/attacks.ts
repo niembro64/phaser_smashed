@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { AttackEnergy, Player } from '../interfaces';
 import { setEmitterPlayerOnFalse } from './damage';
 
@@ -128,9 +128,9 @@ export function getIsAttackEnergyOffscreen(
 ): boolean {
   if (
     attackEnergy.sprite.y < 0 ||
-    attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT ||
+    attackEnergy.sprite.y > SCREEN_DIMENSIONS.HEIGHT ||
     attackEnergy.sprite.x < 0 ||
-    attackEnergy.sprite.x > game.SCREEN_DIMENSIONS.WIDTH
+    attackEnergy.sprite.x > SCREEN_DIMENSIONS.WIDTH
   ) {
     return true;
   }
@@ -165,7 +165,7 @@ export function isAttackEnergyNearPlayer(player: Player): boolean {
 
 export function setAttackPhysicalOffscreen(player: Player, game: Game): void {
   player.char.attackPhysical.sprite.y = -1000;
-  player.char.attackPhysical.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
+  player.char.attackPhysical.sprite.x = SCREEN_DIMENSIONS.WIDTH / 2;
   player.char.attackPhysical.sprite.body.velocity.x = 0;
   player.char.attackPhysical.sprite.body.velocity.y = 0;
 }

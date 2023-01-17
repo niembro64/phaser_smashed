@@ -1,6 +1,5 @@
-import { V4MAPPED } from 'dns';
-import Game from '../Game';
-import { Acceleration, Player, Velocity } from '../interfaces';
+import Game, { SCREEN_DIMENSIONS } from '../Game';
+import { Player } from '../interfaces';
 import { getIsAttackEnergyOffscreen } from './attacks';
 import { getNormalizedVector } from './damage';
 
@@ -39,9 +38,9 @@ export function updateAttackEnergyWrapScreen(game: Game): void {
   }
   game.players.forEach((player) => {
     if (player.char.attackEnergy.sprite.x < 0) {
-      player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
+      player.char.attackEnergy.sprite.x = SCREEN_DIMENSIONS.WIDTH;
     }
-    if (player.char.attackEnergy.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
+    if (player.char.attackEnergy.sprite.x > SCREEN_DIMENSIONS.WIDTH) {
       player.char.attackEnergy.sprite.x = 0;
     }
   });
@@ -50,15 +49,15 @@ export function updateAttackEnergyWrapScreen(game: Game): void {
 export function updateKeepOnScreenPlayer(game: Game): void {
   game.players.forEach((player) => {
     if (player.char.sprite.y < 0) {
-      player.char.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT;
+      player.char.sprite.y = SCREEN_DIMENSIONS.HEIGHT;
     }
-    if (player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
+    if (player.char.sprite.y > SCREEN_DIMENSIONS.HEIGHT) {
       player.char.sprite.y = 0;
     }
     if (player.char.sprite.x < 0) {
-      player.char.sprite.x = game.SCREEN_DIMENSIONS.WIDTH;
+      player.char.sprite.x = SCREEN_DIMENSIONS.WIDTH;
     }
-    if (player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH) {
+    if (player.char.sprite.x > SCREEN_DIMENSIONS.WIDTH) {
       player.char.sprite.x = 0;
     }
   });
@@ -74,9 +73,9 @@ export function isAnyPlayerOffscreen(game: Game): boolean {
 export function getIsPlayerOffscreen(player: Player, game: Game): boolean {
   if (
     player.char.sprite.y < 0 ||
-    player.char.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT ||
+    player.char.sprite.y > SCREEN_DIMENSIONS.HEIGHT ||
     player.char.sprite.x < 0 ||
-    player.char.sprite.x > game.SCREEN_DIMENSIONS.WIDTH
+    player.char.sprite.x > SCREEN_DIMENSIONS.WIDTH
   ) {
     return true;
   }
@@ -85,7 +84,7 @@ export function getIsPlayerOffscreen(player: Player, game: Game): boolean {
 
 export function setRespawn(player: Player, game: Game): void {
   player.char.sprite.x =
-    game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x;
+    SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x;
   player.char.sprite.y = player.char.initializeCharPosition.y;
 
   player.char.sprite.body.setVelocityX(0);
@@ -94,11 +93,11 @@ export function setRespawn(player: Player, game: Game): void {
 
 // export function updateEnergyAttacksScreenWrap(game: Game): void {
 //   game.players.forEach((player, playerIndex) => {
-//     if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
+//     if (player.char.attackEnergy.sprite.y > SCREEN_DIMENSIONS.HEIGHT) {
 //       // player.char.attackEnergy.sprite.body.setVelocityX(0);
 //       // player.char.attackEnergy.sprite.body.setVelocityY(0);
-//       player.char.attackEnergy.sprite.x = game.SCREEN_DIMENSIONS.WIDTH / 2;
-//       player.char.attackEnergy.sprite.Y = game.SCREEN_DIMENSIONS.HEIGHT / 2;
+//       player.char.attackEnergy.sprite.x = SCREEN_DIMENSIONS.WIDTH / 2;
+//       player.char.attackEnergy.sprite.Y = SCREEN_DIMENSIONS.HEIGHT / 2;
 //       player.char.attackEnergy.sprite.body.allowGravity = false;
 //     }
 //   });
@@ -302,8 +301,8 @@ export function setGravityFalse(player: Player): void {
 
 export function updateKeepObjectsFromFallingLikeCrazy(game: Game): void {
   game.players.forEach((player, playerIndex) => {
-    if (player.char.attackEnergy.sprite.y > game.SCREEN_DIMENSIONS.HEIGHT) {
-      player.char.attackEnergy.sprite.y = game.SCREEN_DIMENSIONS.HEIGHT + 200;
+    if (player.char.attackEnergy.sprite.y > SCREEN_DIMENSIONS.HEIGHT) {
+      player.char.attackEnergy.sprite.y = SCREEN_DIMENSIONS.HEIGHT + 200;
       player.char.attackEnergy.sprite.body.setVelocityY(0);
       player.char.attackEnergy.sprite.body.setVelocityX(0);
     }

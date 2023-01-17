@@ -14,11 +14,11 @@ import {
 import {
   setEmitterHurtActiveFalse,
   setEmitterHurtActiveTrue,
-  setOnDeadUpdateMatrix,
-  setResetDamage,
   setEmitterHurtVisibleFalse,
   setEmitterHurtVisibleTrue,
   setEmitterPlayerOnFalse,
+  setOnDeadUpdateMatrix,
+  setResetDamage,
 } from './damage';
 import {
   getIsFirstBlood,

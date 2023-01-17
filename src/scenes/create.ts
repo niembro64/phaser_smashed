@@ -1,5 +1,5 @@
 import ShakePosition from 'phaser3-rex-plugins/plugins/behaviors/shake/ShakePosition';
-import Game from './Game';
+import Game, { SCREEN_DIMENSIONS } from './Game';
 import { setAttackPhysicalOffscreen } from './helpers/attacks';
 import {
   onHitHandlerAttackEnergy,
@@ -15,9 +15,7 @@ import {
 } from './helpers/powers';
 import { filterAttackEnergyNormal, setBlinkTrue } from './helpers/sprites';
 import { setPreUpdate } from './update';
-
 import { Bullets } from './helpers/bullets';
-import { debug } from 'console';
 
 export function create(game: Game) {
   createPreCreate(game);
@@ -69,8 +67,8 @@ export function create(game: Game) {
 export function createGun(game: Game): void {
   let ggs = game.gun.sprite;
   ggs = game.physics.add.sprite(
-    game.SCREEN_DIMENSIONS.WIDTH * 0.8,
-    game.SCREEN_DIMENSIONS.HEIGHT * 0.3,
+    SCREEN_DIMENSIONS.WIDTH * 0.8,
+    SCREEN_DIMENSIONS.HEIGHT * 0.3,
     'centerWhite'
   );
   ggs.setImmovable(true).setBounce(0).setOrigin(0.5, 1).setScale(0.1);
@@ -107,7 +105,7 @@ export function createExplosions(game: Game): void {
 
   eArray.forEach((e, eIndex) => {
     e.sprite = game.physics.add.sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
       -500,
       'explosion256'
     );
@@ -245,8 +243,8 @@ export function createEndDataMatrices(game: Game): void {
     }
     splash.textTitle = game.add
       .text(
-        game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
-        game.SCREEN_DIMENSIONS.HEIGHT / 6,
+        SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
+        SCREEN_DIMENSIONS.HEIGHT / 6,
         splash.name + ' ' + splash.emoji,
         {
           align: 'right',
@@ -269,8 +267,8 @@ export function createEndDataMatrices(game: Game): void {
       .setAlpha(1);
     splash.textData = game.add
       .text(
-        game.SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
-        game.SCREEN_DIMENSIONS.HEIGHT / 6,
+        SCREEN_DIMENSIONS.WIDTH * ((splashIndex + 1) / (numSplashes + 1)),
+        SCREEN_DIMENSIONS.HEIGHT / 6,
         splash.words,
         {
           align: 'right',
@@ -867,7 +865,7 @@ export function createEmittersFollowPlayers(game: Game): void {
 }
 
 export function createLavas(game: Game): void {
-  const initialLeftMostLava = (-1 * game.SCREEN_DIMENSIONS.WIDTH) / 2;
+  const initialLeftMostLava = (-1 * SCREEN_DIMENSIONS.WIDTH) / 2;
 
   for (let i = 0; i < game.lavas.length; i++) {
     createLava(i, game, initialLeftMostLava + i * game.lavas[i].width);
@@ -875,8 +873,8 @@ export function createLavas(game: Game): void {
 }
 
 export function createLava(i: number, game: Game, posX: number): void {
-  const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 10;
-  // const bottomOfMap = game.SCREEN_DIMENSIONS.HEIGHT + 28;
+  const bottomOfMap = SCREEN_DIMENSIONS.HEIGHT + 10;
+  // const bottomOfMap = SCREEN_DIMENSIONS.HEIGHT + 28;
 
   game.lavas[i].sprite = game.physics.add.sprite(posX, bottomOfMap, 'lava');
 
@@ -910,13 +908,13 @@ export function createPlayers(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     if (player.char.srcSpriteSheet === '') {
       player.char.sprite = game.physics.add.sprite(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
+        SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
         game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
         player.char.name
       );
     } else {
       player.char.sprite = game.physics.add.sprite(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
+        SCREEN_DIMENSIONS.WIDTH / 2 + player.char.initializeCharPosition.x,
         game.BASE_PLAYER_INITIAL_POSITION.POSITION.PLAYER_Y,
         player.char.name + '_spritesheet'
       );
@@ -1249,8 +1247,8 @@ export function createBackground(game: Game): void {
   const scaleUp = 1.1;
 
   game.BACKGROUND = game.physics.add.sprite(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2,
     'background'
   );
   game.BACKGROUND.setScale(
@@ -1264,8 +1262,8 @@ export function createBackground(game: Game): void {
 
 export function createBackgroundOutline(game: Game): void {
   game.BACKGROUND_OUTLINE = game.physics.add.sprite(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2,
     'background_outline'
   );
   game.BACKGROUND_OUTLINE.setScale(
@@ -1281,8 +1279,8 @@ export function createPlatforms0(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
 
   game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2,
     'platformHorizontal'
   );
 }
@@ -1290,13 +1288,13 @@ export function createPlatforms1(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
 
   game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 3 + 320,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 3 + 320,
     'platformVertical'
   );
   game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2,
     'platformHorizontal'
   );
 }
@@ -1304,18 +1302,18 @@ export function createPlatforms2(game: Game): void {
   game.PLATFORMS = game.physics.add.staticGroup();
 
   game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2,
     'platformHorizontal'
   );
   game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2 - 34 * 10,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
+    SCREEN_DIMENSIONS.WIDTH / 2 - 34 * 10,
+    SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
     'brick'
   );
   game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2 + 34 * 10,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
+    SCREEN_DIMENSIONS.WIDTH / 2 + 34 * 10,
+    SCREEN_DIMENSIONS.HEIGHT / 2 - 34,
     'brick'
   );
 }
@@ -1338,8 +1336,8 @@ export function createPlatforms3(game: Game): void {
     'platformShort'
   );
   game.PLATFORMS.create(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2,
     'platformHorizontal'
   );
   game.PLATFORMS.create(
@@ -1384,15 +1382,15 @@ export function createPlatforms4(game: Game): void {
   for (let i = 0; i < 20; i++) {
     game.PLATFORMS.create(
       600,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + 300 + i * game.ASSET_BRICK_HEIGHT,
+      SCREEN_DIMENSIONS.HEIGHT / 2 + 300 + i * game.ASSET_BRICK_HEIGHT,
       'platformHorizontal'
     );
   }
 
   for (let i = 0; i < 2; i++) {
     game.PLATFORMS.create(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
       'platformHorizontal'
     );
   }
@@ -1441,8 +1439,8 @@ export function createPlatforms5(game: Game): void {
 
   for (let i = 0; i < 2; i++) {
     game.PLATFORMS.create(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT,
       'platformHorizontal'
     );
   }
@@ -1493,15 +1491,15 @@ export function createPlatforms6(game: Game): void {
 
   for (let i = 0; i < 1; i++) {
     game.PLATFORMS.create(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT + 3 * 34,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2 + i * game.ASSET_BRICK_HEIGHT + 3 * 34,
       'platformHorizontal'
     );
   }
   for (let i = 0; i < 3; i++) {
     game.PLATFORMS.create(
-      game.SCREEN_DIMENSIONS.WIDTH / 2 - 10 * 33,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 +
+      SCREEN_DIMENSIONS.WIDTH / 2 - 10 * 33,
+      SCREEN_DIMENSIONS.HEIGHT / 2 +
         10 * 34 +
         i * game.ASSET_BRICK_HEIGHT +
         3 * 34,
@@ -1611,8 +1609,8 @@ export function createPlatforms6(game: Game): void {
 
 export function createTable(game: Game): void {
   game.TABLE = game.physics.add.sprite(
-    (game.SCREEN_DIMENSIONS.WIDTH / 2) * game.SCREEN_SCALE.WIDTH,
-    (game.SCREEN_DIMENSIONS.HEIGHT / 2 - 300) * game.SCREEN_SCALE.HEIGHT,
+    (SCREEN_DIMENSIONS.WIDTH / 2) * game.SCREEN_SCALE.WIDTH,
+    (SCREEN_DIMENSIONS.HEIGHT / 2 - 300) * game.SCREEN_SCALE.HEIGHT,
     'table'
   );
   // game.TABLE = game.physics.add.sprite(
@@ -1650,7 +1648,7 @@ export function createFlag(game: Game): void {
 export function createBackgroundTitles(game: Game): void {
   game.TEXT_TITLE = game.add
     .text(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
       300 * game.SCREEN_SCALE.HEIGHT,
       'SMASHED',
       {
@@ -1668,8 +1666,8 @@ export function createBackgroundTitles(game: Game): void {
     .setAlpha(0.3);
   game.TEXT_SUBTITLE = game.add
     .text(
-      game.SCREEN_DIMENSIONS.WIDTH / 13,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
+      SCREEN_DIMENSIONS.WIDTH / 13,
+      SCREEN_DIMENSIONS.HEIGHT / 2 + 10,
       'NIEMBRO64',
       {
         // font: "300px Impact",
@@ -1684,7 +1682,7 @@ export function createBackgroundTitles(game: Game): void {
     .setColor('black')
     .setAlpha(0.3);
   game.TEXT_SUPERTITLE = game.add
-    .text(game.SCREEN_DIMENSIONS.WIDTH / 2, 50, 'WEB', {
+    .text(SCREEN_DIMENSIONS.WIDTH / 2, 50, 'WEB', {
       // font: "300px Impact",
       fontFamily: 'Impact',
       // fontFamily: "'Press Start 2P'",
@@ -1703,8 +1701,8 @@ export function createSplashRuleFinished(game: Game): void {
     if (splash.name === 'splash-finished') {
       splash.text = game.add
         .text(
-          game.SCREEN_DIMENSIONS.WIDTH / 2,
-          game.SCREEN_DIMENSIONS.HEIGHT / 2,
+          SCREEN_DIMENSIONS.WIDTH / 2,
+          SCREEN_DIMENSIONS.HEIGHT / 2,
           splash.word,
           {
             // font: "Arial 100px",
@@ -1734,8 +1732,8 @@ export function createSplashBlack(game: Game): void {
   let splash = game.splashRules[0];
   splash.text = game.add
     .text(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2,
       splash.word,
       {
         // font: "Arial 100px",
@@ -1765,8 +1763,8 @@ export function createSplashes(game: Game): void {
     if (splashIndex !== 0 && splashIndex !== game.splashRules.length - 1) {
       splash.text = game.add
         .text(
-          game.SCREEN_DIMENSIONS.WIDTH / 2,
-          game.SCREEN_DIMENSIONS.HEIGHT / 2,
+          SCREEN_DIMENSIONS.WIDTH / 2,
+          SCREEN_DIMENSIONS.HEIGHT / 2,
           splash.word,
           {
             // font: "Arial 100px",
@@ -1797,9 +1795,8 @@ export function createScoreboardShotGlass(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.shotGlass = game.add
       .sprite(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 +
-          game.playerSpawnLocationsX[playerIndex],
-        game.SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
+        SCREEN_DIMENSIONS.WIDTH / 2 + game.playerSpawnLocationsX[playerIndex],
+        SCREEN_DIMENSIONS.HEIGHT / 2 + 200,
         'glass_full'
       )
       .setScale(
@@ -1814,8 +1811,8 @@ export function createScoreboardReady(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardReady = game.add
       .text(
-        game.SCREEN_DIMENSIONS.WIDTH / 2,
-        game.SCREEN_DIMENSIONS.HEIGHT / 2,
+        SCREEN_DIMENSIONS.WIDTH / 2,
+        SCREEN_DIMENSIONS.HEIGHT / 2,
         player.char.name + ' Ready', //🎮
         {
           // font: "Arial 100px",
@@ -1846,38 +1843,33 @@ export function createScoreboardReady(game: Game): void {
 export function createScoreboard(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardController = game.add
-      .text(
-        game.SCREEN_DIMENSIONS.WIDTH / 2,
-        game.SCREEN_DIMENSIONS.HEIGHT / 2,
-        '🎮',
-        {
-          // font: "Arial 100px",
-          fontSize: '300px',
-          fontFamily: 'Impact',
-          // fontFamily: game.FONT_DEFAULT,
-          // fontFamily: "'Courier New'",
-          // fontFamily: "'Press Start 2P'",
-          // color: "white",
-          color: game.colorCircles[playerIndex].colorString,
-          // stroke: player.char.color.primary,
-          stroke: 'black',
-          strokeThickness: 1,
-          shadow: {
-            offsetX: 0,
-            offsetY: 3,
-            color: '#000',
-            blur: 3,
-            stroke: true,
-            fill: true,
-          },
-        }
-      )
+      .text(SCREEN_DIMENSIONS.WIDTH / 2, SCREEN_DIMENSIONS.HEIGHT / 2, '🎮', {
+        // font: "Arial 100px",
+        fontSize: '300px',
+        fontFamily: 'Impact',
+        // fontFamily: game.FONT_DEFAULT,
+        // fontFamily: "'Courier New'",
+        // fontFamily: "'Press Start 2P'",
+        // color: "white",
+        color: game.colorCircles[playerIndex].colorString,
+        // stroke: player.char.color.primary,
+        stroke: 'black',
+        strokeThickness: 1,
+        shadow: {
+          offsetX: 0,
+          offsetY: 3,
+          color: '#000',
+          blur: 3,
+          stroke: true,
+          fill: true,
+        },
+      })
       .setOrigin(0.5, 0.5);
   });
 
   game.scoreBoardTimeGame = game.add.text(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2,
     '',
     {
       // font: "Arial 100px",
@@ -1905,8 +1897,8 @@ export function createScoreboard(game: Game): void {
     .setScale(1 / game.cameras.main.zoom, 1 / game.cameras.main.zoom);
 
   game.scoreBoardTimeTime = game.add.text(
-    game.SCREEN_DIMENSIONS.WIDTH / 2,
-    game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
+    SCREEN_DIMENSIONS.WIDTH / 2,
+    SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
     '',
     {
       // font: "Arial 100px",
@@ -1938,9 +1930,8 @@ export function createScoreboard(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardUpper = game.add
       .text(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 +
-          game.playerSpawnLocationsX[playerIndex],
-        game.SCREEN_DIMENSIONS.HEIGHT / 2,
+        SCREEN_DIMENSIONS.WIDTH / 2 + game.playerSpawnLocationsX[playerIndex],
+        SCREEN_DIMENSIONS.HEIGHT / 2,
         'XXX',
         {
           // font: "Arial 100px",
@@ -1971,9 +1962,8 @@ export function createScoreboard(game: Game): void {
   game.players.forEach((player, playerIndex) => {
     player.scoreBoardLower = game.add
       .text(
-        game.SCREEN_DIMENSIONS.WIDTH / 2 +
-          game.playerSpawnLocationsX[playerIndex],
-        game.SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
+        SCREEN_DIMENSIONS.WIDTH / 2 + game.playerSpawnLocationsX[playerIndex],
+        SCREEN_DIMENSIONS.HEIGHT / 2 + 100,
         'XXX',
         {
           // font: "Arial 100px",
@@ -2008,8 +1998,8 @@ export function createCameras(game: Game): void {
   }
   game.cameraBox.char.sprite = game.physics.add
     .sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2,
       'centerWhite'
     )
     .setScale(0.05)
@@ -2020,8 +2010,8 @@ export function createCameras(game: Game): void {
 
   game.cameraPlayers.char.sprite = game.physics.add
     .sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2,
       'centerWhite'
     )
     .setScale(0.05)
@@ -2033,8 +2023,8 @@ export function createCameras(game: Game): void {
 
   game.cameraPlayersHalfway.char.sprite = game.physics.add
     .sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2,
       'centerWhite'
     )
     .setRotation(Math.PI / 4)
@@ -2046,8 +2036,8 @@ export function createCameras(game: Game): void {
 
   game.cameraCenter.char.sprite = game.physics.add
     .sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2,
       'centerWhite'
     )
     .setScale(0.05)
@@ -2059,8 +2049,8 @@ export function createCameras(game: Game): void {
 
   game.cameraMover.char.sprite = game.physics.add
     .sprite(
-      game.SCREEN_DIMENSIONS.WIDTH / 2,
-      game.SCREEN_DIMENSIONS.HEIGHT / 2,
+      SCREEN_DIMENSIONS.WIDTH / 2,
+      SCREEN_DIMENSIONS.HEIGHT / 2,
       'centerWhite'
     )
     .setScale(0.08)
@@ -2086,7 +2076,7 @@ export function createCameras(game: Game): void {
   // game.cameras.main.setBounds(
   //   0,
   //   0,
-  //   game.SCREEN_DIMENSIONS.WIDTH,
-  //   game.SCREEN_DIMENSIONS.HEIGHT
+  //   SCREEN_DIMENSIONS.WIDTH,
+  //   SCREEN_DIMENSIONS.HEIGHT
   // );
 }

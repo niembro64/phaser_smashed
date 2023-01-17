@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { Debug, Player, Position, Velocity } from '../interfaces';
 
 export class Bullet extends Phaser.Physics.Arcade.Sprite {
@@ -20,7 +20,7 @@ export class Bullet extends Phaser.Physics.Arcade.Sprite {
 
     // game.physics.add.collider(this, game.chomp.sprite);
     // game.physics.add.collider(this, game.TABLE);
-    this.screen = game.SCREEN_DIMENSIONS;
+    this.screen = SCREEN_DIMENSIONS;
     this.debug = game.debug;
   }
 

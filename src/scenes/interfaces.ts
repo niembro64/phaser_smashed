@@ -339,6 +339,7 @@ export interface AttackEnergy {
   durationCooldown: number;
   posFromCenter: Position;
   friction: AttackEnergyFriction;
+  diesOnHitbox: boolean;
   VEL: Velocity;
   velPrevX: number;
   velPrevY: number;

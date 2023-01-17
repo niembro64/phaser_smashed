@@ -113,4 +113,3 @@ export function updateNumShotsLeft(game: Game): void {
   });
   game.shotsLeftCurr = game.debug.InfinityShots - shots;
 }
-

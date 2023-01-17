@@ -1,20 +1,19 @@
-import Game from '../Game';
+import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { emoji, SplashName } from '../interfaces';
-import { updateNumShotsLeft } from './drinking';
 import { getIsPlayerReady } from './pad';
 import { pauseReadySoundPlayer, playReadySoundPlayer } from './sound';
 
 export function updateText(game: Game): void {
   const dataTitleY = 65;
   const dataY = dataTitleY + 45;
-  const splashY = game.SCREEN_DIMENSIONS.HEIGHT / 2;
-  const controllerY = game.SCREEN_DIMENSIONS.HEIGHT - 220;
-  const glassY = game.SCREEN_DIMENSIONS.HEIGHT - 180;
-  const readyY = game.SCREEN_DIMENSIONS.HEIGHT - 140;
-  const damageY = game.SCREEN_DIMENSIONS.HEIGHT - 76;
-  const gameTimeY = game.SCREEN_DIMENSIONS.HEIGHT - 85;
-  const timeTimeY = game.SCREEN_DIMENSIONS.HEIGHT - 95;
-  const killsY = game.SCREEN_DIMENSIONS.HEIGHT - 75;
+  const splashY = SCREEN_DIMENSIONS.HEIGHT / 2;
+  const controllerY = SCREEN_DIMENSIONS.HEIGHT - 220;
+  const glassY = SCREEN_DIMENSIONS.HEIGHT - 180;
+  const readyY = SCREEN_DIMENSIONS.HEIGHT - 140;
+  const damageY = SCREEN_DIMENSIONS.HEIGHT - 76;
+  const gameTimeY = SCREEN_DIMENSIONS.HEIGHT - 85;
+  const timeTimeY = SCREEN_DIMENSIONS.HEIGHT - 95;
+  const killsY = SCREEN_DIMENSIONS.HEIGHT - 75;
 
   const zoom = game.cameras.main.zoom;
   const redOffsetY =
@@ -162,7 +161,7 @@ export function updateClockTextLower(
   game.scoreBoardTimeTime.x = game.cameraMover.char.sprite.x;
   // game.cameraMover.char.sprite.x + game.textLocationLROffset * (1 / zoom);
   game.scoreBoardTimeTime.y = newLowerY;
-  //  game.SCREEN_DIMENSIONS.HEIGHT / 2;
+  //  SCREEN_DIMENSIONS.HEIGHT / 2;
 
   game.scoreBoardTimeTime.setText(
     game.timeClock.minutes.toString() +
@@ -411,8 +410,7 @@ export function updateEndDataMatrices(
     splash.textTitle.x =
       game.cameraMover.char.sprite.x +
       ((game.splashEndDataOffset +
-        game.SCREEN_DIMENSIONS.WIDTH *
-          (Math.floor(numSplashes / 2) - splashIndex)) /
+        SCREEN_DIMENSIONS.WIDTH * (Math.floor(numSplashes / 2) - splashIndex)) /
         (numSplashes + 1)) *
         (1 / zoom);
 
@@ -420,8 +418,7 @@ export function updateEndDataMatrices(
     splash.textData.x =
       game.cameraMover.char.sprite.x +
       ((game.splashEndDataOffset +
-        game.SCREEN_DIMENSIONS.WIDTH *
-          (Math.floor(numSplashes / 2) - splashIndex)) /
+        SCREEN_DIMENSIONS.WIDTH * (Math.floor(numSplashes / 2) - splashIndex)) /
         (numSplashes + 1)) *
         (1 / zoom);
 

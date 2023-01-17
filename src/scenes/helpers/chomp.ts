@@ -1,7 +1,5 @@
-import { Vector } from 'matter';
-import Game from '../Game';
+import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { getDistance, getNormalizedVector, getVector } from './damage';
-import { setChompPowerState } from './powers';
 
 export function updateChompSpriteDirection(game: Game): void {
   let c = game.chomp;
@@ -32,7 +30,7 @@ export function updateChompVelocity(game: Game): void {
   }
 
   c.percentFramesJump = Math.pow(
-    (1 - getClosestDistance(game) / game.SCREEN_DIMENSIONS.WIDTH) * 0.9,
+    (1 - getClosestDistance(game) / SCREEN_DIMENSIONS.WIDTH) * 0.9,
     15
   );
   // console.log('c.percentFramesJump', c.percentFramesJump);
@@ -105,7 +103,6 @@ export function updateChomp(game: Game): void {
   updateChompSpriteDirection(game);
   updateChompVelocity(game);
   updateChompLinkPositions(game);
-
 }
 
 export function updateAtThreeShots(game: Game): void {

@@ -4,7 +4,7 @@ import {
   Player,
   PowerStateCharacterName,
   PowerStateChompName,
-  xyVector
+  xyVector,
 } from '../interfaces';
 import { getNormalizedVector } from './damage';
 import { setPlayerState } from './state';

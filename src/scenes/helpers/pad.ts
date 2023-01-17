@@ -1,4 +1,4 @@
-import Game from '../Game';
+import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { InputType, Player } from '../interfaces';
 import {
   getIsAttackEnergyOffscreen,
@@ -671,9 +671,9 @@ export function isSpriteOffscreen(
   game: Game
 ): boolean {
   if (
-    sprite.x > game.SCREEN_DIMENSIONS.WIDTH ||
+    sprite.x > SCREEN_DIMENSIONS.WIDTH ||
     sprite.x < 0 ||
-    sprite.y > game.SCREEN_DIMENSIONS.HEIGHT ||
+    sprite.y > SCREEN_DIMENSIONS.HEIGHT ||
     sprite.y < 0
   ) {
     return true;
