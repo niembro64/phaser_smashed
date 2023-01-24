@@ -4,7 +4,7 @@ import { getNormalizedVector } from "./damage";
 import { getNearestPlayerAliveXY } from "./movement";
 
 export function getIsBot(player: Player, game: Game): boolean {
-  if ((player.inputType = 1)) {
+  if (player.inputType === 3) {
     return true;
   }
   return false;

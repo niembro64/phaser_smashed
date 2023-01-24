@@ -1,4 +1,4 @@
-import { Bullets } from './helpers/bullets';
+import { Bullets } from "./helpers/bullets";
 
 export interface Debug {
   DevMode: boolean;
@@ -49,45 +49,45 @@ export interface CharacterMove {
 }
 
 export type ButtonName =
-  | 'See Other Projects'
-  | 'Back'
-  | 'ReStart'
-  | 'Controls'
-  | 'Controllers'
-  | 'Rules'
-  | 'Rules-N64'
-  | 'About'
-  | 'History'
-  | 'Options';
+  | "See Other Projects"
+  | "Back"
+  | "ReStart"
+  | "Controls"
+  | "Controllers"
+  | "Rules"
+  | "Rules-N64"
+  | "About"
+  | "History"
+  | "Options";
 
 export type GameState =
-  | 'game-state-start'
-  | 'game-state-play'
-  | 'game-state-paused'
-  | 'game-state-first-blood'
-  | 'game-state-screen-clear'
-  | 'game-state-finished';
+  | "game-state-start"
+  | "game-state-play"
+  | "game-state-paused"
+  | "game-state-first-blood"
+  | "game-state-screen-clear"
+  | "game-state-finished";
 
 export type PlayerState =
-  | 'player-state-start'
-  | 'player-state-alive'
-  | 'player-state-dead'
-  | 'player-state-hurt';
+  | "player-state-start"
+  | "player-state-alive"
+  | "player-state-dead"
+  | "player-state-hurt";
 
 export type AttackState =
-  | 'attackphysical-state-on'
-  | 'attackphysical-state-cooldown'
-  | 'attackphysical-state-off';
+  | "attackphysical-state-on"
+  | "attackphysical-state-cooldown"
+  | "attackphysical-state-off";
 
 export type SplashName =
-  | 'splash-black'
-  | 'splash-none'
-  | 'splash-start'
-  | 'splash-paused'
-  | 'splash-first-blood'
-  | 'splash-screen-clear'
-  | 'splash-cool-down'
-  | 'splash-finished';
+  | "splash-black"
+  | "splash-none"
+  | "splash-start"
+  | "splash-paused"
+  | "splash-first-blood"
+  | "splash-screen-clear"
+  | "splash-cool-down"
+  | "splash-finished";
 
 export interface Clock {
   minutes: number;
@@ -160,7 +160,7 @@ export interface Char {
   friction_ground: number;
   friction_air: number;
   wallTouchArray: boolean[];
-  lastDirectionTouched: 'up' | 'down' | 'left' | 'right' | null;
+  lastDirectionTouched: "up" | "down" | "left" | "right" | null;
   attackPhysical: AttackPhysical;
   attackEnergy: AttackEnergy;
   initializeCharPosition: InitializeCharPosition;
@@ -173,7 +173,7 @@ export interface SpriteState {
   timeStamp: number;
 }
 
-export type SpriteStateName = 'idle' | 'walk' | 'jumpUp' | 'jumpDown' | 'climb';
+export type SpriteStateName = "idle" | "walk" | "jumpUp" | "jumpDown" | "climb";
 
 export interface Shield {
   circle: ColorCircle;
@@ -334,7 +334,7 @@ export interface AttackPhysical {
 
 export interface AttackEnergy {
   sprite: any | Phaser.GameObjects.Sprite;
-  state: 'holding' | 'released';
+  state: "holding" | "released";
   timestampThrow: number;
   durationCooldown: number;
   posFromCenter: Position;
@@ -418,18 +418,24 @@ export interface keyboard {
 }
 
 export type CharacterId = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-export type InputType = 0 | 1 | 2;
+
+// INPUT TYPES
+// 0: none
+// 1:
+// 2:
+// 3: bot
+export type InputType = 0 | 1 | 2 | 3;
 
 export type CharacterName =
-  | 'Mario'
-  | 'Link'
-  | 'Pikachu'
-  | 'Kirby'
-  | 'Chez'
-  | 'BlackChez'
-  | 'GreenKoopa'
-  | 'RedKoopa'
-  | 'BlueKoopa';
+  | "Mario"
+  | "Link"
+  | "Pikachu"
+  | "Kirby"
+  | "Chez"
+  | "BlackChez"
+  | "GreenKoopa"
+  | "RedKoopa"
+  | "BlueKoopa";
 
 export interface SmashConfig {
   players: PlayerConfig[];
@@ -442,7 +448,7 @@ export interface PlayerConfig {
   input?: InputType;
 }
 
-export type WebState = 'start' | 'play';
+export type WebState = "start" | "play";
 
 export interface Quote {
   name: string;
@@ -496,7 +502,7 @@ export interface ChompLink {
   sprite: any | Phaser.GameObjects.Sprite;
 }
 
-export type ChompFilterStateName = 'none' | 'hurt' | 'cooldown';
+export type ChompFilterStateName = "none" | "hurt" | "cooldown";
 
 export interface ChompFilterState {
   name: ChompFilterStateName;
@@ -504,35 +510,35 @@ export interface ChompFilterState {
 }
 
 export const emoji = {
-  keyboardBlack: '⌨',
-  keyboardWhite: '⌨️',
-  gamepad: '🎮',
-  greenCheck: '✔️',
-  caution: '🚧',
-  redX: '❌',
-  gear: '⚙️',
-  cloud: '☁',
-  cloudWhite: '☁️',
-  beer: '🍺',
-  star: '⭐',
-  skullAndCrossbones: '☠️',
-  skull: '💀',
-  punch: '👊',
-  brokenHeart: '💔',
-  back: '🔙',
-  forward: '🔜',
-  restart: '🔄',
-  waiting: '⏳',
+  keyboardBlack: "⌨",
+  keyboardWhite: "⌨️",
+  gamepad: "🎮",
+  greenCheck: "✔️",
+  caution: "🚧",
+  redX: "❌",
+  gear: "⚙️",
+  cloud: "☁",
+  cloudWhite: "☁️",
+  beer: "🍺",
+  star: "⭐",
+  skullAndCrossbones: "☠️",
+  skull: "💀",
+  punch: "👊",
+  brokenHeart: "💔",
+  back: "🔙",
+  forward: "🔜",
+  restart: "🔄",
+  waiting: "⏳",
 };
 
 //🥃⭐🔫⚪​🍺​🍻​🥂​🍾​🥃
 
-export type Keydown = 'a' | 's' | 'd' | 'f' | 'j' | 'k' | 'l' | ';' | 'x';
+export type Keydown = "a" | "s" | "d" | "f" | "j" | "k" | "l" | ";" | "x";
 
-export type PowerStateCharacterName = 'dark' | 'light' | 'none';
+export type PowerStateCharacterName = "dark" | "light" | "none";
 
-export type PowerStateChompName = 'dark' | 'none';
-export type PowerStateFlagName = 'light' | 'none';
+export type PowerStateChompName = "dark" | "none";
+export type PowerStateFlagName = "light" | "none";
 export interface PowerStateCharacter {
   name: PowerStateCharacterName;
   gameStamp: number;
