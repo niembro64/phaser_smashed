@@ -73,7 +73,7 @@ function Play() {
   const [numClicks, setNumClicks] = useState<number>(0);
   const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState<boolean>(false);
-  const [inputArray, setInputArray] = useState<InputType[]>([2, 3, 3, 3]);
+  const [inputArray, setInputArray] = useState<InputType[]>([2, 0, 0, 3]);
 
   const keyboardGroups: KeyboardGroup[][] = [
     [
