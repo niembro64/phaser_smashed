@@ -1,5 +1,5 @@
 import Game, { SCREEN_DIMENSIONS } from '../Game';
-import { Player, Position, xyVector } from '../interfaces';
+import { Player, Position, Velocity, xyVector } from '../interfaces';
 import { getNormalizedVector } from './damage';
 import {
   getNearestPlayerAliveXY,
@@ -141,6 +141,54 @@ export function getIsBotTooFarDown(player: Player, game: Game): boolean {
   return false;
 }
 
+export function getIsBotInPitAreaLeft(player: Player, game: Game): boolean {
+  let bot = player.char.sprite;
+  let left = SCREEN_DIMENSIONS.WIDTH * (17 / 34);
+  let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
+  let center = (left + right) / 2;
+  let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
+  let down = SCREEN_DIMENSIONS.HEIGHT * (19 / 19);
+
+  let centerLeft = (center + left) / 2;
+  let centerRight = (center + right) / 2;
+  if (bot.x > centerLeft && bot.x < center && bot.y > up && bot.y < down) {
+    return true;
+  }
+  return false;
+}
+
+export function getIsBotInPitAreaRight(player: Player, game: Game): boolean {
+  let bot = player.char.sprite;
+  let left = SCREEN_DIMENSIONS.WIDTH * (17 / 34);
+  let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
+  let center = (left + right) / 2;
+  let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
+  let down = SCREEN_DIMENSIONS.HEIGHT * (19 / 19);
+
+  let centerLeft = (center + left) / 2;
+  let centerRight = (center + right) / 2;
+  if (bot.x > centerRight && bot.x < right && bot.y > up && bot.y < down) {
+    return true;
+  }
+  return false;
+}
+
+export function getIsBotInPitArea(player: Player, game: Game): boolean {
+  let bot = player.char.sprite;
+  let left = SCREEN_DIMENSIONS.WIDTH * (17 / 34);
+  let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
+  let center = (left + right) / 2;
+  let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
+  let down = SCREEN_DIMENSIONS.HEIGHT * (19 / 19);
+
+  let centerLeft = (center + left) / 2;
+  let centerRight = (center + right) / 2;
+  if (bot.x > left && bot.x < right && bot.y > up && bot.y < down) {
+    return true;
+  }
+  return false;
+}
+
 export function updateMoveBot(
   player: Player,
   playerIndex: number,
@@ -161,11 +209,15 @@ export function updateMoveBot(
     bot.y
   );
 
-  let v = player.char.sprite.body.velocity;
+  let v: Velocity = player.char.sprite.body.velocity;
 
   let p = player.padCurr;
   let d = player.padDebounced;
   let t = player.char.sprite.body.touching;
+  let jumps = player.char.jumps;
+  let jumpIndex = player.char.jumpIndex;
+  let hasJump = player.char.jumps[jumpIndex] > 0.3;
+  let onLastJump = jumpIndex === jumps.length - 1;
 
   //////////////////////
   // MOVEMENT
@@ -188,7 +240,7 @@ export function updateMoveBot(
     (t.left || t.right) &&
     hasPlayerTouchedWallRecently(player)
   ) {
-    p.Y = true;
+    p.Y = p.Y ? false : true;
   } else if (
     //////////////////////
     // JUMPING OFF GROUND
@@ -210,7 +262,6 @@ export function updateMoveBot(
   } else {
     p.Y = false;
   }
-  console.log('padlong', player.padDebounced);
 
   //////////////////////
   // ENERGY ATTACK
@@ -249,11 +300,40 @@ export function updateMoveBot(
   }
 
   //////////////////////
-  // TOO FAR UP DOWN
+  // TOO FAR UP
   //////////////////////
   if (getIsBotTooFarUp(player, game)) {
     p.Y = false;
-  } else if (getIsBotTooFarDown(player, game)) {
-    p.Y = true;
   }
+
+  //////////////////////
+  // LEFT SIDE OF PIT
+  //////////////////////
+  if (v.y > 0 && onLastJump && getIsBotInPitAreaLeft(player, game)) {
+    p.left = true;
+    p.right = false;
+  }
+
+  //////////////////////
+  // RIGHT SIDE OF PIT
+  //////////////////////
+  if (v.y > 0 && onLastJump && getIsBotInPitAreaRight(player, game)) {
+    p.right = true;
+    p.left = false;
+  }
+
+  //////////////////////
+  // IN PIT
+  //////////////////////
+  if (getIsBotInPitArea(player, game)) {
+    p.up = true;
+
+    if (v.y > 300) {
+      p.Y = p.Y ? false : true;
+    }
+  } else {
+    p.up = false;
+  }
+
+  console.log('v.y', v.y);
 }
