@@ -1,7 +1,7 @@
-import Game from "../Game";
-import { Player, Position, xyVector } from "../interfaces";
-import { getNormalizedVector } from "./damage";
-import { getNearestPlayerAliveXY } from "./movement";
+import Game from '../Game';
+import { Player, Position, xyVector } from '../interfaces';
+import { getNormalizedVector } from './damage';
+import { getNearestPlayerAliveXY } from './movement';
 
 export function getIsBot(player: Player, game: Game): boolean {
   if (player.inputType === 3) {
@@ -28,7 +28,7 @@ export function updateMoveBot(
     nearestPlayerPosition.y
   );
 
-  console.log(nearestPlayerPosition);
+  // console.log(nearestPlayerPosition);
 
   if (movementVector.x > 0) {
     player.padCurr.right = true;
@@ -36,5 +36,14 @@ export function updateMoveBot(
   } else {
     player.padCurr.left = true;
     player.padCurr.right = false;
+  }
+
+  if (
+    player.char.sprite.body.touching.left ||
+    player.char.sprite.body.touching.right
+  ) {
+    player.padCurr.Y = true;
+  } else {
+    player.padCurr.Y = false;
   }
 }
