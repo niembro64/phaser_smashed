@@ -1,22 +1,22 @@
-import { useEffect, useRef, useState } from "react";
-import Phaser from "phaser";
-import Game from "../scenes/Game";
-import "../App.css";
-import "@fontsource/press-start-2p";
-import { setGameState } from "../scenes/helpers/state";
-import useSound from "use-sound";
-import html2canvas from "html2canvas";
-import ShakePositionPlugin from "phaser3-rex-plugins/plugins/shakeposition-plugin.js";
+import { useEffect, useRef, useState } from 'react';
+import Phaser from 'phaser';
+import Game from '../scenes/Game';
+import '../App.css';
+import '@fontsource/press-start-2p';
+import { setGameState } from '../scenes/helpers/state';
+import useSound from 'use-sound';
+import html2canvas from 'html2canvas';
+import ShakePositionPlugin from 'phaser3-rex-plugins/plugins/shakeposition-plugin.js';
 // @ts-ignore
-import importedWoah from "../sounds/BlackBetty_Woah.mp3";
+import importedWoah from '../sounds/BlackBetty_Woah.mp3';
 // @ts-ignore
-import importedBambalam from "../sounds/BlackBetty_Bambalam.mp3";
+import importedBambalam from '../sounds/BlackBetty_Bambalam.mp3';
 // @ts-ignore
-import importedTrance from "../sounds/trance.wav";
+import importedTrance from '../sounds/trance.wav';
 // @ts-ignore
-import importedStartSound from "../sounds/start.wav";
+import importedStartSound from '../sounds/start.wav';
 // @ts-ignore
-import importedBlipSound from "../sounds/game-start-liquid.wav";
+import importedBlipSound from '../sounds/game-start-liquid.wav';
 import {
   CharacterId,
   Debug,
@@ -30,18 +30,18 @@ import {
   emoji,
   KeyboardGroup,
   WorkingController,
-} from "../scenes/interfaces";
-import { debugInit, debugMax } from "../debugOptions";
+} from '../scenes/interfaces';
+import { debugInit, debugMax } from '../debugOptions';
 
 function Play() {
   let myPhaser: any = useRef(null);
 
-  const space: string = "&nbsp";
+  const space: string = '&nbsp';
 
   function captureScreenshot() {
-    console.log("captureScreenshot");
+    console.log('captureScreenshot');
     // Select the element that you want to capture a screenshot of
-    const element = document.querySelector("#top-level");
+    const element = document.querySelector('#top-level');
 
     // Use html2canvas to capture a screenshot of the element
     html2canvas(element as HTMLElement).then((canvas) => {
@@ -49,13 +49,13 @@ function Play() {
       const dataUrl = canvas.toDataURL();
 
       // Create an anchor element
-      const link = document.createElement("a");
+      const link = document.createElement('a');
 
       // Set the href of the anchor element to the data URL
       link.href = dataUrl;
 
       // Set the download attribute of the anchor element
-      link.download = "screenshot.png";
+      link.download = 'screenshot.png';
 
       // Click the anchor element to trigger the download
       link.click();
@@ -71,20 +71,20 @@ function Play() {
   const [startSound] = useSound(importedStartSound, { volume: 0.4 });
   const [blipSound] = useSound(importedBlipSound, { volume: 0.2 });
   const [numClicks, setNumClicks] = useState<number>(0);
-  const [webState, setWebState] = useState<WebState>("start");
+  const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState<boolean>(false);
   const [inputArray, setInputArray] = useState<InputType[]>([0, 2, 3, 0]);
 
   const keyboardGroups: KeyboardGroup[][] = [
     [
-      { left: "D-Pad", right: "W A S D" },
-      { left: "A X B Y", right: "F G H Space" },
-      { left: "L Select Start R", right: "R T Y U" },
+      { left: 'D-Pad', right: 'W A S D' },
+      { left: 'A X B Y', right: 'F G H Space' },
+      { left: 'L Select Start R', right: 'R T Y U' },
     ],
     [
-      { left: "ArrowKeys", right: "D-Pad" },
-      { left: "A X B Y", right: "4 5 6 Enter" },
-      { left: "L Select Start R", right: "7 8 9 +" },
+      { left: 'ArrowKeys', right: 'D-Pad' },
+      { left: 'A X B Y', right: '4 5 6 Enter' },
+      { left: 'L Select Start R', right: '7 8 9 +' },
     ],
   ];
 
@@ -92,24 +92,24 @@ function Play() {
     WorkingController[]
   >([
     {
-      name: "Wired | SNES | iNNEXT",
-      url: "https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/",
+      name: 'Wired | SNES | iNNEXT',
+      url: 'https://www.amazon.com/dp/B01MYUDDCV?ref=ppx_yo2ov_dt_b_product_details&th=1/',
     },
     {
-      name: "Wired | N64 | KIWITATA",
-      url: "https://www.amazon.com/gp/product/B08X677HR4/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1",
+      name: 'Wired | N64 | KIWITATA',
+      url: 'https://www.amazon.com/gp/product/B08X677HR4/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',
     },
     {
-      name: "Wired | GameCube | Mekela NGC",
-      url: "https://www.amazon.com/Mekela-5-8-foot-classic-controller-Windows/dp/B07GSSXS84/ref=sr_1_5?crid=3N3MSRPF8INFK&keywords=Mekela+5.8+feet+Classic+USB+wired+NGC+Controller&qid=1673335159&sprefix=mekela+5.8+feet+classic+usb+wired+ngc+controller%2Caps%2C68&sr=8-5",
+      name: 'Wired | GameCube | Mekela NGC',
+      url: 'https://www.amazon.com/Mekela-5-8-foot-classic-controller-Windows/dp/B07GSSXS84/ref=sr_1_5?crid=3N3MSRPF8INFK&keywords=Mekela+5.8+feet+Classic+USB+wired+NGC+Controller&qid=1673335159&sprefix=mekela+5.8+feet+classic+usb+wired+ngc+controller%2Caps%2C68&sr=8-5',
     },
     {
-      name: "Wired | Switch | PowerA | Nintendo",
-      url: "https://www.amazon.com/gp/product/B07PDJ45BT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1",
+      name: 'Wired | Switch | PowerA | Nintendo',
+      url: 'https://www.amazon.com/gp/product/B07PDJ45BT/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',
     },
     {
-      name: "Wireless | Switch | Pro | Nintendo",
-      url: "https://www.amazon.com/gp/product/B01NAWKYZ0/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1",
+      name: 'Wireless | Switch | Pro | Nintendo',
+      url: 'https://www.amazon.com/gp/product/B01NAWKYZ0/ref=ppx_yo_dt_b_search_asin_title?ie=UTF8&psc=1',
     },
   ]);
 
@@ -118,50 +118,50 @@ function Play() {
       {
         characterId: 2,
         scale: 1,
-        name: "Pikachu",
+        name: 'Pikachu',
       },
       {
         characterId: 0,
         scale: 0.9,
-        name: "Mario",
+        name: 'Mario',
       },
       {
         characterId: 1,
         scale: 0.9,
-        name: "Link",
+        name: 'Link',
       },
       {
         characterId: 3,
         scale: 0.7,
-        name: "Kirby",
+        name: 'Kirby',
       },
     ],
   });
 
   // always keep Chez and BlackChez at positions 4 and 5
   const smashConfigScaleArray: PlayerConfig[] = [
-    { characterId: 0, scale: 0.9, name: "Mario" },
-    { characterId: 1, scale: 0.9, name: "Link" },
-    { characterId: 2, scale: 1, name: "Pikachu" },
-    { characterId: 3, scale: 0.7, name: "Kirby" },
-    { characterId: 4, scale: 1.2, name: "Chez" },
-    { characterId: 5, scale: 1.2, name: "BlackChez" },
-    { characterId: 6, scale: 0.6, name: "GreenKoopa" },
-    { characterId: 7, scale: 0.6, name: "RedKoopa" },
-    { characterId: 8, scale: 0.6, name: "BlueKoopa" },
+    { characterId: 0, scale: 0.9, name: 'Mario' },
+    { characterId: 1, scale: 0.9, name: 'Link' },
+    { characterId: 2, scale: 1, name: 'Pikachu' },
+    { characterId: 3, scale: 0.7, name: 'Kirby' },
+    { characterId: 4, scale: 1.2, name: 'Chez' },
+    { characterId: 5, scale: 1.2, name: 'BlackChez' },
+    { characterId: 6, scale: 0.6, name: 'GreenKoopa' },
+    { characterId: 7, scale: 0.6, name: 'RedKoopa' },
+    { characterId: 8, scale: 0.6, name: 'BlueKoopa' },
   ];
   let config: Phaser.Types.Core.GameConfig = {
     plugins: {
       global: [
         {
-          key: "rexShakePosition",
+          key: 'rexShakePosition',
           plugin: ShakePositionPlugin,
           start: true,
         },
       ],
     },
     transparent: true,
-    title: "Smashed",
+    title: 'Smashed',
     antialias: true,
     pixelArt: false,
     scale: {
@@ -171,13 +171,13 @@ function Play() {
       height: 1080,
     },
     type: Phaser.AUTO,
-    parent: "phaser-container",
-    backgroundColor: "#00000055",
+    parent: 'phaser-container',
+    backgroundColor: '#00000055',
     input: {
       gamepad: true,
     },
     physics: {
-      default: "arcade",
+      default: 'arcade',
       arcade: {
         gravity: { y: 3000 },
         debug: debug.DevMode,
@@ -189,21 +189,21 @@ function Play() {
   let setTimeoutQuotesLengthReStart: number = 1500;
   const [quotesRandomNumber, setQuotesRandomNumber] = useState(0);
   const quotes: Quote[] = [
-    { name: "Breezy", text: "The turtle will die." },
-    { name: "TR3", text: "Smashed." },
-    { name: "Chadams", text: "Two shots... two shots." },
-    { name: "Eddie-Z", text: "He'll do it again, yeah!" },
+    { name: 'Breezy', text: 'The turtle will die.' },
+    { name: 'TR3', text: 'Smashed.' },
+    { name: 'Chadams', text: 'Two shots... two shots.' },
+    { name: 'Eddie-Z', text: "He'll do it again, yeah!" },
     {
-      name: "TR3",
-      text: "How am I supposed to make more than that... shit... happen?",
+      name: 'TR3',
+      text: 'How am I supposed to make more than that... shit... happen?',
     },
     {
-      name: "DDj",
+      name: 'DDj',
       text: "It's safe to say we're not going to the bars tonite.",
     },
     {
-      name: "DDj",
-      text: "...yes you are.",
+      name: 'DDj',
+      text: '...yes you are.',
     },
     // { name: 'Chadams', text: 'AAAYYYUUUGGGGHHHH!!' },
     // { name: 'Chadams', text: 'Spike Enerjeaoah.' },
@@ -227,8 +227,8 @@ function Play() {
   const componentPseudoLoad = useRef(true);
   const intervalClock: any = useRef(null);
 
-  const p1Keys: string[] = ["w", "a", "s", "d"];
-  const p2Keys: string[] = ["ArrowUp", "ArrowLeft", "ArrowDown", "ArrowRight"];
+  const p1Keys: string[] = ['w', 'a', 's', 'd'];
+  const p2Keys: string[] = ['ArrowUp', 'ArrowLeft', 'ArrowDown', 'ArrowRight'];
 
   const [p1KeysTouched, setP1KeysTouched] = useState<boolean>(false);
   const [p2KeysTouched, setP2KeysTouched] = useState<boolean>(false);
@@ -246,7 +246,7 @@ function Play() {
 
     trance.pause();
     startSound();
-    setWebState("play");
+    setWebState('play');
 
     let players = [...smashConfig.players];
     // let newPlayers: {
@@ -275,6 +275,14 @@ function Play() {
             input: inputArray[inputIndex],
           });
           break;
+        case 3:
+          newPlayers.push({
+            name: players[inputIndex].name,
+            characterId: players[inputIndex].characterId,
+            scale: players[inputIndex].scale,
+            input: inputArray[inputIndex],
+          });
+          break;
         default:
       }
       // if (input.state) {
@@ -293,9 +301,9 @@ function Play() {
     }
     setTimeout(() => {
       myPhaser.current = new Phaser.Game(config);
-      myPhaser.current.registry.set("parentContext", Play);
-      myPhaser.current.registry.set("smashConfig", newSmashConfig);
-      myPhaser.current.registry.set("debug", debug);
+      myPhaser.current.registry.set('parentContext', Play);
+      myPhaser.current.registry.set('smashConfig', newSmashConfig);
+      myPhaser.current.registry.set('debug', debug);
     }, setTimeoutQuotesLengthStart);
 
     setShowLoaderIntervalFunction();
@@ -305,7 +313,7 @@ function Play() {
     setShowLoader(true);
     const myInterval = setInterval(() => {
       console.log(
-        "myPhaser.current?.scene?.keys?.game?.loaded",
+        'myPhaser.current?.scene?.keys?.game?.loaded',
         myPhaser?.current?.scene?.keys?.game?.loaded
       );
       if (myPhaser?.current?.scene?.keys?.game?.loaded) {
@@ -371,7 +379,7 @@ function Play() {
       playNumber.current += 1;
       trance.play();
       trance.addEventListener(
-        "ended",
+        'ended',
         () => {
           setFirstCharacterSlot(4);
         },
@@ -384,7 +392,7 @@ function Play() {
   };
 
   const setFirstCharacterSlot = (charId: CharacterId): void => {
-    if (debug.AllowCharsChez || webState === "play") {
+    if (debug.AllowCharsChez || webState === 'play') {
       return;
     }
     if (charId === 4) {
@@ -427,7 +435,7 @@ function Play() {
 
   function ensureTypeCharacterId<CharacterId>(
     argument: CharacterId | undefined | null,
-    message: string = "This value was promised to be there."
+    message: string = 'This value was promised to be there.'
   ): CharacterId {
     if (argument === undefined || argument === null) {
       throw new TypeError(message);
@@ -438,7 +446,7 @@ function Play() {
 
   function ensureTypeCharacterName<CharacterName>(
     argument: CharacterName | undefined | null,
-    message: string = "This value was promised to be there."
+    message: string = 'This value was promised to be there.'
   ): CharacterName {
     if (argument === undefined || argument === null) {
       throw new TypeError(message);
@@ -498,36 +506,36 @@ function Play() {
   const [showOptions, setShowOptions] = useState(false);
 
   const characterMoves: CharacterMove[] = [
-    { button: "D-Pad", move: "Move", status: emoji.greenCheck },
-    { button: "Ground + X", move: "Jump", status: emoji.greenCheck },
-    { button: "Air + X", move: "Jump-Double", status: emoji.greenCheck },
-    { button: "Air + D-Pad + A", move: "Jump-Energy", status: emoji.caution },
-    { button: "B", move: "Attack-Physical", status: emoji.caution },
-    { button: "Y", move: "Attack-Energy", status: emoji.greenCheck },
-    { button: "Forward + B", move: "Attack-Smash", status: emoji.redX },
+    { button: 'D-Pad', move: 'Move', status: emoji.greenCheck },
+    { button: 'Ground + X', move: 'Jump', status: emoji.greenCheck },
+    { button: 'Air + X', move: 'Jump-Double', status: emoji.greenCheck },
+    { button: 'Air + D-Pad + A', move: 'Jump-Energy', status: emoji.caution },
+    { button: 'B', move: 'Attack-Physical', status: emoji.caution },
+    { button: 'Y', move: 'Attack-Energy', status: emoji.greenCheck },
+    { button: 'Forward + B', move: 'Attack-Smash', status: emoji.redX },
     {
-      button: "Air + Wall + Forward",
-      move: "Slide-Wall",
+      button: 'Air + Wall + Forward',
+      move: 'Slide-Wall',
       status: emoji.greenCheck,
     },
-    { button: "L + R", move: "Pause", status: emoji.greenCheck },
-    { button: "Paused + Any Button", move: "Ready", status: emoji.greenCheck },
-    { button: "Paused + All Ready", move: "UnPause", status: emoji.greenCheck },
+    { button: 'L + R', move: 'Pause', status: emoji.greenCheck },
+    { button: 'Paused + Any Button', move: 'Ready', status: emoji.greenCheck },
+    { button: 'Paused + All Ready', move: 'UnPause', status: emoji.greenCheck },
   ];
 
   const clickPauseParent = () => {
-    if (webState === "play") {
+    if (webState === 'play') {
       if (
         !(
           myPhaser.current.scene.keys.game.gameState.name ===
-            "game-state-paused" ||
+            'game-state-paused' ||
           myPhaser.current?.scene?.keys?.game.gameState.name ===
-            "game-state-first-blood" ||
+            'game-state-first-blood' ||
           myPhaser.current?.scene?.keys?.game.gameState.name ===
-            "game-state-screen-clear"
+            'game-state-screen-clear'
         )
       ) {
-        setGameState(myPhaser.current?.scene?.keys?.game, "game-state-paused");
+        setGameState(myPhaser.current?.scene?.keys?.game, 'game-state-paused');
       }
     }
   };
@@ -548,7 +556,7 @@ function Play() {
     clickPauseParent();
 
     switch (buttonName) {
-      case "Back":
+      case 'Back':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -556,7 +564,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case "ReStart":
+      case 'ReStart':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -564,7 +572,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case "Controls":
+      case 'Controls':
         setShowControls(!showControls);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -572,7 +580,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case "Controllers":
+      case 'Controllers':
         setShowControls(false);
         setShowControllers(!showControllers);
         setShowRulesN64(false);
@@ -580,7 +588,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case "Rules-N64":
+      case 'Rules-N64':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(!showRulesN64);
@@ -588,7 +596,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case "About":
+      case 'About':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -596,7 +604,7 @@ function Play() {
         setShowHistory(false);
         setShowOptions(false);
         break;
-      case "History":
+      case 'History':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -604,7 +612,7 @@ function Play() {
         setShowHistory(!showHistory);
         setShowOptions(false);
         break;
-      case "Options":
+      case 'Options':
         setShowControls(false);
         setShowControllers(false);
         setShowRulesN64(false);
@@ -634,10 +642,10 @@ function Play() {
   const onEventKeyboard = (event: any) => {
     let k = event.key;
 
-    if (webState === "start") {
+    if (webState === 'start') {
       let pIndex;
       switch (k) {
-        case "Enter":
+        case 'Enter':
           onClickStartStartButton();
           break;
         // case 'a':
@@ -664,37 +672,37 @@ function Play() {
         //     onClickRotateSelection(pIndex);
         //   }
         //   break;
-        case "j":
+        case 'j':
           onClickOscura(0);
           break;
-        case "k":
+        case 'k':
           onClickOscura(1);
           break;
-        case "l":
+        case 'l':
           onClickOscura(2);
           break;
-        case ";":
+        case ';':
           onClickOscura(3);
           break;
-        case "u":
+        case 'u':
           pIndex = 0;
           if (inputArray[pIndex] !== 0) {
             onClickRotateSelection(pIndex);
           }
           break;
-        case "i":
+        case 'i':
           pIndex = 1;
           if (inputArray[pIndex] !== 0) {
             onClickRotateSelection(pIndex);
           }
           break;
-        case "o":
+        case 'o':
           pIndex = 2;
           if (inputArray[pIndex] !== 0) {
             onClickRotateSelection(pIndex);
           }
           break;
-        case "p":
+        case 'p':
           pIndex = 3;
           if (inputArray[pIndex] !== 0) {
             onClickRotateSelection(pIndex);
@@ -703,7 +711,7 @@ function Play() {
       }
     }
 
-    if (webState === "play") {
+    if (webState === 'play') {
       if (p1Keys.includes(k)) {
         setP1KeysTouched(true);
       }
@@ -711,10 +719,10 @@ function Play() {
         setP2KeysTouched(true);
       }
       switch (k) {
-        case "Backspace":
+        case 'Backspace':
           onClickReStartEventHandler();
           break;
-        case "Escape":
+        case 'Escape':
           onClickBackEventHandler();
           break;
       }
@@ -727,7 +735,7 @@ function Play() {
   };
 
   useEffect(() => {
-    window.addEventListener<"keydown">("keydown", cb, { once: true });
+    window.addEventListener<'keydown'>('keydown', cb, { once: true });
   }, [anyKeyWasPressed]);
 
   const onClickReStartEventHandler = () => {
@@ -735,7 +743,7 @@ function Play() {
       startSound();
       myPhaser.current.scene.keys.game.loaded = false;
       setShowLoaderIntervalFunction();
-      onClickPlayNavButtons("ReStart");
+      onClickPlayNavButtons('ReStart');
       setQuotesRandomNumber(Math.floor(Math.random() * quotes.length));
 
       let newSmashConfig = JSON.parse(
@@ -754,9 +762,9 @@ function Play() {
       }
       setTimeout(() => {
         myPhaser.current = new Phaser.Game(config);
-        myPhaser.current.registry.set("parentContext", Play);
-        myPhaser.current.registry.set("smashConfig", newSmashConfig);
-        myPhaser.current.registry.set("debug", newDebug);
+        myPhaser.current.registry.set('parentContext', Play);
+        myPhaser.current.registry.set('smashConfig', newSmashConfig);
+        myPhaser.current.registry.set('debug', newDebug);
       }, setTimeoutQuotesLengthReStart);
     }
   };
@@ -789,8 +797,8 @@ function Play() {
     if (myPhaser?.current?.scene?.keys?.game) {
       myPhaser.current.scene.keys.game.loaded = false;
     }
-    onClickPlayNavButtons("Back");
-    setWebState("start");
+    onClickPlayNavButtons('Back');
+    setWebState('start');
     setNumClicks(numClicks + 1);
     clearInterval(intervalClock.current);
     intervalClock.current = null;
@@ -820,13 +828,13 @@ function Play() {
   }, [p1KeysTouched, p2KeysTouched]);
 
   const getMaxFromKey = (key: string) => {
-    console.log("getInitFromKey", key);
+    console.log('getInitFromKey', key);
 
     let newVal = debugMax[key as keyof Debug];
     return newVal;
   };
 
-  const [text, setText] = useState("");
+  const [text, setText] = useState('');
   const interval: any = useRef(null);
   // const [quoteCss, setQuoteCss] = useState<boolean>(false);
 
@@ -841,7 +849,7 @@ function Play() {
       }
 
       let tempIndex = 0;
-      let tempText = "";
+      let tempText = '';
       interval.current = setInterval(function () {
         tempText = quotes[quotesRandomNumber].text.substring(0, tempIndex + 1);
         setText(tempText);
@@ -861,13 +869,13 @@ function Play() {
     <div id="top-level" className="over-div">
       {/* <div className="download-screenshot">Download Screenshot</div> */}
       {!debug.DevMode &&
-        webState !== "start" &&
+        webState !== 'start' &&
         numKeyboards === 2 &&
         !bothKeysTouched && (
           <div
             className="keyboard-explainer-double"
             onClick={() => {
-              onClickPlayNavButtons("Controls");
+              onClickPlayNavButtons('Controls');
             }}
           >
             {!p1KeysTouched && (
@@ -887,13 +895,13 @@ function Play() {
           </div>
         )}
       {!debug.DevMode &&
-        webState !== "start" &&
+        webState !== 'start' &&
         numKeyboards === 1 &&
         !p1KeysTouched && (
           <div
             className="keyboard-explainer-single"
             onClick={() => {
-              onClickPlayNavButtons("Controls");
+              onClickPlayNavButtons('Controls');
             }}
           >
             {!p1KeysTouched && (
@@ -905,7 +913,7 @@ function Play() {
             )}
           </div>
         )}
-      {webState !== "start" && showLoader && (
+      {webState !== 'start' && showLoader && (
         // {true && (
         <div className="loader">
           {quotesRandomNumber % 2 === 0 && (
@@ -960,7 +968,7 @@ function Play() {
             />
           </div>
           {debug.TypedLoadingText && (
-            <p className={".first-loader-p"}>{text}</p>
+            <p className={'.first-loader-p'}>{text}</p>
           )}
           {!debug.TypedLoadingText && (
             <p className="first-loader-p">{quotes[quotesRandomNumber].text}</p>
@@ -981,7 +989,7 @@ function Play() {
         </div>
       )}
       <div className="phaser-container" id="phaser-container"></div>
-      {webState === "start" && (
+      {webState === 'start' && (
         <div className="start-class-div">
           <div className="startTitleWrapper2">
             <div className="startTitleWrapper1">
@@ -1012,14 +1020,14 @@ function Play() {
                           inputArray[pIndex] === 2) && (
                           <img
                             className={
-                              "startImage" + (pIndex > 1 ? "Inverse" : "Normal")
+                              'startImage' + (pIndex > 1 ? 'Inverse' : 'Normal')
                             }
                             src={
-                              "images/character_" +
+                              'images/character_' +
                               p.characterId.toString() +
-                              "_cropped.png"
+                              '_cropped.png'
                             }
-                            width={(55 * p.scale).toString() + "%"}
+                            width={(55 * p.scale).toString() + '%'}
                             alt="char"
                           />
                         )}
@@ -1039,14 +1047,14 @@ function Play() {
                           inputArray[pIndex] === 2) && (
                           <img
                             className={
-                              "startImage" + (pIndex > 1 ? "Inverse" : "Normal")
+                              'startImage' + (pIndex > 1 ? 'Inverse' : 'Normal')
                             }
                             src={
-                              "images/character_" +
+                              'images/character_' +
                               p.characterId.toString() +
-                              "_cropped.png"
+                              '_cropped.png'
                             }
-                            width={(55 * p.scale).toString() + "%"}
+                            width={(55 * p.scale).toString() + '%'}
                             alt="char"
                           />
                         )}
@@ -1160,34 +1168,34 @@ function Play() {
             alt="question mark"
             onClick={captureScreenshot}
           />
-          {webState === "start" && (
+          {webState === 'start' && (
             <div
               className="link-tag"
               onClick={() => {
-                onClickPlayNavButtons("Options");
+                onClickPlayNavButtons('Options');
               }}
             >
               {showOptions && <span className="dark-span">Options</span>}
               {!showOptions && <span>Options</span>}
             </div>
           )}
-          {webState === "start" && (
+          {webState === 'start' && (
             <div
               className="link-tag"
               onClick={() => {
-                onClickPlayNavButtons("Controllers");
+                onClickPlayNavButtons('Controllers');
               }}
             >
               {showControllers && <span className="dark-span">Pads</span>}
               {!showControllers && <span>Pads</span>}
             </div>
           )}
-          {webState !== "start" && (
+          {webState !== 'start' && (
             <div className="link-tag" onClick={onClickBackEventHandler}>
               <span>Back</span>
             </div>
           )}
-          {webState !== "start" && (
+          {webState !== 'start' && (
             <div className="link-tag" onClick={onClickReStartEventHandler}>
               <span>ReStart</span>
             </div>
@@ -1196,7 +1204,7 @@ function Play() {
           <div
             className="link-tag"
             onClick={() => {
-              onClickPlayNavButtons("Controls");
+              onClickPlayNavButtons('Controls');
             }}
           >
             {showControls && <span className="dark-span">Buttons</span>}
@@ -1205,17 +1213,17 @@ function Play() {
           <div
             className="link-tag"
             onClick={() => {
-              onClickPlayNavButtons("Rules-N64");
+              onClickPlayNavButtons('Rules-N64');
             }}
           >
             {showRulesN64 && <span className="dark-span">Rules</span>}
             {!showRulesN64 && <span>Rules</span>}
           </div>
-          {webState === "start" && (
+          {webState === 'start' && (
             <div
               className="link-tag"
               onClick={() => {
-                onClickPlayNavButtons("About");
+                onClickPlayNavButtons('About');
               }}
             >
               {showAbout && <span className="dark-span">About</span>}
@@ -1228,7 +1236,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Options");
+                onClickPlayNavBody('Options');
               }}
             >
               <h1>Debug Options</h1>
@@ -1241,7 +1249,7 @@ function Play() {
                       onClick={(e) => {
                         blipSound();
                         e.stopPropagation();
-                        if (typeof value === "number") {
+                        if (typeof value === 'number') {
                           setDebug((prevState) => ({
                             ...prevState,
                             [key]:
@@ -1252,7 +1260,7 @@ function Play() {
                           console.log(index, key, value);
                         }
 
-                        if (typeof value === "boolean") {
+                        if (typeof value === 'boolean') {
                           setDebug((prevState) => ({
                             ...prevState,
                             [key]: !value,
@@ -1263,7 +1271,7 @@ function Play() {
                     >
                       <div className="debug-value">
                         <p>
-                          {typeof value !== "boolean"
+                          {typeof value !== 'boolean'
                             ? value
                             : value
                             ? emoji.greenCheck
@@ -1283,7 +1291,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Controls");
+                onClickPlayNavBody('Controls');
               }}
             >
               <h1>Buttons</h1>
@@ -1325,7 +1333,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Rules-N64");
+                onClickPlayNavBody('Rules-N64');
               }}
             >
               <h1>Rules-N64</h1>
@@ -1344,7 +1352,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("Controllers");
+                onClickPlayNavBody('Controllers');
               }}
             >
               <h1>GamePads</h1>
@@ -1382,7 +1390,7 @@ function Play() {
             <div
               className="popup"
               onClick={() => {
-                onClickPlayNavBody("About");
+                onClickPlayNavBody('About');
               }}
             >
               <h1>About</h1>
@@ -1418,7 +1426,7 @@ function Play() {
                 <li>Bootstrap 5</li>
                 <li
                   onMouseDown={() => {
-                    console.log("MOUSE ENTER");
+                    console.log('MOUSE ENTER');
                     setFirstCharacterSlot(5);
                   }}
                 >
@@ -1430,7 +1438,7 @@ function Play() {
                 src="./images/character_3_cropped.png"
                 alt="kirby"
                 onMouseDown={() => {
-                  console.log("MOUSE DOWN");
+                  console.log('MOUSE DOWN');
                   setFirstCharacterSlot(5);
                 }}
               />

@@ -1,14 +1,14 @@
-import Game, { SCREEN_DIMENSIONS } from "../Game";
-import { InputType, Player } from "../interfaces";
+import Game, { SCREEN_DIMENSIONS } from '../Game';
+import { InputType, Player } from '../interfaces';
 import {
   getIsAttackEnergyOffscreen,
   isAttackEnergyNearPlayer,
   setPhysicsAttackEnergyOff,
   setPhysicsAttackEnergyOn,
-} from "./attacks";
-import { getIsBot, updateMoveBot } from "./bot";
-import { updatePadCurrKeyboard } from "./keyboard";
-import { getHasBeenGameDurationSinceMoment } from "./powers";
+} from './attacks';
+import { getIsBot, updateMoveBot } from './bot';
+import { updatePadCurrKeyboard } from './keyboard';
+import { getHasBeenGameDurationSinceMoment } from './powers';
 
 export function updateGamePadsMaster(game: Game): void {
   let numPlayers = game.players.length;
@@ -29,18 +29,9 @@ export function updateGamePadsMaster(game: Game): void {
       case 0:
         break;
       case 1:
-        console.log("GP MASTER");
-        let pBot: boolean = getIsBot(player, game);
-
-        if (pBot) {
-          console.log(player.char.name, " IS A BOT");
-
-          updateMoveBot(player, playerIndex, game);
-          break;
-        }
         if (player?.gamepad) {
           if (player?.gamepad?.axes?.length === 4) {
-            console.log("CONTROLLER TYPE: PRO", player.gamepad);
+            console.log('CONTROLLER TYPE: PRO', player.gamepad);
             updatePadCurrControllerTypePro(player, game);
           } else if (player?.gamepad?.axes?.length) {
             updatePadCurrControllerTypeHat(player, game);
@@ -51,6 +42,9 @@ export function updateGamePadsMaster(game: Game): void {
         break;
       case 2:
         updatePadCurrKeyboard(player, game);
+        break;
+      case 3:
+        updateMoveBot(player, playerIndex, game);
         break;
       default:
         break;
@@ -87,8 +81,8 @@ export function updatePadCurrControllerTypePro(
       player.padCurr.up = false;
       player.padCurr.down = false;
     }
-    console.log("stickX", stickX);
-    console.log("stickY", stickY);
+    console.log('stickX', stickX);
+    console.log('stickY', stickY);
     // if (stickX === -1 && stickY === -1) {
     //   player.padCurr.left = true;
     //   player.padCurr.right = !player.padCurr.left;
@@ -283,7 +277,7 @@ export function updatePadCurrControllerTypeButtons(
 }
 
 export function getControllerIsRealController(gamepad: Gamepad): boolean {
-  if (gamepad.id.includes("Jabra")) {
+  if (gamepad.id.includes('Jabra')) {
     return false;
   }
   return true;
@@ -362,7 +356,7 @@ export function resetMyHitByMatrix(
   playerIndex: number,
   game: Game
 ): void {
-  if (player.state.name === "player-state-hurt") {
+  if (player.state.name === 'player-state-hurt') {
     return;
   }
   for (let j = 0; j < game.players.length; j++) {
@@ -643,7 +637,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     )
   ) {
     // console.log('holding');
-    player.char.attackEnergy.state = "holding";
+    player.char.attackEnergy.state = 'holding';
     setPhysicsAttackEnergyOff(player);
     updatePlayerHoldAttackEnergy(player);
   } else if (
@@ -658,7 +652,7 @@ export function updateAttackEnergy(player: Player, game: Game): void {
     // console.log('released');
     game.SOUND_GUN.play();
     player.char.attackEnergy.timestampThrow = game.gameNanoseconds;
-    player.char.attackEnergy.state = "released";
+    player.char.attackEnergy.state = 'released';
     setPhysicsAttackEnergyOn(player);
     playerShootAttackEnergy(player, game);
   }
@@ -700,7 +694,7 @@ export function updatePadPreviousAndDebounced(game: Game): void {
     let k = game.GAMEPAD_DEBOUNCE_NUMBER_CYCLES;
 
     if (c.up !== p.up) {
-      console.log("c.up", c.up, "p.up", p.up);
+      console.log('c.up', c.up, 'p.up', p.up);
     }
     p.up = c.up;
     p.down = c.down;
@@ -775,8 +769,8 @@ export function debugUpdateControllersPrintConnected(game: Game): void {
     return;
   }
   game.players.forEach((player, playerIndex) => {
-    console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad);
-    console.log("PLAYER", playerIndex, "CONTROLLER", player?.gamepad.id);
+    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad);
+    console.log('PLAYER', playerIndex, 'CONTROLLER', player?.gamepad.id);
   });
 }
 
@@ -934,39 +928,39 @@ export function debugUpdatePrintAllControllerButtonsWhenActive(
         // );
       }
       if (player.padCurr.B) {
-        console.log(player.playerId, "B");
+        console.log(player.playerId, 'B');
       }
       if (player.padCurr.A) {
-        console.log(player.playerId, "A");
+        console.log(player.playerId, 'A');
       }
       if (player.padCurr.X) {
-        console.log(player.playerId, "X");
+        console.log(player.playerId, 'X');
       }
       if (player.padCurr.Y) {
-        console.log(player.playerId, "Y");
+        console.log(player.playerId, 'Y');
         // player.char.fast = 2;
       }
 
       //  D Pad
       if (player.padCurr.down) {
-        console.log(player.playerId, "down");
+        console.log(player.playerId, 'down');
       }
       if (player.padCurr.up) {
-        console.log(player.playerId, "up");
+        console.log(player.playerId, 'up');
       }
       if (player.padCurr.left) {
-        console.log(player.playerId, "left");
+        console.log(player.playerId, 'left');
       }
       if (player.padCurr.right) {
-        console.log(player.playerId, "right");
+        console.log(player.playerId, 'right');
       }
 
       // L R Buttons
       if (player.padCurr.L) {
-        console.log(player.playerId, "L");
+        console.log(player.playerId, 'L');
       }
       if (player.padCurr.R) {
-        console.log(player.playerId, "R");
+        console.log(player.playerId, 'R');
       }
 
       // if (player.gamepad.B) {
