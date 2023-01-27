@@ -73,7 +73,7 @@ function Play() {
   const [numClicks, setNumClicks] = useState<number>(0);
   const [webState, setWebState] = useState<WebState>('start');
   const [showLoader, setShowLoader] = useState<boolean>(false);
-  const [inputArray, setInputArray] = useState<InputType[]>([0, 2, 3, 0]);
+  const [inputArray, setInputArray] = useState<InputType[]>([2, 3, 3, 3]);
 
   const keyboardGroups: KeyboardGroup[][] = [
     [
@@ -116,24 +116,24 @@ function Play() {
   const [smashConfig, setSmashConfig] = useState<SmashConfig>({
     players: [
       {
-        characterId: 2,
-        scale: 1,
-        name: 'Pikachu',
-      },
-      {
         characterId: 0,
-        scale: 0.9,
+        scale: 1,
         name: 'Mario',
       },
       {
-        characterId: 1,
-        scale: 0.9,
-        name: 'Link',
+        characterId: 7,
+        scale: 0.6,
+        name: 'RedKoopa',
       },
       {
-        characterId: 3,
-        scale: 0.7,
-        name: 'Kirby',
+        characterId: 6,
+        scale: 0.6,
+        name: 'GreenKoopa',
+      },
+      {
+        characterId: 8,
+        scale: 0.6,
+        name: 'BlueKoopa',
       },
     ],
   });

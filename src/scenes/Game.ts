@@ -1902,7 +1902,7 @@ export default class Game extends Phaser.Scene {
         zoom: 0.7,
         vel: { x: 0, y: 0 },
         pos: { x: 0, y: 0 },
-        jumps: [1, 0],
+        jumps: [1, 0.8, 0],
         jumpPower: 1,
         jumpIndex: 0,
         jumpFloat: 1,

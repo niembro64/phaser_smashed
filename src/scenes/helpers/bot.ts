@@ -49,9 +49,11 @@ export function getSameHorizontalSlice(player: Player, game: Game): boolean {
     nearestPlayerPosition = getNearestPlayerAliveXY(player, playerIndex, game);
   });
 
+  let bot = player.char.sprite;
+
   if (
-    player.char.sprite.Y > nearestPlayerPosition.y - 50 &&
-    player.char.sprite.Y < nearestPlayerPosition.y + 120
+    nearestPlayerPosition.y > bot.Y + 120 &&
+    nearestPlayerPosition.y < bot.Y - 50
   ) {
     return true;
   }
@@ -65,13 +67,15 @@ export function getSameVerticalSlice(player: Player, game: Game): boolean {
     y: SCREEN_DIMENSIONS.HEIGHT / 2,
   };
 
+  let bot = player.char.sprite;
+
   game.players.forEach((player, playerIndex) => {
     nearestPlayerPosition = getNearestPlayerAliveXY(player, playerIndex, game);
   });
 
   if (
-    player.char.sprite.X > nearestPlayerPosition.x - 200 &&
-    player.char.sprite.X < nearestPlayerPosition.x + 200
+    nearestPlayerPosition.x > bot.x - 200 &&
+    nearestPlayerPosition.x < bot.x + 200
   ) {
     return true;
   }
@@ -88,18 +92,52 @@ export function getIsBotFacingAnotherPlayer(
     y: SCREEN_DIMENSIONS.HEIGHT / 2,
   };
 
+  let bot = player.char.sprite;
+
   game.players.forEach((player, playerIndex) => {
     nearestPlayerPosition = getNearestPlayerAliveXY(player, playerIndex, game);
   });
 
   if (
-    (player.char.sprite.x > nearestPlayerPosition.x &&
-      !player.char.sprite.flipX) ||
-    (player.char.sprite.x < nearestPlayerPosition.x && player.char.sprite.flipX)
+    (bot.x > nearestPlayerPosition.x && bot.flipX) ||
+    (bot.x < nearestPlayerPosition.x && !bot.flipX)
   ) {
     return true;
   }
 
+  return false;
+}
+
+export function getIsBotTooFarLeft(player: Player, game: Game): boolean {
+  let bot = player.char.sprite;
+  let left = SCREEN_DIMENSIONS.WIDTH * 0.18;
+  if (bot.x < left) {
+    return true;
+  }
+  return false;
+}
+export function getIsBotTooFarRight(player: Player, game: Game): boolean {
+  let bot = player.char.sprite;
+  let right = SCREEN_DIMENSIONS.WIDTH * 0.93;
+  if (bot.x > right) {
+    return true;
+  }
+  return false;
+}
+export function getIsBotTooFarUp(player: Player, game: Game): boolean {
+  let bot = player.char.sprite;
+  let up = SCREEN_DIMENSIONS.HEIGHT * 0.2;
+  if (bot.y < up) {
+    return true;
+  }
+  return false;
+}
+export function getIsBotTooFarDown(player: Player, game: Game): boolean {
+  let bot = player.char.sprite;
+  let down = SCREEN_DIMENSIONS.HEIGHT * 0.9;
+  if (bot.y > down) {
+    return true;
+  }
   return false;
 }
 
@@ -114,11 +152,13 @@ export function updateMoveBot(
     game
   );
 
+  let bot = player.char.sprite;
+
   let enemyVector: xyVector = getNormalizedVector(
-    player.char.sprite.x,
-    player.char.sprite.y,
     nearestPlayerPosition.x,
-    nearestPlayerPosition.y
+    nearestPlayerPosition.y,
+    bot.x,
+    bot.y
   );
 
   let v = player.char.sprite.body.velocity;
@@ -130,9 +170,9 @@ export function updateMoveBot(
   //////////////////////
   // MOVEMENT
   //////////////////////
-  if (!getSameVerticalSlice(player, game)) {
+  if (getSameVerticalSlice(player, game)) {
   } else {
-    if (enemyVector.x > 0) {
+    if (enemyVector.x < 0) {
       p.right = true;
       p.left = false;
     } else {
@@ -159,7 +199,13 @@ export function updateMoveBot(
     t.down
   ) {
     p.Y = true;
-  } else if (v.y > 0) {
+  } else if (
+    //////////////////////
+    // AIR JUMPING
+    //////////////////////
+    enemyVector.y > 0 &&
+    v.y > 0
+  ) {
     p.Y = true;
   } else {
     p.Y = false;
@@ -183,12 +229,31 @@ export function updateMoveBot(
   // PHYSICAL ATTACK
   //////////////////////
   if (
-    getSameHorizontalSlice(player, game) &&
     getIsBotNearAnotherPlayerMedium(player, game, 200) &&
     getIsBotFacingAnotherPlayer(player, game)
   ) {
     p.A = true;
   } else {
     p.A = false;
+  }
+
+  //////////////////////
+  // TOO FAR LEFT RIGHT
+  //////////////////////
+  if (getIsBotTooFarLeft(player, game)) {
+    p.right = true;
+    p.left = false;
+  } else if (getIsBotTooFarRight(player, game)) {
+    p.left = true;
+    p.right = false;
+  }
+
+  //////////////////////
+  // TOO FAR UP DOWN
+  //////////////////////
+  if (getIsBotTooFarUp(player, game)) {
+    p.Y = false;
+  } else if (getIsBotTooFarDown(player, game)) {
+    p.Y = true;
   }
 }
