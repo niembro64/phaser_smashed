@@ -1,6 +1,7 @@
 import Game, { SCREEN_DIMENSIONS } from '../Game';
 import { Player } from '../interfaces';
 import { getIsAttackEnergyOffscreen } from './attacks';
+import { getIsBot } from './bot';
 import { getNormalizedVector } from './damage';
 
 export function updateCirclesLocations(game: Game): void {
@@ -117,16 +118,17 @@ export function updateLastDirectionTouched(player: Player): void {
 
 export function updateWallTouchArray(game: Game): void {
   game.players.forEach((player) => {
-    if (
-      !player.char.sprite.body.touching.down &&
-      (player.char.sprite.body.touching.left ||
-        player.char.sprite.body.touching.right)
-    ) {
-      player.char.wallTouchArray[game.allPlayersWallTouchIterator] = true;
+    let t = player.char.sprite.body.touching;
+    let i = game.allPlayersWallTouchIterator;
+    let w = player.char.wallTouchArray;
+
+    if (!t.down && (t.left || t.right)) {
+      w[i] = true;
     } else {
-      player.char.wallTouchArray[game.allPlayersWallTouchIterator] = false;
+      w[i] = false;
     }
   });
+
   game.allPlayersWallTouchIterator =
     (game.allPlayersWallTouchIterator + 1) %
     game.players[0].char.wallTouchArray.length;
@@ -428,6 +430,13 @@ export function getNearestPlayerAliveXY(
       }
     }
   });
+
+  if (goToX === Infinity) {
+    goToX = SCREEN_DIMENSIONS.WIDTH / 2;
+  }
+  if (goToY === Infinity) {
+    goToY = SCREEN_DIMENSIONS.HEIGHT / 2;
+  }
 
   return { x: goToX, y: goToY };
 }
