@@ -1017,7 +1017,8 @@ function Play() {
                     >
                       <div className="startImageWrapper">
                         {(inputArray[pIndex] === 1 ||
-                          inputArray[pIndex] === 2) && (
+                          inputArray[pIndex] === 2 ||
+                          inputArray[pIndex] === 3) && (
                           <img
                             className={
                               'startImage' + (pIndex > 1 ? 'Inverse' : 'Normal')
@@ -1035,7 +1036,9 @@ function Play() {
                       </div>
                     </div>
                   )}
-                  {(inputArray[pIndex] === 1 || inputArray[pIndex] === 2) && (
+                  {(inputArray[pIndex] === 1 ||
+                    inputArray[pIndex] === 2 ||
+                    inputArray[pIndex] === 3) && (
                     <div
                       className="player-char"
                       onClick={() => {
@@ -1044,7 +1047,8 @@ function Play() {
                     >
                       <div className="startImageWrapper">
                         {(inputArray[pIndex] === 1 ||
-                          inputArray[pIndex] === 2) && (
+                          inputArray[pIndex] === 2 ||
+                          inputArray[pIndex] === 3) && (
                           <img
                             className={
                               'startImage' + (pIndex > 1 ? 'Inverse' : 'Normal')
@@ -1149,6 +1153,18 @@ function Play() {
                           {emoji.keyboardWhite}​
                         </div>
                       )}
+                    </div>
+                  )}
+                  {inputArray[pIndex] === 3 && (
+                    <div
+                      className="b-oscuro b-dark"
+                      onClick={() => {
+                        onClickOscura(pIndex);
+                      }}
+                    >
+                      <span>Bot</span>
+                      <span id="input-sub">In Progress</span>
+                      <div className="button-input-emoji">{emoji.bot}</div>
                     </div>
                   )}
                 </div>
