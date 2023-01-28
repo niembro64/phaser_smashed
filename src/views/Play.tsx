@@ -998,7 +998,8 @@ function Play() {
                 onMouseDown={trancePlay}
                 onMouseUp={trancePause}
               >
-                <img src="images/smashed-gif-cropped.gif" alt="smash title" />
+                <img src="images/smashed_x10_gif.gif" alt="smash title" />
+                {/* <img src="images/smashed-gif-cropped.gif" alt="smash title" /> */}
                 <h1>SMASHED</h1>
               </div>
             </div>
