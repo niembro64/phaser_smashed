@@ -147,33 +147,27 @@ export function getIsBotInPitAreaLeft(player: Player, game: Game): boolean {
   let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
   let center = (left + right) / 2;
   let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
-
   if (bot.x > left && bot.x < center && bot.y > up) {
     return true;
   }
   return false;
 }
-
 export function getIsBotInPitAreaRight(player: Player, game: Game): boolean {
   let bot = player.char.sprite;
   let left = SCREEN_DIMENSIONS.WIDTH * (17 / 34);
   let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
   let center = (left + right) / 2;
   let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
-
   if (bot.x > center && bot.x < right && bot.y > up) {
     return true;
   }
   return false;
 }
-
 export function getIsBotInPitArea(player: Player, game: Game): boolean {
   let bot = player.char.sprite;
   let left = SCREEN_DIMENSIONS.WIDTH * (17 / 34);
   let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
-  let center = (left + right) / 2;
   let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
-
   if (bot.x > left && bot.x < right && bot.y > up) {
     return true;
   }

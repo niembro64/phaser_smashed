@@ -117,7 +117,7 @@ function Play() {
     players: [
       {
         characterId: 0,
-        scale: 1,
+        scale: 0.9,
         name: 'Mario',
       },
       {
@@ -132,8 +132,8 @@ function Play() {
       },
       {
         characterId: 1,
-        scale: 0.6,
-        name: 'BlueKoopa',
+        scale: 0.9,
+        name: 'Link',
       },
     ],
   });
