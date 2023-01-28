@@ -131,7 +131,7 @@ function Play() {
         name: 'GreenKoopa',
       },
       {
-        characterId: 8,
+        characterId: 1,
         scale: 0.6,
         name: 'BlueKoopa',
       },

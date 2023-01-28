@@ -147,11 +147,8 @@ export function getIsBotInPitAreaLeft(player: Player, game: Game): boolean {
   let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
   let center = (left + right) / 2;
   let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
-  let down = SCREEN_DIMENSIONS.HEIGHT * (19 / 19);
 
-  let centerLeft = (center + left) / 2;
-  let centerRight = (center + right) / 2;
-  if (bot.x > centerLeft && bot.x < center && bot.y > up && bot.y < down) {
+  if (bot.x > left && bot.x < center && bot.y > up) {
     return true;
   }
   return false;
@@ -163,11 +160,8 @@ export function getIsBotInPitAreaRight(player: Player, game: Game): boolean {
   let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
   let center = (left + right) / 2;
   let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
-  let down = SCREEN_DIMENSIONS.HEIGHT * (19 / 19);
 
-  let centerLeft = (center + left) / 2;
-  let centerRight = (center + right) / 2;
-  if (bot.x > centerRight && bot.x < right && bot.y > up && bot.y < down) {
+  if (bot.x > center && bot.x < right && bot.y > up) {
     return true;
   }
   return false;
@@ -179,11 +173,8 @@ export function getIsBotInPitArea(player: Player, game: Game): boolean {
   let right = SCREEN_DIMENSIONS.WIDTH * (22 / 34);
   let center = (left + right) / 2;
   let up = SCREEN_DIMENSIONS.HEIGHT * (12 / 19);
-  let down = SCREEN_DIMENSIONS.HEIGHT * (19 / 19);
 
-  let centerLeft = (center + left) / 2;
-  let centerRight = (center + right) / 2;
-  if (bot.x > left && bot.x < right && bot.y > up && bot.y < down) {
+  if (bot.x > left && bot.x < right && bot.y > up) {
     return true;
   }
   return false;
@@ -322,18 +313,18 @@ export function updateMoveBot(
     p.left = false;
   }
 
-  //////////////////////
-  // IN PIT
-  //////////////////////
-  if (getIsBotInPitArea(player, game)) {
-    p.up = true;
+  // //////////////////////
+  // // IN PIT
+  // //////////////////////
+  // if (getIsBotInPitArea(player, game)) {
+  //   p.up = true;
 
-    if (v.y > 300) {
-      p.Y = p.Y ? false : true;
-    }
-  } else {
-    p.up = false;
-  }
+  //   if (v.y > 300) {
+  //     p.Y = p.Y ? false : true;
+  //   }
+  // } else {
+  //   p.up = false;
+  // }
 
   console.log('v.y', v.y);
 }
