@@ -5,7 +5,7 @@ export const debugInit: Debug = {
   DevZoom: 8,
   Level: 6, //0123456
   ModeInfinity: true,
-  InfinityShots: 0,
+  InfinityShots: 7,
   TimeMinutes: 7, //01234567
   MusicActive: true,
   MusicTrack: 2, // 012
